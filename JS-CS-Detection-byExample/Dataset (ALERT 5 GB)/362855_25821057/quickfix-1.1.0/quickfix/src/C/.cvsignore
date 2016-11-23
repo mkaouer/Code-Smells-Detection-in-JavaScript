@@ -1,0 +1,12 @@
+*.lo
+*.la
+Makefile
+.deps
+.libs
+Debug
+*.plg
+*.ncb
+*.opt
+*.dep
+*.mak
+Release

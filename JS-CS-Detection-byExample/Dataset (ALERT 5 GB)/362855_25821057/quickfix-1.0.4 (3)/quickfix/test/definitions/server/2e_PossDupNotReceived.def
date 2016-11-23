@@ -1,0 +1,12 @@
+# Duplicate sequence number was not received, and PossDup is set to 'Y'
+
+iCONNECT
+I8=FIX.4.235=A34=149=TW52=<TIME>56=ISLD98=0108=30
+E8=FIX.4.29=5735=A34=149=ISLD52=00000000-00:00:0056=TW98=0108=3010=0
+R8=FIX.4.235=034=249=TW52=<TIME>56=ISLD
+
+# Already received, this should be ignored
+R8=FIX.4.235=034=249=TW52=<TIME>56=ISLD43=Y
+# Not yet received, this should be processed
+R8=FIX.4.235=034=349=TW52=<TIME>56=ISLD43=Y
+iDISCONNECT

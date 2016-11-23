@@ -1,0 +1,150 @@
+	dnl I got a big bag of -*- Sh -*- for you right here
+# Process this file with autoconf to produce a configure script.
+AC_INIT(src/ut.cpp)
+AM_INIT_AUTOMAKE(quickfix, 1.1.0)
+AM_CONFIG_HEADER(config.h)
+# AM_DISABLE_SHARED
+
+RUBYDIR=[`ruby -e 'require "rbconfig"; print Config::CONFIG["archdir"], "\n"'`]
+AC_SUBST(RUBYDIR)
+
+# Checks for programs.
+AC_PROG_CXX()
+AC_PROG_CC()
+# AC_PROG_RANLIB
+AC_DISABLE_SHARED
+AC_LIBTOOL_WIN32_DLL
+AM_PROG_LIBTOOL
+AM_PROG_LEX
+
+AM_PATH_XML2(2.0.0, , AC_MSG_ERROR(libxml2 must be installed.))
+LIBS="$LIBS $XML_LIBS"
+# gcc flags
+CXXFLAGS="-Wall -fexceptions -D_XOPEN_SOURCE=500 $XML_CFLAGS"
+# icc flags
+# CXXFLAGS="-Kc++eh -Krtti"
+AC_SUBST(CXXFLAGS)
+CFLAGS="-D_XOPEN_SOURCE=500 $XML_CFLAGS"
+AC_SUBST(CFLAGS)
+
+# Checks for libraries.
+AC_CHECK_LIB(c,shutdown,true,AC_CHECK_LIB(socket,shutdown))
+AC_CHECK_LIB(c,inet_addr,true,AC_CHECK_LIB(nsl,inet_addr))
+# Checks for header files.
+AC_CHECK_HEADERS(stdio.h)
+
+# Checks for typedefs, structures, and compiler characteristics.
+# AC_CHECK_BROKENSOEXCEPT
+
+AC_LANG_SAVE
+AC_LANG_CPLUSPLUS
+
+AC_MSG_CHECKING(for STREAMS ioctl)
+AC_TRY_COMPILE(
+	[#include <sys/types.h>
+	 #include <stropts.h>
+	 #include <sys/conf.h>],
+	[ioctl(1,I_NREAD);],
+	AC_MSG_RESULT(yes)
+	AC_DEFINE(USING_STREAMS, 1,
+	The system supports AT&T STREAMS, presumably standard))
+
+AC_MSG_CHECKING(for recursive mutexes)
+AC_TRY_COMPILE(
+	 [#include <pthread.h>],
+	 [PTHREAD_MUTEX_RECURSIVE;],
+	 AC_MSG_RESULT(yes),
+	 AC_MSG_RESULT(no)
+	 AC_MSG_ERROR(recursive mutexes are required))
+
+AC_MSG_CHECKING(for typeinfo in the global namespace)
+AC_TRY_COMPILE(
+	[#include <typeinfo>],
+	[const typeinfo& ty = typeid(typeinfo);],
+	typeinfo_is_global=true, typeinfo_is_global=false)
+
+if test $typeinfo_is_global = true
+then AC_MSG_RESULT(yes)
+else AC_MSG_RESULT(no)
+    AC_MSG_CHECKING(for typeinfo in the std namespace)
+    AC_TRY_COMPILE(
+    [#include <typeinfo>],
+    [const std::type_info& ty = typeid(std::type_info);],
+    AC_MSG_RESULT(yes)
+    AC_DEFINE(TYPEINFO_IN_STD, 1, 
+    Whether or not we are using the new-style typeinfo header),
+    AC_MSG_RESULT(no)
+    AC_MSG_ERROR(type_info is required by the test library))
+fi
+# Checks for library functions.
+AC_LANG_RESTORE
+
+AC_CHECK_LIB(iberty, cplus_demangle,    
+  AC_DEFINE(HAVE_CPLUS_DEMANGLE,1,whether or not we have to demangle names)
+  LIBS="$LIBS -liberty")
+
+# Checks for runtime behavior
+AC_MSG_CHECKING(if select modifies timeval parameter)
+AC_TRY_RUN(
+[
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/time.h>
+int main(int argc, char** argv)
+{
+  struct timeval tv;
+  tv.tv_sec = 0;
+  tv.tv_usec = 1;
+  select(0,0,0,0,&tv);
+  return tv.tv_usec != 1 ? 0 : 1;
+}
+],
+AC_MSG_RESULT(yes)
+AC_DEFINE(SELECT_MODIFIES_TIMEVAL, 1, 
+select statement decrements timeval parameter if interupted),
+AC_MSG_RESULT(no),
+AC_MSG_RESULT(unable to determine, assuming no...))
+
+AC_OUTPUT( 
+	Makefile
+	src/Makefile
+	src/C++/Makefile
+	src/C++/test/Makefile
+	src/java/Makefile
+	src/java/cfg/Makefile
+	src/java/test/Makefile
+	src/java/src/Makefile
+	src/java/src/org/Makefile
+	src/java/src/org/quickfix/Makefile
+	src/java/src/org/quickfix/field/Makefile
+	src/java/src/org/quickfix/fix40/Makefile
+	src/java/src/org/quickfix/fix41/Makefile
+	src/java/src/org/quickfix/fix42/Makefile
+	cfg/Makefile
+	bin/Makefile
+	bin/cfg/Makefile
+	spec/Makefile
+	test/Makefile
+	test/atrun/Makefile
+	test/cfg/Makefile
+	test/definitions/Makefile
+	test/definitions/server/Makefile
+	test/definitions/server/future/Makefile
+	doc/Makefile
+	doc/html/Makefile
+	examples/Makefile
+	examples/ordermatch/Makefile
+	examples/ordermatch/test/Makefile
+	examples/tradeclient/Makefile
+	examples/tradeclientgui/Makefile
+	examples/tradeclientgui/banzai/Makefile
+	examples/tradeclientgui/banzai/cfg/Makefile
+	examples/tradeclientgui/banzai/test/Makefile
+	examples/tradeclientgui/banzai/src/Makefile
+	examples/tradeclientgui/banzai/src/org/Makefile
+	examples/tradeclientgui/banzai/src/org/quickfix/Makefile
+	examples/tradeclientgui/banzai/src/org/quickfix/banzai/Makefile
+	examples/tradeclientgui/banzai/src/org/quickfix/banzai/ui/Makefile
+	templates/Makefile
+        CPPTest/Makefile,
+	cp src/C++/*.h include)

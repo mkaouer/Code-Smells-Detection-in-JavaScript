@@ -1,0 +1,4 @@
+Debug
+Release
+*.ilk *.plg *.dep *.mak
+Makefile

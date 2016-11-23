@@ -1,0 +1,24 @@
+config.status
+stamp-h
+aclocal.m4
+Makefile
+config.log
+config.h
+config.cache
+Debug
+Release
+logs
+*.opt *.ncb *.plg
+buildcycleinfo
+acceptancetest.xml
+log.xml
+modificationset.xml
+unittest.xml
+include
+msxml3.tlh
+*.tmp
+*.log
+libtool
+stamp-h.in
+*.dep
+*.mak

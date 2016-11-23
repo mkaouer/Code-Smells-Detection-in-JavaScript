@@ -1,0 +1,82 @@
+1.1.0
+-----
+Added support for messages with repeating groups.
+
+Added ThreadedSocketInitiator and ThreadedSocketAcceptor. Each session has it own thread 
+for listening on a socket and one for processing messages.
+
+The signature for toApp and toAdmin have changed from ( const Message&, const SessionID& )
+to ( Message&, const SessionID& ). This allows applications to add fields to messages before
+they are sent out. Particularly useful for administrative messages that need fields that arn't
+added by default.
+
+Filestore is much more memory efficient. Only file offsets are stored in memory
+and messages are retreived on in as needed basis. This keeps memory use way
+down and also is a little faster for normal operations.
+
+On Linux and Solaris upgraded from libxml to libxml2. It is recomended by 
+the libxml guys that all new applications use libxml2. configure will verify
+that libxml is installed on a system and automatically add the necessary
+command line parameters.
+
+Possible duplicate messages are now passed to the fromAdmin and fromApp application
+callbacks. Applications must now check for this field and determine how possible
+duplicate messages should be handled.
+
+Values.h correctly generated enumerations for fields of type INT.
+
+Validation works with STRING enumerations, not just CHAR and INT.
+
+Sockets are now properly closed if a connection fails. This fixes a leak in socket
+resources that appeared after a large number of reconnect attempts.
+
+RefTagID, RefMsgType are no longer added to reject message in versions of FIX 4.1 
+and earlier. BusinessMessageReject no longer used in FIX versions 4.1 and earlier.
+
+Improved DataDictionary generation. More enumerations are listed.
+ 
+1.0.4
+-----
+Fixed bug in FileStore where .session file was overwritten on reload.
+
+SocketInitiator now supports multiple alternate host and ports which allows
+QuickFIX to take advantage of systems with failover servers.
+
+Custom build step under windows is now compatible with Visual Studio 7.
+
+Changed fields from template instantiated classes to standard classes in
+order to stop Visual Studio 6 from crashing while in auto-complete mode.
+
+Changed char pointer comparison operators for StringField to friend functions
+so left hand side comparisons can be done such as "value" == senderCompID.
+
+Began implementation of repeating groups.
+	
+1.0.3
+-----
+Added unit testing framework to ordermatch
+
+Fixed bug in ordermatch where executing a partailly filled order resulted in
+the order being left open with a negative ammount.
+
+Added commands to standard input for ordermatch to list available symbols and
+for displaying a book.
+
+Began implementation of C API.
+
+Added target field to order table in banzai.
+
+Banzai can now properly handle receiving executions from multiple targets
+
+1.0.2
+-----
+Fixed an incorrect number 84600 in FieldTypes.h with the
+constant UTC_DAY which is the correct 86400
+
+1.0.1
+-----
+Several classes deriving from FIX::Application had different throw specifiers 
+than the base class.  This caused compilation errors with some compilers.  
+This has been corrected.
+
+FAQ has been updated.

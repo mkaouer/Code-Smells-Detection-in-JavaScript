@@ -1,0 +1,12 @@
+Makefile
+*.log *.ncb
+*.opt *.mak *.dep
+*.plg
+*.suo
+*.lo *.o *.la
+build
+Debug
+Release
+.deps .libs
+store
+*.ncb *.opt *.suo

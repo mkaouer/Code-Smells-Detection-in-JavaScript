@@ -1,0 +1,8 @@
+Makefile
+*.log *.dsp *.ncb
+*.opt *.mak *.dep
+*.plg
+*.suo
+build
+Debug
+Release

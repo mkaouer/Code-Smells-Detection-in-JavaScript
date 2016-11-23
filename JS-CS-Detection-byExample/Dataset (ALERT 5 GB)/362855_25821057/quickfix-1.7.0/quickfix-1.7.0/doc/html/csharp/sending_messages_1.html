@@ -1,0 +1,10 @@
+<B><CODE><PRE>
+static bool sendToTarget(QuickFix.Message message)
+  throw(QuickFix.SessionNotFound);
+
+static bool sendToTarget(QuickFix.Message message, QuickFix.SessionID sessionID)
+  throw(QuickFix.SessionNotFound);
+
+static bool sendToTarget(QuickFix.Message message, String senderCompID, String targetCompID)
+  throw(QuickFix.SessionNotFound);
+</PRE></CODE></B>

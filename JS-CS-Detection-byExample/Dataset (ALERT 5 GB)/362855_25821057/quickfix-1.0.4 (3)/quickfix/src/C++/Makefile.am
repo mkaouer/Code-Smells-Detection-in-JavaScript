@@ -1,0 +1,88 @@
+SUBDIRS = test
+
+LEX += -+ -olex.yy.c
+
+lib_LTLIBRARIES = libquickfix.la
+libquickfix_la_SOURCES = \
+	Session.cpp \
+	Session.h \
+	Parser.cpp \
+	Parser.h \
+	Settings.cpp \
+	Settings.h \
+	ConfigLexer.cpp \
+	ConfigLexer.h \
+	MessageStore.cpp \
+	MessageStore.h \
+	SocketServer.cpp \
+	SocketServer.h \
+	SocketConnector.cpp \
+	SocketStream.cpp \
+	Acceptor.cpp \
+	Acceptor.h \
+	Initiator.cpp \
+	Initiator.h \
+	SocketAcceptor.cpp \
+	SocketAcceptor.h \
+	SocketInitiator.cpp \
+	SocketInitiator.h \
+	SocketMonitor.cpp \
+	SocketMonitor.h \
+	SocketConnection.cpp \
+	SocketConnection.h \
+	FileStore.cpp \
+	FileStore.h \
+	Dictionary.cpp \
+	Dictionary.h \
+	SessionSettings.cpp \
+	SessionSettings.h \
+	MessageValidator.cpp \
+	MessageValidator.h \
+	Application.h \
+	Field.h \
+	FieldConvertors.h \
+	FieldNumbers.h \
+	FieldTypes.h \
+	Fields.h \
+	FieldMap.h \
+	Message.h \
+	MessageSorters.h \
+	Messages.h \
+	SessionID.h \
+	SocketConnector.h \
+	SocketStream.h \
+	Mutex.h \
+	Exceptions.h \
+	Utility.h \
+	Values.h \
+	FlexLexer.h \
+	SAXContentHandler.h \
+	FIX40_Messages.h \
+	FIX41_Messages.h \
+	FIX42_Messages.h \
+	FIX40_MessageCracker.h \
+	FIX41_MessageCracker.h \
+	FIX42_MessageCracker.h \
+	MessageCracker.h
+
+all: all-redirect link-libraries
+
+link-libraries: *
+	rm -f ../../lib/libquickfix.a ../../lib/libquickfix.la
+	ln -s ../src/C++/.libs/libquickfix.a ../../lib/libquickfix.a
+	ln -s ../src/C++/.libs/libquickfix.la ../../lib/libquickfix.la
+
+install-exec-local: *.h
+	rm -rf $(includedir)/quickfix
+	mkdir $(includedir)/quickfix
+	mkdir $(includedir)/quickfix/include
+	cp *.h $(includedir)/quickfix/include
+
+uninstall-local:
+	rm -rf $(includedir)/quickfix
+
+EXTRA_DIST = strptime.c strptime.h
+
+libquickfix_la_LDFLAGS = -static
+
+INCLUDES =-I. -I.. -I../.. -I../../..

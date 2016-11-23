@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<project name="QuickFix" basedir="." default="all">
+    <taskdef name="modificationset" classname="net.sourceforge.cruisecontrol.ModificationSet"/>
+
+    <property name="ccdir" value="/usr/local/cc"/>
+    <property name="masterbuild.logdir" value="${ccdir}/logs"/>
+
+    <property name="base.dir" value="/home/buildmaster/projects"/>
+    <property name="project.dir" value="${base.dir}/quickfix"/>
+    <property name="source.dir" value="${project.dir}/src"/>
+
+    <property name="cvs.repository" value="/usr/local/cvs"/>
+    <property name="cvs.package.test" value="CPPTest"/>
+    <property name="cvs.package.code" value="quickfix"/>
+
+    <property name="ut.executable" value="quickfix"/>
+    <property name="ut.args" value="-t test"/>
+
+    <property name="cpptest.dir" value="${base.dir}"/>
+
+    <path id="classpath">
+        <fileset dir="${ccdir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="init" description="Prepare for build">
+        <tstamp/>
+        <mkdir dir="${masterbuild.logdir}"/>
+    </target>
+
+    <target name="unittest" depends="init,compile" description="Run unit tests after building">
+        <exec executable="${source.dir}/${ut.executable}" failonerror="true">
+           <arg line=" ${ut.args}"/>
+        </exec>
+    </target>
+
+    <target name="bootstrap" depends="init">
+        <exec executable="${project.dir}/bootstrap"/>
+    </target>
+
+    <target name="configure" depends="bootstrap">
+        <exec executable="${project.dir}/configure"/>
+    </target>
+
+    <target name="clean" description="Clean all build products">
+        <exec executable="make" failonerror="true">
+                <arg line="clean"/>
+        </exec>
+    </target>
+
+    <target name="compile" depends="init" description="Compile application without cleaning">
+		<exec executable="make" failonerror="true"/>
+    </target>
+
+    <target name="all" depends="init,modificationset,checkout,bootstrap,configure,clean,compile,unittest" description="Build application">
+        <echo message="Application built!"/>
+    </target>
+
+    <target name="checkout" description="Update package from CVS">
+        <cvs cvsroot="${cvs.repository}" package="${cvs.package.test}" dest="${base.dir}"/>
+        <cvs cvsroot="${cvs.repository}" package="${cvs.package.code}" dest="${base.dir}"/>
+    </target>
+
+    <target name="modificationset" depends="init" description="Check modifications since last build">
+        <echo message="Checking for modifications..."/>
+        <modificationset lastbuild="${lastBuildAttemptTime}" quietperiod="30"
+         dateformat="yyyy-MMM-dd HH:mm:ss">
+            <cvselement cvsroot="${cvs.repository}"/>
+        </modificationset>
+    </target>
+
+    <target name="masterbuild" depends="modificationset,checkout,compile"
+     description="Cruise control master build"/>
+
+    <target name="cleanbuild" depends="clean,masterbuild" description="Cruise control clean build"/>
+
+</project>
