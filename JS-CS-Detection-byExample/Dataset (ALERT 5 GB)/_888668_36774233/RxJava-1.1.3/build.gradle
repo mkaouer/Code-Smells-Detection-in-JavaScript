@@ -1,0 +1,48 @@
+buildscript {
+  repositories { jcenter() }
+  dependencies { classpath 'com.netflix.nebula:gradle-rxjava-project-plugin:4.0.0' }
+}
+
+description = 'RxJava: Reactive Extensions for the JVM – a library for composing asynchronous and event-based programs using observable sequences for the Java VM.'
+
+apply plugin: 'java'
+apply plugin: 'nebula.rxjava-project'
+
+dependencies {
+    testCompile 'junit:junit-dep:4.10'
+    testCompile 'org.mockito:mockito-core:1.8.5'
+
+    perfCompile 'org.openjdk.jmh:jmh-core:1.11.3'
+    perfCompile 'org.openjdk.jmh:jmh-generator-annprocess:1.11.3'
+}
+
+javadoc {
+    exclude "**/rx/internal/**"
+    exclude "**/test/**"
+    exclude "**/perf/**"
+    options {
+        windowTitle = "RxJava Javadoc ${project.version}"
+    }
+    // Clear the following options to make the docs consistent with the old format
+    options.addStringOption('top').value = ''
+    options.addStringOption('doctitle').value = ''
+    options.addStringOption('header').value = ''
+    if (JavaVersion.current().isJava7()) {
+        // "./gradle/stylesheet.css" only supports Java 7
+        options.addStringOption('stylesheetfile', rootProject.file('./gradle/stylesheet.css').toString())
+    }
+}
+
+// support for snapshot/final releases with the various branches RxJava uses
+nebulaRelease {
+    addReleaseBranchPattern(/\d+\.\d+\.\d+/)
+    addReleaseBranchPattern('HEAD')
+}
+
+if (project.hasProperty('release.useLastTag')) {
+    tasks.prepare.enabled = false
+}
+
+test{
+     maxHeapSize = "2g"
+}

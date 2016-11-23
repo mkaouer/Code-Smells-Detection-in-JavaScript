@@ -1,0 +1,105 @@
+Kind,Name,PercentLackOfCohesion,MaxInheritanceTree,CountDeclMethodAll,CountDeclInstanceVariable,CountClassCoupled,CountClassBase,CountDeclClassMethod,CountClassDerived,CountDeclInstanceMethod
+Class,ClearOnExitPolicy,100,1,5,1,4,1,0,0,5
+Class,ColorChooserDialog,93,1,11,3,6,3,0,0,11
+Private Struct,ColorChooserDialog::ExecuteOpenParams,100,0,1,3,0,0,0,0,1
+Class,ColorChooserGtk,63,1,11,2,3,1,1,0,10
+Class,ColorChooserWin,61,1,7,2,3,2,1,0,6
+Abstract Class,CrashHandlerHostLinux,98,1,13,6,3,2,0,5,13
+Class,ExtensionCrashHandlerHostLinux,0,2,18,0,1,1,0,0,5
+Class,FileSelectHelper,100,1,29,9,17,3,2,0,27
+Public Struct,FileSelectHelper::ActiveDirectoryEnumeration,75,0,1,4,2,0,0,0,1
+Private Class,FileSelectHelper::DirectoryListerDispatchDelegate,80,1,5,2,2,1,0,0,5
+Class,GpuCrashHandlerHostLinux,0,2,19,0,1,1,1,0,5
+Struct,GpuFeatureInfo,0,0,0,5,1,0,0,0,0
+Class,GtkPrinterList,30,0,5,2,2,0,1,0,4
+Class,IncrementTimeDelta,33,0,3,3,2,0,0,0,3
+Class,MediaCaptureDevicesDispatcher,100,1,27,4,3,1,0,0,27
+Public Class,MediaCaptureDevicesDispatcher::Observer,0,0,4,0,0,0,0,0,4
+Class,MediaInternals,100,1,19,3,6,1,0,0,19
+Class,MediaStreamDevicesController,97,0,19,4,6,0,0,0,19
+Class,PluginCrashHandlerHostLinux,0,2,19,0,1,1,1,0,5
+Class,PpapiCrashHandlerHostLinux,0,2,19,0,1,1,1,0,5
+Class,PrintDialogGtk,100,1,19,7,12,2,1,0,18
+Struct,PrintHostMsg_RequestPrintPreview_Params,100,0,4,4,0,0,0,0,4
+Struct,PrintMsg_PrintPages_Params,100,0,5,2,3,0,0,0,5
+Struct,PrintMsg_Print_Params,100,0,3,21,2,0,0,0,3
+Class,PrintingMessageFilter,100,1,18,2,13,1,0,0,18
+Public Struct,PrintingMessageFilter::GetPrintSettingsForRenderViewParams,0,0,0,4,2,0,0,0,0
+Class,PrintingUIWebContentsObserver,0,1,5,0,3,1,0,0,3
+Class,RendererCrashHandlerHostLinux,0,2,19,0,1,1,1,0,5
+Class,SQLitePersistentCookieStore,18,1,11,1,18,1,0,0,11
+Public Class,SQLitePersistentCookieStore::Backend,87,1,29,21,17,1,0,0,29
+Private Class,SQLitePersistentCookieStore::Backend::KillDatabaseErrorDelegate,50,1,4,2,2,1,0,0,4
+Private Class,SQLitePersistentCookieStore::Backend::KillDatabaseErrorDelegate::HistogramUniquifier,0,0,1,0,0,0,1,0,0
+Private Class,SQLitePersistentCookieStore::Backend::PendingOperation,33,0,3,2,1,0,0,0,3
+Public Class,ShellBrowserContext::ShellResourceContext,50,1,8,1,2,1,0,0,8
+Class,StickyPrintSettingGtk,40,0,5,1,0,0,0,0,5
+Class,breakpad::MimeWriter,83,0,13,4,2,0,0,0,13
+Class,chrome::ChromeBreakpadClient,0,1,8,0,2,1,0,0,8
+Class,content::AuthSuppliedLoginNotificationDetails,50,1,8,2,1,1,0,0,4
+Class,content::LoginNotificationDetails,50,0,4,1,1,0,0,1,4
+Class,content::NWCookieMonsterDelegate,50,1,4,1,6,1,0,0,4
+Class,content::Shell,98,1,66,13,17,3,7,0,57
+Class,content::ShellAccessTokenStore,100,1,7,2,2,1,0,0,7
+Class,content::ShellBrowserContext,98,1,23,8,8,1,0,0,21
+Class,content::ShellBrowserMainParts,97,1,17,9,8,1,0,0,17
+Class,content::ShellContentBrowserClient,97,1,29,3,18,1,0,0,28
+Class,content::ShellContentClient,0,1,8,0,6,1,0,0,8
+Class,content::ShellContentRendererClient,100,1,11,2,4,1,1,0,10
+Class,content::ShellDevToolsDelegate,95,1,12,2,5,1,0,0,12
+Class,content::ShellDevToolsFrontend,96,1,12,3,5,2,0,0,10
+Class,content::ShellDownloadManagerDelegate,100,1,10,3,2,2,0,0,10
+Class,content::ShellJavaScriptDialog,63,0,6,6,4,0,0,0,6
+Class,content::ShellJavaScriptDialogCreator,88,1,9,1,3,1,0,0,9
+Class,content::ShellLoginDialog,99,1,24,7,3,2,0,0,24
+Class,content::ShellMainDelegate,100,1,9,3,4,1,1,0,8
+Class,content::ShellNetworkDelegate,0,1,20,0,4,1,0,0,20
+Class,content::ShellQuotaPermissionContext,0,1,4,0,2,1,0,0,4
+Class,content::ShellRenderProcessObserver,100,1,9,1,2,1,0,0,9
+Class,content::ShellResourceContext,100,1,5,1,2,1,0,0,5
+Class,content::ShellResourceDispatcherHostDelegate,85,1,7,1,1,1,0,0,7
+Class,content::ShellURLRequestContextGetter,100,1,7,18,5,1,0,0,7
+Class,content::Target,80,1,12,6,3,1,0,0,12
+Class,net::AppProtocolHandler,100,1,4,1,5,1,0,0,4
+Class,net::URLRequestNWAppJob,60,1,6,4,7,1,0,0,5
+Class,nw::AutofillAgent,100,1,16,3,4,3,0,0,16
+Class,nw::CapturePageHelper,100,1,10,2,4,2,1,0,7
+Abstract Class,nw::NativeWindow,97,0,46,4,8,0,1,3,45
+Class,nw::NativeWindowClientView,33,1,3,1,2,1,0,0,3
+Class,nw::NativeWindowCocoa,99,1,94,12,8,1,0,0,48
+Class,nw::NativeWindowFrameView,82,1,17,2,2,1,0,0,17
+Class,nw::NativeWindowGtk,99,1,105,19,6,1,0,0,59
+Class,nw::NativeWindowToolbarWin,100,1,13,7,6,3,0,0,13
+Class,nw::NativeWindowWin,99,1,113,17,13,4,0,0,67
+Class,nw::NwProtocolHandler,0,1,3,0,2,1,0,0,3
+Class,nw::NwRenderViewObserver,0,1,9,0,5,1,0,0,9
+Class,nw::Package,96,0,21,6,5,0,0,0,21
+Class,nw::ResourceRequestJob,100,1,11,7,3,1,1,0,10
+Class,nw::StandardMenusMac,100,0,6,1,1,0,0,0,6
+Class,nwapi::App,0,0,9,0,4,0,7,0,2
+Class,nwapi::Base,85,0,7,2,3,0,0,0,7
+Class,nwapi::Clipboard,0,1,13,0,2,1,0,0,8
+Class,nwapi::CookieAPIContext,100,1,1,6,2,1,0,0,1
+Class,nwapi::Dispatcher,0,1,13,0,6,1,3,0,10
+Class,nwapi::DispatcherBindings,0,1,18,0,1,1,14,0,4
+Class,nwapi::DispatcherHost,99,1,27,3,6,1,2,0,23
+Class,nwapi::Menu,0,1,15,0,4,1,0,0,10
+Class,nwapi::MenuDelegate,100,1,11,1,3,1,0,0,11
+Class,nwapi::MenuItem,0,1,17,0,3,1,0,0,12
+Class,nwapi::Shell,0,0,3,0,2,0,1,0,2
+Class,nwapi::Tray,0,1,18,0,3,1,0,0,13
+Class,nwapi::TrayObserver,33,1,3,1,2,1,0,0,3
+Class,nwapi::Window,100,1,25,2,7,2,0,0,20
+Class,nwapi::WindowBindings,0,1,9,0,1,1,5,0,4
+Class,prerender::PrerendererClient,0,1,3,0,2,2,0,0,3
+Class,printing::JobEventDetails,94,1,6,3,2,1,0,0,6
+Class,printing::PrepareFrameAndViewForPrint,79,1,16,12,6,2,0,0,16
+Class,printing::PrintJob,100,1,26,12,8,3,0,0,26
+Class,printing::PrintJobManager,98,1,11,5,6,1,0,0,11
+Class,printing::PrintJobWorker,99,1,20,6,7,1,0,0,20
+Abstract Class,printing::PrintJobWorkerOwner,0,1,6,0,4,1,0,0,6
+Class,printing::PrintViewManager,100,1,35,10,8,4,0,0,33
+Abstract Class,printing::PrintViewManagerObserver,0,0,2,0,0,0,0,0,2
+Class,printing::PrintWebViewHelper,100,1,51,18,11,2,3,0,48
+Private Class,printing::PrintWebViewHelper::PrintPreviewContext,100,0,29,13,6,0,0,0,29
+Class,printing::PrinterQuery,99,1,16,7,6,1,0,0,16
