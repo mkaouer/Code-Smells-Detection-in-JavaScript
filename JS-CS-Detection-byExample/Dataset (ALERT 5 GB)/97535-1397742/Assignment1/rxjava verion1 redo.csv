@@ -1,0 +1,1423 @@
+Kind,Name,CountDeclClassMethod,MaxInheritanceTree,CountClassDerived,PercentLackOfCohesion,CountClassCoupled,CountDeclInstanceVariable,CountLineCode,CountDeclFile,CountDeclFunction,RatioCommentToCode,CountDeclMethodAll,SumCyclomatic
+File,Action0.java,0,,,,,0,3,,1,5,,1
+File,Action1.java,0,,,,,0,3,,1,5,,1
+File,Action2.java,0,,,,,0,3,,1,5,,1
+File,Action3.java,0,,,,,0,3,,1,5,,1
+File,AtomicObservableSubscription.java,0,,,,,2,32,,5,1.06,,7
+File,AtomicObserver.java,0,,,,,3,32,,4,1.06,,7
+File,ClojureAdaptor.java,0,,,,,2,89,,7,0.26,,28
+File,CompositeException.java,0,,,,,2,35,,4,0.57,,7
+File,Func0.java,0,,,,,0,3,,1,5,,1
+File,Func1.java,0,,,,,0,3,,1,5,,1
+File,Func2.java,0,,,,,0,3,,1,5,,1
+File,Func3.java,0,,,,,0,3,,1,5,,1
+File,Func4.java,0,,,,,0,3,,1,5,,1
+File,Func5.java,0,,,,,0,3,,1,5,,1
+File,Func6.java,0,,,,,0,3,,1,5,,1
+File,Func7.java,0,,,,,0,3,,1,5,,1
+File,Func8.java,0,,,,,0,3,,1,5,,1
+File,Func9.java,0,,,,,0,3,,1,5,,1
+File,FuncN.java,0,,,,,0,3,,1,5,,1
+File,Function.java,0,,,,,0,3,,0,1.67,,0
+File,FunctionLanguageAdaptor.java,0,,,,,0,5,,2,6.2,,2
+File,Functions.java,20,,,,,0,268,,35,0.82,,72
+File,GroovyAdaptor.java,0,,,,,4,203,,30,0.12,,30
+File,JRubyAdaptor.java,0,,,,,4,165,,24,0.12,,25
+File,Notification.java,0,,,,,6,84,,14,0.71,,26
+File,Observable.java,57,,,,,3,686,,149,2.27,,166
+File,Observer.java,0,,,,,0,6,,3,8.83,,3
+File,OperationCombineLatest.java,4,,,,,10,509,,39,0.3,,60
+File,OperationConcat.java,3,,,,,16,227,,26,0.13,,34
+File,OperationFilter.java,1,,,,,3,66,,8,0.24,,11
+File,OperationLast.java,1,,,,,3,55,,7,0.36,,8
+File,OperationMap.java,2,,,,,5,149,,18,0.44,,20
+File,OperationMaterialize.java,1,,,,,6,154,,16,0.2,,22
+File,OperationMerge.java,3,,,,,16,382,,43,0.26,,65
+File,OperationMergeDelayError.java,3,,,,,21,558,,56,0.22,,87
+File,OperationOnErrorResumeNextViaFunction.java,1,,,,,5,177,,17,0.2,,25
+File,OperationOnErrorResumeNextViaObservable.java,1,,,,,5,109,,11,0.27,,17
+File,OperationOnErrorReturn.java,1,,,,,5,143,,14,0.31,,21
+File,OperationScan.java,2,,,,,6,134,,14,0.39,,19
+File,OperationSkip.java,1,,,,,4,78,,10,0.53,,11
+File,OperationSynchronize.java,1,,,,,3,152,,16,0.44,,16
+File,OperationTake.java,1,,,,,8,135,,14,0.33,,18
+File,OperationToObservableFuture.java,2,,,,,3,76,,7,0.03,,10
+File,OperationToObservableIterable.java,1,,,,,1,41,,4,0.51,,5
+File,OperationToObservableList.java,1,,,,,2,59,,7,0.34,,9
+File,OperationToObservableSortedList.java,2,,,,,3,104,,13,0.39,,15
+File,OperationZip.java,4,,,,,12,517,,41,0.29,,63
+File,PerformanceTest.java,1,,,,,4,138,,18,0.47,,23
+File,RxExamples.java,2,,,,,0,16,,3,0,,3
+File,Subject.java,1,,,,,1,103,,12,0.04,,16
+File,Subscription.java,0,,,,,0,4,,1,5,,1
+File,SynchronizedObserver.java,1,,,,,29,449,,33,0.24,,76
+File,TestChainPerformance.java,1,,,,,0,67,,5,0,,14
+File,package-info.java,0,,,,,0,0,,0,0,,0
+File,package-info.java,0,,,,,0,0,,0,0,,0
+Package,rx,57,,,,,9,780,5,,2.22,,196
+Public Generic Class,rx.Notification,0,0,0,66,7,3,83,,,0.72,26,24
+Public Enum Type,rx.Notification.Kind,0,0,0,100,1,3,3,,,0,27,2
+Public Method,rx.Notification.Kind.valueOf,,,,,,,0,,,0,,
+Public Method,rx.Notification.Kind.values,,,,,,,0,,,0,,
+Public Constructor,rx.Notification.Notification,,,,,,,5,,,1.2,,
+Public Constructor,rx.Notification.Notification,,,,,,,5,,,0.6,,
+Public Constructor,rx.Notification.Notification,,,,,,,5,,,1.2,,
+TypeVariable,rx.Notification.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.Notification.equals,,,,,,,16,,,0,,
+Public Method,rx.Notification.getException,,,,,,,3,,,1.67,,
+Public Method,rx.Notification.getKind,,,,,,,3,,,1.67,,
+Public Method,rx.Notification.getValue,,,,,,,3,,,1.67,,
+Public Method,rx.Notification.hasException,,,,,,,3,,,1.67,,
+Public Method,rx.Notification.hasValue,,,,,,,3,,,1.67,,
+Public Method,rx.Notification.hashCode,,,,,,,8,,,0,,
+Public Method,rx.Notification.isOnCompleted,,,,,,,3,,,0,,
+Public Method,rx.Notification.isOnError,,,,,,,3,,,0,,
+Public Method,rx.Notification.isOnNext,,,,,,,3,,,0,,
+Public Method,rx.Notification.toString,,,,,,,9,,,0,,
+Public Generic Class,rx.Observable,57,0,23,97,44,2,642,,,2.42,108,99
+Private Static Generic Class,rx.Observable.NeverObservable,0,1,0,0,0,0,9,,,0,109,1
+Public Constructor,rx.Observable.NeverObservable.NeverObservable,,,,,,,8,,,0,,
+Class,rx.Observable.NeverObservable.NeverObservable.(Anon_8),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.Observable.NeverObservable.NeverObservable.(Anon_8).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.NeverObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Private Static Class,rx.Observable.NoOpObservableSubscription,0,0,0,0,0,0,3,,,0,13,1
+Public Method,rx.Observable.NoOpObservableSubscription.unsubscribe,,,,,,,2,,,0,,
+Protected Constructor,rx.Observable.Observable,,,,,,,3,,,0,,
+Protected Constructor,rx.Observable.Observable,,,,,,,3,,,0,,
+Private Constructor,rx.Observable.Observable,,,,,,,4,,,0,,
+TypeVariable,rx.Observable.T,0,0,0,0,0,0,0,,,0,0,0
+Private Static Generic Class,rx.Observable.ThrowObservable,0,1,0,0,1,0,10,,,0.7,109,1
+TypeVariable,rx.Observable.ThrowObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Constructor,rx.Observable.ThrowObservable.ThrowObservable,,,,,,,9,,,0.78,,
+Class,rx.Observable.ThrowObservable.ThrowObservable.(Anon_9),0,0,0,0,5,0,6,,,1.17,13,1
+Public Method,rx.Observable.ThrowObservable.ThrowObservable.(Anon_9).call,,,,,,,4,,,1.75,,
+Public Static Class,rx.Observable.UnitTest,0,0,0,50,5,1,53,,,0.04,16,4
+Public Method,rx.Observable.UnitTest.before,,,,,,,3,,,0,,
+Public Method,rx.Observable.UnitTest.testCreate,,,,,,,20,,,0,,
+Class,rx.Observable.UnitTest.testCreate.(Anon_30),0,0,0,0,4,0,9,,,0,13,1
+Public Method,rx.Observable.UnitTest.testCreate.(Anon_30).call,,,,,,,7,,,0,,
+Public Method,rx.Observable.UnitTest.testReduce,,,,,,,11,,,0.09,,
+Class,rx.Observable.UnitTest.testReduce.(Anon_31),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.Observable.UnitTest.testReduce.(Anon_31).call,,,,,,,3,,,0,,
+Public Method,rx.Observable.UnitTest.testReduceWithInitialValue,,,,,,,11,,,0.09,,
+Class,rx.Observable.UnitTest.testReduceWithInitialValue.(Anon_32),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.Observable.UnitTest.testReduceWithInitialValue.(Anon_32).call,,,,,,,3,,,0,,
+Private Static Generic Method,rx.Observable._create,,,,,,,3,,,0,,
+TypeVariable,rx.Observable._create.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.concat,,,,,,,3,,,3.33,,
+TypeVariable,rx.Observable.concat.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.create,,,,,,,3,,,12,,
+Public Static Generic Method,rx.Observable.create,,,,,,,10,,,1.9,,
+Class,rx.Observable.create.(Anon_10),0,0,0,0,5,0,5,,,0,13,1
+Public Method,rx.Observable.create.(Anon_10).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.create.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.create.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Method,rx.Observable.createSubscription,,,,,,,8,,,0.88,,
+Public Static Method,rx.Observable.createSubscription,,,,,,,9,,,0.78,,
+Class,rx.Observable.createSubscription.(Anon_14),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.Observable.createSubscription.(Anon_14).unsubscribe,,,,,,,3,,,0,,
+Class,rx.Observable.createSubscription.(Anon_15),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.Observable.createSubscription.(Anon_15).unsubscribe,,,,,,,3,,,0,,
+Public Static Generic Method,rx.Observable.empty,,,,,,,3,,,3.67,,
+TypeVariable,rx.Observable.empty.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.error,,,,,,,3,,,4.67,,
+TypeVariable,rx.Observable.error.T,0,0,0,0,0,0,0,,,0,0,0
+Private Method,rx.Observable.executeCallback,,,,,,,3,,,3,,
+Public Static Generic Method,rx.Observable.filter,,,,,,,3,,,4.33,,
+Public Static Generic Method,rx.Observable.filter,,,,,,,10,,,1.3,,
+Public Method,rx.Observable.filter,,,,,,,3,,,4,,
+Public Method,rx.Observable.filter,,,,,,,9,,,1.33,,
+Class,rx.Observable.filter.(Anon_11),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.Observable.filter.(Anon_11).call,,,,,,,3,,,0,,
+Class,rx.Observable.filter.(Anon_25),0,0,0,0,3,0,4,,,0,13,1
+Public Method,rx.Observable.filter.(Anon_25).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.filter.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.filter.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.from,,,,,,,3,,,3.67,,
+Public Static Generic Method,rx.Observable.from,,,,,,,3,,,3.67,,
+TypeVariable,rx.Observable.from.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.from.T,0,0,0,0,0,0,0,,,0,0,0
+Private Static Method,rx.Observable.handleError,,,,,,,2,,,3,,
+Public Static Generic Method,rx.Observable.just,,,,,,,5,,,4.2,,
+TypeVariable,rx.Observable.just.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.last,,,,,,,3,,,4.67,,
+Public Method,rx.Observable.last,,,,,,,3,,,3,,
+TypeVariable,rx.Observable.last.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.map,,,,,,,3,,,6,,
+Public Static Generic Method,rx.Observable.map,,,,,,,11,,,1.64,,
+Public Generic Method,rx.Observable.map,,,,,,,3,,,4,,
+Public Generic Method,rx.Observable.map,,,,,,,10,,,1.2,,
+Class,rx.Observable.map.(Anon_12),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.map.(Anon_12).call,,,,,,,3,,,0,,
+Class,rx.Observable.map.(Anon_26),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.Observable.map.(Anon_26).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.map.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.map.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.map.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.map.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.map.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.map.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.mapMany,,,,,,,3,,,7.33,,
+Public Static Generic Method,rx.Observable.mapMany,,,,,,,11,,,2,,
+Public Generic Method,rx.Observable.mapMany,,,,,,,3,,,5,,
+Public Generic Method,rx.Observable.mapMany,,,,,,,10,,,1.5,,
+Class,rx.Observable.mapMany.(Anon_13),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.mapMany.(Anon_13).call,,,,,,,3,,,0,,
+Class,rx.Observable.mapMany.(Anon_27),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.Observable.mapMany.(Anon_27).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.mapMany.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mapMany.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mapMany.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mapMany.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mapMany.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mapMany.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.materialize,,,,,,,3,,,3.67,,
+Public Method,rx.Observable.materialize,,,,,,,3,,,3,,
+TypeVariable,rx.Observable.materialize.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.merge,,,,,,,3,,,4.67,,
+Public Static Generic Method,rx.Observable.merge,,,,,,,3,,,4.67,,
+Public Static Generic Method,rx.Observable.merge,,,,,,,3,,,4.67,,
+TypeVariable,rx.Observable.merge.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.merge.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.merge.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.mergeDelayError,,,,,,,3,,,5.33,,
+Public Static Generic Method,rx.Observable.mergeDelayError,,,,,,,3,,,5.33,,
+Public Static Generic Method,rx.Observable.mergeDelayError,,,,,,,3,,,5.33,,
+TypeVariable,rx.Observable.mergeDelayError.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mergeDelayError.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.mergeDelayError.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.never,,,,,,,3,,,4,,
+TypeVariable,rx.Observable.never.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Method,rx.Observable.noOpSubscription,,,,,,,3,,,2.33,,
+Public Static Generic Method,rx.Observable.onErrorResumeNext,,,,,,,3,,,8.67,,
+Public Static Generic Method,rx.Observable.onErrorResumeNext,,,,,,,11,,,2.27,,
+Public Static Generic Method,rx.Observable.onErrorResumeNext,,,,,,,3,,,8,,
+Public Method,rx.Observable.onErrorResumeNext,,,,,,,3,,,7.67,,
+Public Method,rx.Observable.onErrorResumeNext,,,,,,,10,,,2.4,,
+Public Method,rx.Observable.onErrorResumeNext,,,,,,,3,,,8,,
+Class,rx.Observable.onErrorResumeNext.(Anon_16),0,0,0,0,5,0,6,,,0,13,1
+Public Method,rx.Observable.onErrorResumeNext.(Anon_16).call,,,,,,,3,,,0,,
+Class,rx.Observable.onErrorResumeNext.(Anon_28),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.Observable.onErrorResumeNext.(Anon_28).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.onErrorResumeNext.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.onErrorResumeNext.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.onErrorResumeNext.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.onErrorReturn,,,,,,,3,,,7.67,,
+Public Method,rx.Observable.onErrorReturn,,,,,,,3,,,7.33,,
+Public Method,rx.Observable.onErrorReturn,,,,,,,10,,,2.3,,
+Class,rx.Observable.onErrorReturn.(Anon_29),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.Observable.onErrorReturn.(Anon_29).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.onErrorReturn.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.reduce,,,,,,,3,,,9,,
+Public Static Generic Method,rx.Observable.reduce,,,,,,,11,,,2.45,,
+Public Static Generic Method,rx.Observable.reduce,,,,,,,3,,,9.67,,
+Public Static Generic Method,rx.Observable.reduce,,,,,,,11,,,2.55,,
+Public Method,rx.Observable.reduce,,,,,,,3,,,7.67,,
+Public Method,rx.Observable.reduce,,,,,,,3,,,7.67,,
+Public Method,rx.Observable.reduce,,,,,,,3,,,8.33,,
+Public Method,rx.Observable.reduce,,,,,,,3,,,8,,
+Class,rx.Observable.reduce.(Anon_17),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.reduce.(Anon_17).call,,,,,,,3,,,0,,
+Class,rx.Observable.reduce.(Anon_18),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.reduce.(Anon_18).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.reduce.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.reduce.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.reduce.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.reduce.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.scan,,,,,,,3,,,6.67,,
+Public Static Generic Method,rx.Observable.scan,,,,,,,11,,,1.82,,
+Public Static Generic Method,rx.Observable.scan,,,,,,,3,,,7.33,,
+Public Static Generic Method,rx.Observable.scan,,,,,,,11,,,2,,
+Public Method,rx.Observable.scan,,,,,,,3,,,6.33,,
+Public Method,rx.Observable.scan,,,,,,,3,,,6.67,,
+Public Method,rx.Observable.scan,,,,,,,3,,,6.67,,
+Public Method,rx.Observable.scan,,,,,,,3,,,6.67,,
+Class,rx.Observable.scan.(Anon_19),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.scan.(Anon_19).call,,,,,,,3,,,0,,
+Class,rx.Observable.scan.(Anon_20),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.scan.(Anon_20).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.scan.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.scan.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.scan.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.scan.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.skip,,,,,,,3,,,5.33,,
+Public Method,rx.Observable.skip,,,,,,,3,,,4.67,,
+TypeVariable,rx.Observable.skip.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.Observable.subscribe,,,,,,,10,,,2.6,,
+Public Method,rx.Observable.subscribe,,,,,,,24,,,0,,
+Public Method,rx.Observable.subscribe,,,,,,,18,,,0.17,,
+Public Method,rx.Observable.subscribe,,,,,,,15,,,0.13,,
+Public Method,rx.Observable.subscribe,,,,,,,18,,,0.06,,
+Public Method,rx.Observable.subscribe,,,,,,,18,,,0.06,,
+Public Method,rx.Observable.subscribe,,,,,,,21,,,0,,
+Public Method,rx.Observable.subscribe,,,,,,,19,,,0,,
+Class,rx.Observable.subscribe.(Anon_1),0,0,0,0,4,0,21,,,0,15,6
+Public Method,rx.Observable.subscribe.(Anon_1).onCompleted,,,,,,,6,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_1).onError,,,,,,,7,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_1).onNext,,,,,,,7,,,0,,
+Class,rx.Observable.subscribe.(Anon_2),0,0,0,0,3,0,12,,,0.17,15,4
+Public Method,rx.Observable.subscribe.(Anon_2).onCompleted,,,,,,,2,,,0.5,,
+Public Method,rx.Observable.subscribe.(Anon_2).onError,,,,,,,3,,,0.33,,
+Public Method,rx.Observable.subscribe.(Anon_2).onNext,,,,,,,6,,,0,,
+Class,rx.Observable.subscribe.(Anon_3),0,0,0,0,4,0,12,,,0.17,15,4
+Public Method,rx.Observable.subscribe.(Anon_3).onCompleted,,,,,,,2,,,0.5,,
+Public Method,rx.Observable.subscribe.(Anon_3).onError,,,,,,,3,,,0.33,,
+Public Method,rx.Observable.subscribe.(Anon_3).onNext,,,,,,,6,,,0,,
+Class,rx.Observable.subscribe.(Anon_4),0,0,0,0,3,0,15,,,0.07,15,5
+Public Method,rx.Observable.subscribe.(Anon_4).onCompleted,,,,,,,2,,,0.5,,
+Public Method,rx.Observable.subscribe.(Anon_4).onError,,,,,,,6,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_4).onNext,,,,,,,6,,,0,,
+Class,rx.Observable.subscribe.(Anon_5),0,0,0,0,4,0,15,,,0.07,15,5
+Public Method,rx.Observable.subscribe.(Anon_5).onCompleted,,,,,,,2,,,0.5,,
+Public Method,rx.Observable.subscribe.(Anon_5).onError,,,,,,,6,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_5).onNext,,,,,,,6,,,0,,
+Class,rx.Observable.subscribe.(Anon_6),0,0,0,0,3,0,18,,,0,15,6
+Public Method,rx.Observable.subscribe.(Anon_6).onCompleted,,,,,,,5,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_6).onError,,,,,,,6,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_6).onNext,,,,,,,6,,,0,,
+Class,rx.Observable.subscribe.(Anon_7),0,0,0,0,5,0,16,,,0,15,5
+Public Method,rx.Observable.subscribe.(Anon_7).onCompleted,,,,,,,3,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_7).onError,,,,,,,6,,,0,,
+Public Method,rx.Observable.subscribe.(Anon_7).onNext,,,,,,,6,,,0,,
+Public Static Generic Method,rx.Observable.synchronize,,,,,,,3,,,4.67,,
+TypeVariable,rx.Observable.synchronize.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.take,,,,,,,3,,,6.33,,
+Public Method,rx.Observable.take,,,,,,,3,,,5.67,,
+TypeVariable,rx.Observable.take.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.toList,,,,,,,3,,,6.33,,
+Public Method,rx.Observable.toList,,,,,,,3,,,5.67,,
+TypeVariable,rx.Observable.toList.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.toObservable,,,,,,,3,,,5.33,,
+Public Static Generic Method,rx.Observable.toObservable,,,,,,,3,,,5.33,,
+Public Static Generic Method,rx.Observable.toObservable,,,,,,,3,,,4.67,,
+Public Static Generic Method,rx.Observable.toObservable,,,,,,,3,,,6.33,,
+TypeVariable,rx.Observable.toObservable.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.toObservable.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.toObservable.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.toObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.toSortedList,,,,,,,3,,,3.67,,
+Public Static Generic Method,rx.Observable.toSortedList,,,,,,,3,,,3.33,,
+Public Static Generic Method,rx.Observable.toSortedList,,,,,,,10,,,1,,
+Public Method,rx.Observable.toSortedList,,,,,,,3,,,3.33,,
+Public Method,rx.Observable.toSortedList,,,,,,,3,,,3,,
+Public Method,rx.Observable.toSortedList,,,,,,,3,,,3,,
+Class,rx.Observable.toSortedList.(Anon_21),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.Observable.toSortedList.(Anon_21).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.toSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.toSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.toSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.Observable.zip,,,,,,,3,,,8,,
+Public Static Generic Method,rx.Observable.zip,,,,,,,11,,,2.18,,
+Public Static Generic Method,rx.Observable.zip,,,,,,,3,,,9.33,,
+Public Static Generic Method,rx.Observable.zip,,,,,,,11,,,2.55,,
+Public Static Generic Method,rx.Observable.zip,,,,,,,3,,,9.67,,
+Public Static Generic Method,rx.Observable.zip,,,,,,,11,,,2.64,,
+Class,rx.Observable.zip.(Anon_22),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.zip.(Anon_22).call,,,,,,,3,,,0,,
+Class,rx.Observable.zip.(Anon_23),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.zip.(Anon_23).call,,,,,,,3,,,0,,
+Class,rx.Observable.zip.(Anon_24),0,0,0,0,4,0,6,,,0,13,1
+Public Method,rx.Observable.zip.(Anon_24).call,,,,,,,3,,,0,,
+TypeVariable,rx.Observable.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.Observable.zip.T3,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Interface,rx.Observer,0,0,36,0,1,0,5,,,8,3,3
+TypeVariable,rx.Observer.T,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.Observer.onCompleted,,,,,,,1,,,5,,
+Public Abstract Method,rx.Observer.onError,,,,,,,1,,,7,,
+Public Abstract Method,rx.Observer.onNext,,,,,,,1,,,13,,
+Public Interface,rx.Subscription,0,0,35,0,0,0,3,,,6.67,1,1
+Public Abstract Method,rx.Subscription.unsubscribe,,,,,,,1,,,5,,
+Package,rx.concurrency,0,,,,,0,0,1,,0,,0
+Package,rx.examples,0,,,,,0,0,0,,0,,0
+Package,rx.examples.java,2,,,,,0,16,1,,0,,3
+Public Class,rx.examples.java.RxExamples,2,0,0,0,2,0,13,,,0,14,2
+Public Static Method,rx.examples.java.RxExamples.hello,,,,,,,8,,,0,,
+Class,rx.examples.java.RxExamples.hello.(Anon_1),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.examples.java.RxExamples.hello.(Anon_1).call,,,,,,,3,,,0,,
+Public Static Method,rx.examples.java.RxExamples.main,,,,,,,3,,,0,,
+Package,rx.lang,0,,,,,0,0,0,,0,,0
+Package,rx.lang.clojure,0,,,,,2,89,1,,0.26,,28
+Public Class,rx.lang.clojure.ClojureAdaptor,0,0,0,0,3,0,78,,,0.29,14,23
+Public Static Class,rx.lang.clojure.ClojureAdaptor.UnitTest,0,0,0,100,5,2,24,,,0.33,15,3
+Private Interface,rx.lang.clojure.ClojureAdaptor.UnitTest.ScriptAssertion,0,0,0,0,1,0,4,,,0,2,2
+Public Abstract Method,rx.lang.clojure.ClojureAdaptor.UnitTest.ScriptAssertion.error,,,,,,,1,,,0,,
+Public Abstract Method,rx.lang.clojure.ClojureAdaptor.UnitTest.ScriptAssertion.received,,,,,,,1,,,0,,
+Public Method,rx.lang.clojure.ClojureAdaptor.UnitTest.before,,,,,,,3,,,0,,
+Private Method,rx.lang.clojure.ClojureAdaptor.UnitTest.runClojureScript,,,,,,,6,,,0,,
+Public Method,rx.lang.clojure.ClojureAdaptor.UnitTest.testTake,,,,,,,3,,,0,,
+Public Method,rx.lang.clojure.ClojureAdaptor.call,,,,,,,47,,,0,,
+Public Method,rx.lang.clojure.ClojureAdaptor.getFunctionClass,,,,,,,3,,,0,,
+Package,rx.lang.groovy,0,,,,,4,203,1,,0.12,,30
+Public Class,rx.lang.groovy.GroovyAdaptor,0,0,0,0,2,0,185,,,0.14,14,2
+Public Static Class,rx.lang.groovy.GroovyAdaptor.UnitTest,0,0,0,52,12,2,176,,,0.06,32,20
+Private Interface,rx.lang.groovy.GroovyAdaptor.UnitTest.ScriptAssertion,0,0,0,0,1,0,4,,,0,2,2
+Public Abstract Method,rx.lang.groovy.GroovyAdaptor.UnitTest.ScriptAssertion.error,,,,,,,1,,,0,,
+Public Abstract Method,rx.lang.groovy.GroovyAdaptor.UnitTest.ScriptAssertion.received,,,,,,,1,,,0,,
+Private Static Class,rx.lang.groovy.GroovyAdaptor.UnitTest.TestFactory,0,0,0,50,3,1,11,,,0,14,2
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.TestFactory.getNumbers,,,,,,,3,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.TestFactory.getObservable,,,,,,,3,,,0,,
+Private Static Class,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable,0,1,0,0,2,1,19,,,0.11,110,2
+Public Constructor,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable.TestObservable,,,,,,,9,,,0.11,,
+Class,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable.TestObservable.(Anon_1),0,0,0,0,3,0,5,,,0.2,13,1
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable.TestObservable.(Anon_1).call,,,,,,,3,,,0.33,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable.subscribe,,,,,,,8,,,0.13,,
+Class,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable.subscribe.(Anon_2),0,0,0,0,0,0,3,,,0.33,13,1
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.TestObservable.subscribe.(Anon_2).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.before,,,,,,,3,,,0,,
+Private Method,rx.lang.groovy.GroovyAdaptor.UnitTest.runGroovyScript,,,,,,,10,,,0.1,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testCreateViaGroovy,,,,,,,4,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testFilterViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testLast,,,,,,,5,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testMap,,,,,,,5,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testMapViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testMaterializeViaGroovy,,,,,,,5,,,0.2,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testMergeDelayErrorViaGroovy,,,,,,,11,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testMergeViaGroovy,,,,,,,11,,,0.45,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testScriptWithMaterialize,,,,,,,5,,,0.2,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testScriptWithMerge,,,,,,,6,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testScriptWithOnNext,,,,,,,5,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testSkipTakeViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testSkipViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testTakeViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testToSortedList,,,,,,,4,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testToSortedListStatic,,,,,,,4,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testToSortedListWithFunction,,,,,,,4,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.UnitTest.testToSortedListWithFunctionStatic,,,,,,,4,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.call,,,,,,,3,,,0,,
+Public Method,rx.lang.groovy.GroovyAdaptor.getFunctionClass,,,,,,,3,,,0,,
+Package,rx.lang.jruby,0,,,,,4,165,1,,0.12,,25
+Public Class,rx.lang.jruby.JRubyAdaptor,0,0,0,0,2,0,146,,,0.14,14,3
+Public Static Class,rx.lang.jruby.JRubyAdaptor.UnitTest,0,0,0,53,9,2,130,,,0.04,26,14
+Private Interface,rx.lang.jruby.JRubyAdaptor.UnitTest.ScriptAssertion,0,0,0,0,1,0,4,,,0,2,2
+Public Abstract Method,rx.lang.jruby.JRubyAdaptor.UnitTest.ScriptAssertion.error,,,,,,,1,,,0,,
+Public Abstract Method,rx.lang.jruby.JRubyAdaptor.UnitTest.ScriptAssertion.received,,,,,,,1,,,0,,
+Public Static Class,rx.lang.jruby.JRubyAdaptor.UnitTest.TestFactory,0,0,0,50,2,1,9,,,0,14,2
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.TestFactory.getNumbers,,,,,,,3,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.TestFactory.getObservable,,,,,,,3,,,0,,
+Private Static Class,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable,0,1,0,0,2,1,19,,,0.11,110,2
+Public Constructor,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable.TestObservable,,,,,,,9,,,0.11,,
+Class,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable.TestObservable.(Anon_1),0,0,0,0,3,0,5,,,0.2,13,1
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable.TestObservable.(Anon_1).call,,,,,,,3,,,0.33,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable.subscribe,,,,,,,8,,,0.13,,
+Class,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable.subscribe.(Anon_2),0,0,0,0,0,0,3,,,0.33,13,1
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.TestObservable.subscribe.(Anon_2).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.before,,,,,,,3,,,0,,
+Private Method,rx.lang.jruby.JRubyAdaptor.UnitTest.runGroovyScript,,,,,,,12,,,0.08,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testCreateViaGroovy,,,,,,,4,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testFilterViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testLast,,,,,,,5,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testMap,,,,,,,5,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testMaterializeViaGroovy,,,,,,,5,,,0.2,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testScriptWithMaterialize,,,,,,,5,,,0.2,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testScriptWithMerge,,,,,,,6,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testScriptWithOnNext,,,,,,,5,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testSkipTakeViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testSkipViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testTakeViaGroovy,,,,,,,6,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.UnitTest.testToSortedList,,,,,,,4,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.call,,,,,,,9,,,0,,
+Public Method,rx.lang.jruby.JRubyAdaptor.getFunctionClass,,,,,,,3,,,0,,
+Package,rx.operators,36,,,,,137,3825,20,,0.28,,536
+Public Class,rx.operators.OperationCombineLatest,3,0,0,0,8,0,488,,,0.32,15,3
+Private Static Generic Class,rx.operators.OperationCombineLatest.Aggregator,0,0,0,57,14,6,84,,,0.8,19,20
+Public Constructor,rx.operators.OperationCombineLatest.Aggregator.Aggregator,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationCombineLatest.Aggregator.R,0,0,0,0,0,0,0,,,0,0,0
+Method,rx.operators.OperationCombineLatest.Aggregator.addObserver,,,,,,,3,,,2,,
+Public Method,rx.operators.OperationCombineLatest.Aggregator.call,,,,,,,15,,,0.07,,
+Class,rx.operators.OperationCombineLatest.Aggregator.call.(Anon_1),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationCombineLatest.Aggregator.call.(Anon_1).unsubscribe,,,,,,,3,,,0,,
+Method,rx.operators.OperationCombineLatest.Aggregator.complete,,,,,,,9,,,1,,
+Method,rx.operators.OperationCombineLatest.Aggregator.error,,,,,,,5,,,1.4,,
+Method,rx.operators.OperationCombineLatest.Aggregator.next,,,,,,,33,,,0.67,,
+Private Method,rx.operators.OperationCombineLatest.Aggregator.stop,,,,,,,8,,,0.25,,
+Private Static Generic Class,rx.operators.OperationCombineLatest.CombineObserver,0,0,0,53,6,3,26,,,0,17,6
+Public Constructor,rx.operators.OperationCombineLatest.CombineObserver.CombineObserver,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationCombineLatest.CombineObserver.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.CombineObserver.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationCombineLatest.CombineObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationCombineLatest.CombineObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationCombineLatest.CombineObserver.onNext,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationCombineLatest.CombineObserver.startWatching,,,,,,,6,,,0,,
+Public Static Class,rx.operators.OperationCombineLatest.UnitTest,1,0,0,0,16,0,353,,,0.2,30,20
+Private Static Class,rx.operators.OperationCombineLatest.UnitTest.TestObservable,0,1,0,0,3,1,7,,,0.14,109,1
+Public Method,rx.operators.OperationCombineLatest.UnitTest.TestObservable.subscribe,,,,,,,4,,,0.25,,
+Private Method,rx.operators.OperationCombineLatest.UnitTest.getConcat3StringsCombineLatestFunction,,,,,,,18,,,0,,
+Class,rx.operators.OperationCombineLatest.UnitTest.getConcat3StringsCombineLatestFunction.(Anon_2),0,0,0,0,2,0,14,,,0,13,4
+Public Method,rx.operators.OperationCombineLatest.UnitTest.getConcat3StringsCombineLatestFunction.(Anon_2).call,,,,,,,12,,,0,,
+Private Method,rx.operators.OperationCombineLatest.UnitTest.getConcatCombineLatestFunction,,,,,,,16,,,0,,
+Class,rx.operators.OperationCombineLatest.UnitTest.getConcatCombineLatestFunction.(Anon_3),0,0,0,0,5,0,12,,,0,13,3
+Public Method,rx.operators.OperationCombineLatest.UnitTest.getConcatCombineLatestFunction.(Anon_3).call,,,,,,,10,,,0,,
+Private Method,rx.operators.OperationCombineLatest.UnitTest.getConcatStringIntegerCombineLatestFunction,,,,,,,9,,,0,,
+Class,rx.operators.OperationCombineLatest.UnitTest.getConcatStringIntegerCombineLatestFunction.(Anon_4),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.operators.OperationCombineLatest.UnitTest.getConcatStringIntegerCombineLatestFunction.(Anon_4).call,,,,,,,3,,,0,,
+Private Method,rx.operators.OperationCombineLatest.UnitTest.getConcatStringIntegerIntArrayCombineLatestFunction,,,,,,,9,,,0,,
+Class,rx.operators.OperationCombineLatest.UnitTest.getConcatStringIntegerIntArrayCombineLatestFunction.(Anon_5),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.operators.OperationCombineLatest.UnitTest.getConcatStringIntegerIntArrayCombineLatestFunction.(Anon_5).call,,,,,,,3,,,0,,
+Private Static Method,rx.operators.OperationCombineLatest.UnitTest.getStringValue,,,,,,,11,,,0,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregate3Types,,,,,,,18,,,0.28,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregateMultipleTypes,,,,,,,21,,,0.24,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregatorDifferentSizedResultsWithOnComplete,,,,,,,21,,,0.24,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregatorEarlyCompletion,,,,,,,21,,,0.29,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregatorError,,,,,,,21,,,0.29,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregatorSimple,,,,,,,25,,,0.32,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregatorUnsubscribe,,,,,,,21,,,0.29,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testAggregatorsWithDifferentSizesAndTiming,,,,,,,30,,,0.17,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testCombineLatest2Types,,,,,,,11,,,0.09,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testCombineLatest3TypesA,,,,,,,9,,,0.11,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testCombineLatest3TypesB,,,,,,,10,,,0.1,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testCombineLatestDifferentLengthObservableSequences1,,,,,,,24,,,0.21,,
+Public Method,rx.operators.OperationCombineLatest.UnitTest.testCombineLatestDifferentLengthObservableSequences2,,,,,,,23,,,0.22,,
+Public Static Generic Method,rx.operators.OperationCombineLatest.combineLatest,,,,,,,6,,,0,,
+Public Static Generic Method,rx.operators.OperationCombineLatest.combineLatest,,,,,,,7,,,0,,
+Public Static Generic Method,rx.operators.OperationCombineLatest.combineLatest,,,,,,,8,,,0,,
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationCombineLatest.combineLatest.T3,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationConcat,3,0,0,0,7,0,211,,,0.14,15,3
+Private Static Generic Class,rx.operators.OperationConcat.Concat,0,0,0,41,5,6,44,,,0,14,2
+Class,rx.operators.OperationConcat.Concat.(Anon_3),0,0,0,0,2,0,6,,,0,13,2
+Public Method,rx.operators.OperationConcat.Concat.(Anon_3).unsubscribe,,,,,,,4,,,0,,
+Constructor,rx.operators.OperationConcat.Concat.Concat,,,,,,,4,,,0,,
+Private Class,rx.operators.OperationConcat.Concat.ConcatObserver,0,0,0,0,4,1,22,,,0,16,5
+Constructor,rx.operators.OperationConcat.Concat.ConcatObserver.ConcatObserver,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationConcat.Concat.ConcatObserver.onCompleted,,,,,,,8,,,0,,
+Public Method,rx.operators.OperationConcat.Concat.ConcatObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationConcat.Concat.ConcatObserver.onNext,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationConcat.Concat.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationConcat.Concat.call,,,,,,,4,,,0,,
+Public Static Class,rx.operators.OperationConcat.UnitTest,0,0,0,33,14,2,142,,,0.06,17,6
+Class,rx.operators.OperationConcat.UnitTest.(Anon_4),0,0,0,0,4,0,12,,,0.08,15,3
+Public Method,rx.operators.OperationConcat.UnitTest.(Anon_4).onCompleted,,,,,,,2,,,0,,
+Public Method,rx.operators.OperationConcat.UnitTest.(Anon_4).onError,,,,,,,2,,,0.5,,
+Public Method,rx.operators.OperationConcat.UnitTest.(Anon_4).onNext,,,,,,,4,,,0,,
+Private Static Class,rx.operators.OperationConcat.UnitTest.TestObservable,0,1,0,64,6,7,43,,,0.07,110,2
+Class,rx.operators.OperationConcat.UnitTest.TestObservable.(Anon_7),0,0,0,0,2,0,5,,,0.2,13,1
+Public Method,rx.operators.OperationConcat.UnitTest.TestObservable.(Anon_7).unsubscribe,,,,,,,3,,,0.33,,
+Public Constructor,rx.operators.OperationConcat.UnitTest.TestObservable.TestObservable,,,,,,,5,,,0,,
+Public Method,rx.operators.OperationConcat.UnitTest.TestObservable.subscribe,,,,,,,24,,,0.08,,
+Class,rx.operators.OperationConcat.UnitTest.TestObservable.subscribe.(Anon_8),0,0,0,0,6,0,19,,,0.11,13,6
+Public Method,rx.operators.OperationConcat.UnitTest.TestObservable.subscribe.(Anon_8).run,,,,,,,17,,,0.12,,
+Public Method,rx.operators.OperationConcat.UnitTest.before,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationConcat.UnitTest.testConcat,,,,,,,10,,,0,,
+Public Method,rx.operators.OperationConcat.UnitTest.testConcatUnsubscribe,,,,,,,27,,,0.07,,
+Public Method,rx.operators.OperationConcat.UnitTest.testConcatWithList,,,,,,,13,,,0,,
+Public Method,rx.operators.OperationConcat.UnitTest.testMergeObservableOfObservables,,,,,,,23,,,0.09,,
+Class,rx.operators.OperationConcat.UnitTest.testMergeObservableOfObservables.(Anon_5),0,0,0,0,4,0,12,,,0.17,13,1
+Public Method,rx.operators.OperationConcat.UnitTest.testMergeObservableOfObservables.(Anon_5).call,,,,,,,10,,,0.2,,
+Class,rx.operators.OperationConcat.UnitTest.testMergeObservableOfObservables.(Anon_5).call.(Anon_6),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationConcat.UnitTest.testMergeObservableOfObservables.(Anon_5).call.(Anon_6).unsubscribe,,,,,,,2,,,0.5,,
+Public Static Generic Method,rx.operators.OperationConcat.concat,,,,,,,10,,,0,,
+Public Static Generic Method,rx.operators.OperationConcat.concat,,,,,,,8,,,0.88,,
+Public Static Generic Method,rx.operators.OperationConcat.concat,,,,,,,5,,,0,,
+Class,rx.operators.OperationConcat.concat.(Anon_1),0,0,0,0,5,0,5,,,0,13,1
+Public Method,rx.operators.OperationConcat.concat.(Anon_1).call,,,,,,,3,,,0,,
+Class,rx.operators.OperationConcat.concat.(Anon_2),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.operators.OperationConcat.concat.(Anon_2).call,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationConcat.concat.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationConcat.concat.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationConcat.concat.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationFilter,1,0,0,0,3,0,56,,,0.29,13,1
+Private Static Generic Class,rx.operators.OperationFilter.Filter,0,0,0,33,4,3,28,,,0.04,14,2
+Public Constructor,rx.operators.OperationFilter.Filter.Filter,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationFilter.Filter.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationFilter.Filter.call,,,,,,,20,,,0.05,,
+Class,rx.operators.OperationFilter.Filter.call.(Anon_1),0,0,0,0,4,0,17,,,0.06,15,5
+Public Method,rx.operators.OperationFilter.Filter.call.(Anon_1).onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationFilter.Filter.call.(Anon_1).onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationFilter.Filter.call.(Anon_1).onNext,,,,,,,10,,,0.1,,
+TypeVariable,rx.operators.OperationFilter.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.operators.OperationFilter.UnitTest,0,0,0,0,6,0,23,,,0,13,1
+Public Method,rx.operators.OperationFilter.UnitTest.testFilter,,,,,,,20,,,0,,
+Class,rx.operators.OperationFilter.UnitTest.testFilter.(Anon_2),0,0,0,0,3,0,8,,,0,13,2
+Public Method,rx.operators.OperationFilter.UnitTest.testFilter.(Anon_2).call,,,,,,,6,,,0,,
+Public Static Generic Method,rx.operators.OperationFilter.filter,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationFilter.filter.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationLast,1,0,0,0,3,0,44,,,0.45,13,1
+Private Static Generic Class,rx.operators.OperationLast.Last,0,0,0,66,5,3,24,,,0,14,2
+Public Constructor,rx.operators.OperationLast.Last.Last,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationLast.Last.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationLast.Last.call,,,,,,,17,,,0,,
+Class,rx.operators.OperationLast.Last.call.(Anon_1),0,0,0,0,4,0,14,,,0,15,4
+Public Method,rx.operators.OperationLast.Last.call.(Anon_1).onCompleted,,,,,,,6,,,0,,
+Public Method,rx.operators.OperationLast.Last.call.(Anon_1).onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationLast.Last.call.(Anon_1).onNext,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationLast.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.operators.OperationLast.UnitTest,0,0,0,0,6,0,15,,,0,13,1
+Public Method,rx.operators.OperationLast.UnitTest.testLast,,,,,,,12,,,0,,
+Public Static Generic Method,rx.operators.OperationLast.last,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationLast.last.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationMap,2,0,0,0,4,0,136,,,0.48,14,2
+Private Static Generic Class,rx.operators.OperationMap.MapObservable,0,0,0,0,4,2,10,,,0,14,2
+Public Constructor,rx.operators.OperationMap.MapObservable.MapObservable,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationMap.MapObservable.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMap.MapObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationMap.MapObservable.call,,,,,,,3,,,0,,
+Private Static Generic Class,rx.operators.OperationMap.MapObserver,0,0,0,25,2,2,20,,,0,16,5
+Public Constructor,rx.operators.OperationMap.MapObserver.MapObserver,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationMap.MapObserver.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMap.MapObserver.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationMap.MapObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMap.MapObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMap.MapObserver.onNext,,,,,,,7,,,0,,
+Public Static Class,rx.operators.OperationMap.UnitTest,0,0,0,40,9,1,96,,,0.21,17,5
+Public Method,rx.operators.OperationMap.UnitTest.before,,,,,,,3,,,0,,
+Private Method,rx.operators.OperationMap.UnitTest.getMap,,,,,,,6,,,0,,
+Public Method,rx.operators.OperationMap.UnitTest.testMap,,,,,,,17,,,0,,
+Class,rx.operators.OperationMap.UnitTest.testMap.(Anon_1),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.operators.OperationMap.UnitTest.testMap.(Anon_1).call,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMap.UnitTest.testMapMany,,,,,,,32,,,0.13,,
+Class,rx.operators.OperationMap.UnitTest.testMapMany.(Anon_2),0,0,0,0,7,0,21,,,0.1,13,2
+Public Method,rx.operators.OperationMap.UnitTest.testMapMany.(Anon_2).call,,,,,,,18,,,0.11,,
+Class,rx.operators.OperationMap.UnitTest.testMapMany.(Anon_2).call.(Anon_3),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.operators.OperationMap.UnitTest.testMapMany.(Anon_2).call.(Anon_3).call,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMap.UnitTest.testMapMany2,,,,,,,30,,,0,,
+Class,rx.operators.OperationMap.UnitTest.testMapMany2.(Anon_4),0,0,0,0,3,0,10,,,0,13,1
+Public Method,rx.operators.OperationMap.UnitTest.testMapMany2.(Anon_4).call,,,,,,,8,,,0,,
+Class,rx.operators.OperationMap.UnitTest.testMapMany2.(Anon_4).call.(Anon_5),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.operators.OperationMap.UnitTest.testMapMany2.(Anon_4).call.(Anon_5).call,,,,,,,3,,,0,,
+Public Static Generic Method,rx.operators.OperationMap.map,,,,,,,3,,,4.67,,
+TypeVariable,rx.operators.OperationMap.map.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMap.map.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.operators.OperationMap.mapMany,,,,,,,3,,,5.33,,
+TypeVariable,rx.operators.OperationMap.mapMany.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMap.mapMany.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationMaterialize,1,0,0,0,3,0,144,,,0.22,13,1
+Private Static Generic Class,rx.operators.OperationMaterialize.MaterializeObservable,0,0,0,0,4,1,24,,,0,14,2
+Public Constructor,rx.operators.OperationMaterialize.MaterializeObservable.MaterializeObservable,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationMaterialize.MaterializeObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationMaterialize.MaterializeObservable.call,,,,,,,18,,,0,,
+Class,rx.operators.OperationMaterialize.MaterializeObservable.call.(Anon_1),0,0,0,0,4,0,15,,,0,15,3
+Public Method,rx.operators.OperationMaterialize.MaterializeObservable.call.(Anon_1).onCompleted,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationMaterialize.MaterializeObservable.call.(Anon_1).onError,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationMaterialize.MaterializeObservable.call.(Anon_1).onNext,,,,,,,3,,,0,,
+Private Static Class,rx.operators.OperationMaterialize.TestAsyncErrorObservable,0,1,0,50,5,2,35,,,0,110,2
+Constructor,rx.operators.OperationMaterialize.TestAsyncErrorObservable.TestAsyncErrorObservable,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMaterialize.TestAsyncErrorObservable.subscribe,,,,,,,28,,,0,,
+Class,rx.operators.OperationMaterialize.TestAsyncErrorObservable.subscribe.(Anon_2),0,0,0,0,9,0,19,,,0,13,4
+Public Method,rx.operators.OperationMaterialize.TestAsyncErrorObservable.subscribe.(Anon_2).run,,,,,,,17,,,0,,
+Class,rx.operators.OperationMaterialize.TestAsyncErrorObservable.subscribe.(Anon_3),0,0,0,0,1,0,4,,,0,13,1
+Public Method,rx.operators.OperationMaterialize.TestAsyncErrorObservable.subscribe.(Anon_3).unsubscribe,,,,,,,2,,,0,,
+Private Static Class,rx.operators.OperationMaterialize.TestObserver,0,0,0,66,6,3,16,,,0,15,3
+Public Method,rx.operators.OperationMaterialize.TestObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMaterialize.TestObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMaterialize.TestObserver.onNext,,,,,,,3,,,0,,
+Public Static Class,rx.operators.OperationMaterialize.UnitTest,0,0,0,0,11,0,61,,,0.02,15,6
+Public Method,rx.operators.OperationMaterialize.UnitTest.testMaterialize1,,,,,,,20,,,0.05,,
+Public Method,rx.operators.OperationMaterialize.UnitTest.testMaterialize2,,,,,,,21,,,0,,
+Public Method,rx.operators.OperationMaterialize.UnitTest.testMultipleSubscribes,,,,,,,15,,,0,,
+Public Static Generic Method,rx.operators.OperationMaterialize.materialize,,,,,,,3,,,2.67,,
+TypeVariable,rx.operators.OperationMaterialize.materialize.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationMerge,3,0,0,0,3,0,366,,,0.27,15,3
+Private Static Generic Class,rx.operators.OperationMerge.MergeObservable,0,0,0,75,8,6,96,,,0.52,14,2
+Private Class,rx.operators.OperationMerge.MergeObservable.ChildObserver,0,0,0,0,6,1,30,,,0.37,16,10
+Public Constructor,rx.operators.OperationMerge.MergeObservable.ChildObserver.ChildObserver,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.MergeObservable.ChildObserver.onCompleted,,,,,,,10,,,0.4,,
+Public Method,rx.operators.OperationMerge.MergeObservable.ChildObserver.onError,,,,,,,7,,,0.14,,
+Public Method,rx.operators.OperationMerge.MergeObservable.ChildObserver.onNext,,,,,,,5,,,0.4,,
+Private Constructor,rx.operators.OperationMerge.MergeObservable.MergeObservable,,,,,,,3,,,0,,
+Private Class,rx.operators.OperationMerge.MergeObservable.MergeSubscription,0,0,0,0,4,0,16,,,0.5,14,4
+Public Method,rx.operators.OperationMerge.MergeObservable.MergeSubscription.stop,,,,,,,11,,,0.27,,
+Public Method,rx.operators.OperationMerge.MergeObservable.MergeSubscription.unsubscribe,,,,,,,3,,,0,,
+Private Class,rx.operators.OperationMerge.MergeObservable.ParentObserver,0,0,0,0,10,1,33,,,0.48,16,9
+Public Constructor,rx.operators.OperationMerge.MergeObservable.ParentObserver.ParentObserver,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.MergeObservable.ParentObserver.onCompleted,,,,,,,10,,,0.3,,
+Public Method,rx.operators.OperationMerge.MergeObservable.ParentObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.MergeObservable.ParentObserver.onNext,,,,,,,12,,,0.67,,
+TypeVariable,rx.operators.OperationMerge.MergeObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationMerge.MergeObservable.call,,,,,,,4,,,1,,
+Public Static Class,rx.operators.OperationMerge.UnitTest,0,0,0,12,18,1,211,,,0.11,20,9
+Private Static Class,rx.operators.OperationMerge.UnitTest.TestASynchronousObservable,0,1,0,0,4,1,18,,,0,109,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestASynchronousObservable.subscribe,,,,,,,15,,,0,,
+Class,rx.operators.OperationMerge.UnitTest.TestASynchronousObservable.subscribe.(Anon_10),0,0,0,0,1,0,4,,,0,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestASynchronousObservable.subscribe.(Anon_10).unsubscribe,,,,,,,2,,,0,,
+Class,rx.operators.OperationMerge.UnitTest.TestASynchronousObservable.subscribe.(Anon_9),0,0,0,0,3,0,6,,,0,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestASynchronousObservable.subscribe.(Anon_9).run,,,,,,,4,,,0,,
+Private Static Class,rx.operators.OperationMerge.UnitTest.TestErrorObservable,0,1,0,0,7,1,22,,,0.05,110,4
+Constructor,rx.operators.OperationMerge.UnitTest.TestErrorObservable.TestErrorObservable,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.TestErrorObservable.subscribe,,,,,,,16,,,0.06,,
+Class,rx.operators.OperationMerge.UnitTest.TestErrorObservable.subscribe.(Anon_12),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestErrorObservable.subscribe.(Anon_12).unsubscribe,,,,,,,2,,,0.5,,
+Private Static Class,rx.operators.OperationMerge.UnitTest.TestObservable,0,1,0,58,6,3,24,,,0.25,112,4
+Class,rx.operators.OperationMerge.UnitTest.TestObservable.(Anon_11),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestObservable.(Anon_11).unsubscribe,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.TestObservable.sendOnCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.TestObservable.sendOnError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.TestObservable.sendOnNext,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.TestObservable.subscribe,,,,,,,4,,,0,,
+Private Static Class,rx.operators.OperationMerge.UnitTest.TestSynchronousObservable,0,1,0,0,3,0,11,,,0.09,109,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestSynchronousObservable.subscribe,,,,,,,9,,,0.11,,
+Class,rx.operators.OperationMerge.UnitTest.TestSynchronousObservable.subscribe.(Anon_8),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.TestSynchronousObservable.subscribe.(Anon_8).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.operators.OperationMerge.UnitTest.before,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.testError1,,,,,,,15,,,0.4,,
+Public Method,rx.operators.OperationMerge.UnitTest.testError2,,,,,,,20,,,0.35,,
+Public Method,rx.operators.OperationMerge.UnitTest.testMergeArray,,,,,,,10,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.testMergeArrayWithThreading,,,,,,,16,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.testMergeList,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationMerge.UnitTest.testMergeObservableOfObservables,,,,,,,22,,,0.09,,
+Class,rx.operators.OperationMerge.UnitTest.testMergeObservableOfObservables.(Anon_6),0,0,0,0,4,0,12,,,0.17,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.testMergeObservableOfObservables.(Anon_6).call,,,,,,,10,,,0.2,,
+Class,rx.operators.OperationMerge.UnitTest.testMergeObservableOfObservables.(Anon_6).call.(Anon_7),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationMerge.UnitTest.testMergeObservableOfObservables.(Anon_6).call.(Anon_7).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.operators.OperationMerge.UnitTest.testUnSubscribe,,,,,,,22,,,0,,
+Public Static Generic Method,rx.operators.OperationMerge.merge,,,,,,,24,,,0.04,,
+Public Static Generic Method,rx.operators.OperationMerge.merge,,,,,,,8,,,1.13,,
+Public Static Generic Method,rx.operators.OperationMerge.merge,,,,,,,24,,,0.04,,
+Class,rx.operators.OperationMerge.merge.(Anon_1),0,0,0,0,5,0,5,,,0,13,1
+Public Method,rx.operators.OperationMerge.merge.(Anon_1).call,,,,,,,3,,,0,,
+Class,rx.operators.OperationMerge.merge.(Anon_2),0,0,0,0,5,1,21,,,0.05,13,4
+Public Method,rx.operators.OperationMerge.merge.(Anon_2).call,,,,,,,18,,,0.06,,
+Class,rx.operators.OperationMerge.merge.(Anon_2).call.(Anon_3),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationMerge.merge.(Anon_2).call.(Anon_3).unsubscribe,,,,,,,3,,,0,,
+Class,rx.operators.OperationMerge.merge.(Anon_4),0,0,0,0,5,1,21,,,0.05,13,4
+Public Method,rx.operators.OperationMerge.merge.(Anon_4).call,,,,,,,18,,,0.06,,
+Class,rx.operators.OperationMerge.merge.(Anon_4).call.(Anon_5),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationMerge.merge.(Anon_4).call.(Anon_5).unsubscribe,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationMerge.merge.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMerge.merge.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMerge.merge.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationMergeDelayError,3,0,0,0,3,0,540,,,0.23,15,3
+Private Static Generic Class,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable,0,0,0,78,10,7,114,,,0.6,14,2
+Private Class,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ChildObserver,0,0,0,50,8,2,41,,,0.61,17,12
+Public Constructor,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ChildObserver.ChildObserver,,,,,,,3,,,0,,
+Private Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ChildObserver.finishObserver,,,,,,,13,,,0.85,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ChildObserver.onCompleted,,,,,,,6,,,0.5,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ChildObserver.onError,,,,,,,8,,,0.63,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ChildObserver.onNext,,,,,,,5,,,0.4,,
+Private Constructor,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.MergeDelayErrorObservable,,,,,,,3,,,0,,
+Private Class,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.MergeSubscription,0,0,0,0,4,0,16,,,0.5,14,4
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.MergeSubscription.stop,,,,,,,11,,,0.27,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.MergeSubscription.unsubscribe,,,,,,,3,,,0,,
+Private Class,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ParentObserver,0,0,0,0,12,1,39,,,0.49,16,11
+Public Constructor,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ParentObserver.ParentObserver,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ParentObserver.onCompleted,,,,,,,16,,,0.38,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ParentObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.ParentObserver.onNext,,,,,,,12,,,0.67,,
+TypeVariable,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationMergeDelayError.MergeDelayErrorObservable.call,,,,,,,4,,,1,,
+Public Static Class,rx.operators.OperationMergeDelayError.UnitTest,0,0,0,15,22,1,367,,,0.05,25,16
+Private Static Class,rx.operators.OperationMergeDelayError.UnitTest.CaptureObserver,0,0,0,66,3,1,12,,,0,15,3
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.CaptureObserver.onCompleted,,,,,,,2,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.CaptureObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.CaptureObserver.onNext,,,,,,,2,,,0,,
+Private Static Class,rx.operators.OperationMergeDelayError.UnitTest.TestASynchronousObservable,0,1,0,0,4,1,18,,,0,109,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestASynchronousObservable.subscribe,,,,,,,15,,,0,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestASynchronousObservable.subscribe.(Anon_10),0,0,0,0,1,0,4,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestASynchronousObservable.subscribe.(Anon_10).unsubscribe,,,,,,,2,,,0,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestASynchronousObservable.subscribe.(Anon_9),0,0,0,0,3,0,6,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestASynchronousObservable.subscribe.(Anon_9).run,,,,,,,4,,,0,,
+Private Static Class,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable,0,1,0,50,5,2,35,,,0,110,2
+Constructor,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable.TestAsyncErrorObservable,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable.subscribe,,,,,,,28,,,0,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable.subscribe.(Anon_13),0,0,0,0,9,0,19,,,0,13,4
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable.subscribe.(Anon_13).run,,,,,,,17,,,0,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable.subscribe.(Anon_14),0,0,0,0,1,0,4,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestAsyncErrorObservable.subscribe.(Anon_14).unsubscribe,,,,,,,2,,,0,,
+Private Static Class,rx.operators.OperationMergeDelayError.UnitTest.TestErrorObservable,0,1,0,0,7,1,26,,,0.12,110,5
+Constructor,rx.operators.OperationMergeDelayError.UnitTest.TestErrorObservable.TestErrorObservable,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestErrorObservable.subscribe,,,,,,,20,,,0.15,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestErrorObservable.subscribe.(Anon_12),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestErrorObservable.subscribe.(Anon_12).unsubscribe,,,,,,,2,,,0.5,,
+Private Static Class,rx.operators.OperationMergeDelayError.UnitTest.TestObservable,0,1,0,58,6,3,24,,,0.25,112,4
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestObservable.(Anon_11),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestObservable.(Anon_11).unsubscribe,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestObservable.sendOnCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestObservable.sendOnError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestObservable.sendOnNext,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestObservable.subscribe,,,,,,,4,,,0,,
+Private Static Class,rx.operators.OperationMergeDelayError.UnitTest.TestSynchronousObservable,0,1,0,0,3,0,11,,,0.09,109,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestSynchronousObservable.subscribe,,,,,,,9,,,0.11,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.TestSynchronousObservable.subscribe.(Anon_8),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.TestSynchronousObservable.subscribe.(Anon_8).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.before,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testCompositeErrorDelayed1,,,,,,,15,,,0.07,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testCompositeErrorDelayed2,,,,,,,15,,,0.07,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testErrorDelayed1,,,,,,,15,,,0.07,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testErrorDelayed2,,,,,,,20,,,0.05,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testErrorDelayed3,,,,,,,20,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testErrorDelayed4,,,,,,,20,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testErrorDelayed4WithThreading,,,,,,,28,,,0.04,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testMergeArray,,,,,,,10,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testMergeArrayWithThreading,,,,,,,16,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testMergeList,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testMergeObservableOfObservables,,,,,,,22,,,0.23,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.testMergeObservableOfObservables.(Anon_6),0,0,0,0,4,0,12,,,0.17,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testMergeObservableOfObservables.(Anon_6).call,,,,,,,10,,,0.2,,
+Class,rx.operators.OperationMergeDelayError.UnitTest.testMergeObservableOfObservables.(Anon_6).call.(Anon_7),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testMergeObservableOfObservables.(Anon_6).call.(Anon_7).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.operators.OperationMergeDelayError.UnitTest.testUnSubscribe,,,,,,,22,,,0,,
+Public Static Generic Method,rx.operators.OperationMergeDelayError.mergeDelayError,,,,,,,24,,,0.04,,
+Public Static Generic Method,rx.operators.OperationMergeDelayError.mergeDelayError,,,,,,,8,,,1.38,,
+Public Static Generic Method,rx.operators.OperationMergeDelayError.mergeDelayError,,,,,,,24,,,0.04,,
+Class,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_1),0,0,0,0,5,0,5,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_1).call,,,,,,,3,,,0,,
+Class,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_2),0,0,0,0,5,1,21,,,0.05,13,4
+Public Method,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_2).call,,,,,,,18,,,0.06,,
+Class,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_2).call.(Anon_3),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_2).call.(Anon_3).unsubscribe,,,,,,,3,,,0,,
+Class,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_4),0,0,0,0,5,1,21,,,0.05,13,4
+Public Method,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_4).call,,,,,,,18,,,0.06,,
+Class,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_4).call.(Anon_5),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationMergeDelayError.mergeDelayError.(Anon_4).call.(Anon_5).unsubscribe,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationMergeDelayError.mergeDelayError.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMergeDelayError.mergeDelayError.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationMergeDelayError.mergeDelayError.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationOnErrorResumeNextViaFunction,1,0,0,0,3,0,163,,,0.22,13,1
+Private Static Generic Class,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction,0,0,0,25,5,2,40,,,0.4,14,2
+Public Constructor,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call,,,,,,,33,,,0.48,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call.(Anon_1),0,0,0,0,8,0,21,,,0.62,15,6
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call.(Anon_1).onCompleted,,,,,,,3,,,0.33,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call.(Anon_1).onError,,,,,,,14,,,0.79,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call.(Anon_1).onNext,,,,,,,3,,,0.33,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call.(Anon_2),0,0,0,0,2,0,7,,,0.14,13,2
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.OnErrorResumeNextViaFunction.call.(Anon_2).unsubscribe,,,,,,,6,,,0.17,,
+TypeVariable,rx.operators.OperationOnErrorResumeNextViaFunction.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest,0,0,0,0,13,0,118,,,0.04,15,5
+Private Static Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.TestObservable,0,1,0,33,7,3,31,,,0,110,2
+Public Constructor,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.TestObservable.TestObservable,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.TestObservable.subscribe,,,,,,,22,,,0,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.TestObservable.subscribe.(Anon_7),0,0,0,0,8,0,14,,,0,13,3
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.TestObservable.subscribe.(Anon_7).run,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testFunctionThrowsError,,,,,,,22,,,0.23,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testFunctionThrowsError.(Anon_6),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testFunctionThrowsError.(Anon_6).call,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithAsyncExecution,,,,,,,29,,,0,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithAsyncExecution.(Anon_5),0,0,0,0,5,0,6,,,0,13,1
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithAsyncExecution.(Anon_5).call,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithSynchronousExecution,,,,,,,30,,,0,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithSynchronousExecution.(Anon_3),0,0,0,0,5,0,7,,,0,13,1
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithSynchronousExecution.(Anon_3).call,,,,,,,5,,,0,,
+Class,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithSynchronousExecution.(Anon_4),0,0,0,0,5,0,6,,,0,13,1
+Public Method,rx.operators.OperationOnErrorResumeNextViaFunction.UnitTest.testResumeNextWithSynchronousExecution.(Anon_4).call,,,,,,,4,,,0,,
+Public Static Generic Method,rx.operators.OperationOnErrorResumeNextViaFunction.onErrorResumeNextViaFunction,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationOnErrorResumeNextViaFunction.onErrorResumeNextViaFunction.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationOnErrorResumeNextViaObservable,1,0,0,0,3,0,97,,,0.3,13,1
+Private Static Generic Class,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable,0,0,0,25,5,2,36,,,0.39,14,2
+Public Constructor,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call,,,,,,,29,,,0.48,,
+Class,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call.(Anon_1),0,0,0,0,5,0,16,,,0.69,15,5
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call.(Anon_1).onCompleted,,,,,,,3,,,0.33,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call.(Anon_1).onError,,,,,,,9,,,1,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call.(Anon_1).onNext,,,,,,,3,,,0.33,,
+Class,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call.(Anon_2),0,0,0,0,2,0,7,,,0.14,13,2
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.OnErrorResumeNextViaObservable.call.(Anon_2).unsubscribe,,,,,,,6,,,0.17,,
+TypeVariable,rx.operators.OperationOnErrorResumeNextViaObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest,0,0,0,0,11,0,56,,,0,13,2
+Private Static Class,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest.TestObservable,0,1,0,33,7,3,31,,,0,110,2
+Public Constructor,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest.TestObservable.TestObservable,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest.TestObservable.subscribe,,,,,,,22,,,0,,
+Class,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest.TestObservable.subscribe.(Anon_3),0,0,0,0,8,0,14,,,0,13,3
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest.TestObservable.subscribe.(Anon_3).run,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationOnErrorResumeNextViaObservable.UnitTest.testResumeNext,,,,,,,21,,,0,,
+Public Static Generic Method,rx.operators.OperationOnErrorResumeNextViaObservable.onErrorResumeNextViaObservable,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationOnErrorResumeNextViaObservable.onErrorResumeNextViaObservable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationOnErrorReturn,1,0,0,0,3,0,129,,,0.34,13,1
+Private Static Generic Class,rx.operators.OperationOnErrorReturn.OnErrorReturn,0,0,0,25,5,2,39,,,0.54,14,2
+Public Constructor,rx.operators.OperationOnErrorReturn.OnErrorReturn.OnErrorReturn,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationOnErrorReturn.OnErrorReturn.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationOnErrorReturn.OnErrorReturn.call,,,,,,,32,,,0.66,,
+Class,rx.operators.OperationOnErrorReturn.OnErrorReturn.call.(Anon_1),0,0,0,0,7,0,19,,,0.95,15,5
+Public Method,rx.operators.OperationOnErrorReturn.OnErrorReturn.call.(Anon_1).onCompleted,,,,,,,3,,,0.33,,
+Public Method,rx.operators.OperationOnErrorReturn.OnErrorReturn.call.(Anon_1).onError,,,,,,,12,,,1.33,,
+Public Method,rx.operators.OperationOnErrorReturn.OnErrorReturn.call.(Anon_1).onNext,,,,,,,3,,,0.33,,
+Class,rx.operators.OperationOnErrorReturn.OnErrorReturn.call.(Anon_2),0,0,0,0,2,0,7,,,0.14,13,2
+Public Method,rx.operators.OperationOnErrorReturn.OnErrorReturn.call.(Anon_2).unsubscribe,,,,,,,6,,,0.17,,
+TypeVariable,rx.operators.OperationOnErrorReturn.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.operators.OperationOnErrorReturn.UnitTest,0,0,0,0,12,0,85,,,0.06,14,4
+Private Static Class,rx.operators.OperationOnErrorReturn.UnitTest.TestObservable,0,1,0,33,7,3,31,,,0,110,2
+Public Constructor,rx.operators.OperationOnErrorReturn.UnitTest.TestObservable.TestObservable,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationOnErrorReturn.UnitTest.TestObservable.subscribe,,,,,,,22,,,0,,
+Class,rx.operators.OperationOnErrorReturn.UnitTest.TestObservable.subscribe.(Anon_5),0,0,0,0,8,0,14,,,0,13,3
+Public Method,rx.operators.OperationOnErrorReturn.UnitTest.TestObservable.subscribe.(Anon_5).run,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationOnErrorReturn.UnitTest.testFunctionThrowsError,,,,,,,24,,,0.21,,
+Class,rx.operators.OperationOnErrorReturn.UnitTest.testFunctionThrowsError.(Anon_4),0,0,0,0,6,0,6,,,0,13,1
+Public Method,rx.operators.OperationOnErrorReturn.UnitTest.testFunctionThrowsError.(Anon_4).call,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationOnErrorReturn.UnitTest.testResumeNext,,,,,,,25,,,0,,
+Class,rx.operators.OperationOnErrorReturn.UnitTest.testResumeNext.(Anon_3),0,0,0,0,5,0,6,,,0,13,1
+Public Method,rx.operators.OperationOnErrorReturn.UnitTest.testResumeNext.(Anon_3).call,,,,,,,4,,,0,,
+Public Static Generic Method,rx.operators.OperationOnErrorReturn.onErrorReturn,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationOnErrorReturn.onErrorReturn.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationScan,2,0,0,0,4,0,122,,,0.43,14,2
+Private Static Generic Class,rx.operators.OperationScan.Accumulator,0,0,0,37,5,4,46,,,0.28,14,2
+Private Constructor,rx.operators.OperationScan.Accumulator.Accumulator,,,,,,,5,,,0,,
+TypeVariable,rx.operators.OperationScan.Accumulator.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationScan.Accumulator.call,,,,,,,36,,,0.36,,
+Class,rx.operators.OperationScan.Accumulator.call.(Anon_1),0,0,0,33,5,2,33,,,0.39,15,8
+Public Method,rx.operators.OperationScan.Accumulator.call.(Anon_1).onCompleted,,,,,,,6,,,0.17,,
+Public Method,rx.operators.OperationScan.Accumulator.call.(Anon_1).onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationScan.Accumulator.call.(Anon_1).onNext,,,,,,,21,,,0.52,,
+Public Static Class,rx.operators.OperationScan.UnitTest,0,0,0,0,6,0,67,,,0,16,4
+Public Method,rx.operators.OperationScan.UnitTest.before,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationScan.UnitTest.testScanIntegersWithInitialValue,,,,,,,20,,,0,,
+Class,rx.operators.OperationScan.UnitTest.testScanIntegersWithInitialValue.(Anon_2),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationScan.UnitTest.testScanIntegersWithInitialValue.(Anon_2).call,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationScan.UnitTest.testScanIntegersWithoutInitialValue,,,,,,,20,,,0,,
+Class,rx.operators.OperationScan.UnitTest.testScanIntegersWithoutInitialValue.(Anon_3),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationScan.UnitTest.testScanIntegersWithoutInitialValue.(Anon_3).call,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationScan.UnitTest.testScanIntegersWithoutInitialValueAndOnlyOneValue,,,,,,,18,,,0,,
+Class,rx.operators.OperationScan.UnitTest.testScanIntegersWithoutInitialValueAndOnlyOneValue.(Anon_4),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationScan.UnitTest.testScanIntegersWithoutInitialValueAndOnlyOneValue.(Anon_4).call,,,,,,,3,,,0,,
+Public Static Generic Method,rx.operators.OperationScan.scan,,,,,,,3,,,3.67,,
+Public Static Generic Method,rx.operators.OperationScan.scan,,,,,,,3,,,4.33,,
+TypeVariable,rx.operators.OperationScan.scan.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationScan.scan.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationSkip,1,0,0,0,2,0,69,,,0.59,13,1
+Private Static Generic Class,rx.operators.OperationSkip.Skip,0,0,0,25,4,2,31,,,0.35,14,2
+Private Class,rx.operators.OperationSkip.Skip.ItemObserver,0,0,0,37,4,2,20,,,0.2,16,5
+Public Constructor,rx.operators.OperationSkip.Skip.ItemObserver.ItemObserver,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationSkip.Skip.ItemObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationSkip.Skip.ItemObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationSkip.Skip.ItemObserver.onNext,,,,,,,5,,,0.2,,
+Constructor,rx.operators.OperationSkip.Skip.Skip,,,,,,,4,,,0,,
+TypeVariable,rx.operators.OperationSkip.Skip.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationSkip.Skip.call,,,,,,,3,,,0,,
+Public Static Class,rx.operators.OperationSkip.UnitTest,0,0,0,0,6,0,28,,,0,14,2
+Public Method,rx.operators.OperationSkip.UnitTest.testSkip1,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationSkip.UnitTest.testSkip2,,,,,,,12,,,0,,
+Public Static Generic Method,rx.operators.OperationSkip.skip,,,,,,,8,,,1.25,,
+Class,rx.operators.OperationSkip.skip.(Anon_1),0,0,0,0,5,0,5,,,0,13,1
+Public Method,rx.operators.OperationSkip.skip.(Anon_1).call,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationSkip.skip.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationSynchronize,1,0,0,0,3,0,141,,,0.48,13,1
+Private Static Generic Class,rx.operators.OperationSynchronize.Synchronize,0,0,0,25,5,2,11,,,0,14,2
+Public Constructor,rx.operators.OperationSynchronize.Synchronize.Synchronize,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationSynchronize.Synchronize.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.operators.OperationSynchronize.Synchronize.call,,,,,,,5,,,0,,
+TypeVariable,rx.operators.OperationSynchronize.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.operators.OperationSynchronize.UnitTest,0,0,0,0,9,0,125,,,0.22,19,7
+Private Static Class,rx.operators.OperationSynchronize.UnitTest.TestObservable,0,1,0,19,5,1,22,,,0.32,113,5
+Public Constructor,rx.operators.OperationSynchronize.UnitTest.TestObservable.TestObservable,,,,,,,2,,,0,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.TestObservable.sendOnCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.TestObservable.sendOnError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.TestObservable.sendOnNext,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.TestObservable.subscribe,,,,,,,8,,,0.13,,
+Class,rx.operators.OperationSynchronize.UnitTest.TestObservable.subscribe.(Anon_1),0,0,0,0,1,0,4,,,0.25,13,1
+Public Method,rx.operators.OperationSynchronize.UnitTest.TestObservable.subscribe.(Anon_1).unsubscribe,,,,,,,2,,,0.5,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnCompletedAfterOnError,,,,,,,14,,,0.21,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnCompletedAfterUnSubscribe,,,,,,,12,,,0.25,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnErrorAfterOnCompleted,,,,,,,14,,,0.21,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnErrorAfterUnSubscribe,,,,,,,12,,,0.25,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnNextAfterOnCompleted,,,,,,,15,,,0.2,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnNextAfterOnError,,,,,,,14,,,0.21,,
+Public Method,rx.operators.OperationSynchronize.UnitTest.testOnNextAfterUnSubscribe,,,,,,,12,,,0.25,,
+Public Static Generic Method,rx.operators.OperationSynchronize.synchronize,,,,,,,3,,,3.67,,
+TypeVariable,rx.operators.OperationSynchronize.synchronize.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationTake,1,0,0,0,2,0,124,,,0.35,13,1
+Private Static Generic Class,rx.operators.OperationTake.Take,0,0,0,33,5,3,34,,,0.44,14,2
+Private Class,rx.operators.OperationTake.Take.ItemObserver,0,0,0,37,5,2,22,,,0.18,16,5
+Public Constructor,rx.operators.OperationTake.Take.ItemObserver.ItemObserver,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationTake.Take.ItemObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationTake.Take.ItemObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationTake.Take.ItemObserver.onNext,,,,,,,7,,,0.14,,
+TypeVariable,rx.operators.OperationTake.Take.T,0,0,0,0,0,0,0,,,0,0,0
+Constructor,rx.operators.OperationTake.Take.Take,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationTake.Take.call,,,,,,,3,,,0,,
+Public Static Class,rx.operators.OperationTake.UnitTest,0,0,0,0,12,0,80,,,0.01,15,4
+Private Static Class,rx.operators.OperationTake.UnitTest.TestObservable,0,1,0,33,7,3,31,,,0,110,2
+Public Constructor,rx.operators.OperationTake.UnitTest.TestObservable.TestObservable,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationTake.UnitTest.TestObservable.subscribe,,,,,,,22,,,0,,
+Class,rx.operators.OperationTake.UnitTest.TestObservable.subscribe.(Anon_2),0,0,0,0,8,0,14,,,0,13,3
+Public Method,rx.operators.OperationTake.UnitTest.TestObservable.subscribe.(Anon_2).run,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationTake.UnitTest.testTake1,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationTake.UnitTest.testTake2,,,,,,,12,,,0,,
+Public Method,rx.operators.OperationTake.UnitTest.testUnsubscribeAfterTake,,,,,,,19,,,0.05,,
+Public Static Generic Method,rx.operators.OperationTake.take,,,,,,,8,,,1,,
+Class,rx.operators.OperationTake.take.(Anon_1),0,0,0,0,5,0,5,,,0,13,1
+Public Method,rx.operators.OperationTake.take.(Anon_1).call,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationTake.take.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationToObservableFuture,2,0,0,0,5,0,67,,,0.03,14,2
+Private Static Generic Class,rx.operators.OperationToObservableFuture.ToObservableFuture,0,0,0,0,8,3,28,,,0.07,15,6
+TypeVariable,rx.operators.OperationToObservableFuture.ToObservableFuture.T,0,0,0,0,0,0,0,,,0,0,0
+Public Constructor,rx.operators.OperationToObservableFuture.ToObservableFuture.ToObservableFuture,,,,,,,5,,,0,,
+Public Constructor,rx.operators.OperationToObservableFuture.ToObservableFuture.ToObservableFuture,,,,,,,5,,,0,,
+Public Method,rx.operators.OperationToObservableFuture.ToObservableFuture.call,,,,,,,12,,,0.17,,
+Public Static Class,rx.operators.OperationToObservableFuture.UnitTest,0,0,0,0,7,0,30,,,0,14,2
+Public Method,rx.operators.OperationToObservableFuture.UnitTest.testFailure,,,,,,,13,,,0,,
+Public Method,rx.operators.OperationToObservableFuture.UnitTest.testSuccess,,,,,,,13,,,0,,
+Public Static Generic Method,rx.operators.OperationToObservableFuture.toObservableFuture,,,,,,,3,,,0,,
+Public Static Generic Method,rx.operators.OperationToObservableFuture.toObservableFuture,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationToObservableFuture.toObservableFuture.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationToObservableFuture.toObservableFuture.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationToObservableIterable,1,0,0,0,3,0,31,,,0.68,13,1
+TypeVariable,rx.operators.OperationToObservableIterable.T,0,0,0,0,0,0,0,,,0,0,0
+Private Static Generic Class,rx.operators.OperationToObservableIterable.ToObservableIterable,0,0,0,0,4,1,12,,,0,14,3
+TypeVariable,rx.operators.OperationToObservableIterable.ToObservableIterable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Constructor,rx.operators.OperationToObservableIterable.ToObservableIterable.ToObservableIterable,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationToObservableIterable.ToObservableIterable.call,,,,,,,7,,,0,,
+Public Static Class,rx.operators.OperationToObservableIterable.UnitTest,0,0,0,0,8,0,14,,,0,13,1
+Public Method,rx.operators.OperationToObservableIterable.UnitTest.testIterable,,,,,,,11,,,0,,
+Public Static Generic Method,rx.operators.OperationToObservableIterable.toObservableIterable,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationToObservableIterable.toObservableIterable.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationToObservableList,1,0,0,0,3,0,46,,,0.43,13,1
+TypeVariable,rx.operators.OperationToObservableList.T,0,0,0,0,0,0,0,,,0,0,0
+Private Static Generic Class,rx.operators.OperationToObservableList.ToObservableList,0,0,0,50,4,2,28,,,0.18,14,2
+TypeVariable,rx.operators.OperationToObservableList.ToObservableList.T,0,0,0,0,0,0,0,,,0,0,0
+Public Constructor,rx.operators.OperationToObservableList.ToObservableList.ToObservableList,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationToObservableList.ToObservableList.call,,,,,,,22,,,0.23,,
+Class,rx.operators.OperationToObservableList.ToObservableList.call.(Anon_1),0,0,0,0,4,0,19,,,0.26,15,5
+Public Method,rx.operators.OperationToObservableList.ToObservableList.call.(Anon_1).onCompleted,,,,,,,12,,,0.33,,
+Public Method,rx.operators.OperationToObservableList.ToObservableList.call.(Anon_1).onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationToObservableList.ToObservableList.call.(Anon_1).onNext,,,,,,,3,,,0.33,,
+Public Static Class,rx.operators.OperationToObservableList.UnitTest,0,0,0,0,7,0,13,,,0,13,1
+Public Method,rx.operators.OperationToObservableList.UnitTest.testList,,,,,,,10,,,0,,
+Public Static Generic Method,rx.operators.OperationToObservableList.toObservableList,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationToObservableList.toObservableList.T,0,0,0,0,0,0,0,,,0,0,0
+Public Generic Class,rx.operators.OperationToObservableSortedList,2,0,0,0,4,0,88,,,0.47,14,2
+TypeVariable,rx.operators.OperationToObservableSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+Private Static Generic Class,rx.operators.OperationToObservableSortedList.ToObservableSortedList,0,0,0,66,7,3,51,,,0.12,15,3
+Private Static Class,rx.operators.OperationToObservableSortedList.ToObservableSortedList.DefaultComparableFunction,0,0,0,0,4,0,9,,,0.11,13,1
+Public Method,rx.operators.OperationToObservableSortedList.ToObservableSortedList.DefaultComparableFunction.call,,,,,,,5,,,0,,
+TypeVariable,rx.operators.OperationToObservableSortedList.ToObservableSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+Private Constructor,rx.operators.OperationToObservableSortedList.ToObservableSortedList.ToObservableSortedList,,,,,,,3,,,0,,
+Private Constructor,rx.operators.OperationToObservableSortedList.ToObservableSortedList.ToObservableSortedList,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call,,,,,,,28,,,0.11,,
+Class,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call.(Anon_1),0,0,0,0,5,0,25,,,0.12,15,5
+Public Method,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call.(Anon_1).onCompleted,,,,,,,18,,,0.11,,
+Class,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call.(Anon_1).onCompleted.(Anon_2),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call.(Anon_1).onCompleted.(Anon_2).compare,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call.(Anon_1).onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationToObservableSortedList.ToObservableSortedList.call.(Anon_1).onNext,,,,,,,3,,,0.33,,
+Public Static Class,rx.operators.OperationToObservableSortedList.UnitTest,0,0,0,0,7,0,29,,,0,14,2
+Public Method,rx.operators.OperationToObservableSortedList.UnitTest.testSortedList,,,,,,,10,,,0,,
+Public Method,rx.operators.OperationToObservableSortedList.UnitTest.testSortedListWithCustomFunction,,,,,,,15,,,0,,
+Class,rx.operators.OperationToObservableSortedList.UnitTest.testSortedListWithCustomFunction.(Anon_3),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationToObservableSortedList.UnitTest.testSortedListWithCustomFunction.(Anon_3).call,,,,,,,3,,,0,,
+Public Static Generic Method,rx.operators.OperationToObservableSortedList.toSortedList,,,,,,,3,,,2.67,,
+Public Static Generic Method,rx.operators.OperationToObservableSortedList.toSortedList,,,,,,,3,,,2.33,,
+TypeVariable,rx.operators.OperationToObservableSortedList.toSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationToObservableSortedList.toSortedList.T,0,0,0,0,0,0,0,,,0,0,0
+Public Class,rx.operators.OperationZip,3,0,0,0,8,0,495,,,0.3,15,3
+Private Static Generic Class,rx.operators.OperationZip.Aggregator,0,0,0,61,15,7,80,,,0.8,19,20
+Public Constructor,rx.operators.OperationZip.Aggregator.Aggregator,,,,,,,3,,,0,,
+TypeVariable,rx.operators.OperationZip.Aggregator.T,0,0,0,0,0,0,0,,,0,0,0
+Private Method,rx.operators.OperationZip.Aggregator.addObserver,,,,,,,4,,,1.5,,
+Public Method,rx.operators.OperationZip.Aggregator.call,,,,,,,17,,,0.12,,
+Class,rx.operators.OperationZip.Aggregator.call.(Anon_1),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationZip.Aggregator.call.(Anon_1).unsubscribe,,,,,,,3,,,0,,
+Method,rx.operators.OperationZip.Aggregator.complete,,,,,,,8,,,1.13,,
+Method,rx.operators.OperationZip.Aggregator.error,,,,,,,6,,,1.17,,
+Method,rx.operators.OperationZip.Aggregator.next,,,,,,,22,,,0.82,,
+Private Method,rx.operators.OperationZip.Aggregator.stop,,,,,,,9,,,0.22,,
+Public Static Class,rx.operators.OperationZip.UnitTest,1,0,0,0,16,0,359,,,0.19,31,21
+Private Static Class,rx.operators.OperationZip.UnitTest.TestObservable,0,1,0,0,3,1,7,,,0.14,109,1
+Public Method,rx.operators.OperationZip.UnitTest.TestObservable.subscribe,,,,,,,4,,,0.25,,
+Private Method,rx.operators.OperationZip.UnitTest.getConcat3StringsZipr,,,,,,,18,,,0,,
+Class,rx.operators.OperationZip.UnitTest.getConcat3StringsZipr.(Anon_3),0,0,0,0,2,0,14,,,0,13,4
+Public Method,rx.operators.OperationZip.UnitTest.getConcat3StringsZipr.(Anon_3).call,,,,,,,12,,,0,,
+Private Method,rx.operators.OperationZip.UnitTest.getConcatStringIntegerIntArrayZipr,,,,,,,9,,,0,,
+Class,rx.operators.OperationZip.UnitTest.getConcatStringIntegerIntArrayZipr.(Anon_6),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.operators.OperationZip.UnitTest.getConcatStringIntegerIntArrayZipr.(Anon_6).call,,,,,,,3,,,0,,
+Private Method,rx.operators.OperationZip.UnitTest.getConcatStringIntegerZipr,,,,,,,9,,,0,,
+Class,rx.operators.OperationZip.UnitTest.getConcatStringIntegerZipr.(Anon_5),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.operators.OperationZip.UnitTest.getConcatStringIntegerZipr.(Anon_5).call,,,,,,,3,,,0,,
+Private Method,rx.operators.OperationZip.UnitTest.getConcatZipr,,,,,,,16,,,0,,
+Class,rx.operators.OperationZip.UnitTest.getConcatZipr.(Anon_4),0,0,0,0,5,0,12,,,0,13,3
+Public Method,rx.operators.OperationZip.UnitTest.getConcatZipr.(Anon_4).call,,,,,,,10,,,0,,
+Private Method,rx.operators.OperationZip.UnitTest.getDivideZipr,,,,,,,9,,,0,,
+Class,rx.operators.OperationZip.UnitTest.getDivideZipr.(Anon_2),0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.operators.OperationZip.UnitTest.getDivideZipr.(Anon_2).call,,,,,,,3,,,0,,
+Private Static Method,rx.operators.OperationZip.UnitTest.getStringValue,,,,,,,11,,,0,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregate3Types,,,,,,,18,,,0.28,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregateMultipleTypes,,,,,,,22,,,0.23,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregatorDifferentSizedResultsWithOnComplete,,,,,,,22,,,0.23,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregatorEarlyCompletion,,,,,,,22,,,0.23,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregatorError,,,,,,,21,,,0.29,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregatorSimple,,,,,,,25,,,0.32,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregatorUnsubscribe,,,,,,,21,,,0.29,,
+Public Method,rx.operators.OperationZip.UnitTest.testAggregatorsWithDifferentSizesAndTiming,,,,,,,30,,,0.17,,
+Public Method,rx.operators.OperationZip.UnitTest.testOnNextExceptionInvokesOnError,,,,,,,8,,,0,,
+Public Method,rx.operators.OperationZip.UnitTest.testZip2Types,,,,,,,11,,,0.09,,
+Public Method,rx.operators.OperationZip.UnitTest.testZip3Types,,,,,,,10,,,0.1,,
+Public Method,rx.operators.OperationZip.UnitTest.testZippingDifferentLengthObservableSequences1,,,,,,,21,,,0.24,,
+Public Method,rx.operators.OperationZip.UnitTest.testZippingDifferentLengthObservableSequences2,,,,,,,22,,,0.23,,
+Private Static Generic Class,rx.operators.OperationZip.ZipObserver,0,0,0,60,6,4,31,,,0.03,17,7
+TypeVariable,rx.operators.OperationZip.ZipObserver.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.ZipObserver.T,0,0,0,0,0,0,0,,,0,0,0
+Public Constructor,rx.operators.OperationZip.ZipObserver.ZipObserver,,,,,,,4,,,0,,
+Public Method,rx.operators.OperationZip.ZipObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationZip.ZipObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.operators.OperationZip.ZipObserver.onNext,,,,,,,7,,,0,,
+Public Method,rx.operators.OperationZip.ZipObserver.startWatching,,,,,,,5,,,0.2,,
+Public Static Generic Method,rx.operators.OperationZip.zip,,,,,,,6,,,0,,
+Public Static Generic Method,rx.operators.OperationZip.zip,,,,,,,7,,,0,,
+Public Static Generic Method,rx.operators.OperationZip.zip,,,,,,,8,,,0,,
+TypeVariable,rx.operators.OperationZip.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.operators.OperationZip.zip.T3,0,0,0,0,0,0,0,,,0,0,0
+Package,rx.performance,2,,,,,4,205,2,,0.32,,37
+Public Class,rx.performance.PerformanceTest,1,0,0,0,10,0,133,,,0.49,17,8
+Private Static Class,rx.performance.PerformanceTest.MathFunction,0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.performance.PerformanceTest.MathFunction.call,,,,,,,3,,,0,,
+Private Static Class,rx.performance.PerformanceTest.TestObserver,0,0,0,37,7,2,20,,,0,16,4
+Private Constructor,rx.performance.PerformanceTest.TestObserver.TestObserver,,,,,,,4,,,0,,
+Public Method,rx.performance.PerformanceTest.TestObserver.onCompleted,,,,,,,4,,,0,,
+Public Method,rx.performance.PerformanceTest.TestObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.performance.PerformanceTest.TestObserver.onNext,,,,,,,3,,,0,,
+Private Static Class,rx.performance.PerformanceTest.TestStringObserver,0,0,0,37,7,2,20,,,0.05,16,4
+Private Constructor,rx.performance.PerformanceTest.TestStringObserver.TestStringObserver,,,,,,,4,,,0,,
+Public Method,rx.performance.PerformanceTest.TestStringObserver.onCompleted,,,,,,,4,,,0,,
+Public Method,rx.performance.PerformanceTest.TestStringObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.performance.PerformanceTest.TestStringObserver.onNext,,,,,,,3,,,0.33,,
+Public Static Method,rx.performance.PerformanceTest.main,,,,,,,13,,,0.08,,
+Public Method,rx.performance.PerformanceTest.runCompositionTest,,,,,,,13,,,0.08,,
+Public Method,rx.performance.PerformanceTest.runCompositionTestWithMultipleOperations,,,,,,,23,,,0.17,,
+Class,rx.performance.PerformanceTest.runCompositionTestWithMultipleOperations.(Anon_1),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.performance.PerformanceTest.runCompositionTestWithMultipleOperations.(Anon_1).call,,,,,,,3,,,0,,
+Class,rx.performance.PerformanceTest.runCompositionTestWithMultipleOperations.(Anon_2),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.performance.PerformanceTest.runCompositionTestWithMultipleOperations.(Anon_2).call,,,,,,,3,,,0,,
+Public Method,rx.performance.PerformanceTest.runNonCompositionalTestWithArrayOfFunctions,,,,,,,19,,,0.05,,
+Class,rx.performance.PerformanceTest.runNonCompositionalTestWithArrayOfFunctions.(Anon_4),0,0,0,0,3,0,8,,,0.13,13,2
+Public Method,rx.performance.PerformanceTest.runNonCompositionalTestWithArrayOfFunctions.(Anon_4).call,,,,,,,6,,,0.17,,
+Public Method,rx.performance.PerformanceTest.runNonCompositionalTestWithDirectLoop,,,,,,,15,,,0.07,,
+Class,rx.performance.PerformanceTest.runNonCompositionalTestWithDirectLoop.(Anon_3),0,0,0,0,4,0,8,,,0.13,13,2
+Public Method,rx.performance.PerformanceTest.runNonCompositionalTestWithDirectLoop.(Anon_3).call,,,,,,,6,,,0.17,,
+Public Class,rx.performance.TestChainPerformance,1,0,0,0,10,0,63,,,0,15,10
+Private Static Class,rx.performance.TestChainPerformance.MathFunction,0,0,0,0,2,0,5,,,0,13,1
+Public Method,rx.performance.TestChainPerformance.MathFunction.call,,,,,,,3,,,0,,
+Public Static Method,rx.performance.TestChainPerformance.main,,,,,,,16,,,0,,
+Public Method,rx.performance.TestChainPerformance.runChained,,,,,,,15,,,0,,
+Public Method,rx.performance.TestChainPerformance.runComposed,,,,,,,24,,,0,,
+Class,rx.performance.TestChainPerformance.runComposed.(for_loop_3).(Anon_1),0,0,0,0,5,0,13,,,0,13,3
+Public Method,rx.performance.TestChainPerformance.runComposed.(for_loop_3).(Anon_1).call,,,,,,,11,,,0,,
+Package,rx.subjects,1,,,,,1,103,1,,0.04,,16
+Public Generic Class,rx.subjects.Subject,1,1,0,19,5,1,87,,,0.05,113,8
+Protected Constructor,rx.subjects.Subject.Subject,,,,,,,4,,,0,,
+TypeVariable,rx.subjects.Subject.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.subjects.Subject.UnitTest,0,0,0,0,9,0,44,,,0.05,13,1
+Public Method,rx.subjects.Subject.UnitTest.test,,,,,,,41,,,0.05,,
+Class,rx.subjects.Subject.UnitTest.test.(Anon_3),0,0,0,0,4,0,5,,,0,13,1
+Public Method,rx.subjects.Subject.UnitTest.test.(Anon_3).call,,,,,,,3,,,0,,
+Class,rx.subjects.Subject.UnitTest.test.(Anon_4),0,0,0,0,5,0,21,,,0,13,1
+Public Method,rx.subjects.Subject.UnitTest.test.(Anon_4).call,,,,,,,19,,,0,,
+Class,rx.subjects.Subject.UnitTest.test.(Anon_4).call.(Anon_5),0,0,0,0,4,0,9,,,0,13,2
+Public Method,rx.subjects.Subject.UnitTest.test.(Anon_4).call.(Anon_5).run,,,,,,,7,,,0,,
+Class,rx.subjects.Subject.UnitTest.test.(Anon_4).call.(Anon_6),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.subjects.Subject.UnitTest.test.(Anon_4).call.(Anon_6).unsubscribe,,,,,,,3,,,0,,
+Public Static Generic Method,rx.subjects.Subject.create,,,,,,,18,,,0.11,,
+Class,rx.subjects.Subject.create.(Anon_1),0,0,0,0,7,0,13,,,0.15,13,1
+Public Method,rx.subjects.Subject.create.(Anon_1).call,,,,,,,11,,,0.18,,
+Class,rx.subjects.Subject.create.(Anon_1).call.(Anon_2),0,0,0,0,4,0,5,,,0.2,13,1
+Public Method,rx.subjects.Subject.create.(Anon_1).call.(Anon_2).unsubscribe,,,,,,,3,,,0.33,,
+TypeVariable,rx.subjects.Subject.create.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.subjects.Subject.onCompleted,,,,,,,5,,,0,,
+Public Method,rx.subjects.Subject.onError,,,,,,,5,,,0,,
+Public Method,rx.subjects.Subject.onNext,,,,,,,5,,,0,,
+Package,rx.util,1,,,,,36,548,4,,0.36,,97
+Public Class,rx.util.AtomicObservableSubscription,0,0,0,50,4,2,26,,,1.31,17,7
+Public Constructor,rx.util.AtomicObservableSubscription.AtomicObservableSubscription,,,,,,,2,,,0,,
+Public Constructor,rx.util.AtomicObservableSubscription.AtomicObservableSubscription,,,,,,,3,,,0,,
+Public Method,rx.util.AtomicObservableSubscription.isUnsubscribed,,,,,,,3,,,0,,
+Public Method,rx.util.AtomicObservableSubscription.unsubscribe,,,,,,,7,,,0.29,,
+Public Method,rx.util.AtomicObservableSubscription.wrap,,,,,,,6,,,1.17,,
+Public Generic Class,rx.util.AtomicObserver,0,0,0,16,4,3,29,,,1.17,16,7
+Public Constructor,rx.util.AtomicObserver.AtomicObserver,,,,,,,4,,,0,,
+TypeVariable,rx.util.AtomicObserver.T,0,0,0,0,0,0,0,,,0,0,0
+Public Method,rx.util.AtomicObserver.onCompleted,,,,,,,6,,,0.17,,
+Public Method,rx.util.AtomicObserver.onError,,,,,,,6,,,0.17,,
+Public Method,rx.util.AtomicObserver.onNext,,,,,,,5,,,0,,
+Public Class,rx.util.CompositeException,0,0,0,66,9,2,30,,,0.67,52,7
+Public Constructor,rx.util.CompositeException.CompositeException,,,,,,,16,,,0,,
+Public Constructor,rx.util.CompositeException.CompositeException,,,,,,,3,,,0,,
+Public Method,rx.util.CompositeException.getExceptions,,,,,,,3,,,0,,
+Public Method,rx.util.CompositeException.getMessage,,,,,,,3,,,0,,
+Public Generic Class,rx.util.SynchronizedObserver,0,0,0,12,2,4,429,,,0.25,16,10
+Public Constructor,rx.util.SynchronizedObserver.SynchronizedObserver,,,,,,,4,,,0,,
+TypeVariable,rx.util.SynchronizedObserver.T,0,0,0,0,0,0,0,,,0,0,0
+Public Static Class,rx.util.SynchronizedObserver.UnitTest,1,0,0,85,26,1,383,,,0.16,19,12
+Private Static Class,rx.util.SynchronizedObserver.UnitTest.BusyObserver,0,0,0,66,9,5,36,,,0.06,15,5
+Public Method,rx.util.SynchronizedObserver.UnitTest.BusyObserver.onCompleted,,,,,,,4,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.BusyObserver.onError,,,,,,,4,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.BusyObserver.onNext,,,,,,,19,,,0.11,,
+Public Static Class,rx.util.SynchronizedObserver.UnitTest.CompletionThread,0,0,0,0,9,3,28,,,0.18,14,7
+Constructor,rx.util.SynchronizedObserver.UnitTest.CompletionThread.CompletionThread,,,,,,,5,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.CompletionThread.run,,,,,,,18,,,0.11,,
+Public Static Class,rx.util.SynchronizedObserver.UnitTest.OnNextThread,0,0,0,0,2,2,13,,,0.23,14,3
+Constructor,rx.util.SynchronizedObserver.UnitTest.OnNextThread.OnNextThread,,,,,,,4,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.OnNextThread.run,,,,,,,5,,,0,,
+Private Static Class,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver,0,0,0,41,10,2,61,,,0.23,18,18
+Public Constructor,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver.TestConcurrencyObserver,,,,,,,3,,,0,,
+Public Constructor,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver.TestConcurrencyObserver,,,,,,,3,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver.assertEvents,,,,,,,29,,,0.38,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver.onCompleted,,,,,,,3,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver.onError,,,,,,,3,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserver.onNext,,,,,,,13,,,0.15,,
+Private Enum Type,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserverEvent,0,0,0,100,1,3,3,,,0,27,2
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserverEvent.valueOf,,,,,,,0,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestConcurrencyObserverEvent.values,,,,,,,0,,,0,,
+Private Static Class,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable,0,0,0,66,12,6,68,,,0.15,15,4
+Public Constructor,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.TestMultiThreadedObservable,,,,,,,5,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.call,,,,,,,48,,,0.13,,
+Class,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.call.(Anon_2),0,0,0,0,12,0,40,,,0.15,13,4
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.call.(Anon_2).run,,,,,,,38,,,0.16,,
+Class,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.call.(Anon_2).run.(for_loop_7).(Anon_3),0,0,0,0,9,0,21,,,0.14,13,4
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.call.(Anon_2).run.(for_loop_7).(Anon_3).run,,,,,,,19,,,0.16,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestMultiThreadedObservable.waitToFinish,,,,,,,7,,,0,,
+Private Static Class,rx.util.SynchronizedObserver.UnitTest.TestSingleThreadedObservable,0,0,0,44,8,3,37,,,0.11,15,4
+Public Constructor,rx.util.SynchronizedObserver.UnitTest.TestSingleThreadedObservable.TestSingleThreadedObservable,,,,,,,4,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestSingleThreadedObservable.call,,,,,,,22,,,0,,
+Class,rx.util.SynchronizedObserver.UnitTest.TestSingleThreadedObservable.call.(Anon_1),0,0,0,0,8,0,14,,,0,13,3
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestSingleThreadedObservable.call.(Anon_1).run,,,,,,,12,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.TestSingleThreadedObservable.waitToFinish,,,,,,,7,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.before,,,,,,,3,,,0,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.runConcurrencyTest,,,,,,,42,,,0.26,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.testMultiThreadedBasic,,,,,,,16,,,0.13,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.testMultiThreadedWithNPE,,,,,,,17,,,0.35,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.testMultiThreadedWithNPEinMiddle,,,,,,,18,,,0.22,,
+Public Method,rx.util.SynchronizedObserver.UnitTest.testSingleThreadedBasic,,,,,,,15,,,0,,
+Private Static Method,rx.util.SynchronizedObserver.UnitTest.waitOnThreads,,,,,,,10,,,0,,
+Public Method,rx.util.SynchronizedObserver.onCompleted,,,,,,,13,,,0.15,,
+Public Method,rx.util.SynchronizedObserver.onError,,,,,,,13,,,0.15,,
+Public Method,rx.util.SynchronizedObserver.onNext,,,,,,,11,,,0.27,,
+Package,rx.util.functions,20,,,,,0,321,18,,1.5,,89
+Public Interface,rx.util.functions.Action0,0,1,0,0,0,0,2,,,0,1,1
+Public Abstract Method,rx.util.functions.Action0.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Action1,0,1,3,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Action1.T1,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Action1.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Action2,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Action2.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Action2.T2,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Action2.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Action3,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Action3.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Action3.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Action3.T3,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Action3.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func0,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func0.R,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func0.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func1,0,1,69,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func1.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func1.T1,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func1.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func2,0,1,16,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func2.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func2.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func2.T2,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func2.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func3,0,1,5,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func3.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func3.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func3.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func3.T3,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func3.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func4,0,1,1,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func4.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func4.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func4.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func4.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func4.T4,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func4.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func5,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func5.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func5.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func5.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func5.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func5.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func5.T5,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func5.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func6,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func6.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func6.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func6.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func6.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func6.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func6.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func6.T6,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func6.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func7,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func7.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T6,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func7.T7,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func7.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func8,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func8.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T6,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T7,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func8.T8,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func8.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.Func9,0,1,0,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.Func9.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T6,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T7,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T8,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Func9.T9,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.Func9.call,,,,,,,1,,,0,,
+Public Generic Interface,rx.util.functions.FuncN,0,1,17,0,0,0,2,,,0,1,1
+TypeVariable,rx.util.functions.FuncN.R,0,0,0,0,0,0,0,,,0,0,0
+Public Abstract Method,rx.util.functions.FuncN.call,,,,,,,1,,,0,,
+Public Interface,rx.util.functions.Function,0,0,15,0,0,0,2,,,0,0,0
+Public Interface,rx.util.functions.FunctionLanguageAdaptor,0,0,3,0,1,0,4,,,7.75,2,2
+Abstract Method,rx.util.functions.FunctionLanguageAdaptor.call,,,,,,,1,,,7,,
+Public Abstract Method,rx.util.functions.FunctionLanguageAdaptor.getFunctionClass,,,,,,,1,,,9,,
+Public Class,rx.util.functions.Functions,20,0,0,87,27,0,263,,,0.84,32,43
+Public Static Method,rx.util.functions.Functions.from,,,,,,,21,,,0.57,,
+Class,rx.util.functions.Functions.from.(for_loop_2).(Anon_1),0,0,0,0,3,0,5,,,0,13,1
+Public Method,rx.util.functions.Functions.from.(for_loop_2).(Anon_1).call,,,,,,,3,,,0,,
+Public Static Method,rx.util.functions.Functions.fromAction,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromAction,,,,,,,13,,,0.46,,
+Public Static Generic Method,rx.util.functions.Functions.fromAction,,,,,,,13,,,0.46,,
+Public Static Generic Method,rx.util.functions.Functions.fromAction,,,,,,,13,,,0.46,,
+Class,rx.util.functions.Functions.fromAction.(Anon_12),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromAction.(Anon_12).call,,,,,,,7,,,0,,
+Class,rx.util.functions.Functions.fromAction.(Anon_13),0,0,0,0,6,0,10,,,0,13,2
+Public Method,rx.util.functions.Functions.fromAction.(Anon_13).call,,,,,,,7,,,0,,
+Class,rx.util.functions.Functions.fromAction.(Anon_14),0,0,0,0,6,0,10,,,0,13,2
+Public Method,rx.util.functions.Functions.fromAction.(Anon_14).call,,,,,,,7,,,0,,
+Class,rx.util.functions.Functions.fromAction.(Anon_15),0,0,0,0,6,0,10,,,0,13,2
+Public Method,rx.util.functions.Functions.fromAction.(Anon_15).call,,,,,,,7,,,0,,
+TypeVariable,rx.util.functions.Functions.fromAction.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromAction.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromAction.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromAction.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromAction.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromAction.T2,0,0,0,0,0,0,0,,,0,0,0
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,11,,,0.55,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Public Static Generic Method,rx.util.functions.Functions.fromFunc,,,,,,,12,,,0.5,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_10),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_10).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_11),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_11).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_2),0,0,0,0,4,0,8,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_2).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_3),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_3).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_4),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_4).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_5),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_5).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_6),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_6).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_7),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_7).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_8),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_8).call,,,,,,,6,,,0,,
+Class,rx.util.functions.Functions.fromFunc.(Anon_9),0,0,0,0,5,0,9,,,0,13,2
+Public Method,rx.util.functions.Functions.fromFunc.(Anon_9).call,,,,,,,6,,,0,,
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.R,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T0,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T1,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T2,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T3,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T4,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T5,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T6,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T6,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T6,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T7,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T7,0,0,0,0,0,0,0,,,0,0,0
+TypeVariable,rx.util.functions.Functions.fromFunc.T8,0,0,0,0,0,0,0,,,0,0,0
+Private Static Method,rx.util.functions.Functions.fromFunction,,,,,,,34,,,0.03,,
+Public Static Method,rx.util.functions.Functions.getRegisteredLanguageAdaptors,,,,,,,3,,,0,,
+Private Static Method,rx.util.functions.Functions.loadLanguageAdaptor,,,,,,,12,,,0,,
+Public Static Method,rx.util.functions.Functions.registerLanguageAdaptor,,,,,,,8,,,0,,
+Public Static Method,rx.util.functions.Functions.removeLanguageAdaptor,,,,,,,3,,,0,,
+,,0.53125,0.062913907,0.369205298,5.006622517,2.42384106,0.879464286,21.70654469,4.230769231,13.54545455,0.522716397,10.58112583,4.71875
