@@ -1,0 +1,5 @@
+cl /I"C:\Program Files\Java\jdk1.6.0_26\include" /I"C:\Program Files\Java\jdk1.6.0_26\include\win32" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.0\include" org/trifort/rootbeer/runtime/FixedMemory.c /link "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.0\lib\x64\cuda.lib" /DLL /OUT:rootbeer_x64.dll /MACHINE:X64 
+cl /I"C:\Program Files\Java\jdk1.6.0_26\include" /I"C:\Program Files\Java\jdk1.6.0_26\include\win32" /I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.0\include" org/trifort/rootbeer/runtime/CUDARuntime.c org/trifort/rootbeer/runtime/CUDAContext.c /link "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v5.0\lib\x64\cuda.lib" /DLL /OUT:rootbeer_cuda_x64.dll /MACHINE:X64 
+mkdir ..\build\classes\org\trifort\rootbeer\runtime\binaries\
+copy rootbeer_x64.dll ..\build\classes\org\trifort\rootbeer\runtime\binaries\
+copy rootbeer_cuda_x64.dll ..\build\classes\org\trifort\rootbeer\runtime\binaries\

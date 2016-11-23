@@ -1,0 +1,250 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="date" content="2011-09-13T19:15:44+01:00">
+
+   <meta name="author" content="Manuel Moos">
+   <title>Armagetron: network code documentation</title>
+   <meta name="description" content="Armagetron: network code documentation">
+DEFINE(Armagetron Advanced, Armagetron)
+
+</head><body>
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+<td align=center width="25%">
+<a href="index.html" target="_top">Introduction</a>
+</td>
+
+<td align=center width="25%">
+<a href="lower.html" target="_top">Layer One</a>
+</td>
+
+<td align=center width="25%">
+<a href="middle.html" target="_top">Layer Two</a>
+</td>
+
+<td align=center width="25%">
+<a href="upper.html" target="_top">Layer Three</a>
+</td>
+
+
+</tr>
+</table>
+
+
+
+<a name=><h1 align=center>Layer one: protocol abstraction</h1></a>
+<p align=justify>
+Skip this layer if you really want to use Armagetron's networking system
+fast; it contains details you do not need to know from the start.
+</p>
+<p align=justify>
+This layer is responsible for sending raw data packets to other computers.
+The files <code>net_anet.h,net_sysdep.C,net_udp.C</code> and
+<code>net_wins.C</code> are responsible for it;
+they are written in pure C.
+<code>net_anet.h</code> is the header file with the declarations visible to
+layer two, and <code>net_systep.C</code> just includes the real
+implementation from <code>net_udp.C</code> or <code>net_wins.C</code> depending
+on the system Armagetron is compiled for. 
+</p>
+
+<a name=><h2 align=left>Data structures</h2></a>
+
+
+<h4 align=left><a name="sockaddr"><code>struct sockaddr:</code></a></h4>
+<p align=left>Everything the network protocol needs to identify
+a connection to another computer. In the case of UDP, it contains the IP 
+address and port number.</p><hr>
+
+<h4 align=left><a name="socket"><code>Sockets:</code></a></h4>
+<p align=left>represented by integers: in analogy to file descriptors, 
+all network IO is done
+through sockets. Every client has one socket where all the messages to/from
+the server are sent/received through. The server has one listening socket for
+the messages from new clients, and one IO socket for each client.
+(With the UDP protocol, all these sockets are really identical, as there is 
+no such thing as a connection and no need/possibility to assign a connection 
+to the sockets.)</p><hr>
+
+
+<a name=><h2 align=left>Function list</h2></a>
+(only the functions layer two actually uses are mentioned)
+
+
+<h4 align=left><a name="init"><code>Socket ANET_Init();</code></a></h4>
+<p align=left>Initialises the network system, returns the
+control socket. All future IO is done through that socket.</p><hr>
+
+<h4 align=left><a name="shutdown"><code>void ANET_Shutdown (void);</code></a></h4>
+<p align=left>Closes the network system.</p><hr>
+
+<h4 align=left><a name="listen"><code>void ANET_Listen(bool state);</code></a></h4>
+<p align=left>If state is true, the listening
+socket is initialised (listening at the port <code>net_hostport=4532</code>)
+ and can be queried by
+<code>ANET_CheckNewConnections</code>.</p><hr>
+
+<h4 align=left><a name="checknewconnections"><code>Socket ANET_CheckNewConnections (void);</code></a></h4>
+<p align=left>On the server, this checks if there are any new connections
+from clients wanting to join the game. Returns a socket ready to receive
+the newcomer if there is one, or -1 if not. In case of the UDP protocol,
+even the messages from the known clients are caught by this function 
+(as there is no way to distinguish new and old connections with UDP), so layer
+two needs to do some extra checks with this function.
+</p><hr>
+
+<h4 align=left><a name="getaddrfromname"><code>int ANET_GetAddrFromName
+(const char *name, struct sockaddr *addr);</code></a></h4>
+<p align=left>
+Fills <code>*addr</code> with the information necessary to reach the server
+<code>name</code> (containing the IP address in numerical notation or the 
+hostname);
+the port number is set to <code>net_hostport=4532</code> to match the port
+the server listens on.</p><hr>
+
+<h4 align=left><a name="connect"><code>ANET_Connect(Socket s,struct sockaddr *addr);</code></a></h4>
+<p align=left>
+Opens a connection to the computer given by <code>addr</code> through
+the socket <code>s</code>. 
+As UDP is a connectionless protocol, this does not do
+anything currently.</p><hr>
+
+<h4 align=left><a name="write"><code>int  ANET_Write (Socket sock, const byte *buf, int len, struct sockaddr *addr);</code></a></h4>
+<p align=left>Sends <code>len</code> bytes of data from <code>buf</code> through the socket
+<code>sock</code> to the peer identified with <code>*addr</code>. A connection
+has to be established before with <code>ANET_Connect()</code>.</p><hr>
+
+<h4 align=left><a name="read"><code>int  ANET_Read (Socket sock, byte *buf, int len, struct sockaddr *addr);</code></a></h4>
+<p align=left>Reads up to <code>len</code> bytes from the connection associated to 
+socket <code>sock</code> and stores them in the buffer <code>buf</code>. 
+(If a connectionless protocol like UDP is used and the socket is a listening
+socket, this can mean ANY data coming in at the port the socket listens on...)
+The sender's address is stored in <code>*addr</code>, the number of actually
+read bytes is returned (Zero means no data was received.)</p><hr>
+
+<h4 align=left><a name="addrtostring"><code>char *ANET_AddrToString (const struct sockaddr *addr);</code></a></h4>
+<p align=left>
+Returns the information from <code>addr</code> in human readable form.</p><hr>
+
+<h4 align=left><a name="addrcompare"><code>int ANET_AddrCompare (struct sockaddr *addr1, struct sockaddr *addr2);</code></a></h4>
+<p align=left>Checks whether <code>*addr1</code> and <code>*addr2</code> are the same 
+computer (ignoring the port number). If they are, 0 is returned, -1 if not.</p><hr>
+
+<h4 align=left><a name="getsocketport"><code>int  ANET_GetSocketPort (struct sockaddr *addr)</code></a></h4>
+<p align=left>Returns the port number from <code>*addr</code>.</p><hr>
+
+
+
+
+<br>
+<p align=center>This Page was created by
+Manuel Moos(<b> </b> <script language="JavaScript"> var b = "sf.net "; var c = "z-man"; var a="users"; document.write(c); document.write("@") ; document.write(a) ; document.write(".") ; document.write(b); </script> ).
+
+<p align=center>
+Last modification: Tue Sep 13 19:15:44 CEST 2011
+
+</p>
+
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+<td align=center width="25%">
+<a href="index.html" target="_top">Introduction</a>
+</td>
+
+<td align=center width="25%">
+<a href="lower.html" target="_top">Layer One</a>
+</td>
+
+<td align=center width="25%">
+<a href="middle.html" target="_top">Layer Two</a>
+</td>
+
+<td align=center width="25%">
+<a href="upper.html" target="_top">Layer Three</a>
+</td>
+
+
+</tr>
+</table>
+
+
+
+</body>
+</html>
+

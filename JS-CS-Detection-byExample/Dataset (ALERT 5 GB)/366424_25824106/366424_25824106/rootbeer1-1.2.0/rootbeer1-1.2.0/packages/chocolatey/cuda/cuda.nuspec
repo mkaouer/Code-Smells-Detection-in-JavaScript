@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>cuda</id>
+    <title>cuda</title>
+    <version>5.0</version>
+    <authors>NVIDIA</authors>
+    <owners>NVIDIA</owners>
+    <summary>cuda</summary>
+    <description>cuda</description>
+    <projectUrl>http://nvidia.com/</projectUrl>
+    <tags>cuda c c++ gpu</tags>
+  </metadata>
+</package>

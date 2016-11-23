@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cd ../../
+ant jar
+./pack-rootbeer
+
+cd gtc2013/MultiDimRay2/raylib
+ant jar
+cd ../MultiDimRay2/
+ant jar
+cd ..
+java -jar ../../Rootbeer.jar raylib.jar raylib-GPU.jar -nemu
+java -jar ../../lib/pack.jar -mainjar MultiDimRay2.jar -libjar raylib-GPU.jar -destjar MultiDimRay2-GPU.jar

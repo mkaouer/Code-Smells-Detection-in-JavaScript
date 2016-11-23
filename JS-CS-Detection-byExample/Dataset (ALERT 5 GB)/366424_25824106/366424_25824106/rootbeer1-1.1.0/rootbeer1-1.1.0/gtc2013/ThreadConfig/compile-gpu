@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd ../../
+ant jar
+./pack-rootbeer
+
+cd gtc2013/ThreadConfig/
+ant jar
+java -jar ../../Rootbeer.jar ThreadConfigApp.jar ThreadConfigApp-GPU.jar

@@ -1,0 +1,404 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="date" content="2006-07-01T22:04:16+01:00">
+
+   <meta name="author" content="Manuel Moos">
+   <title>Armagetron Advanced: Documentation</title>
+   <meta name="description" content="Armagetron Advanced: Documentation">
+</head><body>
+
+
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+<td align=center width="15%">
+<a href="index.html" target="_top">First Start</a>
+</td>
+
+ <td align=center width="15%">
+<a href="install_windows.html" target="_top"> Installation</a>
+</td>
+  
+
+
+<td align=center width="15%">
+<a href="network.html" target="_top">Network Play</a>
+</td>
+
+<td align=center width="15%">
+<a href="config.html" target="_top">Configuration</a>
+</td>
+
+<td align=center width="10%">
+<strong>FAQ</strong> 
+</td>
+
+
+
+</tr>
+</table>
+
+
+
+<a name=><h1 align=center>Frequently Asked Questions</h1></a>
+
+This list is poorly maintained and can't answer the current real FAQs because at
+the time of this writing, they weren't asked yet :) Check out the
+<a href="http://wiki.armagetronad.net/index.php/FAQ" target=_top><strong>FAQ on the Wiki</strong></a>, too.
+
+
+
+<ol>
+
+<li>OS Specific Questions:</li>
+<ol>
+
+
+<li>Windows:</li>
+<ol>
+
+
+
+<li><table><tr><td valign=top>Q:</td><td><strong><a name=3d_windows>How</a> can I enable 3D acceleration?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+Go to the web page of your graphic card vendor and look for help there. Most of the time,
+a driver update should do the trick. You can check there if 3D acceleration is supported
+for your version of Windows, too. For an automated setup for older video cards, 
+try <a href="http://www.glsetup.com" target=_top><strong>GLSetup</strong></a>.
+</td></tr></table></li>
+
+</ol>
+
+
+
+</ol>
+
+ 
+
+
+
+
+
+<li>graphics:</li>
+<ol>
+<li><table><tr><td valign=top>Q:</td><td><strong>The graphics are ugly! There are almost no textures around, the menu is just writing on
+black background. What can I do?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>Armagetron Advanced detected that your OpenGL implementation does not support hardware acceleration.
+It may be wrong on that; check it by increasing the detail level in "System Setup/Display Settings/Detail Settings".
+If you tune up the texture modes and get an immediate performance dropdown, you are using
+software rendering. Check out the OS specific answer to "How can I enable 3D acceleration?" for
+
+<a href="faq.html#3d_windows
+" target=_top>Windows</a>  . <br>If the rendering speed stays OK, you have hardware acceleration;
+in that case, please send me (<b> </b> <script language="JavaScript"> var b = "sf.net"; var c = "z-man"; var a="users"; document.write(c); document.write("@") ; document.write(a) ; document.write(".") ; document.write(b); </script> )  your your <strong>user.cfg</strong> (found in the <strong>var</strong>-subdirectory
+of the Armagetron Advanced directory 
+ 
+
+
+ )
+ so I can correct the detection in future versions.
+</td></tr></table></li>
+
+<li><table><tr><td valign=top>Q:</td><td><strong>Rendering is VERY slow, I only get about 1 fps even in the menu. What's wrong?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>It seems your OpenGL implementation does not support hardware acceleration, and Armagetron Advanced
+did not detect it. Check out the OS specific answer to "How can I enable 3D acceleration?" for
+
+<a href="faq.html#3d_windows
+" target=_top>Windows</a>  . 
+<br>
+Please send me (<b> </b> <script language="JavaScript"> var b = "sf.net"; var c = "z-man"; var a="users"; document.write(c); document.write("@") ; document.write(a) ; document.write(".") ; document.write(b); </script> )  your your <strong>user.cfg</strong> (found in the <strong>var</strong>-subdirectory
+of the Armagetron Advanced directory 
+ 
+
+
+ )
+ so I can correct the detection in future versions. 
+<br>In the
+meantime, edit this <strong>user.cfg</strong> and set TEXTURE_MODE_0/1/2 to -1 and ALPHA_BLEND to 0,
+this will disable the features that cause the slowdown.
+</td></tr></table></li>
+</ol>
+
+<li>generic stuff:</li>
+<ol>
+<li><table><tr><td valign=top>Q:</td><td><strong><a name=startfaq>When</a> I start Armagetron Advanced, the screen turns black and the game
+exits shortly afterwards. (Or similar right-after-start
+problems) What can I do?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>just try again about four times; Armagetron Advanced should notice that
+the first attempts failed and try some other screen modes (with different
+colour depths, initialisation methods and in fullscreen or windowed mode).
+</td></tr></table></li>
+
+<li><table><tr><td valign=top>Q:</td><td><strong>I can't join a game! When I start a local game, I only see AIs fighting, and
+in a network game, I can only watch the others. I can't even chat! What's wrong?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td></td></tr></table></li>
+,
+
+You are stuck in spectator mode.
+It has been reported to get activated by itself on random occasions
+(upgrading etc.). Go to "Player Setup"/"Player 1 Settings" and change "Spectator Mode" to "Off".
+)
+
+</ol>
+
+<li>network play:</li>
+<ol>
+
+<li><table><tr><td valign=top>Q:</td><td><strong>Why can't I play on my LAN? The server my friend started is invisible, and when
+I do a custom connect, the connection fails.</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>You probably have an activated personal firewall running on your machine blocking
+the network communication.
+You have to set your firewall to allow outgoing UDP connections on port 4533 (for the
+master server) and usually port 4534 for the servers. Note that some versions of MS Windows (XP,
+I think) install a firewall by default that blocks all unknown connections, so you may not
+be aware you have a firewall running at all.
+</td></tr></table></li>
+
+<li><table><tr><td valign=top>Q:</td><td><strong>Why can't I play on the net? When I try an Internet game,
+I get an error saying the master server is not responding.</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>It may be that the master server is temporarily down. It is only running on my now stationary
+laptop connected by DSL; that is not completely failsafe. The previous question may give some insights, too.
+</td></tr></table></li>
+
+<li><table><tr><td valign=top>Q:</td><td><strong>Sometimes, I see players (esp. me) passing through walls. Is that a bug?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>Probably not; it is the normal effect of network latency (Laaaag!)
+when your client does not yet have the latest information from the server. But
+yes, if the effect is permanent (you really end up on the other side), it is a
+bug you should report.</td></tr></table></li>
+
+<li><table><tr><td valign=top>Q:</td><td><strong>Someone is cheating! I keep cutting off his way right before him, and
+that kills me, not him!</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>Again, this is not cheating, but a network latency effect that happens
+when you disable "Prediction" from the network game menu. Then, you see
+the other players not at the place they are probably now, but where they
+were a little while ago. So while you thought you were ahead of your opponent,
+he was in reality a bit ahead of you. By trying to cross him, you ran directly
+into his wall. Either turn on prediction or the "Lag-O-Meter" that shows
+where your opponent may in fact be NOW. Learning to handle these effects is
+one of the skills you need to kick your opponent's ass.</td></tr></table></li>
+
+<li>dedicated server:</li>
+<ol>
+<li><table><tr><td valign=top>Q:</td><td><strong>I started a server, but nobody sees it on the master list. What's up?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+You need to set <code>TALK_TO_MASTER 1</code> in <strong>settings_dedicated.cfg</strong>. Our
+default polity is not to make network connections if not explicitly enabled;
+the connection to the master server is no exception. Plus, we like it when the
+administrators of public servers read the documentation before they put up a
+public server, and disabling the master server connection by default apparently
+has this effect. You're not reading this FAQ just for fun, right?
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>I started a server with <code>TALK_TO_MASTER 1</code>, but can't see it on the master server list. What's up?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+That's normal for default settings if the server and your client are on the same LAN;
+when the client polls your server, the server sends its response packets over the LAN,
+but the client expects them from the internet. We found no failsafe way to avoid this
+problem yet; you can correct it by setting <code>SERVER_IP &lt;server's public internet IP&gt;</code>
+in <strong>settings_dedicated.cfg</strong>. Instead of the raw IP, you can enter a DNS name that will resolve
+to your correct IP.
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>How do I get rid of AI players in multiplayer games?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+Use the settings
+<pre>
+AUTO_AIS 0
+MIN_PLAYERS 0
+NUM_AIS 0
+</pre>
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>No, I mean ALL AIs. The ones that join human teams bug me, too.</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+That would be
+<pre>
+TEAM_BALANCE_WITH_AIS 0
+</pre>
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>And how do I get rid of teams? On an internet server with people joining and leaving all the time, they are confusing.</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+That's
+<pre>
+TEAM_MAX_PLAYERS 1
+</pre>
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>I don't like the way braking works. How can I change that?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+To disable braking, use
+<pre>
+CYCLE_BRAKE 0
+</pre>
+To turn the brake into a turbo, set it to a negative value.</br>
+To reenable the brakes as they were before 0.2.5 (unlimited use), use
+<pre>
+CYCLE_BRAKE_DEPLETE 0.0
+</pre>
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>How about restricting all clients to cockpit view?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+You are starting to bug me. Use
+<pre>
+CAMERA_FORBID_SMART 1    # forbid smart camera
+CAMERA_FORBID_IN    0    # forbid internal camera
+CAMERA_FORBID_FREE 1     # forbid free camera
+CAMERA_FORBID_FOLLOW 1   # forbid fixed external camera
+CAMERA_FORBID_CUSTOM 1   # forbid custom external camera
+</pre>
+I personally really like these settings, but most users seem to disagree there.
+</td></tr></table></li>
+<li><table><tr><td valign=top>Q:</td><td><strong>And what about...?</strong></td></tr>
+           <tr><td  valign=top>A:</td><td>
+Gaa! Enough is enough! This is a FAQ, not a ACQ (All conceivable questions ).
+Read at settings.cfg and settings_dedicated.cfg and the 
+<a href="config.html#files
+" target=_top>documentation</a>. Yes, it is long. If you don't find your answer there,
+look for help <a href="http://forums.armagetronad.net/viewtopic.php?t=1360" target=_top><strong>on the Forums</strong></a>.
+</td></tr></table></li>
+
+</ol>
+</ol>
+</ol>
+
+<br>
+
+
+
+<p align=center>This document was created by
+<a href="http://armagetron.sf.net/contact.html" target=_top><strong>Manuel Moos</strong></a>
+</p>
+
+<p align=center>
+Last modification: Jul 01 2006
+</p>
+<p align=center><!--#spaceportsbanner--></p>
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+<td align=center width="15%">
+<a href="index.html" target="_top">First Start</a>
+</td>
+
+ <td align=center width="15%">
+<a href="install_windows.html" target="_top"> Installation</a>
+</td>
+  
+
+
+<td align=center width="15%">
+<a href="network.html" target="_top">Network Play</a>
+</td>
+
+<td align=center width="15%">
+<a href="config.html" target="_top">Configuration</a>
+</td>
+
+<td align=center width="10%">
+<strong>FAQ</strong> 
+</td>
+
+
+
+</tr>
+</table>
+
+
+</body>
+</html>

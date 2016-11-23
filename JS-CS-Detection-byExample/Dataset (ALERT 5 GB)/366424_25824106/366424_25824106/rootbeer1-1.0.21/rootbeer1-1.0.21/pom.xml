@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+  >
+
+  <groupId>edu.syr.pcpratts</groupId>
+  <artifactId>rootbeer</artifactId>
+  <version>1.x-SNAPSHOT</version>
+
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+  <name>Rootbeer :: Rootbeer</name>
+  <description>Rootbeer - compile Java bytecode for a CUDA GPU</description>
+
+  <properties>
+    <java.version>1.5</java.version>
+    <soot.version>2.5.0</soot.version>
+  </properties>
+
+  <ciManagement>
+    <system>Jenkins</system>
+    <url>http://ouroboros.dyndns-free.com/ci</url>
+  </ciManagement>
+
+  <distributionManagement>
+    <repository>
+      <id>ouroboros</id>
+      <name>Jules' Home Repository</name>
+      <url>http://ouroboros.dyndns-free.com/artifactory/libs-snapshot-local</url>
+    </repository>
+  </distributionManagement>
+
+  <repositories>
+    <repository>
+      <id>Maven Central Repository</id>
+      <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>ouroboros-cache</id>
+      <url>http://ouroboros.dyndns-free.com/artifactory/repo</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <!-- need to be installed -->
+    <dependency>
+      <groupId>pack</groupId>
+      <artifactId>pack</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>soot</artifactId>
+      <version>${soot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>jasmin</artifactId>
+      <version>${soot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>polyglot</artifactId>
+      <version>1.3.5</version>
+    </dependency>
+    <dependency>
+      <groupId>axmlprinter</groupId>
+      <artifactId>axmlprinter</artifactId>
+      <version>2.0</version>
+    </dependency>
+    <!-- pulled from central maven repo -->
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr</artifactId>
+      <version>3.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.6</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+    <!-- <testSourceDirectory>${project.basedir}/src</testSourceDirectory> -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src</directory>
+        <includes>
+          <include>**/*.txt</include>
+          <include>**/*.class</include> <!--TODO: does the source really include classes?-->
+          <include>**/*.g</include>
+          <include>**/*.c</include>
+          <include>**/*.tokens</include>
+          <include>**/*.so.1</include>
+          <include>**/*.dll</include>
+          <include>**/*.dylib</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+	<version>2.12.2</version>
+        <configuration>
+          <includes>
+            <include>**/testcases/**/*.java</include>
+          </includes>
+<!--
+          <excludes>
+            <exclude>**/testcases/rootbeertest/gpurequired/**/*.java</exclude>
+          </excludes>
+-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+	<version>2.5.1</version>
+        <configuration>
+	  <source>${java.version}</source>
+          <target>${java.version}</target>
+          <excludes>
+            <exclude>**/testcases/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+	      <shadedArtifactAttached>true</shadedArtifactAttached>
+	      <shadedClassifierName>uber</shadedClassifierName>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>edu.syr.pcpratts.rootbeer.Main</Main-Class>
+                    <Project-Version>${project.version}</Project-Version>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+	<version>2.9</version>
+      </plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-javadoc-plugin</artifactId>
+	<version>2.6.1</version>
+        <configuration>
+	  <source>${java.version}</source>
+          <target>${java.version}</target>
+          <excludes>
+            <exclude>**/testcases/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+
+  <reporting>
+    <plugins>
+    </plugins>
+  </reporting>
+
+</project>

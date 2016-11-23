@@ -1,0 +1,142 @@
+module AAConfig
+  
+  # Paths are relative the Rakefile
+  SRC_DIR = ".."
+  
+  BUILD_DIR = (ENV["SYMROOT"] || "#{SRC_DIR}/../armagetronad-build/build") + "/.."
+  
+  PACKGAGE_RESOURCE_DIR = [(ENV["CONFIGURATION_BUILD_DIR"] || ""),
+                           (ENV["PRODUCT_NAME"] || "") +
+                             (ENV["WRAPPER_SUFFIX"] || ""),
+                           "Contents/Resources"].join("/")
+  
+  # The files that need processing. The key is the file, value is wheter the file will be packaged.
+  IN_FILES = {"#{SRC_DIR}/src/macosx/version.h.in" => false,
+              "#{SRC_DIR}/src/macosx/English.lproj/InfoPlist.strings.in" => true, 
+              "#{SRC_DIR}/config/aiplayers.cfg.in" => true,
+              "#{SRC_DIR}/language/languages.txt.in" => true}
+  
+  TAG_MAPPINGS = {"@version@" => %x{"#{SRC_DIR}/batch/make/version" "#{SRC_DIR}"}.chomp,
+                  "@year@" => Time.now.strftime("%Y"),
+                  "@progtitle@" => "Armagetron Advanced"}
+   
+end
+
+# =========
+# = Xcode =
+# =========
+
+namespace "xcode" do
+  
+  task :prepare => [:process_in_files, :sort_resources]
+  
+  # TODO: Don't need to run this everytime. Change it to a file based task
+  task :sort_resources do
+    sh %{"#{AAConfig::SRC_DIR}/batch/make/sortresources" \\
+         "#{AAConfig::SRC_DIR}/resource/proto" \\
+         "#{AAConfig::BUILD_DIR}/resource/included" \\
+         "#{AAConfig::SRC_DIR}/batch/make/sortresources.py"}
+  end
+  
+  # TODO: file based...
+  task :cleanup => [:package_in_files] do
+    rm_rf "#{AAConfig::PACKGAGE_RESOURCE_DIR}/resource"
+    cp_r "#{AAConfig::BUILD_DIR}/resource", AAConfig::PACKGAGE_RESOURCE_DIR
+  end
+  
+  AAConfig::IN_FILES.each do |infile, should_package|
+    result_file = infile.sub(AAConfig::SRC_DIR, AAConfig::BUILD_DIR).sub(/\.in$/, '')
+
+    # Define the task for the resulting file
+    file result_file => infile do |t|
+      mkdir_p File.dirname(t.name)
+      cp t.prerequisites[0], t.name
+      # Subsitute the tags in the resulting file
+      open(t.name, 'r+') do |f|
+        data = f.read
+        AAConfig::TAG_MAPPINGS.each { |tag, value| data.gsub!(tag, value) }
+        f.pos = 0
+        f.write(data)
+        f.truncate(f.pos)
+      end
+    end
+    task :process_in_files => result_file
+    
+    # Define the task to package the file
+    if should_package
+      # builddir/config/foo -> builddir/build/Debug/Armagetron Advanced.app/Contents/Resources/config/foo
+      # Currently all files we package follow the same pattern -- we only need the last two paths
+      package_file = AAConfig::PACKGAGE_RESOURCE_DIR + "/" + result_file.split("/")[-2, 2].join("/")
+      file package_file => result_file do |t|
+        mkdir_p File.dirname(t.name)
+        cp t.prerequisites[0], t.name
+      end
+      task :package_in_files => package_file
+    end
+
+  end
+  
+  
+end
+
+# ==================
+# = Beautification =
+# ==================
+
+desc "Uses project defaults and updates file timestamps"
+task :rebeautify do
+  #
+  sh %{ARTISTIC_STYLE_OPTIONS="#{AAConfig::SRC_DIR}/config/astylerc" \\
+       "#{AAConfig::SRC_DIR}/batch/make/beautify" -t "#{AAConfig::SRC_DIR}" "#{AAConfig::SRC_DIR}/.beautytag.re"}
+end
+
+desc "Switches between your settings (beautify-personal) to the project defaults, and leaves timestamps untouched"
+task :beautify do
+  rm_f %{"#{AAConfig::SRC_DIR}/.beautytag.personal"}
+  sh %{ARTISTIC_STYLE_OPTIONS="#{AAConfig::SRC_DIR}/config/astylerc" \\
+       "#{AAConfig::SRC_DIR}/batch/make/beautify" "#{AAConfig::SRC_DIR}" "#{AAConfig::SRC_DIR}/.beautytag"}
+end
+
+desc "Uses your personal settings. Remeber to run ``rake beautify'' before commit!"
+task :beautify_personal do
+  rm_f %{"#{AAConfig::SRC_DIR}/.beautytag"}, %{"#{AAConfig::SRC_DIR}/.beautytag.re"}
+  sh %{ARTISTIC_STYLE_OPTIONS=$HOME/.astylerc \\
+       "#{AAConfig::SRC_DIR}/batch/make/beautify" "#{AAConfig::SRC_DIR}" "#{AAConfig::SRC_DIR}/.beautytag.personal"}
+end
+
+# =====================
+# = Automated release =
+# =====================
+
+desc "Generate the ChangeLog"
+task :changelog do
+  puts "Generating ChangeLog..."
+  sh %{svn log "#{AAConfig::SRC_DIR}" 2>&1 > "#{AAConfig::BUILD_DIR}/ChangeLog"}
+end
+
+# namespace "release" do
+#   
+#   task :create => [:build, :package_create, :package_convert]
+#   
+#   # TODO: Move into a method so we can pass parameters pragmatically. The task will just take an ENV setting.
+#   task :build do
+#     sh %{xcodebuild -project "#{AAConfig::SRC_DIR}/MacOS/Armagetron Advanced.xcodeproj" \\
+#          -target "Armagetron Advanced" -configuration Release build}
+#   end
+#   
+#   # TODO: method
+#   task :package_create do
+#     package_dir = %{"#{AAConfig::BUILD_DIR}/build/Release"}
+#     mkdir_p package_dir
+#     sh %{hdiutil create -srcdir "#{AAConfig::BUILD_DIR}/build/Release" \\
+#          -format UDIF #{package_dir}/release-uncompresed -volname "Armagetron Advanced"}
+#   end
+#   
+#   # TODO: method
+#   task :package_convert do
+#     sh %{hdiutil convert }
+#     hdiutil convert "${2}" -format UDZO -o "${3}"
+#   end
+#   
+# end
+

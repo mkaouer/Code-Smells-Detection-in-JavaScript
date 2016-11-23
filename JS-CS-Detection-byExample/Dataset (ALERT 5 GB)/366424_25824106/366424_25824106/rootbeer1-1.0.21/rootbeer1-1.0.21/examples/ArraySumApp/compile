@@ -1,0 +1,8 @@
+#!/bin/sh
+
+#there is a bug right now where Rootbeer has to be run in the same directory
+cp ../../Rootbeer.jar .
+
+ant jar
+
+java -jar Rootbeer.jar ArraySumApp.jar ArraySumApp-GPU.jar

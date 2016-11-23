@@ -1,0 +1,2 @@
+auto bob = fun(x) { x + 1 }
+assert_equal(4, bob(3));

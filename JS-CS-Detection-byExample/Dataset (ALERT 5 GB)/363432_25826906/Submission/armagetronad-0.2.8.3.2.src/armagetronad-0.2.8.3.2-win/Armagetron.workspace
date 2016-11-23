@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE CodeBlocks_workspace_file>
+<CodeBlocks_workspace_file>
+	<Workspace title="Armagetron workspace">
+		<Project filename="ZThread.cbp"/>
+		<Project filename="Dedicated.cbp" active="1"/>
+		<Project filename="Master.cbp"/>
+		<Project filename="SDL.cbp"/>
+		<Project filename="SDL_image.cbp"/>
+		<Project filename="mikmod.cbp"/>
+		<Project filename="SDL_mixer.cbp"/>
+		<Project filename="Armagetron.cbp"/>
+	</Workspace>
+</CodeBlocks_workspace_file>

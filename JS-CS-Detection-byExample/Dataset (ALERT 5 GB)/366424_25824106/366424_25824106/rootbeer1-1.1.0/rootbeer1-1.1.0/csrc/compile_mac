@@ -1,0 +1,18 @@
+#!/bin/sh
+
+CFLAGS="-fno-common -Os -arch x86_64"
+LDFLAGS="-arch x86_64 -dynamiclib"
+
+llvm-gcc $CFLAGS -g -c -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include/darwin/ -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/FixedMemory.c -o FixedMemory.o
+llvm-gcc $LDFLAGS -F/Library/Frameworks -framework CUDA -L/usr/local/cuda/lib -o rootbeer.dylib FixedMemory.o -lc -lcuda
+
+llvm-gcc $CFLAGS -g -c -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include/darwin/ -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/CUDARuntime.c -o CUDARuntime.o
+llvm-gcc $CFLAGS -g -c -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include/darwin/ -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/CUDAContext.c -o CUDAContext.o
+llvm-gcc $LDFLAGS -F/Library/Frameworks -framework CUDA -o rootbeer_cuda.dylib CUDARuntime.o CUDAContext.o -lc -lcuda -L/usr/local/cuda/lib
+
+llvm-gcc $CFLAGS -g -c -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include/darwin/ -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/OpenCLRuntime.c -o OpenCLRuntime.o
+llvm-gcc $CFLAGS -g -c -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include -I/Library/Java/JavaVirtualMachines/jdk1.7.0_51.jdk/Contents/Home/include/darwin/ -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/OpenCLContext.c -o OpenCLContext.o
+llvm-gcc $LDFLAGS -F/Library/Frameworks -framework CUDA -o rootbeer_opencl.dylib OpenCLRuntime.o OpenCLContext.o -lc -lcuda -L/usr/local/cuda/lib
+
+mkdir ../build/classes/org/trifort/rootbeer/runtime/binaries/
+cp *.dylib ../build/classes/org/trifort/rootbeer/runtime/binaries/

@@ -1,0 +1,851 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="date" content="2011-09-13T19:15:44+01:00">
+
+   <meta name="author" content="Manuel Moos">
+   <title>Armagetron Advanced: Documentation</title>
+   <meta name="description" content="Armagetron Advanced: Documentation">
+</head><body>
+
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+<td align=center width="15%">
+<a href="index.html" target="_top">First Start</a>
+</td>
+
+ <td align=center width="15%">
+<a href="install_windows.html" target="_top"> Installation</a>
+</td>
+  
+
+
+<td align=center width="15%">
+<a href="network.html" target="_top">Network Play</a>
+</td>
+
+<td align=center width="15%">
+<a href="config.html" target="_top">Configuration</a>
+</td>
+
+<td align=center width="10%">
+<a href="faq.html" target="_top">FAQ</a>
+</td>
+
+
+
+</tr>
+</table>
+
+
+
+<a name=><h1 align=center>Command Reference</h1></a>
+
+<pre>
+Available console commands/config file settings:
+
+ADMIN_PASS                   Password for the basic in game admin
+AI_IQ                        IQ of the AI opponents
+ALIVE_LOCX                   Horizontal position of the alive headcount display
+ALIVE_LOCY                   Vertical position of the alive headcount display
+ALIVE_SIZE                   Size of the alive headcount display
+ALLOW_CAM_1_0                Allow/forbid the different camera modes
+ALLOW_CAM_1_1                Allow/forbid the different camera modes
+ALLOW_CAM_1_2                Allow/forbid the different camera modes
+ALLOW_CAM_1_3                Allow/forbid the different camera modes
+ALLOW_CAM_1_4                Allow/forbid the different camera modes
+ALLOW_CAM_1_5                Allow/forbid the different camera modes
+ALLOW_CAM_1_6                Allow/forbid the different camera modes
+ALLOW_CAM_2_0                Allow/forbid the different camera modes
+ALLOW_CAM_2_1                Allow/forbid the different camera modes
+ALLOW_CAM_2_2                Allow/forbid the different camera modes
+ALLOW_CAM_2_3                Allow/forbid the different camera modes
+ALLOW_CAM_2_4                Allow/forbid the different camera modes
+ALLOW_CAM_2_5                Allow/forbid the different camera modes
+ALLOW_CAM_2_6                Allow/forbid the different camera modes
+ALLOW_CAM_3_0                Allow/forbid the different camera modes
+ALLOW_CAM_3_1                Allow/forbid the different camera modes
+ALLOW_CAM_3_2                Allow/forbid the different camera modes
+ALLOW_CAM_3_3                Allow/forbid the different camera modes
+ALLOW_CAM_3_4                Allow/forbid the different camera modes
+ALLOW_CAM_3_5                Allow/forbid the different camera modes
+ALLOW_CAM_3_6                Allow/forbid the different camera modes
+ALLOW_CAM_4_0                Allow/forbid the different camera modes
+ALLOW_CAM_4_1                Allow/forbid the different camera modes
+ALLOW_CAM_4_2                Allow/forbid the different camera modes
+ALLOW_CAM_4_3                Allow/forbid the different camera modes
+ALLOW_CAM_4_4                Allow/forbid the different camera modes
+ALLOW_CAM_4_5                Allow/forbid the different camera modes
+ALLOW_CAM_4_6                Allow/forbid the different camera modes
+ALLOW_CONTROL_DURING_CHAT    If set to 1, this allows a player to issue cycle and camera control commands during chat (losing the chatbot and the yellow chat pyramid).
+ALLOW_ENEMIES_SAME_CLIENT    If set to 1, this allows two players that play on the same client to fight for points with each other.
+ALLOW_ENEMIES_SAME_IP        If set to 1, this allows two players that apparently come from the same machine to fight for points with each other.
+ALLOW_IMPOSTERS              If set to 1, players with identical names are tolerated. If set to 0, all but one will be renamed.
+ALLOW_IMPOSTORS              If set to 1, players with identical names are tolerated. If set to 0, all but one will be renamed.
+ALLOW_TEAM_NAME_COLOR        Allow a team to be named after a color
+ALLOW_TEAM_NAME_PLAYER       Allow a team to be named after the leading player
+ALLOW_VOTING                 If set to 1, voting will be allowed for players.
+ALLOW_VOTING_SPECTATOR       If set to 1, voting will be allowed for spectators.
+ALPHA_BLEND                  Enable alpha blending
+ARENA_AXES                   In how many directions a cycle can turn 4 is the default, 6 is hexatron 
+ARENA_AXES_OVERRIDE          Block out older clients when ARENA_AXES differs from its default? 
+ARMAGETRON_LAST_SCREENMODE   Last screen resolution
+ARMAGETRON_LAST_WINDOWSIZE   Last Window size
+ARMAGETRON_SCREENMODE        Screen resolution
+ARMAGETRON_WINDOWSIZE        Window size
+AUTO_AIS                     Automatically spawn AI players?
+AUTO_INCAM_1                 Automatically switch to internal camera in a maze
+AUTO_INCAM_2                 Automatically switch to internal camera in a maze
+AUTO_INCAM_3                 Automatically switch to internal camera in a maze
+AUTO_INCAM_4                 Automatically switch to internal camera in a maze
+AUTO_IQ                      Automatically adjust AI IQ?
+AUTO_TEAM                    Flag indicating whether players should be put into teams automatically.
+BACKWARD_COMPATIBILITY       Maximum number of old protocol versions to support.
+BAN                          Bans the specified player from the server (kicks him first) for a variable time in minutes.
+BAN_IP                       Bans the spedified IP address from the server for a variable time.
+BAN_LIST                     Prints a list of currently banned IPs.
+BIG_BROTHER                  Did we already send the big brother information?
+BOOKMARK_0_ADDRESS           Server adress of the 1st server bookmark 
+BOOKMARK_0_NAME              Name of the 1st server bookmark 
+BOOKMARK_0_PORT              Server port of the 1st server bookmark 
+BOOKMARK_10_ADDRESS          Server adress of the 11th server bookmark 
+BOOKMARK_10_NAME             Name of the 11th server bookmark 
+BOOKMARK_10_PORT             Server port of the 11th server bookmark 
+BOOKMARK_1_ADDRESS           Server adress of the 2nd server bookmark 
+BOOKMARK_1_NAME              Name of the 2nd server bookmark 
+BOOKMARK_1_PORT              Server port of the 2nd server bookmark 
+BOOKMARK_2_ADDRESS           Server adress of the 3rd server bookmark 
+BOOKMARK_2_NAME              Name of the 3rd server bookmark 
+BOOKMARK_2_PORT              Server port of the 3rd server bookmark 
+BOOKMARK_3_ADDRESS           Server adress of the 4th server bookmark 
+BOOKMARK_3_NAME              Name of the 4th server bookmark 
+BOOKMARK_3_PORT              Server port of the 4th server bookmark 
+BOOKMARK_4_ADDRESS           Server adress of the 5th server bookmark 
+BOOKMARK_4_NAME              Name of the 5th server bookmark 
+BOOKMARK_4_PORT              Server port of the 5th server bookmark 
+BOOKMARK_5_ADDRESS           Server adress of the 6th server bookmark 
+BOOKMARK_5_NAME              Name of the 6th server bookmark 
+BOOKMARK_5_PORT              Server port of the 6th server bookmark 
+BOOKMARK_6_ADDRESS           Server adress of the 7th server bookmark 
+BOOKMARK_6_NAME              Name of the 7th server bookmark 
+BOOKMARK_6_PORT              Server port of the 7th server bookmark 
+BOOKMARK_7_ADDRESS           Server adress of the 8th server bookmark 
+BOOKMARK_7_NAME              Name of the 8th server bookmark 
+BOOKMARK_7_PORT              Server port of the 8th server bookmark 
+BOOKMARK_8_ADDRESS           Server adress of the 9th server bookmark 
+BOOKMARK_8_NAME              Name of the 9th server bookmark 
+BOOKMARK_8_PORT              Server port of the 9th server bookmark 
+BOOKMARK_9_ADDRESS           Server adress of the 10th server bookmark 
+BOOKMARK_9_NAME              Name of the 10th server bookmark 
+BOOKMARK_9_PORT              Server port of the 10th server bookmark 
+BRAKE_GAUGE_LOCX             Horizontal position of the brake meter 
+BRAKE_GAUGE_LOCY             Vertical position of the brake meter 
+BRAKE_GAUGE_SIZE             Size of the brake meter 
+BUG_COLOR_OVERFLOW           Allows the player's colors to overflow and wrap around for the cycle, allowing different colors for cycle and trail.
+BUG_RIP                      Allows the rim wall to be ripped open by a VERY close grind.
+BUG_TRANSPARENCY             Unsupported: make all rim walls semi-transparent by rendering them without occlusion tests
+BUG_TRANSPARENCY_DEMAND      Unsupported: use transparency instead of lowering walls
+BUG_TUNNEL                   Allows players to pass through walls on odd occasions.
+CAMCENTER_1                  Center internal camera on driving direction
+CAMCENTER_2                  Center internal camera on driving direction
+CAMCENTER_3                  Center internal camera on driving direction
+CAMCENTER_4                  Center internal camera on driving direction
+CAMERA_CUSTOM_BACK           Position of the custom camera: how much is it moved back from the cycle?
+CAMERA_CUSTOM_BACK_FROMSPEED This value is multiplied with the current speed and added to CAMERA_CUSTOM_BACK.
+CAMERA_CUSTOM_PITCH          Position of the custom camera: how much does it look up/down?
+CAMERA_CUSTOM_RISE           Position of the custom camera: how much is it moved up from the cycle?
+CAMERA_CUSTOM_RISE_FROMSPEED This value is multiplied with the current speed and added to CAMERA_CUSTOM_RISE.
+CAMERA_CUSTOM_TURN_SPEED     Speed the custom camera turns with
+CAMERA_CUSTOM_TURN_SPEED_180 Extra factor to CAMERA_CUSTOM_TURN_SPEED after a quick reverse
+CAMERA_CUSTOM_ZOOM           Position of the custom camera: how much the camera zooms in your cycle at the beginning of the round (to show the team's formation
+CAMERA_FOLLOW_START_X        Start position of the fixed external camera
+CAMERA_FOLLOW_START_Y        Start position of the fixed external camera
+CAMERA_FOLLOW_START_Z        Start position of the fixed external camera
+CAMERA_FORBID_CUSTOM         Forbids the use of the custom camera on all clients
+CAMERA_FORBID_FOLLOW         Forbids the use of the fixed external camera on all clients
+CAMERA_FORBID_FREE           Forbids the use of the free camera on all clients
+CAMERA_FORBID_IN             Forbids the use of the internal camera on all clients
+CAMERA_FORBID_SERVER_CUSTOM  Forbid the use of the server custom camera? 
+CAMERA_FORBID_SMART          Forbids the use of the internal camera on all clients
+CAMERA_FREE_START_X          Start position of the free camera
+CAMERA_FREE_START_Y          Start position of the free camera
+CAMERA_FREE_START_Z          Start position of the free camera
+CAMERA_IN_TURN_SPEED         Speed the internal camera turns with
+CAMERA_SERVER_CUSTOM_BACK    Position of the custom camera: how much is it moved back from the cycle?
+CAMERA_SERVER_CUSTOM_BACK_FROMSPEED This value is multiplied with the current speed and added to CAMERA_SERVER_CUSTOM_BACK.
+CAMERA_SERVER_CUSTOM_PITCH   Position of the custom camera: how much does it look up/down?
+CAMERA_SERVER_CUSTOM_RISE    Position of the custom camera: how much is it moved up from the cycle?
+CAMERA_SERVER_CUSTOM_RISE_FROMSPEED This value is multiplied with the current speed and added to CAMERA_SERVER_CUSTOM_RISE.
+CAMERA_SERVER_CUSTOM_TURN_SPEED Speed the server custom camera turns with. Turn values are taken from the clientside settings if this is negative.
+CAMERA_SERVER_CUSTOM_TURN_SPEED_180 Extra factor to CAMERA_SERVER_CUSTOM_TURN_SPEED after a quick reverse
+CAMERA_SMART_START_X         Start position of the smart camera
+CAMERA_SMART_START_Y         Start position of the smart camera
+CAMERA_SMART_START_Z         Start position of the smart camera
+CAMERA_VISIBILITY_CLIP_SPEED Speed with wich the visibility targets is brought into view
+CAMERA_VISIBILITY_EXTENSION  Distance (measured in seconds, gets multiplied by speed) of the visibility targets from the watched object
+CAMERA_VISIBILITY_LOWER_WALL If set to 1, walls are lowerd when they block the view and the camera is not moved
+CAMERA_VISIBILITY_LOWER_WALL_SMART Like CAMERA_VISIBILITY_LOWER_WALL, but special setting for the smart camera
+CAMERA_VISIBILITY_RECOVERY_SPEED The speed the external visibility targets recovers from wall hits
+CAMERA_VISIBILITY_SIDESKEW   Extra forward component of the sideways visibility targets
+CAMERA_VISIBILITY_WALL_DISTANCE The distance the visibility targets keep from walls
+CAMWOBBLE_1                  Lets the internal camera move with your cycle
+CAMWOBBLE_2                  Lets the internal camera move with your cycle
+CAMWOBBLE_3                  Lets the internal camera move with your cycle
+CAMWOBBLE_4                  Lets the internal camera move with your cycle
+CENTER_MESSAGE               Prints a big message on the screen of all connected clients.
+CHATTER_REMOVE_TIME          Time in seconds after which a permanent chatter is removed from the game
+CHECK_ERRORS                 Listen to errors claiming a video mode does not exist
+CLIENT_PORT                  Port we try to connect to
+COLORDEPTH                   Color depth to use (0: 16 1: desktop 2: 24)
+COLOR_B_1                    Cycle and wall color, blue component.
+COLOR_B_2                    Cycle and wall color, blue component.
+COLOR_B_3                    Cycle and wall color, blue component.
+COLOR_B_4                    Cycle and wall color, blue component.
+COLOR_G_1                    Cycle and wall color, green component.
+COLOR_G_2                    Cycle and wall color, green component.
+COLOR_G_3                    Cycle and wall color, green component.
+COLOR_G_4                    Cycle and wall color, green component.
+COLOR_R_1                    Cycle and wall color, red component.
+COLOR_R_2                    Cycle and wall color, red component.
+COLOR_R_3                    Cycle and wall color, red component.
+COLOR_R_4                    Cycle and wall color, red component.
+COLOR_STRINGS                Print colored strings
+CONSOLE_DECORATE_ID          Decorates every line of console output with the client ID
+CONSOLE_DECORATE_IP          Decorates every line of console output with the client IP
+CONSOLE_MESSAGE              Prints a message on the console of all connected clients.
+CONSOLE_ROWS                 Number of lines of console output without user intervention
+CONSOLE_ROWS_MAX             Number of lines of console output when scrolling back
+CUSTOM_SCREEN_ASPECT         Custom screen aspect ratio ( pixel width/pixel height)
+CUSTOM_SCREEN_HEIGHT         Custom screen size
+CUSTOM_SCREEN_WIDTH          Custom screen size
+CUSTOM_SERVER_NAME           Name of the server to connect to
+CYCLE_ACCEL                  Wall acceleration factor
+CYCLE_ACCEL_ENEMY            Multiplicator to CYCLE_ACCEL for your enemies' walls
+CYCLE_ACCEL_ENEMY_OVERRIDE   Block out older clients when CYCLE_ACCEL_ENEMY differs from its default? 
+CYCLE_ACCEL_OFFSET           Minimum numeric wall distance, must be positive
+CYCLE_ACCEL_RIM              Multiplicator to CYCLE_ACCEL for the rim walls
+CYCLE_ACCEL_RIM_OVERRIDE     Block out older clients when CYCLE_ACCEL_RIM differs from its default? 
+CYCLE_ACCEL_SELF             Multiplicator to CYCLE_ACCEL for your own wall
+CYCLE_ACCEL_SELF_OVERRIDE    Block out older clients when CYCLE_ACCEL_SELF differs from its default? 
+CYCLE_ACCEL_SLINGSHOT        Multiplicator to the total effect of CYCLE_ACCEL, if the cycle is between its own wall and another wall
+CYCLE_ACCEL_SLINGSHOT_OVERRIDE Block out older clients when CYCLE_ACCEL_SLINGSHOT differs from its default? 
+CYCLE_ACCEL_TEAM             Multiplicator to CYCLE_ACCEL for your temmates' walls
+CYCLE_ACCEL_TEAM_OVERRIDE    Block out older clients when CYCLE_ACCEL_TEAM differs from its default? 
+CYCLE_AVOID_OLDCLIENT_BAD_SYNC If set to 1, old clients will not get sync messages in situations that are known to confuse them
+CYCLE_BLINK_FREQUENCY        Frequency in Hz an invulnerable cycle blinks with.
+CYCLE_BRAKE                  Brake intensity
+CYCLE_BRAKE_DEPLETE          Rate at which the brake reservoir depletes when you are braking
+CYCLE_BRAKE_DEPLETE_OVERRIDE Block out older clients when CYCLE_BRAKE_DEPLETE differs from its default? 
+CYCLE_BRAKE_REFILL           Rate at which the brake reservoir refills when you are not braking
+CYCLE_BRAKE_REFILL_OVERRIDE  Block out older clients when CYCLE_BRAKE_REFILL differs from its default? 
+CYCLE_DELAY                  Minimum time between turns (must be greater than 0)
+CYCLE_DELAY_BONUS            Extra fudge factor to CYCLE_DELAY applied on the dedicated server only.
+CYCLE_DELAY_TIMEBASED        Turn delays will be based on the time since the last turn if this is 1 (default) and the distance if this is 0. Intermediate values and values out of these bounds are supported as well.
+CYCLE_DELAY_TIMEBASED_OVERRIDE Block out older clients when CYCLE_DELAY_TIMEBASED differs from its default? 
+CYCLE_DIST_WALL_SHRINK       Distance multiplier in wall length calculation. All values are legal. See settings.cfg for full docs.
+CYCLE_DIST_WALL_SHRINK_OFFSETDistance offset in wall length calculation. See settings.cfg for full docs.
+CYCLE_FAIR_ANTILAG           If set to 1, this deactivates the anti lag-sliding code when old clients are connected
+CYCLE_FIRST_SPAWN_PROTECTION Set to 1 if the invulnerability and wall delay should already be active on the initial spawn at the beginning of a round.
+CYCLE_INVULNERABLE_TIME      Time in seconds a cycle is invulnerable after a respawn.
+CYCLE_MAX_REFCOUNT           Maximum allowed reference count on cycles before they self destruct. This setting is to protect against performance related DOS attacks.
+CYCLE_PACKETLOSS_TOLERANCE   Cycle death is prevented as long as the player's failure to turn can be explained by the loss of this many network packets. Enabling this allows cheating.
+CYCLE_PING_RUBBER            Additional niceness for high ping players
+CYCLE_RUBBER                 Niceness factor to allow you drive really close to a wall
+CYCLE_RUBBER_DELAY           During this fraction of the cycle delay time after each turn, rubber efficiency will be multiplied with CYCLE_RUBBER_DELAY_BONUS.
+CYCLE_RUBBER_DELAY_BONUS     Factor for CYCLE_RUBBER_DELAY rubber efficiency.
+CYCLE_RUBBER_DELAY_BONUS_OVERRIDE Block out older clients when CYCLE_RUBBER_DELAY_BONUS differs from its default? 
+CYCLE_RUBBER_DELAY_OVERRIDE  Block out older clients when CYCLE_RUBBER_DELAY differs from its default? 
+CYCLE_RUBBER_LEGACY          Revert to old, framerate dependant and old-clients-ripping, rubber code if old clients are present. Old means <= 0.2.7.0 here.
+CYCLE_RUBBER_MALUS_TURN_OVERRIDE Block out older clients when CYCLE_RUBBER_MALUS_TURN differs from its default? 
+CYCLE_RUBBER_MINADJUST       When adjusting to or 180ing into a wall, allow going closer by at least this amount (relative to the last distance)
+CYCLE_RUBBER_MINADJUST_OVERRIDE Block out older clients when CYCLE_RUBBER_MINADJUST differs from its default? 
+CYCLE_RUBBER_MINDISTANCE     The minimal distance rubber code keeps you from the wall in front of you
+CYCLE_RUBBER_MINDISTANCE_LEGACY Extra factor for minimal distance to walls enforced by the rubber code, active when peers with the rip bug are connected
+CYCLE_RUBBER_MINDISTANCE_OVERRIDE Block out older clients when CYCLE_RUBBER_MINDISTANCE differs from its default? 
+CYCLE_RUBBER_MINDISTANCE_PREPARATION Timescale in seconds a cycle's last turn time is compared with to determine the effect of CYCLE_RUBBER_MINDISTANCE_UNPREPARED.	
+CYCLE_RUBBER_MINDISTANCE_PREPARATION_OVERRIDE Block out older clients when CYCLE_RUBBER_MINDISTANCE_PREPARATION differs from its default? 
+CYCLE_RUBBER_MINDISTANCE_RATIO Additional distance to CYCLE_RUBBER_MINDISTANCE for every length unit of the wall you have in front of you
+CYCLE_RUBBER_MINDISTANCE_RATIO_OVERRIDE Block out older clients when CYCLE_RUBBER_MINDISTANCE_RATIO differs from its default? 
+CYCLE_RUBBER_MINDISTANCE_RESERVOIR Addidional distance if you have an empty rubber meter (gets faded out gradually as you use up all your rubber)
+CYCLE_RUBBER_MINDISTANCE_RESERVOIR_OVERRIDE Block out older clients when CYCLE_RUBBER_MINDISTANCE_RESERVOIR differs from its default? 
+CYCLE_RUBBER_MINDISTANCE_UNPREPARED Additional distance for unprepared grinds; it gets applied when the cycle's last turn was just a fraction of a second ago and faded out preparation times larger than CYCLE_RUBBER_MINDISTANCE_PREPARATION.	
+CYCLE_RUBBER_MINDISTANCE_UNPREPARED_OVERRIDE Block out older clients when CYCLE_RUBBER_MINDISTANCE_UNPREPARED differs from its default? 
+CYCLE_RUBBER_SPEED           Logarithmic speed of wall approximation when rubber is in effect (every second, you get closer to the wall by a factor of ~0.4^{this value})
+CYCLE_RUBBER_SPEED_OVERRIDE  Block out older clients when CYCLE_RUBBER_SPEED differs from its default? 
+CYCLE_RUBBER_TIME            Timescale rubber is restored on.
+CYCLE_RUBBER_TIMEBASED       Rubber usage is based on distance travelled if this is 0 (default) and the time passed if this is 1. Intermediate values and values out of these bounds are supported as well.
+CYCLE_RUBBER_TIMEBASED_OVERRIDE Block out older clients when CYCLE_RUBBER_TIMEBASED differs from its default? 
+CYCLE_RUBBER_TIME_OVERRIDE   Block out older clients when CYCLE_RUBBER_TIME differs from its default? 
+CYCLE_RUBBER_WALL_SHRINK     With finite length trails, the used rubber is multiplied with this value and the result is subtracted from the wall length.
+CYCLE_RUBBER_WALL_SHRINK_OVERRIDE Block out older clients when CYCLE_RUBBER_WALL_SHRINK differs from its default? 
+CYCLE_SMOOTH_MIN_SPEED       Minimum speed of smooth correction relative to cycle speed.
+CYCLE_SMOOTH_THRESHOLD       Only syncs that differ from your position by less than this amount (measured in speed) will be handled smoothly, bigger differences will be applied instantly. 
+CYCLE_SMOOTH_TIME            Timescale for smoothing options. Increasing this will make interpolation smoother, but less accurate. Decreasing it will make network synchronization jumpy.
+CYCLE_SOUND_SPEED            Sound speed divisor
+CYCLE_SPEED                  Basic speed of your cycle if you drive straight and not close to walls
+CYCLE_SPEED_DECAY_ABOVE      Rate of cycle speed approaching the value of CYCLE_SPEED from above
+CYCLE_SPEED_DECAY_ABOVE_OVERRIDE Block out older clients when CYCLE_SPEED_DECAY_ABOVE differs from its default? 
+CYCLE_SPEED_DECAY_BELOW      Rate of cycle speed approaching the value of CYCLE_SPEED from below
+CYCLE_SPEED_DECAY_BELOW_OVERRIDE Block out older clients when CYCLE_SPEED_DECAY_BELOW differs from its default? 
+CYCLE_SPEED_MIN              Minimal speed of your cycle, measured relative to CYCLE_SPEED
+CYCLE_SPEED_MIN_OVERRIDE     Block out older clients when CYCLE_SPEED_MIN differs from its default? 
+CYCLE_START_SPEED            Initial cycle speed
+CYCLE_SYNC_FF                Speed of simulation of the extrapolating sync; decrease for lower CPU load, but higher effective ping
+CYCLE_SYNC_FF_STEPS          Number of extrapolation simulation timesteps each real timestep; increase for better accuracy
+CYCLE_SYNC_INTERVAL_ENEMY    Time in seconds between server-client updates of enemy cycles
+CYCLE_SYNC_INTERVAL_SELF     Time in seconds between server-client updates of enemy cycles owned by the client itself
+CYCLE_TIME_TOLERANCE         Maximum time difference of execution of turns on server and client (for clients that send timing information)
+CYCLE_TIME_TOLERANCE_OVERRIDEBlock out older clients when CYCLE_TIME_TOLERANCE differs from its default? 
+CYCLE_TURN_MEMORY            Number of pending turns a cycle will memorize exactly
+CYCLE_TURN_SPEED_FACTOR      Factor the speed of a lightcycle is multiplied with when turning 
+CYCLE_TURN_SPEED_FACTOR_OVERRIDE Block out older clients when CYCLE_TURN_SPEED_FACTOR differs from its default? 
+CYCLE_WALL_NEAR              Maximum accelerating wall distance
+CYCLE_WALL_TIME              Time in seconds a cycle does not make a wall after a respawn.
+DEDICATED_FPS                Maximum simulation steps per second the dedicated server will perform
+DEDICATED_IDLE               After running this time (in hours), the dedicated server takes the next chance to quit.
+DITHER                       Use dithering
+DOUBLEBIND_TIME              Time in seconds during which no two different keyboard events can trigger the same action
+DOUBLEBIND_TIME_OVERRIDE     Block out older clients when DOUBLEBIND_TIME differs from its default? 
+ENEMY_CHATBOT_PENALTY        Penalty in seconds if the victim is in chatbot state and the enemy influence is just the chatbot evading a wall
+ENEMY_CURRENTTIME_INFLUENCE  If set to 1, not the build time of the encountered wall, but the current time enters the comparison of enemy influences. Arbitrary blending values are allowed.
+ENEMY_DEAD_PENALTY           Penalty on the effective time in seconds if the enemy influence detection comes from a dead player
+ENEMY_SUICIDE_TIMEOUT        If no enemy influence can be found for the last this many seconds, a player's death counts as a suicide.
+ENEMY_TEAMMATE_PENALTY       Penalty on the effective time in seconds if the enemy influence detection is from a teammate
+EXIT                         Shuts the dedicated server down and quits.
+EXPLOSION                    Enable explosions?
+EXPLOSION_RADIUS             Blast radius of the cycle explosions
+EXTRA_ROUND_TIME             Lenght of an extra pause at the beginning of the round
+FADEOUT_NAME_DELAY           Time the player names are shown. Set to 0 if you don't want to show them at all or -1 if you want to show them always.
+FAILED_ATTEMPTS              Number of failed attemts to initialize graphics mode
+FASTEST_LOCX                 Horizontal position of the fastest player display
+FASTEST_LOCY                 Vertical position of the fastest player display
+FASTEST_SIZE                 Size of the fastest player display
+FAST_FORWARD_MAXSTEP         Maximum recording time between rendered frames in fast forward mode
+FAST_FORWARD_MAXSTEP_REAL    Maximum real time between rendered frames in fast forward mode
+FAST_FORWARD_MAXSTEP_REL     Maximum fraction of the time left until the end of FF mode between rendered frames
+FAV_NUM_PER_TEAM_PLAYER_1    The favorite number of players per team for this player
+FAV_NUM_PER_TEAM_PLAYER_2    The favorite number of players per team for this player
+FAV_NUM_PER_TEAM_PLAYER_3    The favorite number of players per team for this player
+FAV_NUM_PER_TEAM_PLAYER_4    The favorite number of players per team for this player
+FILTER_COLOR_NAMES           Filter color codes from player names.
+FILTER_COLOR_SERVER_NAMES    Filter color codes from server names in the server browser.
+FILTER_COLOR_STRINGS         Filter color codes from strings coming in over the network.
+FILTER_NAME_ENDS             Filter whitespace and other junk from beginnings and ends of player names.
+FINISH_TYPE                  What happens when the last human is dead?
+FIRST_USE                    Is this the first time you use Armagetron Advanced?
+FLOOR_BLUE                   Floor color
+FLOOR_DETAIL                 Floor detail settings
+FLOOR_GREEN                  Floor color
+FLOOR_MIRROR                 Floor mirror mode
+FLOOR_MIRROR_INT             Intensity of the floor mirror effect
+FLOOR_RED                    Floor color
+FORTRESS_CONQUEST_DECAY_RATE Rate a fortress zone "recovers" from being conquered 
+FORTRESS_CONQUEST_RATE       Rate a fortress zone gets conquered with for each enemy in it 
+FORTRESS_DEFEND_RATE         Rate a fortress zone "recovers" for each defending player 
+FULLSCREEN                   Fullscreen or windowed mode?
+GAME_TIMEOUT                 Base timeout for game state synchronisation; gives appoximately the maximum time between rounds.
+GAME_TYPE                    Type of game played
+GL_EXTENSIONS                OpenGL system information
+GL_RENDERER                  OpenGL system information
+GL_VENDOR                    OpenGL system information
+GL_VERSION                   OpenGL system information
+GRID_SIZE                    Distance between gridlines
+GRID_SIZE_MOVIEPACK          Distance between gridlines when moviepack is active
+HIGH_RIM                     Draw high rim walls
+HISTORY_SIZE_CHAT            Number of lines kept in the chat history.
+HISTORY_SIZE_CONSOLE         Number of lines kept in the console history.
+IDLE_KICK_TIME               Time in seconds after which an inactive player is kicked
+IDLE_REMOVE_TIME             Time in seconds after which an inactive player is removed from the game
+INCLUDE                      Includes the following file
+INFINITY_PLANE               Use infinite points (Does not work properly on most Windows systems)
+INSTANT_CHAT_STRING_1_1      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_10     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_11     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_12     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_13     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_14     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_15     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_16     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_17     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_18     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_19     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_2      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_20     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_21     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_22     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_23     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_24     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_25     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_3      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_4      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_5      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_6      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_7      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_8      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_1_9      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_1      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_10     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_11     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_12     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_13     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_14     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_15     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_16     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_17     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_18     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_19     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_2      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_20     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_21     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_22     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_23     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_24     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_25     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_3      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_4      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_5      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_6      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_7      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_8      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_2_9      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_1      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_10     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_11     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_12     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_13     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_14     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_15     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_16     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_17     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_18     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_19     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_2      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_20     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_21     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_22     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_23     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_24     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_25     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_3      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_4      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_5      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_6      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_7      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_8      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_3_9      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_1      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_10     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_11     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_12     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_13     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_14     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_15     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_16     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_17     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_18     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_19     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_2      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_20     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_21     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_22     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_23     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_24     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_25     Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_3      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_4      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_5      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_6      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_7      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_8      Instant chat available with hotkeys
+INSTANT_CHAT_STRING_4_9      Instant chat available with hotkeys
+KEEP_WINDOW_ACTIVE           Keeps rendering active when the program window loses input focus.
+KEYBOARD                     Keyboard settings
+KICK                         Kicks the specified player from the server.
+KILL                         Kill a specific player (as warning before a kick)
+LADDER_GAIN_EXTRA            Ping dependent ladder extra score for the winner
+LADDER_LOSE_MIN_ON_LOAD      Minimum of you ladder score lost on each load
+LADDER_LOSE_PERCENT_ON_LOAD  Percentage of your ladder score lost on each load
+LADDER_MIN_BET               Minimum score you put in the ladder pot
+LADDER_PERCENT_BET           Percentage of your score you put in the ladder pot
+LADDER_TAX                   Percentage of the ladder pot the IRS takes
+LAG_O_METER                  Draw Lag-O-Meter in network play
+LAG_O_METER_SCALE            Scale of the Lag-O-Meter. 1.0 is the "correct" value, older clients were hardcoded to .5 due to a bug.
+LANGUAGE_FIRST               The language Armagetron Advanced will use 
+LANGUAGE_SECOND              Fallback language if the first language is not available
+LAST_CHAT_BREAK_TIME         Last round time a player in chat mode is able to pause the timer
+LAST_CHECK_ERRORS            Listen to errors claiming a video mode does not exist, last successful init
+LAST_COLORDEPTH              Color depth, last successful init
+LAST_FULLSCREEN              Fullscreen or windowed mode, last successful init
+LAST_ZDEPTH                  z buffer depth, last successful init
+LIMIT_ROUNDS                 End the match after this number of rounds
+LIMIT_SCORE                  End the match when a player reaches this score	 
+LIMIT_TIME                   End the match after this number of minutes 
+LINE_ANTIALIAS               Enable line antialiasing
+LOWER_SKY                    Draw lower sky plane
+MAP_FILE                     File that contains the map used for playing 
+MAP_FILE_OVERRIDE            Block out older clients when MAP_FILE differs from its default? 
+MAP_URI                      DEPRECIATED - use RESOURCE_REPOSITORY_SERVER and MAP_FILE instead
+MAX_CLIENTS                  Maximum number of network clients to accept
+MAX_CLIENTS_SAME_IP_HARD     Maximum number of network clients to accept from the same IP; more logins will be ignored
+MAX_CLIENTS_SAME_IP_SOFT     Maximum number of network clients to accept from the same IP; more logins will get kicked when the server is full
+MAX_IN_RATE                  Maximum network input rate
+MAX_OUT_RATE                 Maximum network output rate
+MAX_PLAYERS_SAME_IP          maximum number of players from the same IP (note that each client can legally host up to four players)
+MAX_VOTES                    The maximum number of total votes that can be active at any given moment.
+MAX_VOTES_PER_VOTER          The maximum number of votes suggested by each voter that can be active at any given moment.
+MESSAGE_OF_DAY               Message sent to clients on connection
+MIN_PLAYERS                  Minimum number of players
+MIN_VOTERS                   Number of voters that need to be online to enable voting.						
+MOUSE_GRAB                   Grab the mouse pointer, so it can't leave the window
+MOVIEPACK                    Use the moviepack if available
+MOVIEPACK_FLOOR_BLUE         Floor color
+MOVIEPACK_FLOOR_GREEN        Floor color
+MOVIEPACK_FLOOR_RED          Floor color
+MOVIEPACK_RIM_WALL_STRETCH_X Extension of one square of rim wall texture in the horizontal direction for the moviepack
+MOVIEPACK_RIM_WALL_STRETCH_Y Extension of the rim wall texture in the vertical direction for the moviepack
+MOVIEPACK_WALL_STRETCH       The distance of the vertical lines on the moviepack walls
+NAME_TEAM_AFTER_PLAYER_1     If set, the team is named after the leading player
+NAME_TEAM_AFTER_PLAYER_2     If set, the team is named after the leading player
+NAME_TEAM_AFTER_PLAYER_3     If set, the team is named after the leading player
+NAME_TEAM_AFTER_PLAYER_4     If set, the team is named after the leading player
+NETWORK_AUTOBAN_FACTOR       Autoban players for NETWORK_AUTOBAN_FACTOR * ( kph - NETWORK_AUTOBAN_OFFSET ) minutes when they get kicked; kph is the average number of kicks per hour they get.
+NETWORK_AUTOBAN_MAX_KPH      Maximal value of the kicks per hour; larger values are smoothly clamped.
+NETWORK_AUTOBAN_OFFSET       Autoban players for NETWORK_AUTOBAN_FACTOR * ( kph - NETWORK_AUTOBAN_OFFSET ) minutes when they get kicked; kph is the average number of kicks per hour they get.
+NETWORK_MIN_BAN              When a client's connection is blocked because he's banned, make him banned for at least this many seconds.
+NETWORK_SPECTATOR_TIME       If set to something bigger than zero, this is the maximal time in seconds a client without players is tolerated.
+NEW_FEATURE_DELAY            Disable features that only came in during the last X protocol versions.
+NEW_TEAM_ALLOWED             Is it currently allowed to create a new team?
+NUM_AIS                      Number of AI players
+PASSWORD                     Password setting
+PASSWORD_STORAGE             Determines where your passwords are stored: 1 means on harddisk (dangerous), 0 in memory and -1 means they are not stored at all.
+PERSP_CORRECT                Enable perspective correction
+PING_CHARITY                 How much ping are you willing to take over from your opponent?
+PING_FLOOD_GLOBAL            The times PING_FLOOD_TIME_X, multiplied by this value, count for all pings from all machines. Negative values disable global flood protection.
+PING_FLOOD_TIME_10           Minimum time for 10 ping packets from one machine to arrive.
+PING_FLOOD_TIME_100          Minimum time for 100 ping packets from one machine to arrive.
+PING_FLOOD_TIME_20           Minimum time for 20 ping packets from one machine to arrive.
+PING_FLOOD_TIME_50           Minimum time for 50 ping packets from one machine to arrive.
+PING_LOCX                    Horizontal position of the ping display
+PING_LOCY                    Vertical position of the ping display
+PING_SIZE                    Size of the ping display
+PLAYERS                      Prints list of currently active players
+PLAYER_1                     Player name
+PLAYER_2                     Player name
+PLAYER_3                     Player name
+PLAYER_4                     Player name
+PLAYER_CHAT_WAIT_FRACTION    Maximum fraction of time to wait for a single player to stop chatting.
+PLAYER_CHAT_WAIT_MAX         Maximum time in seconds to wait for a single player to stop chatting.
+PLAYER_CHAT_WAIT_SINGLE      Set to 1 if only one player should get his chat wait time reduced at any given time.
+PLAYER_CHAT_WAIT_TEAMLEADER  Set to 1 if only team leaders, and 0 if all players, should be allowed to pause the timer.
+POLY_ANTIALIAS               Enable polygon antialiasing
+PREDICT_OBJECTS              Predict cycle movement in network play
+QUIT                         Shuts the dedicated server down and quits.
+REAL_ARENA_SIZE_FACTOR       The currently active arena size. Leave it alone! Change size_factor instead.
+REAL_CYCLE_SPEED_FACTOR      The currently active cycle speed multiplier. Leave it alone! Change speed_factor instead.
+RECORDING_DEBUGLEVEL         Level of additonal information in recording file.
+RESOURCE_REPOSITORY_CLIENT   URI the client uses to search for map files if they aren't stored locally. Better leave it alone 
+RESOURCE_REPOSITORY_SERVER   URI clients and the server use to search for map files if they aren't stored locally 
+RIM_WALL_STRETCH_X           Extension of the rim wall texture in the horizontal direction
+RIM_WALL_STRETCH_Y           Extension of the rim wall texture in the vertical direction
+RIM_WALL_WRAP_Y              Set to 1 if the rim wall texture should repeat in the vertical direction
+ROUND_CENTER_MESSAGE         Big message sent to clients after every round
+ROUND_CONSOLE_MESSAGE        Message sent to clients after every round
+RUBBER_GAUGE_LOCX            Horizontal position of the rubber meter 
+RUBBER_GAUGE_LOCY            Vertical position of the rubber meter 
+RUBBER_GAUGE_SIZE            Size of the rubber meter 
+SAY                          Dedicated server only: let the server administator say something.
+SCORE_DEATHZONE              What you get for hitting the Death Zone
+SCORE_DIE                    What you get for dying
+SCORE_KILL                   What you get for killing someone
+SCORE_LOCX                   Horizontal position of the score display
+SCORE_LOCY                   Vertical position of the score display
+SCORE_SIZE                   Size of the score display
+SCORE_SUICIDE                What you get for stupidly dying
+SCORE_WIN                    What you get for winning a round
+SERVER_DNS                   If your server is on dynamic IP and you set up a dynamic DNS that always points to it, you can set this variable to the DNS name to help clients remember your server across IP changes.
+SERVER_IP                    IP the server listens on 
+SERVER_NAME                  Name of this server
+SERVER_OPTIONS               Short description of the options on this server
+SERVER_PORT                  Port this server listens on
+SETTING_LEGACY_BEHAVIOR_ANNOYING Default legacy behavior for settings that only cause minor annoyances on old clients, like enemy cycles stopping for .1 seconds after each turn. Example: CYCLE_RUBBER_MINDISTANCE
+SETTING_LEGACY_BEHAVIOR_BREAKING Default legacy behavior for settings that absolutely break the client and make play impossible. Example of an affected setting: MAP_FILE
+SETTING_LEGACY_BEHAVIOR_BUMPYDefault legacy behavior for settings that allow play on old clients in principle, but with severe limitations (cycles bouncing around, player commands not executed on time). Example: CYCLE_DELAY_TIMEBASED
+SETTING_LEGACY_BEHAVIOR_CHEATING Default legacy behavior for settings where the default behavior could be considered cheating if nondefault was set. Example: DOUBLEBIND_TIME
+SETTING_LEGACY_BEHAVIOR_VISUAL Default legacy behavior for settings that only affect status displays and visuals, not game physics. Example: CYCLE_RUBBER_* (the client displays the rubber meter, but it's not used for anything)
+SHOW_ALIVE                   Show the number of enemies and friends left on the HUD? 
+SHOW_BRAKE                   Show the brake meter on the HUD? 
+SHOW_FASTEST                 Show the fastest player on the HUD? 
+SHOW_FPS                     Enable fps display
+SHOW_HUD                     Show the HUD? 
+SHOW_OWN_NAME                Should your name be displayed above your cycle on your screen?
+SHOW_PING                    Show your ping on the HUD? 
+SHOW_RUBBER                  Show the rubber meter on the HUD? 
+SHOW_SCORE                   Show your single player scores on the HUD? 
+SHOW_SPEED                   Show the speed meter on the HUD? 
+SHOW_TIME                    Show the current time in the top- right corner? 
+SHOW_TIME_24                 Show the time in 24 hour format? 
+SILENCE_ALL                  If set to 1, all chat messages will be omitted.
+SINCLUDE                     Includes the following file silently, without error message if it is not found
+SIZE_FACTOR                  Arena size modifier
+SKY_WOBBLE                   Sky animation
+SMART_GLANCE_CUSTOM_1        Use custom camera settings when glancing with the smart camera
+SMART_GLANCE_CUSTOM_2        Use custom camera settings when glancing with the smart camera
+SMART_GLANCE_CUSTOM_3        Use custom camera settings when glancing with the smart camera
+SMART_GLANCE_CUSTOM_4        Use custom camera settings when glancing with the smart camera
+SMOOTH_SHADING               Enable smooth shading
+SOFTWARE_RENDERER            Is the OpenGL renderer not hadware accelerated?
+SOUND_BUFFER_SHIFT           Buffer size multiplier
+SOUND_QUALITY                Sound quality 0=off, 3=high
+SOUND_SOURCES                Number of sound sources to be heard at the same time
+SPAM_AUTOKICK                Spam score that causes you to get kicked instantly.
+SPAM_MAXLEN                  Maximal length of chat message.
+SPAM_MAXLEN_OVERRIDE         Block out older clients when SPAM_MAXLEN differs from its default? 
+SPAM_PENALTY                 Number of seconds to silence a spammer.
+SPAM_PROTECTION              Harshness of spam protection; determines min delay between chat messages accepted.
+SPAM_PROTECTION_CHAT         Extra factor for SPAM_PROTECTION for chat messages.
+SPAM_PROTECTION_REPEAT       Minimum time between identical chat messages.
+SPAM_PROTECTION_VOTE         Extra factor for SPAM_PROTECTION for votes.
+SPARKS                       Draw sparks when going too close to a wall
+SPAWN_WINGMEN_BACK           Determines how much each wingman is placed backwards in a team.
+SPAWN_WINGMEN_SIDE           Determines how much each wingman is placed sidewards in a team.
+SPECTATOR_MODE_1             Sets spectator mode for this player
+SPECTATOR_MODE_2             Sets spectator mode for this player
+SPECTATOR_MODE_3             Sets spectator mode for this player
+SPECTATOR_MODE_4             Sets spectator mode for this player
+SPEED_FACTOR                 Speed modifier for the cycles
+SPEED_GAUGE_LOCX             Horizontal position of the speed meter 
+SPEED_GAUGE_LOCY             Vertical position of the speed meter 
+SPEED_GAUGE_SIZE             Size of the speed meter 
+SP_AI_IQ                     IQ of the AI opponents in single player mode
+SP_AUTO_AIS                  Automatically spawn AI players in single player mode?
+SP_AUTO_IQ                   Automatically adjust AI IQ in single player mode?
+SP_EXPLOSION_RADIUS          Blast radius of the cycle explosions in single player mode
+SP_FINISH_TYPE               What happens when the last human is dead in single player mode?
+SP_GAME_TYPE                 Type of game played in single player mode
+SP_LIMIT_ROUNDS              End the match after this number of rounds in single player mode
+SP_LIMIT_SCORE               End the match when a player reaches this score in single player mode
+SP_LIMIT_TIME                End the match after this number of minutes in single player mode
+SP_MIN_PLAYERS               Minimum number of players in single player mode
+SP_NUM_AIS                   Number of AI players in single player mode
+SP_SCORE_WIN                 What you get for winning a round in single player mode
+SP_SIZE_FACTOR               Arena size modifier
+SP_SPEED_FACTOR              Speed modifier for the cycles
+SP_TEAMS_MAX                 Maximum number of teams in single player mode
+SP_TEAMS_MIN                 Minimum number of teams in single player mode
+SP_TEAM_BALANCE_ON_QUIT      Balance teams on player quit in single player mode?
+SP_TEAM_BALANCE_WITH_AIS     Balance teams with AI players in single player mode?
+SP_TEAM_MAX_IMBALANCE        Maximum allowed team imbalance in single player mode
+SP_TEAM_MAX_PLAYERS          Maximum number of players per team in single player mode
+SP_TEAM_MIN_PLAYERS          Minimum number of players per team in single player mode
+SP_WALLS_LENGTH              Length of the cycle walls in meters; negative values will make the walls infinite.
+SP_WALLS_STAY_UP_DELAY       Number of seconds the walls stay up after a player died; negative values will keep them up forever.
+SP_WIN_ZONE_MIN_LAST_DEATH   Minimum number of seconds since the last death before the instant win zone is activated in single player mode
+SP_WIN_ZONE_MIN_ROUND_TIME   Minimum number of seconds the round has to be going on before the instant win zone is activated in single player mode
+START_CAM_1                  Initial Camera
+START_CAM_2                  Initial Camera
+START_CAM_3                  Initial Camera
+START_CAM_4                  Initial Camera
+START_FOV_1                  Initial field of vision
+START_FOV_2                  Initial field of vision
+START_FOV_3                  Initial field of vision
+START_FOV_4                  Initial field of vision
+START_NEW_MATCH              Initiates a new match
+SWAP_MODE                    Determines the commands used to sync graphics and input. 0: do nothing, 1: call glFlush(), 2: call glFinish().
+TALK_TO_MASTER               Announce this server on the internet?
+TEAMS_MAX                    Maximum number of teams
+TEAMS_MIN                    Minimum number of teams
+TEAM_ALLOW_SHUFFLE_UP        If set to 1, players are allowed to change their position in the team as they wish. If 0, they only can drop in rank.
+TEAM_BALANCE_ON_QUIT         Balance teams on player quit?
+TEAM_BALANCE_WITH_AIS        Balance teams with AI players?
+TEAM_CENTER_IS_BOSS          If set to 1, the center player is the team's boss. If at 0, it's the player who is on that team longest.
+TEAM_MAX_IMBALANCE           Maximum allowed team imbalance
+TEAM_MAX_PLAYERS             Maximum number of players per team
+TEAM_MIN_PLAYERS             Minimum number of players per team
+TEXTURES_HI                  Use high color textures
+TEXTURE_MODE_0               Floor Texture:
+TEXTURE_MODE_1               Wall Textures:
+TEXTURE_MODE_2               Object Textures:
+TEXTURE_MODE_3               Font:
+TEXT_OUT                     Enable console text output
+TOPOLOGY_POLICE              The topology police does posteriori checks to determine whether game moves were legal.
+UNBAN_IP                     Revokes the ban of the specified IP address.
+UPPER_SKY                    Draw upper sky plane
+URL                          HTTP URI assiciated with a server
+VIEWPORT_CONF                Viewport configuration; decides how many players can play on this computer
+VIEWPORT_TO_PLAYER_1         Assign this viewport to a player
+VIEWPORT_TO_PLAYER_2         Assign this viewport to a player
+VIEWPORT_TO_PLAYER_3         Assign this viewport to a player
+VIEWPORT_TO_PLAYER_4         Assign this viewport to a player
+VOTE_USE_SERVER_CONTROLLED_KICK Set to 1 to use the enhanced server controlled vote items for kick votes. Does not work for clients prior to 0.2.8.0_rc1.
+VOTE_USE_SERVER_CONTROLLED_KICK_OVERRIDE Block out older clients when VOTE_USE_SERVER_CONTROLLED_KICK differs from its default? 
+VOTING_BIAS                  Add virtual voters that oppose every change.
+VOTING_DECAY                 One non-voter is ignored everytime this many secons pass.
+VOTING_KICK_TIME             The minimum time in seconds between two kick votes against the same player.
+VOTING_PRIVACY               Controls logging of voting process. 2: nothing gets logged 1: vote submission is logged for the server admin 0: voting is logged for the server admin -1: vote submission is made public -2: everything is made public
+VOTING_SPAM_ISSUE            The spam level of issuing a vote.
+VOTING_SPAM_REJECT           The spam level of getting your vote rejected.
+VOTING_START_DECAY           Number of seconds after that the non-voters start to get ignored.
+VOTING_TIMEOUT               Votes older than this time out and are rejected.
+VOTING_TIMEOUT_PER_VOTER     Additional value for VOTING_TIMEOUT for every voter present.
+WALLS_LENGTH                 Length of the cycle walls in meters; negative values will make the walls infinite.
+WALLS_STAY_UP_DELAY          Number of seconds the walls stay up after a player died; negative values will keep them up forever.
+WHITE_SPARKS                 Draw sparks in white (instead of cycle colors).
+WIN_ZONE_DEATHS              A value of 1 turns it into a death zone.
+WIN_ZONE_EXPANSION           Expansion speed of the instant win zone
+WIN_ZONE_INITIAL_SIZE        Initial size of the instant win zone
+WIN_ZONE_MIN_LAST_DEATH      Minimum number of seconds since the last death before the instant win zone is activated
+WIN_ZONE_MIN_ROUND_TIME      Minimum number of seconds the round has to be going on before the instant win zone is activated
+WIN_ZONE_RANDOMNESS          Randomness factor of the initial win zone position. 0 fixes it at the arena center, 1 spreads the zone all over it.
+WORD_DELIMITERS              Characters that count as word delimiters when skipping over words in a text input field.
+WRAP_MENU                    If set, you leave a menu to the top and reenter it at the bottom.
+ZDEPTH                       z buffer depth to use (0: 16 1: from color depth 2: 32)
+ZTRICK                       Performance tweak; does not work on most Windows systems
+
+</pre>
+
+<br>
+
+
+
+<p align=center>This document was created by
+<a href="http://armagetron.sf.net/contact.html" target=_top><strong>Manuel Moos</strong></a>
+</p>
+
+<p align=center>
+Last modification: Sep 13 2011
+</p>
+<p align=center><!--#spaceportsbanner--></p>
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+<td align=center width="15%">
+<a href="index.html" target="_top">First Start</a>
+</td>
+
+ <td align=center width="15%">
+<a href="install_windows.html" target="_top"> Installation</a>
+</td>
+  
+
+
+<td align=center width="15%">
+<a href="network.html" target="_top">Network Play</a>
+</td>
+
+<td align=center width="15%">
+<a href="config.html" target="_top">Configuration</a>
+</td>
+
+<td align=center width="10%">
+<a href="faq.html" target="_top">FAQ</a>
+</td>
+
+
+
+</tr>
+</table>
+
+
+</body>
+</html>
+

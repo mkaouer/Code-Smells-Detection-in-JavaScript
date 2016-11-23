@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>rootbeer</id>
+    <title>Rootbeer GPU Compiler</title>
+    <version>1.0.45</version>
+    <authors>Phil Pratt-Szeliga</authors>
+    <owners>Phil Pratt-Szeliga</owners>
+    <summary>Rootbeer is a compiler that makes it easier to program a GPU with Java.</summary>
+    <description>Rootbeer - A compiler that makes it easier to program a GPU with 
+	  Java. Rootbeer goes beyond basic language bindings. Rootbeer automatically 
+	  serializes complex state to GPU memory.
+	</description>
+    <projectUrl>http://rbcompiler.com/</projectUrl>
+    <tags>Java GPU</tags>
+    <copyright></copyright>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>http://rbcompiler.com/img/rb_favicon.jpg</iconUrl>
+    <dependencies>
+      <dependency id="cuda" version="5.0" />
+    </dependencies>
+  </metadata>
+</package>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+  >
+
+  <groupId>edu.syr.pcpratts</groupId>
+  <artifactId>rootbeer</artifactId>
+  <version>1.x-SNAPSHOT</version>
+
+  <modelVersion>4.0.0</modelVersion>
+  <packaging>jar</packaging>
+  <name>Rootbeer::Rootbeer</name>
+  <description>Rootbeer - compile Java bytecode for a CUDA GPU</description>
+
+  <properties>
+    <java.version>1.5</java.version>
+    <soot.version>2.5.0</soot.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>Maven Central Repository</id>
+      <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>chirrup_org</id>
+      <url>http://chirrup.org/rootbeer/maven/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <!-- need to be installed -->
+    <dependency>
+      <groupId>rootbeer</groupId>
+      <artifactId>pack</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/pack.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>soot</artifactId>
+      <version>rb-1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/sootclasses-rbclassload.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>jasmin</artifactId>
+      <version>2.5.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/jasminclasses-2.5.0.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>polyglot</artifactId>
+      <version>1.3.5</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/polyglotclasses-1.3.5.jar</systemPath>
+    </dependency>
+    <dependency>
+      <groupId>soot</groupId>
+      <artifactId>axmlprinter</artifactId>
+      <version>2.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/AXMLPrinter2.jar</systemPath>
+    </dependency>
+    <!-- pulled from central maven repo -->
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr</artifactId>
+      <version>3.1.3</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>1.6</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.basedir}/src</sourceDirectory>
+    <!-- <testSourceDirectory>${project.basedir}/src</testSourceDirectory> -->
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src</directory>
+        <includes>
+          <include>**/*.txt</include>
+          <include>**/*.class</include> <!--TODO: does the source really include classes?-->
+          <include>**/*.g</include>
+          <include>**/*.c</include>
+          <include>**/*.tokens</include>
+          <include>**/*.so.1</include>
+          <include>**/*.dll</include>
+          <include>**/*.dylib</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+	      <version>2.12.2</version>
+        <configuration>
+          <includes>
+            <include>**/testcases/**/*.java</include>
+          </includes>
+<!--
+          <excludes>
+            <exclude>**/testcases/rootbeertest/gpurequired/**/*.java</exclude>
+          </excludes>
+-->
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+	      <version>2.5.1</version>
+        <configuration>
+	        <source>${java.version}</source>
+          <target>${java.version}</target>
+          <excludes>
+            <exclude>**/testcases/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+<!--
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.0</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+	      <shadedArtifactAttached>true</shadedArtifactAttached>
+	      <shadedClassifierName>uber</shadedClassifierName>
+              <transformers>
+                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                  <manifestEntries>
+                    <Main-Class>edu.syr.pcpratts.rootbeer.Main</Main-Class>
+                    <Project-Version>${project.version}</Project-Version>
+                  </manifestEntries>
+                </transformer>
+              </transformers>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+	      <version>2.9</version>
+      </plugin>
+      <plugin>
+	      <groupId>org.apache.maven.plugins</groupId>
+	      <artifactId>maven-javadoc-plugin</artifactId>
+	      <version>2.6.1</version>
+        <configuration>
+	        <source>${java.version}</source>
+          <target>${java.version}</target>
+          <excludes>
+            <exclude>**/testcases/**</exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>edu.syr.pcpratts.rootbeer.Main</mainClass>
+            </manifest>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+        </configuration>
+      </plugin>
+    </plugins>
+
+    <extensions>
+      <extension>
+        <groupId>org.apache.maven.wagon</groupId> 
+        <artifactId>wagon-ssh</artifactId> 
+        <version>1.0-beta-6</version> 
+      </extension> 
+    </extensions>
+
+  </build>
+
+  <reporting>
+    <plugins>
+    </plugins>
+  </reporting>
+
+</project>

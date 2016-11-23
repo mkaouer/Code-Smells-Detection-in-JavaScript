@@ -1,0 +1,21 @@
+#!/bin/sh
+
+cd ../build/classes
+
+javah org.trifort.rootbeer.runtime.CUDAContext
+mv org_trifort_rootbeer_runtime_CUDAContext.h ../../csrc/org/trifort/rootbeer/runtime/CUDAContext.h
+
+javah org.trifort.rootbeer.runtime.CUDARuntime
+mv org_trifort_rootbeer_runtime_CUDARuntime.h ../../csrc/org/trifort/rootbeer/runtime/CUDARuntime.h
+
+javah org.trifort.rootbeer.runtime.FixedMemory
+mv org_trifort_rootbeer_runtime_FixedMemory.h ../../csrc/org/trifort/rootbeer/runtime/FixedMemory.h
+rm org_trifort_rootbeer_runtime_FixedMemory_MemPointer.h
+
+# javah org.trifort.rootbeer.runtime.OpenCLContext
+# mv org_trifort_rootbeer_runtime_OpenCLContext.h ../../csrc/org/trifort/rootbeer/runtime/OpenCLContext.h
+
+javah org.trifort.rootbeer.runtime.OpenCLRuntime
+mv org_trifort_rootbeer_runtime_OpenCLRuntime.h ../../csrc/org/trifort/rootbeer/runtime/OpenCLRuntime.h
+
+cd ../../csrc

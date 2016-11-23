@@ -1,0 +1,220 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="date" content="2011-09-13T19:15:44+01:00">
+
+   <meta name="author" content="Manuel Moos">
+   <title>Armagetron: network code documentation</title>
+   <meta name="description" content="Armagetron: network code documentation">
+DEFINE(Armagetron Advanced, Armagetron)
+
+</head><body>
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+<td align=center width="25%">
+<a href="index.html" target="_top">Introduction</a>
+</td>
+
+<td align=center width="25%">
+<a href="lower.html" target="_top">Layer One</a>
+</td>
+
+<td align=center width="25%">
+<a href="middle.html" target="_top">Layer Two</a>
+</td>
+
+<td align=center width="25%">
+<a href="upper.html" target="_top">Layer Three</a>
+</td>
+
+
+</tr>
+</table>
+
+
+
+<a name=><h1 align=center>Armagetron: network code documentation</h1></a>
+<p align=justify><strong>
+Warning: These document are basically obsolete. The demo programs don't work
+currently and the docs for Layer 1 have not been updated for the recent refactoring.
+However, Layer 2 and 3 still are mainly intact and give the basic ideas about
+the system.
+</strong></p>
+<p align=justify>
+This document is not designed to explain every detail of the network
+subsystem; it is intended as a sort of user's manual for people who want to
+integrate Armagetron's networking into other GPL'd games and don't know
+much more about networking than the average Quake fan. You will not read 
+anything about the "equal ping" technology here; I didn't know that before
+I started writing this either :-) "equal ping" is not part of any of the
+three network layers, it's in the way the game timer is handled and how
+client control messages are interpreted by the server.
+</p>
+
+<a name=><h2 align=left>General structure</h2></a>
+
+<p align=justify>
+Just like most other network games, Armagetron uses a client/server
+architecture. The server has full control over the game, to minimise the 
+possibility of cheating: the clients send only their players' input to the 
+server (and of course, don't wait for the server's response to interpret it),
+the server executes the commands and sends all clients the updated game 
+information.
+</p>
+
+<p align=justify>
+As you probably expected, Armagetron's network code is organised in layers,
+where the lower layers deal with the details of network communication and the 
+upper layers use the functionality provided by the preceeding layer to 
+implement more complex tasks. In detail:
+</p>
+
+<ul>
+<li><a href="lower.html">Layer 1 (Network protocol abstraction):</a></li>
+
+<li><a href="middle.html">Layer 2 (Network messages):</a></li>
+
+<li><a href="upper.html">Layer 3 (Network objects):</a></li>
+</ul>
+
+<p align=justify>
+The game itself uses the login/logout functions of layer two, and of course
+a lot of layer three. The layers two and three are a little interconnected:
+some stuff that should be happening in layer two already is postponed to
+layer three (i.e. cleaning up after a client quit from the server), so it's
+not possible to compile a program just with layers one and two.
+Sorry about that...
+</p>
+
+<a name=><h3 align=left>Common data types</h3></a>
+<p align=justify>
+<code>string</code> (declared in <code>smartstring.h</code>): this 
+is a better substitute for the normal <code>char *</code> with several 
+enhancements (you can simply append characters to it...).
+</p>
+<p align=justify>
+<code>REAL</code> (declared in <code>stuff.h</code>): just a basic 
+<code>float</code>.
+</p>
+
+<a name=><h3 align=left>Common global objects</h3></a>
+<p align=justify>
+<code>con</code> (declared in <code>console.h</code>):
+ this is the console and used just like <code>cout</code>
+or any other stream. Messages written to <code>con</code>
+are displayed on the screen or written to standard output.
+</p>
+
+<p align=center><!--#spaceportsbanner--></p>
+
+<br>
+<p align=center>This Page was created by
+Manuel Moos(<b> </b> <script language="JavaScript"> var b = "sf.net "; var c = "z-man"; var a="users"; document.write(c); document.write("@") ; document.write(a) ; document.write(".") ; document.write(b); </script> ).
+
+<p align=center>
+Last modification: Tue Sep 13 19:15:44 CEST 2011
+
+</p>
+
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+<td align=center width="25%">
+<a href="index.html" target="_top">Introduction</a>
+</td>
+
+<td align=center width="25%">
+<a href="lower.html" target="_top">Layer One</a>
+</td>
+
+<td align=center width="25%">
+<a href="middle.html" target="_top">Layer Two</a>
+</td>
+
+<td align=center width="25%">
+<a href="upper.html" target="_top">Layer Three</a>
+</td>
+
+
+</tr>
+</table>
+
+
+
+</body>
+</html>
+

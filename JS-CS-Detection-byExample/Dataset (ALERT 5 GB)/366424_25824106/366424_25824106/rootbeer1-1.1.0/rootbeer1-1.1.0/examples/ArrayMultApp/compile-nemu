@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd ../../
+ant jar
+./pack-rootbeer
+
+cd examples/ArrayMultApp/
+ant jar
+java -jar ../../Rootbeer.jar ArrayMultApp.jar ArrayMultApp-GPU.jar -nemu
