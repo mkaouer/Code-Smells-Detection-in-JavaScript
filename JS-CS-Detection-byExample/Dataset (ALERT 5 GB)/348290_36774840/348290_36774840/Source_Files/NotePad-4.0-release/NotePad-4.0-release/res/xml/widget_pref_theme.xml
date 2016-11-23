@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2012 Jonas Kalderstam
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="preference_screen" >
+
+        <ListPreference
+            android:defaultValue="light"
+            android:dialogTitle="@string/settings_theme_dialog"
+            android:entries="@array/widget_theme_preference"
+            android:entryValues="@array/widget_themevalues_preference"
+            android:key="widget_key_current_theme"
+            android:summary="Selected option should be here"
+            android:title="@string/settings_theme" />
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/widget_pref_preview_note"
+            android:key="widget_key_preview_note"
+            android:summaryOff="@string/widget_pref_preview_note_summary_off"
+            android:summaryOn="@string/widget_pref_preview_note_summary_on" />
+        
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:title="@string/widget_pref_show_complete"
+            android:key="widget_key_show_complete"
+            android:summaryOff="@string/widget_pref_show_complete_summary_off"
+            android:summaryOn="@string/widget_pref_show_complete_summary_on" />
+
+</PreferenceScreen>

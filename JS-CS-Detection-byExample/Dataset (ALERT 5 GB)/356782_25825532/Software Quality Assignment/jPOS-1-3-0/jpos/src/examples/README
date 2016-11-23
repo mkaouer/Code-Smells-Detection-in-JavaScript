@@ -1,0 +1,49 @@
+$Id$
+
+This directory contains examples that demonstrate the use of jPOS classes. 
+
+In order to run the examples you have to
+(from your base jPOS installation directory)
+
+   build examples
+   example <example-name> (i.e. example hello)
+
+(add .sh or .bat depending on your OS)
+
+We recommend that you read them in the following order:
+
+   - logger: jPOS extensively uses the logger subsystem.
+     You are also welcome to use it outside jPOS in your own 
+     applications as well.
+
+   - isomsg: show how to handle ISOMsg manipulation (set/unset
+     fields, merge, clone, restricted-clone, nested messages)
+
+   - simplepacking: shows how to pack and unpack an ISOMsg;
+     provides instructions on how to extend ISOPackagers
+     and ISOFieldPackagers
+
+   - simpleserver: a simple ISOChannel based server,
+
+   - simpleclient: demonstrates connection with simpleserver
+
+   - simplemux: runs between simpleserver and simpleclient
+     multiplexing messages
+
+You don't need to deal with GUI stuff in order to setup your
+desired interchange but anyway you may try
+    
+    - simplegui: sends messages to simpleserver with a nice GUI
+      
+Misc examples:
+   
+   We use examples source tree to create simple applications used
+for demonstration, proof of concept, debugging, test, etc. 
+This is the case of:
+
+   - xmlpacking (pack/unpack to/from XML file)
+   - xsltfilter (demo XSL Transformations)
+   - channelfilter (test ISOChannel's filters [see ISOFilter])
+   - isoserver: similar to simpleserver, uses ISOServer component
+   - dirpoll: test org.jpos.util.DirPoll functionality
+

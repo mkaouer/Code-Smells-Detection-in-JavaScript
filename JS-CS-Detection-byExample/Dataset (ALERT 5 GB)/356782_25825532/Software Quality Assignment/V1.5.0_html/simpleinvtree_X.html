@@ -1,0 +1,68 @@
+<html><head><title>Simple Invocation Tree [X]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td>C</td><td><a href="simpleinvtree_D.html">D</a></td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td><a href="simpleinvtree_I.html">I</a></td><td><a href="simpleinvtree_J.html">J</a></td><td>K</td><td><a href="simpleinvtree_L.html">L</a></td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td><a href="simpleinvtree_O.html">O</a></td><td><a href="simpleinvtree_P.html">P</a></td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td><a href="simpleinvtree_U.html">U</a></td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_X.html#45591">xmlpacking.Test.main</a>
+| <a href="dictionary_O.html#4781">org.jpos.util.Logger.Logger</a>
+| <a href="dictionary_O.html#4782">org.jpos.util.SimpleLogListener.SimpleLogListener</a>
+| <a href="dictionary_O.html#4783">org.jpos.util.Logger.addListener</a>
+| <a href="dictionary_X.html#45588">xmlpacking.Test.Test</a>
+| <a href="dictionary_X.html#45595">xmlpacking.Test.testXMLMessage</a>
+
+<a href="dictionary_X.html#45588">xmlpacking.Test.Test</a>
+| <a href="dictionary_O.html#4780">org.jpos.util.SimpleLogSource.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73247">org.jpos.apps.qsp.task.DailyTask.setLogger</a><i>  (Virtual)</i>
+
+<a href="dictionary_X.html#45595">xmlpacking.Test.testXMLMessage</a>
+| <a href="dictionary_O.html#1316">org.jpos.util.LogEvent.LogEvent</a>
+| <a href="dictionary_O.html#18574">org.jpos.iso.packager.XMLPackager.XMLPackager</a>
+| <a href="dictionary_O.html#20819">org.jpos.util.SimpleLogSource.getLogger</a>
+| <a href="dictionary_O.html#1379">org.jpos.util.LogSource.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1204">org.jpos.iso.BaseChannel.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#3961">org.jpos.tpl.PersistentEngine.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#7127">org.jpos.util.ThreadPool.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#7714">org.jpos.iso.ISOBaseValidator.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#7943">org.jpos.iso.VISA1Link.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#9298">org.jpos.iso.channel.ChannelPool.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12210">org.jpos.apps.qsp.Router.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#13498">org.jpos.apps.qsp.task.Naming.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#16259">org.jpos.apps.qsp.QSP.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#16965">org.jpos.iso.ISOMUX.Receiver.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#7695">org.jpos.iso.ISOMUX.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#19133">org.jpos.iso.packager.XMLPackager.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21005">org.jpos.iso.validator.VErrorParser.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25275">org.jpos.iso.ISORequest.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_Q.html#30492">qsp.connectionpool.Test.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#33772">org.jpos.util.Log.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#35918">org.jpos.iso.ISOServer.Session.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#35969">org.jpos.iso.ISOServer.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#36183">org.jpos.iso.channel.SAFChannel.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#38591">org.jpos.apps.qsp.task.HttpAdaptor.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#4780">org.jpos.util.SimpleLogSource.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#10315">org.jpos.security.BaseSMAdapter.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#44875">org.jpos.tpl.ConnectionPool.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48226">org.jpos.util.V24.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1962">org.jpos.iso.ISOBasePackager.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#53195">org.jpos.iso.Connector.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#54602">org.jpos.security.SimpleKeyFile.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#56881">org.jpos.iso.packager.PackagerWrapper.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#66502">org.jpos.apps.qsp.EJBConnector.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#68887">org.jpos.util.SystemMonitor.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#71952">org.jpos.iso.packager.LogPackager.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73414">org.jpos.iso.channel.LoopbackChannel.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#78148">org.jpos.apps.qsp.Connector.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1322">org.jpos.iso.ISOMsg.ISOMsg</a>
+| <a href="dictionary_O.html#1349">org.jpos.iso.ISOMsg.setPackager</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7975">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#17151">org.jpos.iso.ISODate.getDateTime</a>
+| <a href="dictionary_O.html#17175">org.jpos.iso.ISODate.getTime</a>
+| <a href="dictionary_O.html#17146">org.jpos.iso.ISODate.getDate</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#19178">org.jpos.iso.ISOMsg.ISOMsg</a>
+| <a href="dictionary_O.html#1363">org.jpos.iso.ISOMsg.pack</a>
+| <a href="dictionary_O.html#1318">org.jpos.util.LogEvent.addMessage</a>
+| <a href="dictionary_O.html#1351">org.jpos.iso.ISOMsg.unpack</a>
+| <a href="dictionary_O.html#1319">org.jpos.util.Logger.log</a>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td>C</td><td><a href="simpleinvtree_D.html">D</a></td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td><a href="simpleinvtree_I.html">I</a></td><td><a href="simpleinvtree_J.html">J</a></td><td>K</td><td><a href="simpleinvtree_L.html">L</a></td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td><a href="simpleinvtree_O.html">O</a></td><td><a href="simpleinvtree_P.html">P</a></td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td><a href="simpleinvtree_U.html">U</a></td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table></body></html>

@@ -1,0 +1,165 @@
+<html><head><title>ISOChannelAdaptor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_7_0/modules/compat_1_5_2/src/org/jpos/space/ISOChannelAdaptor.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_7_0/modules/compat_1_5_2/src/org/jpos/space/ISOChannelAdaptor.java";
+top.document.title  = "ISOChannelAdaptor.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2010 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.<a href="dictionary_J.html#1017">space</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#41">core</a>.<a href="dictionary_C.html#874">Configurable</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#41">core</a>.<a href="dictionary_C.html#875">Configuration</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#41">core</a>.<a href="dictionary_C.html#876">ConfigurationException</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#755">iso</a>.<a href="dictionary_I.html#4923">ISOChannel</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#755">iso</a>.<a href="dictionary_I.html#756">ISOMsg</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#755">iso</a>.<a href="dictionary_I.html#1388">ISOUtil</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#45">util</a>.<a href="dictionary_U.html#2549">LogEvent</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#45">util</a>.<a href="dictionary_U.html#2551">Logger</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#45">util</a>.<a href="dictionary_U.html#3307">NameRegistrar</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#45">util</a>.<a href="dictionary_U.html#7179">SimpleLogSource</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.IOException;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * Integrates legacy (pre 2.0) ISOChannels to new Space based architecture</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * @author Alejandro Revilla</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> */</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_S.html#10769">ISOChannelAdaptor</a> </span>
+<a name="41"><font size=-1>41     </font></a><span class="keyword">        extends <a href="dictionary_U.html#7179">SimpleLogSource</a> </span>
+<a name="42"><font size=-1>42     </font></a><span class="keyword">        implements <a href="dictionary_C.html#874">Configurable</a></span>
+<a name="43"><font size=-1>43     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    <a href="dictionary_S.html#1018">Space</a> <a href="dictionary_I.html#10795">sp</a>;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    <a href="dictionary_C.html#875">Configuration</a> <a href="dictionary_I.html#10791">cfg</a>;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">    <a href="dictionary_I.html#4923">ISOChannel</a> <a href="dictionary_I.html#10792">channel</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    String <a href="dictionary_I.html#10796">to</a>, <a href="dictionary_I.html#10793">from</a>, <a href="dictionary_I.html#10794">ready</a>;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_I.html#10780">ISOChannelAdaptor</a> </span><span class="default">() {</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">        </span><span class="keyword">super </span><span class="default">();</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">        <a href="dictionary_I.html#10795">sp</a> = <a href="dictionary_S.html#3716">TransientSpace</a>.<a href="dictionary_T.html#3717">getSpace</a> ();</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    }</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_I.html#10788">setConfiguration</a> </span><span class="default">(<a href="dictionary_C.html#875">Configuration</a> <a href="dictionary_C.html#10790">cfg</a>) </span>
+<a name="53"><font size=-1>53     </font></a><span class="default">        </span><span class="keyword">throws <a href="dictionary_C.html#876">ConfigurationException</a> </span>
+<a name="54"><font size=-1>54     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#10791">cfg</a> = <a href="dictionary_C.html#10790">cfg</a>;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">            <a href="dictionary_I.html#10796">to</a>   = <a href="dictionary_I.html#10785">get</a> (</span><span class="string">&quot;to&quot;</span><span class="default">);</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">            <a href="dictionary_I.html#10793">from</a> = <a href="dictionary_I.html#10785">get</a> (</span><span class="string">&quot;from&quot;</span><span class="default">);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">            <a href="dictionary_I.html#10792">channel</a> = (ISOChannel) <a href="dictionary_U.html#3307">NameRegistrar</a>.<a href="dictionary_N.html#5789">get</a> (</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">                </span><span class="string">&quot;channel.&quot; </span><span class="default">+ <a href="dictionary_I.html#10785">get</a> (</span><span class="string">&quot;channel&quot;</span><span class="default">)</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">            );</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">            <a href="dictionary_I.html#10794">ready</a>  = <a href="dictionary_I.html#10792">channel</a>.toString() + </span><span class="string">&quot;.ready&quot;</span><span class="default">;</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">            </span><span class="keyword">new </span><span class="default">Thread (</span><span class="keyword">new <a href="dictionary_S.html#10776">Sender</a> </span><span class="default">()).start ();</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">            </span><span class="keyword">new </span><span class="default">Thread (</span><span class="keyword">new <a href="dictionary_R.html#10771">Receiver</a> </span><span class="default">()).start ();</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_U.html#3307">NameRegistrar</a>.<a href="dictionary_N.html#5782">NotFoundException</a> <a href="dictionary_E.html#10789">e</a>) {</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_C.html#4664">ConfigurationException</a> </span><span class="default">(<a href="dictionary_E.html#10789">e</a>);</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        }</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    }</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    </span><span class="keyword">public class <a href="dictionary_I.html#10775">Sender</a> implements </span><span class="default">Runnable {</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        </span><span class="keyword">public <a href="dictionary_S.html#10776">Sender</a> </span><span class="default">() {</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">            </span><span class="keyword">super </span><span class="default">();</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        }</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_S.html#10777">run</a> </span><span class="default">() {</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">            Thread.<a href="dictionary_T.html#10797">currentThread</a>().setName (</span><span class="string">&quot;channel-sender-&quot; </span><span class="default">+ <a href="dictionary_I.html#10796">to</a>);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(;;) {</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">                    <a href="dictionary_I.html#10781">checkConnection</a> ();</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">                    Object <a href="dictionary_O.html#10779">o</a> = <a href="dictionary_I.html#10795">sp</a>.<a href="dictionary_S.html#1022">in</a> (<a href="dictionary_I.html#10796">to</a>, </span><span class="number">10000</span><span class="default">);</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">                    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#10779">o</a> </span><span class="keyword">instanceof <a href="dictionary_I.html#756">ISOMsg</a></span><span class="default">)</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">                        <a href="dictionary_I.html#10792">channel</a>.<a href="dictionary_I.html#5130">send</a> ((ISOMsg) <a href="dictionary_O.html#10779">o</a>);</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#10778">e</a>) { </span>
+<a name="82"><font size=-1>82     </font></a><span class="default">                    <a href="dictionary_U.html#2551">Logger</a>.<a href="dictionary_L.html#2607">log</a> (</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">                        </span><span class="keyword">new <a href="dictionary_L.html#5126">LogEvent</a> </span><span class="default">(</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">                            <a href="dictionary_S.html#10769">ISOChannelAdaptor</a>.</span><span class="keyword">this</span><span class="default">, </span><span class="string">&quot;channel-sender&quot;</span><span class="default">+<a href="dictionary_I.html#10796">to</a>, <a href="dictionary_E.html#10778">e</a></span>
+<a name="85"><font size=-1>85     </font></a><span class="default">                        )</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">                    );</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">                    <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#1405">sleep</a> (</span><span class="number">1000</span><span class="default">);</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">                }</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">            }</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        }</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    }</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    </span><span class="keyword">public class <a href="dictionary_I.html#10770">Receiver</a> implements </span><span class="default">Runnable {</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">        </span><span class="keyword">public <a href="dictionary_R.html#10771">Receiver</a> </span><span class="default">() {</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">            </span><span class="keyword">super </span><span class="default">();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">        }</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_R.html#10772">run</a> </span><span class="default">() {</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">            Thread.<a href="dictionary_T.html#10797">currentThread</a>().setName (</span><span class="string">&quot;channel-receiver-&quot;</span><span class="default">+<a href="dictionary_I.html#10793">from</a>);</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(;;) {</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">                    <a href="dictionary_I.html#10795">sp</a>.<a href="dictionary_S.html#1030">rd</a> (<a href="dictionary_I.html#10794">ready</a>);</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">                    <a href="dictionary_I.html#756">ISOMsg</a> <a href="dictionary_M.html#10774">m</a> = <a href="dictionary_I.html#10792">channel</a>.<a href="dictionary_I.html#5123">receive</a> ();</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">                    <a href="dictionary_I.html#10795">sp</a>.<a href="dictionary_S.html#1024">out</a> (<a href="dictionary_I.html#10793">from</a>, <a href="dictionary_M.html#10774">m</a>);</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#10773">e</a>) { </span>
+<a name="104"><font size=-1>104     </font></a><span class="default">                    <a href="dictionary_U.html#2551">Logger</a>.<a href="dictionary_L.html#2607">log</a> (</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">                        </span><span class="keyword">new <a href="dictionary_L.html#5126">LogEvent</a> </span><span class="default">(</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">                            <a href="dictionary_S.html#10769">ISOChannelAdaptor</a>.</span><span class="keyword">this</span><span class="default">, </span><span class="string">&quot;channel-receiver-&quot;</span><span class="default">+<a href="dictionary_I.html#10793">from</a>, <a href="dictionary_E.html#10773">e</a></span>
+<a name="107"><font size=-1>107     </font></a><span class="default">                        )</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">                    );</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">                    <a href="dictionary_I.html#10783">disconnect</a> ();</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">                }</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">            }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">        }</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    }</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_I.html#10781">checkConnection</a> </span><span class="default">() {</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">            </span><span class="keyword">while </span><span class="default">(!<a href="dictionary_I.html#10792">channel</a>.<a href="dictionary_I.html#5122">isConnected</a> ()) {</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">                </span><span class="keyword">while </span><span class="default">(<a href="dictionary_I.html#10795">sp</a>.<a href="dictionary_S.html#1023">inp</a> (<a href="dictionary_I.html#10794">ready</a>) != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">                    ;</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">                <a href="dictionary_I.html#10792">channel</a>.<a href="dictionary_I.html#5115">connect</a> ();</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_I.html#10792">channel</a>.<a href="dictionary_I.html#5122">isConnected</a> ())</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">                    <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#1405">sleep</a> (</span><span class="number">10000</span><span class="default">);</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">            }</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">            <a href="dictionary_I.html#10795">sp</a>.<a href="dictionary_S.html#1024">out</a> (<a href="dictionary_I.html#10794">ready</a>, </span><span class="keyword">new </span><span class="default">Object ());</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(IOException <a href="dictionary_E.html#10782">e</a>) {</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">            <a href="dictionary_U.html#2551">Logger</a>.<a href="dictionary_L.html#2607">log</a> (</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">                </span><span class="keyword">new <a href="dictionary_L.html#5126">LogEvent</a> </span><span class="default">(</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">                    <a href="dictionary_S.html#10769">ISOChannelAdaptor</a>.</span><span class="keyword">this</span><span class="default">, </span><span class="string">&quot;check-connection&quot;</span><span class="default">, <a href="dictionary_E.html#10782">e</a></span>
+<a name="128"><font size=-1>128     </font></a><span class="default">                )</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">            );</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">            <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#1405">sleep</a> (</span><span class="number">10000</span><span class="default">);</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">        }</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">    }</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_I.html#10783">disconnect</a> </span><span class="default">() {</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">            </span><span class="keyword">while </span><span class="default">(<a href="dictionary_I.html#10795">sp</a>.<a href="dictionary_S.html#1023">inp</a> (<a href="dictionary_I.html#10794">ready</a>) != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">                ;</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">            <a href="dictionary_I.html#10792">channel</a>.<a href="dictionary_I.html#5119">disconnect</a> ();</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(IOException <a href="dictionary_E.html#10784">e</a>) {</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">            <a href="dictionary_U.html#2551">Logger</a>.<a href="dictionary_L.html#2607">log</a> (</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">                </span><span class="keyword">new <a href="dictionary_L.html#5126">LogEvent</a> </span><span class="default">(</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">                    <a href="dictionary_S.html#10769">ISOChannelAdaptor</a>.</span><span class="keyword">this</span><span class="default">, </span><span class="string">&quot;disconnect&quot;</span><span class="default">, <a href="dictionary_E.html#10784">e</a></span>
+<a name="142"><font size=-1>142     </font></a><span class="default">                )</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">            );</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        }</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">    }</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">    </span><span class="keyword">private </span><span class="default">String <a href="dictionary_I.html#10785">get</a> (String <a href="dictionary_P.html#10786">prop</a>) </span><span class="keyword">throws <a href="dictionary_C.html#876">ConfigurationException</a></span>
+<a name="147"><font size=-1>147     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">        String <a href="dictionary_V.html#10787">value</a> = <a href="dictionary_I.html#10791">cfg</a>.<a href="dictionary_C.html#3721">get</a> (<a href="dictionary_P.html#10786">prop</a>);</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_V.html#10787">value</a> == </span><span class="keyword">null</span><span class="default">)</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_C.html#10798">ConfigurationException</a> </span><span class="default">(</span><span class="string">&quot;null property &quot;</span><span class="default">+<a href="dictionary_P.html#10786">prop</a>);</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_V.html#10787">value</a></span><span class="default">;</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">    }</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">}</span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span>
+</pre></body></html>

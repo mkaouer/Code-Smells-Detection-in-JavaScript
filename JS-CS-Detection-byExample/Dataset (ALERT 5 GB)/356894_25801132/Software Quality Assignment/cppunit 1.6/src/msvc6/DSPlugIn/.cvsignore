@@ -1,0 +1,5 @@
+Debug Release
+*.clw *.opt *.Tags.WW
+TestRunnerDSPlugin_p.c
+dlldata.c
+

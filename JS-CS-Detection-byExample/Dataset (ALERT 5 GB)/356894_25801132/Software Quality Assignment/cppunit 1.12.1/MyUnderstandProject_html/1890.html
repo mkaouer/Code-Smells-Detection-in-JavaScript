@@ -1,0 +1,227 @@
+<html><head><title>CompilerOutputter.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/cppunit/CompilerOutputter.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/cppunit/CompilerOutputter.cpp";
+top.document.title  = "CompilerOutputter.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/config/SourcePrefix.h&gt;</span>
+<a name="2"><font size=-1>2     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/Exception.h&gt;</span>
+<a name="3"><font size=-1>3     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/SourceLine.h&gt;</span>
+<a name="4"><font size=-1>4     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestFailure.h&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestResultCollector.h&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/CompilerOutputter.h&gt;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;algorithm&gt;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/tools/StringTools.h&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span>
+<a name="11"><font size=-1>11     </font></a><span class="string"><a href="dictionary_C.html#7">CPPUNIT_NS_BEGIN</a></span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span>
+<a name="14"><font size=-1>14     </font></a><span class="string"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_C.html#1892">CompilerOutputter</a>( <a href="dictionary_T.html#458">TestResultCollector</a> *<a href="dictionary_R.html#1893">result</a>,</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">                                      <a href="dictionary_O.html#1750">OStream</a> &amp;<a href="dictionary_S.html#1894">stream</a>,</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">                                      </span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#41">string</a> &amp;<a href="dictionary_L.html#1895">locationFormat</a> )</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    : <a href="dictionary_M.html#1896">m_result</a>( <a href="dictionary_R.html#1893">result</a> )</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">    , <a href="dictionary_M.html#1897">m_stream</a>( <a href="dictionary_S.html#1894">stream</a> )</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">    , <a href="dictionary_M.html#1898">m_locationFormat</a>( <a href="dictionary_L.html#1895">locationFormat</a> )</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    , <a href="dictionary_M.html#1899">m_wrapColumn</a>( <a href="dictionary_C.html#799">CPPUNIT_WRAP_COLUMN</a> )</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">{</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">}</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"><a href="dictionary_C.html#470">CompilerOutputter</a>::~<a href="dictionary_Non-Alpha.html#474">CompilerOutputter</a>()</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">{</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">}</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="31"><font size=-1>31     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_S.html#1900">setLocationFormat</a>( </span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#41">string</a> &amp;<a href="dictionary_L.html#1901">locationFormat</a> )</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">{</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">  <a href="dictionary_M.html#1898">m_locationFormat</a> = <a href="dictionary_L.html#1901">locationFormat</a>;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">}</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default"><a href="dictionary_C.html#470">CompilerOutputter</a> *</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"><a href="dictionary_C.html#470">CompilerOutputter</a>::<a href="dictionary_D.html#1902">defaultOutputter</a>( <a href="dictionary_T.html#458">TestResultCollector</a> *<a href="dictionary_R.html#1903">result</a>,</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">                                     <a href="dictionary_O.html#1750">OStream</a> &amp;<a href="dictionary_S.html#1904">stream</a> )</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">{</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">  </span><span class="keyword">return new <a href="dictionary_C.html#471">CompilerOutputter</a></span><span class="default">( <a href="dictionary_R.html#1903">result</a>, <a href="dictionary_S.html#1904">stream</a> );</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">}</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="46"><font size=-1>46     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_W.html#473">write</a>()</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">{</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_W.html#479">wasSuccessful</a>() )</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">    <a href="dictionary_P.html#1905">printSuccess</a>();</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">  </span><span class="keyword">else</span>
+<a name="51"><font size=-1>51     </font></a><span class="keyword">    <a href="dictionary_P.html#1906">printFailureReport</a></span><span class="default">();</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">}</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="56"><font size=-1>56     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1905">printSuccess</a>()</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">{</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt; </span><span class="string">&quot;OK (&quot; </span><span class="default">&lt;&lt; <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_R.html#1783">runTests</a>()  &lt;&lt; </span><span class="string">&quot;)\n&quot;</span><span class="default">;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">}</span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="63"><font size=-1>63     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1906">printFailureReport</a>()</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">{</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">  <a href="dictionary_P.html#1907">printFailuresList</a>();</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">  <a href="dictionary_P.html#1908">printStatistics</a>();</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">}</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="71"><font size=-1>71     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1907">printFailuresList</a>()</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">{</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">( </span><span class="keyword">int <a href="dictionary_I.html#1909">index</a> </span><span class="default">=</span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#1909">index</a> &lt; <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_T.html#1910">testFailuresTotal</a>(); ++<a href="dictionary_I.html#1909">index</a>)</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">  {</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">    <a href="dictionary_P.html#1911">printFailureDetail</a>( <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_F.html#1760">failures</a>()[ <a href="dictionary_I.html#1909">index</a> ] );</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">  }</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">}</span>
+<a name="78"><font size=-1>78     </font></a><span class="default"></span>
+<a name="79"><font size=-1>79     </font></a><span class="default"></span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="81"><font size=-1>81     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1911">printFailureDetail</a>( <a href="dictionary_T.html#135">TestFailure</a> *<a href="dictionary_F.html#1912">failure</a> )</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">{</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">  <a href="dictionary_P.html#1913">printFailureLocation</a>( <a href="dictionary_F.html#1912">failure</a>-&gt;<a href="dictionary_S.html#1771">sourceLine</a>() );</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">  <a href="dictionary_P.html#1914">printFailureType</a>( <a href="dictionary_F.html#1912">failure</a> );</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">  <a href="dictionary_P.html#1915">printFailedTestName</a>( <a href="dictionary_F.html#1912">failure</a> );</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">  <a href="dictionary_P.html#1916">printFailureMessage</a>( <a href="dictionary_F.html#1912">failure</a> );</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">}</span>
+<a name="88"><font size=-1>88     </font></a><span class="default"></span>
+<a name="89"><font size=-1>89     </font></a><span class="default"> </span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="91"><font size=-1>91     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1913">printFailureLocation</a>( <a href="dictionary_S.html#48">SourceLine</a> <a href="dictionary_S.html#1917">sourceLine</a> )</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">{</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( !<a href="dictionary_S.html#1917">sourceLine</a>.<a href="dictionary_I.html#1778">isValid</a>() )</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">  {</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">    <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  </span><span class="string">&quot;##Failure Location unknown## : &quot;</span><span class="default">;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">  }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a> <a href="dictionary_L.html#1918">location</a>;</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">( </span><span class="keyword">unsigned int <a href="dictionary_I.html#1919">index</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#1919">index</a> &lt; <a href="dictionary_M.html#1898">m_locationFormat</a>.<a href="dictionary_L.html#1920">length</a>(); ++<a href="dictionary_I.html#1919">index</a> )</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">  {</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    </span><span class="keyword">char <a href="dictionary_C.html#1921">c</a> </span><span class="default">= <a href="dictionary_M.html#1898">m_locationFormat</a>[ <a href="dictionary_I.html#1919">index</a> ];</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_C.html#1921">c</a> == </span><span class="string">'%'  </span><span class="default">&amp;&amp;  ( <a href="dictionary_I.html#1919">index</a>+</span><span class="number">1 </span><span class="default">&lt; <a href="dictionary_M.html#1898">m_locationFormat</a>.<a href="dictionary_L.html#1920">length</a>() ) )</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">    {</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">      </span><span class="keyword">char <a href="dictionary_C.html#1922">command</a> </span><span class="default">= <a href="dictionary_M.html#1898">m_locationFormat</a>[<a href="dictionary_I.html#1919">index</a>+</span><span class="number">1</span><span class="default">];</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">      </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#1923">processLocationFormatCommand</a>( <a href="dictionary_C.html#1922">command</a>, <a href="dictionary_S.html#1917">sourceLine</a> ) )</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">      {</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        ++<a href="dictionary_I.html#1919">index</a>;</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">continue</span><span class="default">;</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">      }</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">    }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt; <a href="dictionary_C.html#1921">c</a>;</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">  }</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">}</span>
+<a name="116"><font size=-1>116     </font></a><span class="default"></span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="119"><font size=-1>119     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1923">processLocationFormatCommand</a>( </span><span class="keyword">char <a href="dictionary_C.html#1924">command</a></span><span class="default">, </span>
+<a name="120"><font size=-1>120     </font></a><span class="default">                                                 </span><span class="keyword">const <a href="dictionary_S.html#48">SourceLine</a> </span><span class="default">&amp;<a href="dictionary_S.html#1925">sourceLine</a> )</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">{</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">  </span><span class="keyword">switch </span><span class="default">( <a href="dictionary_C.html#1924">command</a> )</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">  {</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">  </span><span class="keyword">case </span><span class="string">'p'</span><span class="default">:</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">    <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  <a href="dictionary_S.html#1925">sourceLine</a>.<a href="dictionary_F.html#1780">fileName</a>();</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">    </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">  </span><span class="keyword">case </span><span class="string">'l'</span><span class="default">:</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">    <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  <a href="dictionary_S.html#1925">sourceLine</a>.<a href="dictionary_L.html#1779">lineNumber</a>();</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">    </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">  </span><span class="keyword">case </span><span class="string">'f'</span><span class="default">:</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">    <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  <a href="dictionary_E.html#1926">extractBaseName</a>( <a href="dictionary_S.html#1925">sourceLine</a>.<a href="dictionary_F.html#1780">fileName</a>() );</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">    </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">  }</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">  </span>
+<a name="135"><font size=-1>135     </font></a><span class="default">  </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">}</span>
+<a name="137"><font size=-1>137     </font></a><span class="default"></span>
+<a name="138"><font size=-1>138     </font></a><span class="default"></span>
+<a name="139"><font size=-1>139     </font></a><span class="default"><a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a> </span>
+<a name="140"><font size=-1>140     </font></a><span class="default"><a href="dictionary_C.html#470">CompilerOutputter</a>::<a href="dictionary_E.html#1926">extractBaseName</a>( </span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#41">string</a> &amp;<a href="dictionary_F.html#1927">fileName</a> ) </span><span class="keyword">const</span>
+<a name="141"><font size=-1>141     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_I.html#1928">indexLastDirectorySeparator</a> </span><span class="default">= <a href="dictionary_F.html#1927">fileName</a>.<a href="dictionary_F.html#1929">find_last_of</a>( </span><span class="string">'/' </span><span class="default">);</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">  </span>
+<a name="144"><font size=-1>144     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_I.html#1928">indexLastDirectorySeparator</a> &lt; </span><span class="number">0 </span><span class="default">)</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">    <a href="dictionary_I.html#1928">indexLastDirectorySeparator</a> = <a href="dictionary_F.html#1927">fileName</a>.<a href="dictionary_F.html#1929">find_last_of</a>( </span><span class="string">'\\' </span><span class="default">);</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">  </span>
+<a name="147"><font size=-1>147     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_I.html#1928">indexLastDirectorySeparator</a> &lt; </span><span class="number">0 </span><span class="default">)</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_F.html#1927">fileName</a></span><span class="default">;</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_F.html#1927">fileName</a></span><span class="default">.<a href="dictionary_S.html#1930">substr</a>( <a href="dictionary_I.html#1928">indexLastDirectorySeparator</a> +</span><span class="number">1 </span><span class="default">);</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">}</span>
+<a name="152"><font size=-1>152     </font></a><span class="default"></span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="155"><font size=-1>155     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1914">printFailureType</a>( <a href="dictionary_T.html#135">TestFailure</a> *<a href="dictionary_F.html#1931">failure</a> )</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">{</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  (<a href="dictionary_F.html#1931">failure</a>-&gt;<a href="dictionary_I.html#384">isError</a>() ? </span><span class="string">&quot;Error&quot; </span><span class="default">: </span><span class="string">&quot;Assertion&quot;</span><span class="default">);</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">}</span>
+<a name="159"><font size=-1>159     </font></a><span class="default"></span>
+<a name="160"><font size=-1>160     </font></a><span class="default"></span>
+<a name="161"><font size=-1>161     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="162"><font size=-1>162     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1915">printFailedTestName</a>( <a href="dictionary_T.html#135">TestFailure</a> *<a href="dictionary_F.html#1932">failure</a> )</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">{</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  </span><span class="string">&quot;\nTest name: &quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_F.html#1932">failure</a>-&gt;<a href="dictionary_F.html#1775">failedTestName</a>();</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">}</span>
+<a name="166"><font size=-1>166     </font></a><span class="default"></span>
+<a name="167"><font size=-1>167     </font></a><span class="default"></span>
+<a name="168"><font size=-1>168     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="169"><font size=-1>169     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1916">printFailureMessage</a>( <a href="dictionary_T.html#135">TestFailure</a> *<a href="dictionary_F.html#1933">failure</a> )</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">{</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  </span><span class="string">&quot;\n&quot;</span><span class="default">;</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">  <a href="dictionary_E.html#117">Exception</a> *<a href="dictionary_T.html#1934">thrownException</a> = <a href="dictionary_F.html#1933">failure</a>-&gt;<a href="dictionary_T.html#685">thrownException</a>();</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt; <a href="dictionary_T.html#1934">thrownException</a>-&gt;<a href="dictionary_M.html#1782">message</a>().<a href="dictionary_S.html#491">shortDescription</a>()  &lt;&lt;  </span><span class="string">&quot;\n&quot;</span><span class="default">;</span>
+<a name="174"><font size=-1>174     </font></a><span class="default"></span>
+<a name="175"><font size=-1>175     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a> <a href="dictionary_M.html#1935">message</a> = <a href="dictionary_T.html#1934">thrownException</a>-&gt;<a href="dictionary_M.html#1782">message</a>().<a href="dictionary_D.html#494">details</a>();</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_M.html#1899">m_wrapColumn</a> &gt; </span><span class="number">0 </span><span class="default">)</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">    <a href="dictionary_M.html#1935">message</a> = <a href="dictionary_S.html#793">StringTools</a>::<a href="dictionary_W.html#798">wrap</a>( <a href="dictionary_M.html#1935">message</a>, <a href="dictionary_M.html#1899">m_wrapColumn</a> );</span>
+<a name="178"><font size=-1>178     </font></a><span class="default"></span>
+<a name="179"><font size=-1>179     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  <a href="dictionary_M.html#1935">message</a>  &lt;&lt;  </span><span class="string">&quot;\n&quot;</span><span class="default">;</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">}</span>
+<a name="181"><font size=-1>181     </font></a><span class="default"></span>
+<a name="182"><font size=-1>182     </font></a><span class="default"></span>
+<a name="183"><font size=-1>183     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="184"><font size=-1>184     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_P.html#1908">printStatistics</a>()</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">{</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  </span><span class="string">&quot;Failures !!!\n&quot;</span><span class="default">;</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">  <a href="dictionary_M.html#1897">m_stream</a>  &lt;&lt;  </span><span class="string">&quot;Run: &quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_R.html#1783">runTests</a>()  &lt;&lt; </span><span class="string">&quot;   &quot;</span>
+<a name="188"><font size=-1>188     </font></a><span class="string">            </span><span class="default">&lt;&lt;  </span><span class="string">&quot;Failure total: &quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_T.html#1910">testFailuresTotal</a>()  &lt;&lt; </span><span class="string">&quot;   &quot;</span>
+<a name="189"><font size=-1>189     </font></a><span class="string">            </span><span class="default">&lt;&lt;  </span><span class="string">&quot;Failures: &quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_T.html#1786">testFailures</a>()  &lt;&lt; </span><span class="string">&quot;   &quot;</span>
+<a name="190"><font size=-1>190     </font></a><span class="string">            </span><span class="default">&lt;&lt;  </span><span class="string">&quot;Errors: &quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_M.html#1896">m_result</a>-&gt;<a href="dictionary_T.html#1787">testErrors</a>()</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">            &lt;&lt;  </span><span class="string">&quot;\n&quot;</span><span class="default">;</span>
+<a name="192"><font size=-1>192     </font></a><span class="default">}</span>
+<a name="193"><font size=-1>193     </font></a><span class="default"></span>
+<a name="194"><font size=-1>194     </font></a><span class="default"></span>
+<a name="195"><font size=-1>195     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="196"><font size=-1>196     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_S.html#1936">setWrapColumn</a>( </span><span class="keyword">int <a href="dictionary_W.html#1937">wrapColumn</a> </span><span class="default">)</span>
+<a name="197"><font size=-1>197     </font></a><span class="default">{</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">  <a href="dictionary_M.html#1899">m_wrapColumn</a> = <a href="dictionary_W.html#1937">wrapColumn</a>;</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">}</span>
+<a name="200"><font size=-1>200     </font></a><span class="default"></span>
+<a name="201"><font size=-1>201     </font></a><span class="default"></span>
+<a name="202"><font size=-1>202     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="203"><font size=-1>203     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_S.html#1938">setNoWrap</a>()</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">{</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">  <a href="dictionary_M.html#1899">m_wrapColumn</a> = </span><span class="number">0</span><span class="default">;</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">}</span>
+<a name="207"><font size=-1>207     </font></a><span class="default"></span>
+<a name="208"><font size=-1>208     </font></a><span class="default"></span>
+<a name="209"><font size=-1>209     </font></a><span class="default"></span><span class="keyword">int </span>
+<a name="210"><font size=-1>210     </font></a><span class="keyword"><a href="dictionary_C.html#470">CompilerOutputter</a></span><span class="default">::<a href="dictionary_W.html#1939">wrapColumn</a>() </span><span class="keyword">const</span>
+<a name="211"><font size=-1>211     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_M.html#1899">m_wrapColumn</a></span><span class="default">;</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">}</span>
+<a name="214"><font size=-1>214     </font></a><span class="default"></span>
+<a name="215"><font size=-1>215     </font></a><span class="default"></span>
+<a name="216"><font size=-1>216     </font></a><span class="default"><a href="dictionary_C.html#11">CPPUNIT_NS_END</a></span>
+<a name="217"><font size=-1>217     </font></a><span class="default"></span>
+</pre></body></html>

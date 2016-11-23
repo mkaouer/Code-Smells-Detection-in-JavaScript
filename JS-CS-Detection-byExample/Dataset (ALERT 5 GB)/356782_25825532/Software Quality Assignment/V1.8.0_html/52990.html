@@ -1,0 +1,165 @@
+<html><head><title>DirPollAdaptor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_8_0/jpos/src/main/java/org/jpos/q2/iso/DirPollAdaptor.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_8_0/jpos/src/main/java/org/jpos/q2/iso/DirPollAdaptor.java";
+top.document.title  = "DirPollAdaptor.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2010 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.q2.<a href="dictionary_Q.html#1237">iso</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1241">core</a>.<a href="dictionary_C.html#2283">Configurable</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1241">core</a>.<a href="dictionary_C.html#2284">Configuration</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1242">q2</a>.<a href="dictionary_Q.html#1239">QBeanSupport</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1242">q2</a>.<a href="dictionary_Q.html#3455">QFactory</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#568">util</a>.<a href="dictionary_U.html#23445">DirPoll</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#568">util</a>.<a href="dictionary_U.html#4247">LogSource</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#568">util</a>.<a href="dictionary_U.html#7052">ThreadPool</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * DirPoll Adaptor</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> *</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * @author Alejandro Revilla</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * @jmx:mbean description=&quot;DirPoll adaptor QBean&quot;</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> *                  extends=&quot;org.jpos.q2.QBeanSupportMBean&quot;</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> */</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_I.html#52991">DirPollAdaptor</a> </span>
+<a name="38"><font size=-1>38     </font></a><span class="keyword">    extends <a href="dictionary_Q.html#1239">QBeanSupport</a></span>
+<a name="39"><font size=-1>39     </font></a><span class="keyword">    implements <a href="dictionary_I.html#23780">DirPollAdaptorMBean</a></span>
+<a name="40"><font size=-1>40     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    String <a href="dictionary_D.html#53015">path</a>, <a href="dictionary_D.html#53018">priorities</a>, <a href="dictionary_D.html#53019">processorClass</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_D.html#53017">poolSize</a></span><span class="default">;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    </span><span class="keyword">long <a href="dictionary_D.html#53016">pollInterval</a></span><span class="default">;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    </span><span class="keyword">protected <a href="dictionary_U.html#23445">DirPoll</a> <a href="dictionary_D.html#53014">dirPoll</a></span><span class="default">;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_D.html#52992">DirPollAdaptor</a> </span><span class="default">() {</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">        </span><span class="keyword">super </span><span class="default">();</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">        <a href="dictionary_D.html#53017">poolSize</a> = </span><span class="number">1</span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">        <a href="dictionary_D.html#53016">pollInterval</a> = </span><span class="number">1000</span><span class="default">;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">    }</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_D.html#52998">initService</a> </span><span class="default">() </span><span class="keyword">throws </span><span class="default">Exception {</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">        <a href="dictionary_Q.html#3455">QFactory</a> <a href="dictionary_F.html#53001">factory</a> = <a href="dictionary_Q.html#8237">getServer</a>().<a href="dictionary_Q.html#5779">getFactory</a>();</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>  = </span><span class="keyword">new <a href="dictionary_D.html#23472">DirPoll</a> </span><span class="default">();</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23515">setPath</a> (<a href="dictionary_D.html#52993">getPath</a> ());</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23538">setThreadPool</a> (</span><span class="keyword">new <a href="dictionary_T.html#7072">ThreadPool</a> </span><span class="default">(</span><span class="number">1</span><span class="default">, <a href="dictionary_D.html#53017">poolSize</a>));</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23517">setPollInterval</a> (<a href="dictionary_D.html#53016">pollInterval</a>);</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#53018">priorities</a> != </span><span class="keyword">null</span><span class="default">) </span>
+<a name="58"><font size=-1>58     </font></a><span class="default">            <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23519">setPriorities</a> (<a href="dictionary_D.html#53018">priorities</a>);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_S.html#53020">setLogger</a> (<a href="dictionary_Q.html#2581">getLog</a>().<a href="dictionary_L.html#41877">getLogger</a>(), <a href="dictionary_Q.html#2581">getLog</a>().<a href="dictionary_L.html#41878">getRealm</a> ());</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">        <a href="dictionary_C.html#2284">Configuration</a> <a href="dictionary_C.html#52999">cfg</a> = <a href="dictionary_F.html#53001">factory</a>.<a href="dictionary_Q.html#8238">getConfiguration</a> (<a href="dictionary_Q.html#1249">getPersist</a>());</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23513">setConfiguration</a> (<a href="dictionary_C.html#52999">cfg</a>);</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23481">createDirs</a> ();</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">        Object <a href="dictionary_D.html#53000">dpp</a> = <a href="dictionary_F.html#53001">factory</a>.<a href="dictionary_Q.html#3471">newInstance</a> (<a href="dictionary_D.html#52997">getProcessor</a>());</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#53000">dpp</a> </span><span class="keyword">instanceof <a href="dictionary_U.html#4247">LogSource</a></span><span class="default">) {</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">            ((LogSource) <a href="dictionary_D.html#53000">dpp</a>).<a href="dictionary_L.html#4252">setLogger</a> (</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">                <a href="dictionary_Q.html#2581">getLog</a>().<a href="dictionary_L.html#41877">getLogger</a>(), <a href="dictionary_Q.html#2581">getLog</a>().<a href="dictionary_L.html#41878">getRealm</a> ()</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">            );</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">            <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23524">setProcessor</a> (<a href="dictionary_D.html#53000">dpp</a>);</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        }</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#53000">dpp</a> </span><span class="keyword">instanceof <a href="dictionary_C.html#2283">Configurable</a></span><span class="default">) {</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">            ((Configurable) <a href="dictionary_D.html#53000">dpp</a>).<a href="dictionary_C.html#2286">setConfiguration</a> (<a href="dictionary_C.html#52999">cfg</a>);</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        }</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    }</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_D.html#53012">startService</a> </span><span class="default">() </span><span class="keyword">throws </span><span class="default">Exception {</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">Thread (<a href="dictionary_D.html#53014">dirPoll</a>).start ();</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    }</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_D.html#53013">stopService</a> </span><span class="default">() </span><span class="keyword">throws </span><span class="default">Exception {</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">        <a href="dictionary_D.html#53014">dirPoll</a>.<a href="dictionary_D.html#23482">destroy</a> ();</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">    }</span>
+<a name="81"><font size=-1>81     </font></a><span class="default"></span>
+<a name="82"><font size=-1>82     </font></a><span class="default"></span>
+<a name="83"><font size=-1>83     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;Base path&quot;</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">     */</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">    </span><span class="keyword">public synchronized void <a href="dictionary_D.html#53002">setPath</a> </span><span class="default">(String <a href="dictionary_P.html#53003">path</a>) {</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#53015">path</a> = <a href="dictionary_P.html#53003">path</a>;</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        <a href="dictionary_Q.html#3507">setModified</a> (</span><span class="keyword">true</span><span class="default">);</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">    }</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;thread pool size&quot;</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">     */</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">    </span><span class="keyword">public synchronized void <a href="dictionary_D.html#53006">setPoolSize</a> </span><span class="default">(</span><span class="keyword">int <a href="dictionary_S.html#53007">size</a></span><span class="default">) {</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#53017">poolSize</a> = <a href="dictionary_S.html#53007">size</a>;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        <a href="dictionary_Q.html#3507">setModified</a> (</span><span class="keyword">true</span><span class="default">);</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;thread pool size&quot;</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment">     */</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_D.html#52995">getPoolSize</a> </span><span class="default">() {</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_D.html#53017">poolSize</a></span><span class="default">;</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">    }</span>
+<a name="104"><font size=-1>104     </font></a><span class="default"></span>
+<a name="105"><font size=-1>105     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;Base path&quot;</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">     */</span>
+<a name="108"><font size=-1>108     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">String <a href="dictionary_D.html#52993">getPath</a> () {</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_D.html#53015">path</a> </span><span class="default">== </span><span class="keyword">null </span><span class="default">? </span><span class="string">&quot;.&quot; </span><span class="default">: <a href="dictionary_D.html#53015">path</a>;</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    }</span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+<a name="112"><font size=-1>112     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;poll time in millis&quot;</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">     */</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">    </span><span class="keyword">public synchronized void <a href="dictionary_D.html#53004">setPollInterval</a> </span><span class="default">(</span><span class="keyword">long <a href="dictionary_P.html#53005">pollInterval</a></span><span class="default">) {</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#53016">pollInterval</a> = <a href="dictionary_P.html#53005">pollInterval</a>;</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">        <a href="dictionary_Q.html#3507">setModified</a> (</span><span class="keyword">true</span><span class="default">);</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">    }</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;poll time in millis&quot;</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">     */</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">    </span><span class="keyword">public long <a href="dictionary_D.html#52994">getPollInterval</a> </span><span class="default">() {</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_D.html#53016">pollInterval</a></span><span class="default">;</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">    }</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;priorities&quot;</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">     */</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">    </span><span class="keyword">public synchronized void <a href="dictionary_D.html#53008">setPriorities</a> </span><span class="default">(String <a href="dictionary_P.html#53009">priorities</a>) {</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#53018">priorities</a> = <a href="dictionary_P.html#53009">priorities</a>;</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">        <a href="dictionary_Q.html#3507">setModified</a> (</span><span class="keyword">true</span><span class="default">);</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">    }</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;priorities&quot;</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     */</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">String <a href="dictionary_D.html#52996">getPriorities</a> () {</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_D.html#53018">priorities</a></span><span class="default">;</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">    }</span>
+<a name="138"><font size=-1>138     </font></a><span class="default"></span>
+<a name="139"><font size=-1>139     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="140"><font size=-1>140     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;processor class&quot;</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">     */</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">    </span><span class="keyword">public synchronized void <a href="dictionary_D.html#53010">setProcessor</a> </span><span class="default">(String <a href="dictionary_P.html#53011">processor</a>) {</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#53019">processorClass</a> = <a href="dictionary_P.html#53011">processor</a>;</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        <a href="dictionary_Q.html#3507">setModified</a> (</span><span class="keyword">true</span><span class="default">);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">    }</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">     * @jmx:managed-attribute description=&quot;processor class&quot;</span>
+<a name="148"><font size=-1>148     </font></a><span class="comment">     */</span>
+<a name="149"><font size=-1>149     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">String <a href="dictionary_D.html#52997">getProcessor</a>() {</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_D.html#53019">processorClass</a></span><span class="default">;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">    }</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">}</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+<a name="154"><font size=-1>154     </font></a><span class="default">   </span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span>
+</pre></body></html>

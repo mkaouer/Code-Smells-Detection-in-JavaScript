@@ -1,0 +1,439 @@
+<html><head><title>GenericPackager.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_6_2/modules/jpos/src/org/jpos/iso/packager/GenericPackager.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_6_2/modules/jpos/src/org/jpos/iso/packager/GenericPackager.java";
+top.document.title  = "GenericPackager.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2008 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.iso.<a href="dictionary_I.html#2703">packager</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.InputStream;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.Enumeration;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.Hashtable;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.Stack;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#636">core</a>.<a href="dictionary_C.html#756">Configuration</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#636">core</a>.<a href="dictionary_C.html#630">ConfigurationException</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#636">core</a>.<a href="dictionary_C.html#3039">ReConfigurable</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#9">iso</a>.<a href="dictionary_I.html#1769">IF_TBASE</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#9">iso</a>.<a href="dictionary_I.html#2706">ISOBasePackager</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#9">iso</a>.<a href="dictionary_I.html#644">ISOException</a>;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#9">iso</a>.<a href="dictionary_I.html#1536">ISOFieldPackager</a>;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#9">iso</a>.<a href="dictionary_I.html#2709">ISOMsgFieldPackager</a>;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#9">iso</a>.<a href="dictionary_I.html#3682">ISOPackager</a>;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#638">util</a>.<a href="dictionary_U.html#634">Logger</a>;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.Attributes;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.InputSource;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.SAXException;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.SAXParseException;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.XMLReader;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.helpers.DefaultHandler;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.xml.sax.helpers.XMLReaderFactory;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * &lt;pre&gt;</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * GenericPackager uses an XML config file to describe the layout of an ISOMessage</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> * The general format is as follows</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"> * &amp;lt;isopackager&amp;gt;</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"> *     &amp;lt;isofield </span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> *         id=&quot;[field id]&quot;</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> *         name=&quot;[field name]&quot;</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> *         length=&quot;[max field length]&quot;</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"> *         class=&quot;[org.jpos.iso.IF_*]&quot;</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"> *         pad=&quot;true|false&quot;&amp;gt;  </span>
+<a name="56"><font size=-1>56     </font></a><span class="comment"> *     &amp;lt;/isofield&amp;gt;</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"> *     ...</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment"> * &amp;lt;/isopackager&amp;gt;</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment"> *</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"> * Fields that contain subfields can be handled as follows</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment"> * &amp;lt;isofieldpackager</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"> *     id=&quot;[field id]&quot;</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"> *     name=&quot;[field name]&quot;</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment"> *     length=&quot;[field length]&quot;</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"> *     class=&quot;[org.jpos.iso.IF_*]&quot;</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"> *     packager=&quot;[org.jpos.iso.packager.*]&quot;&amp;gt;</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"> *      </span>
+<a name="68"><font size=-1>68     </font></a><span class="comment"> *     &amp;lt;isofield </span>
+<a name="69"><font size=-1>69     </font></a><span class="comment"> *         id=&quot;[subfield id]&quot;</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"> *         name=&quot;[subfield name]&quot;</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"> *         length=&quot;[max subfield length]&quot;</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"> *         class=&quot;[org.jpos.iso.IF_*]&quot;</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"> *         pad=&quot;true|false&quot;&amp;gt;</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"> *     &amp;lt;/isofield&amp;gt;</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment"> *         ...</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment"> * &amp;lt;/isofieldpackager&amp;gt;</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment"> *</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment"> * The optional attributes maxValidField, bitmapField and emitBitmap</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment"> * are allowed on the isopackager node.</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment"> *</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment"> * &lt;/pre&gt;</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment"> * @author Eoin Flood</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment"> * @see ISOPackager</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment"> * @see ISOBasePackager</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment"> */</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_P.html#2721">GenericPackager</a> </span>
+<a name="88"><font size=-1>88     </font></a><span class="keyword">    extends <a href="dictionary_I.html#2706">ISOBasePackager</a> implements <a href="dictionary_C.html#3039">ReConfigurable</a></span>
+<a name="89"><font size=-1>89     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">   </span><span class="comment">/* Values copied from ISOBasePackager</span>
+<a name="91"><font size=-1>91     </font></a><span class="comment">      These can be changes using attributes on the isopackager node */ </span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">    </span><span class="keyword">private int <a href="dictionary_G.html#80380">maxValidField</a></span><span class="default">=</span><span class="number">128</span><span class="default">;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_G.html#80378">emitBitmap</a></span><span class="default">=</span><span class="keyword">true</span><span class="default">;</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">    </span><span class="keyword">private int <a href="dictionary_G.html#80377">bitmapField</a></span><span class="default">=</span><span class="number">1</span><span class="default">;</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">    </span><span class="keyword">private </span><span class="default">String <a href="dictionary_G.html#80379">firstField</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default"></span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_G.html#2770">GenericPackager</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#644">ISOException</a></span>
+<a name="98"><font size=-1>98     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">();</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">    }</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    </span><span class="comment">/** </span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     * Create a GenericPackager with the field descriptions </span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">     * from an XML File</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">     * @param filename The XML field description file</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">     */</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_G.html#2771">GenericPackager</a></span><span class="default">(String <a href="dictionary_F.html#80357">filename</a>) </span><span class="keyword">throws <a href="dictionary_I.html#644">ISOException</a></span>
+<a name="108"><font size=-1>108     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">();</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">        <a href="dictionary_G.html#2773">readFile</a>(<a href="dictionary_F.html#80357">filename</a>);</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">    }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    </span><span class="comment">/** </span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">     * Create a GenericPackager with the field descriptions </span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">     * from an XML InputStream</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">     * @param input The XML field description InputStream</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">     */</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_G.html#2772">GenericPackager</a></span><span class="default">(InputStream <a href="dictionary_I.html#80358">input</a>) </span><span class="keyword">throws <a href="dictionary_I.html#644">ISOException</a></span>
+<a name="119"><font size=-1>119     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">();</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">        <a href="dictionary_G.html#80365">readFile</a>(<a href="dictionary_I.html#80358">input</a>);</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">    }</span>
+<a name="123"><font size=-1>123     </font></a><span class="default"></span>
+<a name="124"><font size=-1>124     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">     * Packager Configuration.</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">     *</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">     * &lt;ul&gt;</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">     *  &lt;li&gt;packager-config</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">     *  &lt;li&gt;packager-logger</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">     *  &lt;li&gt;packager-realm</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">     * &lt;/ul&gt;</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">     *</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     * @param cfg Configuration</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     */</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_G.html#80368">setConfiguration</a> </span><span class="default">(<a href="dictionary_C.html#756">Configuration</a> <a href="dictionary_C.html#80370">cfg</a>) </span>
+<a name="136"><font size=-1>136     </font></a><span class="default">        </span><span class="keyword">throws <a href="dictionary_C.html#630">ConfigurationException</a></span>
+<a name="137"><font size=-1>137     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">        </span><span class="keyword">try</span>
+<a name="139"><font size=-1>139     </font></a><span class="keyword">        </span><span class="default">{</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">            String <a href="dictionary_L.html#80371">loggerName</a> = <a href="dictionary_C.html#80370">cfg</a>.<a href="dictionary_C.html#779">get</a>(</span><span class="string">&quot;packager-logger&quot;</span><span class="default">);</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#80371">loggerName</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">                <a href="dictionary_I.html#2739">setLogger</a>(<a href="dictionary_U.html#634">Logger</a>.<a href="dictionary_L.html#5504">getLogger</a> (<a href="dictionary_L.html#80371">loggerName</a>), </span>
+<a name="143"><font size=-1>143     </font></a><span class="default">                           <a href="dictionary_C.html#80370">cfg</a>.<a href="dictionary_C.html#779">get</a> (</span><span class="string">&quot;packager-realm&quot;</span><span class="default">));</span>
+<a name="144"><font size=-1>144     </font></a><span class="default"></span>
+<a name="145"><font size=-1>145     </font></a><span class="default">            <a href="dictionary_G.html#2773">readFile</a>(<a href="dictionary_C.html#80370">cfg</a>.<a href="dictionary_C.html#779">get</a>(</span><span class="string">&quot;packager-config&quot;</span><span class="default">));</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">        } </span>
+<a name="147"><font size=-1>147     </font></a><span class="default">        </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#644">ISOException</a> <a href="dictionary_E.html#80369">e</a>) </span>
+<a name="148"><font size=-1>148     </font></a><span class="default">        {</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_C.html#781">ConfigurationException</a></span><span class="default">(<a href="dictionary_E.html#80369">e</a>);</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">        }</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">    }</span>
+<a name="152"><font size=-1>152     </font></a><span class="default"></span>
+<a name="153"><font size=-1>153     </font></a><span class="default">    </span><span class="keyword">protected int <a href="dictionary_G.html#78193">getMaxValidField</a></span><span class="default">()</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">    {</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_G.html#80380">maxValidField</a></span><span class="default">;</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">    }</span>
+<a name="157"><font size=-1>157     </font></a><span class="default"></span>
+<a name="158"><font size=-1>158     </font></a><span class="default">    </span><span class="keyword">protected boolean <a href="dictionary_G.html#54783">emitBitMap</a></span><span class="default">()</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">    {</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_G.html#80378">emitBitmap</a></span><span class="default">;</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">    }</span>
+<a name="162"><font size=-1>162     </font></a><span class="default"></span>
+<a name="163"><font size=-1>163     </font></a><span class="default">    </span><span class="keyword">protected <a href="dictionary_I.html#1536">ISOFieldPackager</a> <a href="dictionary_G.html#54784">getBitMapfieldPackager</a></span><span class="default">()</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">    {</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_I.html#5724">fld</a></span><span class="default">[<a href="dictionary_G.html#80377">bitmapField</a>];</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">    }</span>
+<a name="167"><font size=-1>167     </font></a><span class="default"></span>
+<a name="168"><font size=-1>168     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="169"><font size=-1>169     </font></a><span class="comment">     * Parse the field descriptions from an XML file.</span>
+<a name="170"><font size=-1>170     </font></a><span class="comment">     *</span>
+<a name="171"><font size=-1>171     </font></a><span class="comment">     * &lt;pre&gt;</span>
+<a name="172"><font size=-1>172     </font></a><span class="comment">     * Uses the sax parser specified by the system property 'sax.parser'</span>
+<a name="173"><font size=-1>173     </font></a><span class="comment">     * The default parser is org.apache.crimson.parser.XMLReaderImpl</span>
+<a name="174"><font size=-1>174     </font></a><span class="comment">     * &lt;/pre&gt;</span>
+<a name="175"><font size=-1>175     </font></a><span class="comment">     * @param filename The XML field description file</span>
+<a name="176"><font size=-1>176     </font></a><span class="comment">     */</span>
+<a name="177"><font size=-1>177     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_G.html#2773">readFile</a></span><span class="default">(String <a href="dictionary_F.html#80364">filename</a>) </span><span class="keyword">throws <a href="dictionary_I.html#644">ISOException</a></span>
+<a name="178"><font size=-1>178     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">            <a href="dictionary_G.html#80359">createXMLReader</a>().parse(<a href="dictionary_F.html#80364">filename</a>);  </span>
+<a name="181"><font size=-1>181     </font></a><span class="default">        } </span>
+<a name="182"><font size=-1>182     </font></a><span class="default">        </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#80363">e</a>) {</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_I.html#2781">ISOException</a></span><span class="default">(<a href="dictionary_E.html#80363">e</a>);</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">        }</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">    }</span>
+<a name="186"><font size=-1>186     </font></a><span class="default"></span>
+<a name="187"><font size=-1>187     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="188"><font size=-1>188     </font></a><span class="comment">     * Parse the field descriptions from an XML InputStream.</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment">     *</span>
+<a name="190"><font size=-1>190     </font></a><span class="comment">     * &lt;pre&gt;</span>
+<a name="191"><font size=-1>191     </font></a><span class="comment">     * Uses the sax parser specified by the system property 'sax.parser'</span>
+<a name="192"><font size=-1>192     </font></a><span class="comment">     * The default parser is org.apache.crimson.parser.XMLReaderImpl</span>
+<a name="193"><font size=-1>193     </font></a><span class="comment">     * &lt;/pre&gt;</span>
+<a name="194"><font size=-1>194     </font></a><span class="comment">     * @param input The XML field description InputStream</span>
+<a name="195"><font size=-1>195     </font></a><span class="comment">     */</span>
+<a name="196"><font size=-1>196     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_G.html#80365">readFile</a></span><span class="default">(InputStream <a href="dictionary_I.html#80367">input</a>) </span><span class="keyword">throws <a href="dictionary_I.html#644">ISOException</a></span>
+<a name="197"><font size=-1>197     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">            <a href="dictionary_G.html#80359">createXMLReader</a>().parse(</span><span class="keyword">new </span><span class="default">InputSource(<a href="dictionary_I.html#80367">input</a>));</span>
+<a name="200"><font size=-1>200     </font></a><span class="default">        } </span>
+<a name="201"><font size=-1>201     </font></a><span class="default">        </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#80366">e</a>) {</span>
+<a name="202"><font size=-1>202     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_I.html#2781">ISOException</a></span><span class="default">(<a href="dictionary_E.html#80366">e</a>);</span>
+<a name="203"><font size=-1>203     </font></a><span class="default">        }</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">    }</span>
+<a name="205"><font size=-1>205     </font></a><span class="default"></span>
+<a name="206"><font size=-1>206     </font></a><span class="default">    </span><span class="keyword">private </span><span class="default">XMLReader <a href="dictionary_G.html#80359">createXMLReader</a> () </span><span class="keyword">throws </span><span class="default">SAXException {</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">        XMLReader <a href="dictionary_R.html#80362">reader</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">            <a href="dictionary_R.html#80362">reader</a> = XMLReaderFactory.createXMLReader();</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(SAXException <a href="dictionary_E.html#80360">e</a>) {</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">            <a href="dictionary_R.html#80362">reader</a> = XMLReaderFactory.createXMLReader (</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">                System.getProperty( </span>
+<a name="213"><font size=-1>213     </font></a><span class="default">                    </span><span class="string">&quot;org.xml.sax.driver&quot;</span><span class="default">, </span>
+<a name="214"><font size=-1>214     </font></a><span class="default">                    </span><span class="string">&quot;org.apache.crimson.parser.XMLReaderImpl&quot;</span>
+<a name="215"><font size=-1>215     </font></a><span class="string">                </span><span class="default">)</span>
+<a name="216"><font size=-1>216     </font></a><span class="default">            );</span>
+<a name="217"><font size=-1>217     </font></a><span class="default">        }</span>
+<a name="218"><font size=-1>218     </font></a><span class="default">        <a href="dictionary_R.html#80362">reader</a>.setFeature (</span><span class="string">&quot;http://xml.org/sax/features/validation&quot;</span><span class="default">, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="219"><font size=-1>219     </font></a><span class="default">        <a href="dictionary_G.html#80312">GenericContentHandler</a> <a href="dictionary_H.html#80361">handler</a> = </span><span class="keyword">new <a href="dictionary_G.html#80312">GenericContentHandler</a></span><span class="default">();</span>
+<a name="220"><font size=-1>220     </font></a><span class="default">        <a href="dictionary_R.html#80362">reader</a>.setContentHandler(<a href="dictionary_H.html#80361">handler</a>);</span>
+<a name="221"><font size=-1>221     </font></a><span class="default">        <a href="dictionary_R.html#80362">reader</a>.setErrorHandler(<a href="dictionary_H.html#80361">handler</a>);</span>
+<a name="222"><font size=-1>222     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#80362">reader</a></span><span class="default">;</span>
+<a name="223"><font size=-1>223     </font></a><span class="default">    }</span>
+<a name="224"><font size=-1>224     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_G.html#2782">setGenericPackagerParams</a> </span><span class="default">(Attributes <a href="dictionary_A.html#80372">atts</a>)</span>
+<a name="225"><font size=-1>225     </font></a><span class="default">    {</span>
+<a name="226"><font size=-1>226     </font></a><span class="default">        String <a href="dictionary_M.html#80376">maxField</a>  = <a href="dictionary_A.html#80372">atts</a>.getValue(</span><span class="string">&quot;maxValidField&quot;</span><span class="default">);</span>
+<a name="227"><font size=-1>227     </font></a><span class="default">        String <a href="dictionary_E.html#80374">emitBmap</a>  = <a href="dictionary_A.html#80372">atts</a>.getValue(</span><span class="string">&quot;emitBitmap&quot;</span><span class="default">);</span>
+<a name="228"><font size=-1>228     </font></a><span class="default">        String <a href="dictionary_B.html#80373">bmapfield</a> = <a href="dictionary_A.html#80372">atts</a>.getValue(</span><span class="string">&quot;bitmapField&quot;</span><span class="default">);</span>
+<a name="229"><font size=-1>229     </font></a><span class="default">        <a href="dictionary_G.html#80379">firstField</a> = <a href="dictionary_A.html#80372">atts</a>.getValue(</span><span class="string">&quot;firstField&quot;</span><span class="default">);</span>
+<a name="230"><font size=-1>230     </font></a><span class="default">        String <a href="dictionary_H.html#80375">headerLenStr</a> = <a href="dictionary_A.html#80372">atts</a>.getValue(</span><span class="string">&quot;headerLength&quot;</span><span class="default">);</span>
+<a name="231"><font size=-1>231     </font></a><span class="default"></span>
+<a name="232"><font size=-1>232     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#80376">maxField</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="233"><font size=-1>233     </font></a><span class="default">            <a href="dictionary_G.html#80380">maxValidField</a> = Integer.parseInt(<a href="dictionary_M.html#80376">maxField</a>); </span>
+<a name="234"><font size=-1>234     </font></a><span class="default"></span>
+<a name="235"><font size=-1>235     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#80374">emitBmap</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="236"><font size=-1>236     </font></a><span class="default">            <a href="dictionary_G.html#80378">emitBitmap</a> = Boolean.valueOf(<a href="dictionary_E.html#80374">emitBmap</a>).booleanValue();</span>
+<a name="237"><font size=-1>237     </font></a><span class="default"></span>
+<a name="238"><font size=-1>238     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_B.html#80373">bmapfield</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="239"><font size=-1>239     </font></a><span class="default">            <a href="dictionary_G.html#80377">bitmapField</a> = Integer.parseInt(<a href="dictionary_B.html#80373">bmapfield</a>);</span>
+<a name="240"><font size=-1>240     </font></a><span class="default"></span>
+<a name="241"><font size=-1>241     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_G.html#80379">firstField</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="242"><font size=-1>242     </font></a><span class="default">            Integer.parseInt (<a href="dictionary_G.html#80379">firstField</a>);  </span><span class="comment">// attempt to parse just to</span>
+<a name="243"><font size=-1>243     </font></a><span class="comment">                                            // force an exception if the</span>
+<a name="244"><font size=-1>244     </font></a><span class="comment">                                            // data is not correct.</span>
+<a name="245"><font size=-1>245     </font></a><span class="comment">        </span>
+<a name="246"><font size=-1>246     </font></a><span class="comment">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_H.html#80375">headerLenStr</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="247"><font size=-1>247     </font></a><span class="default">        	<a href="dictionary_I.html#40358">setHeaderLength</a>(Integer.parseInt(<a href="dictionary_H.html#80375">headerLenStr</a>));</span>
+<a name="248"><font size=-1>248     </font></a><span class="default">    }</span>
+<a name="249"><font size=-1>249     </font></a><span class="default"></span>
+<a name="250"><font size=-1>250     </font></a><span class="default"></span>
+<a name="251"><font size=-1>251     </font></a><span class="default">    </span><span class="keyword">public class <a href="dictionary_G.html#80312">GenericContentHandler</a> extends </span><span class="default">DefaultHandler</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">    {</span>
+<a name="253"><font size=-1>253     </font></a><span class="default">        </span><span class="keyword">private </span><span class="default">Stack <a href="dictionary_G.html#80356">fieldStack</a>;</span>
+<a name="254"><font size=-1>254     </font></a><span class="default"></span>
+<a name="255"><font size=-1>255     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_G.html#80336">startDocument</a></span><span class="default">()</span>
+<a name="256"><font size=-1>256     </font></a><span class="default">        {</span>
+<a name="257"><font size=-1>257     </font></a><span class="default">            <a href="dictionary_G.html#80356">fieldStack</a> = </span><span class="keyword">new </span><span class="default">Stack();</span>
+<a name="258"><font size=-1>258     </font></a><span class="default">        }</span>
+<a name="259"><font size=-1>259     </font></a><span class="default"></span>
+<a name="260"><font size=-1>260     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_G.html#80313">endDocument</a></span><span class="default">() </span><span class="keyword">throws </span><span class="default">SAXException</span>
+<a name="261"><font size=-1>261     </font></a><span class="default">        {</span>
+<a name="262"><font size=-1>262     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_G.html#80356">fieldStack</a>.isEmpty())</span>
+<a name="263"><font size=-1>263     </font></a><span class="default">            {</span>
+<a name="264"><font size=-1>264     </font></a><span class="default">                </span><span class="keyword">throw new </span><span class="default">SAXException (</span><span class="string">&quot;Format error in XML Field Description File&quot;</span><span class="default">);</span>
+<a name="265"><font size=-1>265     </font></a><span class="default">            }</span>
+<a name="266"><font size=-1>266     </font></a><span class="default">        }</span>
+<a name="267"><font size=-1>267     </font></a><span class="default"></span>
+<a name="268"><font size=-1>268     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_G.html#80337">startElement</a></span><span class="default">(String <a href="dictionary_N.html#80348">namespaceURI</a>, String <a href="dictionary_L.html#80346">localName</a>, String <a href="dictionary_Q.html#80352">qName</a>, Attributes <a href="dictionary_A.html#80339">atts</a>)</span>
+<a name="269"><font size=-1>269     </font></a><span class="default">                </span><span class="keyword">throws </span><span class="default">SAXException</span>
+<a name="270"><font size=-1>270     </font></a><span class="default">        {</span>
+<a name="271"><font size=-1>271     </font></a><span class="default">            </span><span class="keyword">try</span>
+<a name="272"><font size=-1>272     </font></a><span class="keyword">            </span><span class="default">{</span>
+<a name="273"><font size=-1>273     </font></a><span class="default">                String <a href="dictionary_I.html#80345">id</a>   = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;id&quot;</span><span class="default">);</span>
+<a name="274"><font size=-1>274     </font></a><span class="default">                String <a href="dictionary_T.html#80355">type</a> = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;class&quot;</span><span class="default">);</span>
+<a name="275"><font size=-1>275     </font></a><span class="default">                String <a href="dictionary_N.html#80347">name</a> = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;name&quot;</span><span class="default">);</span>
+<a name="276"><font size=-1>276     </font></a><span class="default">                String <a href="dictionary_S.html#80353">size</a> = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;length&quot;</span><span class="default">);</span>
+<a name="277"><font size=-1>277     </font></a><span class="default">                String <a href="dictionary_P.html#80351">pad</a>  = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;pad&quot;</span><span class="default">);</span>
+<a name="278"><font size=-1>278     </font></a><span class="default">                </span><span class="comment">// Modified for using IF_TBASE</span>
+<a name="279"><font size=-1>279     </font></a><span class="comment">                </span><span class="default">String <a href="dictionary_T.html#80354">token</a> = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;token&quot;</span><span class="default">);</span>
+<a name="280"><font size=-1>280     </font></a><span class="default"></span>
+<a name="281"><font size=-1>281     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#80346">localName</a>.equals(</span><span class="string">&quot;isopackager&quot;</span><span class="default">))</span>
+<a name="282"><font size=-1>282     </font></a><span class="default">                {</span>
+<a name="283"><font size=-1>283     </font></a><span class="default">                    </span><span class="comment">// Stick a new Hashtable on stack to collect the fields</span>
+<a name="284"><font size=-1>284     </font></a><span class="comment">                    <a href="dictionary_G.html#80356">fieldStack</a></span><span class="default">.push(</span><span class="keyword">new </span><span class="default">Hashtable());</span>
+<a name="285"><font size=-1>285     </font></a><span class="default"></span>
+<a name="286"><font size=-1>286     </font></a><span class="default">                    <a href="dictionary_G.html#2782">setGenericPackagerParams</a> (<a href="dictionary_A.html#80339">atts</a>);</span>
+<a name="287"><font size=-1>287     </font></a><span class="default">                }</span>
+<a name="288"><font size=-1>288     </font></a><span class="default"></span>
+<a name="289"><font size=-1>289     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#80346">localName</a>.equals(</span><span class="string">&quot;isofieldpackager&quot;</span><span class="default">))</span>
+<a name="290"><font size=-1>290     </font></a><span class="default">                {</span>
+<a name="291"><font size=-1>291     </font></a><span class="default">                    </span><span class="comment">/*</span>
+<a name="292"><font size=-1>292     </font></a><span class="comment">                    For a isofield packager node push the following fields</span>
+<a name="293"><font size=-1>293     </font></a><span class="comment">                    onto the stack.</span>
+<a name="294"><font size=-1>294     </font></a><span class="comment">                    1) an Integer indicating the field ID</span>
+<a name="295"><font size=-1>295     </font></a><span class="comment">                    2) an instance of the specified ISOFieldPackager class</span>
+<a name="296"><font size=-1>296     </font></a><span class="comment">                    3) an instance of the specified ISOBasePackager (msgPackager) class</span>
+<a name="297"><font size=-1>297     </font></a><span class="comment">                    4) a Hashtable to collect the subfields</span>
+<a name="298"><font size=-1>298     </font></a><span class="comment">                    */</span>
+<a name="299"><font size=-1>299     </font></a><span class="comment">                    </span><span class="default">String <a href="dictionary_P.html#80350">packager</a> = <a href="dictionary_A.html#80339">atts</a>.getValue(</span><span class="string">&quot;packager&quot;</span><span class="default">);</span>
+<a name="300"><font size=-1>300     </font></a><span class="default"></span>
+<a name="301"><font size=-1>301     </font></a><span class="default">                    <a href="dictionary_G.html#80356">fieldStack</a>.push(</span><span class="keyword">new </span><span class="default">Integer(<a href="dictionary_I.html#80345">id</a>));</span>
+<a name="302"><font size=-1>302     </font></a><span class="default"></span>
+<a name="303"><font size=-1>303     </font></a><span class="default">                    <a href="dictionary_I.html#1536">ISOFieldPackager</a> <a href="dictionary_F.html#80341">f</a>;</span>
+<a name="304"><font size=-1>304     </font></a><span class="default">                    <a href="dictionary_F.html#80341">f</a> = (ISOFieldPackager) Class.forName(<a href="dictionary_T.html#80355">type</a>).newInstance();   </span>
+<a name="305"><font size=-1>305     </font></a><span class="default">                    <a href="dictionary_F.html#80341">f</a>.<a href="dictionary_I.html#2762">setDescription</a>(<a href="dictionary_N.html#80347">name</a>);</span>
+<a name="306"><font size=-1>306     </font></a><span class="default">                    <a href="dictionary_F.html#80341">f</a>.<a href="dictionary_I.html#22">setLength</a>(Integer.parseInt(<a href="dictionary_S.html#80353">size</a>));</span>
+<a name="307"><font size=-1>307     </font></a><span class="default">                    <a href="dictionary_F.html#80341">f</a>.<a href="dictionary_I.html#2764">setPad</a>(</span><span class="keyword">new </span><span class="default">Boolean(<a href="dictionary_P.html#80351">pad</a>).booleanValue());</span>
+<a name="308"><font size=-1>308     </font></a><span class="default">                    </span><span class="comment">// Modified for using IF_TBASE</span>
+<a name="309"><font size=-1>309     </font></a><span class="comment">                    </span><span class="keyword">if</span><span class="default">( <a href="dictionary_F.html#80341">f</a> </span><span class="keyword">instanceof <a href="dictionary_I.html#1769">IF_TBASE</a></span><span class="default">){</span>
+<a name="310"><font size=-1>310     </font></a><span class="default">                      ((IF_TBASE)<a href="dictionary_F.html#80341">f</a>).<a href="dictionary_I.html#1779">setToken</a>( <a href="dictionary_T.html#80354">token</a> );</span>
+<a name="311"><font size=-1>311     </font></a><span class="default">                    }</span>
+<a name="312"><font size=-1>312     </font></a><span class="default">                    <a href="dictionary_G.html#80356">fieldStack</a>.push(<a href="dictionary_F.html#80341">f</a>);</span>
+<a name="313"><font size=-1>313     </font></a><span class="default"></span>
+<a name="314"><font size=-1>314     </font></a><span class="default">                    <a href="dictionary_I.html#2706">ISOBasePackager</a> <a href="dictionary_P.html#80349">p</a>;</span>
+<a name="315"><font size=-1>315     </font></a><span class="default">                    <a href="dictionary_P.html#80349">p</a> = (ISOBasePackager) Class.forName(<a href="dictionary_P.html#80350">packager</a>).newInstance();</span>
+<a name="316"><font size=-1>316     </font></a><span class="default">                    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_P.html#80349">p</a> </span><span class="keyword">instanceof <a href="dictionary_P.html#2721">GenericPackager</a></span><span class="default">)</span>
+<a name="317"><font size=-1>317     </font></a><span class="default">                    {</span>
+<a name="318"><font size=-1>318     </font></a><span class="default">                        <a href="dictionary_P.html#2721">GenericPackager</a> <a href="dictionary_G.html#80343">gp</a> = (GenericPackager) <a href="dictionary_P.html#80349">p</a>;</span>
+<a name="319"><font size=-1>319     </font></a><span class="default">                        <a href="dictionary_G.html#80343">gp</a>.<a href="dictionary_G.html#2782">setGenericPackagerParams</a> (<a href="dictionary_A.html#80339">atts</a>);</span>
+<a name="320"><font size=-1>320     </font></a><span class="default">                    }</span>
+<a name="321"><font size=-1>321     </font></a><span class="default">                    <a href="dictionary_G.html#80356">fieldStack</a>.push(<a href="dictionary_P.html#80349">p</a>);</span>
+<a name="322"><font size=-1>322     </font></a><span class="default"></span>
+<a name="323"><font size=-1>323     </font></a><span class="default">                    <a href="dictionary_G.html#80356">fieldStack</a>.push(</span><span class="keyword">new </span><span class="default">Hashtable());</span>
+<a name="324"><font size=-1>324     </font></a><span class="default">                }</span>
+<a name="325"><font size=-1>325     </font></a><span class="default"></span>
+<a name="326"><font size=-1>326     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#80346">localName</a>.equals(</span><span class="string">&quot;isofield&quot;</span><span class="default">))</span>
+<a name="327"><font size=-1>327     </font></a><span class="default">                {</span>
+<a name="328"><font size=-1>328     </font></a><span class="default">                    Class <a href="dictionary_C.html#80340">c</a> = Class.forName(<a href="dictionary_T.html#80355">type</a>);</span>
+<a name="329"><font size=-1>329     </font></a><span class="default">                    <a href="dictionary_I.html#1536">ISOFieldPackager</a> <a href="dictionary_F.html#80342">f</a>;</span>
+<a name="330"><font size=-1>330     </font></a><span class="default">                    <a href="dictionary_F.html#80342">f</a> = (ISOFieldPackager) <a href="dictionary_C.html#80340">c</a>.newInstance();     </span>
+<a name="331"><font size=-1>331     </font></a><span class="default">                    <a href="dictionary_F.html#80342">f</a>.<a href="dictionary_I.html#2762">setDescription</a>(<a href="dictionary_N.html#80347">name</a>);</span>
+<a name="332"><font size=-1>332     </font></a><span class="default">                    <a href="dictionary_F.html#80342">f</a>.<a href="dictionary_I.html#22">setLength</a>(Integer.parseInt(<a href="dictionary_S.html#80353">size</a>));</span>
+<a name="333"><font size=-1>333     </font></a><span class="default">                    <a href="dictionary_F.html#80342">f</a>.<a href="dictionary_I.html#2764">setPad</a>(</span><span class="keyword">new </span><span class="default">Boolean(<a href="dictionary_P.html#80351">pad</a>).booleanValue());</span>
+<a name="334"><font size=-1>334     </font></a><span class="default">                    </span><span class="comment">// Modified for using IF_TBASE</span>
+<a name="335"><font size=-1>335     </font></a><span class="comment">                    </span><span class="keyword">if</span><span class="default">( <a href="dictionary_F.html#80342">f</a> </span><span class="keyword">instanceof <a href="dictionary_I.html#1769">IF_TBASE</a></span><span class="default">){</span>
+<a name="336"><font size=-1>336     </font></a><span class="default">                      ((IF_TBASE)<a href="dictionary_F.html#80342">f</a>).<a href="dictionary_I.html#1779">setToken</a>( <a href="dictionary_T.html#80354">token</a> );</span>
+<a name="337"><font size=-1>337     </font></a><span class="default">                    }</span>
+<a name="338"><font size=-1>338     </font></a><span class="default">                    </span><span class="comment">// Insert this new isofield into the Hashtable</span>
+<a name="339"><font size=-1>339     </font></a><span class="comment">                    // on the top of the stack using the fieldID as the key</span>
+<a name="340"><font size=-1>340     </font></a><span class="comment">                    </span><span class="default">Hashtable <a href="dictionary_H.html#80344">ht</a> = (Hashtable) <a href="dictionary_G.html#80356">fieldStack</a>.peek();</span>
+<a name="341"><font size=-1>341     </font></a><span class="default">                    <a href="dictionary_H.html#80344">ht</a>.put(</span><span class="keyword">new </span><span class="default">Integer(<a href="dictionary_I.html#80345">id</a>), <a href="dictionary_F.html#80342">f</a>);</span>
+<a name="342"><font size=-1>342     </font></a><span class="default">                }</span>
+<a name="343"><font size=-1>343     </font></a><span class="default">            }</span>
+<a name="344"><font size=-1>344     </font></a><span class="default">            </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#80338">ex</a>)</span>
+<a name="345"><font size=-1>345     </font></a><span class="default">            {</span>
+<a name="346"><font size=-1>346     </font></a><span class="default">                </span><span class="keyword">throw new </span><span class="default">SAXException(<a href="dictionary_E.html#80338">ex</a>);</span>
+<a name="347"><font size=-1>347     </font></a><span class="default">            }</span>
+<a name="348"><font size=-1>348     </font></a><span class="default">        }</span>
+<a name="349"><font size=-1>349     </font></a><span class="default"></span>
+<a name="350"><font size=-1>350     </font></a><span class="default">        </span><span class="comment">/**</span>
+<a name="351"><font size=-1>351     </font></a><span class="comment">         * Convert the ISOFieldPackagers in the Hashtable</span>
+<a name="352"><font size=-1>352     </font></a><span class="comment">         * to an array of ISOFieldPackagers</span>
+<a name="353"><font size=-1>353     </font></a><span class="comment">         */</span>
+<a name="354"><font size=-1>354     </font></a><span class="comment">        </span><span class="keyword">private <a href="dictionary_I.html#1536">ISOFieldPackager</a></span><span class="default">[] <a href="dictionary_G.html#80328">makeFieldArray</a>(Hashtable <a href="dictionary_T.html#80335">tab</a>)</span>
+<a name="355"><font size=-1>355     </font></a><span class="default">        {</span>
+<a name="356"><font size=-1>356     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_M.html#80334">maxField</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="357"><font size=-1>357     </font></a><span class="default"></span>
+<a name="358"><font size=-1>358     </font></a><span class="default">            </span><span class="comment">// First find the largest field number in the Hashtable</span>
+<a name="359"><font size=-1>359     </font></a><span class="comment">            </span><span class="keyword">for </span><span class="default">(Enumeration <a href="dictionary_E.html#80329">e</a>=<a href="dictionary_T.html#80335">tab</a>.keys(); <a href="dictionary_E.html#80329">e</a>.hasMoreElements(); )</span>
+<a name="360"><font size=-1>360     </font></a><span class="default">            {</span>
+<a name="361"><font size=-1>361     </font></a><span class="default">                </span><span class="keyword">int <a href="dictionary_N.html#80330">n</a> </span><span class="default">= ((Integer)<a href="dictionary_E.html#80329">e</a>.nextElement()).intValue();</span>
+<a name="362"><font size=-1>362     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_N.html#80330">n</a> &gt; <a href="dictionary_M.html#80334">maxField</a>) <a href="dictionary_M.html#80334">maxField</a> = <a href="dictionary_N.html#80330">n</a>;</span>
+<a name="363"><font size=-1>363     </font></a><span class="default">            }</span>
+<a name="364"><font size=-1>364     </font></a><span class="default"></span>
+<a name="365"><font size=-1>365     </font></a><span class="default">            </span><span class="comment">// Create the array</span>
+<a name="366"><font size=-1>366     </font></a><span class="comment">            <a href="dictionary_I.html#1536">ISOFieldPackager</a> <a href="dictionary_F.html#80333">fld</a></span><span class="default">[] = </span><span class="keyword">new <a href="dictionary_I.html#1536">ISOFieldPackager</a></span><span class="default">[<a href="dictionary_M.html#80334">maxField</a>+</span><span class="number">1</span><span class="default">];</span>
+<a name="367"><font size=-1>367     </font></a><span class="default"></span>
+<a name="368"><font size=-1>368     </font></a><span class="default">            </span><span class="comment">// Populate it</span>
+<a name="369"><font size=-1>369     </font></a><span class="comment">            </span><span class="keyword">for </span><span class="default">(Enumeration <a href="dictionary_E.html#80331">e</a>=<a href="dictionary_T.html#80335">tab</a>.keys(); <a href="dictionary_E.html#80331">e</a>.hasMoreElements(); )</span>
+<a name="370"><font size=-1>370     </font></a><span class="default">            {</span>
+<a name="371"><font size=-1>371     </font></a><span class="default">                Integer <a href="dictionary_K.html#80332">key</a> = (Integer) <a href="dictionary_E.html#80331">e</a>.nextElement();</span>
+<a name="372"><font size=-1>372     </font></a><span class="default">                <a href="dictionary_F.html#80333">fld</a>[<a href="dictionary_K.html#80332">key</a>.intValue()] = (ISOFieldPackager)<a href="dictionary_T.html#80335">tab</a>.get(<a href="dictionary_K.html#80332">key</a>);</span>
+<a name="373"><font size=-1>373     </font></a><span class="default">            }</span>
+<a name="374"><font size=-1>374     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_F.html#80333">fld</a></span><span class="default">;</span>
+<a name="375"><font size=-1>375     </font></a><span class="default">        }</span>
+<a name="376"><font size=-1>376     </font></a><span class="default"></span>
+<a name="377"><font size=-1>377     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_G.html#80314">endElement</a></span><span class="default">(String <a href="dictionary_N.html#80320">namespaceURI</a>, String <a href="dictionary_L.html#80317">localName</a>, String <a href="dictionary_Q.html#80321">qName</a>)</span>
+<a name="378"><font size=-1>378     </font></a><span class="default">        {</span>
+<a name="379"><font size=-1>379     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#80317">localName</a>.equals(</span><span class="string">&quot;isopackager&quot;</span><span class="default">))</span>
+<a name="380"><font size=-1>380     </font></a><span class="default">            {</span>
+<a name="381"><font size=-1>381     </font></a><span class="default">                Hashtable <a href="dictionary_T.html#80322">tab</a>  = (Hashtable)<a href="dictionary_G.html#80356">fieldStack</a>.pop();</span>
+<a name="382"><font size=-1>382     </font></a><span class="default"></span>
+<a name="383"><font size=-1>383     </font></a><span class="default">                <a href="dictionary_I.html#2729">setFieldPackager</a>(<a href="dictionary_G.html#80328">makeFieldArray</a>(<a href="dictionary_T.html#80322">tab</a>));</span>
+<a name="384"><font size=-1>384     </font></a><span class="default">            }</span>
+<a name="385"><font size=-1>385     </font></a><span class="default"></span>
+<a name="386"><font size=-1>386     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#80317">localName</a>.equals(</span><span class="string">&quot;isofieldpackager&quot;</span><span class="default">))</span>
+<a name="387"><font size=-1>387     </font></a><span class="default">            {</span>
+<a name="388"><font size=-1>388     </font></a><span class="default">                </span><span class="comment">// Pop the 4 entries off the stack in the correct order</span>
+<a name="389"><font size=-1>389     </font></a><span class="comment">                </span><span class="default">Hashtable <a href="dictionary_T.html#80323">tab</a> = (Hashtable)<a href="dictionary_G.html#80356">fieldStack</a>.pop();</span>
+<a name="390"><font size=-1>390     </font></a><span class="default"></span>
+<a name="391"><font size=-1>391     </font></a><span class="default">                <a href="dictionary_I.html#2706">ISOBasePackager</a> <a href="dictionary_M.html#80319">msgPackager</a> = (ISOBasePackager) <a href="dictionary_G.html#80356">fieldStack</a>.pop();</span>
+<a name="392"><font size=-1>392     </font></a><span class="default">                <a href="dictionary_M.html#80319">msgPackager</a>.<a href="dictionary_I.html#2729">setFieldPackager</a> (<a href="dictionary_G.html#80328">makeFieldArray</a>(<a href="dictionary_T.html#80323">tab</a>));</span>
+<a name="393"><font size=-1>393     </font></a><span class="default">                <a href="dictionary_M.html#80319">msgPackager</a>.<a href="dictionary_I.html#2739">setLogger</a> (<a href="dictionary_I.html#2738">getLogger</a>(), </span><span class="string">&quot;Generic Packager&quot;</span><span class="default">);</span>
+<a name="394"><font size=-1>394     </font></a><span class="default"></span>
+<a name="395"><font size=-1>395     </font></a><span class="default">                <a href="dictionary_I.html#1536">ISOFieldPackager</a> <a href="dictionary_F.html#80315">fieldPackager</a> = (ISOFieldPackager) <a href="dictionary_G.html#80356">fieldStack</a>.pop();</span>
+<a name="396"><font size=-1>396     </font></a><span class="default"></span>
+<a name="397"><font size=-1>397     </font></a><span class="default">                Integer <a href="dictionary_F.html#80316">fno</a> = (Integer) <a href="dictionary_G.html#80356">fieldStack</a>.pop();</span>
+<a name="398"><font size=-1>398     </font></a><span class="default"></span>
+<a name="399"><font size=-1>399     </font></a><span class="default">                </span><span class="comment">// Create the ISOMsgField packager with the retrieved msg and field Packagers</span>
+<a name="400"><font size=-1>400     </font></a><span class="comment">                <a href="dictionary_I.html#2709">ISOMsgFieldPackager</a> <a href="dictionary_M.html#80318">mfp</a> </span><span class="default">= </span>
+<a name="401"><font size=-1>401     </font></a><span class="default">                    </span><span class="keyword">new <a href="dictionary_I.html#2740">ISOMsgFieldPackager</a></span><span class="default">(<a href="dictionary_F.html#80315">fieldPackager</a>, <a href="dictionary_M.html#80319">msgPackager</a>);</span>
+<a name="402"><font size=-1>402     </font></a><span class="default"></span>
+<a name="403"><font size=-1>403     </font></a><span class="default">                </span><span class="comment">// Add the newly created ISOMsgField packager to the</span>
+<a name="404"><font size=-1>404     </font></a><span class="comment">                // lower level field stack</span>
+<a name="405"><font size=-1>405     </font></a><span class="comment"></span>
+<a name="406"><font size=-1>406     </font></a><span class="comment">                <a href="dictionary_T.html#80323">tab</a></span><span class="default">=(Hashtable)<a href="dictionary_G.html#80356">fieldStack</a>.peek();</span>
+<a name="407"><font size=-1>407     </font></a><span class="default">                <a href="dictionary_T.html#80323">tab</a>.put(<a href="dictionary_F.html#80316">fno</a>, <a href="dictionary_M.html#80318">mfp</a>);</span>
+<a name="408"><font size=-1>408     </font></a><span class="default">            }</span>
+<a name="409"><font size=-1>409     </font></a><span class="default">        }</span>
+<a name="410"><font size=-1>410     </font></a><span class="default"></span>
+<a name="411"><font size=-1>411     </font></a><span class="default">        </span><span class="comment">// ErrorHandler Methods</span>
+<a name="412"><font size=-1>412     </font></a><span class="comment">        </span><span class="keyword">public void <a href="dictionary_G.html#80324">error</a> </span><span class="default">(SAXParseException <a href="dictionary_E.html#80325">ex</a>) </span><span class="keyword">throws </span><span class="default">SAXException</span>
+<a name="413"><font size=-1>413     </font></a><span class="default">        {</span>
+<a name="414"><font size=-1>414     </font></a><span class="default">            </span><span class="keyword">throw <a href="dictionary_E.html#80325">ex</a></span><span class="default">;</span>
+<a name="415"><font size=-1>415     </font></a><span class="default">        }</span>
+<a name="416"><font size=-1>416     </font></a><span class="default"></span>
+<a name="417"><font size=-1>417     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_G.html#80326">fatalError</a> </span><span class="default">(SAXParseException <a href="dictionary_E.html#80327">ex</a>) </span><span class="keyword">throws </span><span class="default">SAXException</span>
+<a name="418"><font size=-1>418     </font></a><span class="default">        {</span>
+<a name="419"><font size=-1>419     </font></a><span class="default">            </span><span class="keyword">throw <a href="dictionary_E.html#80327">ex</a></span><span class="default">;</span>
+<a name="420"><font size=-1>420     </font></a><span class="default">        }</span>
+<a name="421"><font size=-1>421     </font></a><span class="default">    }</span>
+<a name="422"><font size=-1>422     </font></a><span class="default">    </span><span class="keyword">protected int <a href="dictionary_G.html#54785">getFirstField</a></span><span class="default">() {</span>
+<a name="423"><font size=-1>423     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_G.html#80379">firstField</a> != </span><span class="keyword">null</span><span class="default">)</span>
+<a name="424"><font size=-1>424     </font></a><span class="default">            </span><span class="keyword">return </span><span class="default">Integer.parseInt (<a href="dictionary_G.html#80379">firstField</a>);</span>
+<a name="425"><font size=-1>425     </font></a><span class="default">        </span><span class="keyword">else return super</span><span class="default">.<a href="dictionary_I.html#6471">getFirstField</a>();</span>
+<a name="426"><font size=-1>426     </font></a><span class="default">    }</span>
+<a name="427"><font size=-1>427     </font></a><span class="default">}</span>
+<a name="428"><font size=-1>428     </font></a><span class="default"></span>
+<a name="429"><font size=-1>429     </font></a><span class="default"></span>
+</pre></body></html>

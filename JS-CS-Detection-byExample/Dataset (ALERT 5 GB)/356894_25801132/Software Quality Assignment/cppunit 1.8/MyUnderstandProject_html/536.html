@@ -1,0 +1,82 @@
+<html><head><title>ActiveTest.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.8/src/msvc6/testrunner/ActiveTest.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.8/src/msvc6/testrunner/ActiveTest.h";
+top.document.title  = "ActiveTest.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_C.html#3591">CPPUNIT_ACTIVETEST_H</a></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#define <a href="dictionary_C.html#3591">CPPUNIT_ACTIVETEST_H</a></span>
+<a name="5"><font size=-1>5     </font></a><span class="preproc"></span>
+<a name="6"><font size=-1>6     </font></a><span class="preproc">#include </span><span class="string">&lt;afxmt.h&gt;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#ifndef <a href="dictionary_C.html#3592">CPPUNIT_TESTDECORATOR_H</a></span>
+<a name="9"><font size=-1>9     </font></a><span class="preproc">#include </span><span class="string">&lt;cppunit/extensions/TestDecorator.h&gt;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#endif</span>
+<a name="11"><font size=-1>11     </font></a><span class="preproc"></span>
+<a name="12"><font size=-1>12     </font></a><span class="preproc"></span>
+<a name="13"><font size=-1>13     </font></a><span class="preproc"></span><span class="comment">/* A Microsoft-specific active test</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * An active test manages its own</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * thread of execution.  This one </span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> * is very simple and only sufficient</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"> * for the limited use we put it through</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> * in the TestRunner.  It spawns a thread</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> * on run (TestResult *) and signals</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> * completion of the test.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> *</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * We assume that only one thread </span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> * will be active at once for each</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> * instance.</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> *</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> */</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"></span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_A.html#537">ActiveTest</a> </span><span class="default">: </span><span class="keyword">public </span><span class="default">CppUnit::<a href="dictionary_T.html#539">TestDecorator</a></span>
+<a name="30"><font size=-1>30     </font></a><span class="default">{</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">                    <a href="dictionary_A.html#1379">ActiveTest</a> (CppUnit::<a href="dictionary_T.html#105">Test</a> *test);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">                    ~<a href="dictionary_Non-Alpha.html#1420">ActiveTest</a> ();</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default">    </span><span class="keyword">void            <a href="dictionary_R.html#538">run</a> </span><span class="default">(CppUnit::<a href="dictionary_T.html#100">TestResult</a> *result);</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span><span class="keyword">protected</span><span class="default">:</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    <a href="dictionary_H.html#3412">HANDLE</a>          <a href="dictionary_M.html#555">m_threadHandle</a>;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    <a href="dictionary_C.html#3593">CEvent</a>          <a href="dictionary_M.html#546">m_runCompleted</a>;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">    CppUnit::<a href="dictionary_T.html#100">TestResult</a>      *<a href="dictionary_M.html#3594">m_currentTestResult</a>;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    </span><span class="keyword">void            <a href="dictionary_R.html#3595">run</a> </span><span class="default">();</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    </span><span class="keyword">void            <a href="dictionary_S.html#545">setTestResult</a> </span><span class="default">(CppUnit::<a href="dictionary_T.html#100">TestResult</a> *result);</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    </span><span class="keyword">static <a href="dictionary_U.html#558">UINT</a>     <a href="dictionary_T.html#549">threadFunction</a> </span><span class="default">(<a href="dictionary_L.html#560">LPVOID</a> thisInstance);</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">};</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span><span class="comment">// Construct the active test</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"></span><span class="keyword">inline <a href="dictionary_A.html#537">ActiveTest</a></span><span class="default">::<a href="dictionary_A.html#1379">ActiveTest</a> (CppUnit::<a href="dictionary_T.html#105">Test</a> *<a href="dictionary_T.html#3596">test</a>)</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">: <a href="dictionary_T.html#2019">TestDecorator</a> (<a href="dictionary_T.html#3596">test</a>), <a href="dictionary_M.html#546">m_runCompleted</a> () </span>
+<a name="53"><font size=-1>53     </font></a><span class="default">{ <a href="dictionary_M.html#3594">m_currentTestResult</a> = <a href="dictionary_N.html#568">NULL</a>; <a href="dictionary_M.html#555">m_threadHandle</a> = <a href="dictionary_I.html#3597">INVALID_HANDLE_VALUE</a>; }</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span><span class="comment">// Pend until the test has completed</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"></span><span class="keyword">inline <a href="dictionary_A.html#537">ActiveTest</a></span><span class="default">::~<a href="dictionary_Non-Alpha.html#1420">ActiveTest</a> ()</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">{ <a href="dictionary_C.html#3598">CSingleLock</a> (&amp;<a href="dictionary_M.html#546">m_runCompleted</a>, <a href="dictionary_T.html#259">TRUE</a>); }</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span><span class="comment">// Set the test result that we are to run</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"></span><span class="keyword">inline void <a href="dictionary_A.html#537">ActiveTest</a></span><span class="default">::<a href="dictionary_S.html#545">setTestResult</a> (CppUnit::<a href="dictionary_T.html#100">TestResult</a> *<a href="dictionary_R.html#3599">result</a>)</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">{ <a href="dictionary_M.html#3594">m_currentTestResult</a> = <a href="dictionary_R.html#3599">result</a>; }</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span><span class="comment">// Run our test result</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"></span><span class="keyword">inline void <a href="dictionary_A.html#537">ActiveTest</a></span><span class="default">::<a href="dictionary_R.html#3595">run</a> ()</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">{ <a href="dictionary_T.html#3600">TestDecorator</a>::<a href="dictionary_R.html#3601">run</a> (<a href="dictionary_M.html#3594">m_currentTestResult</a>); }</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="70"><font size=-1>70     </font></a><span class="preproc"></span>
+<a name="71"><font size=-1>71     </font></a><span class="preproc"></span>
+<a name="72"><font size=-1>72     </font></a><span class="preproc"></span>
+</pre></body></html>

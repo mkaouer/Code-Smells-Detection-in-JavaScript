@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="live_folder_name">Notes</string>
+
+    <string name="title_create">New note</string>
+    <string name="title_edit">Edit: %1$s</string>
+
+    <string name="menu_add">New note</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_revert">Revert changes</string>
+    <string name="menu_copy">Copy note</string>
+    <string name="menu_cancel">Cancel</string>
+
+    <string name="resolve_edit">Edit note</string>
+
+    <string name="error_title">Error</string>
+    <string name="error_message">Error loading note</string>
+    <string name="menu_share">Share</string>
+    
+    <string name="search_hint">Search</string>
+    <string name="settings_light_theme">Use light theme</string>
+    <string name="menu_preferences">Settings</string>
+    <string name="settings_cat_theme">Theme</string>
+    <string name="settings_cat_sorting">Sorting</string>
+    <string name="settings_sorting_type">Sort on</string>
+    <string name="settings_sorting_order">Order</string>
+    
+    <string name="settings_summary_sort_type_alphabetic">Title</string>
+    <string name="settings_summary_sort_type_modified">Modification</string>
+    <string name="settings_summary_sort_order_asc">Ascending</string>
+    <string name="settings_summary_sort_order_desc">Descending</string>
+</resources>

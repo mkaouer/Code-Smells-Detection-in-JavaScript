@@ -1,0 +1,39 @@
+<html><head><title>PersonalNoteFilter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\main\src\cgeo\geocaching\filter\PersonalNoteFilter.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\main\\src\\cgeo\\geocaching\\filter\\PersonalNoteFilter.java";
+top.document.title  = "PersonalNoteFilter.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#1293">filter</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.<a href="dictionary_G.html#398">CgeoApplication</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.<a href="dictionary_G.html#547">Geocache</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.R;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.apache.commons.<a href="dictionary_C.html#531">lang3</a>.<a href="dictionary_L.html#526">StringUtils</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#81">util</a>.<a href="dictionary_U.html#924">Collections</a>;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#81">util</a>.<a href="dictionary_U.html#20">List</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_F.html#10837">PersonalNoteFilter</a> extends <a href="dictionary_F.html#3635">AbstractFilter</a> implements <a href="dictionary_F.html#4555">IFilterFactory</a> </span><span class="default">{</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    </span><span class="keyword">protected <a href="dictionary_P.html#10838">PersonalNoteFilter</a></span><span class="default">() {</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_G.html#398">CgeoApplication</a>.<a href="dictionary_C.html#399">getInstance</a>().<a href="dictionary_G.html#313">getString</a>(R.string.caches_filter_personal_note));</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">    }</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="19"><font size=-1>19     </font></a><span class="default">    </span><span class="keyword">public boolean <a href="dictionary_P.html#10839">accepts</a></span><span class="default">(<a href="dictionary_G.html#547">Geocache</a> <a href="dictionary_C.html#10840">cache</a>) {</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_L.html#526">StringUtils</a></span><span class="default">.<a href="dictionary_I.html#428">isNotBlank</a>(<a href="dictionary_C.html#10840">cache</a>.<a href="dictionary_G.html#3771">getPersonalNote</a>());</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    }</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_U.html#20">List</a></span><span class="default">&lt;<a href="dictionary_F.html#10837">PersonalNoteFilter</a>&gt; <a href="dictionary_P.html#10841">getFilters</a>() {</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_U.html#924">Collections</a></span><span class="default">.<a href="dictionary_S.html#969">singletonList</a>(</span><span class="keyword">this</span><span class="default">);</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    }</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">}</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+</pre></body></html>

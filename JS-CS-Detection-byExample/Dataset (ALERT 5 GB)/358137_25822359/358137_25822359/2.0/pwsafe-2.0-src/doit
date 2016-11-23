@@ -1,0 +1,20 @@
+#!/bin/bash
+ROOT=/cvsroot/passwordsafe/pwsafe/pwsafe
+FROM=${ROOT}/corelib/
+TO=${ROOT}/
+CP=/bin/cp
+
+$CP ${FROM}BlowFish.cpp,v $TO
+$CP ${FROM}BlowFish.h,v $TO
+$CP ${FROM}ItemData.cpp,v $TO
+$CP ${FROM}ItemData.h,v $TO
+$CP ${FROM}MyString.cpp,v $TO
+$CP ${FROM}MyString.h,v $TO
+$CP ${FROM}PWCharPool.cpp,v $TO
+$CP ${FROM}PWCharPool.h,v $TO
+$CP ${FROM}Util.cpp,v $TO
+$CP ${FROM}Util.h,v $TO
+$CP ${FROM}sha1.cpp,v $TO
+$CP ${FROM}sha1.h,v $TO
+
+exit 0

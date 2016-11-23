@@ -1,0 +1,98 @@
+<html><head><title>Simple Invocation Tree [B]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td><a href="simpleinvtree_Non-Alpha.html">Non-Alpha</a></td><td><a href="simpleinvtree_A.html">A</a></td><td><a href="simpleinvtree_B.html">B</a></td><td><a href="simpleinvtree_C.html">C</a></td><td><a href="simpleinvtree_D.html">D</a></td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td><a href="simpleinvtree_H.html">H</a></td><td><a href="simpleinvtree_I.html">I</a></td><td>J</td><td>K</td><td><a href="simpleinvtree_L.html">L</a></td><td><a href="simpleinvtree_M.html">M</a></td><td><a href="simpleinvtree_N.html">N</a></td><td><a href="simpleinvtree_O.html">O</a></td><td><a href="simpleinvtree_P.html">P</a></td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td>V</td><td><a href="simpleinvtree_W.html">W</a></td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_B.html#698">BaseTestCase::addTestsToSuite</a>
+| <a href="dictionary_T.html#589">TestSuiteBuilderContext::TestSuiteBuilderContext</a>
+| <a href="dictionary_T.html#262">TestSuiteBuilderContextBase::addTest</a>
+| <a href="dictionary_T.html#592">TestCaller::TestCaller</a>
+| <a href="dictionary_T.html#267">TestSuiteBuilderContextBase::getTestNameFor</a>
+| <a href="dictionary_B.html#706">BaseTestCase::testUsingCheckIt</a>
+| <a href="dictionary_T.html#593">TestSuiteBuilderContext::makeFixture</a>
+
+<a href="dictionary_B.html#702">BaseTestCase::BaseTestCase</a>
+| <a href="dictionary_T.html#96">TestCase::TestCase</a>
+
+<a href="dictionary_B.html#696">BaseTestCase::getTestNamer__</a>
+| <a href="dictionary_T.html#586">TestNamer::TestNamer</a>
+| <a href="dictionary_T.html#588">TestNamer::~TestNamer</a>
+
+<a href="dictionary_B.html#700">BaseTestCase::suite</a>
+| <a href="dictionary_B.html#696">BaseTestCase::getTestNamer__</a>
+| <a href="dictionary_B.html#700">BaseTestCase::suite</a>
+| <a href="dictionary_T.html#349">TestSuite::TestSuite</a>
+| <a href="dictionary_T.html#266">TestNamer::getFixtureName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#251">TestSuiteBuilderContextBase::TestSuiteBuilderContextBase</a>
+| <a href="dictionary_T.html#598">TestSuite::get</a>
+| <a href="dictionary_B.html#698">BaseTestCase::addTestsToSuite</a>
+| <a href="dictionary_T.html#600">TestSuite::release</a>
+| <a href="dictionary_T.html#261">TestSuiteBuilderContextBase::~TestSuiteBuilderContextBase</a>
+
+<a href="dictionary_B.html#706">BaseTestCase::testUsingCheckIt</a>
+| <a href="dictionary_B.html#707">BaseTestCase::checkIt</a><i>  (Virtual)</i>
+| <a href="dictionary_S.html#2876">SubclassedTestCase::checkIt</a><i>  (Virtual)</i>
+
+<a href="dictionary_B.html#703">BaseTestCase::~BaseTestCase</a>
+| <a href="dictionary_T.html#100">TestCase::~TestCase</a>
+
+<a href="dictionary_B.html#2502">BoardGameTest::addTestsToSuite</a>
+| <a href="dictionary_T.html#589">TestSuiteBuilderContext::TestSuiteBuilderContext</a>
+| <a href="dictionary_T.html#262">TestSuiteBuilderContextBase::addTest</a>
+| <a href="dictionary_T.html#592">TestCaller::TestCaller</a>
+| <a href="dictionary_T.html#267">TestSuiteBuilderContextBase::getTestNameFor</a>
+| <a href="dictionary_B.html#7749">BoardGameTest::testReset</a>
+| <a href="dictionary_T.html#593">TestSuiteBuilderContext::makeFixture</a>
+| <a href="dictionary_B.html#7750">BoardGameTest::testResetShouldFail</a>
+
+<a href="dictionary_B.html#7743">BoardGameTest::getTestNamer__</a>
+| <a href="dictionary_T.html#586">TestNamer::TestNamer</a>
+| <a href="dictionary_T.html#588">TestNamer::~TestNamer</a>
+
+<a href="dictionary_B.html#7747">BoardGameTest::setUp</a>
+
+<a href="dictionary_B.html#6124">BoardGameTest::suite</a>
+| <a href="dictionary_B.html#7743">BoardGameTest::getTestNamer__</a>
+| <a href="dictionary_B.html#6124">BoardGameTest::suite</a>
+| <a href="dictionary_T.html#349">TestSuite::TestSuite</a>
+| <a href="dictionary_T.html#266">TestNamer::getFixtureName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#251">TestSuiteBuilderContextBase::TestSuiteBuilderContextBase</a>
+| <a href="dictionary_T.html#598">TestSuite::get</a>
+| <a href="dictionary_B.html#2502">BoardGameTest::addTestsToSuite</a>
+| <a href="dictionary_T.html#600">TestSuite::release</a>
+| <a href="dictionary_T.html#261">TestSuiteBuilderContextBase::~TestSuiteBuilderContextBase</a>
+
+<a href="dictionary_B.html#7749">BoardGameTest::testReset</a>
+| <a href="dictionary_A.html#60">Asserter::failIf</a>
+| <a href="dictionary_R.html#7756">reset</a>
+| <a href="dictionary_M.html#62">Message::Message</a>
+| <a href="dictionary_S.html#49">SourceLine::SourceLine</a>
+| <a href="dictionary_S.html#53">SourceLine::~SourceLine</a>
+
+<a href="dictionary_B.html#7750">BoardGameTest::testResetShouldFail</a>
+| <a href="dictionary_S.html#381">stdCOut</a>
+| <a href="dictionary_A.html#60">Asserter::failIf</a>
+| <a href="dictionary_R.html#7756">reset</a>
+| <a href="dictionary_M.html#62">Message::Message</a>
+| <a href="dictionary_S.html#49">SourceLine::SourceLine</a>
+| <a href="dictionary_S.html#53">SourceLine::~SourceLine</a>
+
+<a href="dictionary_B.html#3890">BriefTestProgressListener::addFailure</a>
+| <a href="dictionary_S.html#381">stdCOut</a>
+| <a href="dictionary_T.html#384">TestFailure::isError</a><i>  (Virtual)</i>
+
+<a href="dictionary_B.html#3892">BriefTestProgressListener::endTest</a>
+| <a href="dictionary_S.html#381">stdCOut</a>
+
+<a href="dictionary_B.html#3888">BriefTestProgressListener::startTest</a>
+| <a href="dictionary_S.html#381">stdCOut</a>
+| <a href="dictionary_T.html#83">Test::getName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#102">TestCaseDecorator::getName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#2098">TestDecorator::getName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#2735">TestComposite::getName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#97">TestCase::getName</a><i>  (Virtual)</i>
+| <a href="dictionary_T.html#5950">TestRunner::WrappingSuite::getName</a><i>  (Virtual)</i>
+| <a href="dictionary_F.html#388">flush</a>
+
+<a href="dictionary_B.html#481">BriefTestProgressListener::~BriefTestProgressListener</a>
+| <a href="dictionary_T.html#115">TestListener::~TestListener</a>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td><a href="simpleinvtree_Non-Alpha.html">Non-Alpha</a></td><td><a href="simpleinvtree_A.html">A</a></td><td><a href="simpleinvtree_B.html">B</a></td><td><a href="simpleinvtree_C.html">C</a></td><td><a href="simpleinvtree_D.html">D</a></td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td><a href="simpleinvtree_H.html">H</a></td><td><a href="simpleinvtree_I.html">I</a></td><td>J</td><td>K</td><td><a href="simpleinvtree_L.html">L</a></td><td><a href="simpleinvtree_M.html">M</a></td><td><a href="simpleinvtree_N.html">N</a></td><td><a href="simpleinvtree_O.html">O</a></td><td><a href="simpleinvtree_P.html">P</a></td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td>V</td><td><a href="simpleinvtree_W.html">W</a></td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table></body></html>

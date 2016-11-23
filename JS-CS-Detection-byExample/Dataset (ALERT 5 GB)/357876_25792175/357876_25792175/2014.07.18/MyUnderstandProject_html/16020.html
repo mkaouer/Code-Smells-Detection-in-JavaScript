@@ -1,0 +1,35 @@
+<html><head><title>DirectionImage.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\main\src\cgeo\geocaching\ui\DirectionImage.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\main\\src\\cgeo\\geocaching\\ui\\DirectionImage.java";
+top.document.title  = "DirectionImage.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#397">ui</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#656">list</a>.<a href="dictionary_L.html#654">StoredList</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#851">network</a>.<a href="dictionary_N.html#844">HtmlImage</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.apache.commons.<a href="dictionary_C.html#531">lang3</a>.<a href="dictionary_L.html#526">StringUtils</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.graphics.<a href="dictionary_G.html#333">drawable</a>.<a href="dictionary_D.html#4910">BitmapDrawable</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_U.html#1298">DirectionImage</a> </span><span class="default">{</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span>
+<a name="12"><font size=-1>12     </font></a><span class="default">    </span><span class="keyword">static private <a href="dictionary_N.html#844">HtmlImage</a> <a href="dictionary_D.html#16022">htmlImage</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_H.html#855">HtmlImage</a></span><span class="default">(<a href="dictionary_N.html#844">HtmlImage</a>.<a href="dictionary_H.html#10075">SHARED</a>, </span><span class="keyword">false</span><span class="default">, <a href="dictionary_L.html#654">StoredList</a>.<a href="dictionary_S.html#665">STANDARD_LIST_ID</a>, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment">     * Retrieve the direction image corresponding to the direction code.</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment">     *</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">     * @param directionCode one of the eight cardinal points</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">     * @return a drawable with the arrow pointing into the right direction</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment">     */</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">    </span><span class="keyword">public static <a href="dictionary_D.html#4910">BitmapDrawable</a> <a href="dictionary_D.html#1329">getDrawable</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_D.html#16021">directionCode</a></span><span class="default">) {</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_L.html#526">StringUtils</a></span><span class="default">.<a href="dictionary_I.html#428">isNotBlank</a>(<a href="dictionary_D.html#16021">directionCode</a>) ? <a href="dictionary_D.html#16022">htmlImage</a>.<a href="dictionary_H.html#4159">getDrawable</a>(</span><span class="string">&quot;http://www.geocaching.com/images/icons/compass/&quot; </span><span class="default">+ <a href="dictionary_D.html#16021">directionCode</a> + </span><span class="string">&quot;.gif&quot;</span><span class="default">) : </span><span class="keyword">null</span><span class="default">;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">    }</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">}</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,191 @@
+<html><head><title>SizeCBar.html</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/msvc6/testrunner/DynamicWindow/SizeCBar.html</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/msvc6/testrunner/DynamicWindow/SizeCBar.html";
+top.document.title  = "SizeCBar.html";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="comment">&lt;!-- This must be included --&gt;</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span><span class="default">&lt;html&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default">&lt;head&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default">	&lt;title&gt;</span><span class="string">The Code Project - CSizingControlBar - a resizable control bar</span><span class="default">&lt;/title&gt;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default">	&lt;meta http-equiv=</span><span class="string">&quot;Content-Type&quot; </span><span class="default">content=</span><span class="string">&quot;text/html; charset=iso-8859-1&quot;</span><span class="default">&gt;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default">	&lt;meta HTTP-EQUIV=</span><span class="string">&quot;Reply-to&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;mailto:webmaster@codeproject.com&quot;</span><span class="default">&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Description&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;Free source code and tutorials for Windows developers.&quot;</span><span class="default">&gt;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default">	&lt;meta Name=</span><span class="string">&quot;keywords&quot; </span><span class="default">Content=</span><span class="string">&quot;Free source code, Visual C++, MFC, Windows, GUI, MFC, docking&quot;</span><span class="default">&gt;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Robots&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;ALL&quot;</span><span class="default">&gt;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Copyright&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;Copyright � 1999-2000 CodeProject.com, All Rights Reserved.&quot;</span><span class="default">&gt;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Rating&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;Safe For Kids&quot;</span><span class="default">&gt;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Revisit-after&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;1 days&quot;</span><span class="default">&gt;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Classification&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;Software&quot;</span><span class="default">&gt;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Distribution&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;Global&quot;</span><span class="default">&gt;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Author&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;Chris Maunder&quot;</span><span class="default">&gt;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">	&lt;meta NAME=</span><span class="string">&quot;Language&quot; </span><span class="default">CONTENT=</span><span class="string">&quot;english&quot;</span><span class="default">&gt;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">	&lt;link rel=</span><span class="string">&quot;stylesheet&quot; </span><span class="default">href=</span><span class="string">&quot;/styles/global.css&quot;</span><span class="default">&gt;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">&lt;/head&gt;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default">&lt;body text=black bgColor=white aLink=red link=blue vLink=navy&gt;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="comment">&lt;!-- Header--&gt;</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"></span><span class="default">&lt;table width=</span><span class="string">&quot;100%&quot; </span><span class="default">border=</span><span class="number">0 </span><span class="default">cellspacing=</span><span class="number">1 </span><span class="default">cellpadding=</span><span class="number">3</span><span class="default">&gt;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">&lt;tr&gt;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default">&lt;td width=</span><span class="string">&quot;80%&quot; </span><span class="default">bgcolor=</span><span class="number">#FBEDBB</span><span class="default">&gt;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">&lt;h1 align=center&gt;</span><span class="string">CSizingControlBar - a resizable control bar</span><span class="default">&lt;/h1&gt;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">&lt;h4 align=center&gt;&lt;a href=</span><span class="string">&quot;mailto:cristi@datamekanix.com&quot;</span><span class="default">&gt;</span><span class="string">Cristi Posea</span><span class="default">&lt;/a&gt;&lt;/h4&gt;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">&lt;p align=center&gt;&lt;i&gt;&lt;font size=</span><span class="number">-1 </span><span class="default">style=&quot;<a href="dictionary_F.html#7859">font-size</a>:</span><span class="number">9pt</span><span class="default">&quot;&gt;</span><span class="string">DevStudio-like docking window&amp;nbsp;</span><span class="default">&lt;/font&gt;&lt;/i&gt;&lt;/p&gt;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">&lt;p align=center&gt;&lt;font style=&quot;<a href="dictionary_F.html#7859">font-size</a>:</span><span class="number">8pt</span><span class="default">&quot;&gt;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">&lt;a href=</span><span class="string">&quot;/script/Newsletter/subscribe.asp&quot;</span><span class="default">&gt;</span><span class="string">Newsletter</span><span class="default">&lt;/a&gt; </span><span class="string">| </span>
+<a name="36"><font size=-1>36     </font></a><span class="string"></span><span class="default">&lt;a href=</span><span class="string">&quot;/General/vsforum.asp&quot;</span><span class="default">&gt;</span><span class="string">Forums</span><span class="default">&lt;/a&gt; </span><span class="string">| </span>
+<a name="37"><font size=-1>37     </font></a><span class="string"></span><span class="default">&lt;a href=</span><span class="string">&quot;/Search.asp&quot;</span><span class="default">&gt;</span><span class="string">Search</span><span class="default">&lt;/a&gt; </span><span class="string">| </span>
+<a name="38"><font size=-1>38     </font></a><span class="string"></span><span class="default">&lt;a href=</span><span class="string">&quot;/latest.asp&quot;</span><span class="default">&gt;</span><span class="string">Latest Updates</span><span class="default">&lt;/a&gt; </span><span class="string">| </span>
+<a name="39"><font size=-1>39     </font></a><span class="string"></span><span class="default">&lt;a href=</span><span class="string">&quot;/submit.html&quot;</span><span class="default">&gt;</span><span class="string">Submit an Article</span><span class="default">&lt;/a&gt; </span><span class="string">|</span>
+<a name="40"><font size=-1>40     </font></a><span class="string"></span><span class="default">&lt;a href=</span><span class="string">&quot;/contest.asp&quot;</span><span class="default">&gt;&lt;b style=&quot;<a href="dictionary_C.html#7857">color</a>:red&quot;&gt;</span><span class="string">Win a Prize!</span><span class="default">&lt;/b&gt;&lt;/a&gt;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">&lt;/font&gt;&lt;/p&gt;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">&lt;/td&gt;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default">&lt;td width=</span><span class="string">&quot;20%&quot; </span><span class="default">valign=</span><span class="string">&quot;top&quot; </span><span class="default">align=</span><span class="string">&quot;left&quot; </span><span class="default">bgcolor=</span><span class="number">#FBEDBB</span><span class="default">&gt;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">&lt;p&gt;&lt;font size=</span><span class="number">1</span><span class="default">&gt;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span><span class="string">Level: &amp;nbsp;&amp;nbsp; Advanced</span><span class="default">&lt;br&gt;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span><span class="string">Posted: &amp;nbsp; 17 Nov 1999</span><span class="default">&lt;br&gt;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span><span class="string">Updated: 12 Jan 2000</span><span class="default">&lt;br&gt;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">&lt;dl&gt;</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">&lt;dt&gt;</span><span class="string">Platform:</span><span class="default">&lt;/dt&gt;&lt;dd&gt;</span><span class="string">VC++ 5.0-6.0, NT 4.0, Win95/98/2k</span><span class="default">&lt;/dd&gt;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">&lt;dt&gt;</span><span class="string">Keywords:</span><span class="default">&lt;/dt&gt;&lt;dd&gt;</span><span class="string">GUI, MFC, docking</span><span class="default">&lt;/dd&gt;</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">&lt;/dl&gt;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">&lt;/font&gt;</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">&lt;/td&gt;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default">&lt;/tr&gt;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"> </span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span><span class="comment">&lt;!-- Quick nav links --&gt;</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment"></span><span class="default">&lt;tr&gt;&lt;td nowrap&gt;&lt;font style=&quot;<a href="dictionary_F.html#7859">font-size</a>:</span><span class="number">65%</span><span class="default">;&quot;&gt;&lt;a href=</span><span class="string">'http://www.codeproject.com'</span><span class="default">&gt;</span><span class="string">Home</span><span class="default">&lt;/a&gt;</span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span><span class="string">&amp;gt;&amp;gt; </span><span class="default">&lt;a href=</span><span class="string">'http://www.codeproject.com/docking/'</span><span class="default">&gt;</span><span class="string">Toolbars &amp;amp; Docking Windows</span><span class="default">&lt;/a&gt;</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span><span class="string">&amp;gt;&amp;gt; </span><span class="default">&lt;a href=</span><span class="string">'http://www.codeproject.com/docking/index.asp#General'</span><span class="default">&gt;</span><span class="string">General</span><span class="default">&lt;/a&gt;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default">&lt;/font&gt;&lt;/td&gt;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">&lt;td align=right nowrap&gt;&lt;font style=&quot;<a href="dictionary_F.html#7859">font-size</a>:</span><span class="number">65%</span><span class="default">;&quot;&gt;</span><span class="string">Problems? Suggestions?</span>
+<a name="67"><font size=-1>67     </font></a><span class="string"></span><span class="default">&lt;a href=</span><span class="string">&quot;mailto:webmaster@codeproject.com&quot;</span><span class="default">&gt;</span><span class="string">Email us</span><span class="default">&lt;/a&gt;&lt;/font&gt;&lt;/td&gt;&lt;/tr&gt;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">&lt;/table&gt;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">&lt;hr noshade size=</span><span class="number">1</span><span class="default">&gt;</span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span><span class="comment">&lt;!-- Article Starts --&gt;</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"></span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"></span><span class="default">&lt;h3&gt;</span><span class="string">Features of CSizingControlBar 2.31</span><span class="default">&lt;/h3&gt;</span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span>
+<a name="76"><font size=-1>76     </font></a><span class="default">&lt;ul&gt;</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">&lt;li&gt;</span><span class="string">Resizable control bar, that can be resized both when docked and when floating.</span>
+<a name="78"><font size=-1>78     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">Multiple sizing control bars can be docked on the same row/column.</span>
+<a name="79"><font size=-1>79     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">Full dynamic resizing, both when docked and floating, including diagonal resizing when floating.</span>
+<a name="80"><font size=-1>80     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">State persistence support (SaveState/LoadState).</span>
+<a name="81"><font size=-1>81     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">Gripper with &quot;hide bar&quot; flat button.</span>
+<a name="82"><font size=-1>82     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">Memory DC flickerless NC painting.</span>
+<a name="83"><font size=-1>83     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">Sample extension class with focus autosensing text caption. On Win98/Win2k, the caption is painted with gradient.</span>
+<a name="84"><font size=-1>84     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">No custom resources were used (bitmaps, cursors, strings, etc.), so the integration is easier and you have full control over the resources you eventually use in derived classes.</span>
+<a name="85"><font size=-1>85     </font></a><span class="string"></span><span class="default">&lt;li&gt;</span><span class="string">Easy to use: just derive your own control bar(s) from CSizingControlBar then add your child controls.</span>
+<a name="86"><font size=-1>86     </font></a><span class="string"></span><span class="default">&lt;/ul&gt;</span>
+<a name="87"><font size=-1>87     </font></a><span class="default"></span>
+<a name="88"><font size=-1>88     </font></a><span class="default">&lt;h3&gt;</span><span class="string">Instructions</span><span class="default">&lt;/h3&gt;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">&lt;p&gt;</span><span class="string">Derive a class from CSizingControlBar (you have an example in mybar.h and mybar.cpp).</span><span class="default">&lt;br&gt;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span><span class="string">Add a member variable to CMainFrame (in mainfrm.h).</span>
+<a name="91"><font size=-1>91     </font></a><span class="string"></span>
+<a name="92"><font size=-1>92     </font></a><span class="string"></span><span class="default">&lt;pre&gt;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default"></span><span class="string">CMyBar m_wndMyBar;</span>
+<a name="94"><font size=-1>94     </font></a><span class="string"></span><span class="default">&lt;/pre&gt;</span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default">&lt;p&gt;</span><span class="string">Create the bar in CMainFrame::OnCreate(). Then set bar styles, enable it to dock... like any control bar. </span>
+<a name="97"><font size=-1>97     </font></a><span class="string"></span><span class="default">&lt;p&gt;</span><span class="string">Some experience in working with control bars (like toolbars) is required.</span>
+<a name="98"><font size=-1>98     </font></a><span class="string"></span>
+<a name="99"><font size=-1>99     </font></a><span class="string"></span><span class="default">&lt;pre&gt;</span>
+<a name="100"><font size=-1>100     </font></a><span class="default"></span><span class="string">if (!m_wndMyBar.Create(_T(&quot;My Bar&quot;), this, CSize(200, 100),</span>
+<a name="101"><font size=-1>101     </font></a><span class="string">    TRUE /*bHasGripper*/, AFX_IDW_CONTROLBAR_FIRST + 32))</span>
+<a name="102"><font size=-1>102     </font></a><span class="string">{</span>
+<a name="103"><font size=-1>103     </font></a><span class="string">    TRACE0(&quot;Failed to create mybar\n&quot;);</span>
+<a name="104"><font size=-1>104     </font></a><span class="string">    return -1;</span>
+<a name="105"><font size=-1>105     </font></a><span class="string">    // fail to create</span>
+<a name="106"><font size=-1>106     </font></a><span class="string">}</span>
+<a name="107"><font size=-1>107     </font></a><span class="string">m_wndMyBar.SetBarStyle(m_wndMyBar.GetBarStyle() |</span>
+<a name="108"><font size=-1>108     </font></a><span class="string">    CBRS_TOOLTIPS | CBRS_FLYBY | CBRS_SIZE_DYNAMIC);</span>
+<a name="109"><font size=-1>109     </font></a><span class="string">m_wndMyBar.EnableDocking(CBRS_ALIGN_ANY);</span>
+<a name="110"><font size=-1>110     </font></a><span class="string">EnableDocking(CBRS_ALIGN_ANY);</span>
+<a name="111"><font size=-1>111     </font></a><span class="string"></span>
+<a name="112"><font size=-1>112     </font></a><span class="string">m_pFloatingFrameClass = RUNTIME_CLASS(CSCBMiniDockFrameWnd);</span>
+<a name="113"><font size=-1>113     </font></a><span class="string"></span>
+<a name="114"><font size=-1>114     </font></a><span class="string">DockControlBar(&amp;m_wndMyBar, AFX_IDW_DOCKBAR_LEFT);</span>
+<a name="115"><font size=-1>115     </font></a><span class="string"></span><span class="default">&lt;/pre&gt;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default"></span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span><span class="string">Note: Starting with version 2.3, the line</span>
+<a name="118"><font size=-1>118     </font></a><span class="string"></span>
+<a name="119"><font size=-1>119     </font></a><span class="string"></span><span class="default">&lt;pre&gt;</span>
+<a name="120"><font size=-1>120     </font></a><span class="default"></span><span class="string">m_pFloatingFrameClass = RUNTIME_CLASS(CSCBMiniDockFrameWnd);</span>
+<a name="121"><font size=-1>121     </font></a><span class="string"></span><span class="default">&lt;/pre&gt;</span>
+<a name="122"><font size=-1>122     </font></a><span class="default"></span>
+<a name="123"><font size=-1>123     </font></a><span class="default"></span><span class="string">must be added to CMainFrame::OnCreate(), </span><span class="default">&lt;i&gt;</span><span class="string">after</span><span class="default">&lt;/i&gt; </span><span class="string">the EnableDocking() call. This is required!</span>
+<a name="124"><font size=-1>124     </font></a><span class="string"></span>
+<a name="125"><font size=-1>125     </font></a><span class="string"></span><span class="default">&lt;h3&gt;</span><span class="string">Plugging in the CSizingControlBarCF class</span><span class="default">&lt;/h3&gt;</span>
+<a name="126"><font size=-1>126     </font></a><span class="default"></span>
+<a name="127"><font size=-1>127     </font></a><span class="default">&lt;p&gt;</span><span class="string">1. Add scbarcf.h and scbarcf.cpp to your project.</span>
+<a name="128"><font size=-1>128     </font></a><span class="string"></span><span class="default">&lt;p&gt;</span><span class="string">2. In your derived class header file change the &quot;#include &quot;sizecbar.h&quot; to &quot;#include &quot;scbarcf.h&quot;.</span>
+<a name="129"><font size=-1>129     </font></a><span class="string"></span><span class="default">&lt;p&gt;</span><span class="string">3. Replace the base class for your custom bar from CSizingControlBar to CSizingControlBarCF. If you used the baseCMyBar trick, you only have to change a line. Otherwise, replace all occurences of CSizingControlBar with CSizingControlBarCF in your derived class.</span>
+<a name="130"><font size=-1>130     </font></a><span class="string"></span><span class="default">&lt;p&gt;</span><span class="string">4. Rebuild and run. Easy, huh?</span>
+<a name="131"><font size=-1>131     </font></a><span class="string"></span>
+<a name="132"><font size=-1>132     </font></a><span class="string"></span><span class="default">&lt;h3&gt;</span><span class="string">Remarks</span><span class="default">&lt;/h3&gt;</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">&lt;p&gt;</span><span class="string">This class is intended to be used as a base class.</span>
+<a name="134"><font size=-1>134     </font></a><span class="string">Do not simply add your code to the sizecbar.* files - instead create a new class derived from CSizingControlBar and put there what you need.</span>
+<a name="135"><font size=-1>135     </font></a><span class="string"></span>
+<a name="136"><font size=-1>136     </font></a><span class="string"></span><span class="default">&lt;p&gt;&lt;b&gt;</span><span class="string">Window IDs</span><span class="default">&lt;/b&gt;</span><span class="string">: You can see above that the control bar is created with the ID AFX_IDW_CONTROLBAR_FIRST + 32.</span>
+<a name="137"><font size=-1>137     </font></a><span class="string">The usage of IDs in the range of AFX_IDW_CONTROLBAR_FIRST + 32 .. AFX_IDW_CONTROLBAR_LAST is required only if the bar will not be enabled for docking (that's is - it will stay fixed right under the frame's menu).</span>
+<a name="138"><font size=-1>138     </font></a><span class="string">But in this situation you won't be able to fully use the features of this class, so if you will enable it to dock (a reasonable guess :) then you can use any valid window ID.</span><span class="default">&lt;br&gt;</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span><span class="string">Another place where the IDs are important is the saving/loading of the bar's state. </span>
+<a name="140"><font size=-1>140     </font></a><span class="string">You must use different IDs for each control bar that is enabled to dock, and this includes the other bars too.</span>
+<a name="141"><font size=-1>141     </font></a><span class="string">For example, if you have two toolbars, you can create the first one with the default ID (which is AFX_IDW_TOOLBAR = AFX_IDW_CONTROLBAR_FIRST), but the second one must have a different ID.</span>
+<a name="142"><font size=-1>142     </font></a><span class="string"></span>
+<a name="143"><font size=-1>143     </font></a><span class="string"></span><span class="default">&lt;p&gt;&lt;b&gt;</span><span class="string">OnUpdateCmdUI</span><span class="default">&lt;/b&gt;</span><span class="string">: This member function is pure virtual in CControlBar (the base class of CSizingControlBar).</span>
+<a name="144"><font size=-1>144     </font></a><span class="string">Its purpose is to allow updating of controls at idle time (from here CCmdUI::DoUpdate() is called for the toolbars' buttons, dialogbars' controls, the panes of status bar, etc.).</span><span class="default">&lt;br&gt;</span>
+<a name="145"><font size=-1>145     </font></a><span class="default"></span><span class="string">However, I found it very useful to update the look of the &quot;x&quot; flat button (no timers needed).</span>
+<a name="146"><font size=-1>146     </font></a><span class="string">So, if you will use this function, don't forget to call the base class' member (see mybar.cpp).</span>
+<a name="147"><font size=-1>147     </font></a><span class="string"></span>
+<a name="148"><font size=-1>148     </font></a><span class="string"></span><span class="default">&lt;p&gt;&lt;b&gt;</span><span class="string">Dynamic resizing</span><span class="default">&lt;/b&gt;</span><span class="string">: This feature allows redrawing of the bar during resizing.</span>
+<a name="149"><font size=-1>149     </font></a><span class="string">Also all the bars are repositioned and redrawn if necessary.</span><span class="default">&lt;br&gt;</span>
+<a name="150"><font size=-1>150     </font></a><span class="default"></span><span class="string">The SPI_GETDRAGFULLWINDOWS system parameter is queried for this (it is enabled by the &quot;Show window contents while dragging&quot; checkbox in Display Properties).</span>
+<a name="151"><font size=-1>151     </font></a><span class="string"></span>
+<a name="152"><font size=-1>152     </font></a><span class="string"></span><span class="default">&lt;p&gt;&lt;b&gt;</span><span class="string">CBRS_SIZE_DYNAMIC</span><span class="default">&lt;/b&gt;</span><span class="string">: This bar style is required. Make sure you add it to the bar, otherwise the application will crash when the user floats a bar. You can add it using SetBarStyle() after Create(), or by changing the default style for Create() to something like: WS_VISIBLE | WS_CHILD | CBRS_TOP | CBRS_SIZE_DYNAMIC.</span>
+<a name="153"><font size=-1>153     </font></a><span class="string"></span>
+<a name="154"><font size=-1>154     </font></a><span class="string"></span><span class="default">&lt;p&gt;&lt;b&gt;</span><span class="string">State persistence</span><span class="default">&lt;/b&gt;</span><span class="string">: The common MFC control bars' docking state is saved using CMainFrame::SaveBarState(). In addition to the info saved by this function, the CSizingControlBar class needs to save 3 sizes. This is done in CSizingControlBar::SaveState() function, so a m_wndMyBar.SaveState() call is required. Please note that the state storing code must be placed in CMainFrame's OnClose() or DestroyWindow(), not in OnDestroy(), because at the time WM_DESTROY message is received, the floating bars are already destroyed.</span><span class="default">&lt;br&gt;</span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span><span class="string">In CMainFrame::OnCreate(), the m_wndMyBar.LoadState() call must be placed before LoadBarState().</span><span class="default">&lt;br&gt;</span>
+<a name="156"><font size=-1>156     </font></a><span class="default"></span><span class="string">Alternatively, if you have multiple CSizingControlBar derived bars, you can call once the static member SizingControlBar::GlobalSaveState() instead of calling each bar's SaveState(). The same for LoadState() - there is a CSizingControlBar::GlobalLoadState() function. See both samples here for more details.</span>
+<a name="157"><font size=-1>157     </font></a><span class="string"></span>
+<a name="158"><font size=-1>158     </font></a><span class="string"></span><span class="default">&lt;p&gt;</span><span class="string">See also </span><span class="default">&lt;a href=</span><span class="string">&quot;http://www.datamekanix.com&quot;</span><span class="default">&gt;</span><span class="string">www.datamekanix.com</span><span class="default">&lt;/a&gt; </span><span class="string">for a full changelog, FAQ, a dedicated message board and more.</span>
+<a name="159"><font size=-1>159     </font></a><span class="string"></span>
+<a name="160"><font size=-1>160     </font></a><span class="string"></span><span class="comment">&lt;!-- Article Ends --&gt;</span>
+<a name="161"><font size=-1>161     </font></a><span class="comment"></span><span class="default">&lt;hr size=</span><span class="string">&quot;1&quot; </span><span class="default">noshade align=</span><span class="string">&quot;center&quot;</span><span class="default">&gt;</span>
+<a name="162"><font size=-1>162     </font></a><span class="default"></span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span>
+<a name="164"><font size=-1>164     </font></a><span class="default"></span>
+<a name="165"><font size=-1>165     </font></a><span class="default">&lt;table width=</span><span class="string">&quot;100%&quot;</span><span class="default">&gt;</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">	&lt;tr&gt;</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">	&lt;td align=</span><span class="string">&quot;left&quot; </span><span class="default">valign=</span><span class="string">&quot;top&quot;</span><span class="default">&gt;</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">	&lt;h6&gt;&lt;a href=</span><span class="string">'http://www.codeproject.com'</span><span class="default">&gt;</span><span class="string">Home</span><span class="default">&lt;/a&gt;</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">      </span><span class="string">&amp;gt;&amp;gt; </span><span class="default">&lt;a href=</span><span class="string">'http://www.codeproject.com/docking/'</span><span class="default">&gt;</span><span class="string">Toolbars &amp;amp; Docking Windows</span><span class="default">&lt;/a&gt;</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">      &lt;br&gt;</span><span class="string">last updated 12 Jan 2000</span><span class="default">&lt;/h6&gt;&lt;/td&gt;</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">	&lt;td nowrap align=</span><span class="string">&quot;center&quot; </span><span class="default">valign=</span><span class="string">&quot;top&quot;</span><span class="default">&gt; </span>
+<a name="172"><font size=-1>172     </font></a><span class="default">	&lt;h6&gt;</span><span class="string">Copyright � CodeProject, 1999-2000.</span><span class="default">&lt;br&gt;</span><span class="string">All rights reserved</span><span class="default">&lt;/h6&gt;</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">	&lt;/td&gt;</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">	&lt;td align=</span><span class="string">&quot;right&quot; </span><span class="default">valign=</span><span class="string">&quot;top&quot;</span><span class="default">&gt; </span>
+<a name="175"><font size=-1>175     </font></a><span class="default">	&lt;h6&gt;&lt;a href=</span><span class="string">&quot;mailto:webmaster@codeproject.com&quot;</span><span class="default">&gt;</span><span class="string">webmaster@codeproject.com</span><span class="default">&lt;/a&gt;&lt;/h6&gt;</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">	&lt;/td&gt;</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">	&lt;/tr&gt;</span>
+<a name="178"><font size=-1>178     </font></a><span class="default">&lt;/table&gt;</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">&lt;/body&gt;</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">&lt;/html&gt;</span>
+<a name="181"><font size=-1>181     </font></a><span class="default"></span>
+</pre></body></html>

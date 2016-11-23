@@ -1,0 +1,125 @@
+/*
+ * Copyright (c) 2000 jPOS.org.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *    "This product includes software developed by the jPOS project 
+ *    (http://www.jpos.org/)". Alternately, this acknowledgment may 
+ *    appear in the software itself, if and wherever such third-party 
+ *    acknowledgments normally appear.
+ *
+ * 4. The names "jPOS" and "jPOS.org" must not be used to endorse 
+ *    or promote products derived from this software without prior 
+ *    written permission. For written permission, please contact 
+ *    license@jpos.org.
+ *
+ * 5. Products derived from this software may not be called "jPOS",
+ *    nor may "jPOS" appear in their name, without prior written
+ *    permission of the jPOS project.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  
+ * IN NO EVENT SHALL THE JPOS PROJECT OR ITS CONTRIBUTORS BE LIABLE FOR 
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS 
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) 
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
+ * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * POSSIBILITY OF SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the jPOS Project.  For more
+ * information please see <http://www.jpos.org/>.
+ */
+
+
+/*
+ * $Log$
+ * Revision 1.6  2000/11/02 12:09:18  apr
+ * Added license to every source file
+ *
+ * Revision 1.5  2000/09/01 16:34:53  apr
+ * Accept "yes" as "true" response for getBoolean
+ *
+ * Revision 1.4  2000/03/01 14:44:38  apr
+ * Changed package name to org.jpos
+ *
+ * Revision 1.3  1999/11/26 12:16:51  apr
+ * CVS devel snapshot
+ *
+ * Revision 1.2  1999/11/11 10:18:49  apr
+ * added get(name,name), getInt(name), getLong(name) and getDouble(name)
+ *
+ * Revision 1.1  1999/09/26 22:32:01  apr
+ * CVS sync
+ *
+ */
+
+package org.jpos.core;
+
+import java.io.*;
+import java.util.*;
+
+/**
+ * @author apr@cs.com.uy
+ * @version $Id$
+ * @since jPOS 1.1
+ */
+public class SimpleConfiguration implements Configuration {
+    private Properties props;
+
+    public SimpleConfiguration () {
+	props = new Properties();
+    }
+    public SimpleConfiguration (Properties props) {
+	this.props = props;
+    }
+    public SimpleConfiguration (String filename) 
+	throws FileNotFoundException, IOException
+    {
+	props = new Properties();
+	load (filename);
+    }
+    synchronized public String get (String name) {
+	return props.getProperty (name, "");
+    }
+    synchronized public String get (String name, String def) {
+	return props.getProperty (name, def);
+    }
+    synchronized public int getInt (String name) {
+        return Integer.parseInt(props.getProperty(name, "0").trim());
+    }
+    synchronized public long getLong (String name) {
+        return Long.parseLong(props.getProperty(name, "0").trim());
+    }
+    synchronized public double getDouble(String name) {
+        return Double.valueOf(
+	    props.getProperty(name,"0.00").trim()).doubleValue();
+    }
+    public boolean getBoolean (String name) {
+	String v = get (name, "false").trim();
+	return v.equalsIgnoreCase("true") || v.equalsIgnoreCase("yes");
+    }
+    synchronized public void load(String filename) 
+	throws FileNotFoundException, IOException
+    {
+	FileInputStream fis = new FileInputStream(filename);
+	props.load(new BufferedInputStream(fis));
+        fis.close();
+    }
+}

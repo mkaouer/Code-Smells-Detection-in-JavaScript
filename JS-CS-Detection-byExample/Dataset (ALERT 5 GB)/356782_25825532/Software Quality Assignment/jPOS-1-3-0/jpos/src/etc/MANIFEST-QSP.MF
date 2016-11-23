@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Specification-Title: jPOS
+Specification-Vendor: CompuService Srl.
+Specification-Version: $VERSION$
+Implementation-Title: jPOS
+Implementation-Vendor: CompuService Srl.
+Implementation-Version: $VERSION$
+Class-path: xalan_1_0_1.jar xerces_1_0_3.jar
+Main-Class: org.jpos.apps.qsp.QSP
+Name: org/jpos/apps/qsp
+Sealed: true
+

@@ -1,0 +1,1583 @@
+<html><head><title>Simple Invocation Tree [I]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td>C</td><td><a href="simpleinvtree_D.html">D</a></td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td><a href="simpleinvtree_I.html">I</a></td><td><a href="simpleinvtree_J.html">J</a></td><td>K</td><td><a href="simpleinvtree_L.html">L</a></td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td><a href="simpleinvtree_O.html">O</a></td><td><a href="simpleinvtree_P.html">P</a></td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td><a href="simpleinvtree_U.html">U</a></td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_I.html#42247">iso.AsciiHexInterpreterTest.testGetPackedLength</a>
+| <a href="dictionary_O.html#5501">org.jpos.iso.AsciiHexInterpreter.getPackedLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#42248">iso.AsciiHexInterpreterTest.testInterpret</a>
+| <a href="dictionary_O.html#5503">org.jpos.iso.AsciiHexInterpreter.interpret</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#42251">iso.AsciiHexInterpreterTest.testReversability</a>
+| <a href="dictionary_O.html#5501">org.jpos.iso.AsciiHexInterpreter.getPackedLength</a>
+| <a href="dictionary_O.html#5503">org.jpos.iso.AsciiHexInterpreter.interpret</a>
+| <a href="dictionary_O.html#5508">org.jpos.iso.AsciiHexInterpreter.uninterpret</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#42254">iso.AsciiHexInterpreterTest.testUninterpret</a>
+| <a href="dictionary_O.html#5508">org.jpos.iso.AsciiHexInterpreter.uninterpret</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#17625">iso.AsciiInterpreterTest.testGetPackedLength</a>
+| <a href="dictionary_O.html#17569">org.jpos.iso.Interpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18988">org.jpos.iso.BCDInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57293">org.jpos.iso.AsciiInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60219">org.jpos.iso.EbcdicInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61629">org.jpos.iso.LiteralInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#17626">iso.AsciiInterpreterTest.testInterpret</a>
+| <a href="dictionary_O.html#17570">org.jpos.iso.Interpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18990">org.jpos.iso.BCDInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57295">org.jpos.iso.AsciiInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60221">org.jpos.iso.EbcdicInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61631">org.jpos.iso.LiteralInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#17628">iso.AsciiInterpreterTest.testReversability</a>
+| java.lang.String.length
+| <a href="dictionary_O.html#17570">org.jpos.iso.Interpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18990">org.jpos.iso.BCDInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57295">org.jpos.iso.AsciiInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60221">org.jpos.iso.EbcdicInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61631">org.jpos.iso.LiteralInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17571">org.jpos.iso.Interpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18994">org.jpos.iso.BCDInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57300">org.jpos.iso.AsciiInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60225">org.jpos.iso.EbcdicInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61636">org.jpos.iso.LiteralInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#17631">iso.AsciiInterpreterTest.testUninterpret</a>
+| <a href="dictionary_O.html#17571">org.jpos.iso.Interpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18994">org.jpos.iso.BCDInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57300">org.jpos.iso.AsciiInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60225">org.jpos.iso.EbcdicInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61636">org.jpos.iso.LiteralInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#54960">iso.AsciiPrefixerTest.testDecode</a>
+| <a href="dictionary_O.html#32199">org.jpos.iso.AsciiPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#54962">iso.AsciiPrefixerTest.testEncode</a>
+| <a href="dictionary_O.html#32204">org.jpos.iso.AsciiPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#54964">iso.AsciiPrefixerTest.testEncodeShortLength</a>
+| <a href="dictionary_O.html#32204">org.jpos.iso.AsciiPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#54966">iso.AsciiPrefixerTest.testReversability</a>
+| <a href="dictionary_O.html#32204">org.jpos.iso.AsciiPrefixer.encodeLength</a>
+| <a href="dictionary_O.html#32199">org.jpos.iso.AsciiPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#19604">iso.BcdPrefixerTest.testDecode</a>
+| <a href="dictionary_O.html#9558">org.jpos.iso.BcdPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#19606">iso.BcdPrefixerTest.testDecode19</a>
+| <a href="dictionary_O.html#9558">org.jpos.iso.BcdPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#19608">iso.BcdPrefixerTest.testDecode99</a>
+| <a href="dictionary_O.html#9558">org.jpos.iso.BcdPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#19610">iso.BcdPrefixerTest.testEncode</a>
+| <a href="dictionary_O.html#9563">org.jpos.iso.BcdPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#19612">iso.BcdPrefixerTest.testEncode99</a>
+| <a href="dictionary_O.html#9563">org.jpos.iso.BcdPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#19614">iso.BcdPrefixerTest.testEncodeLLL</a>
+| <a href="dictionary_O.html#9563">org.jpos.iso.BcdPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#19616">iso.BcdPrefixerTest.testEncodeLLLShortLength</a>
+| <a href="dictionary_O.html#9563">org.jpos.iso.BcdPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#19618">iso.BcdPrefixerTest.testEncodeShortLength</a>
+| <a href="dictionary_O.html#9563">org.jpos.iso.BcdPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#19620">iso.BcdPrefixerTest.testReversability</a>
+| <a href="dictionary_O.html#9563">org.jpos.iso.BcdPrefixer.encodeLength</a>
+| <a href="dictionary_O.html#9558">org.jpos.iso.BcdPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#21724">iso.EbcdicInterpreterTest.testGetPackedLength</a>
+| <a href="dictionary_O.html#17569">org.jpos.iso.Interpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18988">org.jpos.iso.BCDInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57293">org.jpos.iso.AsciiInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60219">org.jpos.iso.EbcdicInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61629">org.jpos.iso.LiteralInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#21725">iso.EbcdicInterpreterTest.testInterpret</a>
+| <a href="dictionary_O.html#17570">org.jpos.iso.Interpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18990">org.jpos.iso.BCDInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57295">org.jpos.iso.AsciiInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60221">org.jpos.iso.EbcdicInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61631">org.jpos.iso.LiteralInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#21727">iso.EbcdicInterpreterTest.testReversability</a>
+| java.lang.String.length
+| <a href="dictionary_O.html#17570">org.jpos.iso.Interpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18990">org.jpos.iso.BCDInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57295">org.jpos.iso.AsciiInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60221">org.jpos.iso.EbcdicInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61631">org.jpos.iso.LiteralInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17571">org.jpos.iso.Interpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18994">org.jpos.iso.BCDInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57300">org.jpos.iso.AsciiInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60225">org.jpos.iso.EbcdicInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61636">org.jpos.iso.LiteralInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#21730">iso.EbcdicInterpreterTest.testUninterpret</a>
+| <a href="dictionary_O.html#17571">org.jpos.iso.Interpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18994">org.jpos.iso.BCDInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57300">org.jpos.iso.AsciiInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60225">org.jpos.iso.EbcdicInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61636">org.jpos.iso.LiteralInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#67186">iso.EbcdicPrefixerTest.testDecode</a>
+| <a href="dictionary_O.html#58561">org.jpos.iso.EbcdicPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#67188">iso.EbcdicPrefixerTest.testEncode</a>
+| <a href="dictionary_O.html#58566">org.jpos.iso.EbcdicPrefixer.encodeLength</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#67190">iso.EbcdicPrefixerTest.testReversability</a>
+| <a href="dictionary_O.html#58566">org.jpos.iso.EbcdicPrefixer.encodeLength</a>
+| <a href="dictionary_O.html#58561">org.jpos.iso.EbcdicPrefixer.decodeLength</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#32006">iso.IF_CHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7315">org.jpos.iso.IF_CHAR.IF_CHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#32009">iso.IF_CHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7315">org.jpos.iso.IF_CHAR.IF_CHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#32014">iso.IF_CHARTest.testUnpack</a>
+| <a href="dictionary_O.html#7315">org.jpos.iso.IF_CHAR.IF_CHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#80243">iso.IF_NOPTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#35406">org.jpos.iso.IF_NOP.IF_NOP</a>
+| <a href="dictionary_O.html#35408">org.jpos.iso.IF_NOP.pack</a>
+| <a href="dictionary_A.html#40405">assertNull</a>
+
+<a href="dictionary_I.html#80246">iso.IF_NOPTest.testUnpack</a>
+| <a href="dictionary_O.html#35406">org.jpos.iso.IF_NOP.IF_NOP</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#35410">org.jpos.iso.IF_NOP.unpack</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#40405">assertNull</a>
+
+<a href="dictionary_I.html#80073">iso.IF_UNUSEDTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#77057">org.jpos.iso.IF_UNUSED.IF_UNUSED</a>
+| <a href="dictionary_O.html#77059">org.jpos.iso.IF_UNUSED.pack</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#80077">iso.IF_UNUSEDTest.testUnpack</a>
+| <a href="dictionary_O.html#77057">org.jpos.iso.IF_UNUSED.IF_UNUSED</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#77061">org.jpos.iso.IF_UNUSED.unpack</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#72628">iso.IFA_AMOUNTTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7313">org.jpos.iso.IFA_AMOUNT.IFA_AMOUNT</a>
+| <a href="dictionary_O.html#66348">org.jpos.iso.ISOAmountFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#72631">iso.IFA_AMOUNTTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7313">org.jpos.iso.IFA_AMOUNT.IFA_AMOUNT</a>
+| <a href="dictionary_O.html#16355">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#66348">org.jpos.iso.ISOAmountFieldPackager.pack</a>
+| <a href="dictionary_O.html#66363">org.jpos.iso.ISOAmountFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#72636">iso.IFA_AMOUNTTest.testUnpack</a>
+| <a href="dictionary_O.html#7313">org.jpos.iso.IFA_AMOUNT.IFA_AMOUNT</a>
+| <a href="dictionary_O.html#16355">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#66363">org.jpos.iso.ISOAmountFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#18773">iso.IFA_BINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#7316">org.jpos.iso.IFA_BINARY.IFA_BINARY</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#18776">iso.IFA_BINARYTest.testPackWrongLength</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#7316">org.jpos.iso.IFA_BINARY.IFA_BINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#18781">iso.IFA_BINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#7316">org.jpos.iso.IFA_BINARY.IFA_BINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#18786">iso.IFA_BINARYTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#7316">org.jpos.iso.IFA_BINARY.IFA_BINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#46958">iso.IFA_FLLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#12089">org.jpos.iso.IFA_FLLCHAR.IFA_FLLCHAR</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#46961">iso.IFA_FLLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#12089">org.jpos.iso.IFA_FLLCHAR.IFA_FLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#17547">org.jpos.iso.ISOFilledStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#46966">iso.IFA_FLLCHARTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#12089">org.jpos.iso.IFA_FLLCHAR.IFA_FLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17547">org.jpos.iso.ISOFilledStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#79826">iso.IFA_FLLNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#41250">org.jpos.iso.IFA_FLLNUM.IFA_FLLNUM</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#79829">iso.IFA_FLLNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#41250">org.jpos.iso.IFA_FLLNUM.IFA_FLLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#17547">org.jpos.iso.ISOFilledStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#79834">iso.IFA_FLLNUMTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#41250">org.jpos.iso.IFA_FLLNUM.IFA_FLLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17547">org.jpos.iso.ISOFilledStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#47467">iso.IFA_LCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#5264">org.jpos.iso.IFA_LCHAR.IFA_LCHAR</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#47470">iso.IFA_LCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#5264">org.jpos.iso.IFA_LCHAR.IFA_LCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#47475">iso.IFA_LCHARTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#5264">org.jpos.iso.IFA_LCHAR.IFA_LCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#76467">iso.IFA_LLBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#35265">org.jpos.iso.IFA_LLBINARY.IFA_LLBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#76470">iso.IFA_LLBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#35265">org.jpos.iso.IFA_LLBINARY.IFA_LLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#76475">iso.IFA_LLBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#35265">org.jpos.iso.IFA_LLBINARY.IFA_LLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#46934">iso.IFA_LLBNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#46947">org.jpos.iso.IFA_LLBNUM.IFA_LLBNUM</a>
+| <a href="dictionary_O.html#46948">org.jpos.iso.IFA_LLBNUM.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#46937">iso.IFA_LLBNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#46947">org.jpos.iso.IFA_LLBNUM.IFA_LLBNUM</a>
+| <a href="dictionary_O.html#16355">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#46948">org.jpos.iso.IFA_LLBNUM.pack</a>
+| <a href="dictionary_O.html#46949">org.jpos.iso.IFA_LLBNUM.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#46942">iso.IFA_LLBNUMTest.testUnpack</a>
+| <a href="dictionary_O.html#46947">org.jpos.iso.IFA_LLBNUM.IFA_LLBNUM</a>
+| <a href="dictionary_O.html#16355">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#46949">org.jpos.iso.IFA_LLBNUM.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#4026">iso.IFA_LLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#4039">org.jpos.iso.IFA_LLCHAR.IFA_LLCHAR</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#4029">iso.IFA_LLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#4039">org.jpos.iso.IFA_LLCHAR.IFA_LLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#4034">iso.IFA_LLCHARTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#4039">org.jpos.iso.IFA_LLCHAR.IFA_LLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#33690">iso.IFA_LLLBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#2198">org.jpos.iso.IFA_LLLBINARY.IFA_LLLBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#33693">iso.IFA_LLLBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#2198">org.jpos.iso.IFA_LLLBINARY.IFA_LLLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#33698">iso.IFA_LLLBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#2198">org.jpos.iso.IFA_LLLBINARY.IFA_LLLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#55109">iso.IFA_LLLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7314">org.jpos.iso.IFA_LLLCHAR.IFA_LLLCHAR</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#55112">iso.IFA_LLLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7314">org.jpos.iso.IFA_LLLCHAR.IFA_LLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#55117">iso.IFA_LLLCHARTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#7314">org.jpos.iso.IFA_LLLCHAR.IFA_LLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#61493">iso.IFA_LLLLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#41044">org.jpos.iso.IFA_LLLLCHAR.IFA_LLLLCHAR</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#61496">iso.IFA_LLLLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#41044">org.jpos.iso.IFA_LLLLCHAR.IFA_LLLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#61501">iso.IFA_LLLLCHARTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#41044">org.jpos.iso.IFA_LLLLCHAR.IFA_LLLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#17838">iso.IFA_LLLLLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17851">org.jpos.iso.IFA_LLLLLCHAR.IFA_LLLLLCHAR</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#17841">iso.IFA_LLLLLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17851">org.jpos.iso.IFA_LLLLLCHAR.IFA_LLLLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#17846">iso.IFA_LLLLLCHARTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#17851">org.jpos.iso.IFA_LLLLLCHAR.IFA_LLLLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#37852">iso.IFA_LLLNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7317">org.jpos.iso.IFA_LLLNUM.IFA_LLLNUM</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#37855">iso.IFA_LLLNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7317">org.jpos.iso.IFA_LLLNUM.IFA_LLLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#37860">iso.IFA_LLLNUMTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#7317">org.jpos.iso.IFA_LLLNUM.IFA_LLLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#79508">iso.IFA_LLNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7312">org.jpos.iso.IFA_LLNUM.IFA_LLNUM</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#79511">iso.IFA_LLNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7312">org.jpos.iso.IFA_LLNUM.IFA_LLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#79516">iso.IFA_LLNUMTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#7312">org.jpos.iso.IFA_LLNUM.IFA_LLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#22711">iso.IFA_NUMERICTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7310">org.jpos.iso.IFA_NUMERIC.IFA_NUMERIC</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#22714">iso.IFA_NUMERICTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7310">org.jpos.iso.IFA_NUMERIC.IFA_NUMERIC</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#22719">iso.IFA_NUMERICTest.testUnpack</a>
+| java.lang.String.getBytes
+| <a href="dictionary_O.html#7310">org.jpos.iso.IFA_NUMERIC.IFA_NUMERIC</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#78176">iso.IFB_AMOUNTTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1548">org.jpos.iso.IFB_AMOUNT.IFB_AMOUNT</a>
+| <a href="dictionary_O.html#55183">org.jpos.iso.IFB_AMOUNT.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#78179">iso.IFB_AMOUNTTest.testPackOddDigits</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1548">org.jpos.iso.IFB_AMOUNT.IFB_AMOUNT</a>
+| <a href="dictionary_O.html#55183">org.jpos.iso.IFB_AMOUNT.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#78182">iso.IFB_AMOUNTTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1548">org.jpos.iso.IFB_AMOUNT.IFB_AMOUNT</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#55183">org.jpos.iso.IFB_AMOUNT.pack</a>
+| <a href="dictionary_O.html#55190">org.jpos.iso.IFB_AMOUNT.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#78187">iso.IFB_AMOUNTTest.testUnpack</a>
+| <a href="dictionary_O.html#1548">org.jpos.iso.IFB_AMOUNT.IFB_AMOUNT</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#55190">org.jpos.iso.IFB_AMOUNT.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#60382">iso.IFB_BINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#1554">org.jpos.iso.IFB_BINARY.IFB_BINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#60385">iso.IFB_BINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#1554">org.jpos.iso.IFB_BINARY.IFB_BINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#60390">iso.IFB_BINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#1554">org.jpos.iso.IFB_BINARY.IFB_BINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#76540">iso.IFB_LLBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#30338">org.jpos.iso.IFB_LLBINARY.IFB_LLBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#76543">iso.IFB_LLBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#30338">org.jpos.iso.IFB_LLBINARY.IFB_LLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#76548">iso.IFB_LLBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#30338">org.jpos.iso.IFB_LLBINARY.IFB_LLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#8071">iso.IFB_LLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1552">org.jpos.iso.IFB_LLCHAR.IFB_LLCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#8074">iso.IFB_LLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1552">org.jpos.iso.IFB_LLCHAR.IFB_LLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#8079">iso.IFB_LLCHARTest.testUnpack</a>
+| <a href="dictionary_O.html#1552">org.jpos.iso.IFB_LLCHAR.IFB_LLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#75838">iso.IFB_LLHBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#1555">org.jpos.iso.IFB_LLHBINARY.IFB_LLHBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#75841">iso.IFB_LLHBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#1555">org.jpos.iso.IFB_LLHBINARY.IFB_LLHBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#75846">iso.IFB_LLHBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#1555">org.jpos.iso.IFB_LLHBINARY.IFB_LLHBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#53697">iso.IFB_LLHCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1553">org.jpos.iso.IFB_LLHCHAR.IFB_LLHCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#53704">iso.IFB_LLHCHARTest.testPackagerTooLong</a>
+| <a href="dictionary_O.html#1553">org.jpos.iso.IFB_LLHCHAR.IFB_LLHCHAR</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#53700">iso.IFB_LLHCHARTest.testPackTooMuch</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1553">org.jpos.iso.IFB_LLHCHAR.IFB_LLHCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#53706">iso.IFB_LLHCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1553">org.jpos.iso.IFB_LLHCHAR.IFB_LLHCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#53711">iso.IFB_LLHCHARTest.testUnpack</a>
+| <a href="dictionary_O.html#1553">org.jpos.iso.IFB_LLHCHAR.IFB_LLHCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#56851">iso.IFB_LLHECHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1551">org.jpos.iso.IFB_LLHECHAR.IFB_LLHECHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#56854">iso.IFB_LLHECHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1551">org.jpos.iso.IFB_LLHECHAR.IFB_LLHECHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#56859">iso.IFB_LLHECHARTest.testUnpack</a>
+| <a href="dictionary_O.html#1551">org.jpos.iso.IFB_LLHECHAR.IFB_LLHECHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#42742">iso.IFB_LLHFBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#42755">org.jpos.iso.IFB_LLHFBINARY.IFB_LLHFBINARY</a>
+| <a href="dictionary_O.html#42756">org.jpos.iso.IFB_LLHFBINARY.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#42745">iso.IFB_LLHFBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#42755">org.jpos.iso.IFB_LLHFBINARY.IFB_LLHFBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#42756">org.jpos.iso.IFB_LLHFBINARY.pack</a>
+| <a href="dictionary_O.html#42757">org.jpos.iso.IFB_LLHFBINARY.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#42750">iso.IFB_LLHFBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#42755">org.jpos.iso.IFB_LLHFBINARY.IFB_LLHFBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#42757">org.jpos.iso.IFB_LLHFBINARY.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#51219">iso.IFB_LLHNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1547">org.jpos.iso.IFB_LLHNUM.IFB_LLHNUM</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#51222">iso.IFB_LLHNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1547">org.jpos.iso.IFB_LLHNUM.IFB_LLHNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#51227">iso.IFB_LLHNUMTest.testUnpack</a>
+| <a href="dictionary_O.html#1547">org.jpos.iso.IFB_LLHNUM.IFB_LLHNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#69212">iso.IFB_LLLBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#8569">org.jpos.iso.IFB_LLLBINARY.IFB_LLLBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#69215">iso.IFB_LLLBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#8569">org.jpos.iso.IFB_LLLBINARY.IFB_LLLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#69220">iso.IFB_LLLBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#8569">org.jpos.iso.IFB_LLLBINARY.IFB_LLLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#78697">iso.IFB_LLLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17104">org.jpos.iso.IFB_LLLCHAR.IFB_LLLCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#78700">iso.IFB_LLLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#17104">org.jpos.iso.IFB_LLLCHAR.IFB_LLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#78705">iso.IFB_LLLCHARTest.testUnpack</a>
+| <a href="dictionary_O.html#17104">org.jpos.iso.IFB_LLLCHAR.IFB_LLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#31804">iso.IFB_LLLHBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#31817">org.jpos.iso.IFB_LLLHBINARY.IFB_LLLHBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#31807">iso.IFB_LLLHBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#31817">org.jpos.iso.IFB_LLLHBINARY.IFB_LLLHBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#31812">iso.IFB_LLLHBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#31817">org.jpos.iso.IFB_LLLHBINARY.IFB_LLLHBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#82478">iso.IFB_LLLHCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1035">org.jpos.iso.IFB_LLLHCHAR.IFB_LLLHCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#82485">iso.IFB_LLLHCHARTest.testPackagerTooLong</a>
+| <a href="dictionary_O.html#1035">org.jpos.iso.IFB_LLLHCHAR.IFB_LLLHCHAR</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#82481">iso.IFB_LLLHCHARTest.testPackTooMuch</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1035">org.jpos.iso.IFB_LLLHCHAR.IFB_LLLHCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#82487">iso.IFB_LLLHCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1035">org.jpos.iso.IFB_LLLHCHAR.IFB_LLLHCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#82492">iso.IFB_LLLHCHARTest.testUnpack</a>
+| <a href="dictionary_O.html#1035">org.jpos.iso.IFB_LLLHCHAR.IFB_LLLHCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#50521">iso.IFB_LLLHECHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#50534">org.jpos.iso.IFB_LLLHECHAR.IFB_LLLHECHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#50524">iso.IFB_LLLHECHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#50534">org.jpos.iso.IFB_LLLHECHAR.IFB_LLLHECHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#50529">iso.IFB_LLLHECHARTest.testUnpack</a>
+| <a href="dictionary_O.html#50534">org.jpos.iso.IFB_LLLHECHAR.IFB_LLLHECHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#77857">iso.IFB_LLLNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1549">org.jpos.iso.IFB_LLLNUM.IFB_LLLNUM</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#77860">iso.IFB_LLLNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1549">org.jpos.iso.IFB_LLLNUM.IFB_LLLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#77865">iso.IFB_LLLNUMTest.testUnpack</a>
+| <a href="dictionary_O.html#1549">org.jpos.iso.IFB_LLLNUM.IFB_LLLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#4697">iso.IFB_LLNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#4710">org.jpos.iso.IFB_LLNUM.IFB_LLNUM</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#4700">iso.IFB_LLNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#4710">org.jpos.iso.IFB_LLNUM.IFB_LLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#4705">iso.IFB_LLNUMTest.testUnpack</a>
+| <a href="dictionary_O.html#4710">org.jpos.iso.IFB_LLNUM.IFB_LLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#10992">iso.IFB_NUMERICTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1545">org.jpos.iso.IFB_NUMERIC.IFB_NUMERIC</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#10995">iso.IFB_NUMERICTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1545">org.jpos.iso.IFB_NUMERIC.IFB_NUMERIC</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#11000">iso.IFB_NUMERICTest.testUnpack</a>
+| <a href="dictionary_O.html#1545">org.jpos.iso.IFB_NUMERIC.IFB_NUMERIC</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#54635">iso.IFE_CHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1550">org.jpos.iso.IFE_CHAR.IFE_CHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#54638">iso.IFE_CHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1550">org.jpos.iso.IFE_CHAR.IFE_CHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#54643">iso.IFE_CHARTest.testUnpack</a>
+| <a href="dictionary_O.html#1550">org.jpos.iso.IFE_CHAR.IFE_CHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#60402">iso.IFE_LLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#33958">org.jpos.iso.IFE_LLCHAR.IFE_LLCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#60405">iso.IFE_LLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#33958">org.jpos.iso.IFE_LLCHAR.IFE_LLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#60410">iso.IFE_LLCHARTest.testUnpack</a>
+| <a href="dictionary_O.html#33958">org.jpos.iso.IFE_LLCHAR.IFE_LLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#15899">iso.IFE_LLLBINARYTest.testPack</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#15912">org.jpos.iso.IFE_LLLBINARY.IFE_LLLBINARY</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#15902">iso.IFE_LLLBINARYTest.testReversability</a>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#15912">org.jpos.iso.IFE_LLLBINARY.IFE_LLLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#15907">iso.IFE_LLLBINARYTest.testUnpack</a>
+| <a href="dictionary_O.html#15912">org.jpos.iso.IFE_LLLBINARY.IFE_LLLBINARY</a>
+| <a href="dictionary_O.html#4142">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a>
+| <a href="dictionary_O.html#12791">org.jpos.iso.ISOBinaryField.getValue</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#33270">iso.IFE_LLLCHARTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#6151">org.jpos.iso.IFE_LLLCHAR.IFE_LLLCHAR</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#33273">iso.IFE_LLLCHARTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#6151">org.jpos.iso.IFE_LLLCHAR.IFE_LLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#33278">iso.IFE_LLLCHARTest.testUnpack</a>
+| <a href="dictionary_O.html#6151">org.jpos.iso.IFE_LLLCHAR.IFE_LLLCHAR</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#25552">iso.IFE_LLNUMTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#25565">org.jpos.iso.IFE_LLNUM.IFE_LLNUM</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#25555">iso.IFE_LLNUMTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#25565">org.jpos.iso.IFE_LLNUM.IFE_LLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#25560">iso.IFE_LLNUMTest.testUnpack</a>
+| <a href="dictionary_O.html#25565">org.jpos.iso.IFE_LLNUM.IFE_LLNUM</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#1732">iso.IFE_NUMERICTest.testPack</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1752">org.jpos.iso.IFE_NUMERIC.IFE_NUMERIC</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#1735">iso.IFE_NUMERICTest.testReversability</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1752">org.jpos.iso.IFE_NUMERIC.IFE_NUMERIC</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#1741">iso.IFE_NUMERICTest.testUnpack</a>
+| <a href="dictionary_O.html#1752">org.jpos.iso.IFE_NUMERIC.IFE_NUMERIC</a>
+| <a href="dictionary_O.html#1755">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a>
+| <a href="dictionary_O.html#1757">org.jpos.iso.ISOField.getValue</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#8663">iso.ISOTests.suite</a>
+| <a href="dictionary_A.html#8664">addTest</a>
+
+<a href="dictionary_I.html#27791">iso.LeftPadderTest.testNoPaddingNeeded</a>
+| <a href="dictionary_O.html#703">org.jpos.iso.LeftPadder.pad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#27794">iso.LeftPadderTest.testPaddingNeeded</a>
+| <a href="dictionary_O.html#703">org.jpos.iso.LeftPadder.pad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#27792">iso.LeftPadderTest.testPadLengthTooShort</a>
+| <a href="dictionary_O.html#703">org.jpos.iso.LeftPadder.pad</a>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#27795">iso.LeftPadderTest.testReversability</a>
+| <a href="dictionary_O.html#703">org.jpos.iso.LeftPadder.pad</a>
+| <a href="dictionary_O.html#709">org.jpos.iso.LeftPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#27797">iso.LeftPadderTest.testUnpad</a>
+| <a href="dictionary_O.html#709">org.jpos.iso.LeftPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#27798">iso.LeftPadderTest.testUnpadAllPadding</a>
+| <a href="dictionary_O.html#709">org.jpos.iso.LeftPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#68794">iso.LiteralInterpreterTest.testGetPackedLength</a>
+| <a href="dictionary_O.html#17569">org.jpos.iso.Interpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18988">org.jpos.iso.BCDInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57293">org.jpos.iso.AsciiInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60219">org.jpos.iso.EbcdicInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61629">org.jpos.iso.LiteralInterpreter.getPackedLength</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#68795">iso.LiteralInterpreterTest.testInterpret</a>
+| <a href="dictionary_O.html#17570">org.jpos.iso.Interpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18990">org.jpos.iso.BCDInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57295">org.jpos.iso.AsciiInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60221">org.jpos.iso.EbcdicInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61631">org.jpos.iso.LiteralInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+
+<a href="dictionary_I.html#68797">iso.LiteralInterpreterTest.testReversability</a>
+| java.lang.String.length
+| <a href="dictionary_O.html#17570">org.jpos.iso.Interpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18990">org.jpos.iso.BCDInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57295">org.jpos.iso.AsciiInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60221">org.jpos.iso.EbcdicInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61631">org.jpos.iso.LiteralInterpreter.interpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17571">org.jpos.iso.Interpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18994">org.jpos.iso.BCDInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57300">org.jpos.iso.AsciiInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60225">org.jpos.iso.EbcdicInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61636">org.jpos.iso.LiteralInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#68800">iso.LiteralInterpreterTest.testUninterpret</a>
+| <a href="dictionary_O.html#17571">org.jpos.iso.Interpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#18994">org.jpos.iso.BCDInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#57300">org.jpos.iso.AsciiInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#60225">org.jpos.iso.EbcdicInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#61636">org.jpos.iso.LiteralInterpreter.uninterpret</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#79257">iso.PerformanceTest.main</a>
+| <a href="dictionary_I.html#79259">iso.PerformanceTest.performPackAll</a>
+| <a href="dictionary_I.html#79260">iso.PerformanceTest.performUnpackAll</a>
+| java.io.PrintStream.println
+| java.lang.Integer.parseInt
+| <a href="dictionary_I.html#79261">iso.PerformanceTest.runPack</a>
+
+<a href="dictionary_I.html#79259">iso.PerformanceTest.performPackAll</a>
+| <a href="dictionary_I.html#79261">iso.PerformanceTest.runPack</a>
+| <a href="dictionary_I.html#79271">iso.PerformanceTest.runPack</a>
+
+<a href="dictionary_I.html#79260">iso.PerformanceTest.performUnpackAll</a>
+| <a href="dictionary_I.html#79285">iso.PerformanceTest.runUnpack</a>
+| <a href="dictionary_I.html#79296">iso.PerformanceTest.runUnpack</a>
+
+<a href="dictionary_I.html#79261">iso.PerformanceTest.runPack</a>
+| java.lang.Class.forName
+| java.lang.Class.newInstance
+| <a href="dictionary_O.html#1050">org.jpos.iso.ISOFieldPackager.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1038">org.jpos.iso.IFB_LLLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#2201">org.jpos.iso.IFA_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#3114">org.jpos.iso.IFB_LLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5267">org.jpos.iso.IFA_LCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5748">org.jpos.iso.IFA_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#6154">org.jpos.iso.IFE_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#8572">org.jpos.iso.IFB_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12092">org.jpos.iso.IFA_FLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12161">org.jpos.iso.IFA_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21333">org.jpos.iso.IFA_LLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25360">org.jpos.iso.IFB_LLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25546">org.jpos.iso.IFA_LLLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#32346">org.jpos.iso.IFE_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#33961">org.jpos.iso.IFE_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41047">org.jpos.iso.IFA_LLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41253">org.jpos.iso.IFA_FLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#44079">org.jpos.iso.IFA_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#53006">org.jpos.iso.IFB_LLLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55256">org.jpos.iso.IFB_LLLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58238">org.jpos.iso.IFA_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#59403">org.jpos.iso.IFB_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63861">org.jpos.iso.IFA_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#64736">org.jpos.iso.IFE_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#65335">org.jpos.iso.IFB_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#67550">org.jpos.iso.IFB_LLHNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73497">org.jpos.iso.IFB_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80364">org.jpos.iso.IFB_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80402">org.jpos.iso.IFB_LLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80693">org.jpos.iso.IFA_LLLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80986">org.jpos.iso.IFB_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_J.html#3480">java.lang.System.currentTimeMillis</a>
+| <a href="dictionary_I.html#79281">iso.PerformanceTest.runPackTest</a>
+| java.lang.Class.getSuperclass
+| java.lang.Class.getName
+| java.lang.String.endsWith
+| <a href="dictionary_J.html#1337">java.lang.Object.getClass</a>
+| java.io.PrintStream.println
+
+<a href="dictionary_I.html#79271">iso.PerformanceTest.runPack</a>
+| java.lang.Class.forName
+| java.lang.Class.newInstance
+| <a href="dictionary_O.html#1050">org.jpos.iso.ISOFieldPackager.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1038">org.jpos.iso.IFB_LLLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#2201">org.jpos.iso.IFA_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#3114">org.jpos.iso.IFB_LLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5267">org.jpos.iso.IFA_LCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5748">org.jpos.iso.IFA_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#6154">org.jpos.iso.IFE_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#8572">org.jpos.iso.IFB_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12092">org.jpos.iso.IFA_FLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12161">org.jpos.iso.IFA_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21333">org.jpos.iso.IFA_LLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25360">org.jpos.iso.IFB_LLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25546">org.jpos.iso.IFA_LLLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#32346">org.jpos.iso.IFE_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#33961">org.jpos.iso.IFE_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41047">org.jpos.iso.IFA_LLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41253">org.jpos.iso.IFA_FLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#44079">org.jpos.iso.IFA_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#53006">org.jpos.iso.IFB_LLLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55256">org.jpos.iso.IFB_LLLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58238">org.jpos.iso.IFA_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#59403">org.jpos.iso.IFB_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63861">org.jpos.iso.IFA_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#64736">org.jpos.iso.IFE_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#65335">org.jpos.iso.IFB_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#67550">org.jpos.iso.IFB_LLHNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73497">org.jpos.iso.IFB_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80364">org.jpos.iso.IFB_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80402">org.jpos.iso.IFB_LLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80693">org.jpos.iso.IFA_LLLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80986">org.jpos.iso.IFB_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_J.html#3480">java.lang.System.currentTimeMillis</a>
+| <a href="dictionary_I.html#79281">iso.PerformanceTest.runPackTest</a>
+| java.lang.Class.getSuperclass
+| java.lang.Class.getName
+| java.lang.String.endsWith
+| <a href="dictionary_J.html#1337">java.lang.Object.getClass</a>
+| java.io.PrintStream.println
+
+<a href="dictionary_I.html#79281">iso.PerformanceTest.runPackTest</a>
+| <a href="dictionary_O.html#4145">org.jpos.iso.ISOFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#4123">org.jpos.iso.IFA_LLABINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21697">org.jpos.iso.IFMC_LLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25485">org.jpos.iso.ISOMsgFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25515">org.jpos.iso.IF_TCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#35408">org.jpos.iso.IF_NOP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#40255">org.jpos.iso.IFEB_LLLNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#43743">org.jpos.iso.packager.Base1_BITMAP126.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#47628">org.jpos.iso.IF_ECHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48102">org.jpos.iso.IFB_LLLTLVBINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48491">org.jpos.iso.IFEB_LLNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#51339">org.jpos.iso.IFEP_LLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55183">org.jpos.iso.IFB_AMOUNT.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58492">org.jpos.iso.IFA_LLLABINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#62125">org.jpos.iso.IFB_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63540">org.jpos.iso.X92_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#42756">org.jpos.iso.IFB_LLHFBINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#66348">org.jpos.iso.ISOAmountFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#46948">org.jpos.iso.IFA_LLBNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#75855">org.jpos.iso.IFA_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#77059">org.jpos.iso.IF_UNUSED.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#79319">org.jpos.iso.IFIPM_LLLCHAR.pack</a><i>  (Virtual)</i>
+
+<a href="dictionary_I.html#79285">iso.PerformanceTest.runUnpack</a>
+| java.lang.Class.forName
+| java.lang.Class.newInstance
+| <a href="dictionary_O.html#1050">org.jpos.iso.ISOFieldPackager.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1038">org.jpos.iso.IFB_LLLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#2201">org.jpos.iso.IFA_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#3114">org.jpos.iso.IFB_LLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5267">org.jpos.iso.IFA_LCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5748">org.jpos.iso.IFA_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#6154">org.jpos.iso.IFE_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#8572">org.jpos.iso.IFB_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12092">org.jpos.iso.IFA_FLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12161">org.jpos.iso.IFA_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21333">org.jpos.iso.IFA_LLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25360">org.jpos.iso.IFB_LLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25546">org.jpos.iso.IFA_LLLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#32346">org.jpos.iso.IFE_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#33961">org.jpos.iso.IFE_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41047">org.jpos.iso.IFA_LLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41253">org.jpos.iso.IFA_FLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#44079">org.jpos.iso.IFA_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#53006">org.jpos.iso.IFB_LLLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55256">org.jpos.iso.IFB_LLLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58238">org.jpos.iso.IFA_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#59403">org.jpos.iso.IFB_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63861">org.jpos.iso.IFA_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#64736">org.jpos.iso.IFE_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#65335">org.jpos.iso.IFB_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#67550">org.jpos.iso.IFB_LLHNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73497">org.jpos.iso.IFB_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80364">org.jpos.iso.IFB_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80402">org.jpos.iso.IFB_LLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80693">org.jpos.iso.IFA_LLLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80986">org.jpos.iso.IFB_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#4145">org.jpos.iso.ISOFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#4123">org.jpos.iso.IFA_LLABINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21697">org.jpos.iso.IFMC_LLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25485">org.jpos.iso.ISOMsgFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25515">org.jpos.iso.IF_TCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#35408">org.jpos.iso.IF_NOP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#40255">org.jpos.iso.IFEB_LLLNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#43743">org.jpos.iso.packager.Base1_BITMAP126.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#47628">org.jpos.iso.IF_ECHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48102">org.jpos.iso.IFB_LLLTLVBINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48491">org.jpos.iso.IFEB_LLNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#51339">org.jpos.iso.IFEP_LLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55183">org.jpos.iso.IFB_AMOUNT.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58492">org.jpos.iso.IFA_LLLABINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#62125">org.jpos.iso.IFB_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63540">org.jpos.iso.X92_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#42756">org.jpos.iso.IFB_LLHFBINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#66348">org.jpos.iso.ISOAmountFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#46948">org.jpos.iso.IFA_LLBNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#75855">org.jpos.iso.IFA_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#77059">org.jpos.iso.IF_UNUSED.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#79319">org.jpos.iso.IFIPM_LLLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_J.html#3480">java.lang.System.currentTimeMillis</a>
+| <a href="dictionary_I.html#79307">iso.PerformanceTest.runUnpackTest</a>
+| java.lang.Class.getSuperclass
+| java.lang.Class.getName
+| java.lang.String.endsWith
+| <a href="dictionary_J.html#1337">java.lang.Object.getClass</a>
+| java.io.PrintStream.println
+
+<a href="dictionary_I.html#79296">iso.PerformanceTest.runUnpack</a>
+| java.lang.Class.forName
+| java.lang.Class.newInstance
+| <a href="dictionary_O.html#1050">org.jpos.iso.ISOFieldPackager.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1038">org.jpos.iso.IFB_LLLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#2201">org.jpos.iso.IFA_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#3114">org.jpos.iso.IFB_LLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5267">org.jpos.iso.IFA_LCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#5748">org.jpos.iso.IFA_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#6154">org.jpos.iso.IFE_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#8572">org.jpos.iso.IFB_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12092">org.jpos.iso.IFA_FLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12161">org.jpos.iso.IFA_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21333">org.jpos.iso.IFA_LLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25360">org.jpos.iso.IFB_LLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25546">org.jpos.iso.IFA_LLLLLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#32346">org.jpos.iso.IFE_LLLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#33961">org.jpos.iso.IFE_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41047">org.jpos.iso.IFA_LLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#41253">org.jpos.iso.IFA_FLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#44079">org.jpos.iso.IFA_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#53006">org.jpos.iso.IFB_LLLHECHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55256">org.jpos.iso.IFB_LLLHBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58238">org.jpos.iso.IFA_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#59403">org.jpos.iso.IFB_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63861">org.jpos.iso.IFA_LLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#64736">org.jpos.iso.IFE_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#65335">org.jpos.iso.IFB_LLBINARY.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#67550">org.jpos.iso.IFB_LLHNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73497">org.jpos.iso.IFB_LLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80364">org.jpos.iso.IFB_LLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80402">org.jpos.iso.IFB_LLHCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80693">org.jpos.iso.IFA_LLLLLCHAR.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#80986">org.jpos.iso.IFB_LLLNUM.setLength</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12777">org.jpos.iso.ISOBinaryField.ISOBinaryField</a>
+| <a href="dictionary_O.html#4145">org.jpos.iso.ISOFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#4123">org.jpos.iso.IFA_LLABINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12118">org.jpos.iso.ISOBinaryFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17535">org.jpos.iso.ISOFilledStringFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21697">org.jpos.iso.IFMC_LLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25485">org.jpos.iso.ISOMsgFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25515">org.jpos.iso.IF_TCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#35408">org.jpos.iso.IF_NOP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#40255">org.jpos.iso.IFEB_LLLNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#43743">org.jpos.iso.packager.Base1_BITMAP126.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1753">org.jpos.iso.ISOStringFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#47628">org.jpos.iso.IF_ECHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48102">org.jpos.iso.IFB_LLLTLVBINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48491">org.jpos.iso.IFEB_LLNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#51339">org.jpos.iso.IFEP_LLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55183">org.jpos.iso.IFB_AMOUNT.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58492">org.jpos.iso.IFA_LLLABINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#62125">org.jpos.iso.IFB_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63540">org.jpos.iso.X92_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#42756">org.jpos.iso.IFB_LLHFBINARY.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#66348">org.jpos.iso.ISOAmountFieldPackager.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#46948">org.jpos.iso.IFA_LLBNUM.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#75855">org.jpos.iso.IFA_BITMAP.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#77059">org.jpos.iso.IF_UNUSED.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#79319">org.jpos.iso.IFIPM_LLLCHAR.pack</a><i>  (Virtual)</i>
+| <a href="dictionary_J.html#3480">java.lang.System.currentTimeMillis</a>
+| <a href="dictionary_I.html#79307">iso.PerformanceTest.runUnpackTest</a>
+| java.lang.Class.getSuperclass
+| java.lang.Class.getName
+| java.lang.String.endsWith
+| <a href="dictionary_J.html#1337">java.lang.Object.getClass</a>
+| java.io.PrintStream.println
+
+<a href="dictionary_I.html#79307">iso.PerformanceTest.runUnpackTest</a>
+| <a href="dictionary_O.html#4150">org.jpos.iso.ISOFieldPackager.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#4130">org.jpos.iso.IFA_LLABINARY.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12128">org.jpos.iso.ISOBinaryFieldPackager.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#17547">org.jpos.iso.ISOFilledStringFieldPackager.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#21701">org.jpos.iso.IFMC_LLCHAR.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25489">org.jpos.iso.ISOMsgFieldPackager.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#25518">org.jpos.iso.IF_TCHAR.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#35410">org.jpos.iso.IF_NOP.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#40264">org.jpos.iso.IFEB_LLLNUM.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#43745">org.jpos.iso.packager.Base1_BITMAP126.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1756">org.jpos.iso.ISOStringFieldPackager.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#47631">org.jpos.iso.IF_ECHAR.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48108">org.jpos.iso.IFB_LLLTLVBINARY.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#48500">org.jpos.iso.IFEB_LLNUM.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#51343">org.jpos.iso.IFEP_LLCHAR.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#55190">org.jpos.iso.IFB_AMOUNT.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#58499">org.jpos.iso.IFA_LLLABINARY.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#62127">org.jpos.iso.IFB_BITMAP.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#63543">org.jpos.iso.X92_BITMAP.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#42757">org.jpos.iso.IFB_LLHFBINARY.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#66363">org.jpos.iso.ISOAmountFieldPackager.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#46949">org.jpos.iso.IFA_LLBNUM.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#75858">org.jpos.iso.IFA_BITMAP.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#77061">org.jpos.iso.IF_UNUSED.unpack</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#79323">org.jpos.iso.IFIPM_LLLCHAR.unpack</a><i>  (Virtual)</i>
+
+<a href="dictionary_I.html#64739">iso.RightPadderTest.setUp</a>
+| <a href="dictionary_O.html#49338">org.jpos.iso.RightPadder.RightPadder</a>
+
+<a href="dictionary_I.html#64740">iso.RightPadderTest.testNoPaddingNeeded</a>
+| <a href="dictionary_O.html#49339">org.jpos.iso.RightPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#49335">org.jpos.iso.RightTPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#64743">iso.RightPadderTest.testPaddingNeeded</a>
+| <a href="dictionary_O.html#49339">org.jpos.iso.RightPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#49335">org.jpos.iso.RightTPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#64741">iso.RightPadderTest.testPadLengthTooShort</a>
+| <a href="dictionary_O.html#49339">org.jpos.iso.RightPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#49335">org.jpos.iso.RightTPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_F.html#18777">fail</a>
+
+<a href="dictionary_I.html#64744">iso.RightPadderTest.testReversability</a>
+| <a href="dictionary_O.html#49339">org.jpos.iso.RightPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#49335">org.jpos.iso.RightTPadder.pad</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#59485">org.jpos.iso.RightPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#64746">iso.RightPadderTest.testUnpad1</a>
+| <a href="dictionary_O.html#59485">org.jpos.iso.RightPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#64747">iso.RightPadderTest.testUnpad2</a>
+| <a href="dictionary_O.html#59485">org.jpos.iso.RightPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#64748">iso.RightPadderTest.testUnpad3</a>
+| <a href="dictionary_O.html#59485">org.jpos.iso.RightPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#64749">iso.RightPadderTest.testUnpadAllPadding</a>
+| <a href="dictionary_O.html#59485">org.jpos.iso.RightPadder.unpad</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#1754">iso.TestUtils.assertEquals</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#26352">iso.TestUtils.assertEquals</a>
+| <a href="dictionary_A.html#1736">assertEquals</a>
+
+<a href="dictionary_I.html#76604">isomsg.Test.createMessage</a>
+| <a href="dictionary_O.html#67378">org.jpos.iso.ISOMsg.ISOMsg</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7975">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#17151">org.jpos.iso.ISODate.getDateTime</a>
+| <a href="dictionary_O.html#32260">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#17175">org.jpos.iso.ISODate.getTime</a>
+| <a href="dictionary_O.html#17146">org.jpos.iso.ISODate.getDate</a>
+| <a href="dictionary_O.html#50708">org.jpos.iso.ISOMsg.clone</a>
+
+<a href="dictionary_I.html#76608">isomsg.Test.main</a>
+| <a href="dictionary_O.html#4781">org.jpos.util.Logger.Logger</a>
+| <a href="dictionary_O.html#4782">org.jpos.util.SimpleLogListener.SimpleLogListener</a>
+| <a href="dictionary_O.html#4783">org.jpos.util.Logger.addListener</a>
+| <a href="dictionary_I.html#76601">isomsg.Test.Test</a>
+| <a href="dictionary_I.html#76612">isomsg.Test.test</a>
+| <a href="dictionary_I.html#76620">isomsg.Test.testNested</a>
+| <a href="dictionary_I.html#76625">isomsg.Test.testRenumber</a>
+
+<a href="dictionary_I.html#76601">isomsg.Test.Test</a>
+| <a href="dictionary_O.html#4780">org.jpos.util.SimpleLogSource.setLogger</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#73247">org.jpos.apps.qsp.task.DailyTask.setLogger</a><i>  (Virtual)</i>
+
+<a href="dictionary_I.html#76612">isomsg.Test.test</a>
+| <a href="dictionary_O.html#1316">org.jpos.util.LogEvent.LogEvent</a>
+| <a href="dictionary_I.html#76604">isomsg.Test.createMessage</a>
+| <a href="dictionary_O.html#1318">org.jpos.util.LogEvent.addMessage</a>
+| <a href="dictionary_O.html#7974">org.jpos.iso.ISOMsg.clone</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7975">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#19181">org.jpos.iso.ISOMsg.merge</a>
+| <a href="dictionary_O.html#50708">org.jpos.iso.ISOMsg.clone</a>
+| <a href="dictionary_O.html#1319">org.jpos.util.Logger.log</a>
+
+<a href="dictionary_I.html#76620">isomsg.Test.testNested</a>
+| <a href="dictionary_O.html#1316">org.jpos.util.LogEvent.LogEvent</a>
+| <a href="dictionary_I.html#76604">isomsg.Test.createMessage</a>
+| <a href="dictionary_O.html#19178">org.jpos.iso.ISOMsg.ISOMsg</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7975">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#1318">org.jpos.util.LogEvent.addMessage</a>
+| <a href="dictionary_O.html#1319">org.jpos.util.Logger.log</a>
+
+<a href="dictionary_I.html#76625">isomsg.Test.testRenumber</a>
+| <a href="dictionary_O.html#1316">org.jpos.util.LogEvent.LogEvent</a>
+| <a href="dictionary_I.html#76604">isomsg.Test.createMessage</a>
+| <a href="dictionary_O.html#19178">org.jpos.iso.ISOMsg.ISOMsg</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7975">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#1318">org.jpos.util.LogEvent.addMessage</a>
+| <a href="dictionary_O.html#1319">org.jpos.util.Logger.log</a>
+| <a href="dictionary_O.html#67413">org.jpos.iso.ISOMsg.move</a>
+
+<a href="dictionary_I.html#36717">isoserver.Test.main</a>
+| <a href="dictionary_O.html#4781">org.jpos.util.Logger.Logger</a>
+| <a href="dictionary_O.html#4782">org.jpos.util.SimpleLogListener.SimpleLogListener</a>
+| <a href="dictionary_O.html#4783">org.jpos.util.Logger.addListener</a>
+| <a href="dictionary_O.html#21062">org.jpos.iso.packager.ISO87APackager.ISO87APackager</a>
+| <a href="dictionary_O.html#36730">org.jpos.iso.channel.ASCIIChannel.ASCIIChannel</a>
+| <a href="dictionary_O.html#7098">org.jpos.util.ThreadPool.ThreadPool</a>
+| <a href="dictionary_O.html#7127">org.jpos.util.ThreadPool.setLogger</a>
+| <a href="dictionary_O.html#35923">org.jpos.iso.ISOServer.ISOServer</a>
+| <a href="dictionary_O.html#35969">org.jpos.iso.ISOServer.setLogger</a>
+| <a href="dictionary_O.html#35928">org.jpos.iso.ISOServer.addISORequestListener</a>
+| java.lang.Thread.start
+| java.lang.Throwable.printStackTrace<i>  (Virtual)</i>
+| <a href="dictionary_O.html#1955">org.jpos.iso.ISOException.printStackTrace</a><i>  (Virtual)</i>
+
+<a href="dictionary_I.html#36724">isoserver.Test.process</a>
+| <a href="dictionary_O.html#7974">org.jpos.iso.ISOMsg.clone</a>
+| <a href="dictionary_O.html#12233">org.jpos.iso.ISOMsg.setResponseMTI</a>
+| <a href="dictionary_O.html#1751">org.jpos.iso.ISOField.ISOField</a>
+| <a href="dictionary_O.html#7975">org.jpos.iso.ISOMsg.set</a>
+| <a href="dictionary_O.html#10912">org.jpos.iso.ISOSource.send</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#12231">org.jpos.iso.ISOMUX.send</a><i>  (Virtual)</i>
+| <a href="dictionary_O.html#1362">org.jpos.iso.ISOChannel.send</a><i>  (Virtual)</i>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td>C</td><td><a href="simpleinvtree_D.html">D</a></td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td><a href="simpleinvtree_I.html">I</a></td><td><a href="simpleinvtree_J.html">J</a></td><td>K</td><td><a href="simpleinvtree_L.html">L</a></td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td><a href="simpleinvtree_O.html">O</a></td><td><a href="simpleinvtree_P.html">P</a></td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td><a href="simpleinvtree_U.html">U</a></td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table></body></html>

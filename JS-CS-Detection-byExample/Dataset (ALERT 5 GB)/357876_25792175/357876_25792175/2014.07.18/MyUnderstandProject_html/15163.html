@@ -1,0 +1,33 @@
+<html><head><title>LogTemplateProviderTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\tests\src\cgeo\geocaching\utils\LogTemplateProviderTest.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\tests\\src\\cgeo\\geocaching\\utils\\LogTemplateProviderTest.java";
+top.document.title  = "LogTemplateProviderTest.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#90">utils</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import static </span><span class="default">org.assertj.core.api.Assertions.assertThat;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#90">utils</a>.<a href="dictionary_U.html#4071">LogTemplateProvider</a>.<a href="dictionary_L.html#4072">LogContext</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#81">util</a>.<a href="dictionary_U.html#3068">Calendar</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">junit.<a href="dictionary_J.html#79">framework</a>.<a href="dictionary_F.html#77">TestCase</a>;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_U.html#15164">LogTemplateProviderTest</a> extends <a href="dictionary_F.html#77">TestCase</a> </span><span class="default">{</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span>
+<a name="13"><font size=-1>13     </font></a><span class="default">    </span><span class="keyword">public static void <a href="dictionary_L.html#15165">testApplyTemplates</a></span><span class="default">() {</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_N.html#15167">noTemplates</a> </span><span class="default">= </span><span class="string">&quot; no templates &quot;</span><span class="default">;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">        <a href="dictionary_A.html#967">assertEquals</a>(<a href="dictionary_N.html#15167">noTemplates</a>, <a href="dictionary_U.html#4071">LogTemplateProvider</a>.<a href="dictionary_L.html#4137">applyTemplates</a>(<a href="dictionary_N.html#15167">noTemplates</a>, </span><span class="keyword">new <a href="dictionary_L.html#4136">LogContext</a></span><span class="default">(</span><span class="keyword">null</span><span class="default">, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">true</span><span class="default">)));</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default">        </span><span class="comment">// This test can occasionally fail if the current year changes right after the next line.</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">        </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_C.html#15166">currentYear</a> </span><span class="default">= Integer.<a href="dictionary_T.html#1202">toString</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_Y.html#3087">YEAR</a>);</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">        <a href="dictionary_A.html#31">assertThat</a>(<a href="dictionary_U.html#4071">LogTemplateProvider</a>.<a href="dictionary_L.html#4137">applyTemplates</a>(</span><span class="string">&quot;[DATE]&quot;</span><span class="default">, </span><span class="keyword">new <a href="dictionary_L.html#4136">LogContext</a></span><span class="default">(</span><span class="keyword">null</span><span class="default">, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">true</span><span class="default">)).<a href="dictionary_C.html#927">contains</a>(<a href="dictionary_C.html#15166">currentYear</a>)).<a href="dictionary_I.html#635">isTrue</a>();</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    }</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default">}</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+</pre></body></html>

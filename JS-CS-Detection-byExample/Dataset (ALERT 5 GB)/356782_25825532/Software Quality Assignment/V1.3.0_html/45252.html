@@ -1,0 +1,35 @@
+<html><head><title>AssertFailedException.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1-3-0/jpos/src/main/org/jpos/util/AssertFailedException.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1-3-0/jpos/src/main/org/jpos/util/AssertFailedException.java";
+top.document.title  = "AssertFailedException.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">org.jpos.<a href="dictionary_J.html#1002">util</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.PrintStream;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#255">iso</a>.<a href="dictionary_I.html#2313">ISOException</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * AssertFailedException</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * @author  &lt;a href=&quot;mailto:apr@cs.com.uy&quot;&gt;Alejandro P. Revilla&lt;/a&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> */</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_U.html#38280">AssertFailedException</a> extends <a href="dictionary_I.html#2313">ISOException</a> </span><span class="default">{</span>
+<a name="12"><font size=-1>12     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_A.html#38281">AssertFailedException</a></span><span class="default">() {</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">();</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    }</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_A.html#45253">AssertFailedException</a> </span><span class="default">(String <a href="dictionary_S.html#45254">s</a>) {</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_S.html#45254">s</a>);</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    }</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_A.html#45255">AssertFailedException</a> </span><span class="default">(Exception <a href="dictionary_N.html#45256">nested</a>) {</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">	</span><span class="keyword">super</span><span class="default">(<a href="dictionary_N.html#45256">nested</a>);</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    }</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_A.html#45257">AssertFailedException</a> </span><span class="default">(String <a href="dictionary_S.html#45259">s</a>, Exception <a href="dictionary_N.html#45258">nested</a>) {</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">	</span><span class="keyword">super</span><span class="default">(<a href="dictionary_S.html#45259">s</a>, <a href="dictionary_N.html#45258">nested</a>);</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    }</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">}</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,191 @@
+<html><head><title>JepUtil.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_5_0/jpos/src/ext/org/jpos/util/JepUtil.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_5_0/jpos/src/ext/org/jpos/util/JepUtil.java";
+top.document.title  = "JepUtil.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright (c) 2000 jPOS.org.  All rights reserved.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Redistribution and use in source and binary forms, with or without</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * modification, are permitted provided that the following conditions</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * are met:</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * 1. Redistributions of source code must retain the above copyright</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *    notice, this list of conditions and the following disclaimer.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * 2. Redistributions in binary form must reproduce the above copyright</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> *    notice, this list of conditions and the following disclaimer in</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> *    the documentation and/or other materials provided with the</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *    distribution.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> *</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * 3. The end-user documentation included with the redistribution,</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> *    if any, must include the following acknowledgment:</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"> *    &quot;This product includes software developed by the jPOS project</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> *    (http://www.jpos.org/)&quot;. Alternately, this acknowledgment may</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> *    appear in the software itself, if and wherever such third-party</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> *    acknowledgments normally appear.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> *</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * 4. The names &quot;jPOS&quot; and &quot;jPOS.org&quot; must not be used to endorse</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> *    or promote products derived from this software without prior</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> *    written permission. For written permission, please contact</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> *    license@jpos.org.</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> *</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * 5. Products derived from this software may not be called &quot;jPOS&quot;,</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> *    nor may &quot;jPOS&quot; appear in their name, without prior written</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> *    permission of the jPOS project.</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> *</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * IN NO EVENT SHALL THE JPOS PROJECT OR ITS CONTRIBUTORS BE LIABLE FOR</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"> * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"> * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment"> * ====================================================================</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment"> *</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"> * This software consists of voluntary contributions made by many</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * individuals on behalf of the jPOS Project.  For more</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * information please see &lt;http://www.jpos.org/&gt;.</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> */</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"></span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.<a href="dictionary_J.html#1272">util</a>;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.text.DecimalFormat;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#716">ISOException</a>;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#1280">ISOMsg</a>;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.nfunk.<a href="dictionary_N.html#78244">jep</a>.<a href="dictionary_J.html#78211">JEP</a>;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"> * JEP utility, using JEP(see http://sourceforge.net/projects/jep/)</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment"> * to deal expression</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"> * @author &lt;a href=&quot;mailto:tzymail@163.com&quot;&gt;Zhiyu Tang&lt;/a&gt;</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment"> */</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_U.html#12223">JepUtil</a> </span><span class="default">{</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="keyword">static <a href="dictionary_U.html#12223">JepUtil</a> <a href="dictionary_J.html#78242">instance</a> </span><span class="default">= </span><span class="keyword">null</span><span class="default">;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    <a href="dictionary_J.html#78211">JEP</a> <a href="dictionary_J.html#78243">jep</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    </span><span class="keyword">static final </span><span class="default">String <a href="dictionary_J.html#78240">BEGIN_TAG</a> = </span><span class="string">&quot;${&quot;</span><span class="default">;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">    </span><span class="keyword">static final </span><span class="default">String <a href="dictionary_J.html#78241">END_TAG</a> = </span><span class="string">&quot;}&quot;</span><span class="default">;</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">    </span><span class="keyword">static final </span><span class="default">String <a href="dictionary_J.html#78239">ANY</a> = </span><span class="string">&quot;any&quot;</span><span class="default">;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_J.html#12224">JepUtil</a> </span><span class="default">() {</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">      <a href="dictionary_J.html#78243">jep</a> = </span><span class="keyword">new <a href="dictionary_J.html#78211">JEP</a></span><span class="default">();</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">      <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_A.html#78212">addStandardConstants</a>();</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">      <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_A.html#78213">addStandardFunctions</a>();</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">    }</span>
+<a name="78"><font size=-1>78     </font></a><span class="default"> </span>
+<a name="79"><font size=-1>79     </font></a><span class="default">   </span><span class="comment">/**</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">    * Replace macros of the statement.</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">    * The format of macro is &quot;${fieldid}&quot;</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">    * @param m - the ISOMsg</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">    * @param s - the statement</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">    */</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">String <a href="dictionary_J.html#18707">replaceMacro</a>( <a href="dictionary_I.html#1280">ISOMsg</a> <a href="dictionary_M.html#78235">m</a>, String <a href="dictionary_S.html#78237">s</a> )</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    </span><span class="keyword">throws <a href="dictionary_I.html#716">ISOException</a></span>
+<a name="87"><font size=-1>87     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_B.html#78231">beginIdx</a></span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_T.html#78238">tagIdx</a></span><span class="default">, <a href="dictionary_E.html#78232">endIdx</a>;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        StringBuffer <a href="dictionary_R.html#78236">result</a> = </span><span class="keyword">new </span><span class="default">StringBuffer();</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        <a href="dictionary_B.html#78231">beginIdx</a> = </span><span class="number">0</span><span class="default">;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        <a href="dictionary_T.html#78238">tagIdx</a> = <a href="dictionary_S.html#78237">s</a>.indexOf( <a href="dictionary_J.html#78240">BEGIN_TAG</a> );</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_B.html#78229">BEGIN_TAG_LEN</a> </span><span class="default">= <a href="dictionary_J.html#78240">BEGIN_TAG</a>.length();</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_E.html#78230">END_TAG_LEN</a> </span><span class="default">= <a href="dictionary_J.html#78241">END_TAG</a>.length();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">        </span><span class="keyword">while</span><span class="default">( <a href="dictionary_T.html#78238">tagIdx</a> != -</span><span class="number">1 </span><span class="default">){</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">                <a href="dictionary_E.html#78232">endIdx</a> = <a href="dictionary_S.html#78237">s</a>.indexOf( <a href="dictionary_J.html#78241">END_TAG</a> , <a href="dictionary_T.html#78238">tagIdx</a> );</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">                </span><span class="keyword">if</span><span class="default">( <a href="dictionary_E.html#78232">endIdx</a> == -</span><span class="number">1 </span><span class="default">)</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">                  </span><span class="keyword">throw new <a href="dictionary_I.html#720">ISOException</a> </span><span class="default">( </span><span class="string">&quot;tags not match&quot; </span><span class="default">);</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">                <a href="dictionary_R.html#78236">result</a>.append( <a href="dictionary_S.html#78237">s</a>.substring(<a href="dictionary_B.html#78231">beginIdx</a> , <a href="dictionary_T.html#78238">tagIdx</a>));</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">                String <a href="dictionary_F.html#78234">fieldid</a> = <a href="dictionary_S.html#78237">s</a>.substring( <a href="dictionary_T.html#78238">tagIdx</a> + <a href="dictionary_B.html#78229">BEGIN_TAG_LEN</a> , <a href="dictionary_E.html#78232">endIdx</a> );</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">                </span><span class="keyword">int <a href="dictionary_F.html#78233">field</a> </span><span class="default">= Integer.valueOf(<a href="dictionary_F.html#78234">fieldid</a>).intValue();</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">                </span><span class="keyword">if</span><span class="default">( !<a href="dictionary_M.html#78235">m</a>.<a href="dictionary_I.html#5173">hasField</a>( <a href="dictionary_F.html#78233">field</a> ) )</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">                  </span><span class="keyword">throw new <a href="dictionary_I.html#720">ISOException</a> </span><span class="default">( </span><span class="string">&quot;tags not match&quot; </span><span class="default">);</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">                <a href="dictionary_R.html#78236">result</a>.append( <a href="dictionary_M.html#78235">m</a>.<a href="dictionary_I.html#5174">getValue</a>(<a href="dictionary_F.html#78233">field</a>) );</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">                <a href="dictionary_B.html#78231">beginIdx</a> = <a href="dictionary_E.html#78232">endIdx</a> + <a href="dictionary_E.html#78230">END_TAG_LEN</a>;</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">                <a href="dictionary_T.html#78238">tagIdx</a> = <a href="dictionary_S.html#78237">s</a>.indexOf( <a href="dictionary_J.html#78240">BEGIN_TAG</a> , <a href="dictionary_B.html#78231">beginIdx</a> );</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        }</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        <a href="dictionary_R.html#78236">result</a>.append( <a href="dictionary_S.html#78237">s</a>.substring(<a href="dictionary_B.html#78231">beginIdx</a>));</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#78236">result</a></span><span class="default">.toString();</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    }</span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+<a name="112"><font size=-1>112     </font></a><span class="default">   </span><span class="comment">/**</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">    * Return the calculated result</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">    * @param expression - the jep expression</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">    */</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">String <a href="dictionary_J.html#78214">getResult</a>( String <a href="dictionary_E.html#78219">expression</a> )</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">       </span><span class="keyword">throws <a href="dictionary_I.html#716">ISOException</a></span>
+<a name="118"><font size=-1>118     </font></a><span class="keyword">       </span><span class="default">{</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">              String <a href="dictionary_V.html#78222">valueString</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">              <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_P.html#78218">parseExpression</a>( <a href="dictionary_E.html#78219">expression</a> );</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">              </span><span class="keyword">if </span><span class="default">( <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_H.html#78217">hasError</a>() ) {</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">                   </span><span class="keyword">throw new <a href="dictionary_I.html#716">ISOException</a></span><span class="default">( <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_G.html#78215">getErrorInfo</a>());</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">              } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">                   Object <a href="dictionary_V.html#78221">value</a> = <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_G.html#78216">getValueAsObject</a>();</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">                   </span><span class="keyword">if </span><span class="default">(<a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_H.html#78217">hasError</a>()) {</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">                       </span><span class="keyword">throw new <a href="dictionary_I.html#716">ISOException</a></span><span class="default">( <a href="dictionary_J.html#78243">jep</a>.<a href="dictionary_G.html#78215">getErrorInfo</a>());</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">                   }</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">                   </span><span class="keyword">if</span><span class="default">( <a href="dictionary_V.html#78221">value</a>  </span><span class="keyword">instanceof </span><span class="default">Double ){</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">                     DecimalFormat <a href="dictionary_N.html#78220">nf</a> = </span><span class="keyword">new </span><span class="default">DecimalFormat();</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">                     <a href="dictionary_N.html#78220">nf</a>.setDecimalSeparatorAlwaysShown( </span><span class="keyword">false </span><span class="default">);</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">                     <a href="dictionary_N.html#78220">nf</a>.setGroupingUsed( </span><span class="keyword">false </span><span class="default">);</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">                     <a href="dictionary_V.html#78222">valueString</a> = <a href="dictionary_N.html#78220">nf</a>.format(<a href="dictionary_V.html#78221">value</a>);</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">                   }</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">                   </span><span class="keyword">else if</span><span class="default">( <a href="dictionary_V.html#78221">value</a>  </span><span class="keyword">instanceof </span><span class="default">String )</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">                        <a href="dictionary_V.html#78222">valueString</a> = (String)<a href="dictionary_V.html#78221">value</a>;</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">                }</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">               </span><span class="keyword">return <a href="dictionary_V.html#78222">valueString</a></span><span class="default">;</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">    }</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default">   </span><span class="comment">/**</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">    * Return the judgement</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">    * @param expression - the jep expression&lt;br&gt;</span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">    * if expression == &quot;any&quot; always return true</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">    */</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_J.html#78225">getResultBoolean</a></span><span class="default">( String <a href="dictionary_E.html#78226">expression</a> )</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">        </span><span class="keyword">throws <a href="dictionary_I.html#716">ISOException</a></span>
+<a name="147"><font size=-1>147     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">      </span><span class="keyword">if</span><span class="default">( <a href="dictionary_E.html#78226">expression</a>.equals( <a href="dictionary_J.html#78239">ANY</a> ) ||</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">          Integer.valueOf(<a href="dictionary_J.html#78214">getResult</a>(<a href="dictionary_E.html#78226">expression</a>)).intValue() == </span><span class="number">1 </span><span class="default">)</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">        </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">      </span><span class="keyword">else</span>
+<a name="152"><font size=-1>152     </font></a><span class="keyword">        return false</span><span class="default">;</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">    }</span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default">   </span><span class="comment">/**</span>
+<a name="156"><font size=-1>156     </font></a><span class="comment">    * Return the calculated result</span>
+<a name="157"><font size=-1>157     </font></a><span class="comment">    * @param m - the ISOMsg</span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">    * @param statement - the expression including macros</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment">    */</span>
+<a name="160"><font size=-1>160     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">String <a href="dictionary_J.html#35891">getResult</a>( <a href="dictionary_I.html#1280">ISOMsg</a> <a href="dictionary_M.html#78223">m</a>, String <a href="dictionary_S.html#78224">statement</a> )</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">    </span><span class="keyword">throws <a href="dictionary_I.html#716">ISOException</a></span>
+<a name="162"><font size=-1>162     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">           </span><span class="keyword">return <a href="dictionary_J.html#78214">getResult</a></span><span class="default">( <a href="dictionary_J.html#18707">replaceMacro</a>( <a href="dictionary_M.html#78223">m</a>, <a href="dictionary_S.html#78224">statement</a> ) );</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">    }</span>
+<a name="165"><font size=-1>165     </font></a><span class="default"></span>
+<a name="166"><font size=-1>166     </font></a><span class="default">   </span><span class="comment">/**</span>
+<a name="167"><font size=-1>167     </font></a><span class="comment">    * Return the judgement</span>
+<a name="168"><font size=-1>168     </font></a><span class="comment">    * @param m - the ISOMsg</span>
+<a name="169"><font size=-1>169     </font></a><span class="comment">    * @param expression - the jep expression&lt;br&gt;</span>
+<a name="170"><font size=-1>170     </font></a><span class="comment">    * if expression == &quot;any&quot; always return true</span>
+<a name="171"><font size=-1>171     </font></a><span class="comment">    */</span>
+<a name="172"><font size=-1>172     </font></a><span class="comment"></span>
+<a name="173"><font size=-1>173     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_J.html#12232">getResultBoolean</a></span><span class="default">( <a href="dictionary_I.html#1280">ISOMsg</a> <a href="dictionary_M.html#78227">m</a>, String <a href="dictionary_S.html#78228">statement</a> )</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">    </span><span class="keyword">throws <a href="dictionary_I.html#716">ISOException</a></span>
+<a name="175"><font size=-1>175     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">          </span><span class="keyword">return <a href="dictionary_J.html#78225">getResultBoolean</a></span><span class="default">( <a href="dictionary_J.html#18707">replaceMacro</a>( <a href="dictionary_M.html#78227">m</a>, <a href="dictionary_S.html#78228">statement</a> ) );</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">    }</span>
+<a name="178"><font size=-1>178     </font></a><span class="default"></span>
+<a name="179"><font size=-1>179     </font></a><span class="default">}</span>
+<a name="180"><font size=-1>180     </font></a><span class="default"></span>
+<a name="181"><font size=-1>181     </font></a><span class="default"></span>
+</pre></body></html>

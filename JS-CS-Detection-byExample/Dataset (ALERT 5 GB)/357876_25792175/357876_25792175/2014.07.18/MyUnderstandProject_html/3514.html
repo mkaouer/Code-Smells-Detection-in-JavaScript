@@ -1,0 +1,46 @@
+<html><head><title>DateUtils.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\main\src\cgeo\geocaching\utils\DateUtils.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\main\\src\\cgeo\\geocaching\\utils\\DateUtils.java";
+top.document.title  = "DateUtils.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#90">utils</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.<a href="dictionary_G.html#547">Geocache</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#81">util</a>.<a href="dictionary_U.html#3068">Calendar</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#81">util</a>.<a href="dictionary_U.html#3515">Date</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="keyword">public final class <a href="dictionary_U.html#1292">DateUtils</a> </span><span class="default">{</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span>
+<a name="10"><font size=-1>10     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_D.html#3516">DateUtils</a></span><span class="default">() {</span>
+<a name="11"><font size=-1>11     </font></a><span class="default">        </span><span class="comment">// utility class</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment">    </span><span class="default">}</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    </span><span class="keyword">public static int <a href="dictionary_D.html#3517">daysSince</a></span><span class="default">(</span><span class="keyword">long <a href="dictionary_D.html#3523">date</a></span><span class="default">) {</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_U.html#3068">Calendar</a> <a href="dictionary_L.html#3524">logDate</a> </span><span class="default">= <a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_G.html#1192">getInstance</a>();</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">        <a href="dictionary_L.html#3524">logDate</a>.<a href="dictionary_S.html#3519">setTimeInMillis</a>(<a href="dictionary_D.html#3523">date</a>);</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">        <a href="dictionary_L.html#3524">logDate</a>.<a href="dictionary_S.html#2520">set</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_S.html#3522">SECOND</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">        <a href="dictionary_L.html#3524">logDate</a>.<a href="dictionary_S.html#2520">set</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_M.html#3521">MINUTE</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">        <a href="dictionary_L.html#3524">logDate</a>.<a href="dictionary_S.html#2520">set</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_H.html#3520">HOUR_OF_DAY</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_U.html#3068">Calendar</a> <a href="dictionary_T.html#3525">today</a> </span><span class="default">= <a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_G.html#1192">getInstance</a>();</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">        <a href="dictionary_T.html#3525">today</a>.<a href="dictionary_S.html#2520">set</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_S.html#3522">SECOND</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">        <a href="dictionary_T.html#3525">today</a>.<a href="dictionary_S.html#2520">set</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_M.html#3521">MINUTE</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">        <a href="dictionary_T.html#3525">today</a>.<a href="dictionary_S.html#2520">set</a>(<a href="dictionary_U.html#3068">Calendar</a>.<a href="dictionary_H.html#3520">HOUR_OF_DAY</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">        </span><span class="keyword">return </span><span class="default">(</span><span class="keyword">int</span><span class="default">) Math.<a href="dictionary_R.html#493">round</a>((<a href="dictionary_T.html#3525">today</a>.<a href="dictionary_G.html#3518">getTimeInMillis</a>() - <a href="dictionary_L.html#3524">logDate</a>.<a href="dictionary_G.html#3518">getTimeInMillis</a>()) / </span><span class="number">86400000</span><span class="default">d);</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">    }</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    </span><span class="keyword">public static boolean <a href="dictionary_D.html#1319">isPastEvent</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_G.html#547">Geocache</a> <a href="dictionary_C.html#3526">cache</a></span><span class="default">) {</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_C.html#3526">cache</a>.<a href="dictionary_G.html#1304">isEventCache</a>()) {</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">            </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">        }</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_U.html#3515">Date</a> <a href="dictionary_H.html#3527">hiddenDate</a> </span><span class="default">= <a href="dictionary_C.html#3526">cache</a>.<a href="dictionary_G.html#3528">getHiddenDate</a>();</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_H.html#3527">hiddenDate</a> </span><span class="default">!= </span><span class="keyword">null </span><span class="default">&amp;&amp; <a href="dictionary_U.html#1292">DateUtils</a>.<a href="dictionary_D.html#3517">daysSince</a>(<a href="dictionary_H.html#3527">hiddenDate</a>.<a href="dictionary_G.html#2691">getTime</a>()) &gt; </span><span class="number">0</span><span class="default">;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    }</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default">}</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+</pre></body></html>

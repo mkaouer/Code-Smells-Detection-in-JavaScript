@@ -1,0 +1,269 @@
+<html><head><title>DllPlugInTester.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.10/src/DllPlugInTester/DllPlugInTester.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.10/src/DllPlugInTester/DllPlugInTester.cpp";
+top.document.title  = "DllPlugInTester.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/BriefTestProgressListener.h&gt;</span>
+<a name="2"><font size=-1>2     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/CompilerOutputter.h&gt;</span>
+<a name="3"><font size=-1>3     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestPath.h&gt;</span>
+<a name="4"><font size=-1>4     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestResult.h&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestResultCollector.h&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestRunner.h&gt;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TextOutputter.h&gt;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TextTestProgressListener.h&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/XmlOutputter.h&gt;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/extensions/TestFactoryRegistry.h&gt;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/plugin/DynamicLibraryManagerException.h&gt;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/plugin/PlugInParameters.h&gt;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/plugin/PlugInManager.h&gt;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/plugin/TestPlugIn.h&gt;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;iostream&gt;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;fstream&gt;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;CommandLineParser.h&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="comment">/* Notes:</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"></span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">  Memory allocated by test plug-in must be freed before unloading the test plug-in.</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">  That is the reason why the XmlOutputter is explicitely destroyed.</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> */</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"></span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"></span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">/*! Runs the specified tests located in the root suite.</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * \param parser Command line parser.</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * \return \c true if the run succeed, \c false if a test failed or if a test</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> *         path was not resolved.</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> */</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"></span><span class="keyword">bool </span>
+<a name="33"><font size=-1>33     </font></a><span class="keyword"><a href="dictionary_R.html#4078">runTests</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_C.html#4080">CommandLineParser</a> </span><span class="default">&amp;<a href="dictionary_P.html#4079">parser</a> )</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">{</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_W.html#4081">wasSuccessful</a> </span><span class="default">= </span><span class="keyword">false</span><span class="default">;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_P.html#4082">PlugInManager</a> <a href="dictionary_P.html#4083">plugInManager</a>;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span>
+<a name="38"><font size=-1>38     </font></a><span class="default">  </span><span class="comment">// The following scope is used to explicitely free all memory allocated before</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">  // unload the test plug-ins (uppon plugInManager destruction).</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">  </span><span class="default">{</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_T.html#479">TestResult</a> <a href="dictionary_C.html#4084">controller</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_T.html#482">TestResultCollector</a> <a href="dictionary_R.html#4085">result</a>;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    <a href="dictionary_C.html#4084">controller</a>.<a href="dictionary_A.html#484">addListener</a>( &amp;<a href="dictionary_R.html#4085">result</a> );        </span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="comment">// Set up outputters</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">    <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_O.html#1499">ostream</a> *<a href="dictionary_S.html#4086">stream</a> = &amp;<a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#362">cerr</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_U.html#4087">useCoutStream</a>() )</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">      <a href="dictionary_S.html#4086">stream</a> = &amp;<a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#492">cout</a>;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">    <a href="dictionary_S.html#176">std</a>::<a href="dictionary_O.html#1499">ostream</a> *<a href="dictionary_X.html#4088">xmlStream</a> = <a href="dictionary_S.html#4086">stream</a>;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( !<a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4089">getXmlFileName</a>().<a href="dictionary_E.html#147">empty</a>() )</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">      <a href="dictionary_X.html#4088">xmlStream</a> = </span><span class="keyword">new <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_O.html#4090">ofstream</a>( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4089">getXmlFileName</a>().<a href="dictionary_C.html#2139">c_str</a>() );</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default">    <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_X.html#1498">XmlOutputter</a> <a href="dictionary_X.html#4092">xmlOutputter</a>( &amp;<a href="dictionary_R.html#4085">result</a>, *<a href="dictionary_X.html#4088">xmlStream</a>, <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4091">getEncoding</a>() );</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    <a href="dictionary_X.html#4092">xmlOutputter</a>.<a href="dictionary_S.html#1506">setStyleSheet</a>( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4093">getXmlStyleSheet</a>() );</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">    <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_T.html#4095">TextOutputter</a> <a href="dictionary_T.html#4096">textOutputter</a>( &amp;<a href="dictionary_R.html#4085">result</a>, *<a href="dictionary_S.html#4086">stream</a> );</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_C.html#495">CompilerOutputter</a> <a href="dictionary_C.html#4097">compilerOutputter</a>( &amp;<a href="dictionary_R.html#4085">result</a>, *<a href="dictionary_S.html#4086">stream</a> );</span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    </span><span class="comment">// Set up test listeners</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">    <a href="dictionary_C.html#37">CPPUNIT_NS</a></span><span class="default">::<a href="dictionary_B.html#486">BriefTestProgressListener</a> <a href="dictionary_B.html#4098">briefListener</a>;</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_T.html#355">TextTestProgressListener</a> <a href="dictionary_D.html#4099">dotListener</a>;</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_U.html#4100">useBriefTestProgress</a>() )</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">      <a href="dictionary_C.html#4084">controller</a>.<a href="dictionary_A.html#484">addListener</a>( &amp;<a href="dictionary_B.html#4098">briefListener</a> );</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">    </span><span class="keyword">else if </span><span class="default">( !<a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_N.html#4101">noTestProgress</a>() )</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">      <a href="dictionary_C.html#4084">controller</a>.<a href="dictionary_A.html#484">addListener</a>( &amp;<a href="dictionary_D.html#4099">dotListener</a> );</span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    </span><span class="comment">// Set up plug-ins</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">    </span><span class="keyword">for </span><span class="default">( </span><span class="keyword">int <a href="dictionary_I.html#4102">index</a> </span><span class="default">=</span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#4102">index</a> &lt; <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4103">getPlugInCount</a>(); ++<a href="dictionary_I.html#4102">index</a> )</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    {</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">      <a href="dictionary_C.html#4105">CommandLinePlugInInfo</a> <a href="dictionary_P.html#4104">plugIn</a> = <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4106">getPlugInAt</a>( <a href="dictionary_I.html#4102">index</a> );</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">      <a href="dictionary_P.html#4083">plugInManager</a>.<a href="dictionary_L.html#4107">load</a>( <a href="dictionary_P.html#4104">plugIn</a>.<a href="dictionary_M.html#4108">m_fileName</a>, <a href="dictionary_P.html#4104">plugIn</a>.<a href="dictionary_M.html#4109">m_parameters</a> );</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">    }</span>
+<a name="73"><font size=-1>73     </font></a><span class="default"></span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    </span><span class="comment">// Registers plug-in specific TestListener (global setUp/tearDown, custom TestListener...)</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">    <a href="dictionary_P.html#4083">plugInManager</a></span><span class="default">.<a href="dictionary_A.html#4110">addListener</a>( &amp;<a href="dictionary_C.html#4084">controller</a> );</span>
+<a name="76"><font size=-1>76     </font></a><span class="default"></span>
+<a name="77"><font size=-1>77     </font></a><span class="default">    </span><span class="comment">// Adds the default registry suite</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">    <a href="dictionary_C.html#37">CPPUNIT_NS</a></span><span class="default">::<a href="dictionary_T.html#489">TestRunner</a> <a href="dictionary_R.html#4111">runner</a>;</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    <a href="dictionary_R.html#4111">runner</a>.<a href="dictionary_A.html#491">addTest</a>( <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_T.html#463">TestFactoryRegistry</a>::<a href="dictionary_G.html#464">getRegistry</a>().<a href="dictionary_M.html#465">makeTest</a>() );</span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span>
+<a name="81"><font size=-1>81     </font></a><span class="default">    </span><span class="comment">// Runs the specified test</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">    </span><span class="keyword">try</span>
+<a name="83"><font size=-1>83     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">      <a href="dictionary_R.html#4111">runner</a>.<a href="dictionary_R.html#493">run</a>( <a href="dictionary_C.html#4084">controller</a>, <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4112">getTestPath</a>() );</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">      <a href="dictionary_W.html#4081">wasSuccessful</a> = <a href="dictionary_R.html#4085">result</a>.<a href="dictionary_W.html#503">wasSuccessful</a>();</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    }</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">    </span><span class="keyword">catch </span><span class="default">( <a href="dictionary_S.html#176">std</a>::<a href="dictionary_I.html#500">invalid_argument</a> &amp; )</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">    {</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">      <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#362">cerr</a>  &lt;&lt;  </span><span class="string">&quot;Failed to resolve test path: &quot;  </span>
+<a name="90"><font size=-1>90     </font></a><span class="string">                 </span><span class="default">&lt;&lt;  <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4112">getTestPath</a>() </span>
+<a name="91"><font size=-1>91     </font></a><span class="default">                 &lt;&lt;  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    }</span>
+<a name="93"><font size=-1>93     </font></a><span class="default"></span>
+<a name="94"><font size=-1>94     </font></a><span class="default">    </span><span class="comment">// Removes plug-in specific TestListener (not really needed but...)</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">    <a href="dictionary_P.html#4083">plugInManager</a></span><span class="default">.<a href="dictionary_R.html#4113">removeListener</a>( &amp;<a href="dictionary_C.html#4084">controller</a> );</span>
+<a name="96"><font size=-1>96     </font></a><span class="default"></span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    </span><span class="comment">// write using outputters</span>
+<a name="98"><font size=-1>98     </font></a><span class="comment">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_U.html#4114">useCompilerOutputter</a>() )</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">      <a href="dictionary_C.html#4097">compilerOutputter</a>.<a href="dictionary_W.html#497">write</a>();</span>
+<a name="100"><font size=-1>100     </font></a><span class="default"></span>
+<a name="101"><font size=-1>101     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_U.html#4115">useTextOutputter</a>() )</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">      <a href="dictionary_T.html#4096">textOutputter</a>.<a href="dictionary_W.html#4116">write</a>();</span>
+<a name="103"><font size=-1>103     </font></a><span class="default"></span>
+<a name="104"><font size=-1>104     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_U.html#4117">useXmlOutputter</a>() )</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">    {</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">      <a href="dictionary_P.html#4083">plugInManager</a>.<a href="dictionary_A.html#4118">addXmlOutputterHooks</a>( &amp;<a href="dictionary_X.html#4092">xmlOutputter</a> );</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">      <a href="dictionary_X.html#4092">xmlOutputter</a>.<a href="dictionary_W.html#1504">write</a>();</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">      <a href="dictionary_P.html#4083">plugInManager</a>.<a href="dictionary_R.html#4119">removeXmlOutputterHooks</a>();</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">    }</span>
+<a name="110"><font size=-1>110     </font></a><span class="default"></span>
+<a name="111"><font size=-1>111     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( !<a href="dictionary_P.html#4079">parser</a>.<a href="dictionary_G.html#4089">getXmlFileName</a>().<a href="dictionary_E.html#147">empty</a>() )</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">      </span><span class="keyword">delete <a href="dictionary_X.html#4088">xmlStream</a></span><span class="default">;</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">  }</span>
+<a name="114"><font size=-1>114     </font></a><span class="default"></span>
+<a name="115"><font size=-1>115     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_W.html#4081">wasSuccessful</a></span><span class="default">;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">}</span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default"></span>
+<a name="119"><font size=-1>119     </font></a><span class="default"></span><span class="keyword">void</span>
+<a name="120"><font size=-1>120     </font></a><span class="keyword"><a href="dictionary_P.html#4121">printShortUsage</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_S.html#178">string</a> &amp;<a href="dictionary_A.html#4122">applicationName</a> )</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">{</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#492">cout</a>  &lt;&lt; </span><span class="string">&quot;Usage:&quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a></span>
+<a name="123"><font size=-1>123     </font></a><span class="default">             &lt;&lt; <a href="dictionary_A.html#4122">applicationName</a>  &lt;&lt;  </span><span class="string">&quot; [-c -b -n -t -o -w] [-x xml-filename]&quot;</span>
+<a name="124"><font size=-1>124     </font></a><span class="string">             &quot;[-s stylesheet] [-e encoding] plug-in[=parameters] [plug-in...] [:testPath]&quot;</span>
+<a name="125"><font size=-1>125     </font></a><span class="string">             </span><span class="default">&lt;&lt; <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>  &lt;&lt;  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>;</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">}</span>
+<a name="127"><font size=-1>127     </font></a><span class="default"></span>
+<a name="128"><font size=-1>128     </font></a><span class="default"></span>
+<a name="129"><font size=-1>129     </font></a><span class="default"></span><span class="keyword">void</span>
+<a name="130"><font size=-1>130     </font></a><span class="keyword"><a href="dictionary_P.html#4123">printUsage</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_S.html#178">string</a> &amp;<a href="dictionary_A.html#4124">applicationName</a> )</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">{</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">  <a href="dictionary_P.html#4121">printShortUsage</a>( <a href="dictionary_A.html#4124">applicationName</a> );</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#492">cout</a>  &lt;&lt;</span>
+<a name="134"><font size=-1>134     </font></a><span class="default"></span><span class="string">&quot;-c --compiler\n&quot;</span>
+<a name="135"><font size=-1>135     </font></a><span class="string">&quot;	Use CompilerOutputter\n&quot;</span>
+<a name="136"><font size=-1>136     </font></a><span class="string">&quot;-x --xml [filename]\n&quot;</span>
+<a name="137"><font size=-1>137     </font></a><span class="string">&quot;	Use XmlOutputter (if filename is omitted, then output to cout or\n&quot;</span>
+<a name="138"><font size=-1>138     </font></a><span class="string">&quot;	cerr.\n&quot;</span>
+<a name="139"><font size=-1>139     </font></a><span class="string">&quot;-s --xsl stylesheet\n&quot;</span>
+<a name="140"><font size=-1>140     </font></a><span class="string">&quot;	XML style sheet for XML Outputter\n&quot;</span>
+<a name="141"><font size=-1>141     </font></a><span class="string">&quot;-e --encoding encoding\n&quot;</span>
+<a name="142"><font size=-1>142     </font></a><span class="string">&quot;	XML file encoding (UTF8, shift_jis, ISO-8859-1...)\n&quot;</span>
+<a name="143"><font size=-1>143     </font></a><span class="string">&quot;-b --brief-progress\n&quot;</span>
+<a name="144"><font size=-1>144     </font></a><span class="string">&quot;	Use BriefTestProgressListener (default is TextTestProgressListener)\n&quot;</span>
+<a name="145"><font size=-1>145     </font></a><span class="string">&quot;-n --no-progress\n&quot;</span>
+<a name="146"><font size=-1>146     </font></a><span class="string">&quot;	Show no test progress (disable default TextTestProgressListener)\n&quot;</span>
+<a name="147"><font size=-1>147     </font></a><span class="string">&quot;-t --text\n&quot;</span>
+<a name="148"><font size=-1>148     </font></a><span class="string">&quot;	Use TextOutputter\n&quot;</span>
+<a name="149"><font size=-1>149     </font></a><span class="string">&quot;-o --cout\n&quot;</span>
+<a name="150"><font size=-1>150     </font></a><span class="string">&quot;	Ouputters output to cout instead of the default cerr.\n&quot;</span>
+<a name="151"><font size=-1>151     </font></a><span class="string">&quot;-w --wait\n&quot;</span>
+<a name="152"><font size=-1>152     </font></a><span class="string">&quot;	Wait for the user to press a return before exit.\n&quot;</span>
+<a name="153"><font size=-1>153     </font></a><span class="string">&quot;filename[=\&quot;options\&quot;]\n&quot;</span>
+<a name="154"><font size=-1>154     </font></a><span class="string">&quot;	Many filenames can be specified. They are the name of the \n&quot;</span>
+<a name="155"><font size=-1>155     </font></a><span class="string">&quot;	test plug-ins to load. Optional plug-ins parameters can be \n&quot;</span>
+<a name="156"><font size=-1>156     </font></a><span class="string">&quot;	specified after the filename by adding '='.\n&quot;</span>
+<a name="157"><font size=-1>157     </font></a><span class="string">&quot;[:testpath]\n&quot;</span>
+<a name="158"><font size=-1>158     </font></a><span class="string">&quot;	Optional. Only one test path can be specified. It must \n&quot;</span>
+<a name="159"><font size=-1>159     </font></a><span class="string">&quot;	be prefixed with ':'. See TestPath constructor for syntax.\n&quot;</span>
+<a name="160"><font size=-1>160     </font></a><span class="string">&quot;\n&quot;</span>
+<a name="161"><font size=-1>161     </font></a><span class="string">&quot;'parameters' (test plug-in or XML filename, test path...) may contains \n&quot;</span>
+<a name="162"><font size=-1>162     </font></a><span class="string">&quot;spaces if double quoted. Quote may be escaped with \&quot;.\n&quot;</span>
+<a name="163"><font size=-1>163     </font></a><span class="string">&quot;\n&quot;</span>
+<a name="164"><font size=-1>164     </font></a><span class="string">&quot;Some examples of command lines:\n&quot;</span>
+<a name="165"><font size=-1>165     </font></a><span class="string">&quot;\n&quot;</span>
+<a name="166"><font size=-1>166     </font></a><span class="string">&quot;DllPlugInTesterd_dll.exe -b -x tests.xml -c simple_plugind.dll CppUnitTestPlugInd.dll\n&quot;</span>
+<a name="167"><font size=-1>167     </font></a><span class="string">&quot;\n&quot;</span>
+<a name="168"><font size=-1>168     </font></a><span class="string">&quot; Will load 2 tests plug-ins (available in lib/), use the brief test\n&quot;</span>
+<a name="169"><font size=-1>169     </font></a><span class="string">&quot;progress, output the result in XML in file tests.xml and also\n&quot;</span>
+<a name="170"><font size=-1>170     </font></a><span class="string">&quot;output the result using the compiler outputter.\n&quot;</span>
+<a name="171"><font size=-1>171     </font></a><span class="string">&quot;\n&quot;</span>
+<a name="172"><font size=-1>172     </font></a><span class="string">&quot;DllPlugInTesterd_dll.exe ClockerPlugInd.dll=\&quot;flat\&quot; -n CppUnitTestPlugInd.dll\n&quot;</span>
+<a name="173"><font size=-1>173     </font></a><span class="string">&quot;\n&quot;</span>
+<a name="174"><font size=-1>174     </font></a><span class="string">&quot; Will load the 2 test plug-ins, and pass the parameter string \&quot;flat\&quot;\n&quot;</span>
+<a name="175"><font size=-1>175     </font></a><span class="string">&quot;to the Clocker plug-in, disable test progress.\n&quot;</span>
+<a name="176"><font size=-1>176     </font></a><span class="string">  </span><span class="default">&lt;&lt; <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>;</span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span>
+<a name="178"><font size=-1>178     </font></a><span class="default">}</span>
+<a name="179"><font size=-1>179     </font></a><span class="default"></span>
+<a name="180"><font size=-1>180     </font></a><span class="default"></span>
+<a name="181"><font size=-1>181     </font></a><span class="default"></span><span class="comment">/*! Main</span>
+<a name="182"><font size=-1>182     </font></a><span class="comment"> * </span>
+<a name="183"><font size=-1>183     </font></a><span class="comment"> * Usage: </span>
+<a name="184"><font size=-1>184     </font></a><span class="comment"> *</span>
+<a name="185"><font size=-1>185     </font></a><span class="comment"> * DllPlugInTester.exe dll-filename1 [dll-filename2 [dll-filename3 ...]] [:testpath]</span>
+<a name="186"><font size=-1>186     </font></a><span class="comment"> *</span>
+<a name="187"><font size=-1>187     </font></a><span class="comment"> * &lt;em&gt;dll-filename&lt;/em&gt; must be the name of the DLL. If the DLL use some other DLL, they</span>
+<a name="188"><font size=-1>188     </font></a><span class="comment"> * should be in the path or in the same directory as the DLL. The DLL must export</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment"> * a function named &quot;GetTestPlugInInterface&quot; with the signature</span>
+<a name="190"><font size=-1>190     </font></a><span class="comment"> * GetTestPlugInInterfaceFunction. Both are defined in:</span>
+<a name="191"><font size=-1>191     </font></a><span class="comment"> * \code</span>
+<a name="192"><font size=-1>192     </font></a><span class="comment"> * #include &lt;msvc6/testrunner/TestPlugInInterface.h&gt;</span>
+<a name="193"><font size=-1>193     </font></a><span class="comment"> * \endcode.</span>
+<a name="194"><font size=-1>194     </font></a><span class="comment"> *</span>
+<a name="195"><font size=-1>195     </font></a><span class="comment"> * See examples/msvc6/TestPlugIn for an example of post-build testing.</span>
+<a name="196"><font size=-1>196     </font></a><span class="comment"> *</span>
+<a name="197"><font size=-1>197     </font></a><span class="comment"> * If no test path is specified, they all the test of the suite returned by the DLL</span>
+<a name="198"><font size=-1>198     </font></a><span class="comment"> * are run. If a test path is specified, then only the specified test is run. The test</span>
+<a name="199"><font size=-1>199     </font></a><span class="comment"> * path must be prefixed by ':'.</span>
+<a name="200"><font size=-1>200     </font></a><span class="comment"> *</span>
+<a name="201"><font size=-1>201     </font></a><span class="comment"> * Test paths are resolved using Test::resolveTestPath() on the suite returned by</span>
+<a name="202"><font size=-1>202     </font></a><span class="comment"> * TestFactoryRegistry::getRegistry().makeTest();</span>
+<a name="203"><font size=-1>203     </font></a><span class="comment"> *</span>
+<a name="204"><font size=-1>204     </font></a><span class="comment"> * If all test succeed and no error happen then the application exit with code 0.</span>
+<a name="205"><font size=-1>205     </font></a><span class="comment"> * If any error occurs (failed to load dll, failed to resolve test paths) or a </span>
+<a name="206"><font size=-1>206     </font></a><span class="comment"> * test fail, the application exit with code 1. If the application failed to</span>
+<a name="207"><font size=-1>207     </font></a><span class="comment"> * parse the command line, it exits with code 2.</span>
+<a name="208"><font size=-1>208     </font></a><span class="comment"> */</span>
+<a name="209"><font size=-1>209     </font></a><span class="comment"></span><span class="keyword">int </span>
+<a name="210"><font size=-1>210     </font></a><span class="keyword"><a href="dictionary_M.html#7630">main</a></span><span class="default">( </span><span class="keyword">int <a href="dictionary_A.html#4126">argc</a></span><span class="default">, </span>
+<a name="211"><font size=-1>211     </font></a><span class="default">      </span><span class="keyword">char </span><span class="default">*<a href="dictionary_A.html#4127">argv</a>[] )</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">{</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">  </span><span class="keyword">const int <a href="dictionary_S.html#4128">successReturnCode</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="214"><font size=-1>214     </font></a><span class="default">  </span><span class="keyword">const int <a href="dictionary_F.html#4129">failureReturnCode</a> </span><span class="default">= </span><span class="number">1</span><span class="default">;</span>
+<a name="215"><font size=-1>215     </font></a><span class="default">  </span><span class="keyword">const int <a href="dictionary_B.html#4130">badCommadLineReturnCode</a> </span><span class="default">= </span><span class="number">2</span><span class="default">;</span>
+<a name="216"><font size=-1>216     </font></a><span class="default"></span>
+<a name="217"><font size=-1>217     </font></a><span class="default">  </span><span class="comment">// check command line</span>
+<a name="218"><font size=-1>218     </font></a><span class="comment">  <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_S.html#178">string</a> <a href="dictionary_A.html#4131">applicationName</a>( <a href="dictionary_A.html#4127">argv</a>[</span><span class="number">0</span><span class="default">] );</span>
+<a name="219"><font size=-1>219     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_A.html#4126">argc</a> &lt; </span><span class="number">2 </span><span class="default">)</span>
+<a name="220"><font size=-1>220     </font></a><span class="default">  {</span>
+<a name="221"><font size=-1>221     </font></a><span class="default">    <a href="dictionary_P.html#4123">printUsage</a>( <a href="dictionary_A.html#4131">applicationName</a> );</span>
+<a name="222"><font size=-1>222     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_B.html#4130">badCommadLineReturnCode</a></span><span class="default">;</span>
+<a name="223"><font size=-1>223     </font></a><span class="default">  }</span>
+<a name="224"><font size=-1>224     </font></a><span class="default"></span>
+<a name="225"><font size=-1>225     </font></a><span class="default">  <a href="dictionary_C.html#4132">CommandLineParser</a> <a href="dictionary_P.html#4133">parser</a>( <a href="dictionary_A.html#4126">argc</a>, <a href="dictionary_A.html#4127">argv</a> );</span>
+<a name="226"><font size=-1>226     </font></a><span class="default">  </span><span class="keyword">try</span>
+<a name="227"><font size=-1>227     </font></a><span class="keyword">  </span><span class="default">{</span>
+<a name="228"><font size=-1>228     </font></a><span class="default">    <a href="dictionary_P.html#4133">parser</a>.<a href="dictionary_P.html#4134">parse</a>();</span>
+<a name="229"><font size=-1>229     </font></a><span class="default">  }</span>
+<a name="230"><font size=-1>230     </font></a><span class="default">  </span><span class="keyword">catch </span><span class="default">( <a href="dictionary_C.html#4136">CommandLineParserException</a> &amp;<a href="dictionary_E.html#4135">e</a> )</span>
+<a name="231"><font size=-1>231     </font></a><span class="default">  {</span>
+<a name="232"><font size=-1>232     </font></a><span class="default">    <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#362">cerr</a>  &lt;&lt;  </span><span class="string">&quot;Error while parsing command line: &quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_E.html#4135">e</a>.<a href="dictionary_W.html#4137">what</a>()  </span>
+<a name="233"><font size=-1>233     </font></a><span class="default">               &lt;&lt; <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a> &lt;&lt; <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>;</span>
+<a name="234"><font size=-1>234     </font></a><span class="default">    <a href="dictionary_P.html#4121">printShortUsage</a>( <a href="dictionary_A.html#4131">applicationName</a> );</span>
+<a name="235"><font size=-1>235     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_B.html#4130">badCommadLineReturnCode</a></span><span class="default">;</span>
+<a name="236"><font size=-1>236     </font></a><span class="default">  }</span>
+<a name="237"><font size=-1>237     </font></a><span class="default"></span>
+<a name="238"><font size=-1>238     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_W.html#4138">wasSuccessful</a> </span><span class="default">= </span><span class="keyword">false</span><span class="default">;</span>
+<a name="239"><font size=-1>239     </font></a><span class="default">  </span><span class="keyword">try</span>
+<a name="240"><font size=-1>240     </font></a><span class="keyword">  </span><span class="default">{</span>
+<a name="241"><font size=-1>241     </font></a><span class="default">    <a href="dictionary_W.html#4138">wasSuccessful</a> = <a href="dictionary_R.html#4078">runTests</a>( <a href="dictionary_P.html#4133">parser</a> );</span>
+<a name="242"><font size=-1>242     </font></a><span class="default">  }</span>
+<a name="243"><font size=-1>243     </font></a><span class="default">  </span><span class="keyword">catch </span><span class="default">( <a href="dictionary_C.html#37">CPPUNIT_NS</a>::<a href="dictionary_D.html#4140">DynamicLibraryManagerException</a> &amp;<a href="dictionary_E.html#4139">e</a> )</span>
+<a name="244"><font size=-1>244     </font></a><span class="default">  {</span>
+<a name="245"><font size=-1>245     </font></a><span class="default">    <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#362">cerr</a>  &lt;&lt; </span><span class="string">&quot;Failed to load test plug-in:&quot;  </span><span class="default">&lt;&lt;  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a></span>
+<a name="246"><font size=-1>246     </font></a><span class="default">               &lt;&lt; <a href="dictionary_E.html#4139">e</a>.<a href="dictionary_W.html#501">what</a>() &lt;&lt; <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>;</span>
+<a name="247"><font size=-1>247     </font></a><span class="default">  }</span>
+<a name="248"><font size=-1>248     </font></a><span class="default"></span>
+<a name="249"><font size=-1>249     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_P.html#4133">parser</a>.<a href="dictionary_W.html#4141">waitBeforeExit</a>() )</span>
+<a name="250"><font size=-1>250     </font></a><span class="default">  {</span>
+<a name="251"><font size=-1>251     </font></a><span class="default">    <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#492">cout</a> &lt;&lt; </span><span class="string">&quot;Please press &lt;RETURN&gt; to exit&quot; </span><span class="default">&lt;&lt; <a href="dictionary_S.html#176">std</a>::<a href="dictionary_E.html#373">endl</a>;</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">    <a href="dictionary_S.html#176">std</a>::<a href="dictionary_C.html#4142">cin</a>.<a href="dictionary_G.html#4143">get</a>();</span>
+<a name="253"><font size=-1>253     </font></a><span class="default">  }</span>
+<a name="254"><font size=-1>254     </font></a><span class="default"></span>
+<a name="255"><font size=-1>255     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_W.html#4138">wasSuccessful</a> </span><span class="default">? <a href="dictionary_S.html#4128">successReturnCode</a> : <a href="dictionary_F.html#4129">failureReturnCode</a>;</span>
+<a name="256"><font size=-1>256     </font></a><span class="default">}</span>
+<a name="257"><font size=-1>257     </font></a><span class="default"></span>
+<a name="258"><font size=-1>258     </font></a><span class="default"></span>
+<a name="259"><font size=-1>259     </font></a><span class="default"></span>
+</pre></body></html>

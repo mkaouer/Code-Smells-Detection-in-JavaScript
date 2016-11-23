@@ -1,0 +1,20 @@
+#!/bin/bash
+ROOT=/cvsroot/passwordsafe/pwsafe/psafe
+FROM=${ROOT}/
+TO=${ROOT}/corelib/
+MV=/bin/mv
+
+$MV ${FROM}BlowFish.cpp,v $TO
+$MV ${FROM}BlowFish.h,v $TO
+$MV ${FROM}ItemData.cpp,v $TO
+$MV ${FROM}ItemData.h,v $TO
+$MV ${FROM}MyString.cpp,v $TO
+$MV ${FROM}MyString.h,v $TO
+$MV ${FROM}PWCharPool.cpp,v $TO
+$MV ${FROM}PWCharPool.h,v $TO
+$MV ${FROM}Util.cpp,v $TO
+$MV ${FROM}Util.h,v $TO
+$MV ${FROM}sha1.cpp,v $TO
+$MV ${FROM}sha1.h,v $TO
+
+exit 0

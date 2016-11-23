@@ -1,0 +1,112 @@
+<html><head><title>BSHRequestListener.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_8_0/jpos/src/main/java/org/jpos/bsh/BSHRequestListener.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_8_0/jpos/src/main/java/org/jpos/bsh/BSHRequestListener.java";
+top.document.title  = "BSHRequestListener.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2010 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.<a href="dictionary_J.html#42081">bsh</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import <a href="dictionary_B.html#2567">bsh</a></span><span class="default">.<a href="dictionary_B.html#2436">Interpreter</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1241">core</a>.<a href="dictionary_C.html#2283">Configurable</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1241">core</a>.<a href="dictionary_C.html#2284">Configuration</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#1241">core</a>.<a href="dictionary_C.html#1238">ConfigurationException</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#596">iso</a>.<a href="dictionary_I.html#592">ISOMsg</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#596">iso</a>.<a href="dictionary_I.html#3459">ISORequestListener</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#596">iso</a>.<a href="dictionary_I.html#3460">ISOSource</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#568">util</a>.<a href="dictionary_U.html#2583">Log</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.Arrays;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.HashSet;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * BSHRequestListener - BeanShell based request listener</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * @author &lt;a href=&quot;mailto:apr@cs.com.uy&quot;&gt;Alejandro P. Revilla&lt;/a&gt;</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> */</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_B.html#81705">BSHRequestListener</a> extends <a href="dictionary_U.html#2583">Log</a> </span>
+<a name="39"><font size=-1>39     </font></a><span class="keyword">    implements <a href="dictionary_I.html#3459">ISORequestListener</a></span><span class="default">, <a href="dictionary_C.html#2283">Configurable</a></span>
+<a name="40"><font size=-1>40     </font></a><span class="default">{</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    </span><span class="keyword">protected static final </span><span class="default">String <a href="dictionary_B.html#81720">MTI_MACRO</a> = </span><span class="string">&quot;$mti&quot;</span><span class="default">;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    </span><span class="keyword">protected </span><span class="default">HashSet <a href="dictionary_B.html#81723">whitelist</a>;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    </span><span class="keyword">protected </span><span class="default">String[] <a href="dictionary_B.html#81721">bshSource</a>;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    <a href="dictionary_C.html#2284">Configuration</a> <a href="dictionary_B.html#81722">cfg</a>;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_B.html#81706">BSHRequestListener</a> </span><span class="default">() {</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">();</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    }</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">   </span><span class="comment">/**</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">    * @param cfg</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">    * &lt;ul&gt;</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">    *  &lt;li&gt;whitelist - supported message types (example: &quot;1100,1220&quot;)</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">    *  &lt;li&gt;source - BSH script(s) to run (can be more than one)</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">    * &lt;/ul&gt;</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">    */</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_B.html#81717">setConfiguration</a> </span><span class="default">(<a href="dictionary_C.html#2284">Configuration</a> <a href="dictionary_C.html#81718">cfg</a>) </span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        </span><span class="keyword">throws <a href="dictionary_C.html#1238">ConfigurationException</a></span>
+<a name="57"><font size=-1>57     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_B.html#81722">cfg</a> = <a href="dictionary_C.html#81718">cfg</a>;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">        <a href="dictionary_B.html#81721">bshSource</a> = <a href="dictionary_C.html#81718">cfg</a>.<a href="dictionary_C.html#7112">getAll</a> (</span><span class="string">&quot;source&quot;</span><span class="default">);</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">        String[] <a href="dictionary_M.html#81719">mti</a> = <a href="dictionary_C.html#81718">cfg</a>.<a href="dictionary_C.html#4086">get</a> (</span><span class="string">&quot;whitelist&quot;</span><span class="default">, </span><span class="string">&quot;*&quot;</span><span class="default">).split(</span><span class="string">&quot;,&quot;</span><span class="default">);</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        <a href="dictionary_B.html#81723">whitelist</a> = </span><span class="keyword">new </span><span class="default">HashSet( Arrays.asList(<a href="dictionary_M.html#81719">mti</a>) );</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    }</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">    </span><span class="keyword">public boolean <a href="dictionary_B.html#81707">process</a> </span><span class="default">(<a href="dictionary_I.html#3460">ISOSource</a> <a href="dictionary_S.html#81716">source</a>, <a href="dictionary_I.html#592">ISOMsg</a> <a href="dictionary_M.html#81714">m</a>) {</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">        </span><span class="keyword">try</span><span class="default">{</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">            String <a href="dictionary_M.html#81715">mti</a> = <a href="dictionary_M.html#81714">m</a>.<a href="dictionary_I.html#3483">getMTI</a> ();</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_B.html#81723">whitelist</a>.contains(<a href="dictionary_M.html#81715">mti</a>) &amp;&amp; !<a href="dictionary_B.html#81723">whitelist</a>.contains(</span><span class="string">&quot;*&quot;</span><span class="default">))</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">                <a href="dictionary_M.html#81715">mti</a> = </span><span class="string">&quot;unsupported&quot;</span><span class="default">;</span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span>
+<a name="70"><font size=-1>70     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#81711">i</a></span><span class="default">=</span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#81711">i</a>&lt;<a href="dictionary_B.html#81721">bshSource</a>.length; i++) {</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">                    <a href="dictionary_B.html#2436">Interpreter</a> <a href="dictionary_B.html#81710">bsh</a> = </span><span class="keyword">new <a href="dictionary_B.html#2436">Interpreter</a> </span><span class="default">();</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">                    <a href="dictionary_B.html#81710">bsh</a>.<a href="dictionary_S.html#2467">set</a> (</span><span class="string">&quot;source&quot;</span><span class="default">, <a href="dictionary_S.html#81716">source</a>);</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">                    <a href="dictionary_B.html#81710">bsh</a>.<a href="dictionary_S.html#2467">set</a> (</span><span class="string">&quot;message&quot;</span><span class="default">, <a href="dictionary_M.html#81714">m</a>);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">                    <a href="dictionary_B.html#81710">bsh</a>.<a href="dictionary_S.html#2467">set</a> (</span><span class="string">&quot;log&quot;</span><span class="default">, </span><span class="keyword">this</span><span class="default">);</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">                    <a href="dictionary_B.html#81710">bsh</a>.<a href="dictionary_S.html#2467">set</a> (</span><span class="string">&quot;cfg&quot;</span><span class="default">, <a href="dictionary_B.html#81722">cfg</a>);</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+<a name="78"><font size=-1>78     </font></a><span class="default">                    </span><span class="keyword">int <a href="dictionary_I.html#81712">idx</a> </span><span class="default">= <a href="dictionary_B.html#81721">bshSource</a>[<a href="dictionary_I.html#81711">i</a>].indexOf(<a href="dictionary_B.html#81720">MTI_MACRO</a>);</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">                    String <a href="dictionary_S.html#81713">script</a>;</span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span>
+<a name="81"><font size=-1>81     </font></a><span class="default">                    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#81712">idx</a> &gt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">                        </span><span class="comment">// replace $mti with the actual value in script file name</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">                        <a href="dictionary_S.html#81713">script</a> </span><span class="default">= <a href="dictionary_B.html#81721">bshSource</a>[<a href="dictionary_I.html#81711">i</a>].substring(</span><span class="number">0</span><span class="default">, <a href="dictionary_I.html#81712">idx</a>) + <a href="dictionary_M.html#81715">mti</a> +</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">                            <a href="dictionary_B.html#81721">bshSource</a>[<a href="dictionary_I.html#81711">i</a>].substring(<a href="dictionary_I.html#81712">idx</a> + <a href="dictionary_B.html#81720">MTI_MACRO</a>.length());</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">                    } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">                        <a href="dictionary_S.html#81713">script</a> = <a href="dictionary_B.html#81721">bshSource</a>[<a href="dictionary_I.html#81711">i</a>];</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">                    }</span>
+<a name="88"><font size=-1>88     </font></a><span class="default"></span>
+<a name="89"><font size=-1>89     </font></a><span class="default">                    <a href="dictionary_B.html#81710">bsh</a>.<a href="dictionary_S.html#2440">source</a> (<a href="dictionary_S.html#81713">script</a>);</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#81709">e</a>) {</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">                    <a href="dictionary_L.html#2584">warn</a> (<a href="dictionary_E.html#81709">e</a>);</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">                }</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">            }</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">        }</span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#81708">e</a>){</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">            <a href="dictionary_L.html#2584">warn</a>(<a href="dictionary_E.html#81708">e</a>);</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">            </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">        }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">        </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">    }</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">}</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default"></span>
+</pre></body></html>

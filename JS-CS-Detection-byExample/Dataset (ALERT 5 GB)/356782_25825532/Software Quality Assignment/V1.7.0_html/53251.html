@@ -1,0 +1,100 @@
+<html><head><title>IFB_BITMAP.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_7_0/modules/jpos/src/org/jpos/iso/IFB_BITMAP.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_7_0/modules/jpos/src/org/jpos/iso/IFB_BITMAP.java";
+top.document.title  = "IFB_BITMAP.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2010 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.<a href="dictionary_J.html#755">iso</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.IOException;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.InputStream;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.BitSet;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> * ISOFieldPackager Binary Bitmap</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> *</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * @author apr@cs.com.uy</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * @version $Id$</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * @see ISOComponent</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * @see ISOBitMapPackager</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> */</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_I.html#1318">IFB_BITMAP</a> extends <a href="dictionary_I.html#8495">ISOBitMapPackager</a> </span><span class="default">{</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_I.html#53252">IFB_BITMAP</a></span><span class="default">() {</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">();</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    }</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">     * @param len - field len</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">     * @param description symbolic descrption</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">     */</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_I.html#1317">IFB_BITMAP</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_L.html#53254">len</a></span><span class="default">, String <a href="dictionary_D.html#53253">description</a>) {</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_L.html#53254">len</a>, <a href="dictionary_D.html#53253">description</a>);</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    }</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">     * @param c - a component</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">     * @return packed component</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">     * @exception ISOException</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     */</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">    </span><span class="keyword">public byte</span><span class="default">[] <a href="dictionary_I.html#48414">pack</a> (<a href="dictionary_I.html#2563">ISOComponent</a> <a href="dictionary_C.html#53257">c</a>) </span><span class="keyword">throws <a href="dictionary_I.html#2564">ISOException</a> </span><span class="default">{</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">        BitSet <a href="dictionary_B.html#53256">b</a> = (BitSet) <a href="dictionary_C.html#53257">c</a>.<a href="dictionary_I.html#3678">getValue</a>();</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_L.html#53258">len</a> </span><span class="default">= </span>
+<a name="52"><font size=-1>52     </font></a><span class="default">            <a href="dictionary_I.html#3676">getLength</a>() &gt;= </span><span class="number">8 </span><span class="default">?</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">                (((<a href="dictionary_B.html#53256">b</a>.length()+</span><span class="number">62</span><span class="default">)&gt;&gt;</span><span class="number">6</span><span class="default">)&lt;&lt;</span><span class="number">3</span><span class="default">) : <a href="dictionary_I.html#3676">getLength</a>();</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_I.html#1388">ISOUtil</a></span><span class="default">.<a href="dictionary_I.html#8500">bitSet2byte</a> (<a href="dictionary_B.html#53256">b</a>, <a href="dictionary_L.html#53258">len</a>);</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    }</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     * @param c - the Component to unpack</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * @param b - binary image</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     * @param offset - starting offset within the binary image</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     * @return consumed bytes</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">     * @exception ISOException</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">     */</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_I.html#48413">unpack</a> </span><span class="default">(<a href="dictionary_I.html#2563">ISOComponent</a> <a href="dictionary_C.html#53261">c</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_B.html#53259">b</a>, </span><span class="keyword">int <a href="dictionary_O.html#53263">offset</a></span><span class="default">)</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        </span><span class="keyword">throws <a href="dictionary_I.html#2564">ISOException</a></span>
+<a name="65"><font size=-1>65     </font></a><span class="keyword">    </span><span class="default">{</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_L.html#53262">len</a></span><span class="default">;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        BitSet <a href="dictionary_B.html#53260">bmap</a> = <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#53268">byte2BitSet</a> (<a href="dictionary_B.html#53259">b</a>, <a href="dictionary_O.html#53263">offset</a>, <a href="dictionary_I.html#3676">getLength</a>() &lt;&lt; </span><span class="number">3</span><span class="default">);</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        <a href="dictionary_C.html#53261">c</a>.<a href="dictionary_I.html#3687">setValue</a>(<a href="dictionary_B.html#53260">bmap</a>);</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        <a href="dictionary_L.html#53262">len</a> = <a href="dictionary_B.html#53260">bmap</a>.get(</span><span class="number">1</span><span class="default">) ? </span><span class="number">128 </span><span class="default">: </span><span class="number">64</span><span class="default">;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#3676">getLength</a>() &gt; </span><span class="number">16 </span><span class="default">&amp;&amp; <a href="dictionary_B.html#53260">bmap</a>.get(</span><span class="number">65</span><span class="default">))</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">            <a href="dictionary_L.html#53262">len</a> = </span><span class="number">192</span><span class="default">;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        </span><span class="keyword">return </span><span class="default">(Math.min (<a href="dictionary_I.html#3676">getLength</a>(), <a href="dictionary_L.html#53262">len</a> &gt;&gt; </span><span class="number">3</span><span class="default">));</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    }</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_I.html#53264">unpack</a> </span><span class="default">(<a href="dictionary_I.html#2563">ISOComponent</a> <a href="dictionary_C.html#53266">c</a>, InputStream <a href="dictionary_I.html#53267">in</a>) </span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">IOException, <a href="dictionary_I.html#2564">ISOException</a></span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    {</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">        BitSet <a href="dictionary_B.html#53265">bmap</a> = <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#53269">byte2BitSet</a> (</span><span class="keyword">new </span><span class="default">BitSet (</span><span class="number">64</span><span class="default">), <a href="dictionary_I.html#8505">readBytes</a> (<a href="dictionary_I.html#53267">in</a>, </span><span class="number">8</span><span class="default">), </span><span class="number">0</span><span class="default">);</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#3676">getLength</a>() &gt; </span><span class="number">8 </span><span class="default">&amp;&amp; <a href="dictionary_B.html#53265">bmap</a>.get (</span><span class="number">1</span><span class="default">)) {</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">            <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#53269">byte2BitSet</a> (<a href="dictionary_B.html#53265">bmap</a>, <a href="dictionary_I.html#8505">readBytes</a> (<a href="dictionary_I.html#53267">in</a>, </span><span class="number">8</span><span class="default">), </span><span class="number">64</span><span class="default">); </span>
+<a name="80"><font size=-1>80     </font></a><span class="default">        }</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#3676">getLength</a>() &gt; </span><span class="number">16 </span><span class="default">&amp;&amp; <a href="dictionary_B.html#53265">bmap</a>.get (</span><span class="number">65</span><span class="default">)) {</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">            <a href="dictionary_I.html#1388">ISOUtil</a>.<a href="dictionary_I.html#53269">byte2BitSet</a> (<a href="dictionary_B.html#53265">bmap</a>, <a href="dictionary_I.html#8505">readBytes</a> (<a href="dictionary_I.html#53267">in</a>, </span><span class="number">8</span><span class="default">), </span><span class="number">128</span><span class="default">); </span>
+<a name="83"><font size=-1>83     </font></a><span class="default">        }</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        <a href="dictionary_C.html#53266">c</a>.<a href="dictionary_I.html#3687">setValue</a>(<a href="dictionary_B.html#53265">bmap</a>);</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    }</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    </span><span class="keyword">public int <a href="dictionary_I.html#53255">getMaxPackedLength</a></span><span class="default">() {</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_I.html#3676">getLength</a></span><span class="default">() &gt;&gt; </span><span class="number">3</span><span class="default">;</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">    }</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">}</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+</pre></body></html>

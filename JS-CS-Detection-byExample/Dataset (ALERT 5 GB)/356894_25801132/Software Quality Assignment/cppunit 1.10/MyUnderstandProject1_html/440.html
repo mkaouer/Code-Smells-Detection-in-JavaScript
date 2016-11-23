@@ -1,0 +1,193 @@
+<html><head><title>TestFactoryRegistry.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.10/include/cppunit/extensions/TestFactoryRegistry.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.10/include/cppunit/extensions/TestFactoryRegistry.h";
+top.document.title  = "TestFactoryRegistry.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_C.html#7481">CPPUNIT_EXTENSIONS_TESTFACTORYREGISTRY_H</a></span>
+<a name="2"><font size=-1>2     </font></a><span class="preproc">#define <a href="dictionary_C.html#7481">CPPUNIT_EXTENSIONS_TESTFACTORYREGISTRY_H</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#include </span><span class="string">&lt;cppunit/Portability.h&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#if <a href="dictionary_C.html#228">CPPUNIT_NEED_DLL_DECL</a></span>
+<a name="7"><font size=-1>7     </font></a><span class="preproc">#pragma </span><span class="default">warning( push )</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="preproc">#pragma </span><span class="default">warning( disable: </span><span class="number">4251</span><span class="default">)  </span><span class="comment">// X needs to have dll-interface to be used by clients of class Z</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"></span><span class="preproc">#endif</span>
+<a name="10"><font size=-1>10     </font></a><span class="preproc"></span>
+<a name="11"><font size=-1>11     </font></a><span class="preproc">#include </span><span class="string">&lt;cppunit/portability/CppUnitSet.h&gt;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/extensions/TestFactory.h&gt;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;string&gt;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span>
+<a name="15"><font size=-1>15     </font></a><span class="string"><a href="dictionary_C.html#99">CPPUNIT_NS_BEGIN</a></span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="keyword">class <a href="dictionary_T.html#43">TestSuite</a></span><span class="default">;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="preproc">#if <a href="dictionary_C.html#228">CPPUNIT_NEED_DLL_DECL</a></span>
+<a name="21"><font size=-1>21     </font></a><span class="preproc"></span><span class="comment">//  template class CPPUNIT_API std::set&lt;TestFactory *&gt;;</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"></span><span class="preproc">#endif</span>
+<a name="23"><font size=-1>23     </font></a><span class="preproc"></span>
+<a name="24"><font size=-1>24     </font></a><span class="preproc"></span>
+<a name="25"><font size=-1>25     </font></a><span class="preproc"></span><span class="comment">/*! \brief Registry for TestFactory.</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> * \ingroup CreatingTestSuite</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> *</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * Notes that the registry \b DON'T assumes lifetime control for any registered tests</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * anymore.</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> *</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * The &lt;em&gt;default&lt;/em&gt; registry is the registry returned by getRegistry() with the </span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * default name parameter value.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> *</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * To register tests, use the macros:</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * - CPPUNIT_TEST_SUITE_REGISTRATION(): to add tests in the default registry.</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * - CPPUNIT_TEST_SUITE_NAMED_REGISTRATION(): to add tests in a named registry.</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> *</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * Example 1: retreiving a suite that contains all the test registered with</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> * CPPUNIT_TEST_SUITE_REGISTRATION().</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"> * \code</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"> * CppUnit::TestFactoryRegistry &amp;registry = CppUnit::TestFactoryRegistry::getRegistry();</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment"> * CppUnit::TestSuite *suite = registry.makeTest();</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment"> * \endcode</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment"> *</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"> * Example 2: retreiving a suite that contains all the test registered with</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * \link CPPUNIT_TEST_SUITE_NAMED_REGISTRATION() CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ..., &quot;Math&quot; )\endlink.</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * \code</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> * CppUnit::TestFactoryRegistry &amp;mathRegistry = CppUnit::TestFactoryRegistry::getRegistry( &quot;Math&quot; );</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"> * CppUnit::TestSuite *mathSuite = mathRegistry.makeTest();</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"> * \endcode</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> *</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> * Example 3: creating a test suite hierarchy composed of unnamed registration and</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> * named registration:</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"> * - All Tests</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"> *   - tests registered with CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ..., &quot;Graph&quot; )</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment"> *   - tests registered with CPPUNIT_TEST_SUITE_NAMED_REGISTRATION( ..., &quot;Math&quot; )</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"> *   - tests registered with CPPUNIT_TEST_SUITE_REGISTRATION</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment"> *</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment"> * \code</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"> * CppUnit::TestSuite *rootSuite = new CppUnit::TestSuite( &quot;All tests&quot; );</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment"> * rootSuite-&gt;addTest( CppUnit::TestFactoryRegistry::getRegistry( &quot;Graph&quot; ).makeTest() );</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"> * rootSuite-&gt;addTest( CppUnit::TestFactoryRegistry::getRegistry( &quot;Math&quot; ).makeTest() );</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"> * CppUnit::TestFactoryRegistry::getRegistry().addTestToSuite( rootSuite );</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment"> * \endcode</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"> *</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"> * The same result can be obtained with:</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"> * \code</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment"> * CppUnit::TestFactoryRegistry &amp;registry = CppUnit::TestFactoryRegistry::getRegistry();</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment"> * registry.addRegistry( &quot;Graph&quot; );</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"> * registry.addRegistry( &quot;Math&quot; );</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"> * CppUnit::TestSuite *suite = registry.makeTest();</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"> * \endcode</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"> *</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"> * Since a TestFactoryRegistry is a TestFactory, the named registries can be </span>
+<a name="75"><font size=-1>75     </font></a><span class="comment"> * registered in the unnamed registry, creating the hierarchy links.</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment"> *</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment"> * \see TestSuiteFactory, AutoRegisterSuite</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment"> * \see CPPUNIT_TEST_SUITE_REGISTRATION, CPPUNIT_TEST_SUITE_NAMED_REGISTRATION</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment"> */</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_C.html#232">CPPUNIT_API</a> <a href="dictionary_T.html#463">TestFactoryRegistry</a> </span><span class="default">: </span><span class="keyword">public <a href="dictionary_T.html#4242">TestFactory</a></span>
+<a name="81"><font size=-1>81     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="82"><font size=-1>82     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">  </span><span class="comment">/** Constructs the registry with the specified name.</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">   * \param name Name of the registry. It is the name of TestSuite returned by</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">   *             makeTest().</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">   */</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">  <a href="dictionary_T.html#4236">TestFactoryRegistry</a></span><span class="default">( <a href="dictionary_S.html#176">std</a>::<a href="dictionary_S.html#178">string</a> name );</span>
+<a name="88"><font size=-1>88     </font></a><span class="default"></span>
+<a name="89"><font size=-1>89     </font></a><span class="default">  </span><span class="comment">/// Destructor.</span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">  </span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#4241">TestFactoryRegistry</a>();</span>
+<a name="91"><font size=-1>91     </font></a><span class="default"></span>
+<a name="92"><font size=-1>92     </font></a><span class="default">  </span><span class="comment">/** Returns a new TestSuite that contains the registered test.</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">   * \return A new TestSuite which contains all the test added using </span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">   * registerFactory(TestFactory *).</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">   */</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">  </span><span class="keyword">virtual <a href="dictionary_T.html#61">Test</a> </span><span class="default">*<a href="dictionary_M.html#465">makeTest</a>();</span>
+<a name="97"><font size=-1>97     </font></a><span class="default"></span>
+<a name="98"><font size=-1>98     </font></a><span class="default">  </span><span class="comment">/** Returns a named registry.</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">   *</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment">   * If the \a name is left to its default value, then the registry that is returned is</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">   * the one used by CPPUNIT_TEST_SUITE_REGISTRATION(): the 'top' level registry.</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">   *</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">   * \param name Name of the registry to return.</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">   * \return Registry. If the registry does not exist, it is created with the</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">   *         specified name.</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">   */</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">  </span><span class="keyword">static <a href="dictionary_T.html#463">TestFactoryRegistry</a> </span><span class="default">&amp;<a href="dictionary_G.html#464">getRegistry</a>( </span><span class="keyword">const <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_S.html#178">string</a> &amp;name = </span><span class="string">&quot;All Tests&quot; </span><span class="default">);</span>
+<a name="108"><font size=-1>108     </font></a><span class="default"></span>
+<a name="109"><font size=-1>109     </font></a><span class="default">  </span><span class="comment">/** Adds the registered tests to the specified suite.</span>
+<a name="110"><font size=-1>110     </font></a><span class="comment">   * \param suite Suite the tests are added to.</span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">   */</span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_A.html#4257">addTestToSuite</a></span><span class="default">( <a href="dictionary_T.html#43">TestSuite</a> *suite );</span>
+<a name="113"><font size=-1>113     </font></a><span class="default"></span>
+<a name="114"><font size=-1>114     </font></a><span class="default">  </span><span class="comment">/** Adds the specified TestFactory to the registry.</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">   *</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">   * \param factory Factory to register. </span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">   */</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_R.html#4248">registerFactory</a></span><span class="default">( <a href="dictionary_T.html#4242">TestFactory</a> *factory );</span>
+<a name="119"><font size=-1>119     </font></a><span class="default"></span>
+<a name="120"><font size=-1>120     </font></a><span class="default">  </span><span class="comment">/*! Removes the specified TestFactory from the registry.</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">   * </span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">   * The specified factory is not destroyed.</span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">   * \param factory Factory to remove from the registry.</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">   * \todo Address case when trying to remove a TestRegistryFactory.</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">   */</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_U.html#4251">unregisterFactory</a></span><span class="default">( <a href="dictionary_T.html#4242">TestFactory</a> *factory );</span>
+<a name="127"><font size=-1>127     </font></a><span class="default"></span>
+<a name="128"><font size=-1>128     </font></a><span class="default">  </span><span class="comment">/*! Adds a registry to the registry.</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">   * </span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">   * Convenience method to help create test hierarchy. See TestFactoryRegistry detail</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">   * for examples of use. Calling this method is equivalent to:</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">   * \code</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">   * this-&gt;registerFactory( TestFactoryRegistry::getRegistry( name ) );</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">   * \endcode</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">   *</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">   * \param name Name of the registry to add.</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">   */</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_A.html#4253">addRegistry</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_S.html#178">string</a> &amp;name );</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default">  </span><span class="comment">/*! Tests if the registry is valid.</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">   *</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">   * This method should be used when unregistering test factory on static variable </span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">   * destruction to ensure that the registry has not been already destroyed (in </span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">   * that case there is no need to unregister the test factory).</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">   *</span>
+<a name="146"><font size=-1>146     </font></a><span class="comment">   * You should not concern yourself with this method unless you are writing a class</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">   * like AutoRegisterSuite.</span>
+<a name="148"><font size=-1>148     </font></a><span class="comment">   *</span>
+<a name="149"><font size=-1>149     </font></a><span class="comment">   * \return \c true if the specified registry has not been destroyed, </span>
+<a name="150"><font size=-1>150     </font></a><span class="comment">   *         otherwise returns \c false.</span>
+<a name="151"><font size=-1>151     </font></a><span class="comment">   * \see AutoRegisterSuite.</span>
+<a name="152"><font size=-1>152     </font></a><span class="comment">   */</span>
+<a name="153"><font size=-1>153     </font></a><span class="comment">  </span><span class="keyword">static bool <a href="dictionary_I.html#4261">isValid</a></span><span class="default">();</span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default">  </span><span class="comment">/** Adds the specified TestFactory with a specific name (DEPRECATED).</span>
+<a name="156"><font size=-1>156     </font></a><span class="comment">   * \param name Name associated to the factory.</span>
+<a name="157"><font size=-1>157     </font></a><span class="comment">   * \param factory Factory to register. </span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">   * \deprecated Use registerFactory( TestFactory *) instead.</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment">   */</span>
+<a name="160"><font size=-1>160     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_R.html#4245">registerFactory</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_S.html#176">std</a></span><span class="default">::<a href="dictionary_S.html#178">string</a> &amp;name,</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">                        <a href="dictionary_T.html#4242">TestFactory</a> *factory );</span>
+<a name="162"><font size=-1>162     </font></a><span class="default"></span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">  <a href="dictionary_T.html#7482">TestFactoryRegistry</a>( </span><span class="keyword">const <a href="dictionary_T.html#463">TestFactoryRegistry</a> </span><span class="default">&amp;copy );</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">  </span><span class="keyword">void operator </span><span class="default">=( </span><span class="keyword">const <a href="dictionary_T.html#463">TestFactoryRegistry</a> </span><span class="default">&amp;copy );</span>
+<a name="166"><font size=-1>166     </font></a><span class="default"></span>
+<a name="167"><font size=-1>167     </font></a><span class="default"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">  </span><span class="keyword">typedef <a href="dictionary_C.html#2471">CppUnitSet</a></span><span class="default">&lt;TestFactory *, <a href="dictionary_S.html#176">std</a>::less&lt;TestFactory*&gt; &gt; <a href="dictionary_F.html#4259">Factories</a>;</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">  <a href="dictionary_F.html#4259">Factories</a> <a href="dictionary_M.html#4250">m_factories</a>;</span>
+<a name="170"><font size=-1>170     </font></a><span class="default"></span>
+<a name="171"><font size=-1>171     </font></a><span class="default">  <a href="dictionary_S.html#176">std</a>::<a href="dictionary_S.html#178">string</a> <a href="dictionary_M.html#4240">m_name</a>;</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">};</span>
+<a name="173"><font size=-1>173     </font></a><span class="default"></span>
+<a name="174"><font size=-1>174     </font></a><span class="default"></span>
+<a name="175"><font size=-1>175     </font></a><span class="default"><a href="dictionary_C.html#128">CPPUNIT_NS_END</a></span>
+<a name="176"><font size=-1>176     </font></a><span class="default"></span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span><span class="preproc">#if <a href="dictionary_C.html#228">CPPUNIT_NEED_DLL_DECL</a></span>
+<a name="178"><font size=-1>178     </font></a><span class="preproc">#pragma </span><span class="default">warning( pop )</span>
+<a name="179"><font size=-1>179     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="180"><font size=-1>180     </font></a><span class="preproc"></span>
+<a name="181"><font size=-1>181     </font></a><span class="preproc"></span>
+<a name="182"><font size=-1>182     </font></a><span class="preproc">#endif  </span><span class="comment">// CPPUNIT_EXTENSIONS_TESTFACTORYREGISTRY_H</span>
+<a name="183"><font size=-1>183     </font></a><span class="comment"></span>
+</pre></body></html>

@@ -1,0 +1,48 @@
+<html><head><title>StreetviewApp.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\main\src\cgeo\geocaching\apps\cache\navi\StreetviewApp.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\main\\src\\cgeo\\geocaching\\apps\\cache\\navi\\StreetviewApp.java";
+top.document.title  = "StreetviewApp.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.apps.cache.<a href="dictionary_C.html#2286">navi</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.<a href="dictionary_G.html#398">CgeoApplication</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.R;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#207">activity</a>.<a href="dictionary_A.html#1368">ActivityMixin</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#351">geopoint</a>.<a href="dictionary_G.html#403">Geopoint</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#90">utils</a>.<a href="dictionary_U.html#2785">ProcessUtils</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#199">app</a>.<a href="dictionary_A.html#150">Activity</a>;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#142">content</a>.<a href="dictionary_C.html#2775">ActivityNotFoundException</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#142">content</a>.<a href="dictionary_C.html#521">Intent</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#145">net</a>.<a href="dictionary_N.html#141">Uri</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_N.html#2776">StreetviewApp</a> extends <a href="dictionary_N.html#2786">AbstractPointNavigationApp</a> </span><span class="default">{</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default">    </span><span class="keyword">private static final <a href="dictionary_S.html#7">String</a> <a href="dictionary_S.html#2784">PACKAGE_NAME_STREET_VIEW</a> </span><span class="default">= </span><span class="string">&quot;com.google.android.street&quot;</span><span class="default">;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    </span><span class="keyword">private static final boolean <a href="dictionary_S.html#2783">INSTALLED</a> </span><span class="default">= <a href="dictionary_U.html#2785">ProcessUtils</a>.<a href="dictionary_P.html#2787">isInstalled</a>(<a href="dictionary_S.html#2784">PACKAGE_NAME_STREET_VIEW</a>);</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span>
+<a name="19"><font size=-1>19     </font></a><span class="default">    <a href="dictionary_S.html#2777">StreetviewApp</a>() {</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_A.html#2788">getString</a>(R.string.cache_menu_streetview), R.id.cache_app_street_view, </span><span class="keyword">null</span><span class="default">);</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    }</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="keyword">public boolean <a href="dictionary_S.html#2778">isInstalled</a></span><span class="default">() {</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_S.html#2783">INSTALLED</a></span><span class="default">;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    }</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_S.html#2779">navigate</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_A.html#2781">activity</a>, <a href="dictionary_G.html#403">Geopoint</a> <a href="dictionary_P.html#2782">point</a>) {</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">            <a href="dictionary_A.html#2781">activity</a>.<a href="dictionary_S.html#431">startActivity</a>(</span><span class="keyword">new <a href="dictionary_C.html#521">Intent</a></span><span class="default">(<a href="dictionary_C.html#521">Intent</a>.<a href="dictionary_A.html#731">ACTION_VIEW</a>,</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">                    <a href="dictionary_N.html#141">Uri</a>.<a href="dictionary_P.html#1949">parse</a>(</span><span class="string">&quot;google.streetview:cbll=&quot; </span><span class="default">+ <a href="dictionary_P.html#2782">point</a>.<a href="dictionary_G.html#1724">getLatitude</a>() + </span><span class="string">&quot;,&quot; </span><span class="default">+ <a href="dictionary_P.html#2782">point</a>.<a href="dictionary_G.html#1725">getLongitude</a>())));</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(</span><span class="keyword">final <a href="dictionary_C.html#2775">ActivityNotFoundException</a> <a href="dictionary_E.html#2780">e</a></span><span class="default">) {</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">            <a href="dictionary_A.html#1368">ActivityMixin</a>.<a href="dictionary_S.html#1477">showToast</a>(<a href="dictionary_A.html#2781">activity</a>, <a href="dictionary_G.html#398">CgeoApplication</a>.<a href="dictionary_C.html#399">getInstance</a>().<a href="dictionary_G.html#313">getString</a>(R.string.err_application_no));</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">        }</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    }</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">}</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,86 @@
+<html><head><title>MockTestCase.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.10/examples/cppunittest/MockTestCase.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.10/examples/cppunittest/MockTestCase.h";
+top.document.title  = "MockTestCase.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_M.html#7069">MOCKTESTCASE_H</a></span>
+<a name="2"><font size=-1>2     </font></a><span class="preproc">#define <a href="dictionary_M.html#7069">MOCKTESTCASE_H</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#include </span><span class="string">&lt;cppunit/TestCase.h&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="comment">/*! \class MockTestCase</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * \brief This class represents a mock test case.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> */</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_M.html#46">MockTestCase</a> </span><span class="default">: </span><span class="keyword">public <a href="dictionary_C.html#37">CPPUNIT_NS</a></span><span class="default">::<a href="dictionary_T.html#204">TestCase</a></span>
+<a name="11"><font size=-1>11     </font></a><span class="default">{</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">  </span><span class="keyword">typedef <a href="dictionary_C.html#37">CPPUNIT_NS</a></span><span class="default">::<a href="dictionary_T.html#204">TestCase</a> <a href="dictionary_S.html#1077">SuperClass</a>;   </span><span class="comment">// work around VC++ call to super class method.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"></span>
+<a name="15"><font size=-1>15     </font></a><span class="comment">  /*! Constructs a MockTestCase object.</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment">   */</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">  <a href="dictionary_M.html#47">MockTestCase</a></span><span class="default">( <a href="dictionary_S.html#176">std</a>::<a href="dictionary_S.html#178">string</a> name );</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span>
+<a name="19"><font size=-1>19     </font></a><span class="default">  </span><span class="comment">/// Destructor.</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">  </span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#80">MockTestCase</a>();</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_S.html#1082">setExpectedSetUpCall</a></span><span class="default">( </span><span class="keyword">int </span><span class="default">callCount = </span><span class="number">1 </span><span class="default">);</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_S.html#1084">setExpectedTearDownCall</a></span><span class="default">( </span><span class="keyword">int </span><span class="default">callCount = </span><span class="number">1 </span><span class="default">);</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_S.html#1086">setExpectedRunTestCall</a></span><span class="default">( </span><span class="keyword">int </span><span class="default">callCount = </span><span class="number">1 </span><span class="default">);</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_S.html#1088">setExpectedCountTestCasesCall</a></span><span class="default">( </span><span class="keyword">int </span><span class="default">callCount = </span><span class="number">1 </span><span class="default">);</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">  </span>
+<a name="27"><font size=-1>27     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_M.html#1090">makeSetUpThrow</a></span><span class="default">();</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_M.html#1091">makeTearDownThrow</a></span><span class="default">();</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_M.html#1092">makeRunTestThrow</a></span><span class="default">();</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_M.html#7070">makeFindTestPathPassFor</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_C.html#37">CPPUNIT_NS</a></span><span class="default">::<a href="dictionary_T.html#61">Test</a> *testFound );</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">  </span>
+<a name="32"><font size=-1>32     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_V.html#1093">verify</a></span><span class="default">();</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="keyword">protected</span><span class="default">:</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_C.html#1071">countTestCases</a></span><span class="default">() </span><span class="keyword">const</span><span class="default">;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_S.html#1078">setUp</a></span><span class="default">();</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_T.html#1080">tearDown</a></span><span class="default">();</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_R.html#1081">runTest</a></span><span class="default">();</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span><span class="comment">//  bool findTestPath( const CPPUNIT_NS::Test *test,</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">//                     CPPUNIT_NS::TestPath &amp;testPath );</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"></span>
+<a name="42"><font size=-1>42     </font></a><span class="comment"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  </span><span class="comment">/// Prevents the use of the copy constructor.</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">  <a href="dictionary_M.html#7071">MockTestCase</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_M.html#46">MockTestCase</a> </span><span class="default">&amp;copy );</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  </span><span class="comment">/// Prevents the use of the copy operator.</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">  </span><span class="keyword">void operator </span><span class="default">=( </span><span class="keyword">const <a href="dictionary_M.html#46">MockTestCase</a> </span><span class="default">&amp;copy );</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1055">m_hasSetUpExpectation</a></span><span class="default">;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1056">m_expectedSetUpCall</a></span><span class="default">;</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1057">m_actualSetUpCall</a></span><span class="default">;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1058">m_hasTearDownExpectation</a></span><span class="default">;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1059">m_expectedTearDownCall</a></span><span class="default">;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1060">m_actualTearDownCall</a></span><span class="default">;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1061">m_expectRunTestCall</a></span><span class="default">;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1062">m_expectedRunTestCallCount</a></span><span class="default">;</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1063">m_actualRunTestCallCount</a></span><span class="default">;</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1064">m_expectCountTestCasesCall</a></span><span class="default">;</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1065">m_expectedCountTestCasesCallCount</a></span><span class="default">;</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_M.html#1066">m_actualCountTestCasesCallCount</a></span><span class="default">;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1067">m_setUpThrow</a></span><span class="default">;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1068">m_tearDownThrow</a></span><span class="default">;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_M.html#1069">m_runTestThrow</a></span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">  </span><span class="keyword">const <a href="dictionary_C.html#37">CPPUNIT_NS</a></span><span class="default">::<a href="dictionary_T.html#61">Test</a> *<a href="dictionary_M.html#1070">m_passingTest</a>;</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">};</span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span>
+<a name="73"><font size=-1>73     </font></a><span class="default"></span>
+<a name="74"><font size=-1>74     </font></a><span class="default"></span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span><span class="preproc">#endif  </span><span class="comment">// MOCKTESTCASE_H</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment"></span>
+</pre></body></html>

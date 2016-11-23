@@ -1,0 +1,40 @@
+<html><head><title>RepeatedTest.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.10/src/cppunit/RepeatedTest.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.10/src/cppunit/RepeatedTest.cpp";
+top.document.title  = "RepeatedTest.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/extensions/RepeatedTest.h&gt;</span>
+<a name="2"><font size=-1>2     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;cppunit/TestResult.h&gt;</span>
+<a name="3"><font size=-1>3     </font></a><span class="string"></span>
+<a name="4"><font size=-1>4     </font></a><span class="string"><a href="dictionary_C.html#99">CPPUNIT_NS_BEGIN</a></span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="comment">// Counts the number of test cases that will be run by this test.</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"></span><span class="keyword">int</span>
+<a name="9"><font size=-1>9     </font></a><span class="keyword"><a href="dictionary_R.html#3283">RepeatedTest</a></span><span class="default">::<a href="dictionary_C.html#4728">countTestCases</a>() </span><span class="keyword">const</span>
+<a name="10"><font size=-1>10     </font></a><span class="keyword"></span><span class="default">{ </span>
+<a name="11"><font size=-1>11     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_T.html#1366">TestDecorator</a></span><span class="default">::<a href="dictionary_C.html#1372">countTestCases</a>() * <a href="dictionary_M.html#4731">m_timesRepeat</a>; </span>
+<a name="12"><font size=-1>12     </font></a><span class="default">}</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="comment">// Runs a repeated test</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span><span class="keyword">void </span>
+<a name="17"><font size=-1>17     </font></a><span class="keyword"><a href="dictionary_R.html#3283">RepeatedTest</a></span><span class="default">::<a href="dictionary_R.html#4727">run</a>( <a href="dictionary_T.html#372">TestResult</a> *<a href="dictionary_R.html#7603">result</a> )</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">{</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">( </span><span class="keyword">int <a href="dictionary_N.html#7604">n</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_N.html#7604">n</a> &lt; <a href="dictionary_M.html#4731">m_timesRepeat</a>; <a href="dictionary_N.html#7604">n</a>++ ) </span>
+<a name="20"><font size=-1>20     </font></a><span class="default">  {</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">( <a href="dictionary_R.html#7603">result</a>-&gt;<a href="dictionary_S.html#2573">shouldStop</a>() )</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">        </span><span class="keyword">break</span><span class="default">;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    <a href="dictionary_T.html#1366">TestDecorator</a>::<a href="dictionary_R.html#1375">run</a>( <a href="dictionary_R.html#7603">result</a> );</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">  }</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">}</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"><a href="dictionary_C.html#128">CPPUNIT_NS_END</a></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+</pre></body></html>

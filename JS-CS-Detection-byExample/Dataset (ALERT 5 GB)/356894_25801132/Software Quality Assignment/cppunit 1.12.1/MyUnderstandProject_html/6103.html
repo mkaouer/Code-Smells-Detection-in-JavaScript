@@ -1,0 +1,32 @@
+<html><head><title>Config.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/include/cppunit/ui/qt/Config.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/include/cppunit/ui/qt/Config.h";
+top.document.title  = "Config.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_C.html#6104">CPPUNIT_QTUI_CONFIG_H</a></span>
+<a name="2"><font size=-1>2     </font></a><span class="preproc">#define <a href="dictionary_C.html#6104">CPPUNIT_QTUI_CONFIG_H</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc"></span><span class="comment">/*! Macro to export symbol to DLL with VC++.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> *</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * - QTTESTRUNNER_DLL_BUILD must be defined when building the DLL.</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * - QTTESTRUNNER_DLL must be defined if linking against the DLL.</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * - If none of the above are defined then you are building or linking against</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *   the static library.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> */</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"></span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span><span class="preproc">#if defined</span><span class="default">( <a href="dictionary_Q.html#6106">QTTESTRUNNER_DLL_BUILD</a> )</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="preproc">#  define <a href="dictionary_Q.html#6105">QTTESTRUNNER_API</a> </span><span class="default">__declspec(dllexport)</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="preproc">#elif defined </span><span class="default">( <a href="dictionary_Q.html#6107">QTTESTRUNNER_DLL</a> )</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="preproc">#  define <a href="dictionary_Q.html#6105">QTTESTRUNNER_API</a> </span><span class="default">__declspec(dllimport)</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="preproc">#else</span>
+<a name="17"><font size=-1>17     </font></a><span class="preproc">#  define <a href="dictionary_Q.html#6105">QTTESTRUNNER_API</a></span>
+<a name="18"><font size=-1>18     </font></a><span class="preproc">#endif</span>
+<a name="19"><font size=-1>19     </font></a><span class="preproc"></span>
+<a name="20"><font size=-1>20     </font></a><span class="preproc"></span>
+<a name="21"><font size=-1>21     </font></a><span class="preproc">#endif </span><span class="comment">// CPPUNIT_QTUI_CONFIG_H</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"></span>
+</pre></body></html>

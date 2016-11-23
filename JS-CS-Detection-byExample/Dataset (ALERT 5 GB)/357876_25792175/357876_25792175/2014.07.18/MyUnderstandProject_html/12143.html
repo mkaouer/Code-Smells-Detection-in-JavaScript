@@ -1,0 +1,109 @@
+<html><head><title>MatcherWrapper.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\main\src\cgeo\geocaching\utils\MatcherWrapper.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\main\\src\\cgeo\\geocaching\\utils\\MatcherWrapper.java";
+top.document.title  = "MatcherWrapper.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#90">utils</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.umd.cs.findbugs.<a href="dictionary_F.html#4061">annotations</a>.<a href="dictionary_A.html#4059">SuppressFBWarnings</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#80">regex</a>.<a href="dictionary_R.html#11457">Matcher</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#80">regex</a>.<a href="dictionary_R.html#21">Pattern</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * Wrapper around the regex {@link Matcher} class. This implementation optimizes the memory usage of the matched</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Strings.</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> *</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> */</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_U.html#1440">MatcherWrapper</a> </span><span class="default">{</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_R.html#11457">Matcher</a> <a href="dictionary_M.html#12154">matcher</a></span><span class="default">;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_M.html#1446">MatcherWrapper</a></span><span class="default">(<a href="dictionary_R.html#21">Pattern</a> <a href="dictionary_P.html#12145">pattern</a>, <a href="dictionary_S.html#7">String</a> <a href="dictionary_I.html#12144">input</a>) {</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_M.html#12154">matcher</a> = <a href="dictionary_P.html#12145">pattern</a>.<a href="dictionary_M.html#5399">matcher</a>(<a href="dictionary_I.html#12144">input</a>);</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">    }</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">     * see {@link Matcher#find()}</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">     */</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_M.html#1448">find</a></span><span class="default">() {</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12154">matcher</a></span><span class="default">.<a href="dictionary_F.html#8433">find</a>();</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">    }</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    </span><span class="keyword">public boolean <a href="dictionary_M.html#4117">find</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_S.html#12146">start</a></span><span class="default">) {</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12154">matcher</a></span><span class="default">.<a href="dictionary_F.html#8433">find</a>(<a href="dictionary_S.html#12146">start</a>);</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    }</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">     * see {@link Matcher#group(int)}</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment">     */</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#7">String</a> <a href="dictionary_M.html#1449">group</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#12147">index</a></span><span class="default">) {</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12149">newString</a></span><span class="default">(<a href="dictionary_M.html#12154">matcher</a>.<a href="dictionary_G.html#11461">group</a>(<a href="dictionary_I.html#12147">index</a>));</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    }</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">     * This method explicitly creates a new String instance from an already existing String. This is necessary to avoid</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">     * huge memory leaks in our parser. If we do regular expression matching on large Strings, the returned matches are</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">     * otherwise memory mapped substrings of the huge original String, therefore blocking the garbage collector from</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">     * removing the huge input String.</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">     * &lt;p&gt;</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">     * Do not change this method, even if Findbugs and other tools will report a violation for that line!</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">     *</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">     * @param input</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">     * @return</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     */</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_A.html#4059">SuppressFBWarnings</a>(</span><span class="string">&quot;DM_STRING_CTOR&quot;</span><span class="default">)</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">    </span><span class="keyword">private static <a href="dictionary_S.html#7">String</a> <a href="dictionary_M.html#12149">newString</a></span><span class="default">(<a href="dictionary_S.html#7">String</a> <a href="dictionary_I.html#12150">input</a>) {</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#12150">input</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">            </span><span class="keyword">return null</span><span class="default">;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">        }</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">        </span><span class="keyword">return new <a href="dictionary_S.html#7">String</a></span><span class="default">(<a href="dictionary_I.html#12150">input</a>); </span><span class="comment">// DON'T REMOVE THE &quot;new String&quot; HERE!</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">    </span><span class="default">}</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * see {@link Matcher#groupCount()}</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     */</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_M.html#4125">groupCount</a></span><span class="default">() {</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12154">matcher</a></span><span class="default">.<a href="dictionary_G.html#12148">groupCount</a>();</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    }</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">     * see {@link Matcher#group()}</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">     */</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#7">String</a> <a href="dictionary_M.html#1451">group</a></span><span class="default">() {</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12149">newString</a></span><span class="default">(<a href="dictionary_M.html#12154">matcher</a>.<a href="dictionary_G.html#11461">group</a>());</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    }</span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">     * see {@link Matcher#start()}</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">     */</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_M.html#1450">start</a></span><span class="default">() {</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12154">matcher</a></span><span class="default">.<a href="dictionary_S.html#1478">start</a>();</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    }</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">     * see {@link Matcher#replaceAll(String)}</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">     */</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#7">String</a> <a href="dictionary_M.html#1447">replaceAll</a></span><span class="default">(<a href="dictionary_S.html#7">String</a> <a href="dictionary_R.html#12151">replacement</a>) {</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12149">newString</a></span><span class="default">(<a href="dictionary_M.html#12154">matcher</a>.<a href="dictionary_R.html#3156">replaceAll</a>(<a href="dictionary_R.html#12151">replacement</a>));</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">    }</span>
+<a name="84"><font size=-1>84     </font></a><span class="default"></span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">     * see {@link Matcher#matches()}</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">     */</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_M.html#12117">matches</a></span><span class="default">() {</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12154">matcher</a></span><span class="default">.<a href="dictionary_M.html#5400">matches</a>();</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">    }</span>
+<a name="91"><font size=-1>91     </font></a><span class="default"></span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">     * see {@link Matcher#replaceFirst(String)}</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">     */</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#7">String</a> <a href="dictionary_M.html#12152">replaceFirst</a></span><span class="default">(<a href="dictionary_S.html#7">String</a> <a href="dictionary_R.html#12153">replacement</a>) {</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#12149">newString</a></span><span class="default">(<a href="dictionary_M.html#12154">matcher</a>.<a href="dictionary_R.html#6474">replaceFirst</a>(<a href="dictionary_R.html#12153">replacement</a>));</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">}</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+</pre></body></html>

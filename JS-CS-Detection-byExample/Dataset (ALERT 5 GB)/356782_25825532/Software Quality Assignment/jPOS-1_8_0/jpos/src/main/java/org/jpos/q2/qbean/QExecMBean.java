@@ -1,0 +1,36 @@
+/*
+ * jPOS Project [http://jpos.org]
+ * Copyright (C) 2000-2010 Alejandro P. Revilla
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package org.jpos.q2.qbean;
+
+/**
+ * MBean interface.
+ * @author Alwyn Schoeman
+ * @version $Revision: 1476 $ $Date: 2003-04-04 07:43:26 -0300 (Fri, 04 Apr 2003) $
+ */
+public interface QExecMBean extends org.jpos.q2.QBeanSupportMBean {
+
+  void setStartScript(java.lang.String scriptPath) ;
+
+  java.lang.String getStartScript() ;
+
+  void setShutdownScript(java.lang.String scriptPath) ;
+
+  java.lang.String getShutdownScript() ;
+
+}

@@ -1,0 +1,43 @@
+<html><head><title>CacheListType.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\main\src\cgeo\geocaching\enumerations\CacheListType.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\main\\src\\cgeo\\geocaching\\enumerations\\CacheListType.java";
+top.document.title  = "CacheListType.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#543">enumerations</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#15">loaders</a>.<a href="dictionary_L.html#2268">AbstractSearchLoader</a>.<a href="dictionary_A.html#2269">CacheListLoaderType</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">public </span><span class="default">enum <a href="dictionary_E.html#1285">CacheListType</a> {</span>
+<a name="6"><font size=-1>6     </font></a><span class="default">    <a href="dictionary_C.html#2333">OFFLINE</a>(</span><span class="keyword">true</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2349">OFFLINE</a>),</span>
+<a name="7"><font size=-1>7     </font></a><span class="default">    <a href="dictionary_C.html#2408">POCKET</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2376">POCKET</a>),</span>
+<a name="8"><font size=-1>8     </font></a><span class="default">    <a href="dictionary_C.html#1336">HISTORY</a>(</span><span class="keyword">true</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2354">HISTORY</a>),</span>
+<a name="9"><font size=-1>9     </font></a><span class="default">    <a href="dictionary_C.html#2405">NEAREST</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2356">NEAREST</a>),</span>
+<a name="10"><font size=-1>10     </font></a><span class="default">    <a href="dictionary_C.html#2401">COORDINATE</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2358">COORDINATE</a>),</span>
+<a name="11"><font size=-1>11     </font></a><span class="default">    <a href="dictionary_C.html#2403">KEYWORD</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2359">KEYWORD</a>),</span>
+<a name="12"><font size=-1>12     </font></a><span class="default">    <a href="dictionary_C.html#2400">ADDRESS</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2362">ADDRESS</a>),</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">    <a href="dictionary_C.html#2402">FINDER</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2365">FINDER</a>),</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    <a href="dictionary_C.html#2406">OWNER</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2368">OWNER</a>),</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">    <a href="dictionary_C.html#2404">MAP</a>(</span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#2269">CacheListLoaderType</a>.<a href="dictionary_C.html#2370">MAP</a>);</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">     * whether or not this list allows switching to another list</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment">     */</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">    </span><span class="keyword">public final boolean <a href="dictionary_C.html#2396">canSwitch</a></span><span class="default">;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default">    </span><span class="keyword">public final <a href="dictionary_A.html#2269">CacheListLoaderType</a> <a href="dictionary_C.html#16937">loaderType</a></span><span class="default">;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    <a href="dictionary_C.html#16931">CacheListType</a>(</span><span class="keyword">final boolean <a href="dictionary_C.html#16932">canSwitch</a></span><span class="default">, </span><span class="keyword">final <a href="dictionary_A.html#2269">CacheListLoaderType</a> <a href="dictionary_L.html#16933">loaderType</a></span><span class="default">) {</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_C.html#2396">canSwitch</a> = <a href="dictionary_C.html#16932">canSwitch</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_C.html#16937">loaderType</a> = <a href="dictionary_L.html#16933">loaderType</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    }</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    </span><span class="keyword">public int <a href="dictionary_C.html#2344">getLoaderId</a></span><span class="default">() {</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#16937">loaderType</a></span><span class="default">.<a href="dictionary_C.html#2319">getLoaderId</a>();</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    }</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">}</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+</pre></body></html>

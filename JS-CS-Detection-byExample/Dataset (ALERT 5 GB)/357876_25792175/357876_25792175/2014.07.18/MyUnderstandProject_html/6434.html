@@ -1,0 +1,163 @@
+<html><head><title>CgeoTestsActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\tests\src\cgeo\geocaching\test\CgeoTestsActivity.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\tests\\src\\cgeo\\geocaching\\test\\CgeoTestsActivity.java";
+top.document.title  = "CgeoTestsActivity.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#82">test</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import <a href="dictionary_B.html#529">butterknife</a></span><span class="default">.<a href="dictionary_B.html#406">ButterKnife</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#199">app</a>.<a href="dictionary_A.html#150">Activity</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#142">content</a>.<a href="dictionary_C.html#6487">ComponentName</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.content.<a href="dictionary_C.html#6492">pm</a>.<a href="dictionary_P.html#6489">InstrumentationInfo</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#146">os</a>.<a href="dictionary_O.html#776">AsyncTask</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#146">os</a>.<a href="dictionary_O.html#151">Bundle</a>;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#838">text</a>.<a href="dictionary_T.html#777">Html</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#838">text</a>.<a href="dictionary_T.html#6491">TextUtils</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#336">util</a>.<a href="dictionary_U.html#762">Log</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#201">view</a>.<a href="dictionary_V.html#198">View</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#337">widget</a>.<a href="dictionary_W.html#4679">Button</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#337">widget</a>.<a href="dictionary_W.html#528">TextView</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#337">widget</a>.<a href="dictionary_W.html#331">Toast</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#648">io</a>.<a href="dictionary_I.html#6435">BufferedReader</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#648">io</a>.<a href="dictionary_I.html#644">IOException</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#648">io</a>.<a href="dictionary_I.html#6488">InputStreamReader</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#81">util</a>.<a href="dictionary_U.html#20">List</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_T.html#6436">CgeoTestsActivity</a> extends <a href="dictionary_A.html#150">Activity</a> </span><span class="default">{</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="keyword">private static final <a href="dictionary_S.html#7">String</a> <a href="dictionary_C.html#6482">TAG</a> </span><span class="default">= <a href="dictionary_T.html#6436">CgeoTestsActivity</a>.</span><span class="keyword">class</span><span class="default">.<a href="dictionary_G.html#1352">getName</a>();</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    </span><span class="keyword">private static final int <a href="dictionary_C.html#6483">TIMEOUT</a> </span><span class="default">= </span><span class="number">600 </span><span class="default">* </span><span class="number">1000</span><span class="default">;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_W.html#528">TextView</a> <a href="dictionary_C.html#6485">logView</a></span><span class="default">;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_C.html#6437">LogcatAsyncTask</a> <a href="dictionary_C.html#6484">logCatTask</a></span><span class="default">;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_T.html#6493">BottomAwareScrollView</a> <a href="dictionary_C.html#6486">scrollView</a></span><span class="default">;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    </span><span class="keyword">private class <a href="dictionary_C.html#6437">LogcatAsyncTask</a> extends <a href="dictionary_O.html#776">AsyncTask</a></span><span class="default">&lt;<a href="dictionary_I.html#761">Integer</a>, <a href="dictionary_S.html#7">String</a>, <a href="dictionary_V.html#2253">Void</a>&gt; {</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">        </span><span class="comment">// TestRunner and silence others</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">        </span><span class="keyword">private static final <a href="dictionary_S.html#7">String</a> <a href="dictionary_L.html#6458">CMD</a> </span><span class="default">= </span><span class="string">&quot;logcat -v brief TestRunner:I cgeo:I *:S&quot;</span><span class="default">;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">        </span><span class="keyword">private <a href="dictionary_I.html#6435">BufferedReader</a> <a href="dictionary_L.html#6460">mReader</a></span><span class="default">;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">        </span><span class="keyword">private <a href="dictionary_P.html#6490">Process</a> <a href="dictionary_L.html#6459">mProc</a></span><span class="default">;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span>
+<a name="39"><font size=-1>39     </font></a><span class="default">        </span><span class="keyword">public <a href="dictionary_L.html#6438">LogcatAsyncTask</a></span><span class="default">() {</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">                <a href="dictionary_L.html#6459">mProc</a> = Runtime.<a href="dictionary_G.html#6441">getRuntime</a>().<a href="dictionary_E.html#6439">exec</a>(<a href="dictionary_L.html#6458">CMD</a>);</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">                <a href="dictionary_L.html#6460">mReader</a> = </span><span class="keyword">new <a href="dictionary_I.html#6435">BufferedReader</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_I.html#6488">InputStreamReader</a></span><span class="default">(</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">                        <a href="dictionary_L.html#6459">mProc</a>.<a href="dictionary_G.html#6440">getInputStream</a>()));</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_E.html#237">Exception</a> <a href="dictionary_E.html#6442">e</a>) {</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">                <a href="dictionary_U.html#762">Log</a>.<a href="dictionary_E.html#696">e</a>(<a href="dictionary_C.html#6482">TAG</a>, </span><span class="string">&quot;Creating proc&quot;</span><span class="default">, <a href="dictionary_E.html#6442">e</a>);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">            }</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">        }</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default">        @<a href="dictionary_O.html#138">Override</a></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">        </span><span class="keyword">protected void <a href="dictionary_L.html#6452">onProgressUpdate</a></span><span class="default">(<a href="dictionary_S.html#7">String</a>... <a href="dictionary_V.html#6457">values</a>) {</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">            </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_L.html#6456">line</a> </span><span class="default">= <a href="dictionary_V.html#6457">values</a>[</span><span class="number">0</span><span class="default">];</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">            </span><span class="keyword">final boolean <a href="dictionary_I.html#6455">isAtBottom</a> </span><span class="default">= <a href="dictionary_C.html#6486">scrollView</a>.<a href="dictionary_B.html#6494">isAtBottom</a>();</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_T.html#6491">TextUtils</a>.<a href="dictionary_I.html#622">isEmpty</a>(<a href="dictionary_L.html#6456">line</a>)) {</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">                <a href="dictionary_C.html#6485">logView</a>.<a href="dictionary_A.html#1184">append</a>(<a href="dictionary_T.html#777">Html</a>.<a href="dictionary_F.html#784">fromHtml</a>(</span><span class="string">&quot;&lt;font color=\&quot;&quot; </span><span class="default">+ <a href="dictionary_L.html#6443">color</a>(<a href="dictionary_L.html#6456">line</a>) + </span><span class="string">&quot;\&quot;&gt;&quot; </span><span class="default">+ <a href="dictionary_L.html#6456">line</a> + </span><span class="string">&quot;&lt;/font&gt;&lt;br/&gt;&quot;</span><span class="default">));</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#6455">isAtBottom</a>) {</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">                    <a href="dictionary_C.html#6486">scrollView</a>.<a href="dictionary_S.html#6454">scrollTo</a>(</span><span class="number">0</span><span class="default">, <a href="dictionary_C.html#6485">logView</a>.<a href="dictionary_G.html#6453">getBottom</a>());</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">                }</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">            }</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">        }</span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        </span><span class="keyword">private <a href="dictionary_S.html#7">String</a> <a href="dictionary_L.html#6443">color</a></span><span class="default">(<a href="dictionary_S.html#7">String</a> <a href="dictionary_L.html#6444">line</a>) {</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">            </span><span class="keyword">switch </span><span class="default">(<a href="dictionary_L.html#6444">line</a>.<a href="dictionary_C.html#3650">charAt</a>(</span><span class="number">0</span><span class="default">)) {</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">                </span><span class="keyword">case </span><span class="string">'E'</span><span class="default">:</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">                    </span><span class="keyword">return </span><span class="string">&quot;red&quot;</span><span class="default">;</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">                </span><span class="keyword">case </span><span class="string">'W'</span><span class="default">:</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">                    </span><span class="keyword">return </span><span class="string">&quot;#FFA500&quot;</span><span class="default">;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">                </span><span class="keyword">case </span><span class="string">'D'</span><span class="default">:</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">                    </span><span class="keyword">return </span><span class="string">&quot;blue&quot;</span><span class="default">;</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">                </span><span class="keyword">default</span><span class="default">:</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">                    </span><span class="keyword">return </span><span class="string">&quot;white&quot;</span><span class="default">;</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">            }</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        }</span>
+<a name="73"><font size=-1>73     </font></a><span class="default"></span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        @<a href="dictionary_O.html#138">Override</a></span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        </span><span class="keyword">protected <a href="dictionary_V.html#2253">Void</a> <a href="dictionary_L.html#6445">doInBackground</a></span><span class="default">(<a href="dictionary_I.html#761">Integer</a>... <a href="dictionary_P.html#6450">params</a>) {</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">            </span><span class="keyword">final long <a href="dictionary_T.html#6451">timeout</a> </span><span class="default">= System.<a href="dictionary_C.html#47">currentTimeMillis</a>() + <a href="dictionary_P.html#6450">params</a>[</span><span class="number">0</span><span class="default">];</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">                </span><span class="keyword">do </span><span class="default">{</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">                    Thread.<a href="dictionary_S.html#1884">sleep</a>(</span><span class="number">50</span><span class="default">);</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">                    <a href="dictionary_P.html#6313">publishProgress</a>(<a href="dictionary_L.html#6460">mReader</a>.<a href="dictionary_R.html#6447">readLine</a>());</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">                } </span><span class="keyword">while </span><span class="default">(System.<a href="dictionary_C.html#47">currentTimeMillis</a>() &lt; <a href="dictionary_T.html#6451">timeout</a>);</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#2242">InterruptedException</a> <a href="dictionary_E.html#6448">e</a>) {</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">                <a href="dictionary_P.html#6313">publishProgress</a>(</span><span class="string">&quot;ERROR: &quot; </span><span class="default">+ <a href="dictionary_E.html#6448">e</a>);</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#644">IOException</a> <a href="dictionary_E.html#6449">e</a>) {</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">                <a href="dictionary_P.html#6313">publishProgress</a>(</span><span class="string">&quot;ERROR: &quot; </span><span class="default">+ <a href="dictionary_E.html#6449">e</a>);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">            } </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">                <a href="dictionary_P.html#6313">publishProgress</a>(</span><span class="string">&quot;END&quot;</span><span class="default">);</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">                <a href="dictionary_L.html#6459">mProc</a>.<a href="dictionary_D.html#6446">destroy</a>();</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">            }</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">            </span><span class="keyword">return null</span><span class="default">;</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        }</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    }</span>
+<a name="93"><font size=-1>93     </font></a><span class="default"></span>
+<a name="94"><font size=-1>94     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="95"><font size=-1>95     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_C.html#6466">onCreate</a></span><span class="default">(<a href="dictionary_O.html#151">Bundle</a> <a href="dictionary_S.html#6468">savedInstanceState</a>) {</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_O.html#175">onCreate</a>(<a href="dictionary_S.html#6468">savedInstanceState</a>);</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">        <a href="dictionary_S.html#1538">setContentView</a>(R.layout.cgeo_tests_activity);</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">        <a href="dictionary_C.html#6485">logView</a> = <a href="dictionary_B.html#406">ButterKnife</a>.<a href="dictionary_F.html#6467">findById</a>(</span><span class="keyword">this</span><span class="default">, R.id.logOutput);</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">        <a href="dictionary_C.html#6486">scrollView</a> = <a href="dictionary_B.html#406">ButterKnife</a>.<a href="dictionary_F.html#6467">findById</a>(</span><span class="keyword">this</span><span class="default">, R.id.scrollView);</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">    }</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="103"><font size=-1>103     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_C.html#6469">onDestroy</a></span><span class="default">() {</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#6484">logCatTask</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">            <a href="dictionary_C.html#6484">logCatTask</a>.<a href="dictionary_C.html#1914">cancel</a>(</span><span class="keyword">true</span><span class="default">);</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        }</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_O.html#181">onDestroy</a>();</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">    }</span>
+<a name="109"><font size=-1>109     </font></a><span class="default"></span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_P.html#6489">InstrumentationInfo</a> <a href="dictionary_C.html#6461">getInstrumentationInfo</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_P.html#6465">packageName</a></span><span class="default">) {</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_U.html#20">List</a></span><span class="default">&lt;<a href="dictionary_P.html#6489">InstrumentationInfo</a>&gt; <a href="dictionary_L.html#6464">list</a> =</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">                <a href="dictionary_G.html#6462">getPackageManager</a>()</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">                        .<a href="dictionary_Q.html#6463">queryInstrumentation</a>(<a href="dictionary_P.html#6465">packageName</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">        </span><span class="keyword">return </span><span class="default">(!<a href="dictionary_L.html#6464">list</a>.<a href="dictionary_I.html#622">isEmpty</a>()) ? <a href="dictionary_L.html#6464">list</a>.<a href="dictionary_G.html#449">get</a>(</span><span class="number">0</span><span class="default">) : </span><span class="keyword">null</span><span class="default">;</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    }</span>
+<a name="116"><font size=-1>116     </font></a><span class="default"></span>
+<a name="117"><font size=-1>117     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">     * @param v</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">     *            referenced from XML layout</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">     */</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#6470">runTests</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_V.html#198">View</a> <a href="dictionary_V.html#6472">v</a></span><span class="default">) {</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_W.html#4679">Button</a> <a href="dictionary_B.html#6471">button</a> </span><span class="default">= <a href="dictionary_B.html#406">ButterKnife</a>.<a href="dictionary_F.html#6467">findById</a>(</span><span class="keyword">this</span><span class="default">, R.id.buttonRun);</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">        <a href="dictionary_B.html#6471">button</a>.<a href="dictionary_S.html#2906">setEnabled</a>(</span><span class="keyword">false</span><span class="default">);</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">            <a href="dictionary_C.html#6473">runTestsInternally</a>();</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">        } </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">            </span><span class="comment">//            button.setEnabled(true);</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">        </span><span class="default">}</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">    }</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_C.html#6473">runTestsInternally</a></span><span class="default">() {</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_P.html#6481">pn</a> </span><span class="default">= <a href="dictionary_G.html#4337">getPackageName</a>().<a href="dictionary_R.html#6474">replaceFirst</a>(</span><span class="string">&quot;.test$&quot;</span><span class="default">, </span><span class="string">&quot;&quot;</span><span class="default">);</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_P.html#6489">InstrumentationInfo</a> <a href="dictionary_I.html#6478">info</a> </span><span class="default">= <a href="dictionary_C.html#6461">getInstrumentationInfo</a>(<a href="dictionary_P.html#6481">pn</a>);</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#6478">info</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">            <a href="dictionary_W.html#331">Toast</a>.<a href="dictionary_M.html#315">makeText</a>(</span><span class="keyword">this</span><span class="default">,</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">                    </span><span class="string">&quot;Cannot find instrumentation for &quot; </span><span class="default">+ <a href="dictionary_P.html#6481">pn</a>, <a href="dictionary_W.html#331">Toast</a>.<a href="dictionary_L.html#6476">LENGTH_SHORT</a>)</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">                    .<a href="dictionary_S.html#318">show</a>();</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">            </span><span class="keyword">return</span><span class="default">;</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">        }</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_C.html#6487">ComponentName</a> <a href="dictionary_C.html#6477">cn</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_C.html#6487">ComponentName</a></span><span class="default">(<a href="dictionary_I.html#6478">info</a>.<a href="dictionary_P.html#6480">packageName</a>,</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">                <a href="dictionary_I.html#6478">info</a>.<a href="dictionary_N.html#6479">name</a>);</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#6475">startInstrumentation</a>(<a href="dictionary_C.html#6477">cn</a>, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">null</span><span class="default">)) {</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">            <a href="dictionary_C.html#6484">logCatTask</a> = </span><span class="keyword">new <a href="dictionary_L.html#6438">LogcatAsyncTask</a></span><span class="default">();</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">            <a href="dictionary_C.html#6484">logCatTask</a>.<a href="dictionary_E.html#801">execute</a>(<a href="dictionary_C.html#6483">TIMEOUT</a>);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">        }</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">        </span><span class="keyword">else </span><span class="default">{</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">            <a href="dictionary_W.html#331">Toast</a>.<a href="dictionary_M.html#315">makeText</a>(</span><span class="keyword">this</span><span class="default">,</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">                    </span><span class="string">&quot;Cannot run instrumentation for &quot; </span><span class="default">+ <a href="dictionary_P.html#6481">pn</a>, <a href="dictionary_W.html#331">Toast</a>.<a href="dictionary_L.html#6476">LENGTH_SHORT</a>)</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">                    .<a href="dictionary_S.html#318">show</a>();</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">        }</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">    }</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">}</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+</pre></body></html>

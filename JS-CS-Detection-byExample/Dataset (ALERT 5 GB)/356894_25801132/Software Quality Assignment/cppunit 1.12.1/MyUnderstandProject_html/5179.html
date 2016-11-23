@@ -1,0 +1,208 @@
+<html><head><title>TestPlugInRunnerDlg.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/msvc6/testpluginrunner/TestPlugInRunnerDlg.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/msvc6/testpluginrunner/TestPlugInRunnerDlg.cpp";
+top.document.title  = "TestPlugInRunnerDlg.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// TestPlugInRunnerDlg.cpp : implementation file</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">//</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"></span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;stdafx.h&quot;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;TestPlugInRunnerDlg.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;TestPlugIn.h&quot;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;TestPlugInException.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;algorithm&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#ifdef <a href="dictionary_Non-Alpha.html#5183">_DEBUG</a></span>
+<a name="11"><font size=-1>11     </font></a><span class="preproc">#define </span><span class="keyword">new </span><span class="default">DEBUG_NEW</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="preproc">#undef <a href="dictionary_T.html#5184">THIS_FILE</a></span>
+<a name="13"><font size=-1>13     </font></a><span class="preproc"></span><span class="keyword">static char <a href="dictionary_T.html#5184">THIS_FILE</a></span><span class="default">[] = __FILE__;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="15"><font size=-1>15     </font></a><span class="preproc"></span>
+<a name="16"><font size=-1>16     </font></a><span class="preproc"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">// TestPlugInRunnerDlg dialog</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_T.html#5185">TestPlugInRunnerDlg</a>( <a href="dictionary_T.html#2623">TestPlugInRunnerModel</a> *<a href="dictionary_M.html#5186">model</a>,</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">                                          <a href="dictionary_C.html#1363">CWnd</a>* <a href="dictionary_P.html#5187">pParent</a> ) </span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    : <a href="dictionary_T.html#3622">TestRunnerDlg</a>( <a href="dictionary_M.html#5186">model</a>, </span><span class="string">&quot;CPP_UNIT_TEST_RUNNER_PLUG_IN_IDD_TEST_PLUG_IN_RUNNER&quot;</span><span class="default">, <a href="dictionary_P.html#5187">pParent</a> )</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">{</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">  </span><span class="comment">//{{AFX_DATA_INIT(TestPlugInRunnerDlg)</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment">	  // NOTE: the ClassWizard will add member initialization here</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment">  //}}AFX_DATA_INIT</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">  // Note that LoadIcon does not require a subsequent DestroyIcon in Win32</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">  <a href="dictionary_M.html#5189">m_hIcon</a> </span><span class="default">= <a href="dictionary_A.html#1537">AfxGetApp</a>()-&gt;<a href="dictionary_L.html#5188">LoadIcon</a>(</span><span class="string">&quot;CPP_UNIT_TEST_RUNNER_PLUG_IN_IDR_TEST_PLUGIN_RUNNER&quot;</span><span class="default">);</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">}</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="32"><font size=-1>32     </font></a><span class="keyword"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_D.html#5190">DoDataExchange</a>( <a href="dictionary_C.html#2809">CDataExchange</a>* <a href="dictionary_P.html#5191">pDX</a> )</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">{</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">  <a href="dictionary_T.html#3199">TestRunnerDlg</a>::<a href="dictionary_D.html#3644">DoDataExchange</a>(<a href="dictionary_P.html#5191">pDX</a>);</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">  </span><span class="comment">//{{AFX_DATA_MAP(TestPlugInRunnerDlg)</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">	  // NOTE: the ClassWizard will add DDX and DDV calls here</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">  //}}AFX_DATA_MAP</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="default">}</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span>
+<a name="40"><font size=-1>40     </font></a><span class="default"><a href="dictionary_B.html#5192">BEGIN_MESSAGE_MAP</a>(<a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a>, <a href="dictionary_T.html#3199">TestRunnerDlg</a>)</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">  </span><span class="comment">//{{AFX_MSG_MAP(TestPlugInRunnerDlg)</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">  </span><span class="default">ON_WM_PAINT()</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  <a href="dictionary_O.html#5193">ON_WM_QUERYDRAGICON</a>()</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">  ON_BN_CLICKED(<a href="dictionary_I.html#5194">IDC_CHOOSE_DLL</a>, OnChooseDll)</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">  <a href="dictionary_O.html#5195">ON_BN_CLICKED</a>(<a href="dictionary_I.html#5196">IDC_RELOAD_DLL</a>, OnReloadDll)</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  </span><span class="comment">//}}AFX_MSG_MAP</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"></span><span class="default">END_MESSAGE_MAP()</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">// TestPlugInRunnerDlg message handlers</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"></span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"><a href="dictionary_B.html#199">BOOL</a> <a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_O.html#5197">OnInitDialog</a>()</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">{</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">  <a href="dictionary_T.html#3199">TestRunnerDlg</a>::<a href="dictionary_O.html#3664">OnInitDialog</a>();</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default">  </span><span class="comment">// Set the icon for this dialog.  The framework does this automatically</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">  //  when the application's main window is not a dialog</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">  <a href="dictionary_S.html#5198">SetIcon</a></span><span class="default">(<a href="dictionary_M.html#5189">m_hIcon</a>, <a href="dictionary_T.html#2165">TRUE</a>);			</span><span class="comment">// Set big icon</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">  <a href="dictionary_S.html#5198">SetIcon</a></span><span class="default">(<a href="dictionary_M.html#5189">m_hIcon</a>, <a href="dictionary_F.html#2480">FALSE</a>);		</span><span class="comment">// Set small icon</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"></span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">  // TODO: Add extra initialization here</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">  <a href="dictionary_L.html#5199">loadPluginIfNesseccary</a></span><span class="default">();</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_T.html#2165">TRUE</a></span><span class="default">;  </span><span class="comment">// return TRUE  unless you set the focus to a control</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"></span><span class="default">}</span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span>
+<a name="67"><font size=-1>67     </font></a><span class="default"></span><span class="comment">// If you add a minimize button to your dialog, you will need the code below</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">//  to draw the icon.  For MFC applications using the document/view model,</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">//  this is automatically done for you by the framework.</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"></span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"></span><span class="keyword">void <a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_O.html#5200">OnPaint</a>() </span>
+<a name="72"><font size=-1>72     </font></a><span class="default">{</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#1535">IsIconic</a>())</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">  {</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">    <a href="dictionary_C.html#3445">CPaintDC</a> <a href="dictionary_D.html#5201">dc</a>(</span><span class="keyword">this</span><span class="default">); </span><span class="comment">// device context for painting</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment"></span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">    <a href="dictionary_S.html#4868">SendMessage</a></span><span class="default">(<a href="dictionary_W.html#5202">WM_ICONERASEBKGND</a>, (<a href="dictionary_W.html#5203">WPARAM</a>) <a href="dictionary_D.html#5201">dc</a>.<a href="dictionary_G.html#5204">GetSafeHdc</a>(), </span><span class="number">0</span><span class="default">);</span>
+<a name="78"><font size=-1>78     </font></a><span class="default"></span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    </span><span class="comment">// Center icon in client rectangle</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">    </span><span class="keyword">int <a href="dictionary_C.html#5205">cxIcon</a> </span><span class="default">= <a href="dictionary_G.html#5206">GetSystemMetrics</a>(<a href="dictionary_S.html#5207">SM_CXICON</a>);</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_C.html#5208">cyIcon</a> </span><span class="default">= <a href="dictionary_G.html#5206">GetSystemMetrics</a>(<a href="dictionary_S.html#5209">SM_CYICON</a>);</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">    <a href="dictionary_C.html#1408">CRect</a> <a href="dictionary_R.html#5210">rect</a>;</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">    <a href="dictionary_G.html#1434">GetClientRect</a>(&amp;<a href="dictionary_R.html#5210">rect</a>);</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_X.html#5211">x</a> </span><span class="default">= (<a href="dictionary_R.html#5210">rect</a>.<a href="dictionary_W.html#1435">Width</a>() - <a href="dictionary_C.html#5205">cxIcon</a> + </span><span class="number">1</span><span class="default">) / </span><span class="number">2</span><span class="default">;</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_Y.html#5212">y</a> </span><span class="default">= (<a href="dictionary_R.html#5210">rect</a>.<a href="dictionary_H.html#1438">Height</a>() - <a href="dictionary_C.html#5208">cyIcon</a> + </span><span class="number">1</span><span class="default">) / </span><span class="number">2</span><span class="default">;</span>
+<a name="86"><font size=-1>86     </font></a><span class="default"></span>
+<a name="87"><font size=-1>87     </font></a><span class="default">    </span><span class="comment">// Draw the icon</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">    <a href="dictionary_D.html#5201">dc</a></span><span class="default">.<a href="dictionary_D.html#5213">DrawIcon</a>(<a href="dictionary_X.html#5211">x</a>, <a href="dictionary_Y.html#5212">y</a>, <a href="dictionary_M.html#5189">m_hIcon</a>);</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">  }</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">  </span><span class="keyword">else</span>
+<a name="91"><font size=-1>91     </font></a><span class="keyword">  </span><span class="default">{</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    <a href="dictionary_T.html#3199">TestRunnerDlg</a>::<a href="dictionary_O.html#5214">OnPaint</a>();</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">  }</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">}</span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default"></span>
+<a name="97"><font size=-1>97     </font></a><span class="default"></span><span class="comment">// The system calls this to obtain the cursor to display while the user drags</span>
+<a name="98"><font size=-1>98     </font></a><span class="comment">//  the minimized window.</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment"><a href="dictionary_H.html#2816">HCURSOR</a> <a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_O.html#5215">OnQueryDragIcon</a>()</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">{</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">  </span><span class="keyword">return </span><span class="default">(<a href="dictionary_H.html#2816">HCURSOR</a>) <a href="dictionary_M.html#5189">m_hIcon</a>;</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">}</span>
+<a name="103"><font size=-1>103     </font></a><span class="default"></span>
+<a name="104"><font size=-1>104     </font></a><span class="default"></span>
+<a name="105"><font size=-1>105     </font></a><span class="default"><a href="dictionary_T.html#2623">TestPlugInRunnerModel</a> &amp;</span>
+<a name="106"><font size=-1>106     </font></a><span class="default"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a>::<a href="dictionary_P.html#5216">plugInModel</a>()</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">{</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">  </span><span class="keyword">return </span><span class="default">*</span><span class="keyword">static_cast</span><span class="default">&lt;<a href="dictionary_T.html#2623">TestPlugInRunnerModel</a>*&gt;( <a href="dictionary_M.html#3636">m_model</a> );</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">}</span>
+<a name="110"><font size=-1>110     </font></a><span class="default"></span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="113"><font size=-1>113     </font></a><span class="keyword"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_O.html#5217">OnChooseDll</a>() </span>
+<a name="114"><font size=-1>114     </font></a><span class="default">{</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">  <a href="dictionary_C.html#5219">CFileDialog</a> <a href="dictionary_D.html#5218">dlg</a>( <a href="dictionary_T.html#2165">TRUE</a>, </span><span class="string">&quot;*.dll&quot;</span><span class="default">, </span><span class="string">&quot;&quot;</span><span class="default">, </span><span class="number">0</span><span class="default">, </span>
+<a name="116"><font size=-1>116     </font></a><span class="default">                   </span><span class="string">&quot;Test Plug-in (*.dll)|*.dll|All Files (*.*)|*.*||&quot;</span><span class="default">,</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">                   </span><span class="keyword">this </span><span class="default">);</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_D.html#5218">dlg</a>.<a href="dictionary_D.html#5220">DoModal</a>() != <a href="dictionary_I.html#3543">IDOK</a> )</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="120"><font size=-1>120     </font></a><span class="default"></span>
+<a name="121"><font size=-1>121     </font></a><span class="default">  </span><span class="keyword">try</span>
+<a name="122"><font size=-1>122     </font></a><span class="keyword">  </span><span class="default">{</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">    <a href="dictionary_L.html#5221">loadDll</a>(<a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a>(<a href="dictionary_D.html#5218">dlg</a>.<a href="dictionary_G.html#5222">GetPathName</a>()));</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">  }</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">  </span><span class="keyword">catch </span><span class="default">( <a href="dictionary_T.html#2572">TestPlugInException</a> &amp;<a href="dictionary_E.html#5223">e</a> )</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">  {</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">    <a href="dictionary_A.html#3588">AfxMessageBox</a>( <a href="dictionary_E.html#5223">e</a>.<a href="dictionary_W.html#5224">what</a>() );</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">  }</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">}</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default"></span>
+<a name="132"><font size=-1>132     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="133"><font size=-1>133     </font></a><span class="keyword"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_O.html#5225">OnReloadDll</a>() </span>
+<a name="134"><font size=-1>134     </font></a><span class="default">{</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">  <a href="dictionary_R.html#3701">reset</a>();</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">  <a href="dictionary_P.html#5216">plugInModel</a>().<a href="dictionary_R.html#2633">reloadPlugIn</a>();</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">}</span>
+<a name="138"><font size=-1>138     </font></a><span class="default"></span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default"><a href="dictionary_S.html#39">std</a>::<a href="dictionary_L.html#5227">list</a>&lt;<a href="dictionary_S.html#39">std</a>::string&gt; </span>
+<a name="141"><font size=-1>141     </font></a><span class="default"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a>::<a href="dictionary_G.html#5226">getCommandLineArguments</a>()</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">{</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_A.html#5228">argc</a></span><span class="default">;</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">  <a href="dictionary_L.html#5230">LPWSTR</a> *<a href="dictionary_A.html#5229">argv</a> = ::<a href="dictionary_C.html#5231">CommandLineToArgvW</a>( ::<a href="dictionary_G.html#5232">GetCommandLineW</a>(), &amp;<a href="dictionary_A.html#5228">argc</a> );</span>
+<a name="145"><font size=-1>145     </font></a><span class="default"></span>
+<a name="146"><font size=-1>146     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_L.html#5227">list</a>&lt;<a href="dictionary_S.html#39">std</a>::string&gt; <a href="dictionary_A.html#5233">arguments</a>;</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">  </span><span class="keyword">for</span><span class="default">( </span><span class="keyword">int <a href="dictionary_I.html#5234">index</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#5234">index</a> &lt; <a href="dictionary_A.html#5228">argc</a>; <a href="dictionary_I.html#5234">index</a>++ ) </span>
+<a name="148"><font size=-1>148     </font></a><span class="default">    <a href="dictionary_A.html#5233">arguments</a>.<a href="dictionary_P.html#285">push_back</a>( <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a>( <a href="dictionary_C.html#2213">CString</a>( <a href="dictionary_A.html#5229">argv</a>[<a href="dictionary_I.html#5234">index</a>] ) ) );</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">  ::<a href="dictionary_G.html#5235">GlobalFree</a>( <a href="dictionary_A.html#5229">argv</a> );</span>
+<a name="151"><font size=-1>151     </font></a><span class="default"></span>
+<a name="152"><font size=-1>152     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_A.html#5233">arguments</a></span><span class="default">;</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">} </span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span>
+<a name="156"><font size=-1>156     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="157"><font size=-1>157     </font></a><span class="keyword"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_L.html#5199">loadPluginIfNesseccary</a>()</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">{</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_L.html#5227">list</a>&lt;<a href="dictionary_S.html#39">std</a>::string&gt; <a href="dictionary_A.html#5236">argv</a> = <a href="dictionary_G.html#5226">getCommandLineArguments</a>();</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_L.html#5227">list</a>&lt;<a href="dictionary_S.html#39">std</a>::string&gt;::<a href="dictionary_I.html#5238">iterator</a> <a href="dictionary_I.html#5237">iter</a> = <a href="dictionary_S.html#39">std</a>::<a href="dictionary_F.html#5239">find</a>( <a href="dictionary_A.html#5236">argv</a>.<a href="dictionary_B.html#5240">begin</a>(), </span>
+<a name="161"><font size=-1>161     </font></a><span class="default">                                                     <a href="dictionary_A.html#5236">argv</a>.<a href="dictionary_E.html#5241">end</a>(), </span>
+<a name="162"><font size=-1>162     </font></a><span class="default">                                                     <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a>( </span><span class="string">&quot;-testsuite&quot; </span><span class="default">) );</span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span>
+<a name="164"><font size=-1>164     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">( <a href="dictionary_I.html#5237">iter</a> == <a href="dictionary_A.html#5236">argv</a>.<a href="dictionary_E.html#5241">end</a>() ) </span>
+<a name="165"><font size=-1>165     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="166"><font size=-1>166     </font></a><span class="default"></span>
+<a name="167"><font size=-1>167     </font></a><span class="default">  </span><span class="keyword">try </span>
+<a name="168"><font size=-1>168     </font></a><span class="keyword">  </span><span class="default">{</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">    <a href="dictionary_L.html#5221">loadDll</a>( *++<a href="dictionary_I.html#5237">iter</a> );</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">  } </span>
+<a name="171"><font size=-1>171     </font></a><span class="default">  </span><span class="keyword">catch</span><span class="default">( <a href="dictionary_S.html#39">std</a>::<a href="dictionary_E.html#5243">exception</a> &amp;<a href="dictionary_E.html#5242">e</a> ) </span>
+<a name="172"><font size=-1>172     </font></a><span class="default">  {</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">    <a href="dictionary_A.html#3588">AfxMessageBox</a>( <a href="dictionary_E.html#5242">e</a>.<a href="dictionary_W.html#5244">what</a>() );</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">  }</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">}</span>
+<a name="176"><font size=-1>176     </font></a><span class="default"></span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span>
+<a name="178"><font size=-1>178     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="179"><font size=-1>179     </font></a><span class="keyword"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_L.html#5221">loadDll</a>( <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#41">string</a> <a href="dictionary_P.html#5245">path</a> )</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">{</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">  <a href="dictionary_T.html#2550">TestPlugIn</a> *<a href="dictionary_P.html#5246">plugIn</a> = </span><span class="keyword">new <a href="dictionary_T.html#2628">TestPlugIn</a></span><span class="default">( <a href="dictionary_P.html#5245">path</a> );</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">  <a href="dictionary_P.html#5216">plugInModel</a>().<a href="dictionary_S.html#2631">setPlugIn</a>( <a href="dictionary_P.html#5246">plugIn</a> );</span>
+<a name="183"><font size=-1>183     </font></a><span class="default"></span>
+<a name="184"><font size=-1>184     </font></a><span class="default">  <a href="dictionary_M.html#3636">m_model</a>-&gt;<a href="dictionary_S.html#2223">selectHistoryTest</a>( <a href="dictionary_P.html#5216">plugInModel</a>().<a href="dictionary_R.html#582">rootTest</a>() );</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">  <a href="dictionary_U.html#3702">updateHistoryCombo</a>();</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">}</span>
+<a name="187"><font size=-1>187     </font></a><span class="default"></span>
+<a name="188"><font size=-1>188     </font></a><span class="default"></span>
+<a name="189"><font size=-1>189     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="190"><font size=-1>190     </font></a><span class="keyword"><a href="dictionary_T.html#5182">TestPlugInRunnerDlg</a></span><span class="default">::<a href="dictionary_I.html#5247">initializeLayout</a>()</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">{</span>
+<a name="192"><font size=-1>192     </font></a><span class="default">  <a href="dictionary_T.html#3199">TestRunnerDlg</a>::<a href="dictionary_I.html#3678">initializeLayout</a>();</span>
+<a name="193"><font size=-1>193     </font></a><span class="default"></span>
+<a name="194"><font size=-1>194     </font></a><span class="default">  <a href="dictionary_A.html#3812">AddSzXControl</a>( <a href="dictionary_I.html#5194">IDC_CHOOSE_DLL</a>, mdRepos );</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">  <a href="dictionary_A.html#3812">AddSzXControl</a>( <a href="dictionary_I.html#5196">IDC_RELOAD_DLL</a>, mdRepos );</span>
+<a name="196"><font size=-1>196     </font></a><span class="default"></span>
+<a name="197"><font size=-1>197     </font></a><span class="default">}</span>
+<a name="198"><font size=-1>198     </font></a><span class="default"></span>
+</pre></body></html>

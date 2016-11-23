@@ -1,0 +1,106 @@
+<html><head><title>cdxCSizeIconCtrl.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/msvc6/testrunner/DynamicWindow/cdxCSizeIconCtrl.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/msvc6/testrunner/DynamicWindow/cdxCSizeIconCtrl.h";
+top.document.title  = "cdxCSizeIconCtrl.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#if </span><span class="default">!</span><span class="preproc">defined</span><span class="default">(<a href="dictionary_A.html#5457">AFX_CDXCSIZEICONCTRL_H__9B4AD1C3_8AA5_11D2_BE9C_000000000000__INCLUDED_</a>)</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span><span class="preproc">#define <a href="dictionary_A.html#5457">AFX_CDXCSIZEICONCTRL_H__9B4AD1C3_8AA5_11D2_BE9C_000000000000__INCLUDED_</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#if <a href="dictionary_Non-Alpha.html#4132">_MSC_VER</a> </span><span class="default">&gt;= </span><span class="number">1000</span>
+<a name="5"><font size=-1>5     </font></a><span class="number"></span><span class="preproc">#pragma </span><span class="default">once</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="preproc">#endif </span><span class="comment">// _MSC_VER &gt;= 1000</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment">// cdxCSizeIconCtrl.h : header file</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment">//</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"></span>
+<a name="10"><font size=-1>10     </font></a><span class="comment">//</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment">// cdxCSizeIconCtrl.h : header file</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment">// -----------------------------------------------------------------------</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment">// Author:  Hans B�hler (hb@codex-design.de)</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment">//          codex design (http://www.codex-design.de)</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment">// Version: 1.3</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment">// -----------------------------------------------------------------------</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">// Changes for 1.1:</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">// - cdxCSizeIconCtrl catches left-mb-doubleclick what caused the window</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment">//	  to get maximized for any reason. </span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">// Changes for 1.2:</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">// - Ability to check parent's state: If it is zoomed, the control won't</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">//   draw a sizing icon.</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">// Changes for 1.3:</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment">// - Icon now has proper colors.</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment">// -----------------------------------------------------------------------</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">// Comments welcome.</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">//</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"></span>
+<a name="29"><font size=-1>29     </font></a><span class="comment">/*</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * cdxCSizeIconCtrl</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * ================</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * A simple class that is a size-icon.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> *</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * (w)Nov.1998 mailto:hans.buehler@student.hu-berlin.de,</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> *    codex design</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> */</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"></span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_C.html#1442">cdxCSizeIconCtrl</a> </span><span class="default">: </span><span class="keyword">public <a href="dictionary_C.html#5458">CScrollBar</a></span>
+<a name="39"><font size=-1>39     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">	<a href="dictionary_D.html#5459">DECLARE_DYNAMIC</a>(<a href="dictionary_C.html#1442">cdxCSizeIconCtrl</a>);</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">	</span><span class="keyword">class <a href="dictionary_A.html#4222">AutoOEMImageList</a> </span><span class="default">: </span><span class="keyword">public <a href="dictionary_C.html#3864">CImageList</a></span>
+<a name="44"><font size=-1>44     </font></a><span class="keyword">	</span><span class="default">{</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">	</span><span class="keyword">private</span><span class="default">:</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">		<a href="dictionary_C.html#1428">CSize</a>	<a href="dictionary_M.html#5460">m_szImage</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default">	</span><span class="keyword">public</span><span class="default">:</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">		<a href="dictionary_A.html#5461">AutoOEMImageList</a>(<a href="dictionary_U.html#1466">UINT</a> nBitmapID, <a href="dictionary_C.html#2659">COLORREF</a> crMask);</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">		</span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#5462">AutoOEMImageList</a>() {}</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default">		</span><span class="keyword">const <a href="dictionary_C.html#1428">CSize</a> </span><span class="default">&amp; <a href="dictionary_S.html#4223">Size</a>() </span><span class="keyword">const </span><span class="default">{ </span><span class="keyword">return <a href="dictionary_M.html#5460">m_szImage</a></span><span class="default">; }</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">	};</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">	</span><span class="keyword">bool	<a href="dictionary_M.html#5463">m_bCapture</a></span><span class="default">;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">	</span><span class="keyword">bool	<a href="dictionary_M.html#5464">m_bReflectParentState</a></span><span class="default">;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">	<a href="dictionary_C.html#1443">cdxCSizeIconCtrl</a>(</span><span class="keyword">bool <a href="dictionary_B.html#5465">bReflectParentState</a> </span><span class="default">= </span><span class="keyword">true</span><span class="default">) : <a href="dictionary_M.html#5463">m_bCapture</a>(</span><span class="keyword">false</span><span class="default">), <a href="dictionary_M.html#5464">m_bReflectParentState</a>(<a href="dictionary_B.html#5465">bReflectParentState</a>) {}</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">	</span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#5466">cdxCSizeIconCtrl</a>() {}</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">	</span><span class="keyword">virtual <a href="dictionary_B.html#199">BOOL</a> <a href="dictionary_C.html#1445">Create</a></span><span class="default">(<a href="dictionary_C.html#1363">CWnd</a> *pParent, <a href="dictionary_U.html#1466">UINT</a> id = AFX_IDW_SIZE_BOX);</span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span><span class="comment">// Operations</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span><span class="comment">// Overrides</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">	// ClassWizard generated virtual function overrides</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">	//{{AFX_VIRTUAL(cdxCSizeIconCtrl)</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">	//}}AFX_VIRTUAL</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"></span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">	// Generated message map functions</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment"></span><span class="keyword">protected</span><span class="default">:</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">	</span><span class="comment">//{{AFX_MSG(cdxCSizeIconCtrl)</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">	</span><span class="default">afx_msg </span><span class="keyword">void <a href="dictionary_O.html#5467">OnPaint</a></span><span class="default">();</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">	<a href="dictionary_A.html#2653">afx_msg</a> <a href="dictionary_B.html#199">BOOL</a> <a href="dictionary_O.html#5468">OnSetCursor</a>(<a href="dictionary_C.html#1363">CWnd</a>* pWnd, <a href="dictionary_U.html#1466">UINT</a> nHitTest, <a href="dictionary_U.html#1466">UINT</a> message);</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">	afx_msg </span><span class="keyword">void <a href="dictionary_O.html#5469">OnLButtonDblClk</a></span><span class="default">(<a href="dictionary_U.html#1466">UINT</a> nFlags, <a href="dictionary_C.html#1482">CPoint</a> point);</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">	</span><span class="comment">//}}AFX_MSG</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment"></span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">	<a href="dictionary_D.html#5470">DECLARE_MESSAGE_MAP</a></span><span class="default">();</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default">	</span><span class="comment">//</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">	// static members</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">	//</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">	</span><span class="keyword">static <a href="dictionary_A.html#4222">AutoOEMImageList</a>	<a href="dictionary_M.html#4221">M_ilImage</a></span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">	</span><span class="keyword">static <a href="dictionary_H.html#2816">HCURSOR</a>				<a href="dictionary_M.html#5471">M_hcSize</a></span><span class="default">;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">};</span>
+<a name="91"><font size=-1>91     </font></a><span class="default"></span>
+<a name="92"><font size=-1>92     </font></a><span class="default"></span><span class="comment">//{{AFX_INSERT_LOCATION}}</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">// Microsoft Developer Studio will insert additional declarations immediately before the previous line.</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment"></span>
+<a name="95"><font size=-1>95     </font></a><span class="comment"></span><span class="preproc">#endif </span><span class="comment">// !defined(AFX_CDXCSIZEICONCTRL_H__9B4AD1C3_8AA5_11D2_BE9C_000000000000__INCLUDED_)</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment"></span>
+</pre></body></html>

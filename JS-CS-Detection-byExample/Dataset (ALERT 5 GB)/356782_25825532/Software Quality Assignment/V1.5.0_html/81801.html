@@ -1,0 +1,161 @@
+<html><head><title>NACChannel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_5_0/jpos/src/main/org/jpos/iso/channel/NACChannel.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_5_0/jpos/src/main/org/jpos/iso/channel/NACChannel.java";
+top.document.title  = "NACChannel.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright (c) 2000 jPOS.org.  All rights reserved.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Redistribution and use in source and binary forms, with or without</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * modification, are permitted provided that the following conditions</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * are met:</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * 1. Redistributions of source code must retain the above copyright</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *    notice, this list of conditions and the following disclaimer.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * 2. Redistributions in binary form must reproduce the above copyright</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> *    notice, this list of conditions and the following disclaimer in</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> *    the documentation and/or other materials provided with the</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *    distribution.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> *</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * 3. The end-user documentation included with the redistribution,</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> *    if any, must include the following acknowledgment:</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"> *    &quot;This product includes software developed by the jPOS project </span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> *    (http://www.jpos.org/)&quot;. Alternately, this acknowledgment may </span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> *    appear in the software itself, if and wherever such third-party </span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> *    acknowledgments normally appear.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> *</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * 4. The names &quot;jPOS&quot; and &quot;jPOS.org&quot; must not be used to endorse </span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> *    or promote products derived from this software without prior </span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> *    written permission. For written permission, please contact </span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> *    license@jpos.org.</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> *</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * 5. Products derived from this software may not be called &quot;jPOS&quot;,</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> *    nor may &quot;jPOS&quot; appear in their name, without prior written</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> *    permission of the jPOS project.</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> *</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  </span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * IN NO EVENT SHALL THE JPOS PROJECT OR ITS CONTRIBUTORS BE LIABLE FOR </span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL </span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS </span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) </span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, </span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"> * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING </span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"> * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE </span>
+<a name="42"><font size=-1>42     </font></a><span class="comment"> * POSSIBILITY OF SUCH DAMAGE.</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment"> * ====================================================================</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment"> *</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"> * This software consists of voluntary contributions made by many</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * individuals on behalf of the jPOS Project.  For more</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * information please see &lt;http://www.jpos.org/&gt;.</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> */</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"></span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.iso.<a href="dictionary_I.html#2971">channel</a>;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.IOException;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.net.ServerSocket;</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#1052">BaseChannel</a>;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#716">ISOException</a>;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#1280">ISOMsg</a>;</span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#1278">ISOPackager</a>;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#715">iso</a>.<a href="dictionary_I.html#1287">ISOUtil</a>;</span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"> * Talks with TCP based NACs</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"> * Sends [LEN][TPDU][ISOMSG]</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment"> * (len=2 bytes network byte order)</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"> *</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"> * @author Alejandro P. Revilla</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"> * @version $Revision$ $Date$</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment"> * @see ISOMsg</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment"> * @see ISOException</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"> * @see ISOChannel</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"> */</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_C.html#81802">NACChannel</a> extends <a href="dictionary_I.html#1052">BaseChannel</a> </span><span class="default">{</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">     * Public constructor </span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">     */</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_N.html#81803">NACChannel</a> </span><span class="default">() {</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">();</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    }</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">     * Construct client ISOChannel</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">     * @param host  server TCP Address</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">     * @param port  server port number</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">     * @param p     an ISOPackager</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">     * @param TPDU  an optional raw header (i.e. TPDU)</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">     * @see ISOPackager</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">     */</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_N.html#81804">NACChannel</a> </span><span class="default">(String <a href="dictionary_H.html#81806">host</a>, </span><span class="keyword">int <a href="dictionary_P.html#81808">port</a></span><span class="default">, <a href="dictionary_I.html#1278">ISOPackager</a> <a href="dictionary_P.html#81807">p</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_T.html#81805">TPDU</a>) {</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_H.html#81806">host</a>, <a href="dictionary_P.html#81808">port</a>, <a href="dictionary_P.html#81807">p</a>);</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_B.html#1227">header</a> = <a href="dictionary_T.html#81805">TPDU</a>;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">    }</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">     * Construct server ISOChannel</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">     * @param p     an ISOPackager</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">     * @param TPDU  an optional raw header (i.e. TPDU)</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">     * @exception IOException</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">     * @see ISOPackager</span>
+<a name="97"><font size=-1>97     </font></a><span class="comment">     */</span>
+<a name="98"><font size=-1>98     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_N.html#81809">NACChannel</a> </span><span class="default">(<a href="dictionary_I.html#1278">ISOPackager</a> <a href="dictionary_P.html#81811">p</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_T.html#81810">TPDU</a>) </span><span class="keyword">throws </span><span class="default">IOException {</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_P.html#81811">p</a>);</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_B.html#1227">header</a> = <a href="dictionary_T.html#81810">TPDU</a>;</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">    }</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     * constructs server ISOChannel associated with a Server Socket</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">     * @param p     an ISOPackager</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">     * @param TPDU  an optional raw header (i.e. TPDU)</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">     * @param serverSocket where to accept a connection</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">     * @exception IOException</span>
+<a name="108"><font size=-1>108     </font></a><span class="comment">     * @see ISOPackager</span>
+<a name="109"><font size=-1>109     </font></a><span class="comment">     */</span>
+<a name="110"><font size=-1>110     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_N.html#81812">NACChannel</a> </span><span class="default">(<a href="dictionary_I.html#1278">ISOPackager</a> <a href="dictionary_P.html#81814">p</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_T.html#81813">TPDU</a>, ServerSocket <a href="dictionary_S.html#81815">serverSocket</a>) </span>
+<a name="111"><font size=-1>111     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">IOException</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">    {</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_P.html#81814">p</a>, <a href="dictionary_S.html#81815">serverSocket</a>);</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_B.html#1227">header</a> = <a href="dictionary_T.html#81813">TPDU</a>;</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    }</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_N.html#81823">sendMessageLength</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_L.html#81824">len</a></span><span class="default">) </span><span class="keyword">throws </span><span class="default">IOException {</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">        <a href="dictionary_B.html#1239">serverOut</a>.write (<a href="dictionary_L.html#81824">len</a> &gt;&gt; </span><span class="number">8</span><span class="default">);</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">        <a href="dictionary_B.html#1239">serverOut</a>.write (<a href="dictionary_L.html#81824">len</a>);</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">    }</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">    </span><span class="keyword">protected int <a href="dictionary_N.html#81816">getMessageLength</a></span><span class="default">() </span><span class="keyword">throws </span><span class="default">IOException, <a href="dictionary_I.html#716">ISOException</a> {</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">        </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_B.html#81817">b</a> = </span><span class="keyword">new byte</span><span class="default">[</span><span class="number">2</span><span class="default">];</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">        <a href="dictionary_B.html#1238">serverIn</a>.readFully(<a href="dictionary_B.html#81817">b</a>,</span><span class="number">0</span><span class="default">,</span><span class="number">2</span><span class="default">);</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">        </span><span class="keyword">return </span><span class="default">(</span><span class="keyword">int</span><span class="default">) (</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">            ((((</span><span class="keyword">int</span><span class="default">)<a href="dictionary_B.html#81817">b</a>[</span><span class="number">0</span><span class="default">])&amp;</span><span class="number">0xFF</span><span class="default">) &lt;&lt; </span><span class="number">8</span><span class="default">) | </span>
+<a name="125"><font size=-1>125     </font></a><span class="default">            (((</span><span class="keyword">int</span><span class="default">)<a href="dictionary_B.html#81817">b</a>[</span><span class="number">1</span><span class="default">])&amp;</span><span class="number">0xFF</span><span class="default">));</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">    }</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_N.html#81818">sendMessageHeader</a></span><span class="default">(<a href="dictionary_I.html#1280">ISOMsg</a> <a href="dictionary_M.html#81821">m</a>, </span><span class="keyword">int <a href="dictionary_L.html#81820">len</a></span><span class="default">) </span><span class="keyword">throws </span><span class="default">IOException { </span>
+<a name="128"><font size=-1>128     </font></a><span class="default">        </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_H.html#81819">h</a> = <a href="dictionary_M.html#81821">m</a>.<a href="dictionary_I.html#1367">getHeader</a>();</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_H.html#81819">h</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_H.html#81819">h</a>.length == </span><span class="number">5</span><span class="default">) {</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">                </span><span class="comment">// swap src/dest address</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">                </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_T.html#81822">tmp</a> = </span><span class="keyword">new byte</span><span class="default">[</span><span class="number">2</span><span class="default">];</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">                System.<a href="dictionary_S.html#2981">arraycopy</a> (<a href="dictionary_H.html#81819">h</a>,   </span><span class="number">1</span><span class="default">, <a href="dictionary_T.html#81822">tmp</a>, </span><span class="number">0</span><span class="default">, </span><span class="number">2</span><span class="default">);</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">                System.<a href="dictionary_S.html#2981">arraycopy</a> (<a href="dictionary_H.html#81819">h</a>,   </span><span class="number">3</span><span class="default">,   <a href="dictionary_H.html#81819">h</a>, </span><span class="number">1</span><span class="default">, </span><span class="number">2</span><span class="default">);</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">                System.<a href="dictionary_S.html#2981">arraycopy</a> (<a href="dictionary_T.html#81822">tmp</a>, </span><span class="number">0</span><span class="default">,   <a href="dictionary_H.html#81819">h</a>, </span><span class="number">3</span><span class="default">, </span><span class="number">2</span><span class="default">);</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">            }</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">        }</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">        </span><span class="keyword">else</span>
+<a name="139"><font size=-1>139     </font></a><span class="keyword">            <a href="dictionary_H.html#81819">h</a> </span><span class="default">= <a href="dictionary_B.html#1227">header</a>;</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_H.html#81819">h</a> != </span><span class="keyword">null</span><span class="default">) </span>
+<a name="141"><font size=-1>141     </font></a><span class="default">            <a href="dictionary_B.html#1239">serverOut</a>.write(<a href="dictionary_H.html#81819">h</a>);</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">    }</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">     * New QSP compatible signature (see QSP's ConfigChannel)</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">     * @param header String as seen by QSP</span>
+<a name="146"><font size=-1>146     </font></a><span class="comment">     */</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_N.html#81825">setHeader</a> </span><span class="default">(String <a href="dictionary_H.html#81826">header</a>) {</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_B.html#1193">setHeader</a> (<a href="dictionary_I.html#1287">ISOUtil</a>.<a href="dictionary_I.html#13408">str2bcd</a>(<a href="dictionary_H.html#81826">header</a>, </span><span class="keyword">false</span><span class="default">));</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">    }</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">}</span>
+<a name="151"><font size=-1>151     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,38 @@
+<html><head><title>DefaultProtector.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/cppunit/DefaultProtector.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/src/cppunit/DefaultProtector.h";
+top.document.title  = "DefaultProtector.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_C.html#6672">CPPUNIT_DEFAULTPROTECTOR_H</a></span>
+<a name="2"><font size=-1>2     </font></a><span class="preproc">#define <a href="dictionary_C.html#6672">CPPUNIT_DEFAULTPROTECTOR_H</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#include </span><span class="string">&lt;cppunit/Protector.h&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span>
+<a name="6"><font size=-1>6     </font></a><span class="string"><a href="dictionary_C.html#7">CPPUNIT_NS_BEGIN</a></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="comment">/*! \brief Default protector that catch all exceptions (Implementation).</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Implementation detail.</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * \internal This protector catch and generate a failure for the following</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * exception types:</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * - Exception</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * - std::exception</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * - ...</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> */</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_D.html#5667">DefaultProtector</a> </span><span class="default">: </span><span class="keyword">public <a href="dictionary_P.html#212">Protector</a></span>
+<a name="18"><font size=-1>18     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_P.html#5668">protect</a></span><span class="default">( </span><span class="keyword">const <a href="dictionary_F.html#211">Functor</a> </span><span class="default">&amp;functor,</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">                </span><span class="keyword">const <a href="dictionary_P.html#550">ProtectorContext</a> </span><span class="default">&amp;context );</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">};</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default"><a href="dictionary_C.html#11">CPPUNIT_NS_END</a></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="preproc">#endif </span><span class="comment">// CPPUNIT_DEFAULTPROTECTOR_H</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"></span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"></span>
+</pre></body></html>

@@ -1,0 +1,60 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: corelib - Win32 Release--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\RONYS~1.DIS\LOCALS~1\Temp\RSP62.tmp" with contents
+[
+/nologo /MD /W4 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_LIB" /D "_AFXDLL" /Fo"Release/" /Fd"Release/" /FD /c 
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\BlowFish.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\ItemData.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\ItemField.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\MyString.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\PWCharPool.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\PWScore.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\PWSfile.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\sha1.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\Util.cpp"
+"D:\local\src\PasswordSafe\pwsafe\pwsafe\corelib\UUIDGen.cpp"
+]
+Creating command line "cl.exe @C:\DOCUME~1\RONYS~1.DIS\LOCALS~1\Temp\RSP62.tmp" 
+Creating temporary file "C:\DOCUME~1\RONYS~1.DIS\LOCALS~1\Temp\RSP63.tmp" with contents
+[
+/nologo /out:"Release\corelib.lib" 
+.\Release\BlowFish.obj
+.\Release\ItemData.obj
+.\Release\ItemField.obj
+.\Release\MyString.obj
+.\Release\PWCharPool.obj
+.\Release\PWScore.obj
+.\Release\PWSfile.obj
+.\Release\sha1.obj
+.\Release\Util.obj
+.\Release\UUIDGen.obj
+]
+Creating command line "link.exe -lib @C:\DOCUME~1\RONYS~1.DIS\LOCALS~1\Temp\RSP63.tmp"
+<h3>Output Window</h3>
+Compiling...
+BlowFish.cpp
+ItemData.cpp
+ItemField.cpp
+MyString.cpp
+PWCharPool.cpp
+PWScore.cpp
+PWSfile.cpp
+sha1.cpp
+Util.cpp
+UUIDGen.cpp
+Generating Code...
+Creating library...
+
+
+
+<h3>Results</h3>
+corelib.lib - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<html><head><title>SMCONSOLE.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_7_0/modules/q2/src/org/jpos/q2/cli/SMCONSOLE.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_7_0/modules/q2/src/org/jpos/q2/cli/SMCONSOLE.java";
+top.document.title  = "SMCONSOLE.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2010 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.q2.<a href="dictionary_Q.html#7115">cli</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#3308">q2</a>.<a href="dictionary_Q.html#7116">CLI</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_C.html#34839">SMCONSOLE</a> implements <a href="dictionary_Q.html#7116">CLI</a></span><span class="default">.<a href="dictionary_C.html#7117">Command</a> {</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_S.html#34840">exec</a> </span><span class="default">(<a href="dictionary_Q.html#7116">CLI</a> <a href="dictionary_C.html#34843">cli</a>, String[] <a href="dictionary_A.html#34842">args</a>) {</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">            String[] <a href="dictionary_P.html#34844">params</a> = </span><span class="keyword">new </span><span class="default">String[<a href="dictionary_A.html#34842">args</a>.length-</span><span class="number">1</span><span class="default">];</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">            System.<a href="dictionary_S.html#3684">arraycopy</a> (<a href="dictionary_A.html#34842">args</a>, </span><span class="number">1</span><span class="default">, <a href="dictionary_P.html#34844">params</a>, </span><span class="number">0</span><span class="default">, <a href="dictionary_P.html#34844">params</a>.length);</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">            org.jpos.<a href="dictionary_J.html#304">security</a>.<a href="dictionary_S.html#6960">jceadapter</a>.<a href="dictionary_J.html#34845">Console</a>.<a href="dictionary_C.html#34846">main</a> (<a href="dictionary_P.html#34844">params</a>);</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(Exception <a href="dictionary_E.html#34841">e</a>) {</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">            <a href="dictionary_E.html#34841">e</a>.printStackTrace();</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">        }</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">    }</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">}</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,8 @@
++ Support file renaming logic when converting
++ Merge in Dentist's bug - missing OnHelp in EditDlg - compile &
+verify in 1.92 & 2.0 branches!
+- Does export to 1.7 re-merge name & user to title?
+- Use session key to encrypt CItemData and user's password!
+- Merge in ppc version - or will Kevin do it?
+- Support unicode
+- Add GUID field

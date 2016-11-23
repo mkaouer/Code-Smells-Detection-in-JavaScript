@@ -1,0 +1,181 @@
+<html><head><title>DSPlugIn.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.8/src/msvc6/DSPlugIn/DSPlugIn.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.8/src/msvc6/DSPlugIn/DSPlugIn.cpp";
+top.document.title  = "DSPlugIn.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// DSPlugIn.cpp : Defines the initialization routines for the DLL.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">//</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"></span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;stdafx.h&quot;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;initguid.h&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;DSPlugIn.h&quot;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;DSAddIn.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#ifdef <a href="dictionary_Non-Alpha.html#942">_DEBUG</a></span>
+<a name="10"><font size=-1>10     </font></a><span class="preproc">#define </span><span class="keyword">new </span><span class="default">DEBUG_NEW</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="preproc">#undef <a href="dictionary_T.html#3214">THIS_FILE</a></span>
+<a name="12"><font size=-1>12     </font></a><span class="preproc"></span><span class="keyword">static char <a href="dictionary_T.html#3214">THIS_FILE</a></span><span class="default">[] = __FILE__;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="14"><font size=-1>14     </font></a><span class="preproc"></span>
+<a name="15"><font size=-1>15     </font></a><span class="preproc"><a href="dictionary_C.html#2737">CComModule</a> <a href="dictionary_Non-Alpha.html#958">_Module</a></span><span class="default">;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default"><a href="dictionary_B.html#3215">BEGIN_OBJECT_MAP</a>(ObjectMap)</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">	OBJECT_ENTRY(CLSID_DSAddIn, CDSAddIn)</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"><a href="dictionary_E.html#3216">END_OBJECT_MAP</a>()</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">// CDSPlugInApp</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"></span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"></span><span class="keyword">class </span><span class="default">CDSPlugInApp : </span><span class="keyword">public </span><span class="default">CWinApp</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">{</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">	CDSPlugInApp();</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="comment">// Overrides</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment">	// ClassWizard generated virtual function overrides</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">	//{{AFX_VIRTUAL(CDSPlugInApp)</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">	</span><span class="keyword">public</span><span class="default">:</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">	</span><span class="keyword">virtual </span><span class="default">BOOL InitInstance();</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">	</span><span class="keyword">virtual int <a href="dictionary_E.html#3217">ExitInstance</a></span><span class="default">();</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">	</span><span class="comment">//}}AFX_VIRTUAL</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"></span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">	//{{AFX_MSG(CDSPlugInApp)</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">		// NOTE - the ClassWizard will add and remove member functions here.</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">		//    DO NOT EDIT what you see in these blocks of generated code !</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">	//}}AFX_MSG</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">	<a href="dictionary_D.html#3218">DECLARE_MESSAGE_MAP</a></span><span class="default">()</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">};</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">// CDSPlugInApp</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"></span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"><a href="dictionary_B.html#3219">BEGIN_MESSAGE_MAP</a></span><span class="default">(CDSPlugInApp, <a href="dictionary_C.html#11">CWinApp</a>)</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">	</span><span class="comment">//{{AFX_MSG_MAP(CDSPlugInApp)</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">		// NOTE - the ClassWizard will add and remove mapping macros here.</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">		//    DO NOT EDIT what you see in these blocks of generated code!</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">	//}}AFX_MSG_MAP</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"></span><span class="default">END_MESSAGE_MAP()</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">// The one and only CDSPlugInApp object</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"></span>
+<a name="58"><font size=-1>58     </font></a><span class="comment"><a href="dictionary_C.html#3221">CDSPlugInApp</a> <a href="dictionary_T.html#3220">theApp</a></span><span class="default">;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">// CDSPlugInApp construction</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"></span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"><a href="dictionary_C.html#3221">CDSPlugInApp</a></span><span class="default">::<a href="dictionary_C.html#3222">CDSPlugInApp</a>()</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">{</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">	</span><span class="comment">// TODO: add construction code here,</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">	// Place all significant initialization in InitInstance</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"></span><span class="default">}</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">// CDSPlugInApp initialization</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"></span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"><a href="dictionary_B.html#16">BOOL</a> <a href="dictionary_C.html#3221">CDSPlugInApp</a></span><span class="default">::<a href="dictionary_I.html#3223">InitInstance</a>()</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">{</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">	<a href="dictionary_Non-Alpha.html#958">_Module</a>.<a href="dictionary_I.html#3224">Init</a>(<a href="dictionary_O.html#3225">ObjectMap</a>, <a href="dictionary_M.html#3226">m_hInstance</a>, &amp;<a href="dictionary_L.html#3227">LIBID_TestRunnerDSPluginLib</a>);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">	</span><span class="keyword">return <a href="dictionary_C.html#11">CWinApp</a></span><span class="default">::<a href="dictionary_I.html#3228">InitInstance</a>();</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">}</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+<a name="78"><font size=-1>78     </font></a><span class="default"></span><span class="keyword">int <a href="dictionary_C.html#3221">CDSPlugInApp</a></span><span class="default">::<a href="dictionary_E.html#3217">ExitInstance</a>()</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">{</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">	<a href="dictionary_Non-Alpha.html#958">_Module</a>.<a href="dictionary_T.html#3229">Term</a>();</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">	</span><span class="keyword">return <a href="dictionary_C.html#11">CWinApp</a></span><span class="default">::<a href="dictionary_E.html#3230">ExitInstance</a>();</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">}</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">// Special entry points required for inproc servers</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment"></span>
+<a name="87"><font size=-1>87     </font></a><span class="comment"><a href="dictionary_S.html#3232">STDAPI</a> <a href="dictionary_D.html#3231">DllGetClassObject</a></span><span class="default">(<a href="dictionary_R.html#3234">REFCLSID</a> <a href="dictionary_R.html#3233">rclsid</a>, <a href="dictionary_R.html#3236">REFIID</a> <a href="dictionary_R.html#3235">riid</a>, <a href="dictionary_L.html#560">LPVOID</a>* <a href="dictionary_P.html#3237">ppv</a>)</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">{</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">	<a href="dictionary_A.html#956">AFX_MANAGE_STATE</a>(<a href="dictionary_A.html#957">AfxGetStaticModuleState</a>());</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">	</span><span class="keyword">return <a href="dictionary_Non-Alpha.html#958">_Module</a></span><span class="default">.<a href="dictionary_G.html#959">GetClassObject</a>(<a href="dictionary_R.html#3233">rclsid</a>, <a href="dictionary_R.html#3235">riid</a>, <a href="dictionary_P.html#3237">ppv</a>);</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">}</span>
+<a name="92"><font size=-1>92     </font></a><span class="default"></span>
+<a name="93"><font size=-1>93     </font></a><span class="default"><a href="dictionary_S.html#3232">STDAPI</a> <a href="dictionary_D.html#3238">DllCanUnloadNow</a>(</span><span class="keyword">void</span><span class="default">)</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">{</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">	<a href="dictionary_A.html#956">AFX_MANAGE_STATE</a>(<a href="dictionary_A.html#957">AfxGetStaticModuleState</a>());</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">	</span><span class="keyword">return </span><span class="default">(<a href="dictionary_A.html#3239">AfxDllCanUnloadNow</a>()==<a href="dictionary_S.html#954">S_OK</a> &amp;&amp; <a href="dictionary_Non-Alpha.html#958">_Module</a>.<a href="dictionary_G.html#3240">GetLockCount</a>()==</span><span class="number">0</span><span class="default">) ? <a href="dictionary_S.html#954">S_OK</a> : <a href="dictionary_S.html#3241">S_FALSE</a>;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">}</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span><span class="comment">// by exporting DllRegisterServer, you can use regsvr32.exe</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment"><a href="dictionary_S.html#3232">STDAPI</a> <a href="dictionary_D.html#3242">DllRegisterServer</a></span><span class="default">(</span><span class="keyword">void</span><span class="default">)</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">{</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">	<a href="dictionary_A.html#956">AFX_MANAGE_STATE</a>(<a href="dictionary_A.html#957">AfxGetStaticModuleState</a>());</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">	<a href="dictionary_H.html#953">HRESULT</a> <a href="dictionary_H.html#3243">hRes</a> = <a href="dictionary_S.html#954">S_OK</a>;</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">	</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">	</span><span class="comment">// Registers object, typelib and all interfaces in typelib</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">	<a href="dictionary_H.html#3243">hRes</a> </span><span class="default">= <a href="dictionary_Non-Alpha.html#958">_Module</a>.<a href="dictionary_R.html#3244">RegisterServer</a>(<a href="dictionary_T.html#259">TRUE</a>);</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">	</span><span class="keyword">if </span><span class="default">(<a href="dictionary_F.html#3245">FAILED</a>(<a href="dictionary_H.html#3243">hRes</a>))</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_H.html#3243">hRes</a></span><span class="default">;</span>
+<a name="109"><font size=-1>109     </font></a><span class="default"></span>
+<a name="110"><font size=-1>110     </font></a><span class="default">	</span><span class="comment">// Register description of this add-in object in its own</span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">	//  &quot;/Description&quot; subkey.</span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">	// TODO:  If you add more add-ins to this module, you need</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">	//  to register all of their descriptions, each description</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">	//  in each add-in object's registry CLSID entry:</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">	// HKEY_CLASSES_ROOT\Clsid\{add-in CLSID}\Description=&quot;add-in description&quot;</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">/*</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">  _ATL_OBJMAP_ENTRY* pEntry = _Module.m_pObjMap;</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">	CRegKey key;</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">	LONG lRes = key.Open(HKEY_CLASSES_ROOT, _T(&quot;CLSID&quot;));</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">	if (lRes == ERROR_SUCCESS)</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">	{</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">		USES_CONVERSION;</span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">		LPOLESTR lpOleStr;</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">		StringFromCLSID(*pEntry-&gt;pclsid, &amp;lpOleStr);</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">		LPTSTR lpsz = OLE2T(lpOleStr);</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment"></span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">		lRes = key.Open(key, lpsz);</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">		if (lRes == ERROR_SUCCESS)</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">		{</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">			CString strDescription;</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">			strDescription.LoadString(IDS_DSPLUGIN_DESCRIPTION);</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">			key.SetKeyValue(_T(&quot;Description&quot;), strDescription);</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">		}</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">		CoTaskMemFree(lpOleStr);</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">	}</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">	if (lRes != ERROR_SUCCESS)</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">		hRes = HRESULT_FROM_WIN32(lRes);</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">*/</span>
+<a name="139"><font size=-1>139     </font></a><span class="comment">	</span><span class="keyword">return <a href="dictionary_H.html#3243">hRes</a></span><span class="default">;</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">}</span>
+<a name="141"><font size=-1>141     </font></a><span class="default"></span>
+<a name="142"><font size=-1>142     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">// DllUnregisterServer - Removes entries from the system registry</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment"></span>
+<a name="145"><font size=-1>145     </font></a><span class="comment"><a href="dictionary_S.html#3232">STDAPI</a> <a href="dictionary_D.html#3246">DllUnregisterServer</a></span><span class="default">(</span><span class="keyword">void</span><span class="default">)</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">{</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">	<a href="dictionary_A.html#956">AFX_MANAGE_STATE</a>(<a href="dictionary_A.html#957">AfxGetStaticModuleState</a>());</span>
+<a name="148"><font size=-1>148     </font></a><span class="default"></span>
+<a name="149"><font size=-1>149     </font></a><span class="default">	<a href="dictionary_H.html#953">HRESULT</a> <a href="dictionary_H.html#3247">hRes</a> = <a href="dictionary_S.html#954">S_OK</a>;</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">	<a href="dictionary_Non-Alpha.html#958">_Module</a>.<a href="dictionary_U.html#3248">UnregisterServer</a>();</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">	</span><span class="keyword">return <a href="dictionary_H.html#3247">hRes</a></span><span class="default">;</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">}</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span><span class="comment">/////////////////////////////////////////////////////////////////////////////</span>
+<a name="156"><font size=-1>156     </font></a><span class="comment">// Debugging support</span>
+<a name="157"><font size=-1>157     </font></a><span class="comment"></span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">// GetLastErrorDescription is used in the implementation of the VERIFY_OK</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment">//  macro, defined in stdafx.h.</span>
+<a name="160"><font size=-1>160     </font></a><span class="comment"></span>
+<a name="161"><font size=-1>161     </font></a><span class="comment"></span><span class="preproc">#ifdef <a href="dictionary_Non-Alpha.html#942">_DEBUG</a></span>
+<a name="162"><font size=-1>162     </font></a><span class="preproc"></span>
+<a name="163"><font size=-1>163     </font></a><span class="preproc"></span><span class="keyword">void </span><span class="default">GetLastErrorDescription(CComBSTR&amp; bstr)</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">{</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">	<a href="dictionary_C.html#525">CComPtr</a>&lt;IErrorInfo&gt; pErrorInfo;</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">	</span><span class="keyword">if </span><span class="default">(GetErrorInfo(</span><span class="number">0</span><span class="default">, &amp;pErrorInfo) == <a href="dictionary_S.html#954">S_OK</a>)</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">		pErrorInfo-&gt;GetDescription(&amp;bstr);</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">}</span>
+<a name="169"><font size=-1>169     </font></a><span class="default"></span>
+<a name="170"><font size=-1>170     </font></a><span class="default"></span><span class="preproc">#endif </span><span class="comment">//_DEBUG</span>
+<a name="171"><font size=-1>171     </font></a><span class="comment"></span>
+</pre></body></html>

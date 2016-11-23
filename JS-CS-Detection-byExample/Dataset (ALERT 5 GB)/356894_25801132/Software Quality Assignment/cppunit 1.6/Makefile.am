@@ -1,0 +1,58 @@
+AUTOMAKE_OPTIONS = 1.4
+ACLOCAL_AMFLAGS = -I config
+
+SUBDIRS = src include examples doc
+
+bin_SCRIPTS = cppunit-config
+
+
+EXTRA_DIST = BUGS INSTALL-WIN32.txt			\
+	cppunit.m4 cppunit.spec.in cppunit.spec	        \
+	config/ac_create_prefix_config_h.m4		\
+	config/ac_cxx_have_sstream.m4			\
+	config/ac_cxx_have_strstream.m4			\
+	config/ac_cxx_namespaces.m4			\
+	config/ac_cxx_rtti.m4				\
+	config/ac_cxx_string_compare_string_first.m4	\
+	config/bb_enable_doxygen.m4
+
+m4datadir = $(datadir)/aclocal
+m4data_DATA = cppunit.m4
+
+# Not sure what is creating the timestamp file.
+# The so_locations file only happens on IRIX.
+DISTCLEANFILES = config/stamp-h1 so_locations
+
+dist-hook:
+	cp -dpR $(top_srcdir)/src/msvc6 $(distdir)/src
+	cp -dpR $(top_srcdir)/include/msvc6 $(distdir)/include 
+	cp -dpR $(top_srcdir)/examples/msvc6 $(distdir)/examples
+	find $(distdir) -name CVS | xargs rm -rf
+	perl -pi -e 's/\n/\r\n/g' `find $(distdir) -name '*.ds?'` \
+		$(distdir)/INSTALL-WIN32.txt
+
+.PHONY: release snapshot rpm docs doc-dist
+
+release:
+	rm -rf .deps */.deps
+	$(MAKE) distcheck
+
+snapshot:
+	$(MAKE) dist distdir=$(PACKAGE)-`date +%Y-%m-%d`
+
+rpm: dist
+	rpm -ta $(PACKAGE)-$(VERSION).tar.gz
+	mv -f /usr/src/redhat/SRPMS/$(PACKAGE)-$(VERSION)-*.rpm .
+	mv -f /usr/src/redhat/RPMS/*/$(PACKAGE)-$(VERSION)-*.rpm .
+	mv -f /usr/src/redhat/RPMS/*/$(PACKAGE)-doc-$(VERSION)-*.rpm .
+
+debian:
+	chmod a+x debian/rules
+	dpkg-buildpackage -rfakeroot -sa -us -uc -tc 
+
+docs:
+	$(MAKE) -C doc
+
+doc-dist: docs
+	tar -zcf $(PACKAGE)-docs-$(VERSION).tar.gz -C doc/html .
+

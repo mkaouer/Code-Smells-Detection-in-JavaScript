@@ -1,0 +1,39 @@
+<html><head><title>StatePremiumFilterTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\tests\src\cgeo\geocaching\filter\StatePremiumFilterTest.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\tests\\src\\cgeo\\geocaching\\filter\\StatePremiumFilterTest.java";
+top.document.title  = "StatePremiumFilterTest.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#1293">filter</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import static </span><span class="default">org.assertj.core.api.Assertions.assertThat;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import <a href="dictionary_C.html#980">cgeo</a></span><span class="default">.<a href="dictionary_C.html#977">CGeoTestCase</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.<a href="dictionary_C.html#13">geocaching</a>.<a href="dictionary_G.html#547">Geocache</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">cgeo.geocaching.<a href="dictionary_G.html#1293">filter</a>.<a href="dictionary_F.html#1800">StateFilter</a>.<a href="dictionary_S.html#1799">StatePremiumFilter</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_F.html#1794">StatePremiumFilterTest</a> extends <a href="dictionary_C.html#977">CGeoTestCase</a> </span><span class="default">{</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span>
+<a name="11"><font size=-1>11     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_F.html#1800">StateFilter</a></span><span class="default">.<a href="dictionary_S.html#1799">StatePremiumFilter</a> <a href="dictionary_S.html#1798">premiumFilter</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_G.html#547">Geocache</a> <a href="dictionary_S.html#1797">premiumCache</a></span><span class="default">;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    @<a href="dictionary_O.html#138">Override</a></span>
+<a name="15"><font size=-1>15     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_S.html#1795">setUp</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_E.html#237">Exception</a> </span><span class="default">{</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_C.html#1801">setUp</a>();</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default">        <a href="dictionary_S.html#1798">premiumFilter</a> = </span><span class="keyword">new <a href="dictionary_S.html#1802">StatePremiumFilter</a></span><span class="default">();</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">        <a href="dictionary_S.html#1797">premiumCache</a> = </span><span class="keyword">new <a href="dictionary_G.html#983">Geocache</a></span><span class="default">();</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">        <a href="dictionary_S.html#1797">premiumCache</a>.<a href="dictionary_G.html#1803">setPremiumMembersOnly</a>(</span><span class="keyword">true</span><span class="default">);</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    }</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_S.html#1796">testAccepts</a></span><span class="default">() {</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">        <a href="dictionary_A.html#31">assertThat</a>(<a href="dictionary_S.html#1798">premiumFilter</a>.<a href="dictionary_S.html#1804">accepts</a>(<a href="dictionary_S.html#1797">premiumCache</a>)).<a href="dictionary_I.html#635">isTrue</a>();</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        <a href="dictionary_A.html#31">assertThat</a>(<a href="dictionary_S.html#1798">premiumFilter</a>.<a href="dictionary_S.html#1804">accepts</a>(</span><span class="keyword">new <a href="dictionary_G.html#983">Geocache</a></span><span class="default">())).<a href="dictionary_I.html#623">isFalse</a>();</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    }</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">}</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+</pre></body></html>

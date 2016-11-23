@@ -1,0 +1,121 @@
+<html><head><title>CSChannel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_8_0/jpos/src/main/java/org/jpos/iso/channel/CSChannel.java</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/Yuri/Desktop/Software Quality Assignment/jPOS-1_8_0/jpos/src/main/java/org/jpos/iso/channel/CSChannel.java";
+top.document.title  = "CSChannel.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * jPOS Project [http://jpos.org]</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Copyright (C) 2000-2010 Alejandro P. Revilla</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> *</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * This program is free software: you can redistribute it and/or modify</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * it under the terms of the GNU Affero General Public License as</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * published by the Free Software Foundation, either version 3 of the</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * License, or (at your option) any later version.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * This program is distributed in the hope that it will be useful,</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * GNU Affero General Public License for more details.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> * You should have received a copy of the GNU Affero General Public License</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> * along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jpos.iso.<a href="dictionary_I.html#1428">channel</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jpos.<a href="dictionary_J.html#596">iso</a>.*;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.io.IOException;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.net.ServerSocket;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> * ISOChannel implementation - CS standard Channel&lt;br&gt;</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * We at &lt;a href=&quot;http://www.cs.com.uy&quot;&gt;CS&lt;/a&gt;, have used</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * the so called ISOChannels for a long time. This class</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * talks with our legacy C++ based systems.&lt;br&gt;</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> *</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * @author apr@cs.com.uy</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * @version $Id$</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * @see ISOMsg</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * @see ISOException</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * @see ISOChannel</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> */</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_C.html#65952">CSChannel</a> extends <a href="dictionary_I.html#1433">BaseChannel</a> </span><span class="default">{</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">     * Public constructor (used by Class.forName(&quot;...&quot;).newInstance())</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">     */</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#65953">CSChannel</a> </span><span class="default">() {</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">();</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    }</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">     * Construct client ISOChannel</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">     * @param host  server TCP Address</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     * @param port  server port number</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">     * @param p     an ISOPackager</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">     * @see ISOPackager</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">     */</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#65954">CSChannel</a> </span><span class="default">(String <a href="dictionary_H.html#65955">host</a>, </span><span class="keyword">int <a href="dictionary_P.html#65957">port</a></span><span class="default">, <a href="dictionary_I.html#1434">ISOPackager</a> <a href="dictionary_P.html#65956">p</a>) {</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_H.html#65955">host</a>, <a href="dictionary_P.html#65957">port</a>, <a href="dictionary_P.html#65956">p</a>);</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">    }</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">     * Construct server ISOChannel</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     * @param p     an ISOPackager</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * @exception IOException</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     * @see ISOPackager</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     */</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#65958">CSChannel</a> </span><span class="default">(<a href="dictionary_I.html#1434">ISOPackager</a> <a href="dictionary_P.html#65959">p</a>) </span><span class="keyword">throws </span><span class="default">IOException {</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_P.html#65959">p</a>);</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    }</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">     * constructs a server ISOChannel associated with a Server Socket</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">     * @param p     an ISOPackager</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">     * @param serverSocket where to accept a connection</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">     * @exception IOException</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">     * @see ISOPackager</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">     */</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#65960">CSChannel</a> </span><span class="default">(<a href="dictionary_I.html#1434">ISOPackager</a> <a href="dictionary_P.html#65961">p</a>, ServerSocket <a href="dictionary_S.html#65962">serverSocket</a>) </span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">IOException</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    {</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_P.html#65961">p</a>, <a href="dictionary_S.html#65962">serverSocket</a>);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">    }</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">     * @param len the packed Message len</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">     * @exception IOException</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">     */</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_C.html#65970">sendMessageLength</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_L.html#65971">len</a></span><span class="default">) </span><span class="keyword">throws </span><span class="default">IOException {</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">        <a href="dictionary_B.html#1442">serverOut</a>.write (<a href="dictionary_L.html#65971">len</a> &gt;&gt; </span><span class="number">8</span><span class="default">);</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">        <a href="dictionary_B.html#1442">serverOut</a>.write (<a href="dictionary_L.html#65971">len</a>);</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">        <a href="dictionary_B.html#1442">serverOut</a>.write (</span><span class="number">0</span><span class="default">);</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        <a href="dictionary_B.html#1442">serverOut</a>.write (</span><span class="number">0</span><span class="default">);</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    }</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">     * @return the Message len</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">     * @exception IOException, ISOException</span>
+<a name="89"><font size=-1>89     </font></a><span class="comment">     */</span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">    </span><span class="keyword">protected int <a href="dictionary_C.html#65964">getMessageLength</a></span><span class="default">() </span><span class="keyword">throws </span><span class="default">IOException, <a href="dictionary_I.html#888">ISOException</a> {</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_L.html#65966">l</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_B.html#65965">b</a> = </span><span class="keyword">new byte</span><span class="default">[</span><span class="number">4</span><span class="default">];</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(<a href="dictionary_L.html#65966">l</a> == </span><span class="number">0</span><span class="default">) {</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">            <a href="dictionary_B.html#1445">serverIn</a>.readFully(<a href="dictionary_B.html#65965">b</a>,</span><span class="number">0</span><span class="default">,</span><span class="number">4</span><span class="default">);</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">            <a href="dictionary_L.html#65966">l</a> = ((((</span><span class="keyword">int</span><span class="default">)<a href="dictionary_B.html#65965">b</a>[</span><span class="number">0</span><span class="default">])&amp;</span><span class="number">0xFF</span><span class="default">) &lt;&lt; </span><span class="number">8</span><span class="default">) | (((</span><span class="keyword">int</span><span class="default">)<a href="dictionary_B.html#65965">b</a>[</span><span class="number">1</span><span class="default">])&amp;</span><span class="number">0xFF</span><span class="default">);</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#65966">l</a> == </span><span class="number">0</span><span class="default">) {</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">                <a href="dictionary_B.html#1442">serverOut</a>.write(<a href="dictionary_B.html#65965">b</a>);</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">                <a href="dictionary_B.html#1442">serverOut</a>.flush();</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">            }</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">        }</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_L.html#65966">l</a></span><span class="default">;</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    }</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">    </span><span class="keyword">protected int <a href="dictionary_C.html#65963">getHeaderLength</a></span><span class="default">() { </span>
+<a name="104"><font size=-1>104     </font></a><span class="default">        </span><span class="comment">// CS Channel does not support header</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">        </span><span class="keyword">return </span><span class="number">0</span><span class="default">; </span>
+<a name="106"><font size=-1>106     </font></a><span class="default">    }</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_C.html#65967">sendMessageHeader</a></span><span class="default">(<a href="dictionary_I.html#592">ISOMsg</a> <a href="dictionary_M.html#65969">m</a>, </span><span class="keyword">int <a href="dictionary_L.html#65968">len</a></span><span class="default">) {</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        </span><span class="comment">// CS Channel does not support header</span>
+<a name="109"><font size=-1>109     </font></a><span class="comment">    </span><span class="default">}</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">}</span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+</pre></body></html>

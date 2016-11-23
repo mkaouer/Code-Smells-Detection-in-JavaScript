@@ -1,0 +1,170 @@
+<html><head><title>MapsWithMeApi.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\patrick\Documents\Software Engineering 2014\Software Quality Assignment\cgeo-market_20140718\cgeo-market_20140718\mapswithme-api\src\com\mapswithme\maps\api\MapsWithMeApi.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\patrick\\Documents\\Software Engineering 2014\\Software Quality Assignment\\cgeo-market_20140718\\cgeo-market_20140718\\mapswithme-api\\src\\com\\mapswithme\\maps\\api\\MapsWithMeApi.java";
+top.document.title  = "MapsWithMeApi.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/******************************************************************************</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">   Copyright (c) 2013, MapsWithMe GmbH All rights reserved.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"></span>
+<a name="4"><font size=-1>4     </font></a><span class="comment">  Redistribution and use in source and binary forms, with or without modification,</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment">  are permitted provided that the following conditions are met:</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"></span>
+<a name="7"><font size=-1>7     </font></a><span class="comment">  Redistributions of source code must retain the above copyright notice, this list</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment">  of conditions and the following disclaimer. Redistributions in binary form must</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment">  reproduce the above copyright notice, this list of conditions and the following</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment">  disclaimer in the documentation and/or other materials provided with the</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment">  distribution. THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment">  CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment">  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment">  PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment">  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment">  OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">  SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">  INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment">  CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">  IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">  OF SUCH DAMAGE.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> ******************************************************************************/</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">com.mapswithme.maps.<a href="dictionary_M.html#4188">api</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#199">app</a>.<a href="dictionary_A.html#150">Activity</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#199">app</a>.<a href="dictionary_A.html#5941">PendingIntent</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#142">content</a>.<a href="dictionary_C.html#235">Context</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#142">content</a>.<a href="dictionary_C.html#521">Intent</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.content.<a href="dictionary_C.html#6492">pm</a>.<a href="dictionary_P.html#9665">ActivityInfo</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#145">net</a>.<a href="dictionary_N.html#141">Uri</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">public final class <a href="dictionary_A.html#5267">MapsWithMeApi</a></span>
+<a name="34"><font size=-1>34     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">   * Most detailed level, buildings and trees are seen.</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">   */</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">  </span><span class="keyword">public static final double <a href="dictionary_M.html#9718">ZOOM_MAX</a> </span><span class="default">= </span><span class="number">19</span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">   * Least detailed level, continents are seen.</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">   */</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">  </span><span class="keyword">public static final double <a href="dictionary_M.html#9719">ZOOM_MIN</a> </span><span class="default">= </span><span class="number">1</span><span class="default">;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  </span><span class="keyword">public static void <a href="dictionary_M.html#9681">showMapsWithMeUrl</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9682">caller</a>, <a href="dictionary_A.html#5941">PendingIntent</a> <a href="dictionary_P.html#9688">pendingIntent</a>, </span><span class="keyword">double <a href="dictionary_Z.html#9691">zoomLevel</a></span><span class="default">, <a href="dictionary_S.html#7">String</a> <a href="dictionary_U.html#9690">url</a>)</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">  {</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_N.html#141">Uri</a> <a href="dictionary_U.html#9689">uri</a> </span><span class="default">= <a href="dictionary_N.html#141">Uri</a>.<a href="dictionary_P.html#1949">parse</a>(<a href="dictionary_U.html#9690">url</a>);</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_L.html#9685">latlon</a></span><span class="default">[] = <a href="dictionary_U.html#9689">uri</a>.<a href="dictionary_G.html#712">getQueryParameter</a>(</span><span class="string">&quot;ll&quot;</span><span class="default">).<a href="dictionary_S.html#1416">split</a>(</span><span class="string">&quot;,&quot;</span><span class="default">);</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">    </span><span class="keyword">final double <a href="dictionary_L.html#9684">lat</a> </span><span class="default">= Double.<a href="dictionary_P.html#1414">parseDouble</a>(<a href="dictionary_L.html#9685">latlon</a>[</span><span class="number">0</span><span class="default">]);</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="keyword">final double <a href="dictionary_L.html#9686">lon</a> </span><span class="default">= Double.<a href="dictionary_P.html#1414">parseDouble</a>(<a href="dictionary_L.html#9685">latlon</a>[</span><span class="number">1</span><span class="default">]);</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_N.html#9687">name</a> </span><span class="default">= <a href="dictionary_U.html#9689">uri</a>.<a href="dictionary_G.html#712">getQueryParameter</a>(</span><span class="string">&quot;n&quot;</span><span class="default">);</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_S.html#7">String</a> <a href="dictionary_I.html#9683">id</a> </span><span class="default">= <a href="dictionary_U.html#9689">uri</a>.<a href="dictionary_G.html#712">getQueryParameter</a>(</span><span class="string">&quot;id&quot;</span><span class="default">);</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    <a href="dictionary_M.html#9710">showPointsOnMap</a>(<a href="dictionary_C.html#9682">caller</a>, <a href="dictionary_N.html#9687">name</a>, <a href="dictionary_Z.html#9691">zoomLevel</a>, <a href="dictionary_P.html#9688">pendingIntent</a>, </span><span class="keyword">new <a href="dictionary_M.html#4196">MWMPoint</a></span><span class="default">(<a href="dictionary_L.html#9684">lat</a>, <a href="dictionary_L.html#9686">lon</a>, <a href="dictionary_N.html#9687">name</a>, <a href="dictionary_I.html#9683">id</a>));</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">  }</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  </span><span class="keyword">public static void <a href="dictionary_M.html#9675">sendRequest</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9678">caller</a>, <a href="dictionary_A.html#9720">MwmRequest</a> <a href="dictionary_R.html#9680">request</a>)</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">  {</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_C.html#521">Intent</a> <a href="dictionary_M.html#9679">mwmIntent</a> </span><span class="default">= <a href="dictionary_R.html#9680">request</a>.<a href="dictionary_M.html#9725">toIntent</a>(<a href="dictionary_C.html#9678">caller</a>);</span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#9666">isMapsWithMeInstalled</a>(<a href="dictionary_C.html#9678">caller</a>))</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    {</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">      </span><span class="comment">// Match activity for intent</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">      </span><span class="keyword">final <a href="dictionary_P.html#9665">ActivityInfo</a> <a href="dictionary_A.html#9677">aInfo</a> </span><span class="default">= <a href="dictionary_C.html#9678">caller</a>.<a href="dictionary_G.html#6462">getPackageManager</a>().<a href="dictionary_R.html#9667">resolveActivity</a>(<a href="dictionary_M.html#9679">mwmIntent</a>, </span><span class="number">0</span><span class="default">).activityInfo;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">      <a href="dictionary_M.html#9679">mwmIntent</a>.<a href="dictionary_S.html#9676">setClassName</a>(<a href="dictionary_A.html#9677">aInfo</a>.<a href="dictionary_P.html#6480">packageName</a>, <a href="dictionary_A.html#9677">aInfo</a>.<a href="dictionary_N.html#6479">name</a>);</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">      <a href="dictionary_C.html#9678">caller</a>.<a href="dictionary_S.html#431">startActivity</a>(<a href="dictionary_M.html#9679">mwmIntent</a>);</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    }</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    </span><span class="keyword">else</span>
+<a name="70"><font size=-1>70     </font></a><span class="keyword">      </span><span class="default">(</span><span class="keyword">new <a href="dictionary_D.html#9726">DownloadMapsWithMeDialog</a></span><span class="default">(<a href="dictionary_C.html#9678">caller</a>)).<a href="dictionary_S.html#318">show</a>();</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">  }</span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span>
+<a name="73"><font size=-1>73     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">   * Shows single point on the map.</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">   *</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">   * @param caller</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">   * @param lat</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">   * @param lon</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">   * @param name</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">   */</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">  </span><span class="keyword">public static void <a href="dictionary_M.html#5269">showPointOnMap</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9692">caller</a>, </span><span class="keyword">double <a href="dictionary_L.html#9693">lat</a></span><span class="default">, </span><span class="keyword">double <a href="dictionary_L.html#9694">lon</a></span><span class="default">, <a href="dictionary_S.html#7">String</a> <a href="dictionary_N.html#9695">name</a>)</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">  {</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">    <a href="dictionary_M.html#5945">showPointsOnMap</a>(<a href="dictionary_C.html#9692">caller</a>, (String) </span><span class="keyword">null</span><span class="default">, (PendingIntent) </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">new <a href="dictionary_M.html#9727">MWMPoint</a></span><span class="default">(<a href="dictionary_L.html#9693">lat</a>, <a href="dictionary_L.html#9694">lon</a>, <a href="dictionary_N.html#9695">name</a>));</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">  }</span>
+<a name="85"><font size=-1>85     </font></a><span class="default"></span>
+<a name="86"><font size=-1>86     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">   * Shows single point on the map using specified zoom level in range from</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">   * {@link MapsWithMeApi#ZOOM_MIN} to {@link MapsWithMeApi#ZOOM_MAX}.</span>
+<a name="89"><font size=-1>89     </font></a><span class="comment">   *</span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">   * @param caller</span>
+<a name="91"><font size=-1>91     </font></a><span class="comment">   * @param lat</span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">   * @param lon</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">   * @param name</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">   * @param zoomLevel</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">   */</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">  </span><span class="keyword">public static void <a href="dictionary_M.html#9696">showPointOnMap</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9697">caller</a>, </span><span class="keyword">double <a href="dictionary_L.html#9698">lat</a></span><span class="default">, </span><span class="keyword">double <a href="dictionary_L.html#9699">lon</a></span><span class="default">, <a href="dictionary_S.html#7">String</a> <a href="dictionary_N.html#9700">name</a>, </span><span class="keyword">double <a href="dictionary_Z.html#9701">zoomLevel</a></span><span class="default">)</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">  {</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    <a href="dictionary_M.html#9710">showPointsOnMap</a>(<a href="dictionary_C.html#9697">caller</a>, (String) </span><span class="keyword">null</span><span class="default">, <a href="dictionary_Z.html#9701">zoomLevel</a>, (PendingIntent) </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">new <a href="dictionary_M.html#9727">MWMPoint</a></span><span class="default">(<a href="dictionary_L.html#9698">lat</a>, <a href="dictionary_L.html#9699">lon</a>, <a href="dictionary_N.html#9700">name</a>));</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">  }</span>
+<a name="100"><font size=-1>100     </font></a><span class="default"></span>
+<a name="101"><font size=-1>101     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">   * Shows set of points on the map.</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">   *</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">   * @param caller</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">   * @param title</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">   * @param points</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">   */</span>
+<a name="108"><font size=-1>108     </font></a><span class="comment">  </span><span class="keyword">public static void <a href="dictionary_M.html#9702">showPointsOnMap</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9703">caller</a>, <a href="dictionary_S.html#7">String</a> <a href="dictionary_T.html#9705">title</a>, <a href="dictionary_A.html#4189">MWMPoint</a>... <a href="dictionary_P.html#9704">points</a>)</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">  {</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    <a href="dictionary_M.html#5945">showPointsOnMap</a>(<a href="dictionary_C.html#9703">caller</a>, <a href="dictionary_T.html#9705">title</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_P.html#9704">points</a>);</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">  }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">   * Shows set of points on the maps and allows MapsWithMeApplication to send</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">   * {@link PendingIntent} provided by client application.</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">   *</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">   * @param caller</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">   * @param title</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">   * @param pendingIntent</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">   * @param points</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">   */</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">  </span><span class="keyword">public static void <a href="dictionary_M.html#5945">showPointsOnMap</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9706">caller</a>, <a href="dictionary_S.html#7">String</a> <a href="dictionary_T.html#9709">title</a>, <a href="dictionary_A.html#5941">PendingIntent</a> <a href="dictionary_P.html#9707">pendingIntent</a>, <a href="dictionary_A.html#4189">MWMPoint</a>... <a href="dictionary_P.html#9708">points</a>)</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">  {</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">    <a href="dictionary_M.html#9710">showPointsOnMap</a>(<a href="dictionary_C.html#9706">caller</a>, <a href="dictionary_T.html#9709">title</a>, -</span><span class="number">1</span><span class="default">, <a href="dictionary_P.html#9707">pendingIntent</a>, <a href="dictionary_P.html#9708">points</a>);</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">  }</span>
+<a name="126"><font size=-1>126     </font></a><span class="default"></span>
+<a name="127"><font size=-1>127     </font></a><span class="default">  </span><span class="keyword">private static void <a href="dictionary_M.html#9710">showPointsOnMap</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9712">caller</a>, <a href="dictionary_S.html#7">String</a> <a href="dictionary_T.html#9716">title</a>, </span><span class="keyword">double <a href="dictionary_Z.html#9717">zoomLevel</a></span><span class="default">, <a href="dictionary_A.html#5941">PendingIntent</a> <a href="dictionary_P.html#9713">pendingIntent</a>,</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">      <a href="dictionary_A.html#4189">MWMPoint</a>... <a href="dictionary_P.html#9714">points</a>)</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">  {</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_A.html#9720">MwmRequest</a> <a href="dictionary_R.html#9715">request</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_A.html#9720">MwmRequest</a></span><span class="default">()</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">                                    .<a href="dictionary_M.html#9722">setTitle</a>(<a href="dictionary_T.html#9716">title</a>)</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">                                    .<a href="dictionary_M.html#9728">setZoomLevel</a>(<a href="dictionary_Z.html#9717">zoomLevel</a>)</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">                                    .<a href="dictionary_M.html#9724">setPendingIntent</a>(<a href="dictionary_P.html#9713">pendingIntent</a>)</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">                                    .<a href="dictionary_S.html#9711">setPoints</a>(<a href="dictionary_P.html#9714">points</a>);</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">    <a href="dictionary_M.html#9675">sendRequest</a>(<a href="dictionary_C.html#9712">caller</a>, <a href="dictionary_R.html#9715">request</a>);</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">  }</span>
+<a name="137"><font size=-1>137     </font></a><span class="default"></span>
+<a name="138"><font size=-1>138     </font></a><span class="default">  </span><span class="keyword">public static void <a href="dictionary_M.html#9670">pickPoint</a></span><span class="default">(<a href="dictionary_A.html#150">Activity</a> <a href="dictionary_C.html#9671">caller</a>, <a href="dictionary_S.html#7">String</a> <a href="dictionary_T.html#9674">title</a>, <a href="dictionary_A.html#5941">PendingIntent</a> <a href="dictionary_P.html#9672">pi</a>)</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">  {</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_A.html#9720">MwmRequest</a> <a href="dictionary_R.html#9673">request</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_A.html#9720">MwmRequest</a></span><span class="default">()</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">                                    .<a href="dictionary_M.html#9722">setTitle</a>(<a href="dictionary_T.html#9674">title</a>)</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">                                    .<a href="dictionary_M.html#9723">setPickPointMode</a>(</span><span class="keyword">true</span><span class="default">)</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">                                    .<a href="dictionary_M.html#9724">setPendingIntent</a>(<a href="dictionary_P.html#9672">pi</a>);</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">    <a href="dictionary_M.html#9675">sendRequest</a>(<a href="dictionary_C.html#9671">caller</a>, <a href="dictionary_R.html#9673">request</a>);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">  }</span>
+<a name="146"><font size=-1>146     </font></a><span class="default"></span>
+<a name="147"><font size=-1>147     </font></a><span class="default">  </span><span class="comment">/**</span>
+<a name="148"><font size=-1>148     </font></a><span class="comment">   * Detects if any version (Lite, Pro) of MapsWithMe, which supports API calls</span>
+<a name="149"><font size=-1>149     </font></a><span class="comment">   * are installed on the device.</span>
+<a name="150"><font size=-1>150     </font></a><span class="comment">   *</span>
+<a name="151"><font size=-1>151     </font></a><span class="comment">   * @param context</span>
+<a name="152"><font size=-1>152     </font></a><span class="comment">   * @return</span>
+<a name="153"><font size=-1>153     </font></a><span class="comment">   */</span>
+<a name="154"><font size=-1>154     </font></a><span class="comment">  </span><span class="keyword">public static boolean <a href="dictionary_M.html#9666">isMapsWithMeInstalled</a></span><span class="default">(<a href="dictionary_C.html#235">Context</a> <a href="dictionary_C.html#9668">context</a>)</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">  {</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_C.html#521">Intent</a> <a href="dictionary_I.html#9669">intent</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_C.html#521">Intent</a></span><span class="default">(<a href="dictionary_A.html#4190">Const</a>.<a href="dictionary_C.html#9357">ACTION_MWM_REQUEST</a>);</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_C.html#9668">context</a></span><span class="default">.<a href="dictionary_G.html#6462">getPackageManager</a>().<a href="dictionary_R.html#9667">resolveActivity</a>(<a href="dictionary_I.html#9669">intent</a>, </span><span class="number">0</span><span class="default">) != </span><span class="keyword">null</span><span class="default">;</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">  }</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">}</span>
+<a name="160"><font size=-1>160     </font></a><span class="default"></span>
+</pre></body></html>

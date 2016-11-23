@@ -1,0 +1,65 @@
+<html><head><title>FloatingPoint.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: /Users/kyleschafer/Desktop/cppunit 1.12.1/include/cppunit/portability/FloatingPoint.h</h3>
+<SCRIPT>
+defaultStatus = "File: /Users/kyleschafer/Desktop/cppunit 1.12.1/include/cppunit/portability/FloatingPoint.h";
+top.document.title  = "FloatingPoint.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="preproc">#ifndef <a href="dictionary_C.html#3249">CPPUNIT_PORTABILITY_FLOATINGPOINT_H_INCLUDED</a></span>
+<a name="2"><font size=-1>2     </font></a><span class="preproc">#define <a href="dictionary_C.html#3249">CPPUNIT_PORTABILITY_FLOATINGPOINT_H_INCLUDED</a></span>
+<a name="3"><font size=-1>3     </font></a><span class="preproc"></span>
+<a name="4"><font size=-1>4     </font></a><span class="preproc">#include </span><span class="string">&lt;cppunit/Portability.h&gt;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;math.h&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"><a href="dictionary_C.html#7">CPPUNIT_NS_BEGIN</a></span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="comment">/// \brief Tests if a floating-point is a NaN.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment">// According to IEEE-754 floating point standard, </span>
+<a name="11"><font size=-1>11     </font></a><span class="comment">// (see e.g. page 8 of</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment">// http://www.cs.berkeley.edu/~wkahan/ieee754status/ieee754.ps) </span>
+<a name="13"><font size=-1>13     </font></a><span class="comment">// all comparisons with NaN are false except &quot;x != x&quot;, which is true.</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment">//</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment">// At least Microsoft Visual Studio 6 is known not to implement this test correctly.</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment">// It emits the following code to test equality:</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">//  fcomp       qword ptr [nan]</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">//  fnstsw      ax                        // copie fp (floating-point) status register to ax</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment">//  test        ah,40h                    // test bit 14 of ax (0x4000) =&gt; C3 of fp status register</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">// According to the following documentation on the x86 floating point status register,</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">// the C2 bit should be tested to test for NaN value. </span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">// http://webster.cs.ucr.edu/AoA/Windows/HTML/RealArithmetic.html#1000117</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">// In Microsoft Visual Studio 2003 &amp; 2005, the test is implemented with:</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment">//  test        ah,44h         // Visual Studio 2005 test both C2 &amp; C3...</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment">//</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">// To work around this, a NaN is assumed to be detected if no strict ordering is found.</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"></span><span class="keyword">inline bool <a href="dictionary_F.html#3251">floatingPointIsUnordered</a></span><span class="default">( </span><span class="keyword">double <a href="dictionary_X.html#3252">x</a> </span><span class="default">)</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">{</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">   </span><span class="comment">// x != x will detect a NaN on conformant platform</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment">   // (2.0 &lt; x  &amp;&amp;  x &lt; 1.0) will detect a NaN on non conformant platform:</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">   // =&gt; no ordering can be found for x.</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">   </span><span class="keyword">return  </span><span class="default">(<a href="dictionary_X.html#3252">x</a> != <a href="dictionary_X.html#3252">x</a>) ||  (</span><span class="number">2.0 </span><span class="default">&lt; <a href="dictionary_X.html#3252">x</a>  &amp;&amp;  <a href="dictionary_X.html#3252">x</a> &lt; </span><span class="number">1.0</span><span class="default">);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">}</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span><span class="comment">/// \brief Tests if a floating-point is finite.</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">/// @return \c true if x is neither a NaN, nor +inf, nor -inf, \c false otherwise.</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="keyword">inline int <a href="dictionary_F.html#3253">floatingPointIsFinite</a></span><span class="default">( </span><span class="keyword">double <a href="dictionary_X.html#3254">x</a> </span><span class="default">)</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">{</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_C.html#3255">CPPUNIT_HAVE_ISFINITE</a>)</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">   </span><span class="keyword">return </span><span class="default">isfinite( <a href="dictionary_X.html#3254">x</a> );</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span><span class="preproc">#elif defined</span><span class="default">(<a href="dictionary_C.html#3256">CPPUNIT_HAVE_FINITE</a>)</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">   </span><span class="keyword">return </span><span class="default">finite( <a href="dictionary_X.html#3254">x</a> );</span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span><span class="preproc">#elif defined</span><span class="default">(<a href="dictionary_C.html#3257">CPPUNIT_HAVE__FINITE</a>)</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">   </span><span class="keyword">return </span><span class="default">_finite(<a href="dictionary_X.html#3254">x</a>);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span><span class="preproc">#else</span>
+<a name="47"><font size=-1>47     </font></a><span class="preproc">   </span><span class="keyword">double <a href="dictionary_T.html#3258">testInf</a> </span><span class="default">= <a href="dictionary_X.html#3254">x</a> * </span><span class="number">0.0</span><span class="default">;  </span><span class="comment">// Produce 0.0 if x is finite, a NaN otherwise.</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">   </span><span class="keyword">return <a href="dictionary_T.html#3258">testInf</a> </span><span class="default">== </span><span class="number">0.0  </span><span class="default">&amp;&amp;  !<a href="dictionary_F.html#3251">floatingPointIsUnordered</a>(<a href="dictionary_T.html#3258">testInf</a>);</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="50"><font size=-1>50     </font></a><span class="preproc"></span><span class="default">}</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default"><a href="dictionary_C.html#11">CPPUNIT_NS_END</a></span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span><span class="preproc">#endif </span><span class="comment">// CPPUNIT_PORTABILITY_FLOATINGPOINT_H_INCLUDED</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"></span>
+</pre></body></html>

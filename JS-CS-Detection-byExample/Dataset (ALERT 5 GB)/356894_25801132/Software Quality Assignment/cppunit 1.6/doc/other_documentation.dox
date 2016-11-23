@@ -1,0 +1,37 @@
+/**
+ \mainpage
+ 
+ \section _history History
+ The first port of JUnit to C++ was done
+ by Michael Feathers. His versions
+ can be found on the 
+ <a href="http://www.xprogramming.com/software.htm">
+ XProgramming software page</a>. They are os-specific,
+ so Jerome Lacoste provided a port to Unix/Solaris.
+ His version can be found on the same page.
+ The CppUnit project has combined and built on this work.
+
+ \section _usage Usage
+ Take a look into 
+ the CppUnit <a href="cookbook.html">cookbook</a>.
+ It gives a quick start into using this 
+ testing framework.
+ For a discussion on CppUnit, check 
+ <a href="http://c2.com/cgi/wiki?CppUnit">
+ the WikiWiki Pages on CppUnit</a>. There you can also
+ find the original versions and various ports to other
+ OSses and languages.
+ 
+ \section _license License
+ This library is released under
+ the GNU
+ <a href="http://www.gnu.org/copyleft/lesser.html">
+ Lesser General Public License</a>.
+
+
+ 
+ 
+ \author Eric Sommerlade (sommerlade@gmx.net)
+ \author Michael Feathers (mfeathers@objectmentor.com)
+ \author Jerome Lacoste (lacostej@altern.org)
+ */
