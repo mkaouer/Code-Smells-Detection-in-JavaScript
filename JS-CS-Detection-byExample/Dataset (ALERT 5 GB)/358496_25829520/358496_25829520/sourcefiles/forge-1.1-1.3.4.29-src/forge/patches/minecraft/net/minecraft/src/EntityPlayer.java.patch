@@ -1,0 +1,183 @@
+--- ../src_base/minecraft/net/minecraft/src/EntityPlayer.java	0000-00-00 00:00:00.000000000 -0000
++++ ../src_work/minecraft/net/minecraft/src/EntityPlayer.java	0000-00-00 00:00:00.000000000 -0000
+@@ -2,6 +2,12 @@
+ 
+ import java.util.*;
+ 
++import net.minecraft.src.forge.ArmorProperties;
++import net.minecraft.src.forge.ForgeHooks;
++import net.minecraft.src.forge.IGuiHandler;
++import net.minecraft.src.forge.ISpecialArmor;
++import net.minecraft.src.forge.MinecraftForge;
++
+ public abstract class EntityPlayer extends EntityLiving
+ {
+     public InventoryPlayer inventory;
+@@ -149,6 +155,7 @@
+             }
+             else
+             {
++            	itemInUse.getItem().onUsingItemTick(itemInUse, this, itemInUseCount);
+                 if (itemInUseCount <= 25 && itemInUseCount % 4 == 0)
+                 {
+                     func_35201_a(itemstack, 5);
+@@ -490,7 +497,16 @@
+ 
+     public void dropCurrentItem()
+     {
+-        dropPlayerItemWithRandomChoice(inventory.decrStackSize(inventory.currentItem, 1), false);
++    	ItemStack stack = inventory.getCurrentItem();
++    	if (stack == null)
++    	{
++    		return;
++    	}    	
++    	
++    	if (stack.getItem().onDroppedByPlayer(stack, this))
++    	{
++            dropPlayerItemWithRandomChoice(inventory.decrStackSize(inventory.currentItem, 1), false);
++    	}
+     }
+ 
+     public void dropPlayerItem(ItemStack itemstack)
+@@ -537,6 +553,9 @@
+         worldObj.spawnEntityInWorld(entityitem);
+     }
+ 
++    /* FORGE: This isnt called anymore
++     */
++    @Deprecated
+     public float getCurrentPlayerStrVsBlock(Block block)
+     {
+         float f = inventory.getStrVsBlock(block);
+@@ -565,6 +584,45 @@
+         return f1;
+     }
+ 
++    /* FORGE: Extended to allow metadata.
++     */
++    public float getCurrentPlayerStrVsBlock(Block block, int md)
++    {
++        float f = 1.0F;
++        ItemStack ist = inventory.getCurrentItem();
++        if(ist != null)
++        {
++        	f = ist.getItem().getStrVsBlock(ist, block, md);
++        }
++        
++        int i = EnchantmentHelper.getEfficiencyModifier(inventory);
++        if (i > 0 && ForgeHooks.canHarvestBlock(block, this, md))
++        {
++        	f += i * i + 1;
++        }
++        
++        if(isPotionActive(Potion.digSpeed))
++        {
++            f *= 1.0F + (float)(getActivePotionEffect(Potion.digSpeed).getAmplifier() + 1) * 0.2F;
++        }
++        
++        if(isPotionActive(Potion.digSlowdown))
++        {
++            f *= 1.0F - (float)(getActivePotionEffect(Potion.digSlowdown).getAmplifier() + 1) * 0.2F;
++        }
++        
++        if(isInsideOfMaterial(Material.water) && !EnchantmentHelper.getAquaAffinityModifier(inventory))
++        {
++            f /= 5F;
++        }
++        
++        if(!onGround)
++        {
++            f /= 5F;
++        }
++        return f;
++    }
++
+     public boolean canHarvestBlock(Block block)
+     {
+         return inventory.canHarvestBlock(block);
+@@ -768,7 +826,11 @@
+         {
+             i = 1 + i >> 1;
+         }
+-        i = applyArmorCalculations(damagesource, i);
++        i = ArmorProperties.ApplyArmor(this, inventory.armorInventory, damagesource, i);
++        if (i <= 0)
++        {
++            return;
++        }
+         i = applyPotionDamageCalculations(damagesource, i);
+         addExhaustion(damagesource.getHungerDamage());
+         health -= i;
+@@ -815,7 +877,9 @@
+ 
+     public void destroyCurrentEquippedItem()
+     {
++    	ItemStack orig = inventory.getCurrentItem();
+         inventory.setInventorySlotContents(inventory.currentItem, null);
++        ForgeHooks.onDestroyCurrentItem(this, orig);
+     }
+ 
+     public double getYOffset()
+@@ -834,6 +898,11 @@
+ 
+     public void attackTargetEntityWithCurrentItem(Entity entity)
+     {
++        ItemStack stack = getCurrentEquippedItem();
++        if (stack != null && stack.getItem().onLeftClickEntity(stack, this, entity))
++        {
++            return;
++        }
+         int i = inventory.getDamageVsEntity(entity);
+         if (isPotionActive(Potion.damageBoost))
+         {
+@@ -947,6 +1016,11 @@
+ 
+     public EnumStatus sleepInBedAt(int i, int j, int k)
+     {
++        EnumStatus customSleep = ForgeHooks.sleepInBedAt(this, i, j, k);
++        if (customSleep != null)
++        {
++            return customSleep;
++        }
+         if (!worldObj.isRemote)
+         {
+             if (isPlayerSleeping() || !isEntityAlive())
+@@ -1341,6 +1415,7 @@
+                     return 101;
+                 }
+             }
++            j = itemstack.getItem().getIconIndex(itemstack, i, this, itemInUse, itemInUseCount);
+         }
+         return j;
+     }
+@@ -1473,4 +1548,30 @@
+         experience = entityplayer.experience;
+         score = entityplayer.score;
+     }
++    
++    /**
++     * Opens a Gui for the player. 
++     * 
++     * @param mod The mod associated with the gui
++     * @param ID The ID number for the Gui
++     * @param world The World
++     * @param X X Position
++     * @param Y Y Position
++     * @param Z Z Position
++     */
++    public void openGui(BaseMod mod, int ID, World world, int X, int Y, int Z)
++    {
++        if (this instanceof EntityPlayerSP)
++        {
++            IGuiHandler handler = MinecraftForge.getGuiHandler(mod);
++            if (handler != null)
++            {
++                GuiScreen screen = handler.getGuiScreen(ID, (EntityPlayerSP)this, world, X, Y, Z);
++                if (screen != null)
++                {
++                    ModLoader.getMinecraftInstance().displayGuiScreen(screen);
++                }
++            }
++        }
++    }
+ }

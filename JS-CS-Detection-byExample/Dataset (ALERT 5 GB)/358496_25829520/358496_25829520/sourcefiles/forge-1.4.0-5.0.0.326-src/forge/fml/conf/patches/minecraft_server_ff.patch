@@ -1,0 +1,73 @@
+diff -r -U 3 minecraft_server\net\minecraft\src\ComponentStrongholdRightTurn.java minecraft_server_patched\net\minecraft\src\ComponentStrongholdRightTurn.java
+--- minecraft_server\net\minecraft\src\ComponentStrongholdRightTurn.java	Sat Oct 20 04:11:53 2012
++++ minecraft_server_patched\net\minecraft\src\ComponentStrongholdRightTurn.java	Sat Oct 20 04:14:21 2012
+@@ -11,6 +11,10 @@
+ 
+ public class ComponentStrongholdRightTurn extends ComponentStrongholdLeftTurn {
+ 
++   public ComponentStrongholdRightTurn(int p_i3843_1_, Random p_i3843_2_, StructureBoundingBox p_i3843_3_, int p_i3843_4_) {
++      super(p_i3843_1_, p_i3843_2_, p_i3843_3_, p_i3843_4_);
++   }
++
+    public void func_74861_a(StructureComponent p_74861_1_, List p_74861_2_, Random p_74861_3_) {
+       if(this.field_74885_f != 2 && this.field_74885_f != 3) {
+          this.func_74989_b((ComponentStrongholdStairs2)p_74861_1_, p_74861_2_, p_74861_3_, 1, 1);
+diff -r -U 3 minecraft_server\net\minecraft\src\DedicatedServer.java minecraft_server_patched\net\minecraft\src\DedicatedServer.java
+--- minecraft_server\net\minecraft\src\DedicatedServer.java	Sat Oct 20 04:11:53 2012
++++ minecraft_server_patched\net\minecraft\src\DedicatedServer.java	Sat Oct 20 04:13:58 2012
+@@ -195,7 +195,7 @@
+       System.exit(0);
+    }
+ 
+-   protected void func_71190_q() {
++   public void func_71190_q() {
+       super.func_71190_q();
+       this.func_71333_ah();
+    }
+diff -r -U 3 minecraft_server\net\minecraft\src\EnumFacing.java minecraft_server_patched\net\minecraft\src\EnumFacing.java
+--- minecraft_server\net\minecraft\src\EnumFacing.java	Sat Oct 20 04:11:53 2012
++++ minecraft_server_patched\net\minecraft\src\EnumFacing.java	Sat Oct 20 04:13:22 2012
+@@ -15,10 +15,6 @@
+    private final int field_82612_k;
+    private static final EnumFacing[] field_82609_l = new EnumFacing[6];
+ 
+-   public static EnumFacing[] func_82598_values() {
+-      return (EnumFacing[])field_82610_m.clone();
+-   }
+-
+    private EnumFacing(int p_i5027_3_, int p_i5027_4_, int p_i5027_5_, int p_i5027_6_, int p_i5027_7_) {
+       this.field_82603_g = p_i5027_3_;
+       this.field_82613_h = p_i5027_4_;
+@@ -40,7 +36,7 @@
+    }
+ 
+    static {
+-      EnumFacing[] var0 = func_82598_values();
++      EnumFacing[] var0 = values();
+       int var1 = var0.length;
+ 
+       for(int var2 = 0; var2 < var1; ++var2) {
+diff -r -U 3 minecraft_server\net\minecraft\src\TcpMasterThread.java minecraft_server_patched\net\minecraft\src\TcpMasterThread.java
+--- minecraft_server\net\minecraft\src\TcpMasterThread.java	Sat Oct 20 04:11:54 2012
++++ minecraft_server_patched\net\minecraft\src\TcpMasterThread.java	Sat Oct 20 04:18:38 2012
+@@ -11,6 +11,7 @@
+       this.field_74504_a = p_i3285_1_;
+    }
+ 
++   @SuppressWarnings("deprecation")
+    public void run() {
+       try {
+          Thread.sleep(5000L);
+diff -r -U 3 minecraft_server\net\minecraft\src\ThreadedFileIOBase.java minecraft_server_patched\net\minecraft\src\ThreadedFileIOBase.java
+--- minecraft_server\net\minecraft\src\ThreadedFileIOBase.java	Sat Oct 20 04:11:54 2012
++++ minecraft_server_patched\net\minecraft\src\ThreadedFileIOBase.java	Sat Oct 20 04:19:13 2012
+@@ -20,7 +20,8 @@
+    }
+ 
+    public void run() {
+-      this.func_75736_b();
++      while(true)
++         this.func_75736_b();
+    }
+ 
+    private void func_75736_b() {

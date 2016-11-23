@@ -1,0 +1,127 @@
+--- ../src-base/minecraft/net/minecraft/client/Minecraft.java
++++ ../src-work/minecraft/net/minecraft/client/Minecraft.java
+@@ -1,5 +1,11 @@
+ package net.minecraft.client;
+ 
++import cpw.mods.fml.client.FMLClientHandler;
++import cpw.mods.fml.common.FMLCommonHandler;
++import cpw.mods.fml.common.registry.GameData;
++import cpw.mods.fml.common.registry.ItemData;
++import cpw.mods.fml.relauncher.ArgsWrapper;
++import cpw.mods.fml.relauncher.FMLRelauncher;
+ import cpw.mods.fml.relauncher.Side;
+ import cpw.mods.fml.relauncher.SideOnly;
+ import java.awt.BorderLayout;
+@@ -115,6 +121,8 @@
+ import org.lwjgl.opengl.PixelFormat;
+ import org.lwjgl.util.glu.GLU;
+ 
++import com.google.common.collect.MapDifference;
++
+ @SideOnly(Side.CLIENT)
+ public abstract class Minecraft implements Runnable, IPlayerUsage
+ {
+@@ -298,6 +306,8 @@
+         this.field_71466_p = new FontRenderer(this.field_71474_y, "/font/default.png", this.field_71446_o, false);
+         this.field_71464_q = new FontRenderer(this.field_71474_y, "/font/alternate.png", this.field_71446_o, false);
+ 
++        FMLClientHandler.instance().beginMinecraftLoading(this);
++
+         if (this.field_71474_y.field_74363_ab != null)
+         {
+             StringTranslate.func_74808_a().func_74810_a(this.field_71474_y.field_74363_ab, false);
+@@ -333,6 +343,8 @@
+         GL11.glViewport(0, 0, this.field_71443_c, this.field_71440_d);
+         this.field_71452_i = new EffectRenderer(this.field_71441_e, this.field_71446_o);
+ 
++        FMLClientHandler.instance().finishMinecraftLoading();
++
+         try
+         {
+             this.field_71430_V = new ThreadDownloadResources(this.field_71412_D, this);
+@@ -361,6 +373,8 @@
+         {
+             this.func_71352_k();
+         }
++
++        FMLClientHandler.instance().onInitializationComplete();
+     }
+ 
+     private void func_71357_I() throws LWJGLException
+@@ -722,9 +736,11 @@
+ 
+             if (!this.field_71454_w)
+             {
++                FMLCommonHandler.instance().onRenderTickStart(this.field_71428_T.field_74281_c);
+                 this.field_71424_I.func_76318_c("gameRenderer");
+                 this.field_71460_t.func_78480_b(this.field_71428_T.field_74281_c);
+                 this.field_71424_I.func_76319_b();
++                FMLCommonHandler.instance().onRenderTickEnd(this.field_71428_T.field_74281_c);
+             }
+ 
+             GL11.glFlush();
+@@ -1254,10 +1270,14 @@
+ 
+     public void func_71407_l()
+     {
++        FMLCommonHandler.instance().rescheduleTicks(Side.CLIENT);
++
+         if (this.field_71467_ac > 0)
+         {
+             --this.field_71467_ac;
+         }
++
++        FMLCommonHandler.instance().onPreClientTick();
+ 
+         this.field_71424_I.func_76320_a("stats");
+         this.field_71413_E.func_77449_e();
+@@ -1715,6 +1735,8 @@
+             this.field_71453_ak.func_74428_b();
+         }
+ 
++        FMLCommonHandler.instance().onPostClientTick();
++
+         this.field_71424_I.func_76319_b();
+         this.field_71423_H = func_71386_F();
+     }
+@@ -1753,8 +1775,27 @@
+         }
+ 
+         this.field_71413_E.func_77450_a(StatList.field_75936_f, 1);
++
++        GameData.initializeServerGate(2);
++
+         this.field_71437_Z = new IntegratedServer(this, p_71371_1_, p_71371_2_, p_71371_3_);
+         this.field_71437_Z.func_71256_s();
++
++        MapDifference<Integer, ItemData> idDifferences = GameData.gateWorldLoadingForValidation();
++        if (idDifferences!=null)
++        {
++            FMLClientHandler.instance().warnIDMismatch(idDifferences, true);
++        }
++        else
++        {
++            GameData.releaseGate(true);
++            continueWorldLoading();
++        }
++
++    }
++
++    public void continueWorldLoading()
++    {
+         this.field_71455_al = true;
+         this.field_71461_s.func_73720_a(StatCollector.func_74838_a("menu.loadingLevel"));
+ 
+@@ -1976,6 +2017,12 @@
+ 
+     public static void main(String[] p_main_0_)
+     {
++        FMLRelauncher.handleClientRelaunch(new ArgsWrapper(p_main_0_));
++    }
++
++    public static void fmlReentry(ArgsWrapper wrapper)
++    {
++        String[] p_main_0_ = wrapper.args;
+         HashMap hashmap = new HashMap();
+         boolean flag = false;
+         boolean flag1 = true;

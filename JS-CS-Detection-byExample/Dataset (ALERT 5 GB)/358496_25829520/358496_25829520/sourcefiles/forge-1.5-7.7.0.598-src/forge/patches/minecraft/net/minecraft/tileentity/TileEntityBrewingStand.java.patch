@@ -1,0 +1,11 @@
+--- ../src_base/minecraft/net/minecraft/tileentity/TileEntityBrewingStand.java
++++ ../src_work/minecraft/net/minecraft/tileentity/TileEntityBrewingStand.java
+@@ -177,7 +177,7 @@
+ 
+             if (Item.itemsList[itemstack.itemID].hasContainerItem())
+             {
+-                this.brewingItemStacks[3] = new ItemStack(Item.itemsList[itemstack.itemID].getContainerItem());
++                this.brewingItemStacks[3] = Item.itemsList[itemstack.itemID].getContainerItemStack(brewingItemStacks[3]);
+             }
+             else
+             {

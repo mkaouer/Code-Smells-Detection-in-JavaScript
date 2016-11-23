@@ -1,0 +1,60 @@
+"Kind","Name","PercentLackOfCohesion","MaxInheritanceTree","CountClassBase","CountClassCoupled","CountClassDerived","CountDeclMethodAll","CountDeclInstanceMethod","CountDeclInstanceVariable","CountDeclMethod"
+"Public Class","Start",0,1,1,0,0,1,0,0,1
+"Public Class","gh",0,1,1,0,0,1,0,0,1
+"Public Class","net.minecraft.src.forge.ArmorProperties",33,1,2,1,0,6,4,4,6
+"Public Class","net.minecraft.src.forge.ArmorProperties",43,1,2,2,0,6,4,4,6
+"Public Class","net.minecraft.src.forge.Configuration",86,1,1,1,0,12,12,6,12
+"Public Class","net.minecraft.src.forge.Configuration",86,1,1,1,0,12,12,6,12
+"Public Class","net.minecraft.src.forge.DimensionManager",71,1,1,0,0,8,0,0,8
+"Public Class","net.minecraft.src.forge.DimensionManager",71,1,1,0,0,8,0,0,8
+"Public Class","net.minecraft.src.forge.DungeonLoot",16,1,1,0,0,4,4,3,4
+"Public Class","net.minecraft.src.forge.DungeonLoot",16,1,1,0,0,4,4,3,4
+"Public Class","net.minecraft.src.forge.EntityTrackerInfo",0,1,1,1,0,1,1,5,1
+"Public Class","net.minecraft.src.forge.EntityTrackerInfo",0,1,1,1,0,1,1,5,1
+"Public Class","net.minecraft.src.forge.EnumHelper",75,1,1,1,1,20,0,0,20
+"Public Class","net.minecraft.src.forge.EnumHelper",75,1,1,2,0,20,0,0,20
+"Public Class","net.minecraft.src.forge.EnumHelperClient",26,2,1,0,0,25,0,0,5
+"Public Class","net.minecraft.src.forge.ForgeHooks",96,1,1,20,0,29,0,0,29
+"Public Class","net.minecraft.src.forge.ForgeHooks",96,1,1,20,0,29,0,0,29
+"Static Class","net.minecraft.src.forge.ForgeHooks.ProbableItem",0,1,1,0,0,1,1,5,1
+"Static Class","net.minecraft.src.forge.ForgeHooks.ProbableItem",0,1,1,0,0,1,1,5,1
+"Class","net.minecraft.src.forge.ForgeHooks.getRandomItem.(Anon_1)",0,1,2,1,0,1,1,0,1
+"Class","net.minecraft.src.forge.ForgeHooks.getRandomItem.(Anon_1)",0,1,2,1,0,1,1,0,1
+"Public Class","net.minecraft.src.forge.ForgeHooksClient",85,1,1,9,0,17,0,0,17
+"Private Static Class","net.minecraft.src.forge.ForgeHooksClient.TesKey",25,1,2,0,0,4,4,2,4
+"Public Class","net.minecraft.src.forge.ForgeHooksServer",66,1,1,7,0,3,0,0,3
+"Public Class","net.minecraft.src.forge.GuiControlsScrollPanel",67,2,1,0,0,8,8,7,8
+"Public Class","net.minecraft.src.forge.GuiMissingMods",50,2,1,2,0,4,4,1,4
+"Public Class","net.minecraft.src.forge.MessageManager",58,1,1,3,0,12,11,1,12
+"Public Class","net.minecraft.src.forge.MessageManager",58,1,1,3,0,12,11,1,12
+"Public Class","net.minecraft.src.forge.MessageManager.ConnectionInstance",68,1,1,1,0,11,11,4,11
+"Public Class","net.minecraft.src.forge.MessageManager.ConnectionInstance",68,1,1,1,0,11,11,4,11
+"Public Class","net.minecraft.src.forge.MinecartKey",0,1,1,0,0,3,3,2,3
+"Public Class","net.minecraft.src.forge.MinecartKey",0,1,1,0,0,3,3,2,3
+"Public Class","net.minecraft.src.forge.MinecraftForge",95,1,1,22,0,56,0,0,56
+"Public Class","net.minecraft.src.forge.MinecraftForge",95,1,1,22,0,56,0,0,56
+"Public Static Class","net.minecraft.src.forge.MinecraftForge.OreQuery",50,1,2,1,0,2,2,1,2
+"Public Static Class","net.minecraft.src.forge.MinecraftForge.OreQuery",50,1,2,1,0,2,2,1,2
+"Public Class","net.minecraft.src.forge.MinecraftForge.OreQuery.OreQueryIterator",37,1,2,1,0,4,4,2,4
+"Public Class","net.minecraft.src.forge.MinecraftForge.OreQuery.OreQueryIterator",37,1,2,1,0,4,4,2,4
+"Public Class","net.minecraft.src.forge.MinecraftForgeClient",88,1,1,9,0,14,0,0,14
+"Public Abstract Class","net.minecraft.src.forge.NetworkMod",0,2,1,0,2,2,2,0,2
+"Public Abstract Class","net.minecraft.src.forge.NetworkMod",0,2,1,0,0,3,3,0,3
+"Public Generic Class","net.minecraft.src.forge.ObjectPair",40,1,1,0,0,5,5,2,5
+"Public Generic Class","net.minecraft.src.forge.ObjectPair",40,1,1,0,0,5,5,2,5
+"Public Class","net.minecraft.src.forge.PacketHandlerClient",19,1,2,11,0,5,5,0,5
+"Public Class","net.minecraft.src.forge.PacketHandlerServer",50,1,2,5,0,4,4,0,4
+"Public Class","net.minecraft.src.forge.Property",73,1,1,0,0,5,5,3,5
+"Public Class","net.minecraft.src.forge.Property",73,1,1,0,0,5,5,3,5
+"Public Abstract Class","net.minecraft.src.forge.packets.ForgePacket",100,1,1,0,6,6,6,0,6
+"Public Abstract Class","net.minecraft.src.forge.packets.ForgePacket",100,1,1,0,0,6,6,0,6
+"Public Class","net.minecraft.src.forge.packets.PacketEntitySpawn",41,2,1,4,0,11,5,11,5
+"Public Class","net.minecraft.src.forge.packets.PacketEntitySpawn",41,2,1,4,0,11,5,11,5
+"Public Class","net.minecraft.src.forge.packets.PacketMissingMods",0,3,1,0,0,13,2,0,2
+"Public Class","net.minecraft.src.forge.packets.PacketMissingMods",0,3,1,0,0,13,2,0,2
+"Public Class","net.minecraft.src.forge.packets.PacketModList",50,2,1,0,2,11,5,4,5
+"Public Class","net.minecraft.src.forge.packets.PacketModList",50,2,1,0,0,11,5,4,5
+"Public Class","net.minecraft.src.forge.packets.PacketOpenGUI",33,2,1,0,0,12,6,6,6
+"Public Class","net.minecraft.src.forge.packets.PacketOpenGUI",33,2,1,0,0,12,6,6,6
+"Public Class","net.minecraft.src.mod_MinecraftForge",0,3,1,2,0,6,4,0,4
+"Public Class","net.minecraft.src.mod_MinecraftForge",0,3,1,2,0,6,4,0,4
