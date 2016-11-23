@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Software Metrics Reference - IF</title></head><body>
+<h1>Instability Factor (IF)</h1>
+
+This metric is defined as the ratio of efferent
+coupling (Ce) to total coupling, which is the sum of efferent coupling
+(Ce) and afferent coupling (Ca). This metric
+is an indicator of the capsule's (class or
+module) resilience to change. Ce represents the number of capsules used
+(called or accessed) by the measured subsystem that are
+located in other subsystems. Ca represents the number of capsules that
+are located outside the measured subsystem and use (call or
+access) capsules located in the measured subsystem.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Measured program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">SUBSYSTEM</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concern<br>
+      </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold;">Coupling</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"> ✔ </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔ </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Known thresholds </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top;"> <span class="s1">The
+range of this metric is between 0 and 1, with 0
+indicating a completely stable subsystem, and 1 indicating a
+completely unstable subsystem.</span> </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Also known as<br>
+      </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold;"><span style="font-weight: normal;">Instability (I)</span><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Used in<br>
+</h2>
+
+<a href="../df/unstabledependencies.html">Unstable Dependencies</a>, <a href="../df/sapbreaker.html">SAP Breaker</a><br>
+
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Martin07]</td>
+      <td style="vertical-align: top;">Robert C. Martin. <a href="http://www.amazon.com/Software-Development-Principles-Patterns-Practices/dp/0135974445">Agile
+Software Development: Principles, Patterns, and Practices</a>. Prentice
+Hall, 2007.</td>
+    </tr>
+  </tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>

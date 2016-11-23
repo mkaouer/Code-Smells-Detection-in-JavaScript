@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
+  <title>Inheritance Map - Overview</title>
+
+  
+</head><body>
+<h1>Inheritance Map<br>
+</h1>
+
+The Inheritance Map gives an overview of the inheritance hierarchies
+define in the system, meaning that this map is only available for
+systems that contain object-oriented code (i.e. not pure C projects).
+Inheritance Maps can be generated for the entire system or for a
+specific class, in which case only the class itself, its class
+hierarchy and the hierarchies of its implemented interfaces, as well as
+the hierarchies of its collaborators.<br>
+
+<h2>Entities and Layout<br>
+</h2>
+
+The Inheritance Map shows all the classes and interfaces defined in the
+system as white rectangles. As in the case of the <a href="pmap.html">Package
+Map</a>,
+the horizontal and vertical sizes of the rectangles are proportional to
+the number of attributes and methods respectively. The Inheritance Map
+is divided into three layers (from top to bottom):<br>
+
+<ul>
+
+  <li>the interfaces layer - containing all the interfaces defined in
+the system<br>
+  </li>
+  <li>the class hierarchies layer - containing all the classes defined
+in the system, which belong to a class hierarchy<br>
+  </li>
+  <li>the standalone classes layer - containing classes defined in the
+system, which are not part of a class hierarchy. A class that only
+implements interfaces but does not extend another class is considered
+standalone.<br>
+  </li>
+</ul>
+
+The relative vertical placement of interfaces in the upper layer
+reflects the depth of each inheritance hierarchy and the level at which
+an interface is located inside its hierarchy. The same applies for the
+middle layer, containing class hierarchies.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 800px; height: 451px;" alt="" src="images/imap_1.png"><br>
+</div>
+
+<h2>Entity selection</h2>
+
+When selecting a class or an interface in the Inheritance Map, the
+entity itself is colored in green (with no borders). Its ancestors and
+descendants are shown with a thickened black border and its siblings
+are shown with a normal black border. This selection feature is very
+useful in order to understand the relation between a class / interface
+and its corresponding hierarchy.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 1200px; height: 494px;" alt="" src="images/imap_2.png"><br>
+</div>
+
+<h2>Quality perspectives<br>
+</h2>
+
+<a href="imap-cx.html">Complexity</a>, <a href="imap-cp.html">Coupling</a>,
+<a href="imap-df.html">Design Flaws</a>, <a href="imap-en.html">Encapsulation</a>,
+<a href="imap-ih.html">Inheritance</a><br>
+
+<h2>Metrics used</h2>
+
+<a href="../sm/dit.html">DIT</a> (indirectly), <a href="../sm/noa.html">NOA</a>,
+<a href="../sm/nom.html">NOM</a><br>
+
+<br>
+</body></html>

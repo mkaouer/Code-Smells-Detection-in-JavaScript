@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Package Map - Coupling Perspective</title></head><body>
+<h1>Package Map - Coupling Perspective<br>
+</h1>
+
+The Coupling Perspective of the <a href="pmap.html">Package Map</a>
+provides insight into the coupling that exists between classes,
+interfaces (Java), and modules (C
+and C++). In the default state,
+the Coupling Perspective will render classes, interfaces, and modules based on
+their predominant nature from the viewpoint of operation calls, using
+four color gradients:<br>
+
+<ul>
+
+  <li>if a class or module only calls other operations but none of its
+operations are called (i.e. it is a
+pure client), it is rendered in a shade of yellow<br>
+  </li>
+  <li>if a class or module both calls and its operations are called by
+other operations it will be rendered in
+a color that depends on which aspect is predominant (i.e. mostly client
+shown in a shade of orange, or mostly provider shown in a shade
+of magenta)</li>
+  <li>if a class, interface, or module has its operations called by
+other operations and does not call other operations (i.e. it is a
+pure provider), it is shown in a shade of blue </li>
+</ul>
+
+<div style="text-align: center;"><img style="width: 800px; height: 557px;" alt="" src="images/pmap-cp_1.png"><br>
+</div>
+
+<h2>Entity selection<br>
+</h2>
+
+The user may select a class, an interface or a module in the map, in
+which case the coloring of the map changes to reflect the coupling from
+the point of view of the selcted entity. The selected entity is colored
+in green (with no borders). Its collaborator classes or modules are colored using
+the four colors described below, based on their relation to
+the selected class, interface or module. In case of the Coupling
+Perspective, this relation is defined in terms of external operation
+calls. If a class, interface, or module has no relation to the
+selected entity, its coloring will be disabled.
+<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 1200px; height: 255px;" alt="" src="images/pmap-cp_2.png"><br>
+</div>
+
+<h2>Other quality perspectives<br>
+</h2>
+
+<a href="pmap-cx.html">Complexity</a>, <a href="pmap-df.html">Design Flaws</a>, <a href="pmap-en.html">Encapsulation</a>
+
+<h2>Metrics used</h2>
+
+<a href="../sm/noa.html">NOA</a>, <a href="../sm/nogf.html">NOF</a>, <a href="../sm/nom.html">NOM</a>,
+<a href="../sm/nogv.html">NOV</a><br>
+</body></html>

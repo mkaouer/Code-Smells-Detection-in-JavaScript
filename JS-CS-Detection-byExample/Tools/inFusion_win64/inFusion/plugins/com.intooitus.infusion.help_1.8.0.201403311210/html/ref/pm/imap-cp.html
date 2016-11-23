@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Inheritance Map - Coupling Perspective</title></head><body>
+<h1>Inheritance Map - Coupling Perspective<br>
+</h1>
+
+The Coupling Perspective of the <a href="imap.html">Inheritance Map</a>
+provides insight into the coupling that exists between classes and
+interfaces (Java). In the default state,
+the Coupling Perspective will render classes and interfaces based on
+their predominant nature from the viewpoint of method calls, using
+four color gradients:<br>
+
+<ul>
+
+  <li>if a class only calls other methods but none of its methods are
+called (i.e. it is a
+pure client), it is rendered in a shade of yellow<br>
+  </li>
+  <li>if a class both calls and its methods are called by
+other methods, it will be rendered in
+a color that depends on which aspect is predominant (i.e. mostly client
+shown in a shade of orange, or mostly provider shown in a shade
+of magenta)</li>
+  <li>if a class or an interface has its methods called by
+other methods and does not itself call other methods (i.e. it is a
+pure provider), it is shown in a shade of blue </li>
+</ul>
+
+<div style="text-align: center;"><img style="width: 800px; height: 619px;" alt="" src="images/imap-cp_1.png"><br>
+</div>
+
+<h2>Entity selection</h2>
+
+The user may select a class or an interface in the map, in
+which case the coloring of the map changes to reflect the coupling from
+the point of view of the selcted entity. The selected entity is colored
+in green (with no borders). Its ancestors and
+descendants are shown with a thickened black border and its siblings
+are shown with a normal black border. Its collaborator classes are
+colored using
+the four colors described below, based on their relation to
+the selected class or interface. In case of the Coupling
+Perspective, this relation is defined in terms of external method
+calls. If a class or an interface has no relation to the
+selected entity, its coloring will be disabled.
+<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 1200px; height: 675px;" alt="" src="images/imap-cp_2.png"><br>
+</div>
+
+<h2>Other quality perspectives<br>
+</h2>
+
+<a href="imap-cx.html">Complexity</a>, <a href="imap-df.html">Design Flaws</a>, 
+<a href="imap-en.html">Encapsulation</a>, <a href="imap-ih.html">Inheritance</a>
+<h2>Metrics used</h2>
+
+<a href="../sm/dit.html">DIT</a> (indirectly), <a href="../sm/noa.html">NOA</a>,
+<a href="../sm/nom.html">NOM</a>
+</body></html>

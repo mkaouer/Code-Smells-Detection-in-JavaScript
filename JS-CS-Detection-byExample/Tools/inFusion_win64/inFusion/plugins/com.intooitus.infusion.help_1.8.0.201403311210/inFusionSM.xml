@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Software Metrics Reference" topic="html/ref/sm/smintro.html">
+      <topic href="html/ref/sm/smintro.html" label="Software Metrics Reference">
+      <topic href="html/ref/sm/afw.html" label="AFW">
+      </topic>
+      <topic href="html/ref/sm/ald.html" label="ALD">
+      </topic>
+      <topic href="html/ref/sm/amw.html" label="AMW">
+      </topic>
+      <topic href="html/ref/sm/atfd.html" label="ATFD">
+      </topic>
+      <topic href="html/ref/sm/bovr.html" label="BOVR">
+      </topic>
+      <topic href="html/ref/sm/bur.html" label="BUR">
+      </topic>
+      <topic href="html/ref/sm/cbo.html" label="CBO">
+      </topic>
+      <topic href="html/ref/sm/cpfd.html" label="CPFD">
+      </topic>
+      <topic href="html/ref/sm/cw.html" label="CW">
+      </topic>
+      <topic href="html/ref/sm/cyclo.html" label="CYCLO">
+      </topic>
+      <topic href="html/ref/sm/dit.html" label="DIT">
+      </topic>
+      <topic href="html/ref/sm/dr.html" label="DR">
+      </topic>
+      <topic href="html/ref/sm/ecgf.html" label="ECGF">
+      </topic>
+      <topic href="html/ref/sm/fanin.html" label="FANIN">
+      </topic>
+      <topic href="html/ref/sm/fanout.html" label="FANOUT">
+      </topic>
+      <topic href="html/ref/sm/fdp.html" label="FDP">
+      </topic>
+      <topic href="html/ref/sm/hit.html" label="HIT">
+      </topic>
+      <topic href="html/ref/sm/icdo.html" label="ICDO">
+      </topic>
+      <topic href="html/ref/sm/icio.html" label="ICIO">
+      </topic>
+      <topic href="html/ref/sm/if.html" label="IF">
+      </topic>
+      <topic href="html/ref/sm/lb.html" label="LB">
+      </topic>
+      <topic href="html/ref/sm/lcc.html" label="LCC">
+      </topic>
+      <topic href="html/ref/sm/lcom.html" label="LCOM">
+      </topic>
+      <topic href="html/ref/sm/lda.html" label="LDA">
+      </topic>
+      <topic href="html/ref/sm/loc.html" label="LOC">
+      </topic>
+      <topic href="html/ref/sm/locomm.html" label="LOCOMM">
+      </topic>
+      <topic href="html/ref/sm/maxnesting.html" label="MAXNESTING">
+      </topic>
+      <topic href="html/ref/sm/nas.html" label="NAS">
+      </topic>
+      <topic href="html/ref/sm/noa.html" label="NOA">
+      </topic>
+      <topic href="html/ref/sm/noac.html" label="NOAC">
+      </topic>
+      <topic href="html/ref/sm/noaccm.html" label="NOACCM">
+      </topic>
+      <topic href="html/ref/sm/noam.html" label="NOAM">
+      </topic>
+      <topic href="html/ref/sm/noav.html" label="NOAV">
+      </topic>
+      <topic href="html/ref/sm/noc.html" label="NOC">
+      </topic>
+      <topic href="html/ref/sm/nochld.html" label="NOCHLD">
+      </topic>
+      <topic href="html/ref/sm/nof.html" label="NOF">
+      </topic>
+      <topic href="html/ref/sm/nogf.html" label="NOGF">
+      </topic>
+      <topic href="html/ref/sm/nogv.html" label="NOGV">
+      </topic>
+      <topic href="html/ref/sm/noic.html" label="NOIC">
+      </topic>
+      <topic href="html/ref/sm/nolv.html" label="NOLV">
+      </topic>
+      <topic href="html/ref/sm/nom.html" label="NOM">
+      </topic>
+      <topic href="html/ref/sm/nomod.html" label="NOMOD">
+      </topic>
+      <topic href="html/ref/sm/nooc.html" label="NOOC">
+      </topic>
+      <topic href="html/ref/sm/nop.html" label="NOP">
+      </topic>
+      <topic href="html/ref/sm/nopar.html" label="NOPAR">
+      </topic>
+      <topic href="html/ref/sm/noprta.html" label="NOPRTA">
+      </topic>
+      <topic href="html/ref/sm/noprtm.html" label="NOPRTM">
+      </topic>
+      <topic href="html/ref/sm/nopuba.html" label="NOPUBA">
+      </topic>
+      <topic href="html/ref/sm/nopubm.html" label="NOPUBM">
+      </topic>
+      <topic href="html/ref/sm/nov.html" label="NOV">
+      </topic>
+      <topic href="html/ref/sm/novrm.html" label="NOVRM">
+      </topic>
+      <topic href="html/ref/sm/ocdo.html" label="OCDO">
+      </topic>
+      <topic href="html/ref/sm/ocio.html" label="OCIO">
+      </topic>
+      <topic href="html/ref/sm/odd.html" label="ODD">
+      </topic>
+      <topic href="html/ref/sm/pnas.html" label="PNAS">
+      </topic>
+      <topic href="html/ref/sm/rfc.html" label="RFC">
+      </topic>
+      <topic href="html/ref/sm/sdc.html" label="SDC">
+      </topic>
+      <topic href="html/ref/sm/sec.html" label="SEC">
+      </topic>
+      <topic href="html/ref/sm/spidx.html" label="SPIDX">
+      </topic>
+      <topic href="html/ref/sm/tcc.html" label="TCC">
+      </topic>
+      <topic href="html/ref/sm/woc.html" label="WOC">
+      </topic>
+      </topic>
+</toc>

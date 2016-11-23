@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>inFusion User Interface - Introduction</title></head><body>
+<h1>inFusion User Interface<br>
+</h1>
+
+As shown in the figure below, the UI of inFusion is divided
+into three areas, each holding a set of specialized Views, displaying
+various information about the analized system or certain parts of the
+system:
+<ul>
+
+  <li><span style="font-weight: bold;">Summary Area</span> (top-left
+part of the window) - displays an overview
+of the currently explored design entity and its quality problems. This
+entity may be the entire system, one of its subsystems, packages, classes, modules
+(procedural part of a C/C++ file), operations, or data. For each of
+these entities there is a specialized view, but all of them display
+the fully qualified name of the entity. In the example below, we can
+see the System Summary for a Java system called jmol-13.0.13,
+containing the <a href="../qm/qmqdi.html">Quality Deficit Index</a> and its components, the list of the detected <a href="../df/dfintro.html">design
+flaws</a>, the list of flawed entities, and the <a href="pyramid.html">Overview Pyramid</a> of
+metrics
+computed for the system. Note that all summary views also display in
+the bread crumbs bar located immediately below the view's title, the
+navigation path to the explored entity through its containment
+hierarchy starting from the System entity.<br>
+  </li>
+  <li><span style="font-weight: bold;">Group / Relation Exploration Area</span>
+(bottom-left part of the window) - displays groups of entities or
+relations between groups of entities. Typical groups of entities are
+the group of flawed classes (classes containing <a href="../df/dfintro.html">design flaws</a>) or the group of all
+packages in the system.
+The figure below currently shows the group of all classes in the
+system, grouped by their containing packages and sorted based on the <a href="../sm/nom.html">NOM (Number of Methods)</a> metric. For each
+type of displayed entity, there
+is a specialized Group Exploration View, and for each type of relation
+there is a specialized Relation Exploration View. Most Group
+Exploration Views allow the user to apply a filter on the displayed
+entities or to add a <a href="../sm/smintro.html">software metric</a>,
+as in the figure below.<br>
+  </li>
+  <li><span style="font-weight: bold;">Visual Exploration Area</span>
+(right part of the window) - displays visual representations of the
+different entities in the form of <a href="../pm/pmintro.html">Polymetric
+Maps</a>. The same area is also used for visually exploring the source
+code by highlighting relevant code fragments, such as for example the
+usage of external attributes in&nbsp; a given class. In the figure
+below, we see the <a href="../pm/pmap-df.html">Design Flaws Perspective</a>
+of the <a href="../pm/pmap.html">Package Map</a> representing the
+entire system. Immediately below the map (bottom-right corner of the
+window) there is a little view called the <a href="spotlight.html">Map
+Spotlight</a>, which is used to highlight entities in the map, based on
+their properties. In the figure, the Map Spotlight is used to highlight
+all the <a href="../df/godclass.html">God Classes</a> in the system.<br>
+  </li>
+</ul>
+
+<img style="width: 1200px; height: 735px;" alt="" src="images/ui_intro.png"><br>
+
+<br>
+
+As shown in the figure above right-clicking any entity displayed
+throughout the tool, be it in a Polymetric Map, a Group Exploration
+View, or a Summary View opens a context-sensitive menu, which allows
+the user to:<br>
+
+<ul>
+
+  <li>Inspect quality problems</li>
+  <li>Explore design aspects</li>
+  <li>Navigate to other entities<br>
+  </li>
+</ul>
+
+<h2>References</h2>
+
+<a href="../df/dfintro.html">Design Flaws</a>, <a href="../qm/qmintro.html">Quality Model</a>, <a href="../pm/pmintro.html">Polymetric Maps</a>, <a href="../sm/smintro.html">Software Metrics</a><br>
+
+<br>
+</body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Design Flaws Reference - Blob Operation</title></head><body>
+<h1>Blob Operation</h1>
+
+A Blob Operation is a very large and complex operation, which tends to
+centralize too much of the functionality of a class or module. Such an
+operation usually starts normal and grows over time until it gets out
+of control, becoming hard to read and maintain.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Affected program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">OPERATION</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"> ✔ </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages<br>
+            </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concerns </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr style="font-weight: bold;">
+            <td style="width: 20%;">Complexity (CX) </td>
+            <td style="width: 20%;">Encapsulation (EN) </td>
+            <td style="width: 20%;">Coupling (CP) </td>
+            <td style="width: 20%;">Inheritance (IH) </td>
+            <td style="width: 20%;">Cohesion (CH) </td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td style="text-align: center;">✔ </td>
+            <td style="text-align: center;">
+            <br>
+            </td>
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detection rule</h2>
+
+Blob Operation are detected using a combination of size and complexity
+metrics, as show below.<br>
+
+<br>
+
+<img src="images/bloboperation_1.png" alt="bloboperation_1.png"><br>
+
+<h2>Metrics used</h2>
+
+<a href="../sm/cyclo.html">CYCLO</a>, <a href="../sm/loc.html">LOC</a>,
+<a href="../sm/locomm.html">LOCOMM</a>,
+<a href="../sm/maxnesting.html">MAXNESTING</a>, <a href="../sm/noav.html">NOAV</a>
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Brown98] </td>
+      <td style="vertical-align: top;">W.J. Brown, R.C. Malveau, W.H.
+Brown, H.W. McCormick, and T.J. Mowbray. <a href="http://www.amazon.com/AntiPatterns-Refactoring-Software-Architectures-Projects/dp/0471197130">AntiPatterns:
+Refactoring Software, Architectures, and Projects in Crisis</a>. John
+Wiley and Sons, 1998. </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Fowler99]</td>
+      <td style="vertical-align: top;">Martin Fowler. <a href="http://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672">Refactoring.
+Improving the Design of Existing Code</a>. Addison- Wesley, 1999.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Lanza06]</td>
+      <td style="vertical-align: top;">Michele Lanza and Radu
+Marinescu. <a href="http://www.amazon.com/Object-Oriented-Metrics-Practice-Software-Characterize/dp/3540244298/">Object-Oriented
+Metrics in Practice</a>. Springer, 2006.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body></html>

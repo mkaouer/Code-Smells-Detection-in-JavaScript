@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Map Spotlight</title></head><body>
+<h1>Map Spotlight</h1>
+
+The Map Spotlight is an intuitive simple to use tool for interacting
+with <a href="../pm/pmintro.html">Polymetric Maps</a>.
+It consists of a search bar, where the user can write simple highlight
+conditions, and a table area where the entities matching the condition
+are shown. These
+entities are also marked in the map
+using a dashed green border. In its default state the Map Spotlight is
+hidden and can be activated by clicking on its corresponding button in
+the toolbar of the Visual Exploration Area, shown in the figure below.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 600px; height: 696px;" alt="" src="images/spotlight.png"><br>
+</div>
+
+<br>
+
+Highlight conditions can be specified using the
+simple
+syntax described below:<br>
+
+<br>
+
+<span style="font-family: Courier New,Courier,monospace;">highlight_condition = name_matching_condition </span><br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
+design_flaw_filtering_condition </span><br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
+metric_filtering_condition</span><br>
+
+<br>
+
+<span style="font-family: Courier New,Courier,monospace;">name_matching_condition
+= [entity_type] &lt;regular_expression&gt;</span><br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;"><br>
+design_flaw_filtering_condition = [entity_type] is &lt;design_flaw_name&gt;
+|
+&lt;filter_name&gt;</span><br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;"><br>
+<span style="font-family: Courier New,Courier,monospace;">metric_filtering_condition
+= [entity_type] has metric comp_operator
+&lt;numerical_value&gt;</span></span><br style="font-family: Courier New,Courier,monospace;">
+
+<br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;">metric =
+&lt;design_flaw_name&gt; </span><br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp; | &lt;metric_name&gt;</span><br style="font-family: Courier New,Courier,monospace;">
+
+<span style="font-family: Courier New,Courier,monospace;"><br>
+comp_operator = &lt; | &lt;= | = | &gt;= | &gt;</span><br style="font-family: Courier New,Courier,monospace;">
+
+<br style="font-family: Courier New,Courier,monospace;">
+
+In the above conditions <span style="font-family: Courier New,Courier,monospace;">&lt;entity_type&gt;</span> means
+any of the entity types appearing in a Polymetric Map (package, class,
+module, method, function, attribute, or variable), while&nbsp;<span style="font-family: Courier New,Courier,monospace;">&lt;metric_name&gt;</span>
+represents any of the supported
+metrics applicable to the entity type in question. As for design flaws
+and filters, the following design flaw names and filter names are
+supported:<br>
+
+<br>
+
+<div style="text-align: center;">
+<table style="width: 462px; height: 374px; text-align: left; margin-left: auto; margin-right: auto;">
+  <tbody>
+    <tr>
+      <td>
+      <table style="text-align: left;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; width: 200px; font-weight: bold;">Design
+Flaw Name </td>
+            <td style="vertical-align: top; width: 100px; font-weight: bold;">Shorthand
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">dataclass</td>
+            <td style="vertical-align: top;">dc<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">dataclumps</td>
+            <td style="vertical-align: top;">dcl<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">datamodule<br>
+            </td>
+            <td style="vertical-align: top;">dm<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">featureenvy<br>
+            </td>
+            <td style="vertical-align: top;">fe<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">godclass<br>
+            </td>
+            <td style="vertical-align: top;">gc<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">godmodule<br>
+            </td>
+            <td style="vertical-align: top;">gm<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">messagechains<br>
+            </td>
+            <td style="vertical-align: top;">mc<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">schizophrenicclass<br>
+            </td>
+            <td style="vertical-align: top;">sc<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">schizophrenicmodule<br>
+            </td>
+            <td style="vertical-align: top;">sm<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">externalduplication<br>
+            </td>
+            <td style="vertical-align: top;">ed<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">internalduplication<br>
+            </td>
+            <td style="vertical-align: top;">id<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">siblingduplication<br>
+            </td>
+            <td style="vertical-align: top;">sd<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">duplication<br>
+            </td>
+            <td style="vertical-align: top;">dup<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">traditionbreaker<br>
+            </td>
+            <td style="vertical-align: top;">tb<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td style="vertical-align: top; width: 20px; text-align: left;"> <br>
+      </td>
+      <td>
+      <table style="text-align: left; width: 100px;" border="1" cellpadding="2" cellspacing="2">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; width: 200px; font-weight: bold;">Filter
+Name </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">public<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">private<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">protected<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">package<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">static<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">abstract<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">constructor<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">destructor<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">accessor<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">empty<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">interface<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">structure<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">overridden<br>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top;">overrider<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+</body></html>

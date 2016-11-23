@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Software Metrics Reference - CYCLO</title>
+
+  
+</head><body>
+<h1>Cyclomatic Number (CYCLO)<br>
+</h1>
+
+This metric was defined by McCabe as the number of
+linearly-independent paths through an operation. The cyclomatic number
+measures the amount of decision logic in a single
+software module. It is used for two related purposes. First, in the
+structured testing methodology, it gives the number of recommended
+tests for software. Second, it is used during all phases of the
+software lifecycle, beginning with design, to keep software reliable,
+testable, and manageable.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Measured program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">OPERATION</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concern </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold;">Complexity</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"> ✔ </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Known thresholds </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; width: 50%;">If the maximum
+value of
+the extended cyclomatic number is greater than 49, then there are
+functions, methods and procedures, which are untestable and difficult
+to understand and are therefore not maintainable.<br>
+            </td>
+            <td style="vertical-align: top; width: 50%;"> A software
+fragment with
+a CYCLO value of 1 - 4 has low complexity.
+A CYCLO value of 5 - 7 represents moderate complexity, which is still
+easy to understand. A value of 6 - 10 has a high complexity, while a
+value greater than 10 is very complex and hard to understand. </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Also known as<br>
+      </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td>Conditional Complexity<br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Used in</h2>
+
+<a href="../df/blobclass.html">Blob Class</a> (indirectly), <a href="../df/blobmodule.html">Blob Module</a> (indirectly), <a href="../df/bloboperation.html">Blob Operation</a>,
+<a href="../pm/cmap-cx.html">Class Map - Complexity Perspective</a>, <a href="../pm/mmap-cx.html">Module Map - Complexity Perspective</a>, <a href="../ui/pyramid.html">Overview Pyramid</a> (indirectly), 
+<a href="../df/shotgunsurgery.html">Shotgun Surgery</a><br>
+
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[McCabe76]</td>
+      <td style="vertical-align: top;">T.J. McCabe. A measure of
+complexity. IEEE Transactions on Software Engineering, 2(4):308–320,
+December 1976.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Lorenz94]</td>
+      <td style="vertical-align: top;">Mark Lorenz and Jeff Kidd. <a href="http://www.amazon.com/Object-Oriented-Software-Metrics-Mark-Lorenz/dp/013179292X">Object-oriented
+software metrics: a practical guide</a>. Prentice-Hall, 1994.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</body></html>

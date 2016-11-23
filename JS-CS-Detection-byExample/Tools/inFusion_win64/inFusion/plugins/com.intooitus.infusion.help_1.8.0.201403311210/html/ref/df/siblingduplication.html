@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Design Flaws Reference - Sibling Duplication</title>
+
+  
+</head><body>
+<h1>Sibling Duplication<br>
+</h1>
+
+Sibling Duplication means duplication between siblings in an
+inheritance hierarchy. Code duplication harms the uniqueness of
+entities within a system. Two or more siblings that define a similar
+functionality make it much harder to locate errors because the
+assumption "only class X implements this, therefore the error can be
+found there" does not hold anymore. Thus, the presence of code
+duplication has (at least) a double negative impact on the quality of a
+system: (1) the bloating of the system and (2) the co-evolution of
+clones (the clones do not all evolve the same way) which also implies
+the cloning of errors.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Affected program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">OPERATION</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"><br>
+            </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages<br>
+            </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔ </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concerns </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr style="font-weight: bold;">
+            <td style="width: 20%;">Complexity (CX) </td>
+            <td style="width: 20%;">Encapsulation (EN) </td>
+            <td style="width: 20%;">Coupling (CP) </td>
+            <td style="width: 20%;">Inheritance (IH) </td>
+            <td style="width: 20%;">Cohesion (CH) </td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td style="text-align: center;">✔ </td>
+            <td style="text-align: center;">✔</td>
+            <td style="text-align: center;">✔</td>
+            <td style="text-align: center;"> ✔ </td>
+            <td style="text-align: center;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detection rule</h2>
+
+The detection of code duplication plays an essential
+role in the assessment and improvement of a design. But detected clones
+might not be relevant if they are too small or if they are analyzed in
+isolation. In this context, the goal of this detection rule is to
+capture those portions of code that contain a significant amount of
+duplication.<br>
+
+<br>
+
+The detection rules is based on the following metrics:<br>
+
+<ul>
+
+<li><a href="../sm/lb.html">LB</a> (Line Bias), measuring the
+distance between two consecutive
+exact clones, i.e., the number of non-matching lines of code between
+two exact clones. </li>
+<li><a href="../sm/sdc.html">SDC</a> (Size of Duplication Chain),
+measuring the total size of a duplication chain in terms of lines of
+code. A duplication chain may contain one or more exactly cloned
+fragments, potentially interrupted by small fragments of non-identical
+code. The size of the duplication chain is the most relevant metric,
+because it measures the area of code that contains code
+duplication.&nbsp;</li>
+<li><a href="../sm/sec.html">SEC</a> (Size of Exact Clone),
+measuring the size of a clone in terms of lines of code. The size of a
+clone is relevant, because in most of the cases our interest in a piece
+of duplicated code is proportional to its size.</li>
+</ul>
+
+<img src="images/siblingduplication_1.png" alt="siblingduplication_1.png">
+<br>
+
+<img src="images/significantduplication_1.png" alt="significantduplication_1.png"><br>
+
+<img src="images/significantduplication_2.png" alt="significantduplication_2.png">
+<h2>Metrics used</h2>
+
+<a href="../sm/lb.html">LB</a>, <a href="../sm/loc.html">LOC</a>
+(indirectly), <a href="../sm/sdc.html">SDC</a>, <a href="../sm/sec.html">SEC</a>
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+<tbody>
+<tr>
+<td style="vertical-align: top; width: 100px;">[Brown98] </td>
+<td style="vertical-align: top;">W.J. Brown, R.C. Malveau, W.H.
+Brown, H.W. McCormick, and T.J. Mowbray. <a href="http://www.amazon.com/AntiPatterns-Refactoring-Software-Architectures-Projects/dp/0471197130">AntiPatterns:
+Refactoring Software, Architectures, and Projects in Crisis</a>. John
+Wiley and Sons, 1998. </td>
+</tr>
+<tr>
+<td style="vertical-align: top;">[Fowler99]</td>
+<td style="vertical-align: top;">Martin Fowler. <a href="http://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672">Refactoring.
+Improving the Design of Existing Code</a>. Addison- Wesley, 1999.</td>
+</tr>
+<tr>
+<td style="vertical-align: top;">[Hunt00]</td>
+<td style="vertical-align: top;">Andrew Hunt and David Thomas. <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The
+Pragmatic Programmer: From Journeyman to Master</a>. Addison Wesley,
+2000.</td>
+</tr>
+</tbody>
+</table>
+
+<br>
+
+<br>
+
+</body></html>

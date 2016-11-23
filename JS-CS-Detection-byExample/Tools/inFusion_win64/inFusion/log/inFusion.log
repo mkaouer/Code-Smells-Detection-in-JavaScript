@@ -1,0 +1,250 @@
+2014-12-03 20:56:49,216 [INFO ]: com.intooitus.logging.Activator  -- Log initialization complete
+2014-12-03 20:56:49,222 [INFO ]: PLATFORM com.intooitus.logging -- BundleEvent STARTED
+2014-12-03 20:56:49,453 [INFO ]: PLATFORM com.intooitus.model.meta -- BundleEvent STARTED
+2014-12-03 20:56:49,468 [INFO ]: PLATFORM com.intooitus.infusion.ui -- BundleEvent STARTED
+2014-12-03 20:56:49,469 [INFO ]: PLATFORM org.eclipse.ui.workbench -- FrameworkEvent INFO
+2014-12-03 20:56:49,468 [INFO ]: PLATFORM org.eclipse.ui.workbench -- The bundle class path entry "e4-workbench.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.workbench_3.8.2.v20121128-133708.jar"
+2014-12-03 20:56:49,469 [WARN ]: PLATFORM org.eclipse.ui.workbench -- The bundle class path entry "e4-workbench.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.workbench_3.8.2.v20121128-133708.jar"
+2014-12-03 20:56:49,469 [ERROR]: PLATFORM org.eclipse.ui.workbench -- The bundle class path entry "e4-workbench.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.workbench_3.8.2.v20121128-133708.jar"
+2014-12-03 20:56:49,469 [INFO ]: PLATFORM org.eclipse.ui.workbench -- The bundle class path entry "compatibility.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.workbench_3.8.2.v20121128-133708.jar"
+2014-12-03 20:56:49,469 [INFO ]: PLATFORM org.eclipse.ui.workbench -- FrameworkEvent INFO
+2014-12-03 20:56:49,469 [WARN ]: PLATFORM org.eclipse.ui.workbench -- The bundle class path entry "compatibility.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.workbench_3.8.2.v20121128-133708.jar"
+2014-12-03 20:56:49,469 [ERROR]: PLATFORM org.eclipse.ui.workbench -- The bundle class path entry "compatibility.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.workbench_3.8.2.v20121128-133708.jar"
+2014-12-03 20:56:49,473 [INFO ]: PLATFORM org.eclipse.jface -- BundleEvent STARTED
+2014-12-03 20:56:49,498 [INFO ]: PLATFORM com.ibm.icu -- The bundle class path entry "icu-data.jar" could not be found for the bundle "initial@reference:file:plugins/com.ibm.icu_4.4.2.v20110823.jar"
+2014-12-03 20:56:49,498 [INFO ]: PLATFORM com.ibm.icu -- FrameworkEvent INFO
+2014-12-03 20:56:49,498 [WARN ]: PLATFORM com.ibm.icu -- The bundle class path entry "icu-data.jar" could not be found for the bundle "initial@reference:file:plugins/com.ibm.icu_4.4.2.v20110823.jar"
+2014-12-03 20:56:49,498 [ERROR]: PLATFORM com.ibm.icu -- The bundle class path entry "icu-data.jar" could not be found for the bundle "initial@reference:file:plugins/com.ibm.icu_4.4.2.v20110823.jar"
+2014-12-03 20:56:49,499 [INFO ]: PLATFORM com.ibm.icu -- BundleEvent STARTED
+2014-12-03 20:56:49,558 [INFO ]: PLATFORM org.eclipse.ui -- BundleEvent STARTED
+2014-12-03 20:56:49,558 [INFO ]: PLATFORM org.eclipse.ui.workbench -- BundleEvent STARTED
+2014-12-03 20:56:49,562 [INFO ]: PLATFORM com.intooitus.commons.ui -- BundleEvent STARTED
+2014-12-03 20:56:49,565 [INFO ]: PLATFORM com.intooitus.orion -- BundleEvent STARTED
+2014-12-03 20:56:49,811 [INFO ]: LICENSING  -- Orion runtime initialization complete
+2014-12-03 20:56:49,814 [INFO ]: PLATFORM org.eclipse.core.databinding.observable -- BundleEvent STARTED
+2014-12-03 20:56:49,859 [INFO ]: PLATFORM org.eclipse.ui.workbench -- ServiceEvent REGISTERED
+2014-12-03 20:56:49,883 [INFO ]: PLATFORM org.eclipse.core.expressions -- BundleEvent STARTED
+2014-12-03 20:56:50,169 [WARN ]: PLATFORM org.eclipse.core.resources -- The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+2014-12-03 20:56:50,197 [INFO ]: PLATFORM org.eclipse.core.filesystem -- BundleEvent STARTED
+2014-12-03 20:56:50,410 [INFO ]: PLATFORM org.eclipse.core.resources -- ServiceEvent REGISTERED
+2014-12-03 20:56:50,410 [INFO ]: PLATFORM org.eclipse.core.resources -- BundleEvent STARTED
+2014-12-03 20:56:50,413 [INFO ]: PLATFORM com.intooitus.filter -- BundleEvent STARTED
+2014-12-03 20:56:50,435 [WARN ]: PLATFORM org.eclipse.ui.workbench -- A handler conflict occurred.  This may disable some commands.
+2014-12-03 20:56:50,498 [INFO ]: PLATFORM org.eclipse.ui.ide -- The bundle class path entry "e4-ide.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.ide_3.8.2.v20121106-170106.jar"
+2014-12-03 20:56:50,498 [WARN ]: PLATFORM org.eclipse.ui.ide -- The bundle class path entry "e4-ide.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.ide_3.8.2.v20121106-170106.jar"
+2014-12-03 20:56:50,498 [ERROR]: PLATFORM org.eclipse.ui.ide -- The bundle class path entry "e4-ide.jar" could not be found for the bundle "initial@reference:file:plugins/org.eclipse.ui.ide_3.8.2.v20121106-170106.jar"
+2014-12-03 20:56:50,498 [INFO ]: PLATFORM org.eclipse.ui.ide -- FrameworkEvent INFO
+2014-12-03 20:56:50,501 [INFO ]: PLATFORM org.eclipse.ui.ide -- BundleEvent STARTED
+2014-12-03 20:56:50,674 [INFO ]: PLATFORM org.eclipse.team.core -- BundleEvent STARTED
+2014-12-03 20:56:50,690 [INFO ]: PLATFORM org.eclipse.help -- BundleEvent STARTED
+2014-12-03 20:56:51,023 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 20:56:51,042 [INFO ]: PLATFORM org.eclipse.ui.workbench.texteditor -- BundleEvent STARTED
+2014-12-03 20:56:51,046 [INFO ]: PLATFORM org.eclipse.ui.editors -- BundleEvent STARTED
+2014-12-03 20:56:51,197 [INFO ]: PLATFORM org.eclipse.jdt.core -- BundleEvent STARTED
+2014-12-03 20:56:51,259 [INFO ]: PLATFORM org.eclipse.jdt.core.manipulation -- BundleEvent STARTED
+2014-12-03 20:56:51,263 [INFO ]: PLATFORM org.eclipse.jdt.ui -- BundleEvent STARTED
+2014-12-03 20:56:51,359 [INFO ]: PLATFORM org.eclipse.core.filebuffers -- BundleEvent STARTED
+2014-12-03 20:56:51,406 [INFO ]: PLATFORM org.eclipse.cdt.make.core -- BundleEvent STARTED
+2014-12-03 20:56:51,458 [INFO ]: PLATFORM org.eclipse.cdt.managedbuilder.core -- BundleEvent STARTED
+2014-12-03 20:56:51,507 [INFO ]: PLATFORM org.eclipse.cdt.core -- BundleEvent STARTED
+2014-12-03 20:56:51,512 [INFO ]: PLATFORM org.eclipse.ui.views -- BundleEvent STARTED
+2014-12-03 20:56:51,545 [INFO ]: PLATFORM org.eclipse.ltk.core.refactoring -- BundleEvent STARTED
+2014-12-03 20:56:51,577 [INFO ]: PLATFORM org.eclipse.cdt.ui -- BundleEvent STARTED
+2014-12-03 20:56:51,580 [INFO ]: PLATFORM org.eclipse.cdt.make.ui -- BundleEvent STARTED
+2014-12-03 20:56:51,591 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 20:56:51,591 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 20:56:51,592 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 20:56:51,714 [INFO ]: PLATFORM org.eclipse.compare.core -- BundleEvent STARTED
+2014-12-03 20:56:51,720 [INFO ]: PLATFORM org.eclipse.compare -- BundleEvent STARTED
+2014-12-03 20:56:51,750 [INFO ]: PLATFORM org.eclipse.ui.forms -- BundleEvent STARTED
+2014-12-03 20:56:53,673 [WARN ]: PLATFORM org.eclipse.ui.workbench -- Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+2014-12-03 20:56:53,710 [INFO ]: PLATFORM org.eclipse.ui.navigator -- BundleEvent STARTED
+2014-12-03 20:56:53,767 [INFO ]: PLATFORM org.eclipse.ui.workbench -- ServiceEvent UNREGISTERING
+2014-12-03 20:56:53,768 [INFO ]: PLATFORM org.eclipse.ui.workbench -- ServiceEvent REGISTERED
+2014-12-03 20:56:53,785 [INFO ]: PLATFORM org.eclipse.debug.core -- ServiceEvent REGISTERED
+2014-12-03 20:56:53,791 [INFO ]: PLATFORM org.eclipse.debug.core -- BundleEvent STARTED
+2014-12-03 20:56:53,793 [INFO ]: PLATFORM org.eclipse.jdt.launching -- ServiceEvent REGISTERED
+2014-12-03 20:56:53,808 [INFO ]: PLATFORM org.eclipse.jdt.launching -- BundleEvent STARTED
+2014-12-03 20:57:21,437 [INFO ]: PLATFORM org.eclipse.emf.common -- BundleEvent STARTED
+2014-12-03 20:57:21,450 [INFO ]: PLATFORM org.eclipse.emf.ecore -- BundleEvent STARTED
+2014-12-03 20:57:21,570 [INFO ]: PLATFORM com.intooitus.qualitymodel -- BundleEvent STARTED
+2014-12-03 20:57:21,581 [INFO ]: PLATFORM com.intooitus.builder.jdt -- BundleEvent STARTED
+2014-12-03 20:57:22,554 [INFO ]: PLATFORM org.eclipse.xtext.builder -- BundleEvent STARTED
+2014-12-03 20:57:29,340 [INFO ]: PLATFORM org.eclipse.xtext -- BundleEvent STARTED
+2014-12-03 20:57:29,367 [INFO ]: PLATFORM org.eclipse.emf.ecore.xmi -- BundleEvent STARTED
+2014-12-03 20:57:29,655 [INFO ]: PLATFORM org.eclipse.xtext.common.types -- BundleEvent STARTED
+2014-12-03 20:57:30,956 [INFO ]: PLATFORM com.intooitus.visualization -- BundleEvent STARTED
+2014-12-03 20:57:31,775 [INFO ]: PLATFORM org.eclipse.draw2d -- BundleEvent STARTED
+2014-12-03 21:13:13,261 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:13,264 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:13:13,265 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:13,267 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:13:13,418 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:13,419 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:13:13,420 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:13,420 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:13:13,729 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.14-src_1417657769398.result
+2014-12-03 21:13:14,556 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:13:15,262 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:13:35,150 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:35,151 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:13:35,152 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:35,153 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:13:35,248 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:35,248 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:13:35,248 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:35,249 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:13:35,306 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.14.1-src_1417658015046.result
+2014-12-03 21:13:35,431 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:13:35,965 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:13:56,730 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:56,731 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:13:56,731 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:56,731 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:13:56,788 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:56,788 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:13:56,788 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:13:56,788 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:13:56,836 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.16-src_1417656639812.result
+2014-12-03 21:13:56,926 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:13:57,450 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:14:21,376 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:14:21,378 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:14:21,379 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:14:21,380 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:14:21,436 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:14:21,436 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:14:21,437 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:14:21,439 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:14:21,473 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.16.1-src_1417652511789.result
+2014-12-03 21:14:21,805 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:14:22,451 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:19:20,809 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:20,814 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:20,815 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:20,816 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:20,876 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:20,877 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:20,879 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:20,880 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:20,922 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.16-src_1417656639812.result
+2014-12-03 21:19:21,012 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:19:21,484 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:19:36,434 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:36,434 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:36,438 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:36,439 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:36,493 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:36,494 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:36,494 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:36,495 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:36,529 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.15-src_1417658241417.result
+2014-12-03 21:19:36,608 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:19:37,006 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:19:45,704 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:45,710 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:45,710 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:45,710 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:45,762 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:45,763 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:45,763 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:45,763 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:45,796 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.14.1-src_1417658015046.result
+2014-12-03 21:19:46,089 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:19:46,512 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:19:55,388 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:55,389 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:55,389 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:55,391 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:55,455 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:55,455 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:19:55,456 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:19:55,456 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:19:55,489 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.14-src_1417657769398.result
+2014-12-03 21:19:55,783 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:19:56,188 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:20:02,387 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:20:02,388 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:20:02,389 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:20:02,390 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:20:02,449 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:20:02,450 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.infusion.gui.views.CyclesView.
+2014-12-03 21:20:02,451 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Unable to find view with id: com.intooitus.infusion.gui.views.PhysicalDependencies, when creating perspective com.intooitus.commons.gui.perspective
+2014-12-03 21:20:02,451 [ERROR]: PLATFORM org.eclipse.ui.workbench -- Part already exists in page layout: com.intooitus.commons.groupexplorerview.
+2014-12-03 21:20:02,491 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Building model for source folder C:\Users\Erind\Desktop\UMD\CIS 375 Software Engineering\Software Quality\inFusion_win64\inFusion\snapshots\HBX-1.14.1-src_1417658015046.result
+2014-12-03 21:20:02,714 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Creating object model. This may take a few minutes depending on the size of your system.
+2014-12-03 21:20:03,136 [INFO ]: c.i.c.m.builder.GenericModelBuilder  -- Done loading model
+2014-12-03 21:24:13,692 [INFO ]: PLATFORM org.eclipse.ui.workbench -- ServiceEvent UNREGISTERING
+2014-12-03 21:24:13,700 [INFO ]: LICENSING  -- Orion runtime shutdown complete
+2014-12-03 21:24:13,708 [INFO ]: PLATFORM org.eclipse.equinox.app -- ServiceEvent UNREGISTERING
+2014-12-03 21:24:13,708 [INFO ]: PLATFORM org.eclipse.osgi -- ServiceEvent UNREGISTERING
+2014-12-03 21:24:13,708 [INFO ]: PLATFORM org.eclipse.osgi -- ServiceEvent UNREGISTERING
+2014-12-03 21:24:13,752 [INFO ]: PLATFORM com.intooitus.filter.editor -- BundleEvent STOPPED
+2014-12-03 21:24:13,752 [INFO ]: PLATFORM org.eclipse.xtext.ui.codetemplates.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,752 [INFO ]: PLATFORM org.eclipse.xtext.ui.shared -- BundleEvent STOPPED
+2014-12-03 21:24:13,757 [INFO ]: PLATFORM org.eclipse.xtext.builder -- BundleEvent STOPPED
+2014-12-03 21:24:13,762 [INFO ]: PLATFORM com.intooitus.visualization -- BundleEvent STOPPED
+2014-12-03 21:24:13,763 [INFO ]: PLATFORM com.intooitus.infusion.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.commons.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.filter -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.infusion.server -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.builder.cdt -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.builder.jdt -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM com.intooitus.qualitymodel -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtend.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext.ui.codetemplates -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext.xbase -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.emf.mwe2.language -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext.generator -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext.common.types -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext.ecore -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,764 [INFO ]: PLATFORM org.eclipse.xtext -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.emf.mwe.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.cdt.autotools.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.cdt.managedbuilder.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.cdt.make.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.cdt.managedbuilder.gnu.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.cdt.managedbuilder.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,765 [INFO ]: PLATFORM org.eclipse.cdt.make.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,767 [INFO ]: PLATFORM org.eclipse.cdt.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.cdt.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.jdt.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.search -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.navigator.resources -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ltk.ui.refactoring -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.team.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.compare -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.debug.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.console -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.editors -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.workbench.texteditor -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.compare.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.emf.edit.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.emf.common.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.help.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.ide -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.views.properties.tabbed -- BundleEvent STOPPED
+2014-12-03 21:24:13,793 [INFO ]: PLATFORM org.eclipse.ui.forms -- BundleEvent STOPPED
+2014-12-03 21:24:13,794 [INFO ]: PLATFORM org.eclipse.ui.navigator -- BundleEvent STOPPED
+2014-12-03 21:24:13,794 [INFO ]: PLATFORM org.eclipse.ui.views -- BundleEvent STOPPED
+2014-12-03 21:24:13,794 [INFO ]: PLATFORM org.eclipse.ui -- BundleEvent STOPPED
+2014-12-03 21:24:13,795 [INFO ]: PLATFORM org.eclipse.ui.workbench -- BundleEvent STOPPED
+2014-12-03 21:24:13,796 [INFO ]: PLATFORM org.eclipse.core.databinding -- BundleEvent STOPPED
+2014-12-03 21:24:13,796 [INFO ]: PLATFORM org.eclipse.jdt.core.manipulation -- BundleEvent STOPPED
+2014-12-03 21:24:13,796 [INFO ]: PLATFORM org.eclipse.ltk.core.refactoring -- BundleEvent STOPPED
+2014-12-03 21:24:13,796 [INFO ]: PLATFORM org.eclipse.core.filebuffers -- BundleEvent STOPPED
+2014-12-03 21:24:13,820 [INFO ]: PLATFORM org.eclipse.jdt.launching -- ServiceEvent UNREGISTERING
+2014-12-03 21:24:13,827 [INFO ]: PLATFORM org.eclipse.jdt.launching -- BundleEvent STOPPED
+2014-12-03 21:24:13,827 [INFO ]: PLATFORM org.eclipse.jdt.debug -- BundleEvent STOPPED
+2014-12-03 21:24:13,831 [INFO ]: PLATFORM org.eclipse.debug.core -- ServiceEvent UNREGISTERING
+2014-12-03 21:24:13,831 [INFO ]: PLATFORM org.eclipse.debug.core -- BundleEvent STOPPED
+2014-12-03 21:24:13,831 [INFO ]: PLATFORM org.eclipse.draw2d -- BundleEvent STOPPED
+2014-12-03 21:24:13,831 [INFO ]: PLATFORM org.eclipse.help.webapp -- BundleEvent STOPPED
+2014-12-03 21:24:13,831 [INFO ]: PLATFORM org.eclipse.help.base -- BundleEvent STOPPED
+2014-12-03 21:24:13,831 [INFO ]: PLATFORM org.eclipse.help -- BundleEvent STOPPED
+2014-12-03 21:24:14,331 [INFO ]: PLATFORM org.eclipse.jdt.core -- BundleEvent STOPPED
+2014-12-03 21:24:14,332 [INFO ]: PLATFORM com.ibm.icu -- BundleEvent STOPPED
+2014-12-03 21:24:14,332 [INFO ]: PLATFORM com.ibm.icu.base -- BundleEvent STOPPED
+2014-12-03 21:24:14,332 [INFO ]: PLATFORM com.intooitus.orion -- BundleEvent STOPPED

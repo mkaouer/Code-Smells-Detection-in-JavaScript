@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Module Map - Encapsulation Perspective</title></head><body>
+<h1>Module Map - Encapsulation Perspective<br>
+</h1>
+
+The Encapsulation Perspective of the <a href="mmap.html">Module Map</a>
+provides insight into the usage of data from the current module by
+external operations, as well as the usage of
+external data by the operations of the current module. In the
+default state,
+the Encapsulation Perspective will render operations using a yellow
+color gradient, computed based on the number of distinct external data
+accessed by the operation. Note that a call to an accessor method is
+also treated as an access to its coresponding attribute. Data is
+rendered using a blue color gradient, computed based on the number of
+distinct operations accessing it.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 800px; height: 863px;" alt="" src="images/mmap-en_1.png"><br>
+</div><br>
+<h2>Entity selection</h2>
+
+
+
+
+
+
+The user may select an operation or a data in the map, in
+which case the coloring of the map changes to reflect the encapsulation
+from
+the point of view of the selcted entity. The selected entity is colored
+in green (with no borders). All other nodes are colored using
+the three colors described below, based on their relation to
+the selected entity. In case of the Encapsulation Perspective, this
+relation is defined in terms of external data accesses. Calls to
+accessor methods are treated as accesses to their corresponding
+attribute. Note that the last color shown below is actually reserved
+for data / operations with no relation to the selected entity but with
+relations
+to other data / operations from the current module. This
+shade of
+gray is slightly darker than the one used for nodes
+with no relation to the data / operations of the current module.<br>
+
+
+
+
+<br>
+
+
+
+
+<div style="text-align: center;"><img style="width: 400px; height: 506px;" alt="" src="images/mmap-en_2.png"><br>
+</div>
+
+
+
+
+<h2>Other quality perspectives<br>
+</h2>
+
+
+
+
+<a href="mmap-ch.html">Cohesion</a>,
+<a href="mmap-cp.html">Complexity</a>, <a href="mmap-cp.html">Coupling</a>,
+<a href="mmap-df.html">Design Flaws</a>
+
+
+
+
+<h2>Metrics used</h2>
+
+
+
+
+<a href="../sm/loc.html">LOC</a><a href="../sm/loc.html"></a>
+
+</body></html>

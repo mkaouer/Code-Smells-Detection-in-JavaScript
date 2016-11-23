@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Software Metrics Reference - OCDO</title></head><body>
+<h1>Outgoing Coupling Dispersion for an Operation (OCDO)</h1>
+
+This metric is defined as the number of distinct (external) classes or
+modules from which operations (methods or
+functions) are called by the measured operation. Operation calls are a
+form of
+coupling between capsules. Since coupling in general is not desirable,
+this metric is used to measure the amount of coupling between capsules.
+A capsule (class or module) should know only about a limited number of
+other capsules and their services. Otherwise, a tangled web of
+interdependencies would exist and maintenance would be a nightmare.<br>
+
+<br>
+
+OCDO_POLY is a variant of OCDO that treats in a special
+manner the case of a polymorphic call (i.e. "virtual" C++ methods that
+are overridden in one or more classes). For this case OCDO_POLY will
+count both the base class, where the called methods was defined, as
+well as all the derived classes where the method has been redefined.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Measured program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">OPERATION</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concern </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-weight: bold;">Coupling</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"> ✔ </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Known thresholds </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;"> <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Also known as<br>
+      </td>
+      <td style="vertical-align: top;">
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="font-weight: normal;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Used in</h2>
+
+<a href="../df/shotgunsurgery.html">Shotgun Surgery</a><h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Lorenz94]</td>
+      <td style="vertical-align: top;">Mark Lorenz and Jeff Kidd. <a href="http://www.amazon.com/Object-Oriented-Software-Metrics-Mark-Lorenz/dp/013179292X">Object-oriented
+software metrics: a practical guide</a>. Prentice-Hall, 1994.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Briand99]</td>
+      <td style="vertical-align: top;">L.C.
+Briand, C. Bunse, and J.W. Daly. Using Metrics to Evaluate Software
+System Maintainability. IEEE Transactions on Software Engineering,
+25(1), 1999.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Lanza06]</td>
+      <td style="vertical-align: top;">Michele Lanza and Radu
+Marinescu. <a href="http://www.amazon.com/Object-Oriented-Metrics-Practice-Software-Characterize/dp/3540244298/">Object-Oriented
+Metrics in Practice</a>. Springer, 2006.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body></html>

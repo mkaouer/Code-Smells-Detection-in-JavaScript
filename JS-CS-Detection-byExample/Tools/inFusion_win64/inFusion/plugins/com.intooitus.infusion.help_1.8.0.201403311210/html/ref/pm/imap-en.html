@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Inheritance Map - Encapsulation Perspective</title></head><body>
+<h1>Inheritance Map - Encapsulation Perspective<br>
+</h1>
+
+The Encapsulation Perspective of the <a href="imap.html">Inheritance
+Map</a> provides insight into the way classes and interfaces (Java)
+expose their data to external clients. In the default state,
+the Encapsulation Perspective will render classes and interfaces based
+on
+their predominant nature from the viewpoint of encapsulation, using
+four color gradients:<br>
+
+<ul>
+
+  <li>if a class or interface only accesses but does not
+itself expose data (i.e. it is a
+pure client), it is rendered in a shade of yellow<br>
+  </li>
+  <li>if a class or interface both exposes and itself
+accesses
+data from other classes or interfaces, it will be rendered in
+a color that depends on which aspect is predominant (i.e. mostly client
+shown in a shade of orange, or mostly provider shown in a shade
+of magenta)</li>
+  <li>if a class or interface only exposes but does not itself
+access data from other classes or interfaces (i.e. it is a
+pure provider) it is shown in a shade of blue </li>
+</ul>
+
+In this context the term &#8220;exposes data&#8221; means that the class or
+interface has data that is either declared public, or
+accessible through a public accessor, and that there is at least one
+other class that accesses this data, either directly or
+through the provided accessor method. In other words, merely defining
+data as public is not considered as &#8220;exposing&#8221; that data, unless there
+is at least one client that actually accesses it.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 800px; height: 619px;" alt="" src="images/imap-en_1.png"><br>
+</div>
+
+<h2>Entity selection</h2>
+
+The user may select a class or an interface in the map, in
+which case the coloring of the map changes to reflect the encapsulation
+from
+the point of view of the selcted entity. The selected entity is colored
+in green (with no borders). Its ancestors and
+descendants are shown with a thickened black border and its siblings
+are shown with a normal black border. Its collaborator classes and
+interfaces are colored using
+the four colors described below, based on their relation to
+the selected class or interface. In case of the Encpasulation
+Perspective, this relation is defined in terms of external data
+accesses. If a class or an interface has no relation to the
+selected entity, its coloring will be disabled.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 1200px; height: 675px;" alt="" src="images/imap-en_2.png"><br>
+</div>
+
+<h2>Other quality perspectives<br>
+</h2>
+
+<a href="imap-cx.html">Complexity</a>, <a href="imap-cp.html">Coupling</a>,
+<a href="imap-df.html">Design Flaws</a>, <a href="imap-ih.html">Inheritance</a>
+<h2>Metrics used</h2>
+
+<a href="../sm/dit.html">DIT</a> (indirectly), <a href="../sm/noa.html">NOA</a>,
+<a href="../sm/nom.html">NOM</a>
+</body></html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.help.toc">
+      <toc
+            file="inFusionRef.xml"
+            primary="true">
+      </toc>
+      <toc
+            file="inFusionDF.xml">
+      </toc>
+      <toc
+            file="inFusionSM.xml">
+      </toc>
+   </extension>
+</plugin>

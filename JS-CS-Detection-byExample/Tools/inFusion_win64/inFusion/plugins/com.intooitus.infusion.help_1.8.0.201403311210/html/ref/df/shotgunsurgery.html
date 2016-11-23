@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Design Flaws Reference - Shotgun Surgery</title>
+
+  
+</head><body>
+<h1>Shotgun Surgery<br>
+</h1>
+
+Shotgun Surgery is a design flaw affecting an operation, whose change
+implies many changes to a lot of different operations in
+various classes or modules. This particular flaw tackles the issue of
+strong afferent (incoming) coupling and it regards not only the
+coupling strength but also the coupling dispersion. It refers to
+operations having
+significant reasons to change (high level of efferent coupling) and
+whose changes are likely to have a huge impact on the system. These
+operations are also known as "bottleneck operations"
+as they are both called by many operations dispersed over many places
+in the system, and at the same time they depend on many other
+operations. If a change occurs in such an operation
+myriads of other methods and functions in various places might need to
+change as well. As a result, it is easy to miss a required change, thus
+causing maintenance problems.
+<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Affected program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">OPERATION</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"> ✔ </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages<br>
+            </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concerns </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr style="font-weight: bold;">
+            <td style="width: 20%;">Complexity (CX) </td>
+            <td style="width: 20%;">Encapsulation (EN) </td>
+            <td style="width: 20%;">Coupling (CP) </td>
+            <td style="width: 20%;">Inheritance (IH) </td>
+            <td style="width: 20%;">Cohesion (CH) </td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td style="text-align: center;"> <br>
+            </td>
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;">✔</td>
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detection rule</h2>
+
+The detection rule for Shotgun Surgery uses a combination of coupling,
+size and complexity metrics, as shown below.<br>
+
+<br>
+
+<img src="images/shotgunsurgery_1.png" alt="shotgunsurgery_1.png"><br>
+
+<br>
+
+<img src="images/shotgunsurgery_2.png" alt="shotgunsurgery_2.png"><br>
+
+<h2>Metrics used</h2>
+
+<a href="../sm/cyclo.html">CYCLO</a>, 
+<a href="../sm/icdo.html">ICDO</a>, <a href="../sm/icio.html">ICIO</a>,
+<a href="../sm/loc.html">LOC</a>, <a href="../sm/maxnesting.html">MAXNESTING</a>,
+<a href="../sm/ocdo.html">OCDO</a>, <a href="../sm/ocio.html">OCIO</a>
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">[Fowler99]</td>
+      <td style="vertical-align: top;">Martin Fowler. <a href="http://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672">Refactoring.
+Improving the Design of Existing Code</a>. Addison- Wesley, 1999.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Lanza06]</td>
+      <td style="vertical-align: top;">Michele Lanza and Radu
+Marinescu. <a href="http://www.amazon.com/Object-Oriented-Metrics-Practice-Software-Characterize/dp/3540244298/">Object-Oriented
+Metrics in Practice</a>. Springer, 2006.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body></html>

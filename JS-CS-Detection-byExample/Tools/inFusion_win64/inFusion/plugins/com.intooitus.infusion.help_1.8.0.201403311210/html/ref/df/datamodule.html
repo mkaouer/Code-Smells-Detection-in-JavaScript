@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title>Design Flaws Reference - Data Module</title></head><body>
+<h1>Data Module
+</h1>
+
+This is the equivalent of the
+design flaw <a href="dataclass.html">Data Class</a> in the procedural world. Like a class, a
+module defines a public interface and has private data and functions. A
+module that exposes too much of its data and has a low complexity is
+probably too open for outsiders.<br>
+
+<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Affected program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">MODULE</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;">&#10004;</td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;"> <br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concerns </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr style="font-weight: bold;">
+            <td style="width: 20%;">Complexity (CX) </td>
+            <td style="width: 20%;">Encapsulation (EN) </td>
+            <td style="width: 20%;">Coupling (CP) </td>
+            <td style="width: 20%;">Inheritance (IH) </td>
+            <td style="width: 20%;">Cohesion (CH) </td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;">&#10004;</td>
+            <td style="text-align: center;">&#10004;</td>
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;">&#10004;</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detection rule</h2>
+
+The detection rule employs two
+metrics, one for measuring the quantity of globally accessible data
+defined in the module, and a metric for measuring the complexity of the
+module's functions.<br>
+<br>
+
+<img src="images/datamodule_1.png" alt="datamodule_1.png">
+<h2>Metrics used</h2>
+
+<a href="../sm/nogv.html">NOGV</a>, <a href="../sm/woc.html">WOC</a>
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Riel96] </td>
+      <td style="vertical-align: top;">A.J. Riel. <a href="http://www.amazon.com/Object-Oriented-Design-Heuristics-Arthur-Riel/dp/020163385X">Object-Oriented
+Design Heuristics</a>. Addison-Wesley, 1996. </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Fowler99]</td>
+      <td style="vertical-align: top;">Martin Fowler. <a href="http://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672">Refactoring.
+Improving the Design of Existing Code</a>. Addison- Wesley, 1999.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Lanza06]</td>
+      <td style="vertical-align: top;">Michele Lanza and Radu
+Marinescu. <a href="http://www.amazon.com/Object-Oriented-Metrics-Practice-Software-Characterize/dp/3540244298/">Object-Oriented
+Metrics in Practice</a>. Springer, 2006.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body></html>

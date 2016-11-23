@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-Vendor: intooitus srl
+Eclipse-BundleShape: dir
+Bundle-Version: 1.8.0.201403311210
+Bundle-Name: com.intooitus.resources.infusion
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.intooitus.resources.infusion;singleton:=true
+
+

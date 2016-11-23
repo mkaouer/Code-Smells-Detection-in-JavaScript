@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://www.intooitus.com/qualityModel" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.intooitus.com/qualityModel">
+
+    <element name="qualityModel" type="tns:QualityModel"></element>
+
+
+    <complexType name="Quality">
+    	<sequence minOccurs="1" maxOccurs="1">
+    		<element name="understandability_weight" type="IDREF" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="changeability_weight" type="IDREF" maxOccurs="1" minOccurs="1"></element>
+    		<element name="reusability_weight" type="IDREF" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="QualityAttributes">
+    	<sequence maxOccurs="1" minOccurs="1">
+    		<element name="size_and_complexity_weight" type="IDREF" maxOccurs="1" minOccurs="1"></element>
+    		<element name="encapsulation_weight" type="IDREF"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="coupling_weight" type="IDREF" maxOccurs="1" minOccurs="1"></element>
+    		<element name="cohesion_weight" type="IDREF" maxOccurs="1" minOccurs="1"></element>
+    		<element name="hierarchies_weight" type="IDREF" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+    
+
+
+    
+
+    <complexType name="DesignProperties">
+    	<sequence>
+    		<element name="relative_impact" type="IDREF" minOccurs="0" maxOccurs="unbounded"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DesignFlaw">
+    	<sequence>
+    		<element name="id" type="ID" maxOccurs="1" minOccurs="1"></element>
+    		<element name="name" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="impact_class" type="IDREF" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="applies_to" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DesignFlawImpactClass">
+    	<sequence>
+            <element name="id" type="ID" maxOccurs="1" minOccurs="1"></element>
+            <element name="name" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<enumeration value="module"></enumeration>
+    					<enumeration value="system"></enumeration>
+    					<enumeration value="hierarchy"></enumeration>
+    					<enumeration value="class"></enumeration>
+    				</restriction>
+    			</simpleType>
+            </element>
+    		<element name="weight" type="int" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DesignFlawImpactLevel">
+    	<sequence>
+            <element name="id" type="ID" maxOccurs="1" minOccurs="1"></element>
+            <element name="name" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<enumeration value="LOW"></enumeration>
+    					<enumeration value="HIGH"></enumeration>
+    					<enumeration value="MEDIUM"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="weight" type="int" minOccurs="1"
+    			maxOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="DesignPropertiesImpactLevel">
+    	<sequence>
+            <element name="id" type="ID" minOccurs="1" maxOccurs="1"></element>
+            <element name="name" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<enumeration value="LOW"></enumeration>
+    					<enumeration value="HIGH"></enumeration>
+    					<enumeration value="MEDIUM"></enumeration>
+    				</restriction>
+    			</simpleType>
+            </element>
+    		<element name="weight" type="int" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="QualityAttributesImpactLevel">
+    	<sequence maxOccurs="1" minOccurs="1">
+    		<element name="id" type="ID" maxOccurs="1" minOccurs="1"></element>
+    		<element name="name">
+    			<simpleType>
+    				<restriction base="string">
+    					<enumeration value="LOW"></enumeration>
+    					<enumeration value="HIGH"></enumeration>
+    					<enumeration value="MEDIUM"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="weight" type="int" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="QualityModel">
+    	<sequence>
+    		<element name="quality_to_quality_attributes"
+    			type="tns:QualityToQualityAttributes" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="quality_attributes_to_design_properties"
+    			type="tns:QualityAttributesToDesignProperties" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="design_properties_to_design_flaws" type="tns:DesignPropertiesToDesignFlaws" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="QualityToQualityAttributes">
+    	<sequence>
+            <element name="quality_attributes_impact_level" type="tns:QualityAttributesImpactLevel" maxOccurs="unbounded" minOccurs="1"></element>
+            <element name="quality" type="tns:Quality" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="QualityAttributesToDesignProperties">
+    	<sequence>
+            <element name="design_properties_impact_level" type="tns:DesignPropertiesImpactLevel" maxOccurs="unbounded" minOccurs="1"></element>
+            <element name="understandability" type="tns:QualityAttributes" maxOccurs="1" minOccurs="1"></element>
+    		<element name="changeability"
+    			type="tns:QualityAttributes" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="reusability" type="tns:QualityAttributes" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="DesignPropertiesToDesignFlaws">
+    	<sequence>
+    		<element name="design_flaw_impact_level"
+    			type="tns:DesignFlawImpactLevel" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
+    		<element name="design_flaw_impact_class"
+    			type="tns:DesignFlawImpactClass" maxOccurs="unbounded"
+    			minOccurs="1">
+    		</element>
+    		<element name="size_and_complexity"
+    			type="tns:DesignProperties" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="encapsulation" type="tns:DesignProperties"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="coupling" type="tns:DesignProperties"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="cohesion" type="tns:DesignProperties"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="hierarchies" type="tns:DesignProperties"
+    			maxOccurs="1" minOccurs="0">
+    		</element>
+    		<element name="design_flaw" type="tns:DesignFlaw"
+    			maxOccurs="unbounded" minOccurs="1">
+    		</element>
+    		<element name="relative_impact" type="tns:RelativeImpact" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RelativeImpact">
+    	<sequence>
+    		<element name="id" type="ID" maxOccurs="1" minOccurs="1"></element>
+    		<element name="impact_level"
+    			type="IDREF" maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="design_flaw" type="IDREF" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+</schema>

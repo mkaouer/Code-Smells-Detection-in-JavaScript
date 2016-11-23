@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Class Map - Overview</title></head><body>
+<h1>Class Map<br>
+</h1>
+
+The Class Map shows the internals of a single class or interface
+(Java), along with its inheritance hierarchy and collaborators.<br>
+
+<h2>Entities and Layout<br>
+</h2>
+
+The layout of the Class Map consists of a series of layers, as shown in
+the figure below:<br>
+
+<ul>
+
+  <li>the first layer from the top represents the current class /
+interface. This layer is divided vertically in two areas corresponding
+to methods and data, as well as horizontally into three areas,
+corresponding to public, protected or package-level members, and
+private members.</li>
+  <li>the second layer contains internal collaborators. These internal
+collaborators include: nested types (i.e. types defined inside the
+current class), container types (i.e. types that the current class may
+be nested inside of), and other nested types that belong to any of the
+container types. <br>
+  </li>
+  <li>the third layer is dedicated to all ancestors and descendants of
+the current class / interface. These ancestors and descendants are
+ordered based on their <a href="../sm/dit.html">DIT</a> metric value.</li>
+  <li>the fourth layer contains external collaborator classes and
+interfaces. These external collaborators are not part of the same
+inheritance hierarchy as the current class or interface.</li>
+  <li>the fith layer is shown only for C and C++ systems contains
+external collaborator modules (files containing global functions and
+variables)<br>
+  </li>
+</ul>
+
+Note that each class, interface or module, showing up in layers two to
+five, is represented as a rectangle that contains two sub-regions of
+smaller rectangles, denoting operations and data respectively.
+Interfaces are rendered using a dotted border. Unlike in the case
+of <a href="pmap.html">Package Maps</a> and <a href="imap.html">Inheritance
+Maps</a>, the sizes of
+the rectangles representing classes, interfaces and modules are not
+linked to any particular
+metric. These rectangles merely act as containers for the enclosed
+operations and data. However, the sizes of the squares representing
+operations and data are given by the <a href="../sm/loc.html">LOC</a>
+metric (for operations) and by
+the total number of accesses (for data).<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 800px; height: 1035px;" alt="" src="images/cmap.png"><br>
+</div>
+
+<h2>Quality perspectives<br>
+</h2>
+
+<a href="cmap-ch.html">Cohesion</a>, <a href="cmap-cx.html">Complexity</a>,
+<a href="cmap-cp.html">Coupling</a>, <a href="cmap-df.html">Design
+Flaws</a>, <a href="cmap-en.html">Encapsulation</a>, <a href="cmap-ih.html">Inheritance</a>
+<h2>Metrics used</h2>
+
+<a href="../sm/dit.html">DIT</a> (indirectly), <a href="../sm/loc.html">LOC</a><br>
+
+<br>
+
+</body></html>

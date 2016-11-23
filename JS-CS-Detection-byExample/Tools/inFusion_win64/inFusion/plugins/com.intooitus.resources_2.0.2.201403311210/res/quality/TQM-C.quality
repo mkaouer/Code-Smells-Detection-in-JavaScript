@@ -1,0 +1,15 @@
+TestQuality {
+	2 ExternalTestCodeDuplication
+	2 InternalTestCodeDuplication
+	2 EnumeratorTests
+	1 FakeTest
+	1 MultipleAssertions
+	2 BlobTest
+}
+
+ExternalTestCodeDuplication "External Test Code Duplication" impact 2 appliesTo "function" test true
+InternalTestCodeDuplication "Internal Test Code Duplication" impact 2 appliesTo "function" test true
+EnumeratorTests "Enumerator Tests" impact 2 appliesTo "module" test true
+FakeTest "Fake Test" impact 2 appliesTo "function" test true
+MultipleAssertions "Multiple Assertions" impact 2 appliesTo "function" test true
+BlobTest "Blob Test" impact 2 appliesTo "function" test true

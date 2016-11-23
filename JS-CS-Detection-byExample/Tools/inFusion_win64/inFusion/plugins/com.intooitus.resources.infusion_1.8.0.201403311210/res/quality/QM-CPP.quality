@@ -1,0 +1,93 @@
+Quality {
+1 Complexity
+1 Encapsulation
+1 Coupling
+1 Inheritance
+1 Cohesion
+}
+
+Complexity {
+2 BlobClass
+2 ExternalDuplication
+2 SiblingDuplication
+2 InternalDuplication
+2 GodClass
+1 DataClumps
+2 IntensiveCoupling
+1 MessageChains
+1 SchizophrenicClass
+1 FeatureEnvy
+2 RefusedParentBequest
+1 TraditionBreaker
+1 SAPBreakers
+2 DistortedHierarchy
+2 BlobOperation
+}
+
+Encapsulation {
+1 ExternalDuplication
+1 SiblingDuplication
+2 GodClass
+2 DataClass
+2 DataClumps
+2 MessageChains
+2 SchizophrenicClass
+2 FeatureEnvy
+}
+
+Coupling {
+1 BlobClass
+1 ExternalDuplication
+1 SiblingDuplication
+2 GodClass
+1 DataClass
+1 IntensiveCoupling
+2 MessageChains
+2 ShotgunSurgery
+2 CyclicDependencies
+2 UnstableDependencies
+1 SchizophrenicClass
+2 FeatureEnvy
+1 TraditionBreaker
+2 SAPBreakers
+1 BlobOperation
+}
+
+Cohesion {
+1 BlobClass
+1 GodClass
+1 DataClass
+2 SchizophrenicClass
+1 FeatureEnvy
+2 RefusedParentBequest
+1 TraditionBreaker 
+}
+
+Inheritance{
+2 SiblingDuplication
+2 SchizophrenicClass
+2 RefusedParentBequest
+2 TraditionBreaker
+1 SAPBreakers
+2 DistortedHierarchy
+}
+
+BlobClass "Blob Class" impact 1 appliesTo "class"
+ExternalDuplication "External Duplication" impact 1 appliesTo "method"
+SiblingDuplication "Sibling Duplication" impact 1 appliesTo "method"
+InternalDuplication "Internal Duplication" impact 1 appliesTo "method"
+GodClass "God Class" impact 5 appliesTo "class"
+DataClass "Data Class" impact 5 appliesTo "class"
+DataClumps "Data Clumps" impact 1 appliesTo "method"
+IntensiveCoupling "Intensive Coupling" impact 1 appliesTo "method"
+MessageChains "Message Chains" impact 5 appliesTo "method"
+ShotgunSurgery "Shotgun Surgery" impact 5 appliesTo "method"
+CyclicDependencies "Cyclic Dependencies" impact 5 appliesTo "subsystem"
+UnstableDependencies "Unstable Dependencies" impact 5 appliesTo "subsystem"
+SchizophrenicClass "Schizophrenic Class" impact 1 appliesTo "class"
+FeatureEnvy "Feature Envy" impact 1 appliesTo "method"
+RefusedParentBequest "Refused Parent Bequest" impact 3 appliesTo "class"
+TraditionBreaker "Tradition Breaker" impact 3 appliesTo "class"
+SAPBreakers "SAP Breakers" impact 5 appliesTo "subsystem"
+DistortedHierarchy "Distorted Hierarchy" impact 3 appliesTo "class"
+BlobOperation "Blob Operation" impact 1 appliesTo "method"

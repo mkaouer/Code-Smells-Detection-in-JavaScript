@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Class Map - Cohesion Perspective</title></head><body>
+<h1>Class Map - Cohesion Perspective<br>
+</h1>The Cohesion Perspective of the <a href="cmap.html">Class Map</a>
+conveys a sense of the degree to which the current class or interface
+(Java) is cohesive from the point of view of operation calls and data
+accesses. In this perspective the coloring of operations and data
+belonging to hierarchy and external collaborators is disabled. In the
+default state,
+the Cohesion Perspective will render data nodes using a blue color
+gradient, computed based on the number of accessing operations from the
+current class. Operation nodes will be rendered based on
+their predominant nature from the viewpoint of operation calls and data
+accesses, using
+four color gradients:<br>
+
+
+
+<ul>
+<li>if an operation calls other operations or accesses data of the
+current class or interface, but is not itself called (i.e. it is a
+pure client) from within the current class, it is rendered in a shade
+of yellow<br>
+  </li><li>if
+an operation calls other operations or accesses data of the current
+class, and is also called from within the current class, it will be
+rendered in
+a color that depends on which aspect is predominant (i.e. mostly client
+shown in a shade of orange, or mostly provider shown in a shade
+of magenta)</li><li>if an operation is called by
+other operations of the current class, but does not itself call other
+operations nor it accesses any data of the current class (i.e. it is a
+pure provider), it is shown in a shade of blue </li>
+</ul>
+
+
+<div style="text-align: center;"><img style="width: 1200px; height: 1372px;" alt="" src="images/cmap-ch_1.png"><br>
+</div>
+
+<h2>Entity selection</h2>
+
+The user may select an operation or a data in the map, in
+which case the coloring of the map changes to reflect the cohesion from
+the point of view of the selcted entity. The selected entity is colored
+in green (with no borders). All other nodes are colored using
+the four colors described below, based on their relation to
+the selected entity. In case of the Cohesion
+Perspective, this relation is defined in terms of internal operation
+calls and internal data accesses. Note that the last color shown below
+is actually reserved for nodes with no relation to the selected entity
+but with relations
+to other nodes from the current class or interface. This shade of
+gray is slightly darker than the one used for nodes
+with no relation to the data / operations of the current class or
+interface.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 800px; height: 444px;" alt="" src="images/cmap-ch_2.png"><br>
+</div>
+
+<h2>Other quality perspectives<br>
+</h2>
+
+<a href="cmap-cx.html">Complexity</a>, <a href="cmap-cp.html">Coupling</a>, 
+<a href="cmap-df.html">Design Flaws</a>,
+<a href="cmap-en.html">Encapsulation</a>, <a href="cmap-ih.html">Inheritance</a>
+<h2>Metrics used</h2>
+
+<a href="../sm/dit.html">DIT</a> (indirectly), <a href="../sm/loc.html">LOC</a>
+</body></html>

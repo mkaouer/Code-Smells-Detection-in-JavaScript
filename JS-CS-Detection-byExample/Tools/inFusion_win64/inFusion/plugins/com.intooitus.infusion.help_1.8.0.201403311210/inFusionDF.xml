@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc label="Design Flaws Reference" topic="html/ref/df/dfintro.html">
+     <topic href="html/ref/df/dfintro.html" label="Design Flaws Reference">
+      <topic href="html/ref/df/blobclass.html" label="Blob Class">
+      </topic>
+      <topic href="html/ref/df/blobmodule.html" label="Blob Module">
+      </topic>
+      <topic href="html/ref/df/bloboperation.html" label="Blob Operation">
+      </topic>
+      <topic href="html/ref/df/cyclicdependencies.html" label="Cyclic Dependecies">
+      </topic>
+      <topic href="html/ref/df/dataclass.html" label="Data Class">
+      </topic>
+      <topic href="html/ref/df/dataclumps.html" label="Data Clumps">
+      </topic>
+      <topic href="html/ref/df/datamodule.html" label="Data Module">
+      </topic>
+      <topic href="html/ref/df/distortedhierarchy.html" label="Distorted Hierarchy">
+      </topic>
+      <topic href="html/ref/df/externalduplication.html" label="External Duplication">
+      </topic>
+      <topic href="html/ref/df/featureenvy.html" label="Feature Envy">
+      </topic>
+      <topic href="html/ref/df/godclass.html" label="God Class">
+      </topic>
+      <topic href="html/ref/df/godmodule.html" label="God Module">
+      </topic>
+      <topic href="html/ref/df/intensivecoupling.html" label="Intensive Coupling">
+      </topic>
+      <topic href="html/ref/df/internalduplication.html" label="Internal Duplication">
+      </topic>
+      <topic href="html/ref/df/messagechains.html" label="Message Chains">
+      </topic>
+      <topic href="html/ref/df/refusedparentbequest.html" label="Refused Parent Bequest">
+      </topic>
+      <topic href="html/ref/df/sapbreaker.html" label="SAP Breaker">
+      </topic>
+      <topic href="html/ref/df/schizophrenicclass.html" label="Schizophrenic Class">
+      </topic>
+      <topic href="html/ref/df/schizophrenicmodule.html" label="Schizophrenic Module">
+      </topic>
+      <topic href="html/ref/df/shotgunsurgery.html" label="Shotgun Surgery">
+      </topic>
+      <topic href="html/ref/df/siblingduplication.html" label="Sibling Duplication">
+      </topic>
+      <topic href="html/ref/df/traditionbreaker.html" label="Tradition Breaker">
+      </topic>
+      <topic href="html/ref/df/underutilizedinterface.html" label="Underutilized Interface">
+      </topic>
+      <topic href="html/ref/df/unstabledependencies.html" label="Unstable Dependencies">
+      </topic>
+     </topic>
+</toc>

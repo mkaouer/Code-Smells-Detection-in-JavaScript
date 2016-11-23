@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.intooitus.model.meta.resources">
+      <container
+            location="res/"
+            name="resource_location"
+            order="0">
+      </container>
+   </extension>
+
+</plugin>

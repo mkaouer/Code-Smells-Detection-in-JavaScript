@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+
+
+
+  
+  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>Class Map - Coupling Perspective</title></head><body>
+<h1>Class Map - Coupling Perspective<br>
+</h1>
+
+<h1>
+</h1>The Coupling Perspective of the <a href="cmap.html">Class Map</a>
+provides insight into the coupling that exists between the operations
+of the current class or interface (Java) and the operations of its
+collaborator classes, interfaces (Java) and modules (C and C++). In the
+default state,
+the Coupling Perspective will render operations based on
+their predominant nature from the viewpoint of operation calls, using
+four color gradients:<br>
+
+
+<ul>
+<li>if an operation only calls other operations but is not itself called (i.e. it is a
+pure client), it is rendered in a shade of yellow<br>
+  </li><li>if an operation both calls and is called by
+other operations, it will be rendered in
+a color that depends on which aspect is predominant (i.e. mostly client
+shown in a shade of orange, or mostly provider shown in a shade
+of magenta)</li><li>if an operation is called by
+other operations but does not itself call other operations (i.e. it is a
+pure provider), it is shown in a shade of blue </li>
+</ul>
+
+
+
+
+<div style="text-align: center;"><img style="width: 1200px; height: 1413px;" alt="" src="images/cmap-cp_1.png"><br>
+</div>
+
+<h2>Entity selection</h2>
+The user may select an operation or a data in the map, in
+which case the coloring of the map changes to reflect the coupling from
+the point of view of the selcted entity. The selected entity is colored
+in green (with no borders). All other operations are colored using
+the four colors described below, based on their relation to
+the selected entity. In case of the Coupling
+Perspective, this relation is defined in terms of external operation
+calls. Note that the last color shown below is actually reserved for
+operations with no relation to the selected entity but with relations
+to other methods from the current class or interface. This shade of
+gray is slightly darker than the one used for data nodes and operations
+with no relation to the methods of the current class or interface.<br>
+
+<br>
+
+<div style="text-align: center;"><img style="width: 800px; height: 327px;" alt="" src="images/cmap-cp_2.png"><br>
+</div>
+
+<h2>Other quality perspectives<br>
+</h2>
+
+<a href="cmap-ch.html">Cohesion</a>, <a href="cmap-cx.html">Complexity</a>, <a href="cmap-df.html">Design Flaws</a>, <a href="cmap-en.html">Encapsulation</a>, <a href="cmap-ih.html">Inheritance</a>
+
+<h2>Metrics used</h2>
+
+<a href="../sm/dit.html">DIT</a> (indirectly), <a href="../sm/loc.html">LOC</a><br>
+
+<br>
+
+</body></html>

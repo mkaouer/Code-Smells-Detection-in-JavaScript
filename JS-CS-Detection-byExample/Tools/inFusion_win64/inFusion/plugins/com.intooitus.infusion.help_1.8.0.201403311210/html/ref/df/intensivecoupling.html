@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+  
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Design Flaws Reference - Intensive Coupling</title></head><body>
+<h1>Intensive Coupling<br>
+</h1>
+
+Intensive
+Coupling if a design flaw that affects operations, which are tied to
+too many other
+operations in the system, whereby these provider operations are
+dispersed only into one or a few capsules. An operation which is
+intensively coupled to operations from a handful of
+other capsules is strongly bound to those capsules. Oftentimes,
+intensive coupling points to a more subtle problem (i.e. the capsules
+providing the many operations invoked by the intensely coupled
+operation do
+not provide a service at the appropraite abstraction level.
+Consequently, understanding the relation between the two sides becomes
+more difficult.<br>
+
+&nbsp;<br>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="0" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="width: 200px; background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Affected program entity </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="vertical-align: top; font-weight: bold;">OPERATION</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Applicable to</td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td style="width: 30%; font-weight: bold;">Procedural
+languages<br>
+            </td>
+            <td style="width: 20%; text-align: center; font-weight: bold;"> ✔ </td>
+            <td style="width: 30%; font-weight: bold;">Object-oriented
+languages<br>
+            </td>
+            <td style="width: 20%; font-weight: bold; text-align: center;">✔ </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="background-color: rgb(102, 102, 102); color: white; font-weight: bold;">&nbsp;
+Impacted quality concerns </td>
+      <td>
+      <table style="text-align: left; width: 100%;" border="1" cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr style="font-weight: bold;">
+            <td style="width: 20%;">Complexity (CX) </td>
+            <td style="width: 20%;">Encapsulation (EN) </td>
+            <td style="width: 20%;">Coupling (CP) </td>
+            <td style="width: 20%;">Inheritance (IH) </td>
+            <td style="width: 20%;">Cohesion (CH) </td>
+          </tr>
+          <tr style="font-weight: bold;">
+            <td style="text-align: center;">✔ </td>
+            <td style="text-align: center;"> <br>
+            </td>
+            <td style="text-align: center;">✔ </td>
+            <td style="text-align: center;"><br>
+            </td>
+            <td style="text-align: center;"><br>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Detection rule</h2>
+
+The detection strategy is based on two main conditions that must be
+fulfilled simultaneously: the operation must invoke many operations
+from few foreign capsules and its <a href="../sm/maxnesting.html">MAXNESTING</a>
+metric must be low.<br>
+
+<br>
+
+<img src="images/intensivecoupling_1.png" alt="intensivecoupling_1.png">
+<h2>Metrics used</h2>
+
+<a href="../sm/dr.html">DR</a>, <a href="../sm/maxnesting.html">MAXNESTING</a>,
+<a href="../sm/ocio.html">OCIO</a>
+<h2>Literature references</h2>
+
+<table style="text-align: left; width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <tbody>
+    <tr>
+      <td style="vertical-align: top; width: 100px;">[Riel96] </td>
+      <td style="vertical-align: top;">A.J. Riel. <a href="http://www.amazon.com/Object-Oriented-Design-Heuristics-Arthur-Riel/dp/020163385X">Object-Oriented
+Design Heuristics</a>. Addison-Wesley, 1996. </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Fowler99]</td>
+      <td style="vertical-align: top;">Martin Fowler. <a href="http://www.amazon.com/Refactoring-Improving-Design-Existing-Code/dp/0201485672">Refactoring.
+Improving the Design of Existing Code</a>. Addison- Wesley, 1999.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">[Lanza06]</td>
+      <td style="vertical-align: top;">Michele Lanza and Radu
+Marinescu. <a href="http://www.amazon.com/Object-Oriented-Metrics-Practice-Software-Characterize/dp/3540244298/">Object-Oriented
+Metrics in Practice</a>. Springer, 2006.</td>
+    </tr>
+  </tbody>
+</table>
+
+</body></html>
