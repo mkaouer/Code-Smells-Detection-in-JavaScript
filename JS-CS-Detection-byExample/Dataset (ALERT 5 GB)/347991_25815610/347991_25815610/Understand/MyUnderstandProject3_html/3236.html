@@ -1,0 +1,208 @@
+<html><head><title>menu_bar.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.2\thrust-0.7.2\src\browser\ui\views\menu_bar.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.2\\thrust-0.7.2\\src\\browser\\ui\\views\\menu_bar.cc";
+top.document.title  = "menu_bar.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2014 GitHub, Inc. All rights reserved.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/ui/views/menu_bar.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_U.html#3237">USE_X11</a>)</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&quot;gtk/gtk.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#endif</span>
+<a name="10"><font size=-1>10     </font></a><span class="preproc"></span>
+<a name="11"><font size=-1>11     </font></a><span class="preproc">#include </span><span class="string">&quot;ui/base/models/menu_model.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/views/background.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/views/layout/box_layout.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_O.html#3240">OS_WIN</a>)</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&quot;ui/gfx/color_utils.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#elif defined</span><span class="default">(<a href="dictionary_U.html#3237">USE_X11</a>)</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="preproc">#include </span><span class="string">&quot;chrome/browser/ui/libgtk2ui/owned_widget_gtk2.h&quot;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;chrome/browser/ui/libgtk2ui/skia_utils_gtk2.h&quot;</span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="preproc">#endif</span>
+<a name="21"><font size=-1>21     </font></a><span class="preproc"></span>
+<a name="22"><font size=-1>22     </font></a><span class="preproc">#include </span><span class="string">&quot;src/browser/ui/views/menu_delegate.h&quot;</span>
+<a name="23"><font size=-1>23     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/ui/views/submenu_button.h&quot;</span>
+<a name="24"><font size=-1>24     </font></a><span class="string"></span>
+<a name="25"><font size=-1>25     </font></a><span class="string"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">{</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">const char <a href="dictionary_K.html#3244">kViewClassName</a></span><span class="default">[] = </span><span class="string">&quot;ThrustShellMenuBar&quot;</span><span class="default">;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="comment">// Default color of the menu bar.</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"></span><span class="keyword">const <a href="dictionary_S.html#2306">SkColor</a> <a href="dictionary_K.html#3245">kDefaultColor</a> </span><span class="default">= <a href="dictionary_S.html#3246">SkColorSetARGB</a>(</span><span class="number">255</span><span class="default">, </span><span class="number">233</span><span class="default">, </span><span class="number">233</span><span class="default">, </span><span class="number">233</span><span class="default">);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_U.html#3237">USE_X11</a>)</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="36"><font size=-1>36     </font></a><span class="keyword"></span><span class="default">GetMenuBarColor(</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">      <a href="dictionary_S.html#2306">SkColor</a>* enabled, </span>
+<a name="38"><font size=-1>38     </font></a><span class="default">      <a href="dictionary_S.html#2306">SkColor</a>* disabled, </span>
+<a name="39"><font size=-1>39     </font></a><span class="default">      <a href="dictionary_S.html#2306">SkColor</a>* highlight,</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">      <a href="dictionary_S.html#2306">SkColor</a>* hover, </span>
+<a name="41"><font size=-1>41     </font></a><span class="default">      <a href="dictionary_S.html#2306">SkColor</a>* background) </span>
+<a name="42"><font size=-1>42     </font></a><span class="default">{</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  libgtk2ui::OwnedWidgetGtk fake_menu_bar;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">  fake_menu_bar.Own(gtk_menu_bar_new());</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  GtkStyle* style = gtk_rc_get_style(fake_menu_bar.get());</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">  *enabled = libgtk2ui::GdkColorToSkColor(style-&gt;fg[GTK_STATE_NORMAL]);</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">  *disabled = libgtk2ui::GdkColorToSkColor(style-&gt;fg[GTK_STATE_INSENSITIVE]);</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">  *highlight = libgtk2ui::GdkColorToSkColor(style-&gt;fg[GTK_STATE_SELECTED]);</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">  *hover = libgtk2ui::GdkColorToSkColor(style-&gt;fg[GTK_STATE_PRELIGHT]);</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">  *background = libgtk2ui::GdkColorToSkColor(style-&gt;bg[GTK_STATE_NORMAL]);</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">}</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="54"><font size=-1>54     </font></a><span class="preproc"></span>
+<a name="55"><font size=-1>55     </font></a><span class="preproc"></span><span class="default">}  </span><span class="comment">// namespace</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment"></span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_M.html#2275">MenuBar</a>()</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  : <a href="dictionary_B.html#3059">background_color_</a>(<a href="dictionary_K.html#3245">kDefaultColor</a>),</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    <a href="dictionary_M.html#3060">menu_model_</a>(<a href="dictionary_N.html#75">NULL</a>) </span>
+<a name="60"><font size=-1>60     </font></a><span class="default">{</span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_O.html#3240">OS_WIN</a>)</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">  <a href="dictionary_B.html#3059">background_color_</a> = color_utils::GetSysSkColor(COLOR_MENUBAR);</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span><span class="preproc">#elif defined</span><span class="default">(<a href="dictionary_U.html#3237">USE_X11</a>)</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">  GetMenuBarColor(&amp;enabled_color_, &amp;disabled_color_, &amp;highlight_color_,</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">                  &amp;hover_color_, &amp;<a href="dictionary_B.html#3059">background_color_</a>);</span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="67"><font size=-1>67     </font></a><span class="preproc"></span>
+<a name="68"><font size=-1>68     </font></a><span class="preproc">  <a href="dictionary_S.html#2210">set_background</a></span><span class="default">(views::<a href="dictionary_B.html#2211">Background</a>::<a href="dictionary_C.html#3247">CreateSolidBackground</a>(<a href="dictionary_B.html#3059">background_color_</a>));</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">  <a href="dictionary_S.html#2208">SetLayoutManager</a>(</span><span class="keyword">new </span><span class="default">views::<a href="dictionary_B.html#3248">BoxLayout</a>(</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">      views::<a href="dictionary_B.html#3249">BoxLayout</a>::<a href="dictionary_K.html#3250">kHorizontal</a>, </span><span class="number">0</span><span class="default">, </span><span class="number">0</span><span class="default">, </span><span class="number">0</span><span class="default">));</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">}</span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span>
+<a name="73"><font size=-1>73     </font></a><span class="default"><a href="dictionary_M.html#1522">MenuBar</a>::~<a href="dictionary_Non-Alpha.html#3050">MenuBar</a>() </span>
+<a name="74"><font size=-1>74     </font></a><span class="default">{</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">}</span>
+<a name="76"><font size=-1>76     </font></a><span class="default"></span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="78"><font size=-1>78     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_S.html#3051">SetMenu</a>(</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    ui::<a href="dictionary_M.html#1518">MenuModel</a>* <a href="dictionary_M.html#3251">model</a>) </span>
+<a name="80"><font size=-1>80     </font></a><span class="default">{</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">  <a href="dictionary_M.html#3060">menu_model_</a> = <a href="dictionary_M.html#3251">model</a>;</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">  <a href="dictionary_R.html#3252">RemoveAllChildViews</a>(</span><span class="keyword">true</span><span class="default">);</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#3253">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#3253">i</a> &lt; <a href="dictionary_M.html#3251">model</a>-&gt;<a href="dictionary_G.html#1736">GetItemCount</a>(); ++<a href="dictionary_I.html#3253">i</a>) {</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    <a href="dictionary_S.html#2298">SubmenuButton</a>* <a href="dictionary_B.html#3254">button</a> = </span><span class="keyword">new <a href="dictionary_S.html#2300">SubmenuButton</a></span><span class="default">(</span><span class="keyword">this</span><span class="default">, <a href="dictionary_M.html#3251">model</a>-&gt;<a href="dictionary_G.html#1746">GetLabelAt</a>(<a href="dictionary_I.html#3253">i</a>), </span><span class="keyword">this</span><span class="default">);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;<a href="dictionary_S.html#3255">set_tag</a>(<a href="dictionary_I.html#3253">i</a>);</span>
+<a name="87"><font size=-1>87     </font></a><span class="default"></span>
+<a name="88"><font size=-1>88     </font></a><span class="default"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_U.html#3237">USE_X11</a>)</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;SetTextColor(views::Button::STATE_NORMAL, enabled_color_);</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;SetTextColor(views::Button::STATE_DISABLED, disabled_color_);</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;SetTextColor(views::Button::STATE_PRESSED, highlight_color_);</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;SetTextColor(views::Button::STATE_HOVERED, hover_color_);</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;<a href="dictionary_S.html#2305">SetUnderlineColor</a>(enabled_color_);</span>
+<a name="94"><font size=-1>94     </font></a><span class="default"></span><span class="preproc">#elif defined</span><span class="default">(<a href="dictionary_O.html#3240">OS_WIN</a>)</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">    <a href="dictionary_B.html#3254">button</a>-&gt;<a href="dictionary_S.html#2305">SetUnderlineColor</a>(color_utils::GetSysSkColor(COLOR_GRAYTEXT));</span>
+<a name="96"><font size=-1>96     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="97"><font size=-1>97     </font></a><span class="preproc"></span>
+<a name="98"><font size=-1>98     </font></a><span class="preproc">    <a href="dictionary_A.html#2213">AddChildView</a></span><span class="default">(<a href="dictionary_B.html#3254">button</a>);</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">  }</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">}</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="103"><font size=-1>103     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_S.html#3052">SetAcceleratorVisibility</a>(</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">    </span><span class="keyword">bool <a href="dictionary_V.html#3256">visible</a></span><span class="default">) </span>
+<a name="105"><font size=-1>105     </font></a><span class="default">{</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#3257">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#3257">i</a> &lt; <a href="dictionary_C.html#2293">child_count</a>(); ++<a href="dictionary_I.html#3257">i</a>)</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    </span><span class="keyword">static_cast</span><span class="default">&lt;<a href="dictionary_S.html#2298">SubmenuButton</a>*&gt;(<a href="dictionary_C.html#3258">child_at</a>(<a href="dictionary_I.html#3257">i</a>))-&gt;<a href="dictionary_S.html#2304">SetAcceleratorVisibility</a>(<a href="dictionary_V.html#3256">visible</a>);</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">}</span>
+<a name="109"><font size=-1>109     </font></a><span class="default"></span>
+<a name="110"><font size=-1>110     </font></a><span class="default"></span><span class="keyword">int </span>
+<a name="111"><font size=-1>111     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_G.html#3053">GetAcceleratorIndex</a>(</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">    base::<a href="dictionary_C.html#2310">char16</a> <a href="dictionary_K.html#3259">key</a>) </span>
+<a name="113"><font size=-1>113     </font></a><span class="default">{</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#3260">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#3260">i</a> &lt; <a href="dictionary_C.html#2293">child_count</a>(); ++<a href="dictionary_I.html#3260">i</a>) {</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    <a href="dictionary_S.html#2298">SubmenuButton</a>* <a href="dictionary_B.html#3261">button</a> = </span><span class="keyword">static_cast</span><span class="default">&lt;<a href="dictionary_S.html#2298">SubmenuButton</a>*&gt;(<a href="dictionary_C.html#3258">child_at</a>(<a href="dictionary_I.html#3260">i</a>));</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_B.html#3261">button</a>-&gt;<a href="dictionary_A.html#2309">accelerator</a>() == <a href="dictionary_K.html#3259">key</a>)</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">      </span><span class="keyword">return <a href="dictionary_I.html#3260">i</a></span><span class="default">;</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">  }</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">  </span><span class="keyword">return </span><span class="default">-</span><span class="number">1</span><span class="default">;</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">}</span>
+<a name="121"><font size=-1>121     </font></a><span class="default"></span>
+<a name="122"><font size=-1>122     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="123"><font size=-1>123     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_A.html#3054">ActivateAccelerator</a>(</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">    base::<a href="dictionary_C.html#2310">char16</a> <a href="dictionary_K.html#3262">key</a>) </span>
+<a name="125"><font size=-1>125     </font></a><span class="default">{</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_I.html#3263">i</a> </span><span class="default">= <a href="dictionary_G.html#3053">GetAcceleratorIndex</a>(<a href="dictionary_K.html#3262">key</a>);</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#3263">i</a> != -</span><span class="number">1</span><span class="default">)</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">    </span><span class="keyword">static_cast</span><span class="default">&lt;<a href="dictionary_S.html#2298">SubmenuButton</a>*&gt;(<a href="dictionary_C.html#3258">child_at</a>(<a href="dictionary_I.html#3263">i</a>))-&gt;<a href="dictionary_A.html#3264">Activate</a>();</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">}</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default"></span><span class="keyword">int </span>
+<a name="132"><font size=-1>132     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_G.html#2568">GetItemCount</a>() </span><span class="keyword">const </span>
+<a name="133"><font size=-1>133     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_M.html#3060">menu_model_</a></span><span class="default">-&gt;<a href="dictionary_G.html#1736">GetItemCount</a>();</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">}</span>
+<a name="136"><font size=-1>136     </font></a><span class="default"></span>
+<a name="137"><font size=-1>137     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="138"><font size=-1>138     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_G.html#2645">GetMenuButtonFromScreenPoint</a>(</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_G.html#110">gfx</a></span><span class="default">::<a href="dictionary_P.html#122">Point</a>&amp; <a href="dictionary_P.html#3265">point</a>,</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    ui::<a href="dictionary_M.html#1518">MenuModel</a>** <a href="dictionary_M.html#3266">menu_model</a>,</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">    views::<a href="dictionary_M.html#2299">MenuButton</a>** <a href="dictionary_B.html#3267">button</a>) </span>
+<a name="142"><font size=-1>142     </font></a><span class="default">{</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">  <a href="dictionary_G.html#110">gfx</a>::<a href="dictionary_P.html#122">Point</a> <a href="dictionary_L.html#3268">location</a>(<a href="dictionary_P.html#3265">point</a>);</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">  views::<a href="dictionary_V.html#2576">View</a>::<a href="dictionary_C.html#3269">ConvertPointFromScreen</a>(</span><span class="keyword">this</span><span class="default">, &amp;<a href="dictionary_L.html#3268">location</a>);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default"></span>
+<a name="146"><font size=-1>146     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_L.html#3268">location</a>.<a href="dictionary_X.html#2250">x</a>() &lt; </span><span class="number">0 </span><span class="default">|| <a href="dictionary_L.html#3268">location</a>.<a href="dictionary_X.html#2250">x</a>() &gt;= <a href="dictionary_W.html#2754">width</a>() || <a href="dictionary_L.html#3268">location</a>.<a href="dictionary_Y.html#2251">y</a>() &lt; </span><span class="number">0 </span><span class="default">||</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">      <a href="dictionary_L.html#3268">location</a>.<a href="dictionary_Y.html#2251">y</a>() &gt;= <a href="dictionary_H.html#2756">height</a>())</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">    </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#3270">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#3270">i</a> &lt; <a href="dictionary_C.html#2293">child_count</a>(); ++<a href="dictionary_I.html#3270">i</a>) {</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">    views::<a href="dictionary_V.html#3271">View</a>* <a href="dictionary_V.html#1627">view</a> = <a href="dictionary_C.html#3258">child_at</a>(<a href="dictionary_I.html#3270">i</a>);</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_V.html#1627">view</a>-&gt;<a href="dictionary_B.html#3272">bounds</a>().<a href="dictionary_C.html#3273">Contains</a>(<a href="dictionary_L.html#3268">location</a>) &amp;&amp;</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">        (<a href="dictionary_M.html#3060">menu_model_</a>-&gt;<a href="dictionary_G.html#1739">GetTypeAt</a>(<a href="dictionary_I.html#3270">i</a>) == ui::<a href="dictionary_M.html#1518">MenuModel</a>::<a href="dictionary_T.html#1748">TYPE_SUBMENU</a>)) {</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">      *<a href="dictionary_M.html#3266">menu_model</a> = <a href="dictionary_M.html#3060">menu_model_</a>-&gt;<a href="dictionary_G.html#1793">GetSubmenuModelAt</a>(<a href="dictionary_I.html#3270">i</a>);</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">      *<a href="dictionary_B.html#3267">button</a> = </span><span class="keyword">static_cast</span><span class="default">&lt;views::<a href="dictionary_M.html#2299">MenuButton</a>*&gt;(<a href="dictionary_V.html#1627">view</a>);</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">      </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">    }</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">  }</span>
+<a name="159"><font size=-1>159     </font></a><span class="default"></span>
+<a name="160"><font size=-1>160     </font></a><span class="default">  </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">}</span>
+<a name="162"><font size=-1>162     </font></a><span class="default"></span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span><span class="keyword">const char</span><span class="default">* </span>
+<a name="164"><font size=-1>164     </font></a><span class="default"><a href="dictionary_M.html#1522">MenuBar</a>::<a href="dictionary_G.html#3055">GetClassName</a>() </span><span class="keyword">const </span>
+<a name="165"><font size=-1>165     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_K.html#3244">kViewClassName</a></span><span class="default">;</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">}</span>
+<a name="168"><font size=-1>168     </font></a><span class="default"></span>
+<a name="169"><font size=-1>169     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="170"><font size=-1>170     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_B.html#3056">ButtonPressed</a>(</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">    views::<a href="dictionary_B.html#3057">Button</a>* <a href="dictionary_S.html#3274">sender</a>, </span>
+<a name="172"><font size=-1>172     </font></a><span class="default">    </span><span class="keyword">const </span><span class="default">ui::<a href="dictionary_E.html#2609">Event</a>&amp; <a href="dictionary_E.html#3275">event</a>) </span>
+<a name="173"><font size=-1>173     </font></a><span class="default">{</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">}</span>
+<a name="175"><font size=-1>175     </font></a><span class="default"></span>
+<a name="176"><font size=-1>176     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="177"><font size=-1>177     </font></a><span class="keyword"><a href="dictionary_M.html#1522">MenuBar</a></span><span class="default">::<a href="dictionary_O.html#3058">OnMenuButtonClicked</a>(</span>
+<a name="178"><font size=-1>178     </font></a><span class="default">    views::<a href="dictionary_V.html#3271">View</a>* <a href="dictionary_S.html#3276">source</a>,</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_G.html#110">gfx</a></span><span class="default">::<a href="dictionary_P.html#122">Point</a>&amp; <a href="dictionary_P.html#3277">point</a>) </span>
+<a name="180"><font size=-1>180     </font></a><span class="default">{</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">  </span><span class="comment">// Hide the accelerator when a submenu is activated.</span>
+<a name="182"><font size=-1>182     </font></a><span class="comment">  <a href="dictionary_S.html#3052">SetAcceleratorVisibility</a></span><span class="default">(</span><span class="keyword">false</span><span class="default">);</span>
+<a name="183"><font size=-1>183     </font></a><span class="default"></span>
+<a name="184"><font size=-1>184     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_M.html#3060">menu_model_</a>)</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="186"><font size=-1>186     </font></a><span class="default"></span>
+<a name="187"><font size=-1>187     </font></a><span class="default">  views::<a href="dictionary_M.html#2299">MenuButton</a>* <a href="dictionary_B.html#3278">button</a> = </span><span class="keyword">static_cast</span><span class="default">&lt;views::<a href="dictionary_M.html#2299">MenuButton</a>*&gt;(<a href="dictionary_S.html#3276">source</a>);</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_I.html#3279">id</a> </span><span class="default">= <a href="dictionary_B.html#3278">button</a>-&gt;<a href="dictionary_T.html#2580">tag</a>();</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">  ui::<a href="dictionary_M.html#1518">MenuModel</a>::<a href="dictionary_I.html#1740">ItemType</a> <a href="dictionary_T.html#1741">type</a> = <a href="dictionary_M.html#3060">menu_model_</a>-&gt;<a href="dictionary_G.html#1739">GetTypeAt</a>(<a href="dictionary_I.html#3279">id</a>);</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_T.html#1741">type</a> != ui::<a href="dictionary_M.html#1518">MenuModel</a>::<a href="dictionary_T.html#1748">TYPE_SUBMENU</a>)</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="192"><font size=-1>192     </font></a><span class="default"></span>
+<a name="193"><font size=-1>193     </font></a><span class="default">  <a href="dictionary_M.html#3061">menu_delegate_</a>.<a href="dictionary_R.html#31">reset</a>(</span><span class="keyword">new <a href="dictionary_M.html#2563">MenuDelegate</a></span><span class="default">(</span><span class="keyword">this</span><span class="default">));</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">  <a href="dictionary_M.html#3061">menu_delegate_</a>-&gt;<a href="dictionary_R.html#3280">RunMenu</a>(<a href="dictionary_M.html#3060">menu_model_</a>-&gt;<a href="dictionary_G.html#1793">GetSubmenuModelAt</a>(<a href="dictionary_I.html#3279">id</a>), <a href="dictionary_B.html#3278">button</a>);</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">}</span>
+<a name="196"><font size=-1>196     </font></a><span class="default"></span>
+<a name="197"><font size=-1>197     </font></a><span class="default">}  </span><span class="comment">// namespace thrust_shell</span>
+<a name="198"><font size=-1>198     </font></a><span class="comment"></span>
+</pre></body></html>

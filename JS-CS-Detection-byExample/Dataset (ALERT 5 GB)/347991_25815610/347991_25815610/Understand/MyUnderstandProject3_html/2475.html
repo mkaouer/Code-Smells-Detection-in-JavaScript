@@ -1,0 +1,231 @@
+<html><head><title>visitedlink_event_listener.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.2\thrust-0.7.2\src\browser\visitedlink\visitedlink_event_listener.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.2\\thrust-0.7.2\\src\\browser\\visitedlink\\visitedlink_event_listener.cc";
+top.document.title  = "visitedlink_event_listener.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2012 The Chromium Authors. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Use of this source code is governed by a BSD-style license that can be</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// found in the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/visitedlink/visitedlink_event_listener.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/memory/shared_memory.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/notification_service.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/notification_types.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_process_host.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_widget_host.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/visitedlink/visitedlink_delegate.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/common/visitedlink/visitedlink_messages.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="keyword">using </span><span class="default">base::Time;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">using </span><span class="default">base::TimeDelta;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">using </span><span class="default">content::RenderWidgetHost;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">{</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="comment">// The amount of time we wait to accumulate visited link additions.</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"></span><span class="keyword">const int <a href="dictionary_K.html#2478">kCommitIntervalMs</a> </span><span class="default">= </span><span class="number">100</span><span class="default">;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="comment">// Size of the buffer after which individual link updates deemed not warranted</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">// and the overall update should be used instead.</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"></span><span class="keyword">const unsigned <a href="dictionary_K.html#2479">kVisitedLinkBufferThreshold</a> </span><span class="default">= </span><span class="number">50</span><span class="default">;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default">}  </span><span class="comment">// namespace</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"></span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"></span><span class="keyword">namespace </span><span class="default">visitedlink {</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="comment">// This class manages buffering and sending visited link hashes (fingerprints)</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">// to renderer based on widget visibility.</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">// As opposed to the VisitedLinkEventListener, which coalesces to</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">// reduce the rate of messages being sent to render processes, this class</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">// ensures that the updates occur only when explicitly requested. This is</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">// used for RenderProcessHostImpl to only send Add/Reset link events to the</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">// renderers when their tabs are visible and the corresponding RenderViews are</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">// created.</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_V.html#2480">VisitedLinkUpdater</a> </span><span class="default">{</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"> </span><span class="keyword">public</span><span class="default">:</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  </span><span class="keyword">explicit <a href="dictionary_V.html#2481">VisitedLinkUpdater</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_R.html#2482">render_process_id</a></span><span class="default">)</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">      : <a href="dictionary_R.html#2489">reset_needed_</a>(</span><span class="keyword">false</span><span class="default">), <a href="dictionary_R.html#2490">render_process_id_</a>(<a href="dictionary_R.html#2482">render_process_id</a>) {</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">  }</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">  </span><span class="comment">// Informs the renderer about a new visited link table.</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_S.html#2483">SendVisitedLinkTable</a></span><span class="default">(base::<a href="dictionary_S.html#958">SharedMemory</a>* <a href="dictionary_T.html#2484">table_memory</a>) {</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">    content::<a href="dictionary_R.html#2494">RenderProcessHost</a>* <a href="dictionary_P.html#2495">process</a> =</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">        content::<a href="dictionary_R.html#2492">RenderProcessHost</a>::<a href="dictionary_F.html#2493">FromID</a>(<a href="dictionary_R.html#2490">render_process_id_</a>);</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_P.html#2495">process</a>)</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;  </span><span class="comment">// Happens in tests</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">    </span><span class="default">base::<a href="dictionary_S.html#957">SharedMemoryHandle</a> <a href="dictionary_H.html#2496">handle_for_process</a>;</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">    <a href="dictionary_T.html#2484">table_memory</a>-&gt;<a href="dictionary_S.html#2497">ShareToProcess</a>(<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#2498">GetHandle</a>(), &amp;<a href="dictionary_H.html#2496">handle_for_process</a>);</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(base::<a href="dictionary_S.html#958">SharedMemory</a>::<a href="dictionary_I.html#959">IsHandleValid</a>(<a href="dictionary_H.html#2496">handle_for_process</a>))</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">      <a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_S.html#2499">Send</a>(</span><span class="keyword">new <a href="dictionary_C.html#2500">ChromeViewMsg_VisitedLink_NewTable</a></span><span class="default">(</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">          <a href="dictionary_H.html#2496">handle_for_process</a>));</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  }</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  </span><span class="comment">// Buffers |links| to update, but doesn't actually relay them.</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_A.html#2485">AddLinks</a></span><span class="default">(</span><span class="keyword">const <a href="dictionary_V.html#938">VisitedLinkCommon</a></span><span class="default">::<a href="dictionary_F.html#976">Fingerprints</a>&amp; <a href="dictionary_L.html#2486">links</a>) {</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_R.html#2489">reset_needed_</a>)</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_P.html#2491">pending_</a>.<a href="dictionary_S.html#979">size</a>() + <a href="dictionary_L.html#2486">links</a>.<a href="dictionary_S.html#979">size</a>() &gt; <a href="dictionary_K.html#2479">kVisitedLinkBufferThreshold</a>) {</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">      </span><span class="comment">// Once the threshold is reached, there's no need to store pending visited</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">      // link updates -- we opt for resetting the state for all links.</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">      <a href="dictionary_A.html#2487">AddReset</a></span><span class="default">();</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">    }</span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default">    <a href="dictionary_P.html#2491">pending_</a>.<a href="dictionary_I.html#2501">insert</a>(<a href="dictionary_P.html#2491">pending_</a>.<a href="dictionary_E.html#2502">end</a>(), <a href="dictionary_L.html#2486">links</a>.<a href="dictionary_B.html#2503">begin</a>(), <a href="dictionary_L.html#2486">links</a>.<a href="dictionary_E.html#2502">end</a>());</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">  }</span>
+<a name="74"><font size=-1>74     </font></a><span class="default"></span>
+<a name="75"><font size=-1>75     </font></a><span class="default">  </span><span class="comment">// Tells the updater that sending individual link updates is no longer</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">  // necessary and the visited state for all links should be reset.</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_A.html#2487">AddReset</a></span><span class="default">() {</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    <a href="dictionary_R.html#2489">reset_needed_</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    <a href="dictionary_P.html#2491">pending_</a>.<a href="dictionary_C.html#2504">clear</a>();</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">  }</span>
+<a name="81"><font size=-1>81     </font></a><span class="default"></span>
+<a name="82"><font size=-1>82     </font></a><span class="default">  </span><span class="comment">// Sends visited link update messages: a list of links whose visited state</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">  // changed or reset of visited state for all links.</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_U.html#2488">Update</a></span><span class="default">() {</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    content::<a href="dictionary_R.html#2494">RenderProcessHost</a>* <a href="dictionary_P.html#2495">process</a> =</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">        content::<a href="dictionary_R.html#2492">RenderProcessHost</a>::<a href="dictionary_F.html#2493">FromID</a>(<a href="dictionary_R.html#2490">render_process_id_</a>);</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_P.html#2495">process</a>)</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;  </span><span class="comment">// Happens in tests</span>
+<a name="89"><font size=-1>89     </font></a><span class="comment"></span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_V.html#2505">VisibleWidgetCount</a>())</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default"></span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_R.html#2489">reset_needed_</a>) {</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">      <a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_S.html#2499">Send</a>(</span><span class="keyword">new <a href="dictionary_C.html#2506">ChromeViewMsg_VisitedLink_Reset</a></span><span class="default">());</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">      <a href="dictionary_R.html#2489">reset_needed_</a> = </span><span class="keyword">false</span><span class="default">;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_P.html#2491">pending_</a>.<a href="dictionary_E.html#2507">empty</a>())</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">      </span><span class="keyword">return</span><span class="default">;</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    <a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_S.html#2499">Send</a>(</span><span class="keyword">new <a href="dictionary_C.html#2508">ChromeViewMsg_VisitedLink_Add</a></span><span class="default">(<a href="dictionary_P.html#2491">pending_</a>));</span>
+<a name="103"><font size=-1>103     </font></a><span class="default"></span>
+<a name="104"><font size=-1>104     </font></a><span class="default">    <a href="dictionary_P.html#2491">pending_</a>.<a href="dictionary_C.html#2504">clear</a>();</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">  }</span>
+<a name="106"><font size=-1>106     </font></a><span class="default"></span>
+<a name="107"><font size=-1>107     </font></a><span class="default"> </span><span class="keyword">private</span><span class="default">:</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_R.html#2489">reset_needed_</a></span><span class="default">;</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_R.html#2490">render_process_id_</a></span><span class="default">;</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">  <a href="dictionary_V.html#938">VisitedLinkCommon</a>::<a href="dictionary_F.html#976">Fingerprints</a> <a href="dictionary_P.html#2491">pending_</a>;</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">};</span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default"><a href="dictionary_V.html#2509">VisitedLinkEventListener</a>::<a href="dictionary_V.html#2510">VisitedLinkEventListener</a>(</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">    <a href="dictionary_V.html#1457">VisitedLinkMaster</a>* <a href="dictionary_M.html#2511">master</a>,</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    content::<a href="dictionary_B.html#2099">BrowserContext</a>* <a href="dictionary_B.html#2512">browser_context</a>)</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    : <a href="dictionary_M.html#2513">master_</a>(<a href="dictionary_M.html#2511">master</a>),</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">      <a href="dictionary_B.html#2514">browser_context_</a>(<a href="dictionary_B.html#2512">browser_context</a>) {</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">  <a href="dictionary_R.html#2515">registrar_</a>.<a href="dictionary_A.html#1253">Add</a>(</span><span class="keyword">this</span><span class="default">, content::<a href="dictionary_N.html#2516">NOTIFICATION_RENDERER_PROCESS_CREATED</a>,</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">                 content::<a href="dictionary_N.html#2517">NotificationService</a>::<a href="dictionary_A.html#2518">AllBrowserContextsAndSources</a>());</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">  <a href="dictionary_R.html#2515">registrar_</a>.<a href="dictionary_A.html#1253">Add</a>(</span><span class="keyword">this</span><span class="default">, content::<a href="dictionary_N.html#2519">NOTIFICATION_RENDERER_PROCESS_TERMINATED</a>,</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">                 content::<a href="dictionary_N.html#2517">NotificationService</a>::<a href="dictionary_A.html#2518">AllBrowserContextsAndSources</a>());</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">  <a href="dictionary_R.html#2515">registrar_</a>.<a href="dictionary_A.html#1253">Add</a>(</span><span class="keyword">this</span><span class="default">, content::<a href="dictionary_N.html#2520">NOTIFICATION_RENDER_WIDGET_VISIBILITY_CHANGED</a>,</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">                 content::<a href="dictionary_N.html#2517">NotificationService</a>::<a href="dictionary_A.html#2518">AllBrowserContextsAndSources</a>());</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">}</span>
+<a name="125"><font size=-1>125     </font></a><span class="default"></span>
+<a name="126"><font size=-1>126     </font></a><span class="default"><a href="dictionary_V.html#2509">VisitedLinkEventListener</a>::~<a href="dictionary_Non-Alpha.html#2523">VisitedLinkEventListener</a>() {</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_P.html#2521">pending_visited_links_</a>.<a href="dictionary_E.html#2507">empty</a>())</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">    <a href="dictionary_P.html#2521">pending_visited_links_</a>.<a href="dictionary_C.html#2504">clear</a>();</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">}</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_V.html#2509">VisitedLinkEventListener</a></span><span class="default">::<a href="dictionary_N.html#2526">NewTable</a>(base::<a href="dictionary_S.html#958">SharedMemory</a>* <a href="dictionary_T.html#2528">table_memory</a>) {</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_T.html#2528">table_memory</a>)</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="134"><font size=-1>134     </font></a><span class="default"></span>
+<a name="135"><font size=-1>135     </font></a><span class="default">  </span><span class="comment">// Send to all RenderProcessHosts.</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">  </span><span class="keyword">for </span><span class="default">(<a href="dictionary_U.html#2529">Updaters</a>::<a href="dictionary_I.html#1266">iterator</a> <a href="dictionary_I.html#476">i</a> = <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_B.html#1096">begin</a>(); <a href="dictionary_I.html#476">i</a> != <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_E.html#1097">end</a>(); ++<a href="dictionary_I.html#476">i</a>) {</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">    </span><span class="comment">// Make sure to not send to incognito renderers.</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">    </span><span class="default">content::<a href="dictionary_R.html#2494">RenderProcessHost</a>* <a href="dictionary_P.html#2495">process</a> =</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">        content::<a href="dictionary_R.html#2492">RenderProcessHost</a>::<a href="dictionary_F.html#2493">FromID</a>(<a href="dictionary_I.html#476">i</a>-&gt;<a href="dictionary_F.html#340">first</a>);</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_P.html#2495">process</a>)</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">      </span><span class="keyword">continue</span><span class="default">;</span>
+<a name="142"><font size=-1>142     </font></a><span class="default"></span>
+<a name="143"><font size=-1>143     </font></a><span class="default">    <a href="dictionary_I.html#476">i</a>-&gt;<a href="dictionary_S.html#341">second</a>-&gt;<a href="dictionary_S.html#2530">SendVisitedLinkTable</a>(<a href="dictionary_T.html#2528">table_memory</a>);</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">  }</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">}</span>
+<a name="146"><font size=-1>146     </font></a><span class="default"></span>
+<a name="147"><font size=-1>147     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_V.html#2509">VisitedLinkEventListener</a></span><span class="default">::<a href="dictionary_A.html#2531">Add</a>(<a href="dictionary_V.html#1457">VisitedLinkMaster</a>::<a href="dictionary_F.html#972">Fingerprint</a> <a href="dictionary_F.html#2533">fingerprint</a>) {</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">  <a href="dictionary_P.html#2521">pending_visited_links_</a>.<a href="dictionary_P.html#1047">push_back</a>(<a href="dictionary_F.html#2533">fingerprint</a>);</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_C.html#2534">coalesce_timer_</a>.<a href="dictionary_I.html#2535">IsRunning</a>()) {</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">    <a href="dictionary_C.html#2534">coalesce_timer_</a>.<a href="dictionary_S.html#2536">Start</a>(<a href="dictionary_F.html#661">FROM_HERE</a>,</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">        <a href="dictionary_T.html#2537">TimeDelta</a>::<a href="dictionary_F.html#2538">FromMilliseconds</a>(<a href="dictionary_K.html#2478">kCommitIntervalMs</a>), </span><span class="keyword">this</span><span class="default">,</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">        &amp;<a href="dictionary_V.html#2509">VisitedLinkEventListener</a>::<a href="dictionary_C.html#2539">CommitVisitedLinks</a>);</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">  }</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">}</span>
+<a name="156"><font size=-1>156     </font></a><span class="default"></span>
+<a name="157"><font size=-1>157     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_V.html#2509">VisitedLinkEventListener</a></span><span class="default">::<a href="dictionary_R.html#2540">Reset</a>() {</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">  <a href="dictionary_P.html#2521">pending_visited_links_</a>.<a href="dictionary_C.html#2504">clear</a>();</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">  <a href="dictionary_C.html#2534">coalesce_timer_</a>.<a href="dictionary_S.html#1168">Stop</a>();</span>
+<a name="160"><font size=-1>160     </font></a><span class="default"></span>
+<a name="161"><font size=-1>161     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(<a href="dictionary_U.html#2529">Updaters</a>::<a href="dictionary_I.html#1266">iterator</a> <a href="dictionary_I.html#476">i</a> = <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_B.html#1096">begin</a>(); <a href="dictionary_I.html#476">i</a> != <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_E.html#1097">end</a>(); ++<a href="dictionary_I.html#476">i</a>) {</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">    <a href="dictionary_I.html#476">i</a>-&gt;<a href="dictionary_S.html#341">second</a>-&gt;<a href="dictionary_A.html#2542">AddReset</a>();</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">    <a href="dictionary_I.html#476">i</a>-&gt;<a href="dictionary_S.html#341">second</a>-&gt;<a href="dictionary_U.html#2543">Update</a>();</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">  }</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">}</span>
+<a name="166"><font size=-1>166     </font></a><span class="default"></span>
+<a name="167"><font size=-1>167     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_V.html#2509">VisitedLinkEventListener</a></span><span class="default">::<a href="dictionary_C.html#2539">CommitVisitedLinks</a>() {</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">  </span><span class="comment">// Send to all RenderProcessHosts.</span>
+<a name="169"><font size=-1>169     </font></a><span class="comment">  </span><span class="keyword">for </span><span class="default">(<a href="dictionary_U.html#2529">Updaters</a>::<a href="dictionary_I.html#1266">iterator</a> <a href="dictionary_I.html#476">i</a> = <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_B.html#1096">begin</a>(); <a href="dictionary_I.html#476">i</a> != <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_E.html#1097">end</a>(); ++<a href="dictionary_I.html#476">i</a>) {</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">    <a href="dictionary_I.html#476">i</a>-&gt;<a href="dictionary_S.html#341">second</a>-&gt;<a href="dictionary_A.html#2544">AddLinks</a>(<a href="dictionary_P.html#2521">pending_visited_links_</a>);</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">    <a href="dictionary_I.html#476">i</a>-&gt;<a href="dictionary_S.html#341">second</a>-&gt;<a href="dictionary_U.html#2543">Update</a>();</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">  }</span>
+<a name="173"><font size=-1>173     </font></a><span class="default"></span>
+<a name="174"><font size=-1>174     </font></a><span class="default">  <a href="dictionary_P.html#2521">pending_visited_links_</a>.<a href="dictionary_C.html#2504">clear</a>();</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">}</span>
+<a name="176"><font size=-1>176     </font></a><span class="default"></span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_V.html#2509">VisitedLinkEventListener</a></span><span class="default">::<a href="dictionary_O.html#2545">Observe</a>(</span>
+<a name="178"><font size=-1>178     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_T.html#2546">type</a></span><span class="default">,</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">    </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_N.html#574">NotificationSource</a>&amp; <a href="dictionary_S.html#2547">source</a>,</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">    </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_N.html#575">NotificationDetails</a>&amp; <a href="dictionary_D.html#2548">details</a>) {</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">  </span><span class="keyword">switch </span><span class="default">(<a href="dictionary_T.html#2546">type</a>) {</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">    </span><span class="keyword">case </span><span class="default">content::<a href="dictionary_N.html#2516">NOTIFICATION_RENDERER_PROCESS_CREATED</a>: {</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">      content::<a href="dictionary_R.html#2494">RenderProcessHost</a>* <a href="dictionary_P.html#2495">process</a> =</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">          content::<a href="dictionary_S.html#1255">Source</a>&lt;content::<a href="dictionary_R.html#2494">RenderProcessHost</a>&gt;(<a href="dictionary_S.html#2547">source</a>).<a href="dictionary_P.html#1295">ptr</a>();</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">      </span><span class="keyword">if </span><span class="default">(<a href="dictionary_B.html#2514">browser_context_</a> != <a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#1247">GetBrowserContext</a>())</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">        </span><span class="keyword">return</span><span class="default">;</span>
+<a name="187"><font size=-1>187     </font></a><span class="default"></span>
+<a name="188"><font size=-1>188     </font></a><span class="default">      </span><span class="comment">// Happens on browser start up.</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment">      </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_M.html#2513">master_</a>-&gt;<a href="dictionary_S.html#2549">shared_memory</a>())</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">        </span><span class="keyword">return</span><span class="default">;</span>
+<a name="191"><font size=-1>191     </font></a><span class="default"></span>
+<a name="192"><font size=-1>192     </font></a><span class="default">      <a href="dictionary_U.html#2522">updaters_</a>[<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#1285">GetID</a>()] =</span>
+<a name="193"><font size=-1>193     </font></a><span class="default">          <a href="dictionary_M.html#2550">make_linked_ptr</a>(</span><span class="keyword">new <a href="dictionary_V.html#2481">VisitedLinkUpdater</a></span><span class="default">(<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#1285">GetID</a>()));</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">      <a href="dictionary_U.html#2522">updaters_</a>[<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#1285">GetID</a>()]-&gt;<a href="dictionary_S.html#2551">SendVisitedLinkTable</a>(</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">          <a href="dictionary_M.html#2513">master_</a>-&gt;<a href="dictionary_S.html#2549">shared_memory</a>());</span>
+<a name="196"><font size=-1>196     </font></a><span class="default">      </span><span class="keyword">break</span><span class="default">;</span>
+<a name="197"><font size=-1>197     </font></a><span class="default">    }</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">    </span><span class="keyword">case </span><span class="default">content::<a href="dictionary_N.html#2519">NOTIFICATION_RENDERER_PROCESS_TERMINATED</a>: {</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">      content::<a href="dictionary_R.html#2494">RenderProcessHost</a>* <a href="dictionary_P.html#2495">process</a> =</span>
+<a name="200"><font size=-1>200     </font></a><span class="default">          content::<a href="dictionary_S.html#1255">Source</a>&lt;content::<a href="dictionary_R.html#2494">RenderProcessHost</a>&gt;(<a href="dictionary_S.html#2547">source</a>).<a href="dictionary_P.html#1295">ptr</a>();</span>
+<a name="201"><font size=-1>201     </font></a><span class="default">      </span><span class="keyword">if </span><span class="default">(<a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_C.html#1191">count</a>(<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#1285">GetID</a>())) {</span>
+<a name="202"><font size=-1>202     </font></a><span class="default">        <a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_E.html#1098">erase</a>(<a href="dictionary_P.html#2495">process</a>-&gt;<a href="dictionary_G.html#1285">GetID</a>());</span>
+<a name="203"><font size=-1>203     </font></a><span class="default">      }</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">      </span><span class="keyword">break</span><span class="default">;</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">    }</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">    </span><span class="keyword">case </span><span class="default">content::<a href="dictionary_N.html#2520">NOTIFICATION_RENDER_WIDGET_VISIBILITY_CHANGED</a>: {</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">      <a href="dictionary_R.html#2553">RenderWidgetHost</a>* <a href="dictionary_W.html#2552">widget</a> =</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">          content::<a href="dictionary_S.html#1255">Source</a>&lt;<a href="dictionary_R.html#2553">RenderWidgetHost</a>&gt;(<a href="dictionary_S.html#2547">source</a>).<a href="dictionary_P.html#1295">ptr</a>();</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">      </span><span class="keyword">int <a href="dictionary_C.html#2554">child_id</a> </span><span class="default">= <a href="dictionary_W.html#2552">widget</a>-&gt;<a href="dictionary_G.html#2555">GetProcess</a>()-&gt;<a href="dictionary_G.html#1285">GetID</a>();</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">      </span><span class="keyword">if </span><span class="default">(<a href="dictionary_U.html#2522">updaters_</a>.<a href="dictionary_C.html#1191">count</a>(<a href="dictionary_C.html#2554">child_id</a>))</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">        <a href="dictionary_U.html#2522">updaters_</a>[<a href="dictionary_C.html#2554">child_id</a>]-&gt;<a href="dictionary_U.html#2556">Update</a>();</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">      </span><span class="keyword">break</span><span class="default">;</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">    }</span>
+<a name="214"><font size=-1>214     </font></a><span class="default">    </span><span class="keyword">default</span><span class="default">:</span>
+<a name="215"><font size=-1>215     </font></a><span class="default">      <a href="dictionary_N.html#1296">NOTREACHED</a>();</span>
+<a name="216"><font size=-1>216     </font></a><span class="default">      </span><span class="keyword">break</span><span class="default">;</span>
+<a name="217"><font size=-1>217     </font></a><span class="default">  }</span>
+<a name="218"><font size=-1>218     </font></a><span class="default">}</span>
+<a name="219"><font size=-1>219     </font></a><span class="default"></span>
+<a name="220"><font size=-1>220     </font></a><span class="default">}  </span><span class="comment">// namespace visitedlink</span>
+<a name="221"><font size=-1>221     </font></a><span class="comment"></span>
+</pre></body></html>

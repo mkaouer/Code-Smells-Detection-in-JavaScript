@@ -1,0 +1,61 @@
+<html><head><title>render_view_observer.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.3\thrust-0.7.3\src\renderer\render_view_observer.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.3\\thrust-0.7.3\\src\\renderer\\render_view_observer.cc";
+top.document.title  = "render_view_observer.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2012 The Chromium Authors.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/renderer/render_view_observer.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/command_line.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebView.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebFrame.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebDocument.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebDraggableRegion.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/renderer/render_view.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/renderer/render_view_observer.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/common/switches.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/common/messages.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="keyword">using namespace </span><span class="default">content;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"><a href="dictionary_T.html#402">ThrustShellRenderViewObserver</a>::<a href="dictionary_T.html#403">ThrustShellRenderViewObserver</a>(</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    <a href="dictionary_R.html#148">RenderView</a>* <a href="dictionary_R.html#3997">render_view</a>)</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    : RenderViewObserver(<a href="dictionary_R.html#3997">render_view</a>) </span>
+<a name="25"><font size=-1>25     </font></a><span class="default">{</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">}</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="29"><font size=-1>29     </font></a><span class="keyword"><a href="dictionary_T.html#402">ThrustShellRenderViewObserver</a></span><span class="default">::<a href="dictionary_O.html#3875">OnMessageReceived</a>(</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_I.html#229">IPC</a></span><span class="default">::<a href="dictionary_M.html#230">Message</a>&amp; <a href="dictionary_M.html#3998">message</a>) </span>
+<a name="31"><font size=-1>31     </font></a><span class="default">{</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_H.html#3999">handled</a> </span><span class="default">= </span><span class="keyword">true</span><span class="default">;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">  </span><span class="comment">/*</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">  IPC_BEGIN_MESSAGE_MAP(ThrustShellRenderViewObserver, message)</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">    IPC_MESSAGE_UNHANDLED(handled = false)</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">  IPC_END_MESSAGE_MAP()</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">  */</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">  <a href="dictionary_H.html#3999">handled</a> </span><span class="default">= </span><span class="keyword">false</span><span class="default">;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span>
+<a name="40"><font size=-1>40     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_H.html#3999">handled</a></span><span class="default">;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">}</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span><span class="keyword">void</span>
+<a name="44"><font size=-1>44     </font></a><span class="keyword"><a href="dictionary_T.html#402">ThrustShellRenderViewObserver</a></span><span class="default">::<a href="dictionary_D.html#3876">DraggableRegionsChanged</a>(</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    blink::<a href="dictionary_W.html#145">WebFrame</a>* <a href="dictionary_F.html#4000">frame</a>) </span>
+<a name="46"><font size=-1>46     </font></a><span class="default">{</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">  </span><span class="keyword">return</span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">}</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">}  </span><span class="comment">// namespace thrust_shell</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"></span>
+</pre></body></html>

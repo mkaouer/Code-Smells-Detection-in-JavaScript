@@ -1,0 +1,116 @@
+<html><head><title>color_chooser_win.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.5\thrust-0.7.5\src\browser\dialog\color_chooser_win.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.5\\thrust-0.7.5\\src\\browser\\dialog\\color_chooser_win.cc";
+top.document.title  = "color_chooser_win.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2012 The Chromium Authors. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Use of this source code is governed by a BSD-style license that can be</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// found in the LICENSE-CHROMIUM file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&lt;windows.h&gt;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/color_chooser.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_view_host.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_widget_host_view.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/web_contents.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/views/color_chooser/color_chooser_listener.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/dialog/browser_dialogs.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/dialog/color_chooser_aura.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/dialog/color_chooser_dialog.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="keyword">class <a href="dictionary_C.html#3425">ColorChooserWin</a> </span><span class="default">: </span><span class="keyword">public </span><span class="default">content::<a href="dictionary_C.html#372">ColorChooser</a>,</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">                        </span><span class="keyword">public </span><span class="default">views::<a href="dictionary_C.html#549">ColorChooserListener</a> {</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"> </span><span class="keyword">public</span><span class="default">:</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">  </span><span class="keyword">static <a href="dictionary_C.html#3425">ColorChooserWin</a></span><span class="default">* <a href="dictionary_O.html#3426">Open</a>(content::<a href="dictionary_W.html#373">WebContents</a>* web_contents,</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">                               <a href="dictionary_S.html#376">SkColor</a> initial_color);</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default">  <a href="dictionary_C.html#3427">ColorChooserWin</a>(content::<a href="dictionary_W.html#373">WebContents</a>* web_contents,</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">                  <a href="dictionary_S.html#376">SkColor</a> initial_color);</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">  ~<a href="dictionary_Non-Alpha.html#3428">ColorChooserWin</a>();</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">  </span><span class="comment">// content::ColorChooser overrides:</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">  </span><span class="keyword">virtual void <a href="dictionary_E.html#3429">End</a></span><span class="default">() OVERRIDE;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_S.html#3430">SetSelectedColor</a></span><span class="default">(<a href="dictionary_S.html#376">SkColor</a> <a href="dictionary_C.html#3431">color</a>) OVERRIDE {}</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">  </span><span class="comment">// views::ColorChooserListener overrides:</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">  </span><span class="keyword">virtual void <a href="dictionary_O.html#3432">OnColorChosen</a></span><span class="default">(<a href="dictionary_S.html#376">SkColor</a> color);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_O.html#3433">OnColorChooserDialogClosed</a></span><span class="default">();</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"> </span><span class="keyword">private</span><span class="default">:</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  </span><span class="keyword">static <a href="dictionary_C.html#3425">ColorChooserWin</a></span><span class="default">* <a href="dictionary_C.html#3434">current_color_chooser_</a>;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span>
+<a name="38"><font size=-1>38     </font></a><span class="default">  </span><span class="comment">// The web contents invoking the color chooser.  No ownership. because it will</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">  // outlive this class.</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">  </span><span class="default">content::<a href="dictionary_W.html#373">WebContents</a>* <a href="dictionary_W.html#3435">web_contents_</a>;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default">  </span><span class="comment">// The color chooser dialog which maintains the native color chooser UI.</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">  <a href="dictionary_S.html#354">scoped_refptr</a></span><span class="default">&lt;ColorChooserDialog&gt; <a href="dictionary_C.html#3436">color_chooser_dialog_</a>;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">};</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default"><a href="dictionary_C.html#3425">ColorChooserWin</a>* <a href="dictionary_C.html#3425">ColorChooserWin</a>::<a href="dictionary_C.html#3434">current_color_chooser_</a> = <a href="dictionary_N.html#84">NULL</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default"><a href="dictionary_C.html#3425">ColorChooserWin</a>* <a href="dictionary_C.html#3425">ColorChooserWin</a>::<a href="dictionary_O.html#3426">Open</a>(content::<a href="dictionary_W.html#373">WebContents</a>* <a href="dictionary_W.html#3437">web_contents</a>,</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">                                       <a href="dictionary_S.html#376">SkColor</a> <a href="dictionary_I.html#3438">initial_color</a>) {</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#3434">current_color_chooser_</a>)</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_N.html#84">NULL</a></span><span class="default">;</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">  <a href="dictionary_C.html#3434">current_color_chooser_</a> = </span><span class="keyword">new <a href="dictionary_C.html#3427">ColorChooserWin</a></span><span class="default">(<a href="dictionary_W.html#3437">web_contents</a>, <a href="dictionary_I.html#3438">initial_color</a>);</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_C.html#3434">current_color_chooser_</a></span><span class="default">;</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">}</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default"><a href="dictionary_C.html#3425">ColorChooserWin</a>::<a href="dictionary_C.html#3427">ColorChooserWin</a>(content::<a href="dictionary_W.html#373">WebContents</a>* <a href="dictionary_W.html#3439">web_contents</a>,</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">                                 <a href="dictionary_S.html#376">SkColor</a> <a href="dictionary_I.html#3440">initial_color</a>)</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">    : <a href="dictionary_W.html#3435">web_contents_</a>(<a href="dictionary_W.html#3439">web_contents</a>) {</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">  <a href="dictionary_G.html#100">gfx</a>::<a href="dictionary_N.html#554">NativeWindow</a> <a href="dictionary_O.html#3441">owning_window</a> = (<a href="dictionary_G.html#100">gfx</a>::<a href="dictionary_N.html#554">NativeWindow</a>)::<a href="dictionary_G.html#3442">GetAncestor</a>(</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">      (<a href="dictionary_H.html#561">HWND</a>)<a href="dictionary_W.html#3439">web_contents</a>-&gt;<a href="dictionary_G.html#1207">GetRenderViewHost</a>()-&gt;<a href="dictionary_G.html#3443">GetView</a>()-&gt;<a href="dictionary_G.html#2907">GetNativeView</a>(),</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">      <a href="dictionary_G.html#3444">GA_ROOT</a>);</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">  <a href="dictionary_C.html#3436">color_chooser_dialog_</a> = </span><span class="keyword">new <a href="dictionary_C.html#553">ColorChooserDialog</a></span><span class="default">(</span><span class="keyword">this</span><span class="default">,</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">                                                 <a href="dictionary_I.html#3440">initial_color</a>,</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">                                                 <a href="dictionary_O.html#3441">owning_window</a>);</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">}</span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span>
+<a name="67"><font size=-1>67     </font></a><span class="default"><a href="dictionary_C.html#3425">ColorChooserWin</a>::~<a href="dictionary_Non-Alpha.html#3428">ColorChooserWin</a>() {</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">  </span><span class="comment">// Always call End() before destroying.</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">  <a href="dictionary_D.html#1542">DCHECK</a></span><span class="default">(!<a href="dictionary_C.html#3436">color_chooser_dialog_</a>);</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">}</span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_C.html#3425">ColorChooserWin</a></span><span class="default">::<a href="dictionary_E.html#3429">End</a>() {</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">  </span><span class="comment">// The ColorChooserDialog's listener is going away.  Ideally we'd</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">  // programmatically close the dialog at this point.  Since that's impossible,</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">  // we instead tell the dialog its listener is going away, so that the dialog</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">  // doesn't try to communicate with a destroyed listener later.  (We also tell</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">  // the renderer the dialog is closed, since from the renderer's perspective</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">  // it effectively is.)</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">  <a href="dictionary_O.html#3433">OnColorChooserDialogClosed</a></span><span class="default">();</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">}</span>
+<a name="81"><font size=-1>81     </font></a><span class="default"></span>
+<a name="82"><font size=-1>82     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_C.html#3425">ColorChooserWin</a></span><span class="default">::<a href="dictionary_O.html#3432">OnColorChosen</a>(<a href="dictionary_S.html#376">SkColor</a> <a href="dictionary_C.html#3445">color</a>) {</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_W.html#3435">web_contents_</a>)</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">    <a href="dictionary_W.html#3435">web_contents_</a>-&gt;<a href="dictionary_D.html#3400">DidChooseColorInColorChooser</a>(<a href="dictionary_C.html#3445">color</a>);</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">}</span>
+<a name="86"><font size=-1>86     </font></a><span class="default"></span>
+<a name="87"><font size=-1>87     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_C.html#3425">ColorChooserWin</a></span><span class="default">::<a href="dictionary_O.html#3433">OnColorChooserDialogClosed</a>() {</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#3436">color_chooser_dialog_</a>.<a href="dictionary_G.html#154">get</a>()) {</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">    <a href="dictionary_C.html#3436">color_chooser_dialog_</a>-&gt;<a href="dictionary_L.html#3446">ListenerDestroyed</a>();</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">    <a href="dictionary_C.html#3436">color_chooser_dialog_</a> = <a href="dictionary_N.html#84">NULL</a>;</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">  }</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">  <a href="dictionary_D.html#1542">DCHECK</a>(<a href="dictionary_C.html#3434">current_color_chooser_</a> == </span><span class="keyword">this</span><span class="default">);</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">  <a href="dictionary_C.html#3434">current_color_chooser_</a> = <a href="dictionary_N.html#84">NULL</a>;</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_W.html#3435">web_contents_</a>)</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">    <a href="dictionary_W.html#3435">web_contents_</a>-&gt;<a href="dictionary_D.html#3407">DidEndColorChooser</a>();</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">}</span>
+<a name="97"><font size=-1>97     </font></a><span class="default"></span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">chrome {</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default">content::<a href="dictionary_C.html#372">ColorChooser</a>* <a href="dictionary_S.html#5248">ShowColorChooser</a>(content::<a href="dictionary_W.html#373">WebContents</a>* <a href="dictionary_W.html#3448">web_contents</a>,</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">                                        <a href="dictionary_S.html#376">SkColor</a> <a href="dictionary_I.html#3449">initial_color</a>) {</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_C.html#3425">ColorChooserWin</a></span><span class="default">::<a href="dictionary_O.html#3426">Open</a>(<a href="dictionary_W.html#3448">web_contents</a>, <a href="dictionary_I.html#3449">initial_color</a>);</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">}</span>
+<a name="104"><font size=-1>104     </font></a><span class="default"></span>
+<a name="105"><font size=-1>105     </font></a><span class="default">}  </span><span class="comment">// namespace chrome</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment"></span>
+</pre></body></html>

@@ -1,0 +1,59 @@
+<html><head><title>main_delegate.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.4\thrust-0.7.4\src\app\main_delegate.h</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.4\\thrust-0.7.4\\src\\app\\main_delegate.h";
+top.document.title  = "main_delegate.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"></span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span><span class="preproc">#ifndef <a href="dictionary_T.html#4097">THRUST_SHELL_APP_MAIN_DELEGATE_H_</a></span>
+<a name="5"><font size=-1>5     </font></a><span class="preproc">#define <a href="dictionary_T.html#4097">THRUST_SHELL_APP_MAIN_DELEGATE_H_</a></span>
+<a name="6"><font size=-1>6     </font></a><span class="preproc"></span>
+<a name="7"><font size=-1>7     </font></a><span class="preproc">#include </span><span class="string">&quot;brightray/common/main_delegate.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;brightray/common/content_client.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_M.html#4100">MainDelegate</a> </span><span class="default">: </span><span class="keyword">public <a href="dictionary_B.html#410">brightray</a></span><span class="default">::<a href="dictionary_M.html#4101">MainDelegate</a> {</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="keyword">public</span><span class="default">:</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">  <a href="dictionary_M.html#4102">MainDelegate</a>();</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">  ~<a href="dictionary_Non-Alpha.html#4103">MainDelegate</a>();</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">protected</span><span class="default">:</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">  </span><span class="comment">/****************************************************************************/</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment">  /* CONTENT_MAIN_DELEGATE IMPLEMENTATION */</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment">  /****************************************************************************/</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">  </span><span class="keyword">virtual bool <a href="dictionary_B.html#4104">BasicStartupComplete</a></span><span class="default">(</span><span class="keyword">int</span><span class="default">* exit_code) OVERRIDE;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_P.html#4105">PreSandboxStartup</a></span><span class="default">() OVERRIDE;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">  </span><span class="keyword">virtual </span><span class="default">content::<a href="dictionary_C.html#4107">ContentBrowserClient</a>* <a href="dictionary_C.html#4106">CreateContentBrowserClient</a>() OVERRIDE;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">  </span><span class="keyword">virtual </span><span class="default">content::<a href="dictionary_C.html#4109">ContentRendererClient</a>*</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">      <a href="dictionary_C.html#4108">CreateContentRendererClient</a>() OVERRIDE;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">  </span><span class="comment">/****************************************************************************/</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">  /* BRIGHTRAY_MAIN_DELEGATE IMPLEMENTATION */</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment">  /****************************************************************************/</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment">  </span><span class="keyword">virtual <a href="dictionary_S.html#19">scoped_ptr</a></span><span class="default">&lt;brightray::ContentClient&gt; <a href="dictionary_C.html#4110">CreateContentClient</a>() OVERRIDE;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_A.html#4111">AddDataPackFromPath</a></span><span class="default">(</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">      ui::<a href="dictionary_R.html#4112">ResourceBundle</a>* bundle, </span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#2038">FilePath</a>&amp; pak_dir) OVERRIDE;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="preproc">#if defined</span><span class="default">(<a href="dictionary_O.html#4114">OS_MACOSX</a>)</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">  </span><span class="keyword">virtual void </span><span class="default">OverrideChildProcessPath() OVERRIDE;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">  </span><span class="keyword">virtual void </span><span class="default">OverrideFrameworkBundlePath() OVERRIDE;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span><span class="preproc">#endif</span>
+<a name="37"><font size=-1>37     </font></a><span class="preproc"></span>
+<a name="38"><font size=-1>38     </font></a><span class="preproc"></span><span class="keyword">private</span><span class="default">:</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">  <a href="dictionary_B.html#410">brightray</a>::<a href="dictionary_C.html#4116">ContentClient</a> <a href="dictionary_C.html#4115">content_client_</a>;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">  <a href="dictionary_S.html#19">scoped_ptr</a>&lt;content::ContentBrowserClient&gt; <a href="dictionary_B.html#4117">browser_client_</a>;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">  <a href="dictionary_S.html#19">scoped_ptr</a>&lt;content::ContentRendererClient&gt; <a href="dictionary_R.html#4118">renderer_client_</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  <a href="dictionary_D.html#4119">DISALLOW_COPY_AND_ASSIGN</a>(<a href="dictionary_M.html#4100">MainDelegate</a>);</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">};</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default">}</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span><span class="preproc">#endif </span><span class="comment">// THRUST_SHELL_APP_MAIN_DELEGATE_H_</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"></span>
+</pre></body></html>

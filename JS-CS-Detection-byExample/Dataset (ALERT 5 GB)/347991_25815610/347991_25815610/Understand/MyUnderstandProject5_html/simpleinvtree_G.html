@@ -1,0 +1,47 @@
+<html><head><title>Simple Invocation Tree [G]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td>I</td><td><a href="simpleinvtree_J.html">J</a></td><td>K</td><td>L</td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td>O</td><td><a href="simpleinvtree_P.html">P</a></td><td>Q</td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td><a href="simpleinvtree_V.html">V</a></td><td><a href="simpleinvtree_W.html">W</a></td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_G.html#2417">GlobalMenuBarRegistrarX11::GetInstance</a>
+| <a href="dictionary_S.html#2419">Singleton::get</a>
+
+<a href="dictionary_G.html#2428">GlobalMenuBarRegistrarX11::GlobalMenuBarRegistrarX11</a>
+| <a href="dictionary_G.html#2431">g_dbus_proxy_new_for_bus</a>
+
+<a href="dictionary_G.html#2465">GlobalMenuBarRegistrarX11::OnNameOwnerChanged</a>
+| <a href="dictionary_B.html#1123">begin</a>
+| <a href="dictionary_E.html#2472">end</a>
+| <a href="dictionary_G.html#2424">GlobalMenuBarRegistrarX11::RegisterXID</a>
+
+<a href="dictionary_G.html#2451">GlobalMenuBarRegistrarX11::OnProxyCreated</a>
+| <a href="dictionary_G.html#2460">g_dbus_proxy_new_for_bus_finish</a>
+| <a href="dictionary_G.html#2461">g_error_free</a>
+| <a href="dictionary_G.html#2462">g_signal_connect</a>
+| <a href="dictionary_G.html#2463">G_CALLBACK</a>
+| <a href="dictionary_O.html#2464">OnNameOwnerChanged</a>
+
+<a href="dictionary_G.html#2420">GlobalMenuBarRegistrarX11::OnWindowMapped</a>
+| <a href="dictionary_I.html#887">insert</a>
+| <a href="dictionary_G.html#2424">GlobalMenuBarRegistrarX11::RegisterXID</a>
+
+<a href="dictionary_G.html#2425">GlobalMenuBarRegistrarX11::OnWindowUnmapped</a>
+| <a href="dictionary_G.html#2427">GlobalMenuBarRegistrarX11::UnregisterXID</a>
+| <a href="dictionary_E.html#1122">erase</a>
+
+<a href="dictionary_G.html#2424">GlobalMenuBarRegistrarX11::RegisterXID</a>
+| <a href="dictionary_D.html#1542">DCHECK</a>
+| <a href="dictionary_T.html#2444">thrust_shell::GlobalMenuBarX11::GetPathForWindow</a>
+| <a href="dictionary_G.html#2446">g_dbus_proxy_call</a>
+| <a href="dictionary_G.html#2447">g_variant_new</a>
+| <a href="dictionary_C.html#883">c_str</a>
+
+<a href="dictionary_G.html#2427">GlobalMenuBarRegistrarX11::UnregisterXID</a>
+| <a href="dictionary_D.html#1542">DCHECK</a>
+| <a href="dictionary_T.html#2444">thrust_shell::GlobalMenuBarX11::GetPathForWindow</a>
+| <a href="dictionary_G.html#2446">g_dbus_proxy_call</a>
+| <a href="dictionary_G.html#2447">g_variant_new</a>
+
+<a href="dictionary_G.html#2437">GlobalMenuBarRegistrarX11::~GlobalMenuBarRegistrarX11</a>
+| <a href="dictionary_G.html#2438">g_signal_handlers_disconnect_by_func</a>
+| <a href="dictionary_G.html#2440">g_object_unref</a>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td>I</td><td><a href="simpleinvtree_J.html">J</a></td><td>K</td><td>L</td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td>O</td><td><a href="simpleinvtree_P.html">P</a></td><td>Q</td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td><a href="simpleinvtree_V.html">V</a></td><td><a href="simpleinvtree_W.html">W</a></td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table></body></html>

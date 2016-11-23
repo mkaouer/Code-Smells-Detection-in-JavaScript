@@ -1,0 +1,169 @@
+<html><head><title>thrust_window_binding.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.1\thrust-0.7.1\src\api\thrust_window_binding.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.1\\thrust-0.7.1\\src\\api\\thrust_window_binding.cc";
+top.document.title  = "thrust_window_binding.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"></span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/api/thrust_window_binding.h&quot;</span>
+<a name="5"><font size=-1>5     </font></a><span class="string"></span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/api/thrust_session_binding.h&quot;</span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/thrust_window.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/browser_client.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/api/api.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span>
+<a name="13"><font size=-1>13     </font></a><span class="default"><a href="dictionary_T.html#2884">ThrustWindowBindingFactory</a>::<a href="dictionary_T.html#2885">ThrustWindowBindingFactory</a>()</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">{</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">}</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default"><a href="dictionary_T.html#2884">ThrustWindowBindingFactory</a>::~<a href="dictionary_Non-Alpha.html#2886">ThrustWindowBindingFactory</a>()</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">{</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">}</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"><a href="dictionary_A.html#1427">APIBinding</a>* <a href="dictionary_T.html#2884">ThrustWindowBindingFactory</a>::<a href="dictionary_C.html#2887">Create</a>(</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">    </span><span class="keyword">const unsigned int <a href="dictionary_I.html#2888">id</a></span><span class="default">,</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">    <a href="dictionary_S.html#51">scoped_ptr</a>&lt;base::DictionaryValue&gt; <a href="dictionary_A.html#2889">args</a>)</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">{</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">  </span><span class="keyword">return new <a href="dictionary_T.html#2890">ThrustWindowBinding</a></span><span class="default">(<a href="dictionary_I.html#2888">id</a>, <a href="dictionary_A.html#2889">args</a>.<a href="dictionary_P.html#388">Pass</a>());</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">}</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"><a href="dictionary_T.html#1224">ThrustWindowBinding</a>::<a href="dictionary_T.html#2890">ThrustWindowBinding</a>(</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="keyword">const unsigned int <a href="dictionary_I.html#2891">id</a></span><span class="default">, </span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    <a href="dictionary_S.html#51">scoped_ptr</a>&lt;base::DictionaryValue&gt; <a href="dictionary_A.html#2892">args</a>)</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">  : <a href="dictionary_A.html#1428">APIBinding</a>(</span><span class="string">&quot;window&quot;</span><span class="default">, <a href="dictionary_I.html#2891">id</a>)</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">{</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">  <a href="dictionary_L.html#182">LOG</a>(<a href="dictionary_I.html#183">INFO</a>) &lt;&lt; </span><span class="string">&quot;ThrustWindowBinding Constructor [&quot; </span><span class="default">&lt;&lt; </span><span class="keyword">this </span><span class="default">&lt;&lt; </span><span class="string">&quot;] &quot; </span><span class="default">&lt;&lt; <a href="dictionary_I.html#1432">id_</a>;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  <a href="dictionary_S.html#14">std</a>::<a href="dictionary_S.html#15">string</a> <a href="dictionary_R.html#2893">root_url</a> = </span><span class="string">&quot;http://google.com&quot;</span><span class="default">;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">  <a href="dictionary_A.html#2892">args</a>-&gt;<a href="dictionary_G.html#2046">GetString</a>(</span><span class="string">&quot;root_url&quot;</span><span class="default">, &amp;<a href="dictionary_R.html#2893">root_url</a>);</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span>
+<a name="39"><font size=-1>39     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_W.html#2894">width</a> </span><span class="default">= </span><span class="number">800</span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_H.html#2895">height</a> </span><span class="default">= </span><span class="number">600</span><span class="default">;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default">  <a href="dictionary_A.html#2892">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;size.width&quot;</span><span class="default">, &amp;<a href="dictionary_W.html#2894">width</a>);</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  <a href="dictionary_A.html#2892">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;size.height&quot;</span><span class="default">, &amp;<a href="dictionary_H.html#2895">height</a>);</span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default">  <a href="dictionary_S.html#14">std</a>::<a href="dictionary_S.html#15">string</a> <a href="dictionary_T.html#2897">title</a> = </span><span class="string">&quot;ThrustShell&quot;</span><span class="default">;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  <a href="dictionary_A.html#2892">args</a>-&gt;<a href="dictionary_G.html#2046">GetString</a>(</span><span class="string">&quot;title&quot;</span><span class="default">, &amp;<a href="dictionary_T.html#2897">title</a>);</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default">  <a href="dictionary_S.html#14">std</a>::<a href="dictionary_S.html#15">string</a> <a href="dictionary_I.html#2898">icon_path</a> = </span><span class="string">&quot;&quot;</span><span class="default">;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">  <a href="dictionary_A.html#2892">args</a>-&gt;<a href="dictionary_G.html#2046">GetString</a>(</span><span class="string">&quot;icon_path&quot;</span><span class="default">, &amp;<a href="dictionary_I.html#2898">icon_path</a>);</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">  <a href="dictionary_T.html#370">ThrustSession</a>* <a href="dictionary_S.html#2899">session</a> = <a href="dictionary_N.html#316">NULL</a>;</span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span>
+<a name="53"><font size=-1>53     </font></a><span class="default">  </span><span class="keyword">int <a href="dictionary_S.html#2900">session_id</a> </span><span class="default">= -</span><span class="number">1</span><span class="default">;</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">  <a href="dictionary_A.html#2892">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;session_id&quot;</span><span class="default">, &amp;<a href="dictionary_S.html#2900">session_id</a>);</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default">  <a href="dictionary_T.html#2039">ThrustSessionBinding</a>* <a href="dictionary_S.html#2901">sb</a> = </span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    (<a href="dictionary_T.html#2039">ThrustSessionBinding</a>*)(<a href="dictionary_A.html#1438">API</a>::<a href="dictionary_G.html#1442">Get</a>()-&gt;<a href="dictionary_G.html#2534">GetBinding</a>(<a href="dictionary_S.html#2900">session_id</a>));</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  </span><span class="keyword">if</span><span class="default">(<a href="dictionary_S.html#2901">sb</a> != <a href="dictionary_N.html#316">NULL</a>) {</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    <a href="dictionary_S.html#2899">session</a> = <a href="dictionary_S.html#2901">sb</a>-&gt;<a href="dictionary_G.html#2110">GetSession</a>();</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  }</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">  </span><span class="keyword">else </span><span class="default">{</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    <a href="dictionary_S.html#2899">session</a> = <a href="dictionary_T.html#2377">ThrustShellBrowserClient</a>::<a href="dictionary_G.html#2544">Get</a>()-&gt;<a href="dictionary_S.html#2564">system_session</a>();</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">  }</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default">  <a href="dictionary_W.html#2902">window_</a>.<a href="dictionary_R.html#395">reset</a>(<a href="dictionary_T.html#589">ThrustWindow</a>::<a href="dictionary_C.html#1228">CreateNew</a>(</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">,</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        <a href="dictionary_S.html#2899">session</a>,</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        <a href="dictionary_G.html#2220">GURL</a>(<a href="dictionary_R.html#2893">root_url</a>), </span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        <a href="dictionary_G.html#606">gfx</a>::<a href="dictionary_S.html#1102">Size</a>(<a href="dictionary_W.html#2894">width</a>, <a href="dictionary_H.html#2895">height</a>), </span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        <a href="dictionary_T.html#2897">title</a>, </span>
+<a name="71"><font size=-1>71     </font></a><span class="default">        <a href="dictionary_I.html#2898">icon_path</a>, </span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        </span><span class="keyword">true</span><span class="default">));</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">}</span>
+<a name="74"><font size=-1>74     </font></a><span class="default"></span>
+<a name="75"><font size=-1>75     </font></a><span class="default"><a href="dictionary_T.html#1224">ThrustWindowBinding</a>::~<a href="dictionary_Non-Alpha.html#2903">ThrustWindowBinding</a>()</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">{</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">  <a href="dictionary_L.html#182">LOG</a>(<a href="dictionary_I.html#183">INFO</a>) &lt;&lt; </span><span class="string">&quot;ThrustWindowBinding Destructor [&quot; </span><span class="default">&lt;&lt; </span><span class="keyword">this </span><span class="default">&lt;&lt; </span><span class="string">&quot;] &quot; </span><span class="default">&lt;&lt; <a href="dictionary_I.html#1432">id_</a>;</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">  <a href="dictionary_W.html#2902">window_</a>.<a href="dictionary_R.html#395">reset</a>();</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">}</span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span>
+<a name="81"><font size=-1>81     </font></a><span class="default"></span>
+<a name="82"><font size=-1>82     </font></a><span class="default"></span><span class="keyword">void</span>
+<a name="83"><font size=-1>83     </font></a><span class="keyword"><a href="dictionary_T.html#1224">ThrustWindowBinding</a></span><span class="default">::<a href="dictionary_C.html#2904">CallLocalMethod</a>(</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_S.html#14">std</a></span><span class="default">::<a href="dictionary_S.html#15">string</a>&amp; <a href="dictionary_M.html#2905">method</a>,</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    <a href="dictionary_S.html#51">scoped_ptr</a>&lt;base::DictionaryValue&gt; <a href="dictionary_A.html#2906">args</a>,</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_A.html#1438">API</a></span><span class="default">::<a href="dictionary_M.html#1439">MethodCallback</a>&amp; <a href="dictionary_C.html#2907">callback</a>)</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">{</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">  <a href="dictionary_S.html#14">std</a>::<a href="dictionary_S.html#15">string</a> <a href="dictionary_E.html#2908">err</a> = <a href="dictionary_S.html#14">std</a>::<a href="dictionary_S.html#15">string</a>(</span><span class="string">&quot;&quot;</span><span class="default">);</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">  base::<a href="dictionary_D.html#931">DictionaryValue</a>* <a href="dictionary_R.html#2909">res</a> = </span><span class="keyword">new </span><span class="default">base::DictionaryValue;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default">  <a href="dictionary_L.html#182">LOG</a>(<a href="dictionary_I.html#183">INFO</a>) &lt;&lt; </span><span class="string">&quot;ThrustWindow call [&quot; </span><span class="default">&lt;&lt; <a href="dictionary_M.html#2905">method</a> &lt;&lt; </span><span class="string">&quot;]&quot;</span><span class="default">;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">  </span><span class="keyword">if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;show&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_S.html#1882">Show</a>();</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">  }</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;focus&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    </span><span class="keyword">bool <a href="dictionary_F.html#2910">focus</a> </span><span class="default">= </span><span class="keyword">true</span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    <a href="dictionary_A.html#2906">args</a>-&gt;<a href="dictionary_G.html#2044">GetBoolean</a>(</span><span class="string">&quot;focus&quot;</span><span class="default">, &amp;<a href="dictionary_F.html#2910">focus</a>);</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_F.html#1921">Focus</a>(<a href="dictionary_F.html#2910">focus</a>);</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">  }</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;maximize&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_M.html#1889">Maximize</a>();</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">  }</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;unmaximize&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_U.html#2911">UnMaximize</a>();</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">  }</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;minimize&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_M.html#1891">Minimize</a>();</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">  }</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;restore&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_R.html#1890">Restore</a>();</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">  }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;set_title&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    <a href="dictionary_S.html#14">std</a>::<a href="dictionary_S.html#15">string</a> <a href="dictionary_T.html#2912">title</a> = </span><span class="string">&quot;&quot;</span><span class="default">;</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">    <a href="dictionary_A.html#2906">args</a>-&gt;<a href="dictionary_G.html#2046">GetString</a>(</span><span class="string">&quot;title&quot;</span><span class="default">, &amp;<a href="dictionary_T.html#2912">title</a>);</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_S.html#2913">SetTitle</a>(<a href="dictionary_T.html#2912">title</a>);</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">  }</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;move&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">	</span><span class="keyword">int <a href="dictionary_X.html#2914">x</a></span><span class="default">, <a href="dictionary_Y.html#2915">y</a>;</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">	<a href="dictionary_A.html#2906">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;x&quot;</span><span class="default">, &amp;<a href="dictionary_X.html#2914">x</a>);</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">	<a href="dictionary_A.html#2906">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;y&quot;</span><span class="default">, &amp;<a href="dictionary_Y.html#2915">y</a>);</span>
+<a name="121"><font size=-1>121     </font></a><span class="default"></span>
+<a name="122"><font size=-1>122     </font></a><span class="default">	<a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_M.html#2916">Move</a>(<a href="dictionary_X.html#2914">x</a>, <a href="dictionary_Y.html#2915">y</a>);</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">  }</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;resize&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">	</span><span class="keyword">int <a href="dictionary_W.html#2917">width</a></span><span class="default">, <a href="dictionary_H.html#2918">height</a>;</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">	<a href="dictionary_A.html#2906">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;width&quot;</span><span class="default">, &amp;<a href="dictionary_W.html#2917">width</a>);</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">	<a href="dictionary_A.html#2906">args</a>-&gt;<a href="dictionary_G.html#2896">GetInteger</a>(</span><span class="string">&quot;height&quot;</span><span class="default">, &amp;<a href="dictionary_H.html#2918">height</a>);</span>
+<a name="128"><font size=-1>128     </font></a><span class="default"></span>
+<a name="129"><font size=-1>129     </font></a><span class="default">	<a href="dictionary_L.html#182">LOG</a>(<a href="dictionary_I.html#183">INFO</a>) &lt;&lt; </span><span class="string">&quot;calling window_-&gt;Resize(&quot; </span><span class="default">&lt;&lt; <a href="dictionary_W.html#2917">width</a> &lt;&lt; </span><span class="string">&quot;, &quot; </span><span class="default">&lt;&lt; <a href="dictionary_H.html#2918">height</a> &lt;&lt; </span><span class="string">&quot;)&quot;</span><span class="default">;</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">	<a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_R.html#2919">Resize</a>(<a href="dictionary_W.html#2917">width</a>, <a href="dictionary_H.html#2918">height</a>);</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">  }</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;close&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_C.html#1883">Close</a>();</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">  }</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;is_closed&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">    <a href="dictionary_R.html#2909">res</a>-&gt;<a href="dictionary_S.html#2005">SetBoolean</a>(</span><span class="string">&quot;is_closed&quot;</span><span class="default">, <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_I.html#2920">is_closed</a>());</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">  }</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;size&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">    <a href="dictionary_R.html#2909">res</a>-&gt;<a href="dictionary_S.html#1999">SetInteger</a>(</span><span class="string">&quot;size.width&quot;</span><span class="default">, <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_S.html#1711">size</a>().<a href="dictionary_W.html#1811">width</a>());</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    <a href="dictionary_R.html#2909">res</a>-&gt;<a href="dictionary_S.html#1999">SetInteger</a>(</span><span class="string">&quot;size.height&quot;</span><span class="default">, <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_S.html#1711">size</a>().<a href="dictionary_H.html#1814">height</a>());</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">  }</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">  </span><span class="keyword">else if</span><span class="default">(<a href="dictionary_M.html#2905">method</a>.<a href="dictionary_C.html#2059">compare</a>(</span><span class="string">&quot;position&quot;</span><span class="default">) == </span><span class="number">0</span><span class="default">) {</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">    <a href="dictionary_R.html#2909">res</a>-&gt;<a href="dictionary_S.html#1999">SetInteger</a>(</span><span class="string">&quot;position.x&quot;</span><span class="default">, <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_P.html#2921">position</a>().<a href="dictionary_X.html#1537">x</a>());</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">    <a href="dictionary_R.html#2909">res</a>-&gt;<a href="dictionary_S.html#1999">SetInteger</a>(</span><span class="string">&quot;position.y&quot;</span><span class="default">, <a href="dictionary_W.html#2902">window_</a>-&gt;<a href="dictionary_P.html#2921">position</a>().<a href="dictionary_Y.html#1538">y</a>());</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">  }</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">  </span><span class="keyword">else </span><span class="default">{</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">    <a href="dictionary_E.html#2908">err</a> = </span><span class="string">&quot;thrust_window_binding:method_not_found&quot;</span><span class="default">;</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">  }</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">  <a href="dictionary_C.html#2907">callback</a>.<a href="dictionary_R.html#232">Run</a>(<a href="dictionary_E.html#2908">err</a>, <a href="dictionary_S.html#51">scoped_ptr</a>&lt;base::<a href="dictionary_D.html#931">DictionaryValue</a>&gt;(<a href="dictionary_R.html#2909">res</a>).<a href="dictionary_P.html#2065">Pass</a>());</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">}</span>
+<a name="152"><font size=-1>152     </font></a><span class="default"></span>
+<a name="153"><font size=-1>153     </font></a><span class="default"><a href="dictionary_T.html#589">ThrustWindow</a>*</span>
+<a name="154"><font size=-1>154     </font></a><span class="default"><a href="dictionary_T.html#1224">ThrustWindowBinding</a>::<a href="dictionary_G.html#2922">GetWindow</a>() {</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_W.html#2902">window_</a></span><span class="default">.<a href="dictionary_G.html#399">get</a>();</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">}</span>
+<a name="157"><font size=-1>157     </font></a><span class="default"></span>
+<a name="158"><font size=-1>158     </font></a><span class="default">} </span><span class="comment">// namespace thrust_shell</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment"></span>
+</pre></body></html>

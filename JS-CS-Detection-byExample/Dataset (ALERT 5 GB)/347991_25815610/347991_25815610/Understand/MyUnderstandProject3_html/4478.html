@@ -1,0 +1,220 @@
+<html><head><title>devtools_delegate.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.2\thrust-0.7.2\src\devtools\devtools_delegate.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.2\\thrust-0.7.2\\src\\devtools\\devtools_delegate.cc";
+top.document.title  = "devtools_delegate.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2012 The Chromium Authors.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/devtools/devtools_delegate.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;vector&gt;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/bind.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/command_line.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/string_number_conversions.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/utf_string_conversions.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/devtools_http_handler.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/devtools_agent_host.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/devtools_target.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/favicon_status.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/navigation_entry.h&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_view_host.h&quot;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/web_contents.h&quot;</span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/web_contents_delegate.h&quot;</span>
+<a name="21"><font size=-1>21     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/content_switches.h&quot;</span>
+<a name="22"><font size=-1>22     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/url_constants.h&quot;</span>
+<a name="23"><font size=-1>23     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/socket/tcp_listen_socket.h&quot;</span>
+<a name="24"><font size=-1>24     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/base/resource/resource_bundle.h&quot;</span>
+<a name="25"><font size=-1>25     </font></a><span class="string"></span>
+<a name="26"><font size=-1>26     </font></a><span class="string"></span><span class="keyword">using namespace </span><span class="default">content;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">{</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">const char <a href="dictionary_K.html#4482">kTargetTypePage</a></span><span class="default">[] = </span><span class="string">&quot;page&quot;</span><span class="default">;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default">net::<a href="dictionary_S.html#696">StreamListenSocketFactory</a>* <a href="dictionary_C.html#4483">CreateSocketFactory</a>() {</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">  </span><span class="keyword">const <a href="dictionary_C.html#2426">CommandLine</a></span><span class="default">&amp; <a href="dictionary_C.html#4484">command_line</a> = *<a href="dictionary_C.html#2426">CommandLine</a>::<a href="dictionary_F.html#2421">ForCurrentProcess</a>();</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">  </span><span class="comment">// See if the user specified a port on the command line (useful for</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">  // automation). If not, use an ephemeral port by specifying 0.</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">  </span><span class="keyword">int <a href="dictionary_P.html#4485">port</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">  </span><span class="keyword">if</span><span class="default">(<a href="dictionary_C.html#4484">command_line</a>.<a href="dictionary_H.html#2427">HasSwitch</a>(switches::<a href="dictionary_K.html#4486">kRemoteDebuggingPort</a>)) {</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_T.html#4487">temp_port</a></span><span class="default">;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#1275">string</a> <a href="dictionary_P.html#4488">port_str</a> =</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">      <a href="dictionary_C.html#4484">command_line</a>.<a href="dictionary_G.html#3205">GetSwitchValueASCII</a>(switches::<a href="dictionary_K.html#4486">kRemoteDebuggingPort</a>);</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    </span><span class="keyword">if</span><span class="default">(base::<a href="dictionary_S.html#3157">StringToInt</a>(<a href="dictionary_P.html#4488">port_str</a>, &amp;<a href="dictionary_T.html#4487">temp_port</a>) &amp;&amp;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">        <a href="dictionary_T.html#4487">temp_port</a> &gt; </span><span class="number">0 </span><span class="default">&amp;&amp; <a href="dictionary_T.html#4487">temp_port</a> &lt; </span><span class="number">65535</span><span class="default">) {</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">      <a href="dictionary_P.html#4485">port</a> = <a href="dictionary_T.html#4487">temp_port</a>;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    } </span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="keyword">else </span><span class="default">{</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">      <a href="dictionary_D.html#4489">DLOG</a>(<a href="dictionary_W.html#3160">WARNING</a>) &lt;&lt; </span><span class="string">&quot;Invalid http debugger port number &quot; </span><span class="default">&lt;&lt; <a href="dictionary_T.html#4487">temp_port</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    }</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">  }</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">  </span><span class="keyword">return new </span><span class="default">net::<a href="dictionary_T.html#4490">TCPListenSocketFactory</a>(</span><span class="string">&quot;127.0.0.1&quot;</span><span class="default">, <a href="dictionary_P.html#4485">port</a>);</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">}</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_T.html#4491">Target</a> </span><span class="default">: </span><span class="keyword">public </span><span class="default">content::<a href="dictionary_D.html#4492">DevToolsTarget</a> {</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"> </span><span class="keyword">public</span><span class="default">:</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">  </span><span class="keyword">explicit <a href="dictionary_T.html#4493">Target</a></span><span class="default">(<a href="dictionary_W.html#537">WebContents</a>* web_contents);</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#40">string</a> <a href="dictionary_G.html#4494">GetId</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_I.html#4508">id_</a></span><span class="default">; }</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#40">string</a> <a href="dictionary_G.html#4495">GetParentId</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#1053">string</a>(); }</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#40">string</a> <a href="dictionary_G.html#4496">GetType</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_K.html#4482">kTargetTypePage</a></span><span class="default">; }</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#40">string</a> <a href="dictionary_G.html#4497">GetTitle</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_T.html#4509">title_</a></span><span class="default">; }</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#40">string</a> <a href="dictionary_G.html#4498">GetDescription</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#1053">string</a>(); }</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_G.html#195">GURL</a> <a href="dictionary_G.html#4499">GetURL</a></span><span class="default">() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_U.html#4510">url_</a></span><span class="default">; }</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_G.html#195">GURL</a> <a href="dictionary_G.html#4500">GetFaviconURL</a></span><span class="default">() </span><span class="keyword">const </span><span class="default">OVERRIDE { </span><span class="keyword">return <a href="dictionary_F.html#4511">favicon_url_</a></span><span class="default">; }</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">  </span><span class="keyword">virtual </span><span class="default">base::<a href="dictionary_T.html#4502">TimeTicks</a> <a href="dictionary_G.html#4501">GetLastActivityTime</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE {</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_L.html#4512">last_activity_time_</a></span><span class="default">;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">  }</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">  </span><span class="keyword">virtual bool <a href="dictionary_I.html#4503">IsAttached</a></span><span class="default">() </span><span class="keyword">const </span><span class="default">OVERRIDE {</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_A.html#4507">agent_host_</a></span><span class="default">-&gt;<a href="dictionary_I.html#4513">IsAttached</a>();</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">  }</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">  </span><span class="keyword">virtual <a href="dictionary_S.html#389">scoped_refptr</a></span><span class="default">&lt;DevToolsAgentHost&gt; <a href="dictionary_G.html#4504">GetAgentHost</a>() </span><span class="keyword">const </span><span class="default">OVERRIDE {</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_A.html#4507">agent_host_</a></span><span class="default">;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">  }</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">  </span><span class="keyword">virtual bool <a href="dictionary_A.html#4505">Activate</a></span><span class="default">() </span><span class="keyword">const </span><span class="default">OVERRIDE;</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">  </span><span class="keyword">virtual bool <a href="dictionary_C.html#4506">Close</a></span><span class="default">() </span><span class="keyword">const </span><span class="default">OVERRIDE;</span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span>
+<a name="76"><font size=-1>76     </font></a><span class="default"> </span><span class="keyword">private</span><span class="default">:</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">  <a href="dictionary_S.html#389">scoped_refptr</a>&lt;DevToolsAgentHost&gt; <a href="dictionary_A.html#4507">agent_host_</a>;</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a> <a href="dictionary_I.html#4508">id_</a>;</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a> <a href="dictionary_T.html#4509">title_</a>;</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">  <a href="dictionary_G.html#195">GURL</a> <a href="dictionary_U.html#4510">url_</a>;</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">  <a href="dictionary_G.html#195">GURL</a> <a href="dictionary_F.html#4511">favicon_url_</a>;</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">  base::<a href="dictionary_T.html#4502">TimeTicks</a> <a href="dictionary_L.html#4512">last_activity_time_</a>;</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">};</span>
+<a name="84"><font size=-1>84     </font></a><span class="default"></span>
+<a name="85"><font size=-1>85     </font></a><span class="default"><a href="dictionary_T.html#4491">Target</a>::<a href="dictionary_T.html#4493">Target</a>(</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    <a href="dictionary_W.html#537">WebContents</a>* <a href="dictionary_W.html#4514">web_contents</a>) </span>
+<a name="87"><font size=-1>87     </font></a><span class="default">{</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">  <a href="dictionary_A.html#4507">agent_host_</a> =</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">      <a href="dictionary_D.html#4515">DevToolsAgentHost</a>::<a href="dictionary_G.html#4516">GetOrCreateFor</a>(<a href="dictionary_W.html#4514">web_contents</a>-&gt;<a href="dictionary_G.html#4340">GetRenderViewHost</a>());</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">  <a href="dictionary_I.html#4508">id_</a> = <a href="dictionary_A.html#4507">agent_host_</a>-&gt;<a href="dictionary_G.html#658">GetId</a>();</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">  <a href="dictionary_T.html#4509">title_</a> = base::<a href="dictionary_U.html#1745">UTF16ToUTF8</a>(<a href="dictionary_W.html#4514">web_contents</a>-&gt;<a href="dictionary_G.html#4517">GetTitle</a>());</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">  <a href="dictionary_U.html#4510">url_</a> = <a href="dictionary_W.html#4514">web_contents</a>-&gt;<a href="dictionary_G.html#4518">GetURL</a>();</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">  content::<a href="dictionary_N.html#4519">NavigationController</a>&amp; <a href="dictionary_C.html#4520">controller</a> = <a href="dictionary_W.html#4514">web_contents</a>-&gt;<a href="dictionary_G.html#2110">GetController</a>();</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">  content::<a href="dictionary_N.html#4522">NavigationEntry</a>* <a href="dictionary_E.html#4523">entry</a> = <a href="dictionary_C.html#4520">controller</a>.<a href="dictionary_G.html#4521">GetActiveEntry</a>();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#4523">entry</a> != <a href="dictionary_N.html#75">NULL</a> &amp;&amp; <a href="dictionary_E.html#4523">entry</a>-&gt;<a href="dictionary_G.html#663">GetURL</a>().<a href="dictionary_I.html#2701">is_valid</a>())</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    <a href="dictionary_F.html#4511">favicon_url_</a> = <a href="dictionary_E.html#4523">entry</a>-&gt;<a href="dictionary_G.html#4524">GetFavicon</a>().<a href="dictionary_U.html#2127">url</a>;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">  <a href="dictionary_L.html#4512">last_activity_time_</a> = <a href="dictionary_W.html#4514">web_contents</a>-&gt;<a href="dictionary_G.html#4525">GetLastActiveTime</a>();</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">}</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"> </span>
+<a name="100"><font size=-1>100     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="101"><font size=-1>101     </font></a><span class="keyword"><a href="dictionary_T.html#4491">Target</a></span><span class="default">::<a href="dictionary_A.html#4505">Activate</a>() </span><span class="keyword">const </span>
+<a name="102"><font size=-1>102     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">  <a href="dictionary_R.html#536">RenderViewHost</a>* <a href="dictionary_R.html#4526">rvh</a> = <a href="dictionary_A.html#4507">agent_host_</a>-&gt;<a href="dictionary_G.html#4527">GetRenderViewHost</a>();</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_R.html#4526">rvh</a>)</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">    </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">  <a href="dictionary_W.html#537">WebContents</a>* <a href="dictionary_W.html#4528">web_contents</a> = <a href="dictionary_W.html#756">WebContents</a>::<a href="dictionary_F.html#4529">FromRenderViewHost</a>(<a href="dictionary_R.html#4526">rvh</a>);</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_W.html#4528">web_contents</a>)</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">    </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">  <a href="dictionary_W.html#4528">web_contents</a>-&gt;<a href="dictionary_G.html#4530">GetDelegate</a>()-&gt;<a href="dictionary_A.html#4531">ActivateContents</a>(<a href="dictionary_W.html#4528">web_contents</a>);</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">  </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">}</span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="114"><font size=-1>114     </font></a><span class="keyword"><a href="dictionary_T.html#4491">Target</a></span><span class="default">::<a href="dictionary_C.html#4506">Close</a>() </span><span class="keyword">const </span>
+<a name="115"><font size=-1>115     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">  <a href="dictionary_R.html#536">RenderViewHost</a>* <a href="dictionary_R.html#4532">rvh</a> = <a href="dictionary_A.html#4507">agent_host_</a>-&gt;<a href="dictionary_G.html#4527">GetRenderViewHost</a>();</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_R.html#4532">rvh</a>)</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">    </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">  <a href="dictionary_R.html#4532">rvh</a>-&gt;<a href="dictionary_C.html#4533">ClosePage</a>();</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">  </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">}</span>
+<a name="122"><font size=-1>122     </font></a><span class="default"></span>
+<a name="123"><font size=-1>123     </font></a><span class="default"></span>
+<a name="124"><font size=-1>124     </font></a><span class="default">}  </span><span class="comment">// namespace</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment"></span>
+<a name="126"><font size=-1>126     </font></a><span class="comment"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="127"><font size=-1>127     </font></a><span class="default"></span>
+<a name="128"><font size=-1>128     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::<a href="dictionary_T.html#3927">ThrustShellDevToolsDelegate</a>(<a href="dictionary_T.html#348">ThrustSession</a>* <a href="dictionary_S.html#4534">session</a>)</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">: <a href="dictionary_S.html#4076">session_</a>(<a href="dictionary_S.html#4534">session</a>)</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">{</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">  <a href="dictionary_L.html#27">LOG</a>(<a href="dictionary_I.html#28">INFO</a>) &lt;&lt; </span><span class="string">&quot;ThrustShellDevToolsDelegate Constructor&quot;</span><span class="default">;</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">  <a href="dictionary_D.html#4075">devtools_http_handler_</a> =</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    <a href="dictionary_D.html#3932">DevToolsHttpHandler</a>::<a href="dictionary_S.html#4535">Start</a>(<a href="dictionary_C.html#4483">CreateSocketFactory</a>(), <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#1053">string</a>(), </span><span class="keyword">this</span><span class="default">,</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">                               base::<a href="dictionary_F.html#351">FilePath</a>());</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">}</span>
+<a name="136"><font size=-1>136     </font></a><span class="default"></span>
+<a name="137"><font size=-1>137     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::~<a href="dictionary_Non-Alpha.html#4074">ThrustShellDevToolsDelegate</a>() </span>
+<a name="138"><font size=-1>138     </font></a><span class="default">{</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">  <a href="dictionary_L.html#27">LOG</a>(<a href="dictionary_I.html#28">INFO</a>) &lt;&lt; </span><span class="string">&quot;ThrustShellDevToolsDelegate Destructor&quot;</span><span class="default">;</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">}</span>
+<a name="141"><font size=-1>141     </font></a><span class="default"></span>
+<a name="142"><font size=-1>142     </font></a><span class="default"></span><span class="keyword">void</span>
+<a name="143"><font size=-1>143     </font></a><span class="keyword"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a></span><span class="default">::<a href="dictionary_S.html#3930">Stop</a>()</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">{</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">  <a href="dictionary_L.html#27">LOG</a>(<a href="dictionary_I.html#28">INFO</a>) &lt;&lt; </span><span class="string">&quot;ThrustShellDevToolsDelegate Stop&quot;</span><span class="default">;</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">  </span><span class="comment">/* This call destroys this delegates. Be carefule double destroy. */</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">  <a href="dictionary_D.html#4075">devtools_http_handler_</a></span><span class="default">-&gt;<a href="dictionary_S.html#4536">Stop</a>();</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">}</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default"><a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a> </span>
+<a name="151"><font size=-1>151     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::<a href="dictionary_G.html#4064">GetDiscoveryPageHTML</a>() </span>
+<a name="152"><font size=-1>152     </font></a><span class="default">{</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#1053">string</a>(</span><span class="string">&quot;&lt;html&gt;&lt;/html&gt;&quot;</span><span class="default">);</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">}</span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span>
+<a name="156"><font size=-1>156     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="157"><font size=-1>157     </font></a><span class="keyword"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a></span><span class="default">::<a href="dictionary_B.html#4065">BundlesFrontendResources</a>() </span>
+<a name="158"><font size=-1>158     </font></a><span class="default">{</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">  </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">}</span>
+<a name="161"><font size=-1>161     </font></a><span class="default"></span>
+<a name="162"><font size=-1>162     </font></a><span class="default">base::<a href="dictionary_F.html#351">FilePath</a> </span>
+<a name="163"><font size=-1>163     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::<a href="dictionary_G.html#4066">GetDebugFrontendDir</a>() </span>
+<a name="164"><font size=-1>164     </font></a><span class="default">{</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">  </span><span class="keyword">return </span><span class="default">base::<a href="dictionary_F.html#351">FilePath</a>();</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">}</span>
+<a name="167"><font size=-1>167     </font></a><span class="default"></span>
+<a name="168"><font size=-1>168     </font></a><span class="default"><a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a> </span>
+<a name="169"><font size=-1>169     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::<a href="dictionary_G.html#4067">GetPageThumbnailData</a>(</span><span class="keyword">const <a href="dictionary_G.html#195">GURL</a></span><span class="default">&amp; <a href="dictionary_U.html#4537">url</a>) </span>
+<a name="170"><font size=-1>170     </font></a><span class="default">{</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#1053">string</a>();</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">}</span>
+<a name="173"><font size=-1>173     </font></a><span class="default"></span>
+<a name="174"><font size=-1>174     </font></a><span class="default"><a href="dictionary_S.html#20">scoped_ptr</a>&lt;DevToolsTarget&gt;</span>
+<a name="175"><font size=-1>175     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::<a href="dictionary_C.html#4068">CreateNewTarget</a>(</span><span class="keyword">const <a href="dictionary_G.html#195">GURL</a></span><span class="default">&amp; <a href="dictionary_U.html#4538">url</a>) {</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#20">scoped_ptr</a></span><span class="default">&lt;<a href="dictionary_D.html#4539">DevToolsTarget</a>&gt;();</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">}</span>
+<a name="178"><font size=-1>178     </font></a><span class="default"></span>
+<a name="179"><font size=-1>179     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="180"><font size=-1>180     </font></a><span class="keyword"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a></span><span class="default">::<a href="dictionary_E.html#4069">EnumerateTargets</a>(<a href="dictionary_T.html#4070">TargetCallback</a> <a href="dictionary_C.html#4540">callback</a>) {</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">  <a href="dictionary_T.html#4542">TargetList</a> <a href="dictionary_T.html#4541">targets</a>;</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_V.html#570">vector</a>&lt;RenderViewHost*&gt; <a href="dictionary_R.html#4543">rvh_list</a> =</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">    content::<a href="dictionary_D.html#4515">DevToolsAgentHost</a>::<a href="dictionary_G.html#4544">GetValidRenderViewHosts</a>();</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">  </span><span class="keyword">for</span><span class="default">(<a href="dictionary_S.html#39">std</a>::<a href="dictionary_V.html#570">vector</a>&lt;RenderViewHost*&gt;::<a href="dictionary_I.html#4545">iterator</a> <a href="dictionary_I.html#336">it</a> = <a href="dictionary_R.html#4543">rvh_list</a>.<a href="dictionary_B.html#2503">begin</a>();</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">      <a href="dictionary_I.html#336">it</a> != <a href="dictionary_R.html#4543">rvh_list</a>.<a href="dictionary_E.html#2502">end</a>(); ++<a href="dictionary_I.html#336">it</a>) {</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">    <a href="dictionary_W.html#537">WebContents</a>* <a href="dictionary_W.html#4546">web_contents</a> = <a href="dictionary_W.html#756">WebContents</a>::<a href="dictionary_F.html#4529">FromRenderViewHost</a>(*<a href="dictionary_I.html#336">it</a>);</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">    </span><span class="keyword">if</span><span class="default">(<a href="dictionary_W.html#4546">web_contents</a>) {</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">      </span><span class="comment">/* TODO(spolu): FixMe */</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment">      /*</span>
+<a name="190"><font size=-1>190     </font></a><span class="comment">      ExoFrame* frame = ExoFrame::ExoFrameForWebContents(web_contents);</span>
+<a name="191"><font size=-1>191     </font></a><span class="comment">      if(frame-&gt;session() == session_) {</span>
+<a name="192"><font size=-1>192     </font></a><span class="comment">        targets.push_back(new Target(web_contents));</span>
+<a name="193"><font size=-1>193     </font></a><span class="comment">      }</span>
+<a name="194"><font size=-1>194     </font></a><span class="comment">      */</span>
+<a name="195"><font size=-1>195     </font></a><span class="comment">      <a href="dictionary_T.html#4541">targets</a></span><span class="default">.<a href="dictionary_P.html#1308">push_back</a>(</span><span class="keyword">new <a href="dictionary_T.html#4493">Target</a></span><span class="default">(<a href="dictionary_W.html#4546">web_contents</a>));</span>
+<a name="196"><font size=-1>196     </font></a><span class="default">    }</span>
+<a name="197"><font size=-1>197     </font></a><span class="default">  }</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">  <a href="dictionary_C.html#4540">callback</a>.<a href="dictionary_R.html#87">Run</a>(<a href="dictionary_T.html#4541">targets</a>);</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">}</span>
+<a name="200"><font size=-1>200     </font></a><span class="default"></span>
+<a name="201"><font size=-1>201     </font></a><span class="default"></span>
+<a name="202"><font size=-1>202     </font></a><span class="default"><a href="dictionary_S.html#20">scoped_ptr</a>&lt;net::StreamListenSocket&gt;</span>
+<a name="203"><font size=-1>203     </font></a><span class="default"><a href="dictionary_T.html#2822">ThrustShellDevToolsDelegate</a>::<a href="dictionary_C.html#4071">CreateSocketForTethering</a>(</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">    net::<a href="dictionary_S.html#4072">StreamListenSocket</a>::<a href="dictionary_D.html#4073">Delegate</a>* <a href="dictionary_D.html#4547">delegate</a>,</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">    <a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a>* <a href="dictionary_N.html#4548">name</a>) {</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#20">scoped_ptr</a></span><span class="default">&lt;net::<a href="dictionary_S.html#4549">StreamListenSocket</a>&gt;(); </span>
+<a name="207"><font size=-1>207     </font></a><span class="default">}</span>
+<a name="208"><font size=-1>208     </font></a><span class="default"></span>
+<a name="209"><font size=-1>209     </font></a><span class="default">} </span><span class="comment">// namespace thrust_shell</span>
+<a name="210"><font size=-1>210     </font></a><span class="comment"></span>
+</pre></body></html>

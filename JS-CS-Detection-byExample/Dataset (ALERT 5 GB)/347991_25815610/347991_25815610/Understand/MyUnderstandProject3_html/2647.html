@@ -1,0 +1,233 @@
+<html><head><title>browser_client.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.2\thrust-0.7.2\src\browser\browser_client.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.2\\thrust-0.7.2\\src\\browser\\browser_client.cc";
+top.document.title  = "browser_client.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2012 The Chromium Authors.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/browser_client.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/command_line.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/file_util.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/path_service.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/string_number_conversions.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/threading/thread_restrictions.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/values.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;url/gurl.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/url_request_context_getter.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/base/l10n/l10n_util.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;webkit/common/webpreferences.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/browser_url_handler.h&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_process_host.h&quot;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/render_view_host.h&quot;</span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/resource_dispatcher_host.h&quot;</span>
+<a name="21"><font size=-1>21     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/web_contents.h&quot;</span>
+<a name="22"><font size=-1>22     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/content_switches.h&quot;</span>
+<a name="23"><font size=-1>23     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/renderer_preferences.h&quot;</span>
+<a name="24"><font size=-1>24     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/url_constants.h&quot;</span>
+<a name="25"><font size=-1>25     </font></a><span class="string"></span>
+<a name="26"><font size=-1>26     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/browser_main_parts.h&quot;</span>
+<a name="27"><font size=-1>27     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/resource_dispatcher_host_delegate.h&quot;</span>
+<a name="28"><font size=-1>28     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/common/switches.h&quot;</span>
+<a name="29"><font size=-1>29     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/session/thrust_session.h&quot;</span>
+<a name="30"><font size=-1>30     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/geolocation/access_token_store.h&quot;</span>
+<a name="31"><font size=-1>31     </font></a><span class="string"></span>
+<a name="32"><font size=-1>32     </font></a><span class="string"></span>
+<a name="33"><font size=-1>33     </font></a><span class="string"></span><span class="keyword">using namespace </span><span class="default">content;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span><span class="comment">// static</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">* <a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_S.html#2653">self_</a> = <a href="dictionary_N.html#75">NULL</a>;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_T.html#2654">ThrustShellBrowserClient</a>()</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">{</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  <a href="dictionary_S.html#2653">self_</a> = </span><span class="keyword">this</span><span class="default">;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">}</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::~<a href="dictionary_Non-Alpha.html#2655">ThrustShellBrowserClient</a>() </span>
+<a name="47"><font size=-1>47     </font></a><span class="default">{</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">}</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span><span class="comment">// static</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">* </span>
+<a name="52"><font size=-1>52     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_G.html#1258">Get</a>() </span>
+<a name="53"><font size=-1>53     </font></a><span class="default">{</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">  <a href="dictionary_D.html#343">DCHECK</a>(<a href="dictionary_S.html#2653">self_</a>);</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#2653">self_</a></span><span class="default">;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">}</span>
+<a name="57"><font size=-1>57     </font></a><span class="default"></span>
+<a name="58"><font size=-1>58     </font></a><span class="default"><a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a> </span>
+<a name="59"><font size=-1>59     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_G.html#2656">GetApplicationLocale</a>() {</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_L.html#2657">l10n_util</a></span><span class="default">::<a href="dictionary_G.html#2658">GetApplicationLocale</a>(</span><span class="string">&quot;&quot;</span><span class="default">);</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">}</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="64"><font size=-1>64     </font></a><span class="keyword"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">::<a href="dictionary_A.html#2659">AppendExtraCommandLineSwitches</a>(</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    base::<a href="dictionary_C.html#1516">CommandLine</a>* <a href="dictionary_C.html#2660">command_line</a>,</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_C.html#2661">child_process_id</a></span><span class="default">) </span>
+<a name="67"><font size=-1>67     </font></a><span class="default">{</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">  </span><span class="comment">/*</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">  command_line-&gt;AppendSwitch(switches::kEnableThreadedCompositing);</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">#if defined(OS_MACOSX)</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">  command_line-&gt;AppendSwitch(switches::kUseCoreAnimation);</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">#endif</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">  */</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"></span><span class="default">}</span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span>
+<a name="76"><font size=-1>76     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="77"><font size=-1>77     </font></a><span class="keyword"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">::<a href="dictionary_R.html#2662">ResourceDispatcherHostCreated</a>() </span>
+<a name="78"><font size=-1>78     </font></a><span class="default">{</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">  <a href="dictionary_R.html#2663">resource_dispatcher_host_delegate_</a>.<a href="dictionary_R.html#31">reset</a>(</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">      </span><span class="keyword">new <a href="dictionary_T.html#509">ThrustShellResourceDispatcherHostDelegate</a></span><span class="default">());</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">  <a href="dictionary_R.html#2664">ResourceDispatcherHost</a>::<a href="dictionary_G.html#2665">Get</a>()-&gt;<a href="dictionary_S.html#1249">SetDelegate</a>(</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">      <a href="dictionary_R.html#2663">resource_dispatcher_host_delegate_</a>.<a href="dictionary_G.html#95">get</a>());</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">}</span>
+<a name="84"><font size=-1>84     </font></a><span class="default"></span>
+<a name="85"><font size=-1>85     </font></a><span class="default"><a href="dictionary_A.html#2667">AccessTokenStore</a>* </span>
+<a name="86"><font size=-1>86     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_C.html#2666">CreateAccessTokenStore</a>()</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">{ </span>
+<a name="88"><font size=-1>88     </font></a><span class="default">  </span><span class="keyword">return new <a href="dictionary_T.html#2669">ThrustShellAccessTokenStore</a></span><span class="default">();</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">}</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default"><a href="dictionary_S.html#39">std</a>::<a href="dictionary_S.html#40">string</a> </span>
+<a name="92"><font size=-1>92     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_G.html#2670">GetDefaultDownloadName</a>() </span>
+<a name="93"><font size=-1>93     </font></a><span class="default">{</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">  </span><span class="keyword">return </span><span class="string">&quot;download&quot;</span><span class="default">;</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">}</span>
+<a name="96"><font size=-1>96     </font></a><span class="default"></span>
+<a name="97"><font size=-1>97     </font></a><span class="default"></span>
+<a name="98"><font size=-1>98     </font></a><span class="default"><a href="dictionary_W.html#2672">WebContentsViewDelegate</a>* </span>
+<a name="99"><font size=-1>99     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_G.html#2671">GetWebContentsViewDelegate</a>(</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">    <a href="dictionary_W.html#537">WebContents</a>* <a href="dictionary_W.html#2673">web_contents</a>) </span>
+<a name="101"><font size=-1>101     </font></a><span class="default">{ </span>
+<a name="102"><font size=-1>102     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_N.html#75">NULL</a></span><span class="default">;</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">  </span><span class="comment">/* TODO(spolu): Reimplemenent with plugin */</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">  //return CreateThrustShellWebContentsViewDelegate(web_contents);</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment"></span><span class="default">}</span>
+<a name="106"><font size=-1>106     </font></a><span class="default"></span>
+<a name="107"><font size=-1>107     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="108"><font size=-1>108     </font></a><span class="keyword"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">::<a href="dictionary_O.html#2674">OverrideWebkitPrefs</a>(</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">    <a href="dictionary_R.html#2676">RenderViewHost</a>* <a href="dictionary_R.html#2675">render_view_host</a>,</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_G.html#2093">GURL</a></span><span class="default">&amp; <a href="dictionary_U.html#2677">url</a>,</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">    <a href="dictionary_W.html#2679">WebPreferences</a>* <a href="dictionary_P.html#2678">prefs</a>) </span>
+<a name="112"><font size=-1>112     </font></a><span class="default">{</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">  <a href="dictionary_P.html#2678">prefs</a>-&gt;<a href="dictionary_J.html#2680">javascript_enabled</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">  <a href="dictionary_P.html#2678">prefs</a>-&gt;<a href="dictionary_W.html#2681">web_security_enabled</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">  <a href="dictionary_P.html#2678">prefs</a>-&gt;<a href="dictionary_A.html#2682">allow_file_access_from_file_urls</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">  <a href="dictionary_P.html#2678">prefs</a>-&gt;<a href="dictionary_A.html#2683">allow_universal_access_from_file_urls</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">  <a href="dictionary_P.html#2678">prefs</a>-&gt;<a href="dictionary_A.html#2682">allow_file_access_from_file_urls</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">}</span>
+<a name="119"><font size=-1>119     </font></a><span class="default"></span>
+<a name="120"><font size=-1>120     </font></a><span class="default">net::<a href="dictionary_U.html#2685">URLRequestContextGetter</a>* </span>
+<a name="121"><font size=-1>121     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_C.html#2684">CreateRequestContext</a>(</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">    <a href="dictionary_B.html#2099">BrowserContext</a>* <a href="dictionary_C.html#2686">content_browser_context</a>,</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">    <a href="dictionary_P.html#333">ProtocolHandlerMap</a>* <a href="dictionary_P.html#2687">protocol_handlers</a>,</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">    <a href="dictionary_U.html#357">URLRequestInterceptorScopedVector</a> <a href="dictionary_P.html#2688">protocol_interceptors</a>)</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">{</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">  <a href="dictionary_T.html#348">ThrustSession</a>* <a href="dictionary_S.html#2689">session</a> =</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">      <a href="dictionary_T.html#1259">ThrustSessionForBrowserContext</a>(<a href="dictionary_C.html#2686">content_browser_context</a>);</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#2689">session</a></span><span class="default">-&gt;<a href="dictionary_C.html#2690">CreateRequestContext</a>(</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">      <a href="dictionary_P.html#2687">protocol_handlers</a>, <a href="dictionary_P.html#2688">protocol_interceptors</a>.<a href="dictionary_P.html#23">Pass</a>());</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">}</span>
+<a name="131"><font size=-1>131     </font></a><span class="default"></span>
+<a name="132"><font size=-1>132     </font></a><span class="default">net::<a href="dictionary_U.html#2685">URLRequestContextGetter</a>*</span>
+<a name="133"><font size=-1>133     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_C.html#2691">CreateRequestContextForStoragePartition</a>(</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">    <a href="dictionary_B.html#2099">BrowserContext</a>* <a href="dictionary_C.html#2692">content_browser_context</a>,</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">    </span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#682">FilePath</a>&amp; <a href="dictionary_P.html#2693">partition_path</a>,</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">    </span><span class="keyword">bool <a href="dictionary_I.html#2694">in_memory</a></span><span class="default">,</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">    <a href="dictionary_P.html#333">ProtocolHandlerMap</a>* <a href="dictionary_P.html#2695">protocol_handlers</a>,</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">    <a href="dictionary_U.html#357">URLRequestInterceptorScopedVector</a> <a href="dictionary_P.html#2696">protocol_interceptors</a>)</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">{</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">  <a href="dictionary_T.html#348">ThrustSession</a>* <a href="dictionary_S.html#2697">session</a> =</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">      <a href="dictionary_T.html#1259">ThrustSessionForBrowserContext</a>(<a href="dictionary_C.html#2692">content_browser_context</a>);</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_S.html#2697">session</a></span><span class="default">-&gt;<a href="dictionary_C.html#2698">CreateRequestContextForStoragePartition</a>(</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">      <a href="dictionary_P.html#2693">partition_path</a>, <a href="dictionary_I.html#2694">in_memory</a>, </span>
+<a name="144"><font size=-1>144     </font></a><span class="default">      <a href="dictionary_P.html#2695">protocol_handlers</a>, <a href="dictionary_P.html#2696">protocol_interceptors</a>.<a href="dictionary_P.html#23">Pass</a>());</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">}</span>
+<a name="146"><font size=-1>146     </font></a><span class="default"></span>
+<a name="147"><font size=-1>147     </font></a><span class="default"></span>
+<a name="148"><font size=-1>148     </font></a><span class="default"></span><span class="keyword">bool </span>
+<a name="149"><font size=-1>149     </font></a><span class="keyword"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">::<a href="dictionary_I.html#2699">IsHandledURL</a>(</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_G.html#2093">GURL</a></span><span class="default">&amp; <a href="dictionary_U.html#2700">url</a>) </span>
+<a name="151"><font size=-1>151     </font></a><span class="default">{</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_U.html#2700">url</a>.<a href="dictionary_I.html#2701">is_valid</a>())</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">    </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">  <a href="dictionary_D.html#632">DCHECK_EQ</a>(<a href="dictionary_U.html#2700">url</a>.<a href="dictionary_S.html#2702">scheme</a>(), <a href="dictionary_S.html#2703">StringToLowerASCII</a>(<a href="dictionary_U.html#2700">url</a>.<a href="dictionary_S.html#2702">scheme</a>()));</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">  </span><span class="comment">// Keep in sync with ProtocolHandlers added by</span>
+<a name="156"><font size=-1>156     </font></a><span class="comment">  // ThrustShellURLRequestContextGetter::GetURLRequestContext().</span>
+<a name="157"><font size=-1>157     </font></a><span class="comment">  /* TODO(spolu): Check in sync */</span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">  </span><span class="keyword">static const char</span><span class="default">* </span><span class="keyword">const <a href="dictionary_K.html#2704">kProtocolList</a></span><span class="default">[] = {</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">      <a href="dictionary_U.html#463">url</a>::<a href="dictionary_K.html#2705">kBlobScheme</a>,</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">      <a href="dictionary_U.html#463">url</a>::<a href="dictionary_K.html#2706">kFileSystemScheme</a>,</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">      <a href="dictionary_K.html#2707">kChromeUIScheme</a>,</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">      <a href="dictionary_K.html#2708">kChromeDevToolsScheme</a>,</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">      <a href="dictionary_U.html#463">url</a>::<a href="dictionary_K.html#464">kDataScheme</a>,</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">      <a href="dictionary_U.html#463">url</a>::<a href="dictionary_K.html#466">kFileScheme</a>,</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">  };</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(<a href="dictionary_S.html#978">size_t</a> <a href="dictionary_I.html#2709">i</a> = </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#2709">i</a> &lt; <a href="dictionary_A.html#1928">arraysize</a>(<a href="dictionary_K.html#2704">kProtocolList</a>); ++<a href="dictionary_I.html#2709">i</a>) {</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_U.html#2700">url</a>.<a href="dictionary_S.html#2702">scheme</a>() == <a href="dictionary_K.html#2704">kProtocolList</a>[<a href="dictionary_I.html#2709">i</a>])</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">      </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">  }</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">  </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">}</span>
+<a name="172"><font size=-1>172     </font></a><span class="default"></span>
+<a name="173"><font size=-1>173     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="174"><font size=-1>174     </font></a><span class="keyword"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">::<a href="dictionary_R.html#2710">RegisterThrustSession</a>(</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">    <a href="dictionary_T.html#348">ThrustSession</a>* <a href="dictionary_S.html#2711">session</a>)</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">{</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">  <a href="dictionary_L.html#27">LOG</a>(<a href="dictionary_I.html#28">INFO</a>) &lt;&lt; </span><span class="string">&quot;Register Session&quot;</span><span class="default">;</span>
+<a name="178"><font size=-1>178     </font></a><span class="default">  <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_P.html#1308">push_back</a>(<a href="dictionary_S.html#2711">session</a>);</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">}</span>
+<a name="180"><font size=-1>180     </font></a><span class="default"></span>
+<a name="181"><font size=-1>181     </font></a><span class="default"></span><span class="keyword">void </span>
+<a name="182"><font size=-1>182     </font></a><span class="keyword"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a></span><span class="default">::<a href="dictionary_U.html#2713">UnRegisterThrustSession</a>(</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">    <a href="dictionary_T.html#348">ThrustSession</a>* <a href="dictionary_S.html#2714">session</a>)</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">{</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_V.html#570">vector</a>&lt;ThrustSession*&gt;::<a href="dictionary_I.html#2716">iterator</a> <a href="dictionary_I.html#2715">it</a>;</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">  </span><span class="keyword">for</span><span class="default">(<a href="dictionary_I.html#2715">it</a> = <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_B.html#2503">begin</a>(); <a href="dictionary_I.html#2715">it</a> != <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_E.html#2502">end</a>(); <a href="dictionary_I.html#2715">it</a>++) {</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">    </span><span class="keyword">if</span><span class="default">(*<a href="dictionary_I.html#2715">it</a> == <a href="dictionary_S.html#2714">session</a>)</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">      </span><span class="keyword">break</span><span class="default">;</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">  }</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">  </span><span class="keyword">if</span><span class="default">(<a href="dictionary_I.html#2715">it</a> != <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_E.html#2502">end</a>()) {</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">    <a href="dictionary_L.html#27">LOG</a>(<a href="dictionary_I.html#28">INFO</a>) &lt;&lt; </span><span class="string">&quot;UnRegister Session&quot;</span><span class="default">;</span>
+<a name="192"><font size=-1>192     </font></a><span class="default">    <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_E.html#2717">erase</a>(<a href="dictionary_I.html#2715">it</a>);</span>
+<a name="193"><font size=-1>193     </font></a><span class="default">  }</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">}</span>
+<a name="195"><font size=-1>195     </font></a><span class="default"></span>
+<a name="196"><font size=-1>196     </font></a><span class="default"><a href="dictionary_T.html#348">ThrustSession</a>*</span>
+<a name="197"><font size=-1>197     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_T.html#1259">ThrustSessionForBrowserContext</a>(</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">    <a href="dictionary_B.html#2099">BrowserContext</a>* <a href="dictionary_B.html#2718">browser_context</a>) </span>
+<a name="199"><font size=-1>199     </font></a><span class="default">{</span>
+<a name="200"><font size=-1>200     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_V.html#570">vector</a>&lt;ThrustSession*&gt;::<a href="dictionary_I.html#2716">iterator</a> <a href="dictionary_I.html#2719">it</a>;</span>
+<a name="201"><font size=-1>201     </font></a><span class="default">  </span><span class="keyword">for</span><span class="default">(<a href="dictionary_I.html#2719">it</a> = <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_B.html#2503">begin</a>(); <a href="dictionary_I.html#2719">it</a> != <a href="dictionary_S.html#2712">sessions_</a>.<a href="dictionary_E.html#2502">end</a>(); <a href="dictionary_I.html#2719">it</a>++) {</span>
+<a name="202"><font size=-1>202     </font></a><span class="default">    </span><span class="keyword">if</span><span class="default">(*<a href="dictionary_I.html#2719">it</a> == <a href="dictionary_B.html#2718">browser_context</a>) {</span>
+<a name="203"><font size=-1>203     </font></a><span class="default">      </span><span class="keyword">return </span><span class="default">*<a href="dictionary_I.html#2719">it</a>;</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">    }</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">  }</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_N.html#75">NULL</a></span><span class="default">;</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">}</span>
+<a name="208"><font size=-1>208     </font></a><span class="default"></span>
+<a name="209"><font size=-1>209     </font></a><span class="default"><a href="dictionary_T.html#348">ThrustSession</a>* </span>
+<a name="210"><font size=-1>210     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_S.html#2098">system_session</a>()</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">{</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">  </span><span class="keyword">return </span><span class="default">((<a href="dictionary_T.html#348">ThrustSession</a>*) <a href="dictionary_B.html#2720">browser_main_parts</a>()-&gt;<a href="dictionary_B.html#2721">browser_context</a>());</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">}</span>
+<a name="214"><font size=-1>214     </font></a><span class="default"></span>
+<a name="215"><font size=-1>215     </font></a><span class="default"><a href="dictionary_B.html#1523">brightray</a>::<a href="dictionary_B.html#2383">BrowserMainParts</a>* </span>
+<a name="216"><font size=-1>216     </font></a><span class="default"><a href="dictionary_T.html#1257">ThrustShellBrowserClient</a>::<a href="dictionary_O.html#2722">OverrideCreateBrowserMainParts</a>(</span>
+<a name="217"><font size=-1>217     </font></a><span class="default">    </span><span class="keyword">const <a href="dictionary_C.html#755">content</a></span><span class="default">::<a href="dictionary_M.html#2724">MainFunctionParams</a>&amp;) </span>
+<a name="218"><font size=-1>218     </font></a><span class="default">{</span>
+<a name="219"><font size=-1>219     </font></a><span class="default">  </span><span class="keyword">return new <a href="dictionary_T.html#2384">ThrustShellMainParts</a></span><span class="default">();</span>
+<a name="220"><font size=-1>220     </font></a><span class="default">}</span>
+<a name="221"><font size=-1>221     </font></a><span class="default"></span>
+<a name="222"><font size=-1>222     </font></a><span class="default">} </span><span class="comment">// namespace thrust_shell</span>
+<a name="223"><font size=-1>223     </font></a><span class="comment"></span>
+</pre></body></html>

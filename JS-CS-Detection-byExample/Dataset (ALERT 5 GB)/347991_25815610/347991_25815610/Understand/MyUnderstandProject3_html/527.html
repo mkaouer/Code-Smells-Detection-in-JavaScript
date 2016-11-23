@@ -1,0 +1,177 @@
+<html><head><title>file_select_helper.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.2\thrust-0.7.2\src\browser\dialog\file_select_helper.h</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.2\\thrust-0.7.2\\src\\browser\\dialog\\file_select_helper.h";
+top.document.title  = "file_select_helper.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2012 The Chromium Authors.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#ifndef <a href="dictionary_T.html#528">THRUST_SHELL_BROWSER_UI_DIALOG_FILE_SELECT_HELPER_H_</a></span>
+<a name="6"><font size=-1>6     </font></a><span class="preproc">#define <a href="dictionary_T.html#528">THRUST_SHELL_BROWSER_UI_DIALOG_FILE_SELECT_HELPER_H_</a></span>
+<a name="7"><font size=-1>7     </font></a><span class="preproc"></span>
+<a name="8"><font size=-1>8     </font></a><span class="preproc">#include </span><span class="string">&lt;map&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&lt;vector&gt;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/compiler_specific.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/gtest_prod_util.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/base/directory_lister.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/shell_dialogs/select_file_dialog.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/notification_observer.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/notification_registrar.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/file_chooser_params.h&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="keyword">namespace </span><span class="default">content {</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_R.html#536">RenderViewHost</a></span><span class="default">;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_W.html#537">WebContents</a></span><span class="default">;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">}</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">ui {</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">struct <a href="dictionary_S.html#539">SelectedFileInfo</a></span><span class="default">;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">}</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="comment">// This class handles file-selection requests coming from WebUI elements</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">// (via the extensions::ExtensionHost class). It implements both the</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">// initialisation and listener functions for file-selection dialogs.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_F.html#540">FileSelectHelper</a></span>
+<a name="34"><font size=-1>34     </font></a><span class="keyword">    </span><span class="default">: </span><span class="keyword">public </span><span class="default">base::<a href="dictionary_R.html#228">RefCountedThreadSafe</a>&lt;FileSelectHelper&gt;,</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">      </span><span class="keyword">public </span><span class="default">ui::<a href="dictionary_S.html#541">SelectFileDialog</a>::<a href="dictionary_L.html#542">Listener</a>,</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">      </span><span class="keyword">public </span><span class="default">content::<a href="dictionary_N.html#543">NotificationObserver</a> {</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"> </span><span class="keyword">public</span><span class="default">:</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span>
+<a name="39"><font size=-1>39     </font></a><span class="default">  </span><span class="comment">// Show the file chooser dialog.</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">  </span><span class="keyword">static void <a href="dictionary_R.html#544">RunFileChooser</a></span><span class="default">(content::<a href="dictionary_W.html#537">WebContents</a>* tab,</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">                             </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_F.html#545">FileChooserParams</a>&amp; params);</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  </span><span class="comment">// Enumerates all the files in directory.</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">  </span><span class="keyword">static void <a href="dictionary_E.html#546">EnumerateDirectory</a></span><span class="default">(content::<a href="dictionary_W.html#537">WebContents</a>* tab,</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">                                 </span><span class="keyword">int </span><span class="default">request_id,</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">                                 </span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#547">FilePath</a>&amp; path);</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default"> </span><span class="keyword">private</span><span class="default">:</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">  </span><span class="keyword">explicit <a href="dictionary_F.html#548">FileSelectHelper</a></span><span class="default">();</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">  </span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#549">FileSelectHelper</a>();</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default">  </span><span class="comment">// Utility class which can listen for directory lister events and relay</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">  // them to the main object with the correct tracking id.</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">  </span><span class="keyword">class <a href="dictionary_D.html#550">DirectoryListerDispatchDelegate</a></span>
+<a name="55"><font size=-1>55     </font></a><span class="keyword">      </span><span class="default">: </span><span class="keyword">public </span><span class="default">net::<a href="dictionary_D.html#551">DirectoryLister</a>::<a href="dictionary_D.html#552">DirectoryListerDelegate</a> {</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">   </span><span class="keyword">public</span><span class="default">:</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    <a href="dictionary_D.html#553">DirectoryListerDispatchDelegate</a>(<a href="dictionary_F.html#540">FileSelectHelper</a>* <a href="dictionary_P.html#554">parent</a>, </span><span class="keyword">int <a href="dictionary_I.html#555">id</a></span><span class="default">)</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">        : <a href="dictionary_P.html#560">parent_</a>(<a href="dictionary_P.html#554">parent</a>),</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">          <a href="dictionary_I.html#561">id_</a>(<a href="dictionary_I.html#555">id</a>) {}</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">    </span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#556">DirectoryListerDispatchDelegate</a>() {}</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    </span><span class="keyword">virtual void <a href="dictionary_O.html#557">OnListFile</a></span><span class="default">(</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        </span><span class="keyword">const </span><span class="default">net::<a href="dictionary_D.html#551">DirectoryLister</a>::<a href="dictionary_D.html#558">DirectoryListerData</a>&amp; data) OVERRIDE;</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    </span><span class="keyword">virtual void <a href="dictionary_O.html#559">OnListDone</a></span><span class="default">(</span><span class="keyword">int </span><span class="default">error) OVERRIDE;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">   </span><span class="keyword">private</span><span class="default">:</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    </span><span class="comment">// This FileSelectHelper owns this object.</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">    <a href="dictionary_F.html#540">FileSelectHelper</a></span><span class="default">* <a href="dictionary_P.html#560">parent_</a>;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_I.html#561">id_</a></span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    <a href="dictionary_D.html#562">DISALLOW_COPY_AND_ASSIGN</a>(<a href="dictionary_D.html#550">DirectoryListerDispatchDelegate</a>);</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">  };</span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_R.html#563">RunFileChooser</a></span><span class="default">(content::<a href="dictionary_R.html#536">RenderViewHost</a>* render_view_host,</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">                      content::<a href="dictionary_W.html#537">WebContents</a>* web_contents,</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">                      </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_F.html#545">FileChooserParams</a>&amp; params);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_R.html#564">RunFileChooserOnFileThread</a></span><span class="default">(</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">      </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_F.html#545">FileChooserParams</a>&amp; params);</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_R.html#565">RunFileChooserOnUIThread</a></span><span class="default">(</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">      </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_F.html#545">FileChooserParams</a>&amp; params);</span>
+<a name="79"><font size=-1>79     </font></a><span class="default"></span>
+<a name="80"><font size=-1>80     </font></a><span class="default">  </span><span class="comment">// Cleans up and releases this instance. This must be called after the last</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">  // callback is received from the file chooser dialog.</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_R.html#566">RunFileChooserEnd</a></span><span class="default">();</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default">  </span><span class="comment">// SelectFileDialog::Listener overrides.</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">  </span><span class="keyword">virtual void <a href="dictionary_F.html#567">FileSelected</a></span><span class="default">(</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">      </span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#547">FilePath</a>&amp; path, </span><span class="keyword">int </span><span class="default">index, </span><span class="keyword">void</span><span class="default">* params) OVERRIDE;</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_F.html#568">FileSelectedWithExtraInfo</a></span><span class="default">(</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">      </span><span class="keyword">const </span><span class="default">ui::<a href="dictionary_S.html#539">SelectedFileInfo</a>&amp; file,</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">      </span><span class="keyword">int </span><span class="default">index,</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">      </span><span class="keyword">void</span><span class="default">* params) OVERRIDE;</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_M.html#569">MultiFilesSelected</a></span><span class="default">(</span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_V.html#570">vector</a>&lt;base::FilePath&gt;&amp; files,</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">                                  </span><span class="keyword">void</span><span class="default">* params) OVERRIDE;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_M.html#571">MultiFilesSelectedWithExtraInfo</a></span><span class="default">(</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">      </span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_V.html#570">vector</a>&lt;ui::SelectedFileInfo&gt;&amp; files,</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">      </span><span class="keyword">void</span><span class="default">* params) OVERRIDE;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_F.html#572">FileSelectionCanceled</a></span><span class="default">(</span><span class="keyword">void</span><span class="default">* params) OVERRIDE;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default"></span>
+<a name="98"><font size=-1>98     </font></a><span class="default">  </span><span class="comment">// content::NotificationObserver overrides.</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">  </span><span class="keyword">virtual void <a href="dictionary_O.html#573">Observe</a></span><span class="default">(</span><span class="keyword">int </span><span class="default">type,</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">                       </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_N.html#574">NotificationSource</a>&amp; source,</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">                       </span><span class="keyword">const </span><span class="default">content::<a href="dictionary_N.html#575">NotificationDetails</a>&amp; details) OVERRIDE;</span>
+<a name="102"><font size=-1>102     </font></a><span class="default"></span>
+<a name="103"><font size=-1>103     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_E.html#576">EnumerateDirectory</a></span><span class="default">(</span><span class="keyword">int </span><span class="default">request_id,</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">                          content::<a href="dictionary_R.html#536">RenderViewHost</a>* render_view_host,</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">                          </span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#547">FilePath</a>&amp; path);</span>
+<a name="106"><font size=-1>106     </font></a><span class="default"></span>
+<a name="107"><font size=-1>107     </font></a><span class="default">  </span><span class="comment">// Kicks off a new directory enumeration.</span>
+<a name="108"><font size=-1>108     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_S.html#577">StartNewEnumeration</a></span><span class="default">(</span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#547">FilePath</a>&amp; path,</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">                           </span><span class="keyword">int </span><span class="default">request_id,</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">                           content::<a href="dictionary_R.html#536">RenderViewHost</a>* render_view_host);</span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+<a name="112"><font size=-1>112     </font></a><span class="default">  </span><span class="comment">// Callbacks from directory enumeration.</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">  </span><span class="keyword">virtual void <a href="dictionary_O.html#578">OnListFile</a></span><span class="default">(</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">      </span><span class="keyword">int </span><span class="default">id,</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">      </span><span class="keyword">const </span><span class="default">net::<a href="dictionary_D.html#551">DirectoryLister</a>::<a href="dictionary_D.html#558">DirectoryListerData</a>&amp; data);</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">  </span><span class="keyword">virtual void <a href="dictionary_O.html#579">OnListDone</a></span><span class="default">(</span><span class="keyword">int </span><span class="default">id, </span><span class="keyword">int </span><span class="default">error);</span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default">  </span><span class="comment">// Cleans up and releases this instance. This must be called after the last</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">  // callback is received from the enumeration code.</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_E.html#580">EnumerateDirectoryEnd</a></span><span class="default">();</span>
+<a name="121"><font size=-1>121     </font></a><span class="default"></span>
+<a name="122"><font size=-1>122     </font></a><span class="default">  </span><span class="comment">// Helper method to get allowed extensions for select file dialog from</span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">  // the specified accept types as defined in the spec:</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">  //   http://whatwg.org/html/number-state.html#attr-input-accept</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">  // |accept_types| contains only valid lowercased MIME types or file extensions</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">  // beginning with a period (.).</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">  </span><span class="keyword">static <a href="dictionary_S.html#20">scoped_ptr</a></span><span class="default">&lt;ui::SelectFileDialog::FileTypeInfo&gt;</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">      <a href="dictionary_G.html#581">GetFileTypesFromAcceptType</a>(</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">          </span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_V.html#570">vector</a>&lt;base::string16&gt;&amp; accept_types);</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default">  </span><span class="comment">// Check the accept type is valid. It is expected to be all lower case with</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">  // no whitespace.</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">  </span><span class="keyword">static bool <a href="dictionary_I.html#582">IsAcceptTypeValid</a></span><span class="default">(</span><span class="keyword">const <a href="dictionary_S.html#39">std</a></span><span class="default">::<a href="dictionary_S.html#40">string</a>&amp; accept_type);</span>
+<a name="134"><font size=-1>134     </font></a><span class="default"></span>
+<a name="135"><font size=-1>135     </font></a><span class="default">  </span><span class="comment">// The RenderViewHost and WebContents for the page showing a file dialog</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">  // (may only be one such dialog).</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">  </span><span class="default">content::<a href="dictionary_R.html#536">RenderViewHost</a>* <a href="dictionary_R.html#583">render_view_host_</a>;</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">  content::<a href="dictionary_W.html#537">WebContents</a>* <a href="dictionary_W.html#584">web_contents_</a>;</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default">  </span><span class="comment">// Dialog box used for choosing files to upload from file form fields.</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">  <a href="dictionary_S.html#389">scoped_refptr</a></span><span class="default">&lt;ui::SelectFileDialog&gt; <a href="dictionary_S.html#585">select_file_dialog_</a>;</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">  <a href="dictionary_S.html#20">scoped_ptr</a>&lt;ui::SelectFileDialog::FileTypeInfo&gt; <a href="dictionary_S.html#586">select_file_types_</a>;</span>
+<a name="143"><font size=-1>143     </font></a><span class="default"></span>
+<a name="144"><font size=-1>144     </font></a><span class="default">  </span><span class="comment">// The type of file dialog last shown.</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">  </span><span class="default">ui::<a href="dictionary_S.html#541">SelectFileDialog</a>::<a href="dictionary_T.html#588">Type</a> <a href="dictionary_D.html#587">dialog_type_</a>;</span>
+<a name="146"><font size=-1>146     </font></a><span class="default"></span>
+<a name="147"><font size=-1>147     </font></a><span class="default">  </span><span class="comment">// The mode of file dialog last shown.</span>
+<a name="148"><font size=-1>148     </font></a><span class="comment">  </span><span class="default">content::<a href="dictionary_F.html#545">FileChooserParams</a>::<a href="dictionary_M.html#590">Mode</a> <a href="dictionary_D.html#589">dialog_mode_</a>;</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">  </span><span class="comment">// Maintain a list of active directory enumerations.  These could come from</span>
+<a name="151"><font size=-1>151     </font></a><span class="comment">  // the file select dialog or from drag-and-drop of directories, so there could</span>
+<a name="152"><font size=-1>152     </font></a><span class="comment">  // be more than one going on at a time.</span>
+<a name="153"><font size=-1>153     </font></a><span class="comment">  </span><span class="keyword">struct <a href="dictionary_A.html#591">ActiveDirectoryEnumeration</a></span><span class="default">;</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">  <a href="dictionary_S.html#39">std</a>::<a href="dictionary_M.html#593">map</a>&lt;</span><span class="keyword">int</span><span class="default">, ActiveDirectoryEnumeration*&gt; <a href="dictionary_D.html#592">directory_enumerations_</a>;</span>
+<a name="155"><font size=-1>155     </font></a><span class="default"></span>
+<a name="156"><font size=-1>156     </font></a><span class="default">  </span><span class="comment">// Registrar for notifications regarding our RenderViewHost.</span>
+<a name="157"><font size=-1>157     </font></a><span class="comment">  </span><span class="default">content::<a href="dictionary_N.html#595">NotificationRegistrar</a> <a href="dictionary_N.html#594">notification_registrar_</a>;</span>
+<a name="158"><font size=-1>158     </font></a><span class="default"></span>
+<a name="159"><font size=-1>159     </font></a><span class="default">  </span><span class="keyword">friend class </span><span class="default">base::<a href="dictionary_R.html#228">RefCountedThreadSafe</a>&lt;FileSelectHelper&gt;;</span>
+<a name="160"><font size=-1>160     </font></a><span class="default"></span>
+<a name="161"><font size=-1>161     </font></a><span class="default">  <a href="dictionary_D.html#596">DISALLOW_COPY_AND_ASSIGN</a>(<a href="dictionary_F.html#540">FileSelectHelper</a>);</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">};</span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span>
+<a name="164"><font size=-1>164     </font></a><span class="default">} </span><span class="comment">// namespace thrust_shell</span>
+<a name="165"><font size=-1>165     </font></a><span class="comment"></span>
+<a name="166"><font size=-1>166     </font></a><span class="comment"></span><span class="preproc">#endif </span><span class="comment">// THRUST_SHELL_BROWSER_UI_DIALOG_FILE_SELECT_HELPER_H_</span>
+<a name="167"><font size=-1>167     </font></a><span class="comment"></span>
+</pre></body></html>

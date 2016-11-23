@@ -1,0 +1,85 @@
+<html><head><title>global_menu_bar_x11.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.5\thrust-0.7.5\src\browser\ui\views\global_menu_bar_x11.h</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.5\\thrust-0.7.5\\src\\browser\\ui\\views\\global_menu_bar_x11.h";
+top.document.title  = "global_menu_bar_x11.h";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2014 GitHub, Inc. All rights reserved.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#ifndef <a href="dictionary_T.html#5257">THRUST_SHELL_BROWSER_UI_VIEWS_GLOBAL_MENU_BAR_X11_H_</a></span>
+<a name="6"><font size=-1>6     </font></a><span class="preproc">#define <a href="dictionary_T.html#5257">THRUST_SHELL_BROWSER_UI_VIEWS_GLOBAL_MENU_BAR_X11_H_</a></span>
+<a name="7"><font size=-1>7     </font></a><span class="preproc"></span>
+<a name="8"><font size=-1>8     </font></a><span class="preproc">#include </span><span class="string">&lt;string&gt;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/basictypes.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/compiler_specific.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/base/glib/glib_signal.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;ui/gfx/native_widget_types.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="keyword">typedef struct <a href="dictionary_Non-Alpha.html#4314">_DbusmenuMenuitem</a> <a href="dictionary_D.html#4313">DbusmenuMenuitem</a></span><span class="default">;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">typedef struct <a href="dictionary_Non-Alpha.html#4326">_DbusmenuServer</a>   <a href="dictionary_D.html#4325">DbusmenuServer</a></span><span class="default">;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">ui {</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_A.html#1599">Accelerator</a></span><span class="default">;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_M.html#1586">MenuModel</a></span><span class="default">;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">}</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">class <a href="dictionary_T.html#97">ThrustWindow</a></span><span class="default">;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="comment">// Controls the Mac style menu bar on Unity.</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">//</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment">// Unity has an Apple-like menu bar at the top of the screen that changes</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment">// depending on the active window. In the GTK port, we had a hidden GtkMenuBar</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">// object in each GtkWindow which existed only to be scrapped by the</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">// libdbusmenu-gtk code. Since we don't have GtkWindows anymore, we need to</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment">// interface directly with the lower level libdbusmenu-glib, which we</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">// opportunistically dlopen() since not everyone is running Ubuntu.</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">//</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">// This class is like the chrome's corresponding one, but it generates the menu</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">// from menu models instead, and it is also per-window specific.</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_G.html#2443">GlobalMenuBarX11</a> </span><span class="default">{</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"> </span><span class="keyword">public</span><span class="default">:</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">  </span><span class="keyword">explicit <a href="dictionary_G.html#4374">GlobalMenuBarX11</a></span><span class="default">(<a href="dictionary_T.html#97">ThrustWindow</a>* window);</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">  </span><span class="keyword">virtual </span><span class="default">~<a href="dictionary_Non-Alpha.html#4380">GlobalMenuBarX11</a>();</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">  </span><span class="comment">// Creates the object path for DbusemenuServer which is attached to |xid|.</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">  </span><span class="keyword">static <a href="dictionary_S.html#12">std</a></span><span class="default">::<a href="dictionary_S.html#73">string</a> <a href="dictionary_G.html#2444">GetPathForWindow</a>(<a href="dictionary_G.html#100">gfx</a>::<a href="dictionary_A.html#4383">AcceleratedWidget</a> xid);</span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  </span><span class="keyword">void <a href="dictionary_S.html#4384">SetMenu</a></span><span class="default">(ui::<a href="dictionary_M.html#1586">MenuModel</a>* menu_model);</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">  </span><span class="keyword">bool <a href="dictionary_I.html#4381">IsServerStarted</a></span><span class="default">() </span><span class="keyword">const</span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default"> </span><span class="keyword">private</span><span class="default">:</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">  </span><span class="comment">// Creates a DbusmenuServer.</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_I.html#4379">InitServer</a></span><span class="default">(<a href="dictionary_G.html#100">gfx</a>::<a href="dictionary_A.html#4383">AcceleratedWidget</a> xid);</span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span>
+<a name="53"><font size=-1>53     </font></a><span class="default">  </span><span class="comment">// Create a menu from menu model.</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_B.html#4387">BuildMenuFromModel</a></span><span class="default">(ui::<a href="dictionary_M.html#1586">MenuModel</a>* model, <a href="dictionary_D.html#4313">DbusmenuMenuitem</a>* parent);</span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default">  </span><span class="comment">// Sets the accelerator for |item|.</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">  </span><span class="keyword">void <a href="dictionary_R.html#4401">RegisterAccelerator</a></span><span class="default">(<a href="dictionary_D.html#4313">DbusmenuMenuitem</a>* item,</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">                           </span><span class="keyword">const </span><span class="default">ui::<a href="dictionary_A.html#1599">Accelerator</a>&amp; accelerator);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  <a href="dictionary_C.html#5258">CHROMEG_CALLBACK_1</a>(<a href="dictionary_G.html#2443">GlobalMenuBarX11</a>, </span><span class="keyword">void</span><span class="default">, OnItemActivated, <a href="dictionary_D.html#4313">DbusmenuMenuitem</a>*,</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">                     </span><span class="keyword">unsigned int</span><span class="default">);</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">  <a href="dictionary_C.html#5259">CHROMEG_CALLBACK_0</a>(<a href="dictionary_G.html#2443">GlobalMenuBarX11</a>, </span><span class="keyword">void</span><span class="default">, OnSubMenuShow, <a href="dictionary_D.html#4313">DbusmenuMenuitem</a>*);</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">  <a href="dictionary_T.html#97">ThrustWindow</a>*          <a href="dictionary_W.html#4376">window_</a>;</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">  <a href="dictionary_G.html#100">gfx</a>::<a href="dictionary_A.html#4383">AcceleratedWidget</a> <a href="dictionary_X.html#4377">xid_</a>;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span>
+<a name="67"><font size=-1>67     </font></a><span class="default">  <a href="dictionary_D.html#4325">DbusmenuServer</a>*        <a href="dictionary_S.html#4378">server_</a>;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">  <a href="dictionary_D.html#5260">DISALLOW_COPY_AND_ASSIGN</a>(<a href="dictionary_G.html#2443">GlobalMenuBarX11</a>);</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">};</span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default">}  </span><span class="comment">// namespace thrust_shell</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"></span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"></span><span class="preproc">#endif  </span><span class="comment">// THRUST_SHELL_BROWSER_UI_VIEWS_GLOBAL_MENU_BAR_X11_H_</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment"></span>
+</pre></body></html>

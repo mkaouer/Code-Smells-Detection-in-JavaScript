@@ -1,0 +1,259 @@
+<html><head><title>url_request_context_getter.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.0\thrust-0.7.0\src\net\url_request_context_getter.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.0\\thrust-0.7.0\\src\\net\\url_request_context_getter.cc";
+top.document.title  = "url_request_context_getter.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2014 Stanislas Polu. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Copyright (c) 2012 The Chromium Authors.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// See the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/net/url_request_context_getter.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/command_line.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/logging.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/string_number_conversions.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/string_split.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/string_util.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/threading/sequenced_worker_pool.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/threading/worker_pool.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/base/cache_type.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/cert/cert_verifier.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/cookies/cookie_monster.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/dns/host_resolver.h&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/dns/mapped_host_resolver.h&quot;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/http/http_auth_handler_factory.h&quot;</span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/http/http_cache.h&quot;</span>
+<a name="21"><font size=-1>21     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/http/http_network_session.h&quot;</span>
+<a name="22"><font size=-1>22     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/http/http_server_properties_impl.h&quot;</span>
+<a name="23"><font size=-1>23     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/http/transport_security_state.h&quot;</span>
+<a name="24"><font size=-1>24     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/proxy/dhcp_proxy_script_fetcher_factory.h&quot;</span>
+<a name="25"><font size=-1>25     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/proxy/proxy_service.h&quot;</span>
+<a name="26"><font size=-1>26     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/ssl/default_server_bound_cert_store.h&quot;</span>
+<a name="27"><font size=-1>27     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/ssl/server_bound_cert_service.h&quot;</span>
+<a name="28"><font size=-1>28     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/ssl/ssl_config_service_defaults.h&quot;</span>
+<a name="29"><font size=-1>29     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/data_protocol_handler.h&quot;</span>
+<a name="30"><font size=-1>30     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/file_protocol_handler.h&quot;</span>
+<a name="31"><font size=-1>31     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/static_http_user_agent_settings.h&quot;</span>
+<a name="32"><font size=-1>32     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/url_request_context.h&quot;</span>
+<a name="33"><font size=-1>33     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/url_request_intercepting_job_factory.h&quot;</span>
+<a name="34"><font size=-1>34     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/url_request_context_storage.h&quot;</span>
+<a name="35"><font size=-1>35     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;net/url_request/url_request_job_factory_impl.h&quot;</span>
+<a name="36"><font size=-1>36     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/browser_thread.h&quot;</span>
+<a name="37"><font size=-1>37     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/content_switches.h&quot;</span>
+<a name="38"><font size=-1>38     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/common/url_constants.h&quot;</span>
+<a name="39"><font size=-1>39     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/browser/cookie_store_factory.h&quot;</span>
+<a name="40"><font size=-1>40     </font></a><span class="string"></span>
+<a name="41"><font size=-1>41     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/common/switches.h&quot;</span>
+<a name="42"><font size=-1>42     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/net/network_delegate.h&quot;</span>
+<a name="43"><font size=-1>43     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/browser/session/thrust_session.h&quot;</span>
+<a name="44"><font size=-1>44     </font></a><span class="string"></span>
+<a name="45"><font size=-1>45     </font></a><span class="string"></span><span class="keyword">using namespace </span><span class="default">content;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">thrust_shell {</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">{</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_I.html#634">InstallProtocolHandlers</a></span><span class="default">(net::<a href="dictionary_U.html#636">URLRequestJobFactoryImpl</a>* <a href="dictionary_J.html#635">job_factory</a>,</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">                             <a href="dictionary_P.html#638">ProtocolHandlerMap</a>* <a href="dictionary_P.html#637">protocol_handlers</a>) {</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">  </span><span class="keyword">for </span><span class="default">(<a href="dictionary_P.html#638">ProtocolHandlerMap</a>::<a href="dictionary_I.html#640">iterator</a> <a href="dictionary_I.html#641">it</a> =</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">           <a href="dictionary_P.html#637">protocol_handlers</a>-&gt;<a href="dictionary_B.html#639">begin</a>();</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">       <a href="dictionary_I.html#641">it</a> != <a href="dictionary_P.html#637">protocol_handlers</a>-&gt;<a href="dictionary_E.html#642">end</a>();</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">       ++<a href="dictionary_I.html#641">it</a>) {</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    </span><span class="keyword">bool <a href="dictionary_S.html#643">set_protocol</a> </span><span class="default">= <a href="dictionary_J.html#635">job_factory</a>-&gt;<a href="dictionary_S.html#644">SetProtocolHandler</a>(</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">        <a href="dictionary_I.html#641">it</a>-&gt;<a href="dictionary_F.html#645">first</a>, <a href="dictionary_I.html#641">it</a>-&gt;<a href="dictionary_S.html#646">second</a>.<a href="dictionary_R.html#647">release</a>());</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    <a href="dictionary_D.html#193">DCHECK</a>(<a href="dictionary_S.html#643">set_protocol</a>);</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">  }</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">  <a href="dictionary_P.html#637">protocol_handlers</a>-&gt;<a href="dictionary_C.html#648">clear</a>();</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">}</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">}  </span><span class="comment">// namespace</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"></span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"><a href="dictionary_T.html#649">ThrustShellURLRequestContextGetter</a></span><span class="default">::<a href="dictionary_T.html#650">ThrustShellURLRequestContextGetter</a>(</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    <a href="dictionary_T.html#234">ThrustSession</a>* <a href="dictionary_P.html#651">parent</a>,</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    </span><span class="keyword">bool <a href="dictionary_I.html#652">ignore_certificate_errors</a></span><span class="default">,</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    </span><span class="keyword">const </span><span class="default">base::<a href="dictionary_F.html#372">FilePath</a>&amp; <a href="dictionary_B.html#653">base_path</a>,</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">    base::<a href="dictionary_M.html#655">MessageLoop</a>* <a href="dictionary_I.html#654">io_loop</a>,</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">    base::<a href="dictionary_M.html#655">MessageLoop</a>* <a href="dictionary_F.html#656">file_loop</a>,</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">    <a href="dictionary_P.html#638">ProtocolHandlerMap</a>* <a href="dictionary_P.html#657">protocol_handlers</a>,</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    <a href="dictionary_U.html#659">URLRequestInterceptorScopedVector</a> <a href="dictionary_R.html#658">request_interceptors</a>,</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    net::<a href="dictionary_N.html#661">NetLog</a>* <a href="dictionary_N.html#660">net_log</a>)</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">    : <a href="dictionary_P.html#662">parent_</a>(<a href="dictionary_P.html#651">parent</a>),</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">      <a href="dictionary_I.html#663">ignore_certificate_errors_</a>(<a href="dictionary_I.html#652">ignore_certificate_errors</a>),</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">      <a href="dictionary_B.html#664">base_path_</a>(<a href="dictionary_B.html#653">base_path</a>),</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">      <a href="dictionary_I.html#665">io_loop_</a>(<a href="dictionary_I.html#654">io_loop</a>),</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">      <a href="dictionary_F.html#666">file_loop_</a>(<a href="dictionary_F.html#656">file_loop</a>),</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">      <a href="dictionary_N.html#667">net_log_</a>(<a href="dictionary_N.html#660">net_log</a>),</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">      <a href="dictionary_R.html#668">request_interceptors_</a>(<a href="dictionary_R.html#658">request_interceptors</a>.<a href="dictionary_P.html#208">Pass</a>())</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">{</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">  </span><span class="comment">// Must first be created on the UI thread.</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">  <a href="dictionary_D.html#193">DCHECK</a></span><span class="default">(<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_C.html#381">CurrentlyOn</a>(<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_U.html#382">UI</a>));</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">  <a href="dictionary_S.html#11">std</a>::<a href="dictionary_S.html#669">swap</a>(<a href="dictionary_P.html#670">protocol_handlers_</a>, *<a href="dictionary_P.html#657">protocol_handlers</a>);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">  </span>
+<a name="87"><font size=-1>87     </font></a><span class="default">  </span><span class="comment">// We must create the proxy config service on the UI loop on Linux because it</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">  // must synchronously run on the glib message loop. This will be passed to</span>
+<a name="89"><font size=-1>89     </font></a><span class="comment">  // the URLRequestContextStorage on the IO thread in GetURLRequestContext().</span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">  <a href="dictionary_P.html#671">proxy_config_service_</a></span><span class="default">.<a href="dictionary_R.html#672">reset</a>(</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">      net::<a href="dictionary_P.html#673">ProxyService</a>::<a href="dictionary_C.html#674">CreateSystemProxyConfigService</a>(</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        <a href="dictionary_I.html#665">io_loop_</a>-&gt;<a href="dictionary_M.html#675">message_loop_proxy</a>().<a href="dictionary_G.html#171">get</a>(), <a href="dictionary_F.html#666">file_loop_</a>));</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">}</span>
+<a name="94"><font size=-1>94     </font></a><span class="default"></span>
+<a name="95"><font size=-1>95     </font></a><span class="default"><a href="dictionary_T.html#649">ThrustShellURLRequestContextGetter</a>::~<a href="dictionary_Non-Alpha.html#676">ThrustShellURLRequestContextGetter</a>() </span>
+<a name="96"><font size=-1>96     </font></a><span class="default">{</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">}</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default">net::<a href="dictionary_U.html#678">URLRequestContext</a>* </span>
+<a name="100"><font size=-1>100     </font></a><span class="default"><a href="dictionary_T.html#649">ThrustShellURLRequestContextGetter</a>::<a href="dictionary_G.html#677">GetURLRequestContext</a>() </span>
+<a name="101"><font size=-1>101     </font></a><span class="default">{</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">  <a href="dictionary_D.html#193">DCHECK</a>(<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_C.html#381">CurrentlyOn</a>(<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_I.html#679">IO</a>));</span>
+<a name="103"><font size=-1>103     </font></a><span class="default"></span>
+<a name="104"><font size=-1>104     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_U.html#680">url_request_context_</a>) {</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">    <a href="dictionary_U.html#680">url_request_context_</a>.<a href="dictionary_R.html#672">reset</a>(</span><span class="keyword">new </span><span class="default">net::<a href="dictionary_U.html#681">URLRequestContext</a>());</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">    <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_S.html#682">set_net_log</a>(<a href="dictionary_N.html#667">net_log_</a>);</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    <a href="dictionary_N.html#683">network_delegate_</a>.<a href="dictionary_R.html#672">reset</a>(</span><span class="keyword">new <a href="dictionary_T.html#685">ThrustShellNetworkDelegate</a></span><span class="default">);</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">    <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_S.html#686">set_network_delegate</a>(<a href="dictionary_N.html#683">network_delegate_</a>.<a href="dictionary_G.html#171">get</a>());</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>.<a href="dictionary_R.html#672">reset</a>(</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">net::URLRequestContextStorage(<a href="dictionary_U.html#680">url_request_context_</a>.<a href="dictionary_G.html#171">get</a>()));</span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+<a name="112"><font size=-1>112     </font></a><span class="default">    <a href="dictionary_S.html#244">scoped_refptr</a>&lt;net::CookieStore&gt; <a href="dictionary_C.html#688">cookie_store</a> = <a href="dictionary_N.html#172">NULL</a>;</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    </span><span class="keyword">if</span><span class="default">(<a href="dictionary_P.html#662">parent_</a>) {</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">      <a href="dictionary_C.html#688">cookie_store</a> = </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_C.html#689">CookieMonster</a>(<a href="dictionary_P.html#662">parent_</a>-&gt;<a href="dictionary_G.html#690">GetCookieStore</a>(), <a href="dictionary_N.html#172">NULL</a>);</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    }</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    </span><span class="keyword">else </span><span class="default">{</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">      <a href="dictionary_C.html#688">cookie_store</a> = </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_C.html#689">CookieMonster</a>(<a href="dictionary_N.html#172">NULL</a>, <a href="dictionary_N.html#172">NULL</a>);</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">    }</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">    </span><span class="comment">//cookie_store-&gt;GetCookieMonster()-&gt;SetPersistSessionCookies(false);</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">    <a href="dictionary_S.html#687">storage_</a></span><span class="default">-&gt;<a href="dictionary_S.html#691">set_cookie_store</a>(<a href="dictionary_C.html#688">cookie_store</a>);</span>
+<a name="121"><font size=-1>121     </font></a><span class="default"></span>
+<a name="122"><font size=-1>122     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">    const char* schemes[] = {&quot;http&quot;, &quot;https&quot;, &quot;file&quot;, &quot;app&quot;};</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">    cookie_store-&gt;GetCookieMonster()-&gt;SetCookieableSchemes(schemes, 4);</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">    */</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">          </span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">    <a href="dictionary_S.html#687">storage_</a></span><span class="default">-&gt;<a href="dictionary_S.html#692">set_server_bound_cert_service</a>(</span><span class="keyword">new </span><span class="default">net::<a href="dictionary_S.html#693">ServerBoundCertService</a>(</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_D.html#694">DefaultServerBoundCertStore</a>(<a href="dictionary_N.html#172">NULL</a>),</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">        base::<a href="dictionary_W.html#695">WorkerPool</a>::<a href="dictionary_G.html#696">GetTaskRunner</a>(</span><span class="keyword">true</span><span class="default">)));</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#697">set_http_user_agent_settings</a>(</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_S.html#698">StaticHttpUserAgentSettings</a>(</span><span class="string">&quot;en-us,en&quot;</span><span class="default">, <a href="dictionary_S.html#11">std</a>::<a href="dictionary_S.html#12">string</a>()));</span>
+<a name="132"><font size=-1>132     </font></a><span class="default"></span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    <a href="dictionary_S.html#38">scoped_ptr</a>&lt;net::HostResolver&gt; <a href="dictionary_H.html#702">host_resolver</a>(</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">        net::<a href="dictionary_H.html#699">HostResolver</a>::<a href="dictionary_C.html#700">CreateDefaultResolver</a>(</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">            <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_N.html#701">net_log</a>()));</span>
+<a name="136"><font size=-1>136     </font></a><span class="default"></span>
+<a name="137"><font size=-1>137     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#703">set_cert_verifier</a>(net::<a href="dictionary_C.html#704">CertVerifier</a>::<a href="dictionary_C.html#705">CreateDefault</a>());</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#706">set_transport_security_state</a>(</span><span class="keyword">new </span><span class="default">net::<a href="dictionary_T.html#707">TransportSecurityState</a>);</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    </span><span class="comment">/* TODO(spolu): use v8 if possible, look at chrome code. */</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">    <a href="dictionary_S.html#687">storage_</a></span><span class="default">-&gt;<a href="dictionary_S.html#708">set_proxy_service</a>(</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">        net::<a href="dictionary_P.html#673">ProxyService</a>::<a href="dictionary_C.html#709">CreateUsingSystemProxyResolver</a>(</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">          <a href="dictionary_P.html#671">proxy_config_service_</a>.<a href="dictionary_R.html#647">release</a>(),</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">          </span><span class="number">0</span><span class="default">,</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">          <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_N.html#701">net_log</a>()));</span>
+<a name="146"><font size=-1>146     </font></a><span class="default"></span>
+<a name="147"><font size=-1>147     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#710">set_ssl_config_service</a>(</span><span class="keyword">new </span><span class="default">net::<a href="dictionary_S.html#711">SSLConfigServiceDefaults</a>);</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#712">set_http_auth_handler_factory</a>(</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">        net::<a href="dictionary_H.html#713">HttpAuthHandlerFactory</a>::<a href="dictionary_C.html#714">CreateDefault</a>(<a href="dictionary_H.html#702">host_resolver</a>.<a href="dictionary_G.html#171">get</a>()));</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#715">set_http_server_properties</a>(</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">        <a href="dictionary_S.html#38">scoped_ptr</a>&lt;net::<a href="dictionary_H.html#716">HttpServerProperties</a>&gt;(</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">            </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_H.html#717">HttpServerPropertiesImpl</a>()));</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default">    net::<a href="dictionary_H.html#718">HttpCache</a>::<a href="dictionary_B.html#719">BackendFactory</a>* <a href="dictionary_M.html#720">main_backend</a> = <a href="dictionary_N.html#172">NULL</a>;</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">    </span><span class="keyword">if</span><span class="default">(<a href="dictionary_P.html#662">parent_</a>-&gt;<a href="dictionary_I.html#721">IsOffTheRecord</a>()) {</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">      <a href="dictionary_M.html#720">main_backend</a> = net::<a href="dictionary_H.html#718">HttpCache</a>::<a href="dictionary_D.html#722">DefaultBackend</a>::<a href="dictionary_I.html#723">InMemory</a>(</span><span class="number">0</span><span class="default">);</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">    }</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">    </span><span class="keyword">else </span><span class="default">{</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">      base::<a href="dictionary_F.html#372">FilePath</a> <a href="dictionary_C.html#724">cache_path</a> = <a href="dictionary_B.html#664">base_path_</a>.<a href="dictionary_A.html#725">Append</a>(<a href="dictionary_F.html#726">FILE_PATH_LITERAL</a>(</span><span class="string">&quot;Cache&quot;</span><span class="default">));</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">      <a href="dictionary_M.html#720">main_backend</a> =</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_H.html#718">HttpCache</a>::<a href="dictionary_D.html#727">DefaultBackend</a>(</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">            net::<a href="dictionary_D.html#728">DISK_CACHE</a>,</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">            net::<a href="dictionary_C.html#729">CACHE_BACKEND_DEFAULT</a>,</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">            <a href="dictionary_C.html#724">cache_path</a>,</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">            </span><span class="number">0</span><span class="default">,</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">            <a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_G.html#730">GetMessageLoopProxyForThread</a>(<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_C.html#731">CACHE</a>)</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">                .<a href="dictionary_G.html#171">get</a>());</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">    }</span>
+<a name="170"><font size=-1>170     </font></a><span class="default"></span>
+<a name="171"><font size=-1>171     </font></a><span class="default">    net::<a href="dictionary_H.html#732">HttpNetworkSession</a>::<a href="dictionary_P.html#733">Params</a> <a href="dictionary_N.html#734">network_session_params</a>;</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_C.html#736">cert_verifier</a> =</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_C.html#735">cert_verifier</a>();</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_T.html#738">transport_security_state</a> =</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_T.html#737">transport_security_state</a>();</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_S.html#740">server_bound_cert_service</a> =</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_S.html#739">server_bound_cert_service</a>();</span>
+<a name="178"><font size=-1>178     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_P.html#742">proxy_service</a> =</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_P.html#741">proxy_service</a>();</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_S.html#744">ssl_config_service</a> =</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_S.html#743">ssl_config_service</a>();</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_H.html#746">http_auth_handler_factory</a> =</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_H.html#745">http_auth_handler_factory</a>();</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_N.html#747">network_delegate</a> =</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">        <a href="dictionary_N.html#683">network_delegate_</a>.<a href="dictionary_G.html#171">get</a>();</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_H.html#749">http_server_properties</a> =</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_H.html#748">http_server_properties</a>();</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_N.html#750">net_log</a> =</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_N.html#701">net_log</a>();</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_I.html#751">ignore_certificate_errors</a> =</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">        <a href="dictionary_I.html#663">ignore_certificate_errors_</a>;</span>
+<a name="192"><font size=-1>192     </font></a><span class="default"></span>
+<a name="193"><font size=-1>193     </font></a><span class="default">    </span><span class="comment">// Give |storage_| ownership at the end in case it's |mapped_host_resolver|.</span>
+<a name="194"><font size=-1>194     </font></a><span class="comment">    <a href="dictionary_S.html#687">storage_</a></span><span class="default">-&gt;<a href="dictionary_S.html#752">set_host_resolver</a>(<a href="dictionary_H.html#702">host_resolver</a>.<a href="dictionary_P.html#208">Pass</a>());</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">    <a href="dictionary_N.html#734">network_session_params</a>.<a href="dictionary_H.html#754">host_resolver</a> =</span>
+<a name="196"><font size=-1>196     </font></a><span class="default">        <a href="dictionary_U.html#680">url_request_context_</a>-&gt;<a href="dictionary_H.html#753">host_resolver</a>();</span>
+<a name="197"><font size=-1>197     </font></a><span class="default"></span>
+<a name="198"><font size=-1>198     </font></a><span class="default">    net::<a href="dictionary_H.html#756">HttpCache</a>* <a href="dictionary_M.html#757">main_cache</a> = </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_H.html#755">HttpCache</a>(</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">        <a href="dictionary_N.html#734">network_session_params</a>, <a href="dictionary_M.html#720">main_backend</a>);</span>
+<a name="200"><font size=-1>200     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#758">set_http_transaction_factory</a>(<a href="dictionary_M.html#757">main_cache</a>);</span>
+<a name="201"><font size=-1>201     </font></a><span class="default"></span>
+<a name="202"><font size=-1>202     </font></a><span class="default">    <a href="dictionary_S.html#38">scoped_ptr</a>&lt;net::URLRequestJobFactoryImpl&gt; <a href="dictionary_J.html#760">job_factory</a>(</span>
+<a name="203"><font size=-1>203     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_U.html#759">URLRequestJobFactoryImpl</a>());</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">    </span><span class="comment">// Keep ProtocolHandlers added in sync with</span>
+<a name="205"><font size=-1>205     </font></a><span class="comment">    // ThrustShellContentBrowserClient::IsHandledURL().</span>
+<a name="206"><font size=-1>206     </font></a><span class="comment">    <a href="dictionary_I.html#634">InstallProtocolHandlers</a></span><span class="default">(<a href="dictionary_J.html#760">job_factory</a>.<a href="dictionary_G.html#171">get</a>(), &amp;<a href="dictionary_P.html#670">protocol_handlers_</a>);</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">    </span><span class="keyword">bool <a href="dictionary_S.html#761">set_protocol</a> </span><span class="default">= <a href="dictionary_J.html#760">job_factory</a>-&gt;<a href="dictionary_S.html#644">SetProtocolHandler</a>(</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">        <a href="dictionary_U.html#762">url</a>::<a href="dictionary_K.html#763">kDataScheme</a>, </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_D.html#764">DataProtocolHandler</a>);</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">    <a href="dictionary_D.html#193">DCHECK</a>(<a href="dictionary_S.html#761">set_protocol</a>);</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">    <a href="dictionary_S.html#761">set_protocol</a> = <a href="dictionary_J.html#760">job_factory</a>-&gt;<a href="dictionary_S.html#644">SetProtocolHandler</a>(</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">        <a href="dictionary_U.html#762">url</a>::<a href="dictionary_K.html#765">kFileScheme</a>,</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">        </span><span class="keyword">new </span><span class="default">net::<a href="dictionary_F.html#766">FileProtocolHandler</a>(</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">            content::<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_G.html#767">GetBlockingPool</a>()-&gt;</span>
+<a name="214"><font size=-1>214     </font></a><span class="default">                <a href="dictionary_G.html#768">GetTaskRunnerWithShutdownBehavior</a>(</span>
+<a name="215"><font size=-1>215     </font></a><span class="default">                    base::<a href="dictionary_S.html#769">SequencedWorkerPool</a>::<a href="dictionary_S.html#770">SKIP_ON_SHUTDOWN</a>)));</span>
+<a name="216"><font size=-1>216     </font></a><span class="default">    <a href="dictionary_D.html#193">DCHECK</a>(<a href="dictionary_S.html#761">set_protocol</a>);</span>
+<a name="217"><font size=-1>217     </font></a><span class="default"></span>
+<a name="218"><font size=-1>218     </font></a><span class="default">    </span><span class="comment">// Set up interceptors in the reverse order.</span>
+<a name="219"><font size=-1>219     </font></a><span class="comment">    <a href="dictionary_S.html#38">scoped_ptr</a></span><span class="default">&lt;net::URLRequestJobFactory&gt; <a href="dictionary_T.html#771">top_job_factory</a> =</span>
+<a name="220"><font size=-1>220     </font></a><span class="default">        <a href="dictionary_J.html#760">job_factory</a>.<a href="dictionary_P.html#772">PassAs</a>&lt;net::URLRequestJobFactory&gt;();</span>
+<a name="221"><font size=-1>221     </font></a><span class="default">    </span><span class="keyword">for </span><span class="default">(<a href="dictionary_U.html#659">URLRequestInterceptorScopedVector</a>::<a href="dictionary_R.html#774">reverse_iterator</a> <a href="dictionary_I.html#775">i</a> =</span>
+<a name="222"><font size=-1>222     </font></a><span class="default">             <a href="dictionary_R.html#668">request_interceptors_</a>.<a href="dictionary_R.html#773">rbegin</a>();</span>
+<a name="223"><font size=-1>223     </font></a><span class="default">         <a href="dictionary_I.html#775">i</a> != <a href="dictionary_R.html#668">request_interceptors_</a>.<a href="dictionary_R.html#776">rend</a>();</span>
+<a name="224"><font size=-1>224     </font></a><span class="default">         ++<a href="dictionary_I.html#775">i</a>) {</span>
+<a name="225"><font size=-1>225     </font></a><span class="default">      <a href="dictionary_T.html#771">top_job_factory</a>.<a href="dictionary_R.html#672">reset</a>(</span><span class="keyword">new </span><span class="default">net::<a href="dictionary_U.html#777">URLRequestInterceptingJobFactory</a>(</span>
+<a name="226"><font size=-1>226     </font></a><span class="default">          <a href="dictionary_T.html#771">top_job_factory</a>.<a href="dictionary_P.html#208">Pass</a>(), <a href="dictionary_M.html#778">make_scoped_ptr</a>(*<a href="dictionary_I.html#775">i</a>)));</span>
+<a name="227"><font size=-1>227     </font></a><span class="default">    }</span>
+<a name="228"><font size=-1>228     </font></a><span class="default">    <a href="dictionary_R.html#668">request_interceptors_</a>.<a href="dictionary_W.html#779">weak_clear</a>();</span>
+<a name="229"><font size=-1>229     </font></a><span class="default"></span>
+<a name="230"><font size=-1>230     </font></a><span class="default">    <a href="dictionary_S.html#687">storage_</a>-&gt;<a href="dictionary_S.html#780">set_job_factory</a>(<a href="dictionary_T.html#771">top_job_factory</a>.<a href="dictionary_R.html#647">release</a>());</span>
+<a name="231"><font size=-1>231     </font></a><span class="default">  }</span>
+<a name="232"><font size=-1>232     </font></a><span class="default"></span>
+<a name="233"><font size=-1>233     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_U.html#680">url_request_context_</a></span><span class="default">.<a href="dictionary_G.html#171">get</a>();</span>
+<a name="234"><font size=-1>234     </font></a><span class="default">}</span>
+<a name="235"><font size=-1>235     </font></a><span class="default"></span>
+<a name="236"><font size=-1>236     </font></a><span class="default"><a href="dictionary_S.html#244">scoped_refptr</a>&lt;base::SingleThreadTaskRunner&gt;</span>
+<a name="237"><font size=-1>237     </font></a><span class="default"><a href="dictionary_T.html#649">ThrustShellURLRequestContextGetter</a>::<a href="dictionary_G.html#781">GetNetworkTaskRunner</a>() </span><span class="keyword">const </span>
+<a name="238"><font size=-1>238     </font></a><span class="keyword"></span><span class="default">{</span>
+<a name="239"><font size=-1>239     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_B.html#380">BrowserThread</a></span><span class="default">::<a href="dictionary_G.html#730">GetMessageLoopProxyForThread</a>(<a href="dictionary_B.html#380">BrowserThread</a>::<a href="dictionary_I.html#679">IO</a>);</span>
+<a name="240"><font size=-1>240     </font></a><span class="default">}</span>
+<a name="241"><font size=-1>241     </font></a><span class="default"></span>
+<a name="242"><font size=-1>242     </font></a><span class="default">net::<a href="dictionary_H.html#699">HostResolver</a>* </span>
+<a name="243"><font size=-1>243     </font></a><span class="default"><a href="dictionary_T.html#649">ThrustShellURLRequestContextGetter</a>::<a href="dictionary_H.html#782">host_resolver</a>() </span>
+<a name="244"><font size=-1>244     </font></a><span class="default">{</span>
+<a name="245"><font size=-1>245     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_U.html#680">url_request_context_</a></span><span class="default">-&gt;<a href="dictionary_H.html#753">host_resolver</a>();</span>
+<a name="246"><font size=-1>246     </font></a><span class="default">}</span>
+<a name="247"><font size=-1>247     </font></a><span class="default"></span>
+<a name="248"><font size=-1>248     </font></a><span class="default">} </span><span class="comment">// namespace thrust_shell</span>
+<a name="249"><font size=-1>249     </font></a><span class="comment"></span>
+</pre></body></html>

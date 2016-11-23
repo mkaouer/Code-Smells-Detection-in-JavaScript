@@ -1,0 +1,96 @@
+<html><head><title>context.cc</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Dionis\Dropbox\Dionis\CIS 375\thrust-0.7.0\thrust-0.7.0\src\renderer\extensions\context.cc</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Dionis\\Dropbox\\Dionis\\CIS 375\\thrust-0.7.0\\thrust-0.7.0\\src\\renderer\\extensions\\context.cc";
+top.document.title  = "context.cc";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">// Copyright (c) 2012 The Chromium Authors. All rights reserved.</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">// Use of this source code is governed by a BSD-style license that can be</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">// found in the LICENSE file.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;src/renderer/extensions/context.h&quot;</span>
+<a name="6"><font size=-1>6     </font></a><span class="string"></span>
+<a name="7"><font size=-1>7     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/logging.h&quot;</span>
+<a name="8"><font size=-1>8     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/memory/scoped_ptr.h&quot;</span>
+<a name="9"><font size=-1>9     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/strings/string_split.h&quot;</span>
+<a name="10"><font size=-1>10     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;base/values.h&quot;</span>
+<a name="11"><font size=-1>11     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/renderer/render_view.h&quot;</span>
+<a name="12"><font size=-1>12     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;content/public/renderer/v8_value_converter.h&quot;</span>
+<a name="13"><font size=-1>13     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebFrame.h&quot;</span>
+<a name="14"><font size=-1>14     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebDocument.h&quot;</span>
+<a name="15"><font size=-1>15     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebScopedMicrotaskSuppression.h&quot;</span>
+<a name="16"><font size=-1>16     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;third_party/WebKit/public/web/WebView.h&quot;</span>
+<a name="17"><font size=-1>17     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;v8/include/v8.h&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;src/renderer/extensions/module_system.h&quot;</span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span>
+<a name="21"><font size=-1>21     </font></a><span class="string"></span><span class="keyword">using </span><span class="default">content::V8ValueConverter;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">namespace </span><span class="default">extensions {</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"><a href="dictionary_C.html#1819">Context</a>::<a href="dictionary_C.html#1820">Context</a>(<a href="dictionary_V.html#20">v8</a>::<a href="dictionary_H.html#21">Handle</a>&lt;v8::Context&gt; <a href="dictionary_V.html#1821">v8_context</a>,</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">                 blink::<a href="dictionary_W.html#1195">WebFrame</a>* <a href="dictionary_W.html#1822">web_frame</a>)</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    : <a href="dictionary_V.html#1823">v8_context_</a>(<a href="dictionary_V.html#1821">v8_context</a>),</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">      <a href="dictionary_W.html#1824">web_frame_</a>(<a href="dictionary_W.html#1822">web_frame</a>),</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">      <a href="dictionary_S.html#1825">safe_builtins_</a>(</span><span class="keyword">this</span><span class="default">),</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">      <a href="dictionary_I.html#1826">isolate_</a>(<a href="dictionary_V.html#1821">v8_context</a>-&gt;<a href="dictionary_G.html#316">GetIsolate</a>()) {</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">  <a href="dictionary_V.html#1827">VLOG</a>(</span><span class="number">1</span><span class="default">) &lt;&lt; </span><span class="string">&quot;Created context:\n&quot;</span>
+<a name="32"><font size=-1>32     </font></a><span class="string">          </span><span class="default">&lt;&lt; </span><span class="string">&quot;  frame:        &quot; </span><span class="default">&lt;&lt; <a href="dictionary_W.html#1824">web_frame_</a>;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">}</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"><a href="dictionary_C.html#1819">Context</a>::~<a href="dictionary_Non-Alpha.html#1828">Context</a>() {</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  <a href="dictionary_V.html#1827">VLOG</a>(</span><span class="number">1</span><span class="default">) &lt;&lt; </span><span class="string">&quot;Destroyed context:\n&quot;</span>
+<a name="37"><font size=-1>37     </font></a><span class="string">          </span><span class="default">&lt;&lt; </span><span class="string">&quot;  frame:        &quot; </span><span class="default">&lt;&lt; <a href="dictionary_W.html#1824">web_frame_</a>;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">  <a href="dictionary_I.html#1829">Invalidate</a>();</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">}</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_C.html#1819">Context</a></span><span class="default">::<a href="dictionary_I.html#1829">Invalidate</a>() {</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_I.html#1830">is_valid</a>())</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    </span><span class="keyword">return</span><span class="default">;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#1831">module_system_</a>)</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    <a href="dictionary_M.html#1831">module_system_</a>-&gt;<a href="dictionary_I.html#1832">Invalidate</a>();</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">  <a href="dictionary_W.html#1824">web_frame_</a> = <a href="dictionary_N.html#172">NULL</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">  <a href="dictionary_V.html#1823">v8_context_</a>.<a href="dictionary_R.html#284">reset</a>();</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">}</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">content::<a href="dictionary_R.html#7">RenderView</a>* <a href="dictionary_C.html#1819">Context</a>::<a href="dictionary_G.html#1833">GetRenderView</a>() </span><span class="keyword">const </span><span class="default">{</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(<a href="dictionary_W.html#1824">web_frame_</a> &amp;&amp; <a href="dictionary_W.html#1824">web_frame_</a>-&gt;<a href="dictionary_V.html#1834">view</a>())</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">    </span><span class="keyword">return </span><span class="default">content::<a href="dictionary_R.html#7">RenderView</a>::<a href="dictionary_F.html#1835">FromWebView</a>(<a href="dictionary_W.html#1824">web_frame_</a>-&gt;<a href="dictionary_V.html#1834">view</a>());</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">  </span><span class="keyword">else</span>
+<a name="54"><font size=-1>54     </font></a><span class="keyword">    return <a href="dictionary_N.html#172">NULL</a></span><span class="default">;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">}</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default"><a href="dictionary_G.html#261">GURL</a> <a href="dictionary_C.html#1819">Context</a>::<a href="dictionary_G.html#1836">GetURL</a>() </span><span class="keyword">const </span><span class="default">{</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">  </span><span class="comment">/* TODO(spolu): Check OK                      */</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">  /*              see: user_script_slave.cc:216 */</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">  </span><span class="keyword">return <a href="dictionary_W.html#1824">web_frame_</a> </span><span class="default">?</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    <a href="dictionary_G.html#932">GURL</a>(<a href="dictionary_W.html#1824">web_frame_</a>-&gt;<a href="dictionary_D.html#1720">document</a>().<a href="dictionary_U.html#1837">url</a>().<a href="dictionary_S.html#1838">string</a>()) : <a href="dictionary_G.html#932">GURL</a>();</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">}</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+<a name="64"><font size=-1>64     </font></a><span class="default"><a href="dictionary_V.html#20">v8</a>::<a href="dictionary_L.html#28">Local</a>&lt;v8::Value&gt; <a href="dictionary_C.html#1819">Context</a>::<a href="dictionary_C.html#1839">CallFunction</a>(</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_H.html#21">Handle</a>&lt;v8::Function&gt; <a href="dictionary_F.html#1840">function</a>,</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_A.html#1841">argc</a></span><span class="default">,</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_H.html#21">Handle</a>&lt;v8::Value&gt; <a href="dictionary_A.html#1842">argv</a>[]) </span><span class="keyword">const </span><span class="default">{</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">  <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_E.html#1843">EscapableHandleScope</a> <a href="dictionary_H.html#1844">handle_scope</a>(<a href="dictionary_I.html#1845">isolate</a>());</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">  <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_C.html#1846">Context</a>::<a href="dictionary_S.html#1847">Scope</a> <a href="dictionary_S.html#1848">scope</a>(<a href="dictionary_V.html#1849">v8_context</a>());</span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default">  blink::<a href="dictionary_W.html#1850">WebScopedMicrotaskSuppression</a> <a href="dictionary_S.html#1851">suppression</a>;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_I.html#1830">is_valid</a>()) {</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_H.html#1844">handle_scope</a></span><span class="default">.<a href="dictionary_E.html#1852">Escape</a>(</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_L.html#310">Local</a>&lt;<a href="dictionary_V.html#20">v8</a>::<a href="dictionary_P.html#1853">Primitive</a>&gt;(<a href="dictionary_V.html#20">v8</a>::<a href="dictionary_U.html#1854">Undefined</a>(<a href="dictionary_I.html#1845">isolate</a>())));</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">  }</span>
+<a name="76"><font size=-1>76     </font></a><span class="default"></span>
+<a name="77"><font size=-1>77     </font></a><span class="default">  <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_H.html#21">Handle</a>&lt;v8::Object&gt; <a href="dictionary_G.html#1855">global</a> = <a href="dictionary_V.html#1849">v8_context</a>()-&gt;<a href="dictionary_G.html#412">Global</a>();</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">  </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_W.html#1824">web_frame_</a>)</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_H.html#1844">handle_scope</a></span><span class="default">.<a href="dictionary_E.html#1852">Escape</a>(<a href="dictionary_F.html#1840">function</a>-&gt;<a href="dictionary_C.html#462">Call</a>(<a href="dictionary_G.html#1855">global</a>, <a href="dictionary_A.html#1841">argc</a>, <a href="dictionary_A.html#1842">argv</a>));</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">  </span><span class="keyword">return <a href="dictionary_H.html#1844">handle_scope</a></span><span class="default">.<a href="dictionary_E.html#1852">Escape</a>(</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">      <a href="dictionary_V.html#20">v8</a>::<a href="dictionary_L.html#310">Local</a>&lt;<a href="dictionary_V.html#20">v8</a>::<a href="dictionary_V.html#456">Value</a>&gt;(<a href="dictionary_W.html#1824">web_frame_</a>-&gt;<a href="dictionary_C.html#1856">callFunctionEvenIfScriptDisabled</a>(</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">          <a href="dictionary_F.html#1840">function</a>, <a href="dictionary_G.html#1855">global</a>, <a href="dictionary_A.html#1841">argc</a>, <a href="dictionary_A.html#1842">argv</a>)));</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">}</span>
+<a name="84"><font size=-1>84     </font></a><span class="default"></span>
+<a name="85"><font size=-1>85     </font></a><span class="default">}  </span><span class="comment">// namespace extensions</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment"></span>
+</pre></body></html>
