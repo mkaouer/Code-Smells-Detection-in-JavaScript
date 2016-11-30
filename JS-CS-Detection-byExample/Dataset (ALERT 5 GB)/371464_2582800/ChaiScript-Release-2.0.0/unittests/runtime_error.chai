@@ -1,6 +1,0 @@
-try {
-  throw(runtime_error("error"))
-}
-catch(e) {
-  print(e.what())
-}

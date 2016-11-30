@@ -1,5 +1,0 @@
-def sam() {
-	return 5
-}
-
-print(sam())

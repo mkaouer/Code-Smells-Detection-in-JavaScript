@@ -1,6 +1,0 @@
-load_module("stl_extra")
-
-var x = List()
-x.push_front(3)
-x.push_front("A")
-print(x)

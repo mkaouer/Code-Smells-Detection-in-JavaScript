@@ -1,4 +1,0 @@
-var x = [1, 2, 3, 4]
-var r = range(x)
-r.pop_front()
-print(r.front())
