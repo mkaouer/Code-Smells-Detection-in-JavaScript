@@ -1,0 +1,1 @@
+Install-ChocolateyPackage 'filebot' 'msi' '/quiet' 'https://downloads.sourceforge.net/project/filebot/filebot/FileBot_@{version}/FileBot_@{version}_x86.msi' 'https://downloads.sourceforge.net/project/filebot/filebot/FileBot_@{version}/FileBot_@{version}_x64.msi'

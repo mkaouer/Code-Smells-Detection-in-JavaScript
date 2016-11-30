@@ -1,0 +1,90 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false">
+	<!--
+	Persistent disk store location
+	-->
+	<diskStore path="ehcache.disk.store.dir" />
+	
+	<!--
+	Mandatory Default Cache configuration. These settings will be applied to caches
+	created pragmatically using CacheManager.add(String cacheName)
+	-->
+	<defaultCache
+		maxElementsInMemory="100"
+		eternal="false"
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120"
+		overflowToDisk="false"
+		diskPersistent="false"
+		memoryStoreEvictionPolicy="LRU"
+	/>
+	
+	<!--
+	Short-lived (2 days) persistent disk cache for web responses
+	-->
+	<cache name="web-datasource"
+		maxElementsInMemory="200"
+		maxElementsOnDisk="20000"
+		eternal="false"
+		timeToIdleSeconds="172800"
+		timeToLiveSeconds="172800"
+		overflowToDisk="true"
+		diskPersistent="true"
+		memoryStoreEvictionPolicy="LRU"
+	/>
+	
+	<!--
+	Long-lived (2 weeks) persistent disk cache for web responses
+	-->
+	<cache name="web-datasource-lv2"
+		maxElementsInMemory="200"
+		maxElementsOnDisk="20000"
+		eternal="false"
+		timeToIdleSeconds="1209600"
+		timeToLiveSeconds="1209600"
+		overflowToDisk="true"
+		diskPersistent="true"
+		memoryStoreEvictionPolicy="LRU"
+	/>
+	
+	<!--
+	Long-lived (2 months) persistent disk cache for web responses (that can be updated via If-Modified or If-None-Match)
+	-->
+	<cache name="web-datasource-lv3"
+		maxElementsInMemory="200"
+		maxElementsOnDisk="200000"
+		eternal="false"
+		timeToIdleSeconds="5256000"
+		timeToLiveSeconds="5256000"
+		overflowToDisk="true"
+		diskPersistent="true"
+		memoryStoreEvictionPolicy="LRU"
+	/>
+	
+	<!--
+	Very long-lived cache (4 months) anime/series lists, movie index, etc
+	-->
+	<cache name="web-persistent-datasource"
+		maxElementsInMemory="50"
+		maxElementsOnDisk="20000"
+		eternal="false"
+		timeToIdleSeconds="10512000"
+		timeToLiveSeconds="10512000"
+		overflowToDisk="true"
+		diskPersistent="true"
+		memoryStoreEvictionPolicy="LRU"
+	/>
+	
+	<!--
+	Simple memory cache for calculated checksums. Time to live is 2 hours.
+	-->
+	<cache name="checksum"
+		maxElementsInMemory="5000"
+		eternal="false"
+		timeToIdleSeconds="7200"
+		timeToLiveSeconds="7200"
+		overflowToDisk="false"
+		diskPersistent="false"
+		memoryStoreEvictionPolicy="LRU"
+	/>
+		
+</ehcache>

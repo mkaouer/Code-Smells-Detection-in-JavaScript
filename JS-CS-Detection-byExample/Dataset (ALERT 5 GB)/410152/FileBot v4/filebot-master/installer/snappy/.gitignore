@@ -1,0 +1,10 @@
+parts
+stage
+prime
+snap
+
+oracle-java
+
+*.jar
+*.so
+*.snap
