@@ -1,0 +1,4 @@
+#define MINOR_VERSION 5558
+#define MAJOR_VERSION 0,3,0,5558
+#define VERSION "0.3.0"
+#define BUILD_DATE "20060701"

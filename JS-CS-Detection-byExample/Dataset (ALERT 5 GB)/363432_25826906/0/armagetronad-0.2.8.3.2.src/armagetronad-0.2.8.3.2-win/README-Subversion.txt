@@ -1,0 +1,110 @@
+In this file you find instructions how to get from a fresh Subversion checkout to a running game.
+It is assumed that you know how to check out modules on your system, because you apparently already managed to check out one :) "Checking out module X in parallel to this" means you should go to the parent directory and check out module X from the same repository where you got this module from, so that the parent directory looks like this:
+
+parent_directory:
+    armagetronad:
+        README-Subversion and other files
+    X:
+        files from X
+
+To use the sources from Subversion, you need to have additional tools installed: on all operating systems, you'll need Python (www.python.org). On Unix, you also need all autotools (autoconf and automake, check with your distribution).
+To build tarball distributions, you also need a 'svn' command line tool that can generate ChangeLogs.
+
+****************
+* Unix vanilla *
+****************
+You're in luck, you already have everything you'll need. Follow these steps:
+
+# generate configure, config.h.in and the like
+> sh ./bootstrap.sh
+# generate and change to build directory
+> mkdir ../armagetronad-build && cd ../armagetronad-build
+# run the configure script ( add --disable-glout for the dedicated server )
+> ../armagetronad/configure
+# run make
+> make
+# run game
+> make run
+# or run with arguments
+> ./src/armagetronad_main <options>
+# install game if you like
+> make install
+
+****************
+* Unix managed *
+****************
+
+There is also a helper module for the unix build, managing the tasks above and managing debug and optimized versions of the client and the server. It is designed to operate with the Eclipse IDE, but runs fine without it. The module's name is armagetronad_build_eclipse.
+Check it out parallel to the armagetronad module, cd there and read the enclosed README.
+If you're in a hurry, just run "make" there.
+
+****************
+* KDevelop 3.0 *
+****************
+
+First, you need to bootstrap. Execute: sh ./bootstrap.sh
+Run 'kdevelop' if you haven't done so already.
+From the Project menu, choose Open Project
+Select 'armagetron.kdevelop' and press OK
+From the Build menu, choose Run Configure
+
+If all goes smoothly, you can now edit Armagetron Advanced and run it.
+
+********
+* OS X *
+********
+
+The Mac OS projects are located in the armagetronad/MacOS/ directory.
+
+== Armagetron.pbproj
+
+This is the old project. If you would like to build on Xcode < 2.1 or Project Builder you must use this. It is not up-to date, so you must add several missing files to it.
+
+== Armagetron Advanced.xcodeproj
+
+This will only open in Xcode >= 2.4. It has these targets:
+* Armagetron Advanced -- The client
+* Armagetron Advanced 10.2.8 -- The client for Mac OS X 10.2.8
+* Armagetron Advanced Dedicated -- Dedicated Server
+* Create Client Release -- Create a distributable disk image of the client.
+  This target checks to see if you have an $AA_RECORDER_APP environment
+  variable set, and if you do the recorder app will be included in the disk
+  image. For example I have in my .bash_profile:
+
+    AA_RECORDER_APP="/Users/Shared/Applications/Games/Armagetron Advanced
+    Recorder.app"
+
+* Create Dedicated Release -- Create a distributable disk image of the
+  dedicated server.
+* Create Full Release -- Runs both "Create Client Release" and "Create  
+  Dedicated Release"
+  
+All required libraries required to build Armagetron Advanced for Mac OS X may
+be download from the the Sourceforge project page:
+
+https://sf.net/project/showfiles.php?group_id=110997&package_id=266788
+
+*********************
+* Windows + VisualC *
+*********************
+
+You'll need to check out the additional module build_visualc parallel to this module. In it, you'll find a README describing how to proceed; you'll need to download some libraries and put them in the right place.
+
+********************
+* Windows + Cygwin *
+********************
+
+Not supported yet.
+
+*******************
+* Windows + Mingw *
+*******************
+
+Not supported yet.
+
+
+
+------------------------------------------
+Initialy written by z-man.
+Some changes, including Subversion migration, by Luke-Jr
+Original KDevelop 3.0 instructions by subby
