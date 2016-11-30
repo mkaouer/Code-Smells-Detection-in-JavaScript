@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test-data>
+    <test-code>
+        <description><![CDATA[
+calling public method from constructor
+     ]]></description>
+        <expected-problems>1</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  bar();
+ }
+ public void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+calling protected method from constructor
+     ]]></description>
+        <expected-problems>1</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  bar();
+ }
+ protected void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+calling package private method from constructor
+     ]]></description>
+        <expected-problems>1</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  bar();
+ }
+ void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+calling private method, ok
+     ]]></description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  bar();
+ }
+ private void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+overloaded constructors, calling public method
+     ]]></description>
+        <expected-problems>1</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  this("Bar");
+ }
+ private Foo(String bar) {
+  bar();
+ }
+ public void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+calling method on literal bug
+     ]]></description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo(String s) {
+  "foo".equals(s);
+ }
+ public void equals(String bar) {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+method in anonymous inner class is ok
+     ]]></description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo(String s) {
+  addActionListener(new ActionListener() {
+   public void actionPerformed(ActionEvent e) {bar();}
+  });
+ }
+ public void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+bug report 975407
+     ]]></description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  bar();
+ }
+ private void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+ignore abstract methods
+     ]]></description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+public class Foo {
+ public Foo() {
+  bar();
+ }
+ abstract void bar() {}
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+Generics
+     ]]></description>
+        <expected-problems>0</expected-problems>
+        <code><![CDATA[
+package foo.bar;
+public enum Buz {
+ FOO(2);
+ private Buz(String s) {}
+}
+     ]]></code>
+        <source-type>java 1.5</source-type>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+985989, base line
+     ]]></description>
+        <expected-problems>1</expected-problems>
+        <code><![CDATA[
+public class SeniorClass {
+    public SeniorClass(){
+        toString(); //may throw NullPointerException if overridden
+    }
+    public String toString(){
+        return "IAmSeniorClass";
+    }
+}
+public class JuniorClass extends SeniorClass {
+    private String name;
+    
+    public JuniorClass() {
+        super(); //Automatic call leads to NullPointerException
+        name = "JuniorClass";
+    }
+    public String toString(){
+        return name.toUpperCase();
+    }
+}
+     ]]></code>
+    </test-code>
+    <test-code>
+        <description><![CDATA[
+985989, inner static class should be checked as well
+     ]]></description>
+        <expected-problems>1</expected-problems>
+        <code><![CDATA[
+public class Test {
+
+    public static class SeniorClass {
+        public SeniorClass(){
+            toString(); //may throw NullPointerException if overridden
+        }
+        public String toString(){
+            return "IAmSeniorClass";
+        }
+    }
+    public static class JuniorClass extends SeniorClass {
+        private String name;
+        
+        public JuniorClass() {
+            super(); //Automatic call leads to NullPointerException
+            name = "JuniorClass";
+        }
+        public String toString(){
+            return name.toUpperCase();
+        }
+    }
+    public static void main (String[] args) {
+        System.out.println(": "+new SeniorClass());
+        System.out.println(": "+new JuniorClass());
+    }
+
+}
+     ]]></code>
+    </test-code>
+</test-data>

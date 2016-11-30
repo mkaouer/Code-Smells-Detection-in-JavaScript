@@ -1,0 +1,126 @@
+
+make sure code is up to date and everything is in svn:
+
+ant -f bin/build.xml delete
+svn update
+svn status
+
+run version update script at the top level:
+
+./etc/update_version.sh <version>
+
+    tasks implemented by script:
+    update pmd.bat, designer.bat, bgastviewer.*, cpd.jnlp, cpdgui.bat, build.xml to point to pmd-<version>.jar
+    update PMD.java, xdocs/running.xml, compiling.xml, integrations.xml, installing.xml to reflect pmd-<version>
+    update the release date in the changelog
+    update release number and tag name in project.xml
+
+then, run the script that will generate the proper rulesets/rulesets.properties
+
+./etc/updating_rulesets.sh
+	update rulesets/rulesets.properties - add any new ruleset file names
+
+ensure all the new rules are listed in a rulesets/releases/<version>.xml file
+
+ant -f bin/build.xml pmdOnPmd
+
+ant -f bin/build.xml clean regress
+Check in everything
+
+ant -f bin/build.xml  dist regress regress14
+Do all the JUnit tests run?  OK, then:
+
+TESTS: Can you
+1) run 1 file and get a report
+./bin/pmd.sh ~/tmp/Test.java xml unusedcode
+./bin/pmd.sh ~/tmp/Test.java html rulesets/unusedcode.xml
+2) run the Ant 'pmd' task and get a report
+ant -f bin/build.xml pmd
+
+cd into etc/ and run the release script:
+$ ./release.sh
+
+It will run:
+
+	ant dist
+	./docs.sh all
+
+	generate the binary zip file
+
+	tag svn (unless -s if used)
+
+	generate the source zip file
+
+Note: if you see a bug and fix it, you can delete the release using (and the retag it):
+$ svn delete https://pmd.svn.sourceforge.net/svnroot/pmd/tags/pmd/pmd_release_<version>
+
+Go to Admin, File Releases, Add release
+Paste stuff into the changelog/readme boxes
+Add the pmd-bin-<version>.zip file
+Add the pmd-src-<version>.zip file
+Classify the file
+Click File Releases, Edit Release, set previous version to 'hidden'.
+
+upload command below will create and upload the maven artifacts to sourceforge. Login info
+for 'pmd-repo' must be defined in ~/.m2/settings.xml:
+
+---8<---8<---
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+  <servers>
+    <server>
+      <id>pmd-repo</id>
+      <username>your-sf-login</username>
+      <password>your-sf-pwd</password>
+    </server>
+  </servers>
+
+</settings>
+--->8--->8---
+
+
+cd ~/pmd/pmd/
+update the "download" and "what's new" link in navigation.xml
+update date and changelog links in project.xml (recent releases section)
+
+./docs.sh all
+./docs.sh upload
+
+update cpd.jnlp by running:
+
+ant -f bin/build.xml cpdjnlp
+
+
+Submit news to SF
+Go to http://freshmeat.net/
+Submit news to java.net
+Do a blog entry
+
+
+Getting the new PMD version into Maven Central Repository:
+----------------------------------------------------------
+1. Make sure you have a gpg key:
+
+   gpg --list-keys
+
+2. Create a bundle
+
+  mvn clean source:jar javadoc:jar package gpg:sign repository:bundle-create -Dgpg.keyname=your_key -Dgpg.passphrase=your_pwd
+
+3. The bundle is target/pmd-x.x.x-bundle.jar.
+
+  Test it: target/pmd-x.x.x.jar is the file, that is contained in the bundle.
+  So we can use it:
+  
+  java -cp target/pmd-x.x.x.jar:lib/asm-3.2.jar:lib/javacc.jar:lib/jaxen-1.1.1.jar net.sourceforge.pmd.PMD src/net/sourceforge/pmd/PMD.java text unusedcode
+
+  This should work: "No problems found!"
+  
+
+4. Upload pmd-x.x.x-bundle.jar to https://oss.sonatype.org.
+
+More info: https://docs.sonatype.org/display/Repository/Uploading+3rd-party+Artifacts+to+Maven+Central
+

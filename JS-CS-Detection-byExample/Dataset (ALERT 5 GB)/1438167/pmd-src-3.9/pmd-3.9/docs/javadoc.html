@@ -1,0 +1,2442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title>PMD - Javadoc Report</title><style type="text/css" media="all">
+          @import url("./style/maven-base.css");
+          
+			    @import url("./style/maven-theme.css");</style><link rel="stylesheet" href="./style/print.css" type="text/css" media="print"></link><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta></head><body class="composite"><div id="banner"><a href="http://pmd.sourceforge.net/" id="organizationLogo"><img alt="InfoEther" src="http://sourceforge.net/sflogo.php?group_id=56262&amp;type=5"></img></a><a href="http://pmd.sourceforge.net/" id="projectLogo"><img alt="PMD" src="./images/pmd_logo_small.jpg"></img></a><div class="clear"><hr></hr></div></div><div id="breadcrumbs"><div class="xright">
+        
+        <a href="http://pmdapplied.com/" class="externalLink" title="External Link">**** Get the book! ****</a>
+      
+        
+          
+            <span class="separator">|</span>
+          
+        
+        <a href="http://sourceforge.net/projects/pmd" class="externalLink" title="External Link">SourceForge.net Project Page</a>
+      
+        
+          
+            <span class="separator">|</span>
+          
+        
+        <a href="http://sourceforge.net" class="externalLink" title="External Link">Hosted by SourceForge</a>
+      </div><div class="clear"><hr></hr></div></div><div id="leftColumn"><div id="navcolumn"><div id="menuOverview"><h5>Overview</h5><ul><li class="none"><a href="http://sourceforge.net/project/showfiles.php?group_id=56262&amp;package_id=51441&amp;release_id=452776" class="externalLink" title="External Link">Download PMD 3.9</a></li><li class="none"><a href="http://sourceforge.net/project/shownotes.php?release_id=452776&amp;group_id=56262" class="externalLink" title="External Link">What's new in PMD 3.9</a></li><li class="none"><a href="news.html">PMD in the news</a></li><li class="none"><a href="products.html">PMD-related products and books</a></li><li class="none"><a href="bestpractices.html">Best practices</a></li><li class="none"><a href="future.html">Future directions</a></li><li class="none"><a href="similar-projects.html">Similar projects</a></li><li class="none"><a href="credits.html">Credits</a></li><li class="none"><a href="license.html">License</a></li><li class="none"><a href="meaning.html">What does 'PMD' mean?</a></li></ul></div><div id="menuUsage"><h5>Usage</h5><ul><li class="none"><a href="installing.html">Installation</a></li><li class="none"><a href="running.html">Command line usage</a></li><li class="none"><a href="ant-task.html">Ant task usage</a></li><li class="none"><a href="maven-plugin.html">Maven plugin usage</a></li><li class="none"><a href="integrations.html">IDE plugin usage</a></li><li class="none"><a href="suppressing.html">Suppressing warnings</a></li><li class="none"><a href="cpd.html">Finding duplicated code</a></li><li class="none"><a href="jspsupport.html">JSP support</a></li></ul></div><div id="menuCustomizing_PMD"><h5>Customizing PMD</h5><ul><li class="none"><a href="compiling.html">Compiling PMD</a></li><li class="none"><a href="howtowritearule.html">How to write a rule</a></li><li class="none"><a href="xpathruletutorial.html">Writing XPath rules</a></li><li class="none"><a href="howtomakearuleset.html">How to make a rule set</a></li><li class="none"><a href="howitworks.html">How it works</a></li></ul></div><div id="menuFor_example"><h5>For example</h5><ul><li class="none"><a href="scoreboard.html">Run PMD on a Sourceforge project</a></li></ul></div><div id="menuRule_Sets"><h5>Rule Sets</h5><ul><li class="none"><a href="rules/index.html">Index</a></li><li class="none"><a href="rules/basic.html">Basic</a></li><li class="none"><a href="rules/braces.html">Braces</a></li><li class="none"><a href="rules/codesize.html">Code Size</a></li><li class="none"><a href="rules/clone.html">Clone</a></li><li class="none"><a href="rules/controversial.html">Controversial</a></li><li class="none"><a href="rules/coupling.html">Coupling</a></li><li class="none"><a href="rules/design.html">Design</a></li><li class="none"><a href="rules/finalizers.html">Finalizers</a></li><li class="none"><a href="rules/imports.html">Import Statements</a></li><li class="none"><a href="rules/j2ee.html">J2EE</a></li><li class="none"><a href="rules/javabeans.html">Javabeans</a></li><li class="none"><a href="rules/junit.html">JUnit Tests</a></li><li class="none"><a href="rules/logging-java.html">Logging (Java)</a></li><li class="none"><a href="rules/logging-jakarta-commons.html">Logging (Jakarta)</a></li><li class="none"><a href="rules/migrating.html">Migrating</a></li><li class="none"><a href="rules/naming.html">Naming</a></li><li class="none"><a href="rules/optimizations.html">Optimizations</a></li><li class="none"><a href="rules/strictexception.html">Strict Exceptions</a></li><li class="none"><a href="rules/strings.html">Strings</a></li><li class="none"><a href="rules/sunsecure.html">Sun Security</a></li><li class="none"><a href="rules/unusedcode.html">Unused Code</a></li><li class="none"><a href="rules/basic-jsp.html">Java Server Pages</a></li><li class="none"><a href="rules/basic-jsf.html">Java Server Faces</a></li></ul></div><div id="menuProject_Documentation"><h5>Project Documentation</h5><ul><li class="none"><a href="index.html">About PMD</a></li><li class="collapsed"><a href="project-info.html">Project Info</a></li><li class="expanded"><a href="maven-reports.html">Project Reports</a><ul><li class="none"><a href="apidocs/index.html" class="newWindow" title="New Window" target="_blank">JavaDocs</a></li><li class="none"><strong><a href="javadoc.html">JavaDoc Report</a></strong></li><li class="none"><a href="xref/index.html" class="newWindow" title="New Window" target="_blank">Source Xref</a></li><li class="none"><a href="xref-test/index.html" class="newWindow" title="New Window" target="_blank">Test Xref</a></li><li class="none"><a href="junit-report.html">Unit Tests</a></li><li class="none"><a href="clover/index.html" class="newWindow" title="New Window" target="_blank">Clover</a></li><li class="none"><a href="file-activity-report.html">File Activity</a></li><li class="none"><a href="developer-activity-report.html">Developer Activity</a></li><li class="none"><a href="faq.html">FAQs</a></li><li class="none"><a href="pmd-report.html">PMD Report</a></li></ul></li><li class="none"><a href="http://maven.apache.org/development-process.html" class="externalLink" title="External Link">Development Process</a></li></ul></div><a href="http://maven.apache.org/" title="Built by Maven" id="poweredBy"><img alt="Built by Maven" src="./images/logos/maven-button-1.png"></img></a></div></div><div id="bodyColumn"><div class="contentBox"><div class="section"><a name="Javadoc_Report"></a><h2>Javadoc Report</h2><p></p>
+    <div class="source"><pre>  Generating Javadoc
+  Javadoc execution
+  Loading source files for package net.sourceforge.pmd...
+  Loading source files for package net.sourceforge.pmd.parsers...
+  Loading source files for package net.sourceforge.pmd.dfa...
+  Loading source files for package net.sourceforge.pmd.dfa.variableaccess...
+  Loading source files for package net.sourceforge.pmd.dfa.report...
+  Loading source files for package net.sourceforge.pmd.dfa.pathfinder...
+  Loading source files for package net.sourceforge.pmd.util...
+  Loading source files for package net.sourceforge.pmd.util.designer...
+  Loading source files for package net.sourceforge.pmd.util.viewer...
+  Loading source files for package net.sourceforge.pmd.util.viewer.model...
+  Loading source files for package net.sourceforge.pmd.util.viewer.util...
+  Loading source files for package net.sourceforge.pmd.util.viewer.gui...
+  Loading source files for package net.sourceforge.pmd.util.viewer.gui.menu...
+  Loading source files for package net.sourceforge.pmd.sourcetypehandlers...
+  Loading source files for package net.sourceforge.pmd.ant...
+  Loading source files for package net.sourceforge.pmd.jaxen...
+  Loading source files for package net.sourceforge.pmd.quickfix...
+  Loading source files for package net.sourceforge.pmd.typeresolution...
+  Loading source files for package net.sourceforge.pmd.typeresolution.rules...
+  Loading source files for package net.sourceforge.pmd.typeresolution.visitors...
+  Loading source files for package net.sourceforge.pmd.ast...
+  Loading source files for package net.sourceforge.pmd.properties...
+  Loading source files for package net.sourceforge.pmd.cpd...
+  Loading source files for package net.sourceforge.pmd.cpd.cppast...
+  Loading source files for package net.sourceforge.pmd.renderers...
+  Loading source files for package net.sourceforge.pmd.rules...
+  Loading source files for package net.sourceforge.pmd.rules.junit...
+  Loading source files for package net.sourceforge.pmd.rules.naming...
+  Loading source files for package net.sourceforge.pmd.rules.migration...
+  Loading source files for package net.sourceforge.pmd.rules.optimization...
+  Loading source files for package net.sourceforge.pmd.rules.strictexception...
+  Loading source files for package net.sourceforge.pmd.rules.sunsecure...
+  Loading source files for package net.sourceforge.pmd.rules.design...
+  Loading source files for package net.sourceforge.pmd.rules.basic...
+  Loading source files for package net.sourceforge.pmd.rules.codesize...
+  Loading source files for package net.sourceforge.pmd.rules.imports...
+  Loading source files for package net.sourceforge.pmd.rules.strings...
+  Loading source files for package net.sourceforge.pmd.symboltable...
+  Loading source files for package net.sourceforge.pmd.jsp.ast...
+  Loading source files for package net.sourceforge.pmd.jsp.rules...
+  Loading source files for package net.sourceforge.pmd.stat...
+  Constructing Javadoc information...
+  Standard Doclet version 1.4.2_03
+  Generating target/docs/apidocs/constant-values.html...
+  Copying file /home/tom/.maven/cache/maven-javadoc-plugin-1.6.1/plugin-resources/stylesheet.css to file target/docs/apidocs/stylesheet.css...
+  Building tree for all the packages and classes...
+  Generating target/docs/apidocs/net/sourceforge/pmd/class-use/AbstractRule.html...
+  "if (x != y) { diff(); } else { same(); } and&lt;br&gt;
+   (!x ? diff() : same());."
+  This sentence is different from what will be interpreted as the first sentence in the
+  src/net/sourceforge/pmd/rules/design/ConfusingTernary.java:39: warning - The first sentence is interpreted to be:
+  next major release (when that interpretation will be internationalized), which is:
+  "if (x !"
+  To avoid this note, change the doc comment to make this a proper first sentence, then
+  use -breakiterator from that point forward, which will output this new sentence.
+  "This rule finds the following:
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/rules/strings/AppendCharacterWithChar.java:24: warning - The first sentence is interpreted to be:
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds the following:
+   &lt;p/&gt;
+   &lt;pre&gt;
+  src/net/sourceforge/pmd/rules/strings/ConsecutiveLiteralAppends.java:56: warning - The first sentence is interpreted to be:
+           StringBuffer.append(&amp;quot;c&amp;quot;); // appends a
+           single character
+   &lt;/pre&gt;
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/rules/strings/InsufficientStringBufferDeclaration.java:37: warning - The first sentence is interpreted to be:
+   It is preferable to use StringBuffer.append('c'); // appends a single
+   character Implementation of PMD RFE 1373863"
+  src/net/sourceforge/pmd/rules/strings/UseStringBufferLength.java:32: warning - The first sentence is interpreted to be:
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello&amp;quot;);
+   buf.append(&amp;quot; &amp;quot;).append(&amp;quot;World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   This would be more eloquently put as:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   The rule takes one parameter, threshold, which defines the lower limit of
+   consecutive appends before a violation is created. "
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?thread_id=1438119&amp;forum_id=188194"
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?"
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer sb = new StringBuffer(&amp;quot;some string&amp;quot;);
+   if (sb.toString().equals(&amp;quot;&amp;quot;)) {
+       // this is wrong
+   }
+   if (sb.length() == 0) {
+       // this is right
+   }
+   &lt;/pre&gt;"
+  src/net/sourceforge/pmd/rules/design/ConfusingTernary.java:39: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/AppendCharacterWithChar.java:24: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/ConsecutiveLiteralAppends.java:56: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/InsufficientStringBufferDeclaration.java:37: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/UseStringBufferLength.java:32: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/class-use/Rule.html...
+  "if (x != y) { diff(); } else { same(); } and&lt;br&gt;
+   (!x ? diff() : same());."
+  This sentence is different from what would be generated using -breakiterator: 
+  "if (x !"
+  "This rule finds the following:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds the following:
+   &lt;p/&gt;
+   &lt;pre&gt;
+           StringBuffer.append(&amp;quot;c&amp;quot;); // appends a
+           single character
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   It is preferable to use StringBuffer.append('c'); // appends a single
+   character Implementation of PMD RFE 1373863"
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello&amp;quot;);
+   buf.append(&amp;quot; &amp;quot;).append(&amp;quot;World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   This would be more eloquently put as:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   The rule takes one parameter, threshold, which defines the lower limit of
+   consecutive appends before a violation is created. "
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?thread_id=1438119&amp;forum_id=188194"
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?"
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer sb = new StringBuffer(&amp;quot;some string&amp;quot;);
+   if (sb.toString().equals(&amp;quot;&amp;quot;)) {
+       // this is wrong
+   }
+   if (sb.length() == 0) {
+       // this is right
+   }
+   &lt;/pre&gt;"
+  src/net/sourceforge/pmd/ast/ASTEnumConstant.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeMemberDeclaration.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTRSIGNEDSHIFT.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSwitchStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTResultType.java:25: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeDeclaration.java:32: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValueArrayInitializer.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAssignmentOperator.java:28: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTContinueStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTryStatement.java:19: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValue.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTConditionalOrExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceType.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTBlock.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTEnumBody.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimitiveType.java:22: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeParameters.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValuePair.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTBreakStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTLiteral.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/JavaNode.java:8: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeDeclaration.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeArguments.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTName.java:30: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMultiplicativeExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeParameter.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberSelector.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSingleMemberAnnotation.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMethodDeclaration.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAndExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValuePairs.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTArguments.java:25: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTWhileStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTFinallyStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTArrayDimsAndInits.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSynchronizedStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTWildcardBounds.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMethodDeclarator.java:22: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTEnumElement.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTIfStatement.java:27: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTVariableInitializer.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTExclusiveOrExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTInstanceOfExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatementExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTExplicitConstructorInvocation.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSwitchLabel.java:28: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTArrayInitializer.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceDeclaration.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTConditionalAndExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTEqualityExpression.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTCatchStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTBooleanLiteral.java:28: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPackageDeclaration.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimaryPrefix.java:70: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTReturnStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTType.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPreIncrementExpression.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAssertStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTConditionalExpression.java:27: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/SimpleJavaNode.java:34: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/SimpleJavaNode.java:41: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTUnaryExpressionNotPlusMinus.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTArgumentList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTExtendsList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTImportDeclaration.java:68: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTEmptyStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAllocationExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTConstructorDeclaration.java:26: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceBodyDeclaration.java:33: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTFieldDeclaration.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTRUNSIGNEDSHIFT.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPostfixExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTNullLiteral.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTCastExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTImplementsList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeArgument.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTLocalVariableDeclaration.java:20: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTForInit.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimarySuffix.java:55: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTDefaultValue.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceBody.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTReferenceType.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMarkerAnnotation.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTInclusiveOrExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTNameList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTFormalParameters.java:21: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeBody.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAdditiveExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeBound.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatementExpressionList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTNormalAnnotation.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTCompilationUnit.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTInitializer.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTRelationalExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTForUpdate.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTVariableDeclaratorId.java:22: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTShiftExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTBlockStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTVariableDeclarator.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTDoStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimaryExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTThrowStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPreDecrementExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTForStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTUnaryExpression.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/design/ConfusingTernary.java:39: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/AppendCharacterWithChar.java:24: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/ConsecutiveLiteralAppends.java:56: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/InsufficientStringBufferDeclaration.java:37: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/UseStringBufferLength.java:32: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/design/ConfusingTernary.java:39: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/class-use/JavaParserVisitor.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/rules/strings/AppendCharacterWithChar.java:24: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/rules/strings/ConsecutiveLiteralAppends.java:56: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/rules/strings/InsufficientStringBufferDeclaration.java:37: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/rules/strings/UseStringBufferLength.java:32: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTDeclaration.java:45: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTDoctypeExternalId.java:77: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/SimpleNode.java:39: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/SimpleNode.java:46: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTUnparsedText.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspExpressionInAttribute.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspScriptlet.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTValueBinding.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDirectiveAttribute.java:59: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDeclarations.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/Node.java:15: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTCommentTag.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTContent.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTCData.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspComment.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTDoctypeDeclaration.java:48: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/jsp/ast/ASTAttribute.java:74: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/jsp/ast/ASTAttributeValue.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDirective.java:48: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/jsp/ast/ASTElExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTElement.java:98: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTText.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDocument.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTCompilationUnit.java:20: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDeclaration.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/JspParser.java:387: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/symboltable/TypeSet.java:25: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/util/viewer/model/ViewerModelEvent.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/util/viewer/model/ViewerModelEvent.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/rules/strings/AppendCharacterWithChar.java:24: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/JavaCharStream.java:445: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/rules/design/ConfusingTernary.java:39: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/rules/strings/ConsecutiveLiteralAppends.java:56: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/SimpleJavaNode.java:41: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/SimpleNode.java:46: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/rules/strings/InsufficientStringBufferDeclaration.java:37: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTAdditiveExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTAllocationExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTAndExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeBody.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeDeclaration.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeMemberDeclaration.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTArgumentList.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTArguments.java:25: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTArrayDimsAndInits.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTArrayInitializer.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTAssertStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTAssignmentOperator.java:28: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTBlock.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTBlockStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTBooleanLiteral.java:28: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTBreakStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTCastExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTCatchStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceBody.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceBodyDeclaration.java:33: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceDeclaration.java:17: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceType.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTCompilationUnit.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTConditionalAndExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTConditionalExpression.java:27: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTConditionalOrExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTConstructorDeclaration.java:26: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTContinueStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTDefaultValue.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTDoStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEmptyStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTEnumBody.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEnumConstant.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEnumElement.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEqualityExpression.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "if (x != y) { diff(); } else { same(); } and&lt;br&gt;
+   (!x ? diff() : same());."
+  src/net/sourceforge/pmd/ast/ASTExclusiveOrExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "if (x !"
+  "This rule finds the following:
+   &lt;p/&gt;
+   "
+  src/net/sourceforge/pmd/ast/ASTExplicitConstructorInvocation.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds the following:
+   &lt;p/&gt;
+   &lt;pre&gt;
+  src/net/sourceforge/pmd/ast/ASTExpression.java:18: warning - The first sentence is interpreted to be:
+           StringBuffer.append(&amp;quot;c&amp;quot;); // appends a
+           single character
+   &lt;/pre&gt;
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/ast/ASTExtendsList.java:18: warning - The first sentence is interpreted to be:
+   It is preferable to use StringBuffer.append('c'); // appends a single
+   character Implementation of PMD RFE 1373863"
+  src/net/sourceforge/pmd/ast/ASTFieldDeclaration.java:18: warning - The first sentence is interpreted to be:
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   "
+  src/net/sourceforge/pmd/ast/ASTFinallyStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTForInit.java:18: warning - The first sentence is interpreted to be:
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/ast/ASTForStatement.java:18: warning - The first sentence is interpreted to be:
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello&amp;quot;);
+  src/net/sourceforge/pmd/ast/ASTForUpdate.java:18: warning - The first sentence is interpreted to be:
+   buf.append(&amp;quot; &amp;quot;).append(&amp;quot;World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   This would be more eloquently put as:
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/ast/ASTFormalParameters.java:21: warning - The first sentence is interpreted to be:
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+  src/net/sourceforge/pmd/ast/ASTIfStatement.java:27: warning - The first sentence is interpreted to be:
+   buf.append(&amp;quot;Hello World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   The rule takes one parameter, threshold, which defines the lower limit of
+   consecutive appends before a violation is created. "
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+  src/net/sourceforge/pmd/ast/ASTImplementsList.java:18: warning - The first sentence is interpreted to be:
+   See http://sourceforge.net/forum/forum.php?thread_id=1438119&amp;forum_id=188194"
+  src/net/sourceforge/pmd/ast/ASTImportDeclaration.java:68: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+  src/net/sourceforge/pmd/ast/ASTInclusiveOrExpression.java:18: warning - The first sentence is interpreted to be:
+   See http://sourceforge.net/forum/forum.php?"
+  "This rule finds places where StringBuffer.toString() is called just to see if
+  src/net/sourceforge/pmd/ast/ASTInitializer.java:18: warning - The first sentence is interpreted to be:
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTInstanceOfExpression.java:18: warning - The first sentence is interpreted to be:
+  "This rule finds places where StringBuffer.toString() is called just to see if
+  src/net/sourceforge/pmd/ast/ASTLiteral.java:17: warning - The first sentence is interpreted to be:
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer sb = new StringBuffer(&amp;quot;some string&amp;quot;);
+   if (sb.toString().equals(&amp;quot;&amp;quot;)) {
+  src/net/sourceforge/pmd/ast/ASTLocalVariableDeclaration.java:20: warning - The first sentence is interpreted to be:
+       // this is wrong
+   }
+   if (sb.length() == 0) {
+       // this is right
+   }
+   &lt;/pre&gt;"
+  src/net/sourceforge/pmd/ast/ASTMarkerAnnotation.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberSelector.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValue.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValueArrayInitializer.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValuePair.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMemberValuePairs.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMethodDeclaration.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMethodDeclarator.java:22: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTMultiplicativeExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTName.java:30: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTNameList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTNormalAnnotation.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTNullLiteral.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPackageDeclaration.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPostfixExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPreDecrementExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPreIncrementExpression.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimaryExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimaryPrefix.java:70: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimarySuffix.java:55: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTPrimitiveType.java:22: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTRSIGNEDSHIFT.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTRUNSIGNEDSHIFT.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTReferenceType.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTRelationalExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTResultType.java:25: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTReturnStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTShiftExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSingleMemberAnnotation.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatementExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatementExpressionList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSwitchLabel.java:28: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSwitchStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTSynchronizedStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTThrowStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTryStatement.java:19: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTType.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeArgument.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeArguments.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeBound.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeDeclaration.java:32: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeParameter.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTTypeParameters.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTUnaryExpression.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTUnaryExpressionNotPlusMinus.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTVariableDeclarator.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTVariableDeclaratorId.java:22: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTVariableInitializer.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTWhileStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTWildcardBounds.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/JavaNode.java:8: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/SimpleJavaNode.java:34: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTAttribute.java:74: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTAttributeValue.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTCData.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTCommentTag.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTCompilationUnit.java:20: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTContent.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTDeclaration.java:45: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTDoctypeDeclaration.java:48: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTDoctypeExternalId.java:77: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTElExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTElement.java:98: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspComment.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDeclaration.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDeclarations.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDirective.java:48: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDirectiveAttribute.java:59: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDocument.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspExpressionInAttribute.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspScriptlet.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTText.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTUnparsedText.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTValueBinding.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/Node.java:15: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/SimpleNode.java:39: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/PropertyDescriptor.java:41: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/JspParser.java:387: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/symboltable/TypeSet.java:25: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/UseStringBufferLength.java:32: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/class-use/JavaParserVisitorAdapter.html...
+  "if (x != y) { diff(); } else { same(); } and&lt;br&gt;
+   (!x ? diff() : same());."
+  src/net/sourceforge/pmd/util/viewer/model/ViewerModelEvent.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "if (x !"
+  "This rule finds the following:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds the following:
+   &lt;p/&gt;
+   &lt;pre&gt;
+           StringBuffer.append(&amp;quot;c&amp;quot;); // appends a
+           single character
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   It is preferable to use StringBuffer.append('c'); // appends a single
+   character Implementation of PMD RFE 1373863"
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello&amp;quot;);
+   buf.append(&amp;quot; &amp;quot;).append(&amp;quot;World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   This would be more eloquently put as:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   The rule takes one parameter, threshold, which defines the lower limit of
+   consecutive appends before a violation is created. "
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?thread_id=1438119&amp;forum_id=188194"
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?"
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer sb = new StringBuffer(&amp;quot;some string&amp;quot;);
+   if (sb.toString().equals(&amp;quot;&amp;quot;)) {
+       // this is wrong
+   }
+   if (sb.length() == 0) {
+       // this is right
+   }
+   &lt;/pre&gt;"
+  src/net/sourceforge/pmd/rules/design/ConfusingTernary.java:39: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/AppendCharacterWithChar.java:24: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/ConsecutiveLiteralAppends.java:56: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/InsufficientStringBufferDeclaration.java:37: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/rules/strings/UseStringBufferLength.java:32: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/symboltable/TypeSet.java:25: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/util/viewer/model/ViewerModelEvent.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/PropertyDescriptor.java:41: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/AbstractRule.java:377: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/AbstractRule.java:389: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/AbstractRule.java:401: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/AbstractRule.java:413: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/CommonAbstractRule.java:190: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/CommonAbstractRule.java:202: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/CommonAbstractRule.java:214: warning - @param argument "ctx" is not a parameter name.
+  src/net/sourceforge/pmd/CommonAbstractRule.java:226: warning - @param argument "ctx" is not a parameter name.
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/class-use/JspParserVisitor.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/class-use/ParseException.html...
+  "This production groups all characters between two tags, where
+   tag is an xml-tag "&lt;...&gt;" or a jsp-page-tag "&lt;%...%&gt;" or CDATA "&lt;![CDATA[...]]&gt;"."
+  This sentence is different from what would be generated using -breakiterator: 
+  "This production groups all characters between two tags, where
+   tag is an xml-tag "&lt;...&gt;" or a jsp-page-tag "&lt;%...%&gt;" or CDATA "&lt;!"
+  Generating target/docs/apidocs/net/sourceforge/pmd/symboltable/package-use.html...
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   Requiring 2 calls seems clunky..."
+  src/net/sourceforge/pmd/ast/JavaNode.java:8: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   "
+  Generating target/docs/apidocs/net/sourceforge/pmd/util/viewer/model/package-use.html...
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   &lt;/p&gt;"
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   &lt;/p&gt;"
+  Building index for all the packages and classes...
+  Generating target/docs/apidocs/index-all.html...
+  "This rule finds the following:
+   &lt;p/&gt;
+   "
+  src/net/sourceforge/pmd/ast/ASTAdditiveExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds the following:
+   &lt;p/&gt;
+   &lt;pre&gt;
+           StringBuffer.append(&amp;quot;c&amp;quot;); // appends a
+           single character
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   It is preferable to use StringBuffer.append('c'); // appends a single
+  src/net/sourceforge/pmd/ast/ASTAllocationExpression.java:18: warning - The first sentence is interpreted to be:
+   character Implementation of PMD RFE 1373863"
+  "Method to adjust line and column numbers for the start of a token.&lt;BR&gt;"
+  src/net/sourceforge/pmd/ast/ASTAndExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Method to adjust line and column numbers for the start of a token."
+  "if (x != y) { diff(); } else { same(); } and&lt;br&gt;
+   (!x ? diff() : same());."
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeBody.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "if (x !"
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   "
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeDeclaration.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   &lt;pre&gt;
+  src/net/sourceforge/pmd/ast/ASTAnnotationTypeMemberDeclaration.java:18: warning - The first sentence is interpreted to be:
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello&amp;quot;);
+   buf.append(&amp;quot; &amp;quot;).append(&amp;quot;World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/ast/ASTArgumentList.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTArguments.java:25: warning - The first sentence is interpreted to be:
+   This would be more eloquently put as:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+  src/net/sourceforge/pmd/ast/ASTArrayDimsAndInits.java:18: warning - The first sentence is interpreted to be:
+   The rule takes one parameter, threshold, which defines the lower limit of
+   consecutive appends before a violation is created. "
+  src/net/sourceforge/pmd/ast/ASTArrayInitializer.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTAssertStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTAssignmentOperator.java:28: warning - The first sentence is interpreted to be:
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?thread_id=1438119&amp;forum_id=188194"
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTBlock.java:18: warning - The first sentence is interpreted to be:
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTBlockStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTBooleanLiteral.java:28: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTBreakStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTCastExpression.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTCatchStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceBody.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceBodyDeclaration.java:33: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceDeclaration.java:17: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTClassOrInterfaceType.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTCompilationUnit.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTConditionalAndExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTConditionalExpression.java:27: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTConditionalOrExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTConstructorDeclaration.java:26: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTContinueStatement.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTDefaultValue.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTDoStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEmptyStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEnumBody.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEnumConstant.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEnumDeclaration.java:14: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEnumElement.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTEqualityExpression.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTExclusiveOrExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTExplicitConstructorInvocation.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTExtendsList.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTFieldDeclaration.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTFinallyStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTForInit.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTFormalParameter.java:28: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTFormalParameters.java:21: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTForStatement.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTForUpdate.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTIfStatement.java:27: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTImplementsList.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTImportDeclaration.java:68: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTInclusiveOrExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTInitializer.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTInstanceOfExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTLabeledStatement.java:14: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTLiteral.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTLocalVariableDeclaration.java:20: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTMarkerAnnotation.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTMemberSelector.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTMemberValue.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTMemberValueArrayInitializer.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTMemberValuePair.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTMemberValuePairs.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTMethodDeclaration.java:17: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTMethodDeclarator.java:22: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTMultiplicativeExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTName.java:30: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTNameList.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTNormalAnnotation.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTNullLiteral.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPackageDeclaration.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPostfixExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPreDecrementExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPreIncrementExpression.java:17: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPrimaryExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPrimaryPrefix.java:70: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPrimarySuffix.java:55: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTPrimitiveType.java:22: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTReferenceType.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTRelationalExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTResultType.java:25: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTReturnStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTRSIGNEDSHIFT.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTRUNSIGNEDSHIFT.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTShiftExpression.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTSingleMemberAnnotation.java:17: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/ASTStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTStatementExpression.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTStatementExpressionList.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTSwitchLabel.java:28: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTSwitchStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTSynchronizedStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTThrowStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTTryStatement.java:19: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTType.java:17: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTTypeArgument.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTTypeArguments.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTTypeBound.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTTypeDeclaration.java:32: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTTypeParameter.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/ASTTypeParameters.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTUnaryExpression.java:17: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTUnaryExpressionNotPlusMinus.java:17: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTVariableDeclarator.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  src/net/sourceforge/pmd/ast/ASTVariableDeclaratorId.java:22: warning - The first sentence is interpreted to be:
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTVariableInitializer.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTWhileStatement.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/ast/ASTWildcardBounds.java:18: warning - The first sentence is interpreted to be:
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  src/net/sourceforge/pmd/ast/JavaCharStream.java:445: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "If the property is multi-valued, i.e."
+  This sentence is different from what would be generated using -breakiterator: 
+  "If the property is multi-valued, i.e. an array of strings, then this
+   returns the maximum number permitted. "
+  "This production groups all characters between two tags, where
+   tag is an xml-tag "&lt;...&gt;" or a jsp-page-tag "&lt;%...%&gt;" or CDATA "&lt;![CDATA[...]]&gt;"."
+  This sentence is different from what would be generated using -breakiterator: 
+  "This production groups all characters between two tags, where
+   tag is an xml-tag "&lt;...&gt;" or a jsp-page-tag "&lt;%...%&gt;" or CDATA "&lt;!"
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   Requiring 2 calls seems clunky..."
+  This sentence is different from what would be generated using -breakiterator: 
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   "
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer sb = new StringBuffer(&amp;quot;some string&amp;quot;);
+   if (sb.toString().equals(&amp;quot;&amp;quot;)) {
+       // this is wrong
+   }
+   if (sb.length() == 0) {
+       // this is right
+   }
+   &lt;/pre&gt;"
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   &lt;/p&gt;"
+  Building index for all classes...
+  src/net/sourceforge/pmd/ast/SimpleJavaNode.java:41: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/ast/SimpleJavaNode.java:34: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/rules/design/package-summary.html...
+  "if (x != y) { diff(); } else { same(); } and&lt;br&gt;
+   (!x ? diff() : same());."
+  This sentence is different from what would be generated using -breakiterator: 
+  "if (x !"
+  Generating target/docs/apidocs/net/sourceforge/pmd/rules/strings/package-summary.html...
+  "This rule finds the following:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds the following:
+   &lt;p/&gt;
+   &lt;pre&gt;
+           StringBuffer.append(&amp;quot;c&amp;quot;); // appends a
+           single character
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   It is preferable to use StringBuffer.append('c'); // appends a single
+   character Implementation of PMD RFE 1373863"
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds concurrent calls to StringBuffer.append where String literals
+   are used It would be much better to make these calls using one call to
+   .append
+   &lt;p/&gt;
+   example:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello&amp;quot;);
+   buf.append(&amp;quot; &amp;quot;).append(&amp;quot;World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   This would be more eloquently put as:
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer buf = new StringBuffer();
+   buf.append(&amp;quot;Hello World&amp;quot;);
+   &lt;/pre&gt;
+   &lt;p/&gt;
+   The rule takes one parameter, threshold, which defines the lower limit of
+   consecutive appends before a violation is created. "
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?thread_id=1438119&amp;forum_id=188194"
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds StringBuffers which may have been pre-sized incorrectly
+   
+   See http://sourceforge.net/forum/forum.php?"
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "This rule finds places where StringBuffer.toString() is called just to see if
+   the string is 0 length by either using .equals("") or toString().size()
+   &lt;p/&gt;
+   &lt;pre&gt;
+   StringBuffer sb = new StringBuffer(&amp;quot;some string&amp;quot;);
+   if (sb.toString().equals(&amp;quot;&amp;quot;)) {
+       // this is wrong
+   }
+   if (sb.length() == 0) {
+       // this is right
+   }
+   &lt;/pre&gt;"
+  Generating target/docs/apidocs/net/sourceforge/pmd/symboltable/package-summary.html...
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   Requiring 2 calls seems clunky..."
+  This sentence is different from what would be generated using -breakiterator: 
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   "
+  src/net/sourceforge/pmd/rules/ConstructorCallsOverridableMethod.java:43: warning - @todo is an unknown tag.
+  src/net/sourceforge/pmd/rules/ConstructorCallsOverridableMethod.java:43: warning - @todo is an unknown tag.
+  src/net/sourceforge/pmd/rules/ConstructorCallsOverridableMethod.java:762: warning - @todo is an unknown tag.
+  Generating target/docs/apidocs/net/sourceforge/pmd/util/viewer/model/package-summary.html...
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   "
+  This sentence is different from what would be generated using -breakiterator: 
+  "The event which will be sent every time  the model changes
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   &lt;p/&gt;
+   Note: the instances will be immutable
+   &lt;p/&gt;
+   &lt;/p&gt;"
+  Generating target/docs/apidocs/net/sourceforge/pmd/PropertyDescriptor.html...
+  "If the property is multi-valued, i.e."
+  This sentence is different from what would be generated using -breakiterator: 
+  "If the property is multi-valued, i.e. an array of strings, then this
+   returns the maximum number permitted. "
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/JavaNode.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAdditiveExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAllocationExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAndExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAnnotationTypeBody.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAnnotationTypeDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAnnotationTypeMemberDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTArgumentList.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTArguments.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTArrayDimsAndInits.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTArrayInitializer.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAssertStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTAssignmentOperator.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTBlock.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTBlockStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTBooleanLiteral.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTBreakStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTCastExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTCatchStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTClassOrInterfaceBody.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTClassOrInterfaceBodyDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTClassOrInterfaceDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTClassOrInterfaceType.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTCompilationUnit.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTConditionalAndExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTConditionalExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTConditionalOrExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTConstructorDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTContinueStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTDefaultValue.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTDoStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTEmptyStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTEnumBody.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTEnumConstant.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTEnumDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTEnumElement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTEqualityExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTExclusiveOrExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTExplicitConstructorInvocation.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTExtendsList.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTFieldDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTFinallyStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTForInit.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTFormalParameter.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/symboltable/TypeSet.java:25: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTFormalParameters.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTForStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTForUpdate.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTIfStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTImplementsList.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTImportDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/Node.java:15: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTInclusiveOrExpression.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTAttribute.java:74: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTAttributeValue.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTInitializer.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTCData.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTCommentTag.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTInstanceOfExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTCompilationUnit.java:20: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTContent.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTLabeledStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTDeclaration.java:45: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTLiteral.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTDoctypeDeclaration.java:48: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTLocalVariableDeclaration.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTDoctypeExternalId.java:77: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTElement.java:98: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTElExpression.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMarkerAnnotation.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspComment.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDeclaration.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMemberSelector.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDeclarations.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMemberValue.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDirective.java:48: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDirectiveAttribute.java:59: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMemberValueArrayInitializer.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTJspDocument.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTJspExpression.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMemberValuePair.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTJspExpressionInAttribute.java:18: warning - The first sentence is interpreted to be:
+  src/net/sourceforge/pmd/jsp/ast/ASTJspScriptlet.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMemberValuePairs.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTText.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMethodDeclaration.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/ASTUnparsedText.java:18: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/ASTValueBinding.java:18: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMethodDeclarator.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/JspParser.java:387: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/ast/SimpleNode.java:46: warning - The first sentence is interpreted to be:
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTMultiplicativeExpression.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/ast/SimpleNode.java:39: warning - The first sentence is interpreted to be:
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/rules/AbstractJspRule.java:203: warning - @param argument "ctx" is not a parameter name.
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTName.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/rules/AbstractJspRule.java:215: warning - @param argument "ctx" is not a parameter name.
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTNameList.html...
+  "Accept the visitor."
+  src/net/sourceforge/pmd/jsp/rules/AbstractJspRule.java:227: warning - @param argument "ctx" is not a parameter name.
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  src/net/sourceforge/pmd/jsp/rules/AbstractJspRule.java:239: warning - @param argument "ctx" is not a parameter name.
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTNormalAnnotation.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTNullLiteral.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPackageDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPostfixExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPreDecrementExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPreIncrementExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPrimaryExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPrimaryPrefix.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPrimarySuffix.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTPrimitiveType.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTReferenceType.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTRelationalExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTResultType.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTReturnStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTRSIGNEDSHIFT.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTRUNSIGNEDSHIFT.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTShiftExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTSingleMemberAnnotation.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTStatementExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTStatementExpressionList.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTSwitchLabel.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTSwitchStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTSynchronizedStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTThrowStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTryStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTType.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTypeArgument.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTypeArguments.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTypeBound.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTypeDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTypeParameter.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTTypeParameters.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTUnaryExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTUnaryExpressionNotPlusMinus.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTVariableDeclarator.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTVariableDeclaratorId.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTVariableInitializer.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTWhileStatement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/ASTWildcardBounds.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/JavaCharStream.html...
+  "Method to adjust line and column numbers for the start of a token.&lt;BR&gt;"
+  This sentence is different from what would be generated using -breakiterator: 
+  "Method to adjust line and column numbers for the start of a token."
+  Generating target/docs/apidocs/net/sourceforge/pmd/ast/SimpleJavaNode.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/symboltable/TypeSet.html...
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   Requiring 2 calls seems clunky..."
+  This sentence is different from what would be generated using -breakiterator: 
+  "TODO should Resolver provide a canResolve() and a resolve()?
+   "
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/Node.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTAttribute.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTAttributeValue.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTCData.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTCommentTag.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTCompilationUnit.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTContent.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTDoctypeDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTDoctypeExternalId.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTElement.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTElExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspComment.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspDeclaration.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspDeclarations.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspDirective.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspDirectiveAttribute.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspDocument.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspExpression.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspExpressionInAttribute.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTJspScriptlet.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTText.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTUnparsedText.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/ASTValueBinding.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/JspParser.html...
+  "This production groups all characters between two tags, where
+   tag is an xml-tag "&lt;...&gt;" or a jsp-page-tag "&lt;%...%&gt;" or CDATA "&lt;![CDATA[...]]&gt;"."
+  This sentence is different from what would be generated using -breakiterator: 
+  "This production groups all characters between two tags, where
+   tag is an xml-tag "&lt;...&gt;" or a jsp-page-tag "&lt;%...%&gt;" or CDATA "&lt;!"
+  Generating target/docs/apidocs/net/sourceforge/pmd/jsp/ast/SimpleNode.html...
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  "Accept the visitor."
+  This sentence is different from what would be generated using -breakiterator: 
+  "Accept the visitor"
+  Generating target/docs/apidocs/help-doc.html...
+  462 warnings
+</pre></div>
+  </div></div></div><div class="clear"><hr></hr></div><div id="footer"><div class="xright">© 2002-2006, InfoEther</div><div class="clear"><hr></hr></div></div></body></html>

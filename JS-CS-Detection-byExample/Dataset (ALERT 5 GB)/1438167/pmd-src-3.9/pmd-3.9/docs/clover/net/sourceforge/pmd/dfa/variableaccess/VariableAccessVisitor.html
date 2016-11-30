@@ -1,0 +1,719 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PMD - 3.9</title>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../style.css" TITLE="Style">
+</head>
+<body>
+<TABLE cellspacing="0" cellpadding="2"><TBODY>
+    <!-- / home/ tom/ pmd/ pmd/ src/ net/ sourceforge/ pmd/ dfa/ variableaccess/ VariableAccessVisitor.java -->
+  <TR>
+    <TD colspan="6" class="reportHeader">
+    <TABLE width="100%"><TR>
+    <TD valign="top" class="titleText">Clover coverage report -   PMD - 3.9 <DIV class="timestamp"><b>Coverage timestamp:</b>&nbsp;Tue Dec 19 2006 09:38:44 EST</DIV>
+            <DIV class="navBar"><a href="../../../../../pkgs-summary.html"><b>Overview</b></a>&nbsp;&nbsp;&nbsp;<a href="pkg-summary.html"><b>Package</b></a>&nbsp;&nbsp;&nbsp;<font class="navBarCurrent">File</font></DIV>
+    
+<DIV class="navBarLink">
+&nbsp;&nbsp;&nbsp;
+    <A HREF="../../../../../index.html" TARGET="_top">FRAMES</A>&nbsp;&nbsp;
+<A HREF="VariableAccessVisitor.html" TARGET="_top">NO FRAMES</A>&nbsp;&nbsp;
+    </DIV>
+
+</TD>
+         <td class="headerStats" valign="top" width="40%" align="right">
+        <table align="right">
+         <tr>
+           <td nowrap><b>file stats:</b></td>
+           <td align="right"><b>LOC:</b></td>
+           <td align="right">143</td>
+           <td width="10%">&nbsp;</td>
+           <td align="right"><b>Methods:</b></td>
+           <td align="right">7</td>
+         </tr>
+         <tr>
+           <td></td>
+           <td align="right"><b>NCLOC:</b></td>
+           <td align="right">105</td>
+           <td width="10%">&nbsp;</td>
+           <td align="right"><b>Classes:</b></td>
+           <td align="right">1</td>
+         </tr>
+      </table>
+     </td>
+    </TR></TABLE>
+   </TD>
+  </TR>
+
+<TR><TD class="hbreak" colspan="6">&nbsp;</TD></TR>
+  <TR>
+    <TD class="graphHeaderLeft"><b>&nbsp;Source file</b></TD>
+    <TD class="graphHeader">Conditionals</TD>
+    <TD class="graphHeader">Statements</TD>
+    <TD class="graphHeader">Methods</TD>
+    <TD class="graphHeader" align="left" colspan="2"><B>TOTAL</B></TD>
+  </TR>   
+  <TR>
+    <TD class="graphItem">
+        	   VariableAccessVisitor.java
+	    </TD>
+   
+    <TD class="graphPercent" align="center">90%</TD>
+    <TD class="graphPercent" align="center">98%</TD>
+    <TD class="graphPercent" align="center">85.7%</TD>
+    <TD class="graphBarLeft" align="center"><B>94.3%</B></TD>
+    <TD class="graphBar">
+            <TABLE class="barGraph" cellspacing="0">
+        <TBODY>
+          <TR>
+	               <TD class="covered"><img alt="coverage" src="../../../../../img/trans.gif"
+                   width="188" height="12"></TD>
+            <TD class="uncovered"><img alt="coverage" src="../../../../../img/trans.gif"
+                   width="12" height="12"></TD>
+	   	  </TR>
+	</TBODY>
+      </TABLE>
+          </TD>
+  </TR> 
+</TBODY></TABLE><TABLE cellspacing="0" cellpadding="0" class="srcView"><TBODY>
+<TR><TD align="right" class="lineCount">
+&nbsp;1</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">/*</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;2</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> * Created on 14.07.2004</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;3</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> */</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;4</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">package</span> net.sourceforge.pmd.dfa.variableaccess;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;5</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;6</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ASTClassOrInterfaceBodyDeclaration;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;7</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ASTConstructorDeclaration;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;8</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ASTFormalParameter;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;9</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ASTFormalParameters;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;10</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ASTMethodDeclaration;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;11</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ASTVariableInitializer;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;12</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.JavaParserVisitorAdapter;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;13</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.SimpleNode;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;14</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.dfa.IDataFlowNode;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;15</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.dfa.StartOrEndDataFlowNode;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;16</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.symboltable.NameOccurrence;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;17</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.symboltable.VariableNameDeclaration;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;18</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;19</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.ArrayList;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;20</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.HashSet;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;21</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.Iterator;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;22</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.List;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;23</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.Map;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;24</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.Set;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;25</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;26</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">/**</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;27</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> * <span class="javadoc">@author</span> raik, Sven Jacob</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;28</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> *         &lt;p/&gt;</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;29</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> *         Searches for special nodes and computes based on the sequence, the type of</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;30</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> *         access of a variable.</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;31</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> */</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="VariableAccessVisitor">&nbsp;32</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">public</span> <span class="keyword">class</span> VariableAccessVisitor <span class="keyword">extends</span> JavaParserVisitorAdapter {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;33</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;34</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 34: method entered 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 34: method entered 43 times.">    <span class="keyword">public</span> <span class="keyword">void</span> compute(ASTMethodDeclaration node) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;35</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 35: expression evaluated to true 43 times, false 0 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 35: expression evaluated to true 43 times, false 0 times.">        <span class="keyword">if</span> (node.jjtGetParent() <span class="keyword">instanceof</span> ASTClassOrInterfaceBodyDeclaration) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;36</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 36: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 36: statement executed 43 times.">            <span class="keyword">this</span>.computeNow(node);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;37</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;38</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;39</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;40</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 40: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 40: method not entered.">    <span class="keyword">public</span> <span class="keyword">void</span> compute(ASTConstructorDeclaration node) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;41</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 41: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 41: statement not executed.">        <span class="keyword">this</span>.computeNow(node);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;42</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;43</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;44</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 44: method entered 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 44: method entered 43 times.">    <span class="keyword">private</span> <span class="keyword">void</span> computeNow(SimpleNode node) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;45</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 45: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 45: statement executed 43 times.">        IDataFlowNode inode = node.getDataFlowNode();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;46</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;47</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 47: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 47: statement executed 43 times.">        List undefinitions = markUsages(inode);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;48</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;49</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="comment">// all variables are first in state undefinition </span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;50</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 50: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 50: statement executed 43 times.">        IDataFlowNode firstINode = (IDataFlowNode) inode.getFlow().get(0);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;51</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 51: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 51: statement executed 43 times.">        firstINode.setVariableAccess(undefinitions);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;52</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;53</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="comment">// all variables are getting undefined when leaving scope</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;54</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 54: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 54: statement executed 43 times.">        IDataFlowNode lastINode = (IDataFlowNode) inode.getFlow().get(inode.getFlow().size() - 1);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;55</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 55: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 55: statement executed 43 times.">        lastINode.setVariableAccess(undefinitions);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;56</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;57</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;58</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 58: method entered 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 58: method entered 43 times.">    <span class="keyword">private</span> List markUsages(IDataFlowNode inode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;59</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="comment">// undefinitions was once a field... seems like it works fine as a local</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;60</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 60: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 60: statement executed 43 times.">        List undefinitions = <span class="keyword">new</span> ArrayList();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;61</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 61: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 61: statement executed 43 times.">        Set variableDeclarations = collectDeclarations(inode);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;62</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 62: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 62: statement executed 43 times.">        <span class="keyword">for</span> (Iterator i = variableDeclarations.iterator(); i.hasNext();) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;63</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 63: statement executed 86 times.">&nbsp;86</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 63: statement executed 86 times.">            Map declarations = (Map) i.next();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;64</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 64: statement executed 86 times.">&nbsp;86</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 64: statement executed 86 times.">            <span class="keyword">for</span> (Iterator j = declarations.entrySet().iterator(); j.hasNext();) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;65</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 65: statement executed 45 times.">&nbsp;45</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 65: statement executed 45 times.">                Map.Entry entry = (Map.Entry) j.next();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;66</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 66: statement executed 45 times.">&nbsp;45</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 66: statement executed 45 times.">                VariableNameDeclaration vnd = (VariableNameDeclaration) entry.getKey();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;67</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;68</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 68: statement executed 45 times.">&nbsp;45</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 68: statement executed 45 times.">                <span class="keyword">if</span> (vnd.getAccessNodeParent() <span class="keyword">instanceof</span> ASTFormalParameter) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;69</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                    <span class="comment">// add definition for parameters</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;70</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 70: statement executed 3 times.">&nbsp;3</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 70: statement executed 3 times.">                    addVariableAccess(</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;71</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                            (SimpleNode)vnd.getNode().getFirstParentOfType(ASTFormalParameters.<span class="keyword">class</span>), </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;72</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                            <span class="keyword">new</span> VariableAccess(VariableAccess.DEFINITION, vnd.getImage()), </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;73</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                            inode.getFlow());</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;74</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 74: statement executed 42 times.">&nbsp;42</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 74: statement executed 42 times.">                } <span class="keyword">else</span> <span class="keyword">if</span> (vnd.getAccessNodeParent().getFirstChildOfType(ASTVariableInitializer.<span class="keyword">class</span>) != <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;75</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                    <span class="comment">// add definition for initialized variables</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;76</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 76: statement executed 40 times.">&nbsp;40</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 76: statement executed 40 times.">                    addVariableAccess(</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;77</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                            vnd.getNode(), </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;78</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                            <span class="keyword">new</span> VariableAccess(VariableAccess.DEFINITION, vnd.getImage()), </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;79</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                            inode.getFlow());                    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;80</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;81</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 81: statement executed 45 times.">&nbsp;45</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 81: statement executed 45 times.">                undefinitions.add(<span class="keyword">new</span> VariableAccess(VariableAccess.UNDEFINITION, vnd.getImage()));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;82</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;83</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 83: statement executed 45 times.">&nbsp;45</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 83: statement executed 45 times.">                <span class="keyword">for</span> (Iterator k = ((List) entry.getValue()).iterator(); k.hasNext();) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;84</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 84: statement executed 122 times.">&nbsp;122</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 84: statement executed 122 times.">                    addAccess(k, inode);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;85</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;86</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;87</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;88</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 88: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 88: statement executed 43 times.">        <span class="keyword">return</span> undefinitions;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;89</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;90</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;91</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 91: method entered 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 91: method entered 43 times.">    <span class="keyword">private</span> Set collectDeclarations(IDataFlowNode inode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;92</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 92: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 92: statement executed 43 times.">        Set decls = <span class="keyword">new</span> HashSet();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;93</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 93: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 93: statement executed 43 times.">        Map varDecls;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;94</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 94: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 94: statement executed 43 times.">        <span class="keyword">for</span> (<span class="keyword">int</span> i = 0; i &lt; inode.getFlow().size(); i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;95</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 95: statement executed 313 times.">&nbsp;313</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 95: statement executed 313 times.">            IDataFlowNode n = (IDataFlowNode) inode.getFlow().get(i);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;96</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 96: statement executed 313 times.">&nbsp;313</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 96: statement executed 313 times.">            <span class="keyword">if</span> (n <span class="keyword">instanceof</span> StartOrEndDataFlowNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;97</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 97: statement executed 86 times.">&nbsp;86</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 97: statement executed 86 times.">                <span class="keyword">continue</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;98</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;99</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 99: statement executed 227 times.">&nbsp;227</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 99: statement executed 227 times.">            varDecls = n.getSimpleNode().getScope().getVariableDeclarations();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;100</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 100: statement executed 227 times.">&nbsp;227</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 100: statement executed 227 times.">            <span class="keyword">if</span> (!decls.contains(varDecls)) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;101</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 101: statement executed 86 times.">&nbsp;86</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 101: statement executed 86 times.">                decls.add(varDecls);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;102</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;103</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;104</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 104: statement executed 43 times.">&nbsp;43</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 104: statement executed 43 times.">        <span class="keyword">return</span> decls;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;105</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;106</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;107</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 107: method entered 122 times.">&nbsp;122</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 107: method entered 122 times.">    <span class="keyword">private</span> <span class="keyword">void</span> addAccess(Iterator k, IDataFlowNode inode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;108</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 108: statement executed 122 times.">&nbsp;122</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 108: statement executed 122 times.">        NameOccurrence occurrence = (NameOccurrence) k.next();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;109</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 109: statement executed 122 times.">&nbsp;122</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 109: statement executed 122 times.">        <span class="keyword">if</span> (occurrence.isOnLeftHandSide()) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;110</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 110: statement executed 67 times.">&nbsp;67</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 110: statement executed 67 times.">            <span class="keyword">this</span>.addVariableAccess(occurrence.getLocation(), <span class="keyword">new</span> VariableAccess(VariableAccess.DEFINITION, occurrence.getImage()), inode.getFlow());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;111</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 111: expression evaluated to true 55 times, false 0 times.">&nbsp;55</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 111: expression evaluated to true 55 times, false 0 times.">        } <span class="keyword">else</span> <span class="keyword">if</span> (occurrence.isOnRightHandSide() || (!occurrence.isOnLeftHandSide() &amp;&amp; !occurrence.isOnRightHandSide())) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;112</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 112: statement executed 55 times.">&nbsp;55</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 112: statement executed 55 times.">            <span class="keyword">this</span>.addVariableAccess(occurrence.getLocation(), <span class="keyword">new</span> VariableAccess(VariableAccess.REFERENCING, occurrence.getImage()), inode.getFlow());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;113</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;114</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;115</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;116</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">/**</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;117</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * Adds a VariableAccess to a dataflow node.</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;118</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * <span class="javadoc">@param</span> node location of the access of a variable</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;119</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * <span class="javadoc">@param</span> va variable access to add</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;120</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * <span class="javadoc">@param</span> flow dataflownodes that can contain the node. </span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;121</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     */</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;122</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 122: method entered 165 times.">&nbsp;165</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 122: method entered 165 times.">    <span class="keyword">private</span> <span class="keyword">void</span> addVariableAccess(SimpleNode node, VariableAccess va, List flow) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;123</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="comment">// backwards to find the right inode (not a method declaration) </span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;124</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 124: expression evaluated to true 764 times, false 0 times.">&nbsp;764</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 124: expression evaluated to true 764 times, false 0 times.">        <span class="keyword">for</span> (<span class="keyword">int</span> i = flow.size()-1; i &gt; 0; i--) { </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;125</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 125: statement executed 764 times.">&nbsp;764</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 125: statement executed 764 times.">            IDataFlowNode inode = (IDataFlowNode) flow.get(i);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;126</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 126: statement executed 764 times.">&nbsp;764</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 126: statement executed 764 times.">            <span class="keyword">if</span> (inode.getSimpleNode() == <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;127</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 127: statement executed 165 times.">&nbsp;165</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 127: statement executed 165 times.">                <span class="keyword">continue</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;128</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;129</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;130</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 130: statement executed 599 times.">&nbsp;599</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 130: statement executed 599 times.">            List children = inode.getSimpleNode().findChildrenOfType(node.getClass());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;131</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 131: statement executed 599 times.">&nbsp;599</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 131: statement executed 599 times.">            Iterator childrenIterator = children.iterator();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;132</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 132: statement executed 599 times.">&nbsp;599</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 132: statement executed 599 times.">            <span class="keyword">while</span> (childrenIterator.hasNext()) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;133</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 133: statement executed 438 times.">&nbsp;438</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 133: statement executed 438 times.">                <span class="keyword">if</span> (node.equals(childrenIterator.next())) { </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;134</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 134: statement executed 165 times.">&nbsp;165</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 134: statement executed 165 times.">                    List v = <span class="keyword">new</span> ArrayList();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;135</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 135: statement executed 165 times.">&nbsp;165</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 135: statement executed 165 times.">                    v.add(va);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;136</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 136: statement executed 165 times.">&nbsp;165</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 136: statement executed 165 times.">                    inode.setVariableAccess(v);     </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;137</TD>
+<TD align="right" class="lineCountHilight">
+<A title="Line 137: statement executed 165 times.">&nbsp;165</A>
+</TD><TD class="srcCell"><SPAN class="srcLine"><A title="Line 137: statement executed 165 times.">                    <span class="keyword">return</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;138</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;139</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;140</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;141</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;142</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;143</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">}</SPAN></TD></TR></TBODY></TABLE>
+<TABLE width="100%"><TR><TD class="hbreak" colspan="6">&nbsp;</TD></TR>
+<TR><TD class="footer" colspan="6">
+<table>
+<tr>
+ <td><a target="_new" href="http://www.cenqua.com/clover?6HR"><img alt="Clover" src="../../../../../img/logo.gif" border="0"></a></td><td nowrap><i>Report generated by </i><a target="_new" href="http://www.cenqua.com/clover?6HR">Clover Code Coverage v1.3.6</a><i><BR>Tue Dec 19 2006 09:39:36 EST</i>.</td>
+<td>&nbsp;</td><td style="BORDER-LEFT: #9c9c9c 1px solid;">&nbsp;</td><td>Open Source License registered to the PMD Project. This license of Clover is provided to support the development of PMD only. </td>
+</tr>
+</table>
+</td>
+</tr></TABLE>

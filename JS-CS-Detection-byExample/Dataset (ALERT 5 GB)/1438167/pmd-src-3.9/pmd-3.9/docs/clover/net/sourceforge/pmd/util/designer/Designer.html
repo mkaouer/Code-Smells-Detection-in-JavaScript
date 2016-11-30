@@ -1,0 +1,2971 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PMD - 3.9</title>
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../style.css" TITLE="Style">
+</head>
+<body>
+<TABLE cellspacing="0" cellpadding="2"><TBODY>
+    <!-- / home/ tom/ pmd/ pmd/ src/ net/ sourceforge/ pmd/ util/ designer/ Designer.java -->
+  <TR>
+    <TD colspan="6" class="reportHeader">
+    <TABLE width="100%"><TR>
+    <TD valign="top" class="titleText">Clover coverage report -   PMD - 3.9 <DIV class="timestamp"><b>Coverage timestamp:</b>&nbsp;Tue Dec 19 2006 09:38:44 EST</DIV>
+            <DIV class="navBar"><a href="../../../../../pkgs-summary.html"><b>Overview</b></a>&nbsp;&nbsp;&nbsp;<a href="pkg-summary.html"><b>Package</b></a>&nbsp;&nbsp;&nbsp;<font class="navBarCurrent">File</font></DIV>
+    
+<DIV class="navBarLink">
+&nbsp;&nbsp;&nbsp;
+    <A HREF="../../../../../index.html" TARGET="_top">FRAMES</A>&nbsp;&nbsp;
+<A HREF="Designer.html" TARGET="_top">NO FRAMES</A>&nbsp;&nbsp;
+    </DIV>
+
+</TD>
+         <td class="headerStats" valign="top" width="40%" align="right">
+        <table align="right">
+         <tr>
+           <td nowrap><b>file stats:</b></td>
+           <td align="right"><b>LOC:</b></td>
+           <td align="right">644</td>
+           <td width="10%">&nbsp;</td>
+           <td align="right"><b>Methods:</b></td>
+           <td align="right">60</td>
+         </tr>
+         <tr>
+           <td></td>
+           <td align="right"><b>NCLOC:</b></td>
+           <td align="right">514</td>
+           <td width="10%">&nbsp;</td>
+           <td align="right"><b>Classes:</b></td>
+           <td align="right">9</td>
+         </tr>
+      </table>
+     </td>
+    </TR></TABLE>
+   </TD>
+  </TR>
+
+<TR><TD class="hbreak" colspan="6">&nbsp;</TD></TR>
+  <TR>
+    <TD class="graphHeaderLeft"><b>&nbsp;Source file</b></TD>
+    <TD class="graphHeader">Conditionals</TD>
+    <TD class="graphHeader">Statements</TD>
+    <TD class="graphHeader">Methods</TD>
+    <TD class="graphHeader" align="left" colspan="2"><B>TOTAL</B></TD>
+  </TR>   
+  <TR>
+    <TD class="graphItem">
+        	   Designer.java
+	    </TD>
+   
+    <TD class="graphPercent" align="center">0%</TD>
+    <TD class="graphPercent" align="center">0%</TD>
+    <TD class="graphPercent" align="center">0%</TD>
+    <TD class="graphBarLeft" align="center"><B>0%</B></TD>
+    <TD class="graphBar">
+            <TABLE class="barGraph" cellspacing="0">
+        <TBODY>
+          <TR>
+	   	    <TD class="uncovered"><img alt="coverage" src="../../../../../img/trans.gif" width="200" height="12"></TD> 
+	   	  </TR>
+	</TBODY>
+      </TABLE>
+          </TD>
+  </TR> 
+</TBODY></TABLE><TABLE cellspacing="0" cellpadding="0" class="srcView"><TBODY>
+<TR><TD align="right" class="lineCount">
+&nbsp;1</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">/**</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;2</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> * BSD-style license; for more info see http://pmd.sourceforge.net/license.html</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;3</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment"> */</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;4</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">package</span> net.sourceforge.pmd.util.designer;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;5</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;6</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.PMD;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;7</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.RuleContext;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;8</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.RuleSet;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;9</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.SourceType;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;10</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.TargetJDK1_3;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;11</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.TargetJDK1_4;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;12</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.TargetJDK1_5;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;13</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.TargetJDK1_6;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;14</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.Node;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;15</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.ParseException;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;16</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.ast.SimpleNode;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;17</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.jaxen.DocumentNavigator;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;18</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.jaxen.MatchesFunction;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;19</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.jsp.ast.JspCharStream;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;20</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.jsp.ast.JspParser;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;21</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.util.NumericConstants;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;22</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> net.sourceforge.pmd.util.StringUtil;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;23</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> org.jaxen.BaseXPath;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;24</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> org.jaxen.JaxenException;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;25</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> org.jaxen.XPath;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;26</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;27</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.*;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;28</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.event.*;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;29</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.text.JTextComponent;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;30</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.tree.DefaultTreeCellRenderer;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;31</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.tree.DefaultTreeModel;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;32</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.tree.TreeNode;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;33</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.tree.TreePath;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;34</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> javax.swing.undo.*;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;35</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.BorderLayout;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;36</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.Color;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;37</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.Component;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;38</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.Dimension;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;39</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.Font;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;40</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.FontMetrics;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;41</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.Graphics;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;42</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.Toolkit;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;43</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.datatransfer.Clipboard;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;44</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.datatransfer.ClipboardOwner;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;45</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.datatransfer.StringSelection;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;46</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.datatransfer.Transferable;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;47</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.event.ActionEvent;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;48</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.event.ActionListener;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;49</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.event.ComponentEvent;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;50</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.awt.event.KeyEvent;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;51</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.io.IOException;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;52</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.io.StringReader;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;53</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.io.StringWriter;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;54</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.lang.reflect.InvocationTargetException;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;55</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.lang.reflect.Method;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;56</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.Enumeration;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;57</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.Iterator;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;58</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.List;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;59</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">import</span> java.util.Vector;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;60</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="Designer">&nbsp;61</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="keyword">public</span> <span class="keyword">class</span> Designer <span class="keyword">implements</span> ClipboardOwner {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;62</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;63</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final <span class="keyword">char</span> LABEL_IMAGE_SEPARATOR = ':';</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;64</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Color IMAGE_TEXT_COLOR = Color.BLUE;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;65</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="Parser">&nbsp;66</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">interface</span> Parser { <span class="keyword">public</span> SimpleNode parse(StringReader sr); };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;67</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;68</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Parser jdkParser1_3 = <span class="keyword">new</span> Parser() {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;69</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 69: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 69: method not entered.">        <span class="keyword">public</span> SimpleNode parse(StringReader sr) { <span class="keyword">return</span> <span class="keyword">new</span> TargetJDK1_3().createParser(sr).CompilationUnit(); };</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;70</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;71</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;72</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Parser jdkParser1_4 = <span class="keyword">new</span> Parser() {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;73</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 73: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 73: method not entered.">        <span class="keyword">public</span> SimpleNode parse(StringReader sr) { <span class="keyword">return</span> <span class="keyword">new</span> TargetJDK1_4().createParser(sr).CompilationUnit(); };</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;74</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;75</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;76</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Parser jdkParser1_5 = <span class="keyword">new</span> Parser() {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;77</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 77: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 77: method not entered.">        <span class="keyword">public</span> SimpleNode parse(StringReader sr) { <span class="keyword">return</span> <span class="keyword">new</span> TargetJDK1_5().createParser(sr).CompilationUnit(); };</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;78</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;79</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;80</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Parser jdkParser1_6 = <span class="keyword">new</span> Parser() {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;81</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 81: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 81: method not entered.">        <span class="keyword">public</span> SimpleNode parse(StringReader sr) { <span class="keyword">return</span> <span class="keyword">new</span> TargetJDK1_6().createParser(sr).CompilationUnit(); };</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;82</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;83</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;84</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Parser jspParser = <span class="keyword">new</span> Parser() {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;85</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 85: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 85: method not entered.">        <span class="keyword">public</span> SimpleNode parse(StringReader sr) { <span class="keyword">return</span> <span class="keyword">new</span> JspParser(<span class="keyword">new</span> JspCharStream(sr)).CompilationUnit(); };</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;86</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;87</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;88</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final Object[][] sourceTypeSets = <span class="keyword">new</span> Object[][] {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;89</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        { <span class="string">"JDK 1.3"</span>, SourceType.JAVA_13, jdkParser1_3 },</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;90</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        { <span class="string">"JDK 1.4"</span>, SourceType.JAVA_14, jdkParser1_4 },</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;91</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        { <span class="string">"JDK 1.5"</span>, SourceType.JAVA_15, jdkParser1_5 },</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;92</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        { <span class="string">"JDK 1.6"</span>, SourceType.JAVA_16, jdkParser1_6 },</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;93</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        { <span class="string">"JSP"</span>,      SourceType.JSP,      jspParser }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;94</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        };</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;95</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;96</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">static</span> final <span class="keyword">int</span> defaultSourceTypeSelectionIndex = 1; <span class="comment">// JDK 1.4</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;97</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;98</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;99</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 99: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 99: method not entered.">    <span class="keyword">private</span> SimpleNode getCompilationUnit() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;100</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;101</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 101: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 101: statement not executed.">        Parser parser = (Parser)sourceTypeSets[selectedSourceTypeIndex()][2];</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;102</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 102: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 102: statement not executed.">        <span class="keyword">return</span> parser.parse(<span class="keyword">new</span> StringReader(codeEditorPane.getText()));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;103</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;104</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;105</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 105: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 105: method not entered.">    <span class="keyword">private</span> SourceType getSourceType() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;106</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;107</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 107: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 107: statement not executed.">        <span class="keyword">return</span> (SourceType)sourceTypeSets[selectedSourceTypeIndex()][1];</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;108</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;109</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;110</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 110: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 110: method not entered.">    <span class="keyword">private</span> <span class="keyword">int</span> selectedSourceTypeIndex() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;111</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 111: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 111: statement not executed.">        <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;sourceTypeMenuItems.length; i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;112</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 112: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 112: statement not executed.">            <span class="keyword">if</span> (sourceTypeMenuItems[i].isSelected()) <span class="keyword">return</span> i;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;113</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;114</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 114: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 114: statement not executed.">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Initial default source type not specified"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;115</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;116</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="ExceptionNode">&nbsp;117</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> ExceptionNode <span class="keyword">implements</span> TreeNode {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;118</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;119</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="keyword">private</span> Object             item;        </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;120</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="keyword">private</span> ExceptionNode[] kids;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;121</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;122</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 122: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 122: method not entered.">        <span class="keyword">public</span> ExceptionNode(Object theItem) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;123</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 123: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 123: statement not executed.">            item = theItem;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;124</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;125</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 125: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 125: statement not executed.">            <span class="keyword">if</span> (item <span class="keyword">instanceof</span> ParseException) createKids();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;126</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;127</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;128</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="comment">// each line in the error message becomes a separate tree node</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;129</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 129: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 129: method not entered.">        <span class="keyword">private</span> <span class="keyword">void</span> createKids() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;130</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;131</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 131: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 131: statement not executed.">            String message = ((ParseException)item).getMessage();            </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;132</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 132: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 132: statement not executed.">            String[] lines = StringUtil.substringsOf(message, PMD.EOL);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;133</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;134</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 134: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 134: statement not executed.">            kids = <span class="keyword">new</span> ExceptionNode[lines.length];</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;135</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 135: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 135: statement not executed.">            <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;lines.length; i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;136</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 136: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 136: statement not executed.">                kids[i] = <span class="keyword">new</span> ExceptionNode(lines[i]);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;137</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;138</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;139</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;140</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 140: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 140: method not entered.">        <span class="keyword">public</span> <span class="keyword">int</span> getChildCount() { <span class="keyword">return</span> kids == <span class="keyword">null</span> ? 0 : kids.length; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;141</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 141: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 141: method not entered.">        <span class="keyword">public</span> <span class="keyword">boolean</span> getAllowsChildren() {<span class="keyword">return</span> <span class="keyword">false</span>; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;142</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 142: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 142: method not entered.">        <span class="keyword">public</span> <span class="keyword">boolean</span> isLeaf() { <span class="keyword">return</span> kids == <span class="keyword">null</span>; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;143</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 143: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 143: method not entered.">        <span class="keyword">public</span> TreeNode getParent() { <span class="keyword">return</span> <span class="keyword">null</span>; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;144</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 144: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 144: method not entered.">        <span class="keyword">public</span> TreeNode getChildAt(<span class="keyword">int</span> childIndex) { <span class="keyword">return</span> kids[childIndex]; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;145</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 145: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 145: method not entered.">        <span class="keyword">public</span> String label() {    <span class="keyword">return</span> item.toString();    }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;146</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;147</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 147: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 147: method not entered.">        <span class="keyword">public</span> Enumeration children() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;148</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 148: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 148: statement not executed.">            Enumeration e = <span class="keyword">new</span> Enumeration() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;149</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                <span class="keyword">int</span> i = 0;</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;150</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 150: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 150: method not entered.">                <span class="keyword">public</span> <span class="keyword">boolean</span> hasMoreElements() { </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;151</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 151: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 151: statement not executed.">                    <span class="keyword">return</span> kids != <span class="keyword">null</span> &amp;&amp; i &lt; kids.length;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;152</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;153</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;154</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 154: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 154: method not entered.">                <span class="keyword">public</span> Object nextElement() { <span class="keyword">return</span> kids[i++]; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;155</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                };</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;156</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 156: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 156: statement not executed.">            <span class="keyword">return</span> e;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;157</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;158</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;159</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 159: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 159: method not entered.">        <span class="keyword">public</span> <span class="keyword">int</span> getIndex(TreeNode node) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;160</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 160: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 160: statement not executed.">            <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;kids.length; i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;161</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 161: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 161: statement not executed.">                <span class="keyword">if</span> (kids[i] == node) <span class="keyword">return</span> i;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;162</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;163</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 163: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 163: statement not executed.">            <span class="keyword">return</span> -1;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;164</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;165</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;166</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;167</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// Tree node that wraps the AST node for the tree widget and</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;168</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// any possible children they may have.</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="ASTTreeNode">&nbsp;169</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> ASTTreeNode <span class="keyword">implements</span> TreeNode {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;170</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;171</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="keyword">private</span> Node             node;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;172</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="keyword">private</span> ASTTreeNode     parent;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;173</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="keyword">private</span> ASTTreeNode[]     kids;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;174</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;175</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 175: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 175: method not entered.">        <span class="keyword">public</span> ASTTreeNode(Node theNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;176</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 176: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 176: statement not executed.">            node = theNode;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;177</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;178</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 178: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 178: statement not executed.">            Node prnt = node.jjtGetParent();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;179</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 179: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 179: statement not executed.">            <span class="keyword">if</span> (prnt != <span class="keyword">null</span>) parent = <span class="keyword">new</span> ASTTreeNode(prnt);            </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;180</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;181</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;182</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 182: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 182: method not entered.">        <span class="keyword">public</span> <span class="keyword">int</span> getChildCount() { <span class="keyword">return</span> node.jjtGetNumChildren(); }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;183</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 183: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 183: method not entered.">        <span class="keyword">public</span> <span class="keyword">boolean</span> getAllowsChildren() { <span class="keyword">return</span> <span class="keyword">false</span>;    }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;184</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 184: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 184: method not entered.">        <span class="keyword">public</span> <span class="keyword">boolean</span> isLeaf() { <span class="keyword">return</span> node.jjtGetNumChildren() == 0;    }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;185</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 185: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 185: method not entered.">        <span class="keyword">public</span> TreeNode getParent() { <span class="keyword">return</span> parent; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;186</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;187</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 187: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 187: method not entered.">        <span class="keyword">public</span> Enumeration children() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;188</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;189</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 189: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 189: statement not executed.">            <span class="keyword">if</span> (getChildCount() &gt; 0) getChildAt(0);    <span class="comment">// force it to build kids</span></A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;190</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;191</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 191: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 191: statement not executed.">            Enumeration e = <span class="keyword">new</span> Enumeration() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;192</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                <span class="keyword">int</span> i = 0;</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;193</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 193: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 193: method not entered.">                <span class="keyword">public</span> <span class="keyword">boolean</span> hasMoreElements() { </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;194</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 194: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 194: statement not executed.">                    <span class="keyword">return</span> kids != <span class="keyword">null</span> &amp;&amp; i &lt; kids.length;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;195</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;196</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 196: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 196: method not entered.">                <span class="keyword">public</span> Object nextElement() { <span class="keyword">return</span> kids[i++]; }</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;197</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                };</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;198</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 198: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 198: statement not executed.">            <span class="keyword">return</span> e;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;199</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;200</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;201</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 201: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 201: method not entered.">        <span class="keyword">public</span> TreeNode getChildAt(<span class="keyword">int</span> childIndex) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;202</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;203</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 203: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 203: statement not executed.">            <span class="keyword">if</span> (kids == <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;204</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 204: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 204: statement not executed.">                kids = <span class="keyword">new</span> ASTTreeNode[node.jjtGetNumChildren()];</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;205</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 205: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 205: statement not executed.">                <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;kids.length; i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;206</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 206: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 206: statement not executed.">                    kids[i] = <span class="keyword">new</span> ASTTreeNode(node.jjtGetChild(i));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;207</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;208</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;209</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 209: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 209: statement not executed.">            <span class="keyword">return</span> kids[childIndex];</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;210</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;211</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;212</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 212: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 212: method not entered.">        <span class="keyword">public</span> <span class="keyword">int</span> getIndex(TreeNode node) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;213</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;214</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 214: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 214: statement not executed.">            <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;kids.length; i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;215</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 215: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 215: statement not executed.">                <span class="keyword">if</span> (kids[i] == node) <span class="keyword">return</span> i;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;216</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;217</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 217: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 217: statement not executed.">            <span class="keyword">return</span> -1;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;218</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;219</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;220</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 220: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 220: method not entered.">        <span class="keyword">public</span> String label() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;221</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 221: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 221: statement not executed.">            <span class="keyword">if</span> (node <span class="keyword">instanceof</span> SimpleNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;222</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 222: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 222: statement not executed.">                SimpleNode sn = (SimpleNode)node;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;223</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 223: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 223: statement not executed.">                <span class="keyword">if</span> (sn.getLabel() != <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;224</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 224: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 224: statement not executed.">                    <span class="keyword">return</span> node.toString() + LABEL_IMAGE_SEPARATOR + sn.getLabel();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;225</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;226</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 226: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 226: statement not executed.">                <span class="keyword">if</span> (sn.getImage() == <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;227</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 227: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 227: statement not executed.">                    <span class="keyword">return</span> node.toString();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;228</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;229</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 229: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 229: statement not executed.">                <span class="keyword">return</span> node.toString() + LABEL_IMAGE_SEPARATOR + sn.getImage();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;230</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;231</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 231: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 231: statement not executed.">            <span class="keyword">return</span> node.toString();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;232</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;233</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;234</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;235</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// Create our own renderer to ensure we don't show the default icon</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;236</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// and render any node image data in a different colour to hightlight </span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;237</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// it.</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;238</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="ASTCellRenderer">&nbsp;239</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> ASTCellRenderer <span class="keyword">extends</span> DefaultTreeCellRenderer {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;240</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;241</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="keyword">private</span> ASTTreeNode node;</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;242</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;243</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 243: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 243: method not entered.">        <span class="keyword">public</span> Icon getIcon() { <span class="keyword">return</span> <span class="keyword">null</span>; };</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;244</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;245</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 245: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 245: method not entered.">        <span class="keyword">public</span> Component getTreeCellRendererComponent(JTree tree, Object value,    <span class="keyword">boolean</span> sel,<span class="keyword">boolean</span> expanded,<span class="keyword">boolean</span> leaf, <span class="keyword">int</span> row,  <span class="keyword">boolean</span> hasFocus) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;246</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;247</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 247: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 247: statement not executed.">            <span class="keyword">if</span> (value <span class="keyword">instanceof</span> ASTTreeNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;248</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 248: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 248: statement not executed.">                node = (ASTTreeNode)value;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;249</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;250</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 250: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 250: statement not executed.">            <span class="keyword">return</span> <span class="keyword">super</span>.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;251</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;252</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;253</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        <span class="comment">// overwrite the image data (if present) in a different colour</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;254</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 254: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 254: method not entered.">        <span class="keyword">public</span> <span class="keyword">void</span> paint(Graphics g) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;255</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;256</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 256: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 256: statement not executed.">            <span class="keyword">super</span>.paint(g);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;257</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;258</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 258: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 258: statement not executed.">            <span class="keyword">if</span> (node == <span class="keyword">null</span>) <span class="keyword">return</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;259</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;260</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 260: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 260: statement not executed.">            String text = node.label();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;261</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 261: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 261: statement not executed.">            <span class="keyword">int</span> separatorPos = text.indexOf(LABEL_IMAGE_SEPARATOR);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;262</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 262: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 262: statement not executed.">            <span class="keyword">if</span> (separatorPos &lt; 0) <span class="keyword">return</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;263</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;264</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 264: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 264: statement not executed.">            String label = text.substring(0, separatorPos+1);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;265</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 265: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 265: statement not executed.">            String image = text.substring(separatorPos+1);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;266</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;267</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 267: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 267: statement not executed.">            FontMetrics fm = g.getFontMetrics();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;268</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 268: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 268: statement not executed.">            <span class="keyword">int</span> width = SwingUtilities.computeStringWidth(fm, label);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;269</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;270</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 270: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 270: statement not executed.">            g.setColor(IMAGE_TEXT_COLOR);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;271</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 271: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 271: statement not executed.">            g.drawString(image, width, fm.getMaxAscent());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;272</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;273</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;274</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;275</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// Special tree variant that knows how to retrieve node labels and</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;276</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">// provides the ability to expand all nodes at once.</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;277</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="ASTTreeWidget">&nbsp;278</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> ASTTreeWidget <span class="keyword">extends</span> JTree {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;279</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;280</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 280: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 280: method not entered.">        <span class="keyword">public</span> ASTTreeWidget(Vector items) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;281</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 281: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 281: statement not executed.">            <span class="keyword">super</span>(items);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;282</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;283</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;284</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 284: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 284: method not entered.">        <span class="keyword">public</span> String convertValueToText(Object value, <span class="keyword">boolean</span> selected, <span class="keyword">boolean</span> expanded, <span class="keyword">boolean</span> leaf, <span class="keyword">int</span> row, <span class="keyword">boolean</span> hasFocus) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;285</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 285: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 285: statement not executed.">            <span class="keyword">if</span> (value == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="string">""</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;286</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 286: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 286: statement not executed.">            <span class="keyword">if</span> (value <span class="keyword">instanceof</span> ASTTreeNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;287</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 287: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 287: statement not executed.">                <span class="keyword">return</span> ((ASTTreeNode)value).label();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;288</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;289</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 289: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 289: statement not executed.">            <span class="keyword">if</span> (value <span class="keyword">instanceof</span> ExceptionNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;290</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 290: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 290: statement not executed.">                <span class="keyword">return</span> ((ExceptionNode)value).label();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;291</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;292</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 292: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 292: statement not executed.">            <span class="keyword">return</span> value.toString();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;293</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;294</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;295</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 295: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 295: method not entered.">        <span class="keyword">public</span> <span class="keyword">void</span> expandAll(<span class="keyword">boolean</span> expand) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;296</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 296: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 296: statement not executed.">            TreeNode root = (TreeNode)getModel().getRoot();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;297</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 297: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 297: statement not executed.">            expandAll(<span class="keyword">new</span> TreePath(root), expand);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;298</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;299</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;300</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 300: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 300: method not entered.">        <span class="keyword">private</span> <span class="keyword">void</span> expandAll(TreePath parent, <span class="keyword">boolean</span> expand) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;301</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            <span class="comment">// Traverse children</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;302</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 302: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 302: statement not executed.">            TreeNode node = (TreeNode)parent.getLastPathComponent();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;303</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 303: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 303: statement not executed.">            <span class="keyword">if</span> (node.getChildCount() &gt;= 0) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;304</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 304: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 304: statement not executed.">                <span class="keyword">for</span> (Enumeration e=node.children(); e.hasMoreElements(); ) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;305</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 305: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 305: statement not executed.">                    TreeNode n = (TreeNode)e.nextElement();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;306</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 306: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 306: statement not executed.">                    TreePath path = parent.pathByAddingChild(n);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;307</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 307: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 307: statement not executed.">                    expandAll(path, expand);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;308</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;309</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;310</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;311</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 311: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 311: statement not executed.">            <span class="keyword">if</span> (expand) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;312</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 312: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 312: statement not executed.">                expandPath(parent);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;313</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            } <span class="keyword">else</span> {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;314</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 314: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 314: statement not executed.">                collapsePath(parent);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;315</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;316</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }        </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;317</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;318</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;319</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 319: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 319: method not entered.">    <span class="keyword">private</span> <span class="keyword">void</span> loadTreeData(TreeNode rootNode) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;320</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 320: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 320: statement not executed.">        astWidget.setModel(<span class="keyword">new</span> DefaultTreeModel(rootNode));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;321</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 321: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 321: statement not executed.">        astWidget.expandAll(<span class="keyword">true</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;322</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;323</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="ShowListener">&nbsp;324</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> ShowListener <span class="keyword">implements</span> ActionListener {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;325</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 325: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 325: method not entered.">        <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent ae) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;326</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 326: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 326: statement not executed.">            MyPrintStream ps = <span class="keyword">new</span> MyPrintStream();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;327</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 327: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 327: statement not executed.">            System.setOut(ps);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;328</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 328: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 328: statement not executed.">            TreeNode tn;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;329</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 329: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 329: statement not executed.">            <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;330</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 330: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 330: statement not executed.">                SimpleNode lastCompilationUnit = getCompilationUnit();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;331</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 331: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 331: statement not executed.">                tn = <span class="keyword">new</span> ASTTreeNode(lastCompilationUnit);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;332</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            } <span class="keyword">catch</span> (ParseException pe) {                </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;333</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 333: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 333: statement not executed.">                tn = <span class="keyword">new</span> ExceptionNode(pe);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;334</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;335</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;336</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 336: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 336: statement not executed.">            loadTreeData(tn);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;337</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;338</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;339</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="DFAListener">&nbsp;340</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> DFAListener <span class="keyword">implements</span> ActionListener {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;341</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 341: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 341: method not entered.">        <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent ae) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;342</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;343</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 343: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 343: statement not executed.">           DFAGraphRule dfaGraphRule = <span class="keyword">new</span> DFAGraphRule();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;344</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 344: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 344: statement not executed.">           RuleSet rs = <span class="keyword">new</span> RuleSet();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;345</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 345: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 345: statement not executed.">           SourceType sourceType = getSourceType();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;346</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 346: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 346: statement not executed.">           <span class="keyword">if</span> (!sourceType.equals(SourceType.JSP)){</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;347</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 347: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 347: statement not executed.">               rs.addRule(dfaGraphRule);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;348</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">           }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;349</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 349: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 349: statement not executed.">           RuleContext ctx = <span class="keyword">new</span> RuleContext();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;350</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 350: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 350: statement not executed.">           ctx.setSourceCodeFilename(<span class="string">"[no filename]"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;351</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 351: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 351: statement not executed.">           StringReader reader = <span class="keyword">new</span> StringReader(codeEditorPane.getText());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;352</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 352: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 352: statement not executed.">           PMD pmd = <span class="keyword">new</span> PMD();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;353</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 353: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 353: statement not executed.">           pmd.setJavaVersion(sourceType);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;354</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">           </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;355</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 355: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 355: statement not executed.">           <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;356</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 356: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 356: statement not executed.">                pmd.processFile(reader, rs, ctx);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;357</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">//           } catch (PMDException pmde) {</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;358</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">//               loadTreeData(new ExceptionNode(pmde));</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;359</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">           } <span class="keyword">catch</span> (Exception e) {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;360</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 360: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 360: statement not executed.">               e.printStackTrace();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;361</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                   }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;362</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">           </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;363</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 363: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 363: statement not executed.">           List methods = dfaGraphRule.getMethods();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;364</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 364: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 364: statement not executed.">           <span class="keyword">if</span> (methods != <span class="keyword">null</span> &amp;&amp; !methods.isEmpty()) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;365</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 365: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 365: statement not executed.">               dfaPanel.resetTo(methods, codeEditorPane);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;366</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 366: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 366: statement not executed.">               dfaPanel.repaint();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;367</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">           }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;368</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;369</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;370</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+<A name="XPathListener">&nbsp;371</A></TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> <span class="keyword">class</span> XPathListener <span class="keyword">implements</span> ActionListener {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;372</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 372: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 372: method not entered.">        <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent ae) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;373</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 373: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 373: statement not executed.">            xpathResults.clear();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;374</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 374: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 374: statement not executed.">            <span class="keyword">if</span> (xpathQueryArea.getText().length() == 0) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;375</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 375: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 375: statement not executed.">                xpathResults.addElement(<span class="string">"XPath query field is empty"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;376</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 376: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 376: statement not executed.">                xpathResultList.repaint();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;377</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 377: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 377: statement not executed.">                codeEditorPane.requestFocus();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;378</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 378: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 378: statement not executed.">                <span class="keyword">return</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;379</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;380</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 380: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 380: statement not executed.">            SimpleNode c = getCompilationUnit();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;381</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 381: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 381: statement not executed.">            <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;382</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 382: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 382: statement not executed.">                XPath xpath = <span class="keyword">new</span> BaseXPath(xpathQueryArea.getText(), <span class="keyword">new</span> DocumentNavigator());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;383</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 383: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 383: statement not executed.">                <span class="keyword">for</span> (Iterator iter = xpath.selectNodes(c).iterator(); iter.hasNext();) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;384</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 384: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 384: statement not executed.">                    StringBuffer sb = <span class="keyword">new</span> StringBuffer();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;385</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 385: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 385: statement not executed.">                    Object obj = iter.next();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;386</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 386: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 386: statement not executed.">                    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> String) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;387</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 387: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 387: statement not executed.">                        System.out.println(<span class="string">"Result was a string: "</span> + ((String) obj));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;388</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 388: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 388: statement not executed.">                    } <span class="keyword">else</span> <span class="keyword">if</span> (!(obj <span class="keyword">instanceof</span> Boolean)) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;389</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                        <span class="comment">// if it's a Boolean and it's 'false', what does that mean?</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;390</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 390: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 390: statement not executed.">                        SimpleNode node = (SimpleNode) obj;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;391</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 391: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 391: statement not executed.">                        String name = node.getClass().getName().substring(node.getClass().getName().lastIndexOf('.') + 1);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;392</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 392: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 392: statement not executed.">                        String line = <span class="string">" at line "</span> + node.getBeginLine();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;393</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 393: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 393: statement not executed.">                        sb.append(name).append(line).append(PMD.EOL);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;394</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 394: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 394: statement not executed.">                        xpathResults.addElement(sb.toString().trim());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;395</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;396</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;397</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 397: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 397: statement not executed.">                <span class="keyword">if</span> (xpathResults.isEmpty()) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;398</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 398: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 398: statement not executed.">                    xpathResults.addElement(<span class="string">"No matching nodes "</span> + System.currentTimeMillis());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;399</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;400</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            } <span class="keyword">catch</span> (ParseException pe) {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;401</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 401: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 401: statement not executed.">                xpathResults.addElement(pe.fillInStackTrace().getMessage());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;402</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            } <span class="keyword">catch</span> (JaxenException je) {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;403</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 403: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 403: statement not executed.">                xpathResults.addElement(je.fillInStackTrace().getMessage());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;404</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;405</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 405: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 405: statement not executed.">            xpathResultList.repaint();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;406</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 406: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 406: statement not executed.">            xpathQueryArea.requestFocus();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;407</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;408</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;409</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;410</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final CodeEditorTextPane codeEditorPane = <span class="keyword">new</span> CodeEditorTextPane();</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;411</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final ASTTreeWidget astWidget            = <span class="keyword">new</span> ASTTreeWidget(<span class="keyword">new</span> Vector());</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;412</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> DefaultListModel xpathResults            = <span class="keyword">new</span> DefaultListModel();</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;413</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final JList xpathResultList                = <span class="keyword">new</span> JList(xpathResults);</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;414</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final JTextArea xpathQueryArea            = <span class="keyword">new</span> JTextArea(15, 30);</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;415</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final JFrame frame                         = <span class="keyword">new</span> JFrame(<span class="string">"PMD Rule Designer"</span>);</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;416</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final DFAPanel dfaPanel                    = <span class="keyword">new</span> DFAPanel();</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;417</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="keyword">private</span> final JRadioButtonMenuItem[] sourceTypeMenuItems = <span class="keyword">new</span> JRadioButtonMenuItem[sourceTypeSets.length];</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;418</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;419</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 419: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 419: method not entered.">    <span class="keyword">public</span> Designer() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;420</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 420: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 420: statement not executed.">        MatchesFunction.registerSelfInSimpleContext();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;421</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;422</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 422: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 422: statement not executed.">        xpathQueryArea.setFont(<span class="keyword">new</span> Font(<span class="string">"Verdana"</span>, Font.PLAIN, 16));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;423</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 423: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 423: statement not executed.">        makeTextComponentUndoable(codeEditorPane);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;424</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 424: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 424: statement not executed.">        JSplitPane controlSplitPane = <span class="keyword">new</span> JSplitPane(JSplitPane.HORIZONTAL_SPLIT, <span class="keyword">new</span> JScrollPane(codeEditorPane), createXPathQueryPanel());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;425</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 425: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 425: statement not executed.">        JSplitPane resultsSplitPane = <span class="keyword">new</span> JSplitPane(JSplitPane.HORIZONTAL_SPLIT, createASTPanel(), createXPathResultPanel());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;426</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;427</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 427: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 427: statement not executed.">        JTabbedPane tabbed = <span class="keyword">new</span> JTabbedPane();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;428</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 428: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 428: statement not executed.">        tabbed.addTab(<span class="string">"Abstract Syntax Tree / XPath"</span>, resultsSplitPane);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;429</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 429: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 429: statement not executed.">        tabbed.addTab(<span class="string">"Data Flow Analysis"</span>, dfaPanel);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;430</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 430: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 430: statement not executed.">        <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;431</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            <span class="comment">// Remove when minimal runtime support is &gt;= JDK 1.4</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;432</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 432: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 432: statement not executed.">            Method setMnemonicAt = JTabbedPane.<span class="keyword">class</span>.getMethod(<span class="string">"setMnemonicAt"</span>, <span class="keyword">new</span> Class[]{Integer.TYPE, Integer.TYPE});</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;433</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 433: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 433: statement not executed.">            <span class="keyword">if</span> (setMnemonicAt != <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;434</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                <span class="comment">//        // Compatible with &gt;= JDK 1.4</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;435</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                <span class="comment">//        tabbed.setMnemonicAt(0, KeyEvent.VK_A);</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;436</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                <span class="comment">//        tabbed.setMnemonicAt(1, KeyEvent.VK_D);</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;437</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 437: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 437: statement not executed.">                setMnemonicAt.invoke(tabbed, <span class="keyword">new</span> Object[]{NumericConstants.ZERO, <span class="keyword">new</span> Integer(KeyEvent.VK_A)});</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;438</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 438: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 438: statement not executed.">                setMnemonicAt.invoke(tabbed, <span class="keyword">new</span> Object[]{NumericConstants.ONE, <span class="keyword">new</span> Integer(KeyEvent.VK_D)});</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;439</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;440</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        } <span class="keyword">catch</span> (NoSuchMethodException nsme) { <span class="comment">// Runtime is &lt; JDK 1.4</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;441</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        } <span class="keyword">catch</span> (IllegalAccessException e) { <span class="comment">// Runtime is &gt;= JDK 1.4 but there was an error accessing the function</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;442</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 442: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 442: statement not executed.">            e.printStackTrace();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;443</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 443: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 443: statement not executed.">            <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(<span class="string">"Runtime reports to be &gt;= JDK 1.4 yet String.split(java.lang.String) is broken."</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;444</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        } <span class="keyword">catch</span> (IllegalArgumentException e) {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;445</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 445: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 445: statement not executed.">            e.printStackTrace();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;446</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 446: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 446: statement not executed.">            <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(<span class="string">"Runtime reports to be &gt;= JDK 1.4 yet String.split(java.lang.String) is broken."</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;447</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        } <span class="keyword">catch</span> (InvocationTargetException e) { <span class="comment">// Runtime is &gt;= JDK 1.4 but there was an error accessing the function</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;448</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 448: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 448: statement not executed.">            e.printStackTrace();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;449</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 449: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 449: statement not executed.">            <span class="keyword">throw</span> <span class="keyword">new</span> InternalError(<span class="string">"Runtime reports to be &gt;= JDK 1.4 yet String.split(java.lang.String) is broken."</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;450</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;451</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;452</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 452: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 452: statement not executed.">        JSplitPane containerSplitPane = <span class="keyword">new</span> JSplitPane(JSplitPane.VERTICAL_SPLIT, controlSplitPane, tabbed);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;453</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 453: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 453: statement not executed.">        containerSplitPane.setContinuousLayout(<span class="keyword">true</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;454</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;455</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 455: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 455: statement not executed.">        JMenuBar menuBar = createMenuBar();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;456</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 456: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 456: statement not executed.">        frame.setJMenuBar(menuBar);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;457</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 457: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 457: statement not executed.">        frame.getContentPane().add(containerSplitPane);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;458</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 458: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 458: statement not executed.">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;459</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;460</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 460: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 460: statement not executed.">        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;461</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 461: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 461: statement not executed.">        <span class="keyword">int</span> screenHeight = screenSize.height;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;462</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 462: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 462: statement not executed.">        <span class="keyword">int</span> screenWidth = screenSize.width;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;463</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;464</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 464: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 464: statement not executed.">        frame.pack();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;465</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 465: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 465: statement not executed.">        frame.setSize((screenWidth*3/4),(screenHeight*3/4));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;466</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 466: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 466: statement not executed.">        frame.setLocation((screenWidth -frame.getWidth()) / 2, (screenHeight  - frame.getHeight()) / 2);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;467</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 467: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 467: statement not executed.">        frame.setVisible(<span class="keyword">true</span>);    </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;468</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 468: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 468: statement not executed.">        resultsSplitPane.setDividerLocation(resultsSplitPane.getMaximumDividerLocation() - (resultsSplitPane.getMaximumDividerLocation() / 2));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;469</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 469: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 469: statement not executed.">        containerSplitPane.setDividerLocation(containerSplitPane.getMaximumDividerLocation() / 2);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;470</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;471</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;472</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 472: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 472: method not entered.">    <span class="keyword">private</span> JMenuBar createMenuBar() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;473</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 473: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 473: statement not executed.">        JMenuBar menuBar = <span class="keyword">new</span> JMenuBar();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;474</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 474: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 474: statement not executed.">        JMenu menu = <span class="keyword">new</span> JMenu(<span class="string">"JDK"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;475</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 475: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 475: statement not executed.">        ButtonGroup group = <span class="keyword">new</span> ButtonGroup();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;476</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;477</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 477: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 477: statement not executed.">        <span class="keyword">for</span> (<span class="keyword">int</span> i=0; i&lt;sourceTypeSets.length; i++) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;478</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 478: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 478: statement not executed.">            JRadioButtonMenuItem button = <span class="keyword">new</span> JRadioButtonMenuItem(sourceTypeSets[i][0].toString());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;479</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 479: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 479: statement not executed.">            sourceTypeMenuItems[i] = button;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;480</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 480: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 480: statement not executed.">            group.add(button);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;481</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 481: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 481: statement not executed.">            menu.add(button);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;482</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;483</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 483: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 483: statement not executed.">        sourceTypeMenuItems[defaultSourceTypeSelectionIndex].setSelected(<span class="keyword">true</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;484</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 484: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 484: statement not executed.">        menuBar.add(menu);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;485</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;486</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 486: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 486: statement not executed.">        JMenu actionsMenu = <span class="keyword">new</span> JMenu(<span class="string">"Actions"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;487</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 487: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 487: statement not executed.">        JMenuItem copyXMLItem = <span class="keyword">new</span> JMenuItem(<span class="string">"Copy xml to clipboard"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;488</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 488: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 488: statement not executed.">        copyXMLItem.addActionListener(<span class="keyword">new</span> ActionListener() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;489</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 489: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 489: method not entered.">            <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent e) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;490</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 490: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 490: statement not executed.">                copyXmlToClipboard();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;491</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;492</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        });</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;493</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 493: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 493: statement not executed.">        actionsMenu.add(copyXMLItem);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;494</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 494: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 494: statement not executed.">        JMenuItem createRuleXMLItem = <span class="keyword">new</span> JMenuItem(<span class="string">"Create rule XML"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;495</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 495: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 495: statement not executed.">        createRuleXMLItem.addActionListener(<span class="keyword">new</span> ActionListener() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;496</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 496: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 496: method not entered.">            <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent e) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;497</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 497: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 497: statement not executed.">                createRuleXML();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;498</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;499</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        });</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;500</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 500: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 500: statement not executed.">        actionsMenu.add(createRuleXMLItem);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;501</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 501: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 501: statement not executed.">        menuBar.add(actionsMenu);        </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;502</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;503</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 503: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 503: statement not executed.">        <span class="keyword">return</span> menuBar;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;504</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;505</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;506</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 506: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 506: method not entered.">    <span class="keyword">private</span> <span class="keyword">void</span> createRuleXML() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;507</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 507: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 507: statement not executed.">        CreateXMLRulePanel rulePanel = <span class="keyword">new</span> CreateXMLRulePanel(xpathQueryArea, codeEditorPane);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;508</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 508: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 508: statement not executed.">        JFrame xmlframe = <span class="keyword">new</span> JFrame(<span class="string">"Create XML Rule"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;509</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 509: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 509: statement not executed.">        xmlframe.setContentPane(rulePanel);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;510</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 510: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 510: statement not executed.">        xmlframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;511</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 511: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 511: statement not executed.">        xmlframe.setSize(<span class="keyword">new</span> Dimension(600, 700));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;512</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 512: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 512: statement not executed.">        xmlframe.addComponentListener(<span class="keyword">new</span> java.awt.event.ComponentAdapter() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;513</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 513: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 513: method not entered.">              <span class="keyword">public</span> <span class="keyword">void</span> componentResized(ComponentEvent e) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;514</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 514: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 514: statement not executed.">                JFrame tmp = (JFrame)e.getSource();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;515</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 515: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 515: statement not executed.">                <span class="keyword">if</span> (tmp.getWidth()&lt;600 || tmp.getHeight()&lt;700) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;516</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 516: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 516: statement not executed.">                  tmp.setSize(600, 700);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;517</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;518</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">              }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;519</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            });</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;520</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 520: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 520: statement not executed.">        <span class="keyword">int</span> screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;521</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 521: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 521: statement not executed.">        <span class="keyword">int</span> screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;522</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 522: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 522: statement not executed.">        xmlframe.pack();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;523</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 523: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 523: statement not executed.">        xmlframe.setLocation((screenWidth - xmlframe.getWidth()) / 2, (screenHeight - xmlframe.getHeight()) / 2);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;524</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 524: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 524: statement not executed.">        xmlframe.setVisible(<span class="keyword">true</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;525</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;526</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;527</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 527: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 527: method not entered.">    <span class="keyword">private</span> JComponent createASTPanel() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;528</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 528: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 528: statement not executed.">        astWidget.setCellRenderer(<span class="keyword">new</span> ASTCellRenderer());        </A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;529</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 529: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 529: statement not executed.">        <span class="keyword">return</span> <span class="keyword">new</span> JScrollPane(astWidget);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;530</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;531</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;532</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 532: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 532: method not entered.">    <span class="keyword">private</span> JComponent createXPathResultPanel() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;533</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 533: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 533: statement not executed.">        xpathResults.addElement(<span class="string">"No results yet"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;534</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 534: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 534: statement not executed.">        xpathResultList.setBorder(BorderFactory.createLineBorder(Color.black));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;535</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 535: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 535: statement not executed.">        xpathResultList.setFixedCellWidth(300);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;536</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 536: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 536: statement not executed.">        JScrollPane scrollPane = <span class="keyword">new</span> JScrollPane();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;537</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 537: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 537: statement not executed.">        scrollPane.getViewport().setView(xpathResultList);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;538</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 538: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 538: statement not executed.">        <span class="keyword">return</span> scrollPane;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;539</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;540</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;541</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 541: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 541: method not entered.">    <span class="keyword">private</span> JPanel createXPathQueryPanel() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;542</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 542: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 542: statement not executed.">        JPanel p = <span class="keyword">new</span> JPanel();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;543</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 543: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 543: statement not executed.">        p.setLayout(<span class="keyword">new</span> BorderLayout());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;544</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 544: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 544: statement not executed.">        xpathQueryArea.setBorder(BorderFactory.createLineBorder(Color.black));</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;545</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 545: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 545: statement not executed.">        makeTextComponentUndoable(xpathQueryArea);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;546</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 546: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 546: statement not executed.">        JScrollPane scrollPane = <span class="keyword">new</span> JScrollPane(xpathQueryArea);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;547</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 547: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 547: statement not executed.">        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;548</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 548: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 548: statement not executed.">        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;549</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 549: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 549: statement not executed.">        final JButton b = createGoButton();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;550</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;551</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 551: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 551: statement not executed.">        p.add(<span class="keyword">new</span> JLabel(<span class="string">"XPath Query (if any)"</span>), BorderLayout.NORTH);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;552</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 552: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 552: statement not executed.">        p.add(scrollPane, BorderLayout.CENTER);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;553</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 553: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 553: statement not executed.">        p.add(b, BorderLayout.SOUTH);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;554</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;555</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 555: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 555: statement not executed.">        <span class="keyword">return</span> p;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;556</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;557</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;558</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 558: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 558: method not entered.">    <span class="keyword">private</span> JButton createGoButton() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;559</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 559: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 559: statement not executed.">        JButton b = <span class="keyword">new</span> JButton(<span class="string">"Go"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;560</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 560: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 560: statement not executed.">        b.setMnemonic('g');</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;561</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 561: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 561: statement not executed.">        b.addActionListener(<span class="keyword">new</span> ShowListener());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;562</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 562: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 562: statement not executed.">        b.addActionListener(codeEditorPane);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;563</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 563: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 563: statement not executed.">        b.addActionListener(<span class="keyword">new</span> XPathListener());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;564</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 564: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 564: statement not executed.">        b.addActionListener(<span class="keyword">new</span> DFAListener());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;565</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 565: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 565: statement not executed.">        <span class="keyword">return</span> b;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;566</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;567</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;568</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 568: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 568: method not entered.">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> makeTextComponentUndoable(JTextComponent textConponent) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;569</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 569: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 569: statement not executed.">        final UndoManager undoManager = <span class="keyword">new</span> UndoManager();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;570</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 570: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 570: statement not executed.">        textConponent.getDocument().addUndoableEditListener(<span class="keyword">new</span> UndoableEditListener() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;571</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 571: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 571: method not entered.">                 <span class="keyword">public</span> <span class="keyword">void</span> undoableEditHappened(</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;572</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                   UndoableEditEvent evt) {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;573</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 573: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 573: statement not executed.">                     undoManager.addEdit(evt.getEdit());</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;574</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                 }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;575</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">               });</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;576</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 576: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 576: statement not executed.">        ActionMap actionMap = textConponent.getActionMap();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;577</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 577: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 577: statement not executed.">        InputMap inputMap = textConponent.getInputMap();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;578</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 578: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 578: statement not executed.">        actionMap.put(<span class="string">"Undo"</span>, <span class="keyword">new</span> AbstractAction(<span class="string">"Undo"</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;579</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 579: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 579: method not entered.">                 <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent evt) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;580</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 580: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 580: statement not executed.">                     <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;581</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 581: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 581: statement not executed.">                         <span class="keyword">if</span> (undoManager.canUndo()) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;582</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 582: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 582: statement not executed.">                             undoManager.undo();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;583</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                         }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;584</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                     } <span class="keyword">catch</span> (CannotUndoException e) {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;585</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                     }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;586</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                 }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;587</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">             });</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;588</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 588: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 588: statement not executed.">        inputMap.put(KeyStroke.getKeyStroke(<span class="string">"control Z"</span>), <span class="string">"Undo"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;589</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">          </SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;590</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 590: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 590: statement not executed.">        actionMap.put(<span class="string">"Redo"</span>, <span class="keyword">new</span> AbstractAction(<span class="string">"Redo"</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;591</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 591: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 591: method not entered.">                <span class="keyword">public</span> <span class="keyword">void</span> actionPerformed(ActionEvent evt) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;592</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 592: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 592: statement not executed.">                    <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;593</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 593: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 593: statement not executed.">                        <span class="keyword">if</span> (undoManager.canRedo()) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;594</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 594: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 594: statement not executed.">                            undoManager.redo();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;595</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                        } </SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;596</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                    } <span class="keyword">catch</span> (CannotRedoException e) {</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;597</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;598</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;599</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            });</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;600</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 600: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 600: statement not executed.">        inputMap.put(KeyStroke.getKeyStroke(<span class="string">"control Y"</span>), <span class="string">"Redo"</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;601</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;602</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;603</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 603: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 603: method not entered.">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;604</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 604: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 604: statement not executed.">        <span class="keyword">new</span> Designer();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;605</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;606</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;607</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 607: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 607: method not entered.">    <span class="keyword">private</span> final <span class="keyword">void</span> copyXmlToClipboard() {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;608</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 608: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 608: statement not executed.">        <span class="keyword">if</span> (codeEditorPane.getText() != <span class="keyword">null</span> &amp;&amp; codeEditorPane.getText().trim().length() &gt; 0) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;609</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 609: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 609: statement not executed.">            String xml = <span class="string">""</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;610</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 610: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 610: statement not executed.">            SimpleNode cu = getCompilationUnit();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;611</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 611: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 611: statement not executed.">            <span class="keyword">if</span> (cu != <span class="keyword">null</span>) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;612</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 612: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 612: statement not executed.">                <span class="keyword">try</span> {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;613</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 613: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 613: statement not executed.">                    xml = getXmlString(cu);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;614</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                } <span class="keyword">catch</span> (IOException e) {</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;615</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 615: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 615: statement not executed.">                    e.printStackTrace();</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;616</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 616: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 616: statement not executed.">                    xml = <span class="string">"Error trying to construct XML representation"</span>;</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;617</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">                }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;618</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">            }</SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;619</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 619: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 619: statement not executed.">            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(<span class="keyword">new</span> StringSelection(xml), <span class="keyword">this</span>);</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;620</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">        }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;621</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;622</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;623</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    <span class="comment">/**</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;624</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * Returns an unformatted xml string (without the declaration)</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;625</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     *</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;626</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * <span class="javadoc">@param</span> node</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;627</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * <span class="javadoc">@return</span> String</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;628</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     * <span class="javadoc">@throws</span> java.io.IOException</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;629</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">     */</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;630</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 630: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 630: method not entered.">    <span class="keyword">private</span> String getXmlString(SimpleNode node) <span class="keyword">throws</span> IOException {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;631</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">/*</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;632</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">        StringWriter writer = new StringWriter();</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;633</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">        XMLSerializer xmlSerializer = new XMLSerializer(writer, new OutputFormat("XML", "UTF-8", true));</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;634</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">        xmlSerializer.asDOMSerializer();</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;635</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">        xmlSerializer.serialize(node.asXml());</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;636</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">        return writer.toString();</span></SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;637</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"><span class="comment">*/</span></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;638</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 638: statement not executed.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 638: statement not executed.">        <span class="keyword">return</span> <span class="string">"FIXME"</span>; <span class="comment">// FIXME</span></A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;639</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;640</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR><TR><TD align="right" class="lineCountHilight">
+&nbsp;641</TD>
+<TD align="right" class="coverageCountHilight">
+<A title="Line 641: method not entered.">&nbsp;0</A>
+</TD><TD class="srcCell"><SPAN class="srcLineHilight"><A title="Line 641: method not entered.">    <span class="keyword">public</span> <span class="keyword">void</span> lostOwnership(Clipboard clipboard, Transferable contents) {</A>
+</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;642</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">    }</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;643</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine">}</SPAN></TD></TR><TR><TD align="right" class="lineCount">
+&nbsp;644</TD>
+<TD align="right" class="coverageCount">
+&nbsp;&nbsp;
+</TD><TD class="srcCell"><SPAN class="srcLine"></SPAN></TD></TR></TBODY></TABLE>
+<TABLE width="100%"><TR><TD class="hbreak" colspan="6">&nbsp;</TD></TR>
+<TR><TD class="footer" colspan="6">
+<table>
+<tr>
+ <td><a target="_new" href="http://www.cenqua.com/clover?6HR"><img alt="Clover" src="../../../../../img/logo.gif" border="0"></a></td><td nowrap><i>Report generated by </i><a target="_new" href="http://www.cenqua.com/clover?6HR">Clover Code Coverage v1.3.6</a><i><BR>Tue Dec 19 2006 09:39:36 EST</i>.</td>
+<td>&nbsp;</td><td style="BORDER-LEFT: #9c9c9c 1px solid;">&nbsp;</td><td>Open Source License registered to the PMD Project. This license of Clover is provided to support the development of PMD only. </td>
+</tr>
+</table>
+</td>
+</tr></TABLE>

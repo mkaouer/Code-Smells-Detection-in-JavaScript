@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<ruleset name="42" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+  <description>
+This ruleset contains links to rules that are new in PMD v4.2
+  </description>
+
+  <rule ref="rulesets/android.xml/DoNotHardCodeSDCard"/>
+  <rule ref="rulesets/controversial.xml/AvoidLiteralsInIfCondition"/>
+  <rule ref="rulesets/controversial.xml/UseConcurrentHashMap"/>
+  <rule ref="rulesets/strictexception.xml/AvoidCatchingGenericException"/>
+  <rule ref="rulesets/strictexception.xml/AvoidLosingExceptionInformation"/>
+  <rule ref="rulesets/naming.xml/GenericsNaming"/>
+  <rule ref="rulesets/jsp.xml/NoInlineScript"/>
+  <rule ref="rulesets/basic.xml/AvoidMultipleUnaryOperators"/>
+  <rule ref="rulesets/codesize.xml/TooManyMethods"/>
+  <rule ref="rulesets/controversial.xml/DoNotCallGarbageCollectionExplicitly"/>
+  <rule ref="rulesets/design.xml/ReturnEmptyArrayRatherThanNull"/>
+  <rule ref="rulesets/design.xml/AbstractClassWithoutAnyMethod"/>
+  <rule ref="rulesets/design.xml/TooFewBranchesForASwitchStatement"/>
+  <rule ref="rulesets/strictexception.xml/DoNotThrowExceptionInFinally"/>
+  <rule ref="rulesets/strings.xml/AvoidStringBufferField"/>
+</ruleset>
