@@ -1,0 +1,86 @@
+<html><head><title>io_realm_internal_SubtableSchema.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\wmohsen\Downloads\v2\realm-java-0.74.0\realm-jni\src\io_realm_internal_SubtableSchema.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\wmohsen\\Downloads\\v2\\realm-java-0.74.0\\realm-jni\\src\\io_realm_internal_SubtableSchema.cpp";
+top.document.title  = "io_realm_internal_SubtableSchema.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 2014 Realm Inc.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * you may not use this file except in compliance with the License.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * You may obtain a copy of the License at</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * See the License for the specific language governing permissions and</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * limitations under the License.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> */</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;util.hpp&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;io_realm_internal_SubtableSchema.h&quot;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span>
+<a name="20"><font size=-1>20     </font></a><span class="string"></span><span class="keyword">using namespace </span><span class="default">tightdb;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">using namespace </span><span class="default">std;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">void <a href="dictionary_A.html#6856">arrayToVector</a></span><span class="default">(<a href="dictionary_J.html#86">JNIEnv</a>* <a href="dictionary_E.html#6857">env</a>, <a href="dictionary_J.html#2580">jlongArray</a> <a href="dictionary_P.html#6858">path</a>, <a href="dictionary_V.html#6860">vector</a>&lt;size_t&gt;&amp; <a href="dictionary_N.html#6859">nativePath</a>)</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">{</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">    <a href="dictionary_J.html#2528">jsize</a> <a href="dictionary_S.html#6861">size</a> = <a href="dictionary_E.html#6857">env</a>-&gt;<a href="dictionary_G.html#2583">GetArrayLength</a>(<a href="dictionary_P.html#6858">path</a>);</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    <a href="dictionary_N.html#6859">nativePath</a>.<a href="dictionary_R.html#6862">reserve</a>(<a href="dictionary_S.html#6861">size</a>+</span><span class="number">1</span><span class="default">);</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    <a href="dictionary_J.html#133">jlong</a>* <a href="dictionary_P.html#6863">pathElements</a> = <a href="dictionary_E.html#6857">env</a>-&gt;<a href="dictionary_G.html#2585">GetLongArrayElements</a>(<a href="dictionary_P.html#6858">path</a>, </span><span class="number">0</span><span class="default">);</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    </span><span class="keyword">for </span><span class="default">(<a href="dictionary_J.html#2528">jsize</a> <a href="dictionary_I.html#6864">i</a> = </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#6864">i</a> &lt; <a href="dictionary_S.html#6861">size</a>; ++<a href="dictionary_I.html#6864">i</a>) {</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">        <a href="dictionary_N.html#6859">nativePath</a>.<a href="dictionary_P.html#6865">push_back</a>(<a href="dictionary_S.html#1485">S</a>(<a href="dictionary_P.html#6863">pathElements</a>[<a href="dictionary_I.html#6864">i</a>]));</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    }</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">    <a href="dictionary_E.html#6857">env</a>-&gt;<a href="dictionary_R.html#2593">ReleaseLongArrayElements</a>(<a href="dictionary_P.html#6858">path</a>, <a href="dictionary_P.html#6863">pathElements</a>, <a href="dictionary_J.html#1686">JNI_ABORT</a>);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">}</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default"><a href="dictionary_J.html#82">JNIEXPORT</a> <a href="dictionary_J.html#133">jlong</a> <a href="dictionary_J.html#84">JNICALL</a> <a href="dictionary_J.html#2265">Java_io_realm_internal_SubtableSchema_nativeAddColumn</a></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">  (<a href="dictionary_J.html#86">JNIEnv</a>* <a href="dictionary_E.html#6866">env</a>, <a href="dictionary_J.html#765">jobject</a>, <a href="dictionary_J.html#133">jlong</a>  <a href="dictionary_N.html#6868">nativeTablePtr</a>, <a href="dictionary_J.html#2580">jlongArray</a> <a href="dictionary_P.html#6869">path</a>, <a href="dictionary_J.html#83">jint</a> <a href="dictionary_C.html#6870">colType</a>, <a href="dictionary_J.html#90">jstring</a> <a href="dictionary_N.html#6871">name</a>)</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">{</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_T.html#1508">TABLE_VALID</a>(<a href="dictionary_E.html#6866">env</a>, <a href="dictionary_T.html#1486">TBL</a>(<a href="dictionary_N.html#6868">nativeTablePtr</a>)))</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">        </span><span class="keyword">return </span><span class="number">0</span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">        <a href="dictionary_J.html#798">JStringAccessor</a> <a href="dictionary_N.html#6872">name2</a>(<a href="dictionary_E.html#6866">env</a>, <a href="dictionary_N.html#6871">name</a>); </span><span class="comment">// throws</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">        <a href="dictionary_V.html#6860">vector</a></span><span class="default">&lt;size_t&gt; <a href="dictionary_N.html#6873">nativePath</a>;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">        <a href="dictionary_A.html#6856">arrayToVector</a>(<a href="dictionary_E.html#6866">env</a>, <a href="dictionary_P.html#6869">path</a>, <a href="dictionary_N.html#6873">nativePath</a>);</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_T.html#1486">TBL</a></span><span class="default">(<a href="dictionary_N.html#6868">nativeTablePtr</a>)-&gt;<a href="dictionary_A.html#6874">add_subcolumn</a>(<a href="dictionary_N.html#6873">nativePath</a>, <a href="dictionary_D.html#6875">DataType</a>(<a href="dictionary_C.html#6870">colType</a>), <a href="dictionary_N.html#6872">name2</a>);</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    }</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">    <a href="dictionary_C.html#107">CATCH_STD</a>()</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    </span><span class="keyword">return </span><span class="number">0</span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">}</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">JNIEXPORT </span><span class="keyword">void </span><span class="default">JNICALL <a href="dictionary_J.html#2266">Java_io_realm_internal_SubtableSchema_nativeRemoveColumn</a></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">  (<a href="dictionary_J.html#86">JNIEnv</a>* <a href="dictionary_E.html#6878">env</a>, <a href="dictionary_J.html#765">jobject</a>, <a href="dictionary_J.html#133">jlong</a> <a href="dictionary_N.html#6880">nativeTablePtr</a>, <a href="dictionary_J.html#2580">jlongArray</a> <a href="dictionary_P.html#6881">path</a>, <a href="dictionary_J.html#133">jlong</a> <a href="dictionary_C.html#6882">columnIndex</a>)</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">{</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_T.html#1515">TBL_AND_COL_INDEX_VALID</a>(<a href="dictionary_E.html#6878">env</a>, <a href="dictionary_T.html#1486">TBL</a>(<a href="dictionary_N.html#6880">nativeTablePtr</a>), <a href="dictionary_C.html#6882">columnIndex</a>))</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">        </span><span class="keyword">return</span><span class="default">;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        <a href="dictionary_V.html#6860">vector</a>&lt;size_t&gt; <a href="dictionary_N.html#6883">nativePath</a>;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">        <a href="dictionary_A.html#6856">arrayToVector</a>(<a href="dictionary_E.html#6878">env</a>, <a href="dictionary_P.html#6881">path</a>, <a href="dictionary_N.html#6883">nativePath</a>);</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">        <a href="dictionary_T.html#1486">TBL</a>(<a href="dictionary_N.html#6880">nativeTablePtr</a>)-&gt;<a href="dictionary_R.html#6884">remove_subcolumn</a>(<a href="dictionary_N.html#6883">nativePath</a>, <a href="dictionary_C.html#6882">columnIndex</a>);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    }</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">    <a href="dictionary_C.html#107">CATCH_STD</a>()</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">}</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default">JNIEXPORT </span><span class="keyword">void </span><span class="default">JNICALL <a href="dictionary_J.html#2267">Java_io_realm_internal_SubtableSchema_nativeRenameColumn</a></span>
+<a name="64"><font size=-1>64     </font></a><span class="default">  (<a href="dictionary_J.html#86">JNIEnv</a>* <a href="dictionary_E.html#6887">env</a>, <a href="dictionary_J.html#765">jobject</a>, <a href="dictionary_J.html#133">jlong</a> <a href="dictionary_N.html#6889">nativeTablePtr</a>, <a href="dictionary_J.html#2580">jlongArray</a> <a href="dictionary_P.html#6890">path</a>, <a href="dictionary_J.html#133">jlong</a> <a href="dictionary_C.html#6891">columnIndex</a>, <a href="dictionary_J.html#90">jstring</a> <a href="dictionary_N.html#6892">name</a>)</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">{</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_T.html#1515">TBL_AND_COL_INDEX_VALID</a>(<a href="dictionary_E.html#6887">env</a>, <a href="dictionary_T.html#1486">TBL</a>(<a href="dictionary_N.html#6889">nativeTablePtr</a>), <a href="dictionary_C.html#6891">columnIndex</a>))</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        </span><span class="keyword">return</span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        <a href="dictionary_J.html#798">JStringAccessor</a> <a href="dictionary_N.html#6893">name2</a>(<a href="dictionary_E.html#6887">env</a>, <a href="dictionary_N.html#6892">name</a>);</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        <a href="dictionary_V.html#6860">vector</a>&lt;size_t&gt; <a href="dictionary_N.html#6894">nativePath</a>;</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">        <a href="dictionary_A.html#6856">arrayToVector</a>(<a href="dictionary_E.html#6887">env</a>, <a href="dictionary_P.html#6890">path</a>, <a href="dictionary_N.html#6894">nativePath</a>);</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        <a href="dictionary_T.html#1486">TBL</a>(<a href="dictionary_N.html#6889">nativeTablePtr</a>)-&gt;<a href="dictionary_R.html#6895">rename_subcolumn</a>(<a href="dictionary_N.html#6894">nativePath</a>, <a href="dictionary_C.html#6891">columnIndex</a>, <a href="dictionary_N.html#6893">name2</a>);</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    }</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    <a href="dictionary_C.html#107">CATCH_STD</a>()</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">}</span>
+<a name="76"><font size=-1>76     </font></a><span class="default"></span>
+</pre></body></html>

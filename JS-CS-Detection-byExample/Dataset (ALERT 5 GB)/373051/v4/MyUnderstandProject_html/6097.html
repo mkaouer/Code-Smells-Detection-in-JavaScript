@@ -1,0 +1,57 @@
+<html><head><title>java_lang_List_Util.cpp</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\wmohsen\Downloads\v5\realm-java-0.72.0\realm-jni\src\java_lang_List_Util.cpp</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\wmohsen\\Downloads\\v5\\realm-java-0.72.0\\realm-jni\\src\\java_lang_List_Util.cpp";
+top.document.title  = "java_lang_List_Util.cpp";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 2014 Realm Inc.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * you may not use this file except in compliance with the License.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * You may obtain a copy of the License at</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * See the License for the specific language governing permissions and</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * limitations under the License.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> */</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"></span><span class="preproc">#include </span><span class="string">&quot;util.hpp&quot;</span>
+<a name="18"><font size=-1>18     </font></a><span class="string"></span><span class="preproc">#include </span><span class="string">&quot;java_lang_List_Util.hpp&quot;</span>
+<a name="19"><font size=-1>19     </font></a><span class="string"></span>
+<a name="20"><font size=-1>20     </font></a><span class="string"><a href="dictionary_J.html#377">jint</a> <a href="dictionary_J.html#2401">java_lang_List_size</a></span><span class="default">(<a href="dictionary_J.html#350">JNIEnv</a>* <a href="dictionary_E.html#6098">env</a>, <a href="dictionary_J.html#373">jobject</a> <a href="dictionary_J.html#6099">jList</a>)</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">{</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">    </span><span class="comment">// WARNING: do not cache these methods, list class may be different based on the object jlist</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">    <a href="dictionary_J.html#1348">jclass</a> <a href="dictionary_J.html#6100">jListClass</a> </span><span class="default">= <a href="dictionary_E.html#6098">env</a>-&gt;<a href="dictionary_G.html#6101">GetObjectClass</a>(<a href="dictionary_J.html#6099">jList</a>);</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_J.html#6100">jListClass</a> == <a href="dictionary_N.html#1350">NULL</a>)</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        </span><span class="keyword">return </span><span class="number">0</span><span class="default">;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    <a href="dictionary_J.html#6103">jmethodID</a> <a href="dictionary_J.html#6102">jListSizeMethodId</a> = <a href="dictionary_E.html#6098">env</a>-&gt;<a href="dictionary_G.html#6104">GetMethodID</a>(<a href="dictionary_J.html#6100">jListClass</a>, </span><span class="string">&quot;size&quot;</span><span class="default">, </span><span class="string">&quot;()I&quot;</span><span class="default">);</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_J.html#6102">jListSizeMethodId</a> == <a href="dictionary_N.html#1350">NULL</a>) {</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">        <a href="dictionary_T.html#393">ThrowException</a>(<a href="dictionary_E.html#6098">env</a>, NoSuchMethod, </span><span class="string">&quot;jList&quot;</span><span class="default">, </span><span class="string">&quot;size&quot;</span><span class="default">);</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">        </span><span class="keyword">return </span><span class="number">0</span><span class="default">;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    }</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_E.html#6098">env</a></span><span class="default">-&gt;<a href="dictionary_C.html#6105">CallIntMethod</a>(<a href="dictionary_J.html#6099">jList</a>, <a href="dictionary_J.html#6102">jListSizeMethodId</a>);</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">}</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+<a name="34"><font size=-1>34     </font></a><span class="default"><a href="dictionary_J.html#373">jobject</a> <a href="dictionary_J.html#2402">java_lang_List_get</a>(<a href="dictionary_J.html#350">JNIEnv</a>* <a href="dictionary_E.html#6106">env</a>, <a href="dictionary_J.html#373">jobject</a> <a href="dictionary_J.html#6107">jList</a>, <a href="dictionary_J.html#377">jint</a> <a href="dictionary_I.html#6108">index</a>)</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">{</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span><span class="comment">// WARNING: do not cache these methods/classes, list class may be different based on the object jlist</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">    <a href="dictionary_J.html#1348">jclass</a> <a href="dictionary_J.html#6109">jListClass</a> </span><span class="default">= <a href="dictionary_E.html#6106">env</a>-&gt;<a href="dictionary_G.html#6101">GetObjectClass</a>(<a href="dictionary_J.html#6107">jList</a>);</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">     </span><span class="keyword">if </span><span class="default">(<a href="dictionary_J.html#6109">jListClass</a> == <a href="dictionary_N.html#1350">NULL</a>)</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_N.html#1350">NULL</a></span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">    <a href="dictionary_J.html#6103">jmethodID</a> <a href="dictionary_J.html#6110">jListGetMethodId</a> = <a href="dictionary_E.html#6106">env</a>-&gt;<a href="dictionary_G.html#6104">GetMethodID</a>(<a href="dictionary_J.html#6109">jListClass</a>, </span><span class="string">&quot;get&quot;</span><span class="default">, </span><span class="string">&quot;(I)Ljava/lang/Object;&quot;</span><span class="default">);</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_J.html#6110">jListGetMethodId</a> == <a href="dictionary_N.html#1350">NULL</a>) {</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">        <a href="dictionary_T.html#393">ThrowException</a>(<a href="dictionary_E.html#6106">env</a>, NoSuchMethod, </span><span class="string">&quot;jList&quot;</span><span class="default">, </span><span class="string">&quot;get&quot;</span><span class="default">);</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_N.html#1350">NULL</a></span><span class="default">;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    }</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="keyword">return <a href="dictionary_E.html#6106">env</a></span><span class="default">-&gt;<a href="dictionary_C.html#6111">CallObjectMethod</a>(<a href="dictionary_J.html#6107">jList</a>, <a href="dictionary_J.html#6110">jListGetMethodId</a>, <a href="dictionary_I.html#6108">index</a>);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">}</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+</pre></body></html>

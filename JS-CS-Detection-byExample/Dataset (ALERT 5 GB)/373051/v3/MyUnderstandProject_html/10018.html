@@ -1,0 +1,116 @@
+<html><head><title>activity_realm_example.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body>
+<h3>File: C:\Users\wmohsen\Downloads\v3\realm-java-0.73.1\test\concurrencyExample\src\main\res\layout\activity_realm_example.xml</h3>
+<SCRIPT>
+ defaultStatus = "File: C:\\Users\\wmohsen\\Downloads\\v3\\realm-java-0.73.1\\test\\concurrencyExample\\src\\main\\res\\layout\\activity_realm_example.xml";
+top.document.title  = "activity_realm_example.xml";
+</SCRIPT>
+<pre><a name="1"><font size=-1>1     </font></a><ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<a name="2"><font size=-1>2     </font></a>    android:layout_width="match_parent"
+<a name="3"><font size=-1>3     </font></a>    android:layout_height="match_parent"
+<a name="4"><font size=-1>4     </font></a>    android:background="#ff797979"
+<a name="5"><font size=-1>5     </font></a>    android:orientation="vertical"
+<a name="6"><font size=-1>6     </font></a>    android:paddingBottom="@dimen/activity_vertical_margin"
+<a name="7"><font size=-1>7     </font></a>    android:paddingLeft="@dimen/activity_horizontal_margin"
+<a name="8"><font size=-1>8     </font></a>    android:paddingRight="@dimen/activity_horizontal_margin"
+<a name="9"><font size=-1>9     </font></a>    android:paddingTop="@dimen/activity_vertical_margin">
+<a name="10"><font size=-1>10     </font></a>
+<a name="11"><font size=-1>11     </font></a>    <LinearLayout
+<a name="12"><font size=-1>12     </font></a>        android:layout_width="match_parent"
+<a name="13"><font size=-1>13     </font></a>        android:layout_height="wrap_content"
+<a name="14"><font size=-1>14     </font></a>        android:orientation="vertical">
+<a name="15"><font size=-1>15     </font></a>
+<a name="16"><font size=-1>16     </font></a>        <TextView
+<a name="17"><font size=-1>17     </font></a>            android:id="@+id/update_message"
+<a name="18"><font size=-1>18     </font></a>            android:layout_width="match_parent"
+<a name="19"><font size=-1>19     </font></a>            android:layout_height="wrap_content"
+<a name="20"><font size=-1>20     </font></a>            android:layout_margin="25dp"
+<a name="21"><font size=-1>21     </font></a>            android:gravity="center"
+<a name="22"><font size=-1>22     </font></a>            android:text="In the background there is a loop creating records."
+<a name="23"><font size=-1>23     </font></a>            android:textSize="24sp" />
+<a name="24"><font size=-1>24     </font></a>
+<a name="25"><font size=-1>25     </font></a>        <View
+<a name="26"><font size=-1>26     </font></a>            android:layout_width="match_parent"
+<a name="27"><font size=-1>27     </font></a>            android:layout_height="1dp"
+<a name="28"><font size=-1>28     </font></a>            android:layout_margin="12dp"
+<a name="29"><font size=-1>29     </font></a>            android:background="#ffcfcfcf" />
+<a name="30"><font size=-1>30     </font></a>
+<a name="31"><font size=-1>31     </font></a>        <LinearLayout
+<a name="32"><font size=-1>32     </font></a>            android:layout_width="match_parent"
+<a name="33"><font size=-1>33     </font></a>            android:layout_height="wrap_content"
+<a name="34"><font size=-1>34     </font></a>            android:layout_weight="1"
+<a name="35"><font size=-1>35     </font></a>            android:background="#ff1144aa"
+<a name="36"><font size=-1>36     </font></a>            android:orientation="vertical"
+<a name="37"><font size=-1>37     </font></a>            android:padding="20dp">
+<a name="38"><font size=-1>38     </font></a>
+<a name="39"><font size=-1>39     </font></a>            <TextView
+<a name="40"><font size=-1>40     </font></a>                android:layout_width="match_parent"
+<a name="41"><font size=-1>41     </font></a>                android:layout_height="wrap_content"
+<a name="42"><font size=-1>42     </font></a>                android:layout_margin="7dp"
+<a name="43"><font size=-1>43     </font></a>                android:gravity="center"
+<a name="44"><font size=-1>44     </font></a>                android:text="You can also create records manually..."
+<a name="45"><font size=-1>45     </font></a>                android:textSize="22sp" />
+<a name="46"><font size=-1>46     </font></a>
+<a name="47"><font size=-1>47     </font></a>            <TextView
+<a name="48"><font size=-1>48     </font></a>                android:id="@+id/message_timestamp"
+<a name="49"><font size=-1>49     </font></a>                android:layout_width="match_parent"
+<a name="50"><font size=-1>50     </font></a>                android:layout_height="wrap_content"
+<a name="51"><font size=-1>51     </font></a>                android:gravity="center_horizontal"
+<a name="52"><font size=-1>52     </font></a>                android:text="Create a Record:"
+<a name="53"><font size=-1>53     </font></a>                android:textColor="#ffafafaf"
+<a name="54"><font size=-1>54     </font></a>                android:textSize="22sp" />
+<a name="55"><font size=-1>55     </font></a>
+<a name="56"><font size=-1>56     </font></a>            <View
+<a name="57"><font size=-1>57     </font></a>                android:layout_width="match_parent"
+<a name="58"><font size=-1>58     </font></a>                android:layout_height="1dp"
+<a name="59"><font size=-1>59     </font></a>                android:layout_margin="12dp"
+<a name="60"><font size=-1>60     </font></a>                android:background="#ffcfcfcf" />
+<a name="61"><font size=-1>61     </font></a>
+<a name="62"><font size=-1>62     </font></a>            <EditText
+<a name="63"><font size=-1>63     </font></a>                android:id="@+id/name"
+<a name="64"><font size=-1>64     </font></a>                android:layout_width="match_parent"
+<a name="65"><font size=-1>65     </font></a>                android:layout_height="wrap_content"
+<a name="66"><font size=-1>66     </font></a>                android:hint="Enter Person's Name" />
+<a name="67"><font size=-1>67     </font></a>
+<a name="68"><font size=-1>68     </font></a>            <EditText
+<a name="69"><font size=-1>69     </font></a>                android:id="@+id/age"
+<a name="70"><font size=-1>70     </font></a>                android:layout_width="match_parent"
+<a name="71"><font size=-1>71     </font></a>                android:layout_height="wrap_content"
+<a name="72"><font size=-1>72     </font></a>                android:hint="Enter Person's Age" />
+<a name="73"><font size=-1>73     </font></a>
+<a name="74"><font size=-1>74     </font></a>            <RadioGroup
+<a name="75"><font size=-1>75     </font></a>                android:id="@+id/petType"
+<a name="76"><font size=-1>76     </font></a>                android:layout_width="match_parent"
+<a name="77"><font size=-1>77     </font></a>                android:layout_height="wrap_content">
+<a name="78"><font size=-1>78     </font></a>
+<a name="79"><font size=-1>79     </font></a>                <RadioButton
+<a name="80"><font size=-1>80     </font></a>                    android:id="@+id/hasCat"
+<a name="81"><font size=-1>81     </font></a>                    android:layout_width="wrap_content"
+<a name="82"><font size=-1>82     </font></a>                    android:layout_height="wrap_content"
+<a name="83"><font size=-1>83     </font></a>                    android:text="Cat" />
+<a name="84"><font size=-1>84     </font></a>
+<a name="85"><font size=-1>85     </font></a>                <RadioButton
+<a name="86"><font size=-1>86     </font></a>                    android:id="@+id/hasDog"
+<a name="87"><font size=-1>87     </font></a>                    android:layout_width="wrap_content"
+<a name="88"><font size=-1>88     </font></a>                    android:layout_height="wrap_content"
+<a name="89"><font size=-1>89     </font></a>                    android:text="Dog" />
+<a name="90"><font size=-1>90     </font></a>            </RadioGroup>
+<a name="91"><font size=-1>91     </font></a>
+<a name="92"><font size=-1>92     </font></a>            <EditText
+<a name="93"><font size=-1>93     </font></a>                android:id="@+id/pets_name"
+<a name="94"><font size=-1>94     </font></a>                android:layout_width="match_parent"
+<a name="95"><font size=-1>95     </font></a>                android:layout_height="wrap_content"
+<a name="96"><font size=-1>96     </font></a>                android:hint="Enter Pets Name" />
+<a name="97"><font size=-1>97     </font></a>
+<a name="98"><font size=-1>98     </font></a>            <Button
+<a name="99"><font size=-1>99     </font></a>                android:id="@+id/add_record_button"
+<a name="100"><font size=-1>100     </font></a>                android:layout_width="match_parent"
+<a name="101"><font size=-1>101     </font></a>                android:layout_height="wrap_content"
+<a name="102"><font size=-1>102     </font></a>                android:text="Create Record" />
+<a name="103"><font size=-1>103     </font></a>
+<a name="104"><font size=-1>104     </font></a>        </LinearLayout>
+<a name="105"><font size=-1>105     </font></a>    </LinearLayout>
+<a name="106"><font size=-1>106     </font></a></ScrollView>
+</pre></body></html>

@@ -1,0 +1,2539 @@
+<html><head><title>Simple Invocation Tree [J]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td>E</td><td>F</td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td><a href="simpleinvtree_I.html">I</a></td><td><a href="simpleinvtree_J.html">J</a></td><td><a href="simpleinvtree_K.html">K</a></td><td>L</td><td>M</td><td><a href="simpleinvtree_N.html">N</a></td><td>O</td><td>P</td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_J.html#6">Java_io_realm_internal_Group_createNative__</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+
+<a href="dictionary_J.html#15">Java_io_realm_internal_Group_createNative___3B</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_M.html#8060">malloc</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_G.html#8061">GetByteArrayRegion</a>
+| <a href="dictionary_B.html#3576">BinaryData</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_F.html#8067">free</a>
+
+<a href="dictionary_J.html#12">Java_io_realm_internal_Group_createNative__Ljava_lang_String_2I</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_G.html#3266">GetStringUTFChars</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_K.html#276">KeyBuffer::KeyBuffer</a>
+| <a href="dictionary_K.html#282">KeyBuffer::~KeyBuffer</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#17">Java_io_realm_internal_Group_createNative__Ljava_nio_ByteBuffer_2</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_G.html#263">GetBinaryData</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_D.html#3612">data</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#18">Java_io_realm_internal_Group_nativeClose</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+
+<a href="dictionary_J.html#29">Java_io_realm_internal_Group_nativeCommit</a>
+| <a href="dictionary_C.html#8143">commit</a>
+
+<a href="dictionary_J.html#31">Java_io_realm_internal_Group_nativeEquals</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#23">Java_io_realm_internal_Group_nativeGetTableName</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#8096">get_table_name</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#24">Java_io_realm_internal_Group_nativeGetTableNativePtr</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_L.html#8105">LangBindHelper::get_or_add_table</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#21">Java_io_realm_internal_Group_nativeHasTable</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_H.html#8089">has_table</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#20">Java_io_realm_internal_Group_nativeSize</a>
+| <a href="dictionary_S.html#153">size</a>
+
+<a href="dictionary_J.html#28">Java_io_realm_internal_Group_nativeToJson</a>
+| <a href="dictionary_S.html#4162">sync_with_stdio</a>
+| <a href="dictionary_T.html#4163">to_json</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#30">Java_io_realm_internal_Group_nativeToString</a>
+| <a href="dictionary_S.html#4162">sync_with_stdio</a>
+| <a href="dictionary_T.html#4173">to_string</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#8131">Java_io_realm_internal_Group_nativeWriteToByteBuffer</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_W.html#8126">write_to_mem</a>
+| <a href="dictionary_U.html#8136">util::int_less_than_or_equal</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_N.html#8137">NewDirectByteBuffer</a>
+| <a href="dictionary_D.html#3612">data</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#25">Java_io_realm_internal_Group_nativeWriteToFile</a>
+| <a href="dictionary_G.html#3266">GetStringUTFChars</a>
+| <a href="dictionary_K.html#276">KeyBuffer::KeyBuffer</a>
+| <a href="dictionary_W.html#8115">write</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#8120">ReleaseStringUTFChars</a>
+| <a href="dictionary_K.html#282">KeyBuffer::~KeyBuffer</a>
+
+<a href="dictionary_J.html#27">Java_io_realm_internal_Group_nativeWriteToMem</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_W.html#8126">write_to_mem</a>
+| <a href="dictionary_D.html#3612">data</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_N.html#4330">NewByteArray</a>
+| <a href="dictionary_S.html#4331">SetByteArrayRegion</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_F.html#8067">free</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2581">Java_io_realm_internal_LinkView_nativeAdd</a>
+| <a href="dictionary_A.html#2586">add</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2624">Java_io_realm_internal_LinkView_nativeClear</a>
+| <a href="dictionary_C.html#2628">clear</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2554">Java_io_realm_internal_LinkView_nativeClose</a>
+| <a href="dictionary_L.html#2560">LangBindHelper::unbind_linklist_ptr</a>
+
+<a href="dictionary_J.html#2561">Java_io_realm_internal_LinkView_nativeGetRow</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2573">Java_io_realm_internal_LinkView_nativeGetTargetRowIndex</a>
+| <a href="dictionary_G.html#274">get</a>
+| <a href="dictionary_G.html#2578">get_index</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2589">Java_io_realm_internal_LinkView_nativeInsert</a>
+| <a href="dictionary_I.html#2595">insert</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2637">Java_io_realm_internal_LinkView_nativeIsEmpty</a>
+| <a href="dictionary_I.html#2641">is_empty</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2607">Java_io_realm_internal_LinkView_nativeMove</a>
+| <a href="dictionary_M.html#2613">move</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2616">Java_io_realm_internal_LinkView_nativeRemove</a>
+| <a href="dictionary_R.html#2621">remove</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2598">Java_io_realm_internal_LinkView_nativeSet</a>
+| <a href="dictionary_S.html#2604">set</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2631">Java_io_realm_internal_LinkView_nativeSize</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1387">Java_io_realm_internal_Row_nativeGetBoolean</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3739">get_bool</a>
+
+<a href="dictionary_J.html#1394">Java_io_realm_internal_Row_nativeGetByteArray</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#4328">get_binary</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_N.html#4330">NewByteArray</a>
+| <a href="dictionary_S.html#4331">SetByteArrayRegion</a>
+| <a href="dictionary_D.html#3612">data</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+
+<a href="dictionary_J.html#1381">Java_io_realm_internal_Row_nativeGetColumnCount</a>
+| <a href="dictionary_I.html#139">is_attached</a>
+| <a href="dictionary_G.html#179">get_column_count</a>
+
+<a href="dictionary_J.html#1383">Java_io_realm_internal_Row_nativeGetColumnIndex</a>
+| <a href="dictionary_I.html#139">is_attached</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_G.html#3719">get_column_index</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1382">Java_io_realm_internal_Row_nativeGetColumnName</a>
+| <a href="dictionary_R.html#185">RowColIndexValid</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#3711">get_column_name</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1384">Java_io_realm_internal_Row_nativeGetColumnType</a>
+| <a href="dictionary_R.html#185">RowColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+
+<a href="dictionary_J.html#1392">Java_io_realm_internal_Row_nativeGetDateTime</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3760">get_datetime</a>
+
+<a href="dictionary_J.html#1390">Java_io_realm_internal_Row_nativeGetDouble</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3753">get_double</a>
+
+<a href="dictionary_J.html#1388">Java_io_realm_internal_Row_nativeGetFloat</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3746">get_float</a>
+
+<a href="dictionary_J.html#1385">Java_io_realm_internal_Row_nativeGetIndex</a>
+| <a href="dictionary_R.html#140">RowIsValid</a>
+| <a href="dictionary_G.html#2578">get_index</a>
+
+<a href="dictionary_J.html#1397">Java_io_realm_internal_Row_nativeGetLink</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_I.html#3915">is_null_link</a>
+| <a href="dictionary_G.html#3803">get_link</a>
+
+<a href="dictionary_J.html#1399">Java_io_realm_internal_Row_nativeGetLinkView</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_L.html#4359">LangBindHelper::get_linklist_ptr</a>
+
+<a href="dictionary_J.html#1386">Java_io_realm_internal_Row_nativeGetLong</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3732">get_int</a>
+
+<a href="dictionary_J.html#1396">Java_io_realm_internal_Row_nativeGetMixed</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3793">get_mixed</a>
+| <a href="dictionary_C.html#3794">CreateJMixedFromMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1395">Java_io_realm_internal_Row_nativeGetMixedType</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#222">get_mixed_type</a>
+
+<a href="dictionary_J.html#1393">Java_io_realm_internal_Row_nativeGetString</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#3767">get_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1398">Java_io_realm_internal_Row_nativeIsNullLink</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_I.html#3915">is_null_link</a>
+
+<a href="dictionary_J.html#1409">Java_io_realm_internal_Row_nativeNullifyLink</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_N.html#3921">nullify_link</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1401">Java_io_realm_internal_Row_nativeSetBoolean</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3841">set_bool</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1406">Java_io_realm_internal_Row_nativeSetByteArray</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_G.html#4409">GetByteArrayElements</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_S.html#4411">set_binary</a>
+| <a href="dictionary_R.html#287">ReleaseByteArrayElements</a>
+
+<a href="dictionary_J.html#1404">Java_io_realm_internal_Row_nativeSetDate</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3868">set_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1403">Java_io_realm_internal_Row_nativeSetDouble</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3859">set_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1402">Java_io_realm_internal_Row_nativeSetFloat</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3850">set_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1408">Java_io_realm_internal_Row_nativeSetLink</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3907">set_link</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1400">Java_io_realm_internal_Row_nativeSetLong</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3832">set_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1407">Java_io_realm_internal_Row_nativeSetMixed</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#4417">row_nativeSetMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1405">Java_io_realm_internal_Row_nativeSetString</a>
+| <a href="dictionary_R.html#235">RowColIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_S.html#3878">set_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2717">Java_io_realm_internal_SharedGroup_createNative</a>
+| <a href="dictionary_G.html#3266">GetStringUTFChars</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_K.html#276">KeyBuffer::KeyBuffer</a>
+| <a href="dictionary_K.html#282">KeyBuffer::~KeyBuffer</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_S.html#3285">string</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2723">Java_io_realm_internal_SharedGroup_createNativeWithImplicitTransactions</a>
+| <a href="dictionary_K.html#276">KeyBuffer::KeyBuffer</a>
+| <a href="dictionary_K.html#282">KeyBuffer::~KeyBuffer</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2730">Java_io_realm_internal_SharedGroup_nativeAdvanceRead</a>
+| <a href="dictionary_L.html#3334">LangBindHelper::advance_read</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2733">Java_io_realm_internal_SharedGroup_nativeBeginImplicit</a>
+| <a href="dictionary_S.html#3325">SharedGroup::begin_read</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2735">Java_io_realm_internal_SharedGroup_nativeBeginRead</a>
+| <a href="dictionary_S.html#3325">SharedGroup::begin_read</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2737">Java_io_realm_internal_SharedGroup_nativeBeginWrite</a>
+| <a href="dictionary_S.html#3380">SharedGroup::begin_write</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2745">Java_io_realm_internal_SharedGroup_nativeCommit</a>
+| <a href="dictionary_S.html#3386">SharedGroup::commit</a>
+
+<a href="dictionary_J.html#2747">Java_io_realm_internal_SharedGroup_nativeCommitAndContinueAsRead</a>
+| <a href="dictionary_L.html#3347">LangBindHelper::commit_and_continue_as_read</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2749">Java_io_realm_internal_SharedGroup_nativeCreateReplication</a>
+| <a href="dictionary_G.html#3266">GetStringUTFChars</a>
+| <a href="dictionary_M.html#3309">makeWriteLogCollector</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2751">Java_io_realm_internal_SharedGroup_nativeCreateTransactLogRegistry</a>
+| <a href="dictionary_G.html#3266">GetStringUTFChars</a>
+| <a href="dictionary_G.html#3316">getWriteLogs</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2753">Java_io_realm_internal_SharedGroup_nativeEndRead</a>
+| <a href="dictionary_S.html#3375">SharedGroup::end_read</a>
+
+<a href="dictionary_J.html#2755">Java_io_realm_internal_SharedGroup_nativeGetDefaultReplicationDatabaseFileName</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+
+<a href="dictionary_J.html#2756">Java_io_realm_internal_SharedGroup_nativeHasChanged</a>
+| <a href="dictionary_S.html#3398">SharedGroup::has_changed</a>
+
+<a href="dictionary_J.html#2758">Java_io_realm_internal_SharedGroup_nativePromoteToWrite</a>
+| <a href="dictionary_L.html#3341">LangBindHelper::promote_to_write</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2761">Java_io_realm_internal_SharedGroup_nativeReserve</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_S.html#3363">SharedGroup::reserve</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2764">Java_io_realm_internal_SharedGroup_nativeRollback</a>
+| <a href="dictionary_S.html#3390">SharedGroup::rollback</a>
+
+<a href="dictionary_J.html#2766">Java_io_realm_internal_SharedGroup_nativeRollbackAndContinueAsRead</a>
+| <a href="dictionary_L.html#3394">LangBindHelper::rollback_and_continue_as_read</a>
+
+<a href="dictionary_J.html#1689">Java_io_realm_internal_SubtableSchema_nativeAddColumn</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_A.html#3414">arrayToVector</a>
+| <a href="dictionary_A.html#3436">add_subcolumn</a>
+| <a href="dictionary_D.html#3437">DataType</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1690">Java_io_realm_internal_SubtableSchema_nativeRemoveColumn</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_A.html#3414">arrayToVector</a>
+| <a href="dictionary_R.html#3446">remove_subcolumn</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1691">Java_io_realm_internal_SubtableSchema_nativeRenameColumn</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_A.html#3414">arrayToVector</a>
+| <a href="dictionary_R.html#3457">rename_subcolumn</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6066">Java_io_realm_internal_Table_createNative</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_L.html#9601">LangBindHelper::new_table</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6200">Java_io_realm_internal_Table_nativeAddColumn</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_H.html#8875">has_shared_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_A.html#4776">add_column</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6204">Java_io_realm_internal_Table_nativeAddColumnLink</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_H.html#8875">has_shared_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_I.html#8885">is_group_level</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_A.html#8887">add_column_link</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6209">Java_io_realm_internal_Table_nativeAddEmptyRow</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_G.html#179">get_column_count</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_A.html#8971">add_empty_row</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6212">Java_io_realm_internal_Table_nativeAddInt</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_A.html#3929">add_int</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6216">Java_io_realm_internal_Table_nativeAverageDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_A.html#4118">average_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6219">Java_io_realm_internal_Table_nativeAverageFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_A.html#4090">average_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6222">Java_io_realm_internal_Table_nativeAverageInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_A.html#4062">average_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6225">Java_io_realm_internal_Table_nativeClear</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_C.html#2628">clear</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6227">Java_io_realm_internal_Table_nativeClearSubtable</a>
+| <a href="dictionary_T.html#196">TblIndexValid</a>
+| <a href="dictionary_C.html#3825">clear_subtable</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2460">Java_io_realm_internal_Table_nativeClose</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_L.html#9598">LangBindHelper::unbind_table_ptr</a>
+
+<a href="dictionary_J.html#6232">Java_io_realm_internal_Table_nativeCountDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_C.html#9401">count_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6236">Java_io_realm_internal_Table_nativeCountFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_C.html#9393">count_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6240">Java_io_realm_internal_Table_nativeCountLong</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_C.html#9385">count_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6244">Java_io_realm_internal_Table_nativeCountString</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_C.html#9410">count_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6248">Java_io_realm_internal_Table_nativeEquals</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6251">Java_io_realm_internal_Table_nativeFindAllBool</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4010">find_all_bool</a>
+
+<a href="dictionary_J.html#6255">Java_io_realm_internal_Table_nativeFindAllDate</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4037">find_all_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6259">Java_io_realm_internal_Table_nativeFindAllDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4028">find_all_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6263">Java_io_realm_internal_Table_nativeFindAllFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4019">find_all_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6267">Java_io_realm_internal_Table_nativeFindAllInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4001">find_all_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6271">Java_io_realm_internal_Table_nativeFindAllString</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_F.html#4048">find_all_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6275">Java_io_realm_internal_Table_nativeFindFirstBool</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3957">find_first_bool</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6279">Java_io_realm_internal_Table_nativeFindFirstDate</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#3981">find_first_datetime</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6283">Java_io_realm_internal_Table_nativeFindFirstDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3973">find_first_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6287">Java_io_realm_internal_Table_nativeFindFirstFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3965">find_first_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6291">Java_io_realm_internal_Table_nativeFindFirstInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3948">find_first_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6295">Java_io_realm_internal_Table_nativeFindFirstString</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3992">find_first_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6299">Java_io_realm_internal_Table_nativeGetBoolean</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3739">get_bool</a>
+
+<a href="dictionary_J.html#6303">Java_io_realm_internal_Table_nativeGetByteArray</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_T.html#3776">tbl_GetByteArray</a>
+
+<a href="dictionary_J.html#6307">Java_io_realm_internal_Table_nativeGetColumnCount</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_G.html#179">get_column_count</a>
+
+<a href="dictionary_J.html#6309">Java_io_realm_internal_Table_nativeGetColumnIndex</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_G.html#3719">get_column_index</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6312">Java_io_realm_internal_Table_nativeGetColumnName</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#3711">get_column_name</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6315">Java_io_realm_internal_Table_nativeGetColumnType</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+
+<a href="dictionary_J.html#6318">Java_io_realm_internal_Table_nativeGetDateTime</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3760">get_datetime</a>
+
+<a href="dictionary_J.html#6322">Java_io_realm_internal_Table_nativeGetDistinctView</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_H.html#9281">has_search_index</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+| <a href="dictionary_G.html#9536">get_distinct_view</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6325">Java_io_realm_internal_Table_nativeGetDouble</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3753">get_double</a>
+
+<a href="dictionary_J.html#6329">Java_io_realm_internal_Table_nativeGetFloat</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3746">get_float</a>
+
+<a href="dictionary_J.html#6333">Java_io_realm_internal_Table_nativeGetLink</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3803">get_link</a>
+
+<a href="dictionary_J.html#6337">Java_io_realm_internal_Table_nativeGetLinkTarget</a>
+| <a href="dictionary_G.html#9146">get_link_target</a>
+| <a href="dictionary_L.html#9147">LangBindHelper::bind_table_ptr</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6340">Java_io_realm_internal_Table_nativeGetLong</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3732">get_int</a>
+
+<a href="dictionary_J.html#6344">Java_io_realm_internal_Table_nativeGetMixed</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3793">get_mixed</a>
+| <a href="dictionary_C.html#3794">CreateJMixedFromMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6348">Java_io_realm_internal_Table_nativeGetMixedType</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#222">get_mixed_type</a>
+
+<a href="dictionary_J.html#6352">Java_io_realm_internal_Table_nativeGetRowPtr</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6355">Java_io_realm_internal_Table_nativeGetSortedView</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_G.html#9547">get_sorted_view</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6359">Java_io_realm_internal_Table_nativeGetString</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#3767">get_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6363">Java_io_realm_internal_Table_nativeGetSubtable</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_L.html#3817">LangBindHelper::get_subtable_ptr</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6367">Java_io_realm_internal_Table_nativeGetSubtableDuringInsert</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_L.html#9164">LangBindHelper::get_subtable_ptr_during_insert</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6371">Java_io_realm_internal_Table_nativeGetSubtableSize</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_G.html#3810">get_subtable_size</a>
+
+<a href="dictionary_J.html#6375">Java_io_realm_internal_Table_nativeGetTableSpec</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_G.html#1348">GetTableSpecMethodID</a>
+| <a href="dictionary_G.html#8926">get_descriptor</a>
+| <a href="dictionary_N.html#8537">NewObject</a>
+| <a href="dictionary_G.html#1347">GetClassTableSpec</a>
+| <a href="dictionary_G.html#1346">get_descriptor</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6377">Java_io_realm_internal_Table_nativeHasIndex</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_H.html#9281">has_search_index</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6380">Java_io_realm_internal_Table_nativeInsertBoolean</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_I.html#9014">insert_bool</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6385">Java_io_realm_internal_Table_nativeInsertByteArray</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_T.html#3887">tbl_nativeDoByteArray</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6390">Java_io_realm_internal_Table_nativeInsertDate</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_I.html#9041">insert_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6395">Java_io_realm_internal_Table_nativeInsertDone</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_I.html#9082">insert_done</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6397">Java_io_realm_internal_Table_nativeInsertDouble</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_I.html#9032">insert_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6402">Java_io_realm_internal_Table_nativeInsertFloat</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_I.html#9023">insert_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6407">Java_io_realm_internal_Table_nativeInsertLinkList</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_I.html#8979">insert_linklist</a>
+
+<a href="dictionary_J.html#6411">Java_io_realm_internal_Table_nativeInsertLong</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_I.html#9005">insert_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6416">Java_io_realm_internal_Table_nativeInsertMixed</a>
+| <a href="dictionary_T.html#202">TblIndexInsertValid</a>
+| <a href="dictionary_T.html#3897">tbl_nativeDoMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6421">Java_io_realm_internal_Table_nativeInsertString</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_I.html#9051">insert_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6426">Java_io_realm_internal_Table_nativeInsertSubtable</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_I.html#9076">insert_subtable</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6430">Java_io_realm_internal_Table_nativeIsNullLink</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_I.html#3915">is_null_link</a>
+
+<a href="dictionary_J.html#6434">Java_io_realm_internal_Table_nativeIsRootTable</a>
+| <a href="dictionary_H.html#8875">has_shared_type</a>
+
+<a href="dictionary_J.html#6436">Java_io_realm_internal_Table_nativeIsValid</a>
+| <a href="dictionary_I.html#139">is_attached</a>
+
+<a href="dictionary_J.html#6438">Java_io_realm_internal_Table_nativeLowerBoundInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_L.html#9518">lower_bound_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6442">Java_io_realm_internal_Table_nativeMaximumDate</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4069">maximum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6445">Java_io_realm_internal_Table_nativeMaximumDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4125">maximum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6448">Java_io_realm_internal_Table_nativeMaximumFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4097">maximum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6451">Java_io_realm_internal_Table_nativeMaximumInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4069">maximum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6454">Java_io_realm_internal_Table_nativeMinimumDate</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4076">minimum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6457">Java_io_realm_internal_Table_nativeMinimumDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4132">minimum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6460">Java_io_realm_internal_Table_nativeMinimumFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4104">minimum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6463">Java_io_realm_internal_Table_nativeMinimumInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4076">minimum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6466">Java_io_realm_internal_Table_nativeMoveLastOver</a>
+| <a href="dictionary_T.html#164">TblRowIndexValid</a>
+| <a href="dictionary_M.html#8996">move_last_over</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6469">Java_io_realm_internal_Table_nativeNullifyLink</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_N.html#3921">nullify_link</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6473">Java_io_realm_internal_Table_nativeOptimize</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_O.html#9553">optimize</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6475">Java_io_realm_internal_Table_nativePivot</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_A.html#3690">aggregate</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6481">Java_io_realm_internal_Table_nativeRemove</a>
+| <a href="dictionary_T.html#164">TblRowIndexValid</a>
+| <a href="dictionary_R.html#2621">remove</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6484">Java_io_realm_internal_Table_nativeRemoveColumn</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_H.html#8875">has_shared_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_R.html#8905">remove_column</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6487">Java_io_realm_internal_Table_nativeRemoveLast</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_R.html#8989">remove_last</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6489">Java_io_realm_internal_Table_nativeRenameColumn</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_H.html#8875">has_shared_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_R.html#8914">rename_column</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6493">Java_io_realm_internal_Table_nativeRowToString</a>
+| <a href="dictionary_T.html#164">TblRowIndexValid</a>
+| <a href="dictionary_R.html#4182">row_to_string</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6496">Java_io_realm_internal_Table_nativeSetBoolean</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3841">set_bool</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6501">Java_io_realm_internal_Table_nativeSetByteArray</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_T.html#3887">tbl_nativeDoByteArray</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6506">Java_io_realm_internal_Table_nativeSetDate</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3868">set_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6511">Java_io_realm_internal_Table_nativeSetDouble</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3859">set_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6516">Java_io_realm_internal_Table_nativeSetFloat</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3850">set_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6521">Java_io_realm_internal_Table_nativeSetIndex</a>
+| <a href="dictionary_T.html#180">TblColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_A.html#9274">add_search_index</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6524">Java_io_realm_internal_Table_nativeSetLink</a>
+| <a href="dictionary_T.html#256">TblIndexAndTypeInsertValid</a>
+| <a href="dictionary_S.html#3907">set_link</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6529">Java_io_realm_internal_Table_nativeSetLong</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_S.html#3832">set_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6534">Java_io_realm_internal_Table_nativeSetMixed</a>
+| <a href="dictionary_T.html#196">TblIndexValid</a>
+| <a href="dictionary_T.html#3897">tbl_nativeDoMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6539">Java_io_realm_internal_Table_nativeSetString</a>
+| <a href="dictionary_T.html#248">TblIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_S.html#3878">set_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6544">Java_io_realm_internal_Table_nativeSize</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_S.html#153">size</a>
+
+<a href="dictionary_J.html#6546">Java_io_realm_internal_Table_nativeSumDouble</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#4111">sum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6549">Java_io_realm_internal_Table_nativeSumFloat</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#4083">sum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6552">Java_io_realm_internal_Table_nativeSumInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#4055">sum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6555">Java_io_realm_internal_Table_nativeToJson</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_S.html#4162">sync_with_stdio</a>
+| <a href="dictionary_T.html#4163">to_json</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6557">Java_io_realm_internal_Table_nativeToString</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_T.html#4173">to_string</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6560">Java_io_realm_internal_Table_nativeUpdateFromSpec</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_H.html#8875">has_shared_type</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_G.html#8926">get_descriptor</a>
+| <a href="dictionary_S.html#1343">set_descriptor</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6563">Java_io_realm_internal_Table_nativeUpperBoundInt</a>
+| <a href="dictionary_T.html#229">TblColIndexAndTypeValid</a>
+| <a href="dictionary_U.html#9527">upper_bound_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#6567">Java_io_realm_internal_Table_nativeWhere</a>
+| <a href="dictionary_T.html#129">TableIsValid</a>
+| <a href="dictionary_W.html#4192">where</a>
+| <a href="dictionary_T.html#3089">TableQuery::TableQuery</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#685">Java_io_realm_internal_TableQuery_nativeAverageDouble</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7816">Query::average_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#691">Java_io_realm_internal_TableQuery_nativeAverageFloat</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7766">Query::average_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#697">Java_io_realm_internal_TableQuery_nativeAverageInt</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7716">Query::average_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#703">Java_io_realm_internal_TableQuery_nativeBeginsWith</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_B.html#7579">begins_with</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#718">Java_io_realm_internal_TableQuery_nativeBetween__J_3JDD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_B.html#7310">between</a>
+| <a href="dictionary_G.html#7311">group</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_E.html#7313">end_group</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#713">Java_io_realm_internal_TableQuery_nativeBetween__J_3JFF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_B.html#7310">between</a>
+| <a href="dictionary_G.html#7311">group</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_E.html#7313">end_group</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#708">Java_io_realm_internal_TableQuery_nativeBetween__J_3JJJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_B.html#7310">between</a>
+| <a href="dictionary_G.html#7311">group</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_E.html#7313">end_group</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#723">Java_io_realm_internal_TableQuery_nativeBetweenDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_B.html#7532">between_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7311">group</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_E.html#7313">end_group</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#728">Java_io_realm_internal_TableQuery_nativeClose</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+
+<a href="dictionary_J.html#730">Java_io_realm_internal_TableQuery_nativeContains</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_C.html#7599">contains</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#735">Java_io_realm_internal_TableQuery_nativeCount</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7849">Query::count</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#740">Java_io_realm_internal_TableQuery_nativeEndGroup</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_Q.html#7620">Query::end_group</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#742">Java_io_realm_internal_TableQuery_nativeEndsWith</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_E.html#7589">ends_with</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#755">Java_io_realm_internal_TableQuery_nativeEqual__J_3JD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_E.html#7242">equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7191">numeric_link_equal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#751">Java_io_realm_internal_TableQuery_nativeEqual__J_3JF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_E.html#7242">equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7191">numeric_link_equal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#747">Java_io_realm_internal_TableQuery_nativeEqual__J_3JJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_E.html#7242">equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7191">numeric_link_equal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#7546">Java_io_realm_internal_TableQuery_nativeEqual__J_3JLjava_lang_String_2Z</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_E.html#7242">equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_C.html#7198">column</a>
+| <a href="dictionary_S.html#4046">StringData</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#759">Java_io_realm_internal_TableQuery_nativeEqual__J_3JZ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_E.html#7242">equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7191">numeric_link_equal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#768">Java_io_realm_internal_TableQuery_nativeEqualDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7465">less_equal_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7191">numeric_link_equal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#772">Java_io_realm_internal_TableQuery_nativeFind</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_R.html#155">RowIndexValid</a>
+| <a href="dictionary_Q.html#7653">Query::find</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#775">Java_io_realm_internal_TableQuery_nativeFindAll</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7666">Query::find_all</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#788">Java_io_realm_internal_TableQuery_nativeGreater__J_3JD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7265">greater</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7207">numeric_link_greater</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#784">Java_io_realm_internal_TableQuery_nativeGreater__J_3JF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7265">greater</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7207">numeric_link_greater</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#780">Java_io_realm_internal_TableQuery_nativeGreater__J_3JJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7265">greater</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7207">numeric_link_greater</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#792">Java_io_realm_internal_TableQuery_nativeGreaterDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7488">greater_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7207">numeric_link_greater</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#804">Java_io_realm_internal_TableQuery_nativeGreaterEqual__J_3JD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7276">greater_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#800">Java_io_realm_internal_TableQuery_nativeGreaterEqual__J_3JF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7276">greater_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#796">Java_io_realm_internal_TableQuery_nativeGreaterEqual__J_3JJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7276">greater_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#808">Java_io_realm_internal_TableQuery_nativeGreaterEqualDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_G.html#7499">greater_equal_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7214">numeric_link_greaterequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#812">Java_io_realm_internal_TableQuery_nativeGroup</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_Q.html#7613">Query::group</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#822">Java_io_realm_internal_TableQuery_nativeLess__J_3JD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7287">less</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7221">numeric_link_less</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#818">Java_io_realm_internal_TableQuery_nativeLess__J_3JF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7287">less</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7221">numeric_link_less</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#814">Java_io_realm_internal_TableQuery_nativeLess__J_3JJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7287">less</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7221">numeric_link_less</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#826">Java_io_realm_internal_TableQuery_nativeLessDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7510">less_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7221">numeric_link_less</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#838">Java_io_realm_internal_TableQuery_nativeLessEqual__J_3JD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7298">less_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#834">Java_io_realm_internal_TableQuery_nativeLessEqual__J_3JF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7298">less_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#830">Java_io_realm_internal_TableQuery_nativeLessEqual__J_3JJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7298">less_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#842">Java_io_realm_internal_TableQuery_nativeLessEqualDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_L.html#7465">less_equal_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7228">numeric_link_lessequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#846">Java_io_realm_internal_TableQuery_nativeMaximumDate</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7690">Query::maximum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#852">Java_io_realm_internal_TableQuery_nativeMaximumDouble</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7790">Query::maximum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#858">Java_io_realm_internal_TableQuery_nativeMaximumFloat</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7740">Query::maximum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#864">Java_io_realm_internal_TableQuery_nativeMaximumInt</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7690">Query::maximum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#870">Java_io_realm_internal_TableQuery_nativeMinimumDate</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7702">Query::minimum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#876">Java_io_realm_internal_TableQuery_nativeMinimumDouble</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7802">Query::minimum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#882">Java_io_realm_internal_TableQuery_nativeMinimumFloat</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7752">Query::minimum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#888">Java_io_realm_internal_TableQuery_nativeMinimumInt</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7702">Query::minimum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#902">Java_io_realm_internal_TableQuery_nativeNotEqual__J_3JD</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_N.html#7254">not_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7200">numeric_link_notequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#898">Java_io_realm_internal_TableQuery_nativeNotEqual__J_3JF</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_N.html#7254">not_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7200">numeric_link_notequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#894">Java_io_realm_internal_TableQuery_nativeNotEqual__J_3JJ</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_N.html#7254">not_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7200">numeric_link_notequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#7559">Java_io_realm_internal_TableQuery_nativeNotEqual__J_3JLjava_lang_String_2Z</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_N.html#7254">not_equal</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_C.html#7198">column</a>
+| <a href="dictionary_S.html#4046">StringData</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#911">Java_io_realm_internal_TableQuery_nativeNotEqualDateTime</a>
+| <a href="dictionary_G.html#3422">GetArrayLength</a>
+| <a href="dictionary_G.html#3425">GetLongArrayElements</a>
+| <a href="dictionary_Q.html#7166">query_col_type_valid</a>
+| <a href="dictionary_N.html#7477">not_equal_datetime</a>
+| <a href="dictionary_D.html#7466">DateTime</a>
+| <a href="dictionary_G.html#7184">getTableLink</a>
+| <a href="dictionary_A.html#7244">and_query</a>
+| <a href="dictionary_N.html#7200">numeric_link_notequal</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_R.html#3427">ReleaseLongArrayElements</a>
+
+<a href="dictionary_J.html#915">Java_io_realm_internal_TableQuery_nativeOr</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_Q.html#7627">Query::Or</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#917">Java_io_realm_internal_TableQuery_nativeParent</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_T.html#3093">TableQuery::pop_subtable</a>
+| <a href="dictionary_T.html#7643">TableQuery::end_subtable</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#919">Java_io_realm_internal_TableQuery_nativeRemove</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7860">Query::remove</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#924">Java_io_realm_internal_TableQuery_nativeSubtable</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_T.html#3094">TableQuery::get_current_table</a>
+| <a href="dictionary_T.html#3091">TableQuery::push_subtable</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_T.html#7636">TableQuery::subtable</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#927">Java_io_realm_internal_TableQuery_nativeSumDouble</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7778">Query::sum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#933">Java_io_realm_internal_TableQuery_nativeSumFloat</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7728">Query::sum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#939">Java_io_realm_internal_TableQuery_nativeSumInt</a>
+| <a href="dictionary_R.html#7159">Ref2Ptr</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_R.html#145">RowIndexesValid</a>
+| <a href="dictionary_Q.html#7678">Query::sum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#945">Java_io_realm_internal_TableQuery_nativeTableview</a>
+| <a href="dictionary_Q.html#7161">query_valid</a>
+| <a href="dictionary_Q.html#7165">Query::get_table</a>
+| <a href="dictionary_W.html#4192">where</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#948">Java_io_realm_internal_TableQuery_nativeValidateQuery</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_V.html#7179">validate</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1985">Java_io_realm_internal_TableView_createNativeTableView</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2107">Java_io_realm_internal_TableView_nativeAddInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#173">ColIndexValid</a>
+| <a href="dictionary_A.html#3929">add_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2111">Java_io_realm_internal_TableView_nativeAverageDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_A.html#4118">average_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2114">Java_io_realm_internal_TableView_nativeAverageFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_A.html#4090">average_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2117">Java_io_realm_internal_TableView_nativeAverageInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_A.html#4062">average_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2120">Java_io_realm_internal_TableView_nativeClear</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#2628">clear</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2122">Java_io_realm_internal_TableView_nativeClearSubtable</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_C.html#3825">clear_subtable</a>
+
+<a href="dictionary_J.html#2127">Java_io_realm_internal_TableView_nativeFindAllBool</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4010">find_all_bool</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2131">Java_io_realm_internal_TableView_nativeFindAllDate</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4037">find_all_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2135">Java_io_realm_internal_TableView_nativeFindAllDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4028">find_all_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2139">Java_io_realm_internal_TableView_nativeFindAllFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4019">find_all_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2143">Java_io_realm_internal_TableView_nativeFindAllInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#4001">find_all_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2147">Java_io_realm_internal_TableView_nativeFindAllString</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_S.html#4046">StringData</a>
+| <a href="dictionary_D.html#3612">data</a>
+| <a href="dictionary_F.html#4048">find_all_string</a>
+| <a href="dictionary_S.html#153">size</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2151">Java_io_realm_internal_TableView_nativeFindFirstBool</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_F.html#3957">find_first_bool</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2155">Java_io_realm_internal_TableView_nativeFindFirstDate</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3981">find_first_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2159">Java_io_realm_internal_TableView_nativeFindFirstDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3973">find_first_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2163">Java_io_realm_internal_TableView_nativeFindFirstFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3965">find_first_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2167">Java_io_realm_internal_TableView_nativeFindFirstInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_F.html#3948">find_first_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2171">Java_io_realm_internal_TableView_nativeFindFirstString</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_F.html#3992">find_first_string</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2175">Java_io_realm_internal_TableView_nativeGetBoolean</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3739">get_bool</a>
+
+<a href="dictionary_J.html#2179">Java_io_realm_internal_TableView_nativeGetByteArray</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_T.html#3776">tbl_GetByteArray</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2183">Java_io_realm_internal_TableView_nativeGetColumnCount</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_G.html#179">get_column_count</a>
+
+<a href="dictionary_J.html#2185">Java_io_realm_internal_TableView_nativeGetColumnIndex</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_T.html#124">to_jlong_or_not_found</a>
+| <a href="dictionary_G.html#3719">get_column_index</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2188">Java_io_realm_internal_TableView_nativeGetColumnName</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#173">ColIndexValid</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#3711">get_column_name</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2191">Java_io_realm_internal_TableView_nativeGetColumnType</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#173">ColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+
+<a href="dictionary_J.html#2194">Java_io_realm_internal_TableView_nativeGetDateTimeValue</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3760">get_datetime</a>
+
+<a href="dictionary_J.html#2198">Java_io_realm_internal_TableView_nativeGetDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3753">get_double</a>
+
+<a href="dictionary_J.html#2202">Java_io_realm_internal_TableView_nativeGetFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3746">get_float</a>
+
+<a href="dictionary_J.html#2206">Java_io_realm_internal_TableView_nativeGetLink</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3803">get_link</a>
+
+<a href="dictionary_J.html#2210">Java_io_realm_internal_TableView_nativeGetLong</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3732">get_int</a>
+
+<a href="dictionary_J.html#2214">Java_io_realm_internal_TableView_nativeGetMixed</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3793">get_mixed</a>
+| <a href="dictionary_C.html#3794">CreateJMixedFromMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2218">Java_io_realm_internal_TableView_nativeGetMixedType</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#222">get_mixed_type</a>
+
+<a href="dictionary_J.html#2222">Java_io_realm_internal_TableView_nativeGetSourceRowIndex</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_R.html#155">RowIndexValid</a>
+| <a href="dictionary_G.html#3703">get_source_ndx</a>
+
+<a href="dictionary_J.html#2225">Java_io_realm_internal_TableView_nativeGetString</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_G.html#3767">get_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2229">Java_io_realm_internal_TableView_nativeGetSubtable</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_L.html#3817">LangBindHelper::get_subtable_ptr</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2233">Java_io_realm_internal_TableView_nativeGetSubtableSize</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_G.html#3810">get_subtable_size</a>
+
+<a href="dictionary_J.html#2237">Java_io_realm_internal_TableView_nativeIsNullLink</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_I.html#3915">is_null_link</a>
+
+<a href="dictionary_J.html#2241">Java_io_realm_internal_TableView_nativeMaximumDate</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4069">maximum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2244">Java_io_realm_internal_TableView_nativeMaximumDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4125">maximum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2247">Java_io_realm_internal_TableView_nativeMaximumFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4097">maximum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2250">Java_io_realm_internal_TableView_nativeMaximumInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4069">maximum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2253">Java_io_realm_internal_TableView_nativeMinimumDate</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4076">minimum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2256">Java_io_realm_internal_TableView_nativeMinimumDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4132">minimum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2259">Java_io_realm_internal_TableView_nativeMinimumFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4104">minimum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2262">Java_io_realm_internal_TableView_nativeMinimumInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_M.html#4076">minimum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2265">Java_io_realm_internal_TableView_nativeNullifyLink</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_N.html#3921">nullify_link</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2269">Java_io_realm_internal_TableView_nativePivot</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_A.html#3690">aggregate</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2275">Java_io_realm_internal_TableView_nativeRemoveRow</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_R.html#155">RowIndexValid</a>
+| <a href="dictionary_R.html#2621">remove</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2278">Java_io_realm_internal_TableView_nativeRowToString</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_R.html#155">RowIndexValid</a>
+| <a href="dictionary_R.html#4182">row_to_string</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2281">Java_io_realm_internal_TableView_nativeSetBoolean</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_S.html#3841">set_bool</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2286">Java_io_realm_internal_TableView_nativeSetByteArray</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_T.html#3887">tbl_nativeDoByteArray</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2291">Java_io_realm_internal_TableView_nativeSetDateTimeValue</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_S.html#3868">set_datetime</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2296">Java_io_realm_internal_TableView_nativeSetDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_S.html#3859">set_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2301">Java_io_realm_internal_TableView_nativeSetFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_S.html#3850">set_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2306">Java_io_realm_internal_TableView_nativeSetLink</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_S.html#3907">set_link</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2311">Java_io_realm_internal_TableView_nativeSetLong</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_S.html#3832">set_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2316">Java_io_realm_internal_TableView_nativeSetMixed</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#190">IndexValid</a>
+| <a href="dictionary_T.html#3897">tbl_nativeDoMixed</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2321">Java_io_realm_internal_TableView_nativeSetString</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_I.html#240">IndexAndTypeValid</a>
+| <a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_S.html#3878">set_string</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2326">Java_io_realm_internal_TableView_nativeSize</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_S.html#153">size</a>
+
+<a href="dictionary_J.html#2328">Java_io_realm_internal_TableView_nativeSort</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#173">ColIndexValid</a>
+| <a href="dictionary_G.html#219">get_column_type</a>
+| <a href="dictionary_S.html#4153">sort</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2332">Java_io_realm_internal_TableView_nativeSumDouble</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#4111">sum_double</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2335">Java_io_realm_internal_TableView_nativeSumFloat</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#4083">sum_float</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2338">Java_io_realm_internal_TableView_nativeSumInt</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_C.html#223">ColIndexAndTypeValid</a>
+| <a href="dictionary_S.html#4055">sum_int</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2341">Java_io_realm_internal_TableView_nativeToJson</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_S.html#4162">sync_with_stdio</a>
+| <a href="dictionary_T.html#4163">to_json</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2343">Java_io_realm_internal_TableView_nativeToString</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_S.html#4162">sync_with_stdio</a>
+| <a href="dictionary_T.html#4173">to_string</a>
+| <a href="dictionary_S.html#70">str</a>
+| <a href="dictionary_N.html#4165">NewStringUTF</a>
+| <a href="dictionary_C.html#3546">c_str</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#2346">Java_io_realm_internal_TableView_nativeWhere</a>
+| <a href="dictionary_S.html#3679">sync_if_needed</a>
+| <a href="dictionary_V.html#3660">view_valid</a>
+| <a href="dictionary_G.html#4191">get_parent</a>
+| <a href="dictionary_W.html#4192">where</a>
+| <a href="dictionary_T.html#3089">TableQuery::TableQuery</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#1021">Java_io_realm_internal_Util_nativeGetMemUsage</a>
+| <a href="dictionary_G.html#1364">GetMemUsage</a>
+
+<a href="dictionary_J.html#1023">Java_io_realm_internal_Util_nativeTestcase</a>
+| <a href="dictionary_E.html#7922">ExceptionKind</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+
+<a href="dictionary_J.html#3519">Java_io_realm_internal_Version_nativeGetVersion</a>
+| <a href="dictionary_T.html#265">to_jstring</a>
+| <a href="dictionary_V.html#5841">Version::get_version</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_W.html#2569">what</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+
+<a href="dictionary_J.html#3520">Java_io_realm_internal_Version_nativeHasFeature</a>
+| <a href="dictionary_V.html#5847">Version::has_feature</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_S.html#70">str</a>
+
+<a href="dictionary_J.html#3521">Java_io_realm_internal_Version_nativeIsAtLeast</a>
+| <a href="dictionary_V.html#5855">Version::is_at_least</a>
+
+<a href="dictionary_J.html#1338">Java_io_realm_TableSpec_getColumnCount</a>
+| <a href="dictionary_G.html#1348">GetTableSpecMethodID</a>
+| <a href="dictionary_C.html#4748">CallLongMethod</a>
+
+<a href="dictionary_J.html#1342">Java_io_realm_TableSpec_getColumnIndex</a>
+| <a href="dictionary_G.html#1348">GetTableSpecMethodID</a>
+| <a href="dictionary_C.html#4748">CallLongMethod</a>
+
+<a href="dictionary_J.html#1340">Java_io_realm_TableSpec_getColumnName</a>
+| <a href="dictionary_G.html#1348">GetTableSpecMethodID</a>
+| <a href="dictionary_C.html#437">CallObjectMethod</a>
+
+<a href="dictionary_J.html#1339">Java_io_realm_TableSpec_getColumnType</a>
+| <a href="dictionary_G.html#1348">GetTableSpecMethodID</a>
+| <a href="dictionary_C.html#437">CallObjectMethod</a>
+
+<a href="dictionary_J.html#1341">Java_io_realm_TableSpec_getTableSpec</a>
+| <a href="dictionary_G.html#1348">GetTableSpecMethodID</a>
+| <a href="dictionary_C.html#437">CallObjectMethod</a>
+
+<a href="dictionary_J.html#431">java_lang_List_get</a>
+| <a href="dictionary_G.html#426">GetObjectClass</a>
+| <a href="dictionary_G.html#429">GetMethodID</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_C.html#437">CallObjectMethod</a>
+
+<a href="dictionary_J.html#422">java_lang_List_size</a>
+| <a href="dictionary_G.html#426">GetObjectClass</a>
+| <a href="dictionary_G.html#429">GetMethodID</a>
+| <a href="dictionary_T.html#97">ThrowException</a>
+| <a href="dictionary_C.html#430">CallIntMethod</a>
+
+<a href="dictionary_J.html#103">jprint</a>
+| <a href="dictionary_F.html#3557">fprintf</a>
+| <a href="dictionary_F.html#3559">fflush</a>
+
+<a href="dictionary_J.html#102">jprintf</a>
+| <a href="dictionary_V.html#3566">va_start</a>
+| <a href="dictionary_V.html#3567">vsnprintf</a>
+| <a href="dictionary_J.html#103">jprint</a>
+| <a href="dictionary_V.html#3568">va_end</a>
+
+<a href="dictionary_J.html#268">JStringAccessor::JStringAccessor</a>
+| <a href="dictionary_J.html#3584">JStringCharsAccessor::JStringCharsAccessor</a>
+| <a href="dictionary_T.html#2572">TIGHTDB_ASSERT</a>
+| <a href="dictionary_N.html#3635">numeric_limits::max</a>
+| <a href="dictionary_J.html#3589">JStringCharsAccessor::size</a>
+| <a href="dictionary_J.html#3588">JStringCharsAccessor::data</a>
+| <a href="dictionary_F.html#3639">find_utf8_buf_size</a>
+| <a href="dictionary_R.html#3626">reset</a>
+| <a href="dictionary_G.html#274">get</a>
+| <a href="dictionary_T.html#3644">to_utf8</a>
+| <a href="dictionary_R.html#3602">runtime_error</a>
+| <a href="dictionary_J.html#3587">JStringCharsAccessor::~JStringCharsAccessor</a>
+
+<a href="dictionary_J.html#269">JStringAccessor::operator tightdb::StringData</a>
+| <a href="dictionary_G.html#274">get</a>
+
+<a href="dictionary_J.html#3594">JStringCharsAccessor::get_size</a>
+| <a href="dictionary_I.html#3600">int_cast_with_overflow_detect</a>
+| <a href="dictionary_G.html#3601">GetStringLength</a>
+| <a href="dictionary_R.html#3602">runtime_error</a>
+
+<a href="dictionary_J.html#3584">JStringCharsAccessor::JStringCharsAccessor</a>
+| <a href="dictionary_G.html#3597">GetStringChars</a>
+| <a href="dictionary_J.html#3594">JStringCharsAccessor::get_size</a>
+
+<a href="dictionary_J.html#3587">JStringCharsAccessor::~JStringCharsAccessor</a>
+| <a href="dictionary_R.html#3598">ReleaseStringChars</a>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td>E</td><td>F</td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td><a href="simpleinvtree_I.html">I</a></td><td><a href="simpleinvtree_J.html">J</a></td><td><a href="simpleinvtree_K.html">K</a></td><td>L</td><td>M</td><td><a href="simpleinvtree_N.html">N</a></td><td>O</td><td>P</td><td><a href="simpleinvtree_Q.html">Q</a></td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr></table></body></html>

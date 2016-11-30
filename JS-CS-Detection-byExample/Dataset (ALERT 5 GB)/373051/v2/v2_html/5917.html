@@ -1,0 +1,220 @@
+<html><head><title>RealmIntroExampleActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\wmohsen\Downloads\v2\realm-java-0.74.0\examples\introExample\src\main\java\io\realm\examples\intro\RealmIntroExampleActivity.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\wmohsen\\Downloads\\v2\\realm-java-0.74.0\\examples\\introExample\\src\\main\\java\\io\\realm\\examples\\intro\\RealmIntroExampleActivity.java";
+top.document.title  = "RealmIntroExampleActivity.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 2014 Realm Inc.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * you may not use this file except in compliance with the License.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * You may obtain a copy of the License at</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * See the License for the specific language governing permissions and</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * limitations under the License.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> */</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">io.realm.examples.<a href="dictionary_E.html#5961">intro</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1803">app</a>.<a href="dictionary_A.html#1751">Activity</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1805">os</a>.<a href="dictionary_O.html#5918">AsyncTask</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1805">os</a>.<a href="dictionary_O.html#1753">Bundle</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1455">util</a>.<a href="dictionary_U.html#1453">Log</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#57">widget</a>.<a href="dictionary_W.html#4919">LinearLayout</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#57">widget</a>.<a href="dictionary_W.html#52">TextView</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.<a href="dictionary_I.html#857">realm</a>.<a href="dictionary_R.html#855">Realm</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.<a href="dictionary_I.html#857">realm</a>.<a href="dictionary_R.html#884">RealmResults</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.examples.intro.<a href="dictionary_I.html#2101">model</a>.<a href="dictionary_M.html#2106">Cat</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.examples.intro.<a href="dictionary_I.html#2101">model</a>.<a href="dictionary_M.html#2105">Dog</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.examples.intro.<a href="dictionary_I.html#2101">model</a>.<a href="dictionary_M.html#2080">Person</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_I.html#5919">RealmIntroExampleActivity</a> extends <a href="dictionary_A.html#1751">Activity</a> </span><span class="default">{</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_R.html#5947">realmExamples</a></span><span class="default">() {</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default">        </span><span class="comment">// These operations are small enough that</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">        // we can generally safely run them on the UI thread.</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"></span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">        // Open the default realm ones for the UI thread.</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">        <a href="dictionary_R.html#855">Realm</a> <a href="dictionary_R.html#5955">realm</a> </span><span class="default">= <a href="dictionary_R.html#855">Realm</a>.<a href="dictionary_R.html#1318">getInstance</a>(</span><span class="keyword">this</span><span class="default">);</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">        <a href="dictionary_R.html#5920">basicCRUD</a>(<a href="dictionary_R.html#5955">realm</a>);</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">        <a href="dictionary_R.html#5926">basicQuery</a>(<a href="dictionary_R.html#5955">realm</a>);</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">        <a href="dictionary_R.html#5923">basicLinkQuery</a>(<a href="dictionary_R.html#5955">realm</a>);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">        </span><span class="comment">// More complex operations can be executed on another thread.</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">        </span><span class="keyword">new <a href="dictionary_O.html#5918">AsyncTask</a></span><span class="default">&lt;Void, Void, String&gt;() {</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">            @<a href="dictionary_O.html#50">Override</a></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">            </span><span class="keyword">protected <a href="dictionary_S.html#51">String</a> <a href="dictionary_Non-Alpha.html#5949">doInBackground</a></span><span class="default">(<a href="dictionary_V.html#3677">Void</a>... <a href="dictionary_V.html#5951">voids</a>) {</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">                <a href="dictionary_S.html#51">String</a> <a href="dictionary_I.html#5950">info</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">                <a href="dictionary_I.html#5950">info</a> = <a href="dictionary_R.html#5934">complexReadWrite</a>();</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">                info += <a href="dictionary_R.html#5930">complexQuery</a>();</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">                </span><span class="keyword">return <a href="dictionary_I.html#5950">info</a></span><span class="default">;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">            }</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default">            @<a href="dictionary_O.html#50">Override</a></span>
+<a name="58"><font size=-1>58     </font></a><span class="default">            </span><span class="keyword">protected void <a href="dictionary_Non-Alpha.html#5952">onPostExecute</a></span><span class="default">(<a href="dictionary_S.html#51">String</a> <a href="dictionary_R.html#5953">result</a>) {</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">                <a href="dictionary_R.html#5956">showStatus</a>(<a href="dictionary_R.html#5953">result</a>);</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">            }</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        }.<a href="dictionary_E.html#5954">execute</a>();</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    }</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_R.html#5920">basicCRUD</a></span><span class="default">(<a href="dictionary_R.html#855">Realm</a> <a href="dictionary_R.html#5922">realm</a>) {</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;Perform basic Create/Read/Update/Delete (CRUD) operations...&quot;</span><span class="default">);</span>
+<a name="67"><font size=-1>67     </font></a><span class="default"></span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        </span><span class="comment">// All writes must be wrapped in a transaction to facilitate safe multi threading</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">        <a href="dictionary_R.html#5922">realm</a></span><span class="default">.<a href="dictionary_R.html#1319">beginTransaction</a>();</span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default">        </span><span class="comment">// Add a person</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">        <a href="dictionary_M.html#2080">Person</a> <a href="dictionary_P.html#5921">person</a> </span><span class="default">= <a href="dictionary_R.html#5922">realm</a>.<a href="dictionary_R.html#1321">createObject</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">);</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">        <a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2092">setName</a>(</span><span class="string">&quot;Young Person&quot;</span><span class="default">);</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        <a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2086">setAge</a>(</span><span class="number">14</span><span class="default">);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span>
+<a name="76"><font size=-1>76     </font></a><span class="default">        </span><span class="comment">// When the write transaction is committed, all changes a synced to disk.</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">        <a href="dictionary_R.html#5922">realm</a></span><span class="default">.<a href="dictionary_R.html#1329">commitTransaction</a>();</span>
+<a name="78"><font size=-1>78     </font></a><span class="default"></span>
+<a name="79"><font size=-1>79     </font></a><span class="default">        </span><span class="comment">// Find the first person (no query conditions) and read a field</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">        <a href="dictionary_P.html#5921">person</a> </span><span class="default">= <a href="dictionary_R.html#5922">realm</a>.<a href="dictionary_R.html#1315">where</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#1331">findFirst</a>();</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(<a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2084">getName</a>() + </span><span class="string">&quot;:&quot; </span><span class="default">+ <a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2081">getAge</a>());</span>
+<a name="82"><font size=-1>82     </font></a><span class="default"></span>
+<a name="83"><font size=-1>83     </font></a><span class="default">        </span><span class="comment">// Update person in a write transaction</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">        <a href="dictionary_R.html#5922">realm</a></span><span class="default">.<a href="dictionary_R.html#1319">beginTransaction</a>();</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">        <a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2092">setName</a>(</span><span class="string">&quot;Senior Person&quot;</span><span class="default">);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">        <a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2086">setAge</a>(</span><span class="number">99</span><span class="default">);</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(<a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2084">getName</a>() + </span><span class="string">&quot; got older: &quot; </span><span class="default">+ <a href="dictionary_P.html#5921">person</a>.<a href="dictionary_P.html#2081">getAge</a>());</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        <a href="dictionary_R.html#5922">realm</a>.<a href="dictionary_R.html#1329">commitTransaction</a>();</span>
+<a name="89"><font size=-1>89     </font></a><span class="default"></span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        </span><span class="comment">// Delete all persons</span>
+<a name="91"><font size=-1>91     </font></a><span class="comment">        <a href="dictionary_R.html#5922">realm</a></span><span class="default">.<a href="dictionary_R.html#1319">beginTransaction</a>();</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        <a href="dictionary_R.html#5922">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#902">clear</a>();</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">        <a href="dictionary_R.html#5922">realm</a>.<a href="dictionary_R.html#1329">commitTransaction</a>();</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">    }</span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_R.html#5926">basicQuery</a></span><span class="default">(<a href="dictionary_R.html#855">Realm</a> <a href="dictionary_R.html#5928">realm</a>) {</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;\nPerforming basic Query operation...&quot;</span><span class="default">);</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;Number of persons: &quot; </span><span class="default">+ <a href="dictionary_R.html#5928">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#929">size</a>());</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default">        <a href="dictionary_R.html#884">RealmResults</a>&lt;<a href="dictionary_M.html#2080">Person</a>&gt; <a href="dictionary_R.html#5929">results</a> = <a href="dictionary_R.html#5928">realm</a>.<a href="dictionary_R.html#1315">where</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#1335">equalTo</a>(</span><span class="string">&quot;age&quot;</span><span class="default">, </span><span class="number">99</span><span class="default">).<a href="dictionary_F.html#5927">findAll</a>();</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;Size of result set: &quot; </span><span class="default">+ <a href="dictionary_R.html#5929">results</a>.<a href="dictionary_R.html#929">size</a>());</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">    }</span>
+<a name="104"><font size=-1>104     </font></a><span class="default"></span>
+<a name="105"><font size=-1>105     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_R.html#5923">basicLinkQuery</a></span><span class="default">(<a href="dictionary_R.html#855">Realm</a> <a href="dictionary_R.html#5924">realm</a>) {</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;\nPerforming basic Link Query operation...&quot;</span><span class="default">);</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;Number of persons: &quot; </span><span class="default">+ <a href="dictionary_R.html#5924">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#929">size</a>());</span>
+<a name="108"><font size=-1>108     </font></a><span class="default"></span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        <a href="dictionary_R.html#884">RealmResults</a>&lt;<a href="dictionary_M.html#2080">Person</a>&gt; <a href="dictionary_R.html#5925">results</a> = <a href="dictionary_R.html#5924">realm</a>.<a href="dictionary_R.html#1315">where</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#1334">equalTo</a>(</span><span class="string">&quot;cats.name&quot;</span><span class="default">, </span><span class="string">&quot;Tiger&quot;</span><span class="default">).<a href="dictionary_R.html#1316">findAll</a>();</span>
+<a name="110"><font size=-1>110     </font></a><span class="default"></span>
+<a name="111"><font size=-1>111     </font></a><span class="default">        <a href="dictionary_R.html#5956">showStatus</a>(</span><span class="string">&quot;Size of result set: &quot; </span><span class="default">+ <a href="dictionary_R.html#5925">results</a>.<a href="dictionary_R.html#929">size</a>());</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">    }</span>
+<a name="113"><font size=-1>113     </font></a><span class="default"></span>
+<a name="114"><font size=-1>114     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_S.html#51">String</a> <a href="dictionary_R.html#5934">complexReadWrite</a></span><span class="default">() {</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">        <a href="dictionary_S.html#51">String</a> <a href="dictionary_S.html#5944">status</a> = </span><span class="string">&quot;\nPerforming complex Read/Write operation...&quot;</span><span class="default">;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default"></span>
+<a name="117"><font size=-1>117     </font></a><span class="default">        </span><span class="comment">// Open the default realm. All threads must use it's own reference to the realm.</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">        // Those can not be transferred across threads.</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">        <a href="dictionary_R.html#855">Realm</a> <a href="dictionary_R.html#5942">realm</a> </span><span class="default">= <a href="dictionary_R.html#855">Realm</a>.<a href="dictionary_G.html#1908">getInstance</a>(</span><span class="keyword">this</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="120"><font size=-1>120     </font></a><span class="default"></span>
+<a name="121"><font size=-1>121     </font></a><span class="default">        </span><span class="comment">// Add ten persons in one write transaction</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">        <a href="dictionary_R.html#5942">realm</a></span><span class="default">.<a href="dictionary_R.html#1319">beginTransaction</a>();</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">        <a href="dictionary_M.html#2105">Dog</a> <a href="dictionary_F.html#5941">fido</a> = <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1321">createObject</a>(<a href="dictionary_M.html#2105">Dog</a>.</span><span class="keyword">class</span><span class="default">);</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">        <a href="dictionary_F.html#5941">fido</a>.<a href="dictionary_D.html#3685">setName</a>(</span><span class="string">&quot;fido&quot;</span><span class="default">);</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#5937">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#5937">i</a> &lt; </span><span class="number">10</span><span class="default">; i++) {</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">            <a href="dictionary_M.html#2080">Person</a> <a href="dictionary_P.html#5938">person</a> = <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1321">createObject</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">);</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">            <a href="dictionary_P.html#5938">person</a>.<a href="dictionary_P.html#2092">setName</a>(</span><span class="string">&quot;Person no. &quot; </span><span class="default">+ <a href="dictionary_I.html#5937">i</a>);</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">            <a href="dictionary_P.html#5938">person</a>.<a href="dictionary_P.html#2086">setAge</a>(<a href="dictionary_I.html#5937">i</a>);</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">            <a href="dictionary_P.html#5938">person</a>.<a href="dictionary_P.html#2090">setDog</a>(<a href="dictionary_F.html#5941">fido</a>);</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default">            </span><span class="comment">// The field tempReference is annotated with @Ignore.</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">            // This means setTempReference sets the Person tempReference</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">            // field directly. The tempReference is NOT saved as part of</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">            // the RealmObject:</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">            <a href="dictionary_P.html#5938">person</a></span><span class="default">.<a href="dictionary_P.html#2094">setTempReference</a>(</span><span class="number">42</span><span class="default">);</span>
+<a name="136"><font size=-1>136     </font></a><span class="default"></span>
+<a name="137"><font size=-1>137     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_J.html#5936">j</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_J.html#5936">j</a> &lt; <a href="dictionary_I.html#5937">i</a>; j++) {</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">                <a href="dictionary_M.html#2106">Cat</a> <a href="dictionary_C.html#5935">cat</a> = <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1321">createObject</a>(<a href="dictionary_M.html#2106">Cat</a>.</span><span class="keyword">class</span><span class="default">);</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">                <a href="dictionary_C.html#5935">cat</a>.<a href="dictionary_C.html#3545">setName</a>(</span><span class="string">&quot;Cat_&quot; </span><span class="default">+ <a href="dictionary_J.html#5936">j</a>);</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">                <a href="dictionary_P.html#5938">person</a>.<a href="dictionary_P.html#2082">getCats</a>().<a href="dictionary_R.html#4282">add</a>(<a href="dictionary_C.html#5935">cat</a>);</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">            }</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">        }</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">        <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1329">commitTransaction</a>();</span>
+<a name="144"><font size=-1>144     </font></a><span class="default"></span>
+<a name="145"><font size=-1>145     </font></a><span class="default">        </span><span class="comment">// Implicit read transactions allow you to access your objects</span>
+<a name="146"><font size=-1>146     </font></a><span class="comment">        </span><span class="default">status += </span><span class="string">&quot;\nNumber of persons: &quot; </span><span class="default">+ <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#929">size</a>();</span>
+<a name="147"><font size=-1>147     </font></a><span class="default"></span>
+<a name="148"><font size=-1>148     </font></a><span class="default">        </span><span class="comment">// Iterate over all objects</span>
+<a name="149"><font size=-1>149     </font></a><span class="comment">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_M.html#2080">Person</a> <a href="dictionary_P.html#5940">pers</a> : <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">)) {</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">            <a href="dictionary_S.html#51">String</a> <a href="dictionary_D.html#5939">dogName</a>;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_P.html#5940">pers</a>.<a href="dictionary_P.html#2083">getDog</a>() == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">                <a href="dictionary_D.html#5939">dogName</a> = </span><span class="string">&quot;None&quot;</span><span class="default">;</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">            } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">                <a href="dictionary_D.html#5939">dogName</a> = <a href="dictionary_P.html#5940">pers</a>.<a href="dictionary_P.html#2083">getDog</a>().<a href="dictionary_D.html#3684">getName</a>();</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">            }</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">            status += </span><span class="string">&quot;\n&quot; </span><span class="default">+ <a href="dictionary_P.html#5940">pers</a>.<a href="dictionary_P.html#2084">getName</a>() + </span><span class="string">&quot;:&quot; </span><span class="default">+ <a href="dictionary_P.html#5940">pers</a>.<a href="dictionary_P.html#2081">getAge</a>() + </span><span class="string">&quot; : &quot; </span><span class="default">+ <a href="dictionary_D.html#5939">dogName</a> + </span><span class="string">&quot; : &quot; </span><span class="default">+ <a href="dictionary_P.html#5940">pers</a>.<a href="dictionary_P.html#2082">getCats</a>().<a href="dictionary_R.html#4297">size</a>();</span>
+<a name="157"><font size=-1>157     </font></a><span class="default"></span>
+<a name="158"><font size=-1>158     </font></a><span class="default">            </span><span class="comment">// The field tempReference is annotated with @Ignore</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment">            // Though we initially set its value to 42, it has</span>
+<a name="160"><font size=-1>160     </font></a><span class="comment">            // not been saved as part of the Person RealmObject:</span>
+<a name="161"><font size=-1>161     </font></a><span class="comment">            </span><span class="default">assert(<a href="dictionary_P.html#5940">pers</a>.<a href="dictionary_P.html#2085">getTempReference</a>() == </span><span class="number">0</span><span class="default">);</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">        }</span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span>
+<a name="164"><font size=-1>164     </font></a><span class="default">        </span><span class="comment">// Sorting</span>
+<a name="165"><font size=-1>165     </font></a><span class="comment">        <a href="dictionary_R.html#884">RealmResults</a></span><span class="default">&lt;<a href="dictionary_M.html#2080">Person</a>&gt; <a href="dictionary_S.html#5943">sortedPersons</a> = <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#933">sort</a>(</span><span class="string">&quot;age&quot;</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">        assert(<a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#911">last</a>().<a href="dictionary_G.html#32">getName</a>() == <a href="dictionary_S.html#5943">sortedPersons</a>.<a href="dictionary_R.html#904">first</a>().<a href="dictionary_P.html#2084">getName</a>());</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">        status += </span><span class="string">&quot;\nSorting &quot; </span><span class="default">+ <a href="dictionary_S.html#5943">sortedPersons</a>.<a href="dictionary_R.html#911">last</a>().<a href="dictionary_P.html#2084">getName</a>() + </span><span class="string">&quot; == &quot; </span><span class="default">+ <a href="dictionary_R.html#5942">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#904">first</a>().<a href="dictionary_G.html#32">getName</a>();</span>
+<a name="168"><font size=-1>168     </font></a><span class="default"></span>
+<a name="169"><font size=-1>169     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_S.html#5944">status</a></span><span class="default">;</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">    }</span>
+<a name="171"><font size=-1>171     </font></a><span class="default"></span>
+<a name="172"><font size=-1>172     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_S.html#51">String</a> <a href="dictionary_R.html#5930">complexQuery</a></span><span class="default">() {</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">        <a href="dictionary_S.html#51">String</a> <a href="dictionary_S.html#5933">status</a> = </span><span class="string">&quot;\n\nPerforming complex Query operation...&quot;</span><span class="default">;</span>
+<a name="174"><font size=-1>174     </font></a><span class="default"></span>
+<a name="175"><font size=-1>175     </font></a><span class="default">        <a href="dictionary_R.html#855">Realm</a> <a href="dictionary_R.html#5931">realm</a> = <a href="dictionary_R.html#855">Realm</a>.<a href="dictionary_G.html#1908">getInstance</a>(</span><span class="keyword">this</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">        status += </span><span class="string">&quot;\nNumber of persons: &quot; </span><span class="default">+ <a href="dictionary_R.html#5931">realm</a>.<a href="dictionary_R.html#1320">allObjects</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">).<a href="dictionary_R.html#929">size</a>();</span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span>
+<a name="178"><font size=-1>178     </font></a><span class="default">        </span><span class="comment">// Find all persons where age between 7 and 9 and name begins with &quot;Person&quot;.</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">        <a href="dictionary_R.html#884">RealmResults</a></span><span class="default">&lt;<a href="dictionary_M.html#2080">Person</a>&gt; <a href="dictionary_R.html#5932">results</a> = <a href="dictionary_R.html#5931">realm</a>.<a href="dictionary_R.html#1315">where</a>(<a href="dictionary_M.html#2080">Person</a>.</span><span class="keyword">class</span><span class="default">)</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">                .<a href="dictionary_R.html#5962">between</a>(</span><span class="string">&quot;age&quot;</span><span class="default">, </span><span class="number">7</span><span class="default">, </span><span class="number">9</span><span class="default">)       </span><span class="comment">// Notice implicit &quot;and&quot; operation</span>
+<a name="181"><font size=-1>181     </font></a><span class="comment">                </span><span class="default">.<a href="dictionary_R.html#5963">beginsWith</a>(</span><span class="string">&quot;name&quot;</span><span class="default">, </span><span class="string">&quot;Person&quot;</span><span class="default">).<a href="dictionary_R.html#1316">findAll</a>();</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">        status += </span><span class="string">&quot;\nSize of result set: &quot; </span><span class="default">+ <a href="dictionary_R.html#5932">results</a>.<a href="dictionary_R.html#929">size</a>();</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_S.html#5933">status</a></span><span class="default">;</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">    }</span>
+<a name="185"><font size=-1>185     </font></a><span class="default"></span>
+<a name="186"><font size=-1>186     </font></a><span class="default"></span>
+<a name="187"><font size=-1>187     </font></a><span class="default">    </span><span class="comment">// ------------------------------------------------------------------------</span>
+<a name="188"><font size=-1>188     </font></a><span class="comment">    // Non Realm</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment"></span>
+<a name="190"><font size=-1>190     </font></a><span class="comment">    </span><span class="keyword">public static final <a href="dictionary_S.html#51">String</a> <a href="dictionary_R.html#5959">TAG</a> </span><span class="default">= <a href="dictionary_I.html#5919">RealmIntroExampleActivity</a>.</span><span class="keyword">class</span><span class="default">.<a href="dictionary_G.html#32">getName</a>();</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_W.html#4919">LinearLayout</a> <a href="dictionary_R.html#5960">rootLayout</a> </span><span class="default">= </span><span class="keyword">null</span><span class="default">;</span>
+<a name="192"><font size=-1>192     </font></a><span class="default"></span>
+<a name="193"><font size=-1>193     </font></a><span class="default">    @<a href="dictionary_O.html#50">Override</a></span>
+<a name="194"><font size=-1>194     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_R.html#5945">onCreate</a></span><span class="default">(<a href="dictionary_O.html#1753">Bundle</a> <a href="dictionary_S.html#5946">savedInstanceState</a>) {</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_O.html#1778">onCreate</a>(<a href="dictionary_S.html#5946">savedInstanceState</a>);</span>
+<a name="196"><font size=-1>196     </font></a><span class="default">        <a href="dictionary_S.html#1779">setContentView</a>(R.layout.activity_realm_basic_example);</span>
+<a name="197"><font size=-1>197     </font></a><span class="default">        <a href="dictionary_R.html#5960">rootLayout</a> = ((LinearLayout) <a href="dictionary_F.html#34">findViewById</a>(R.id.container));</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">        <a href="dictionary_R.html#5960">rootLayout</a>.<a href="dictionary_R.html#4983">removeAllViews</a>();</span>
+<a name="199"><font size=-1>199     </font></a><span class="default"></span>
+<a name="200"><font size=-1>200     </font></a><span class="default">        <a href="dictionary_R.html#5947">realmExamples</a>();</span>
+<a name="201"><font size=-1>201     </font></a><span class="default">    }</span>
+<a name="202"><font size=-1>202     </font></a><span class="default"></span>
+<a name="203"><font size=-1>203     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_R.html#5956">showStatus</a></span><span class="default">(<a href="dictionary_S.html#51">String</a> <a href="dictionary_T.html#5958">txt</a>) {</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">        <a href="dictionary_U.html#1453">Log</a>.<a href="dictionary_I.html#1955">i</a>(<a href="dictionary_R.html#5959">TAG</a>, <a href="dictionary_T.html#5958">txt</a>);</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">        <a href="dictionary_W.html#52">TextView</a> <a href="dictionary_T.html#5957">tv</a> = </span><span class="keyword">new <a href="dictionary_W.html#52">TextView</a></span><span class="default">(</span><span class="keyword">this</span><span class="default">);</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">        <a href="dictionary_T.html#5957">tv</a>.<a href="dictionary_S.html#36">setText</a>(<a href="dictionary_T.html#5958">txt</a>);</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">        <a href="dictionary_R.html#5960">rootLayout</a>.<a href="dictionary_A.html#4929">addView</a>(<a href="dictionary_T.html#5957">tv</a>);</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">    }</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">}</span>
+<a name="210"><font size=-1>210     </font></a><span class="default"></span>
+</pre></body></html>

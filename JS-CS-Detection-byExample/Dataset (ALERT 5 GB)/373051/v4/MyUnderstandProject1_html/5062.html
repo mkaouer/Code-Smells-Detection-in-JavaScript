@@ -1,0 +1,849 @@
+<html><head><title>Realm.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\wmohsen\Downloads\v4\realm-java-0.73.0\realm\src\main\java\io\realm\Realm.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\wmohsen\\Downloads\\v4\\realm-java-0.73.0\\realm\\src\\main\\java\\io\\realm\\Realm.java";
+top.document.title  = "Realm.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 2014 Realm Inc.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * you may not use this file except in compliance with the License.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * You may obtain a copy of the License at</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * See the License for the specific language governing permissions and</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * limitations under the License.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> */</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">io.<a href="dictionary_I.html#327">realm</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#320">content</a>.<a href="dictionary_C.html#290">Context</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1448">os</a>.<a href="dictionary_O.html#5068">Handler</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1448">os</a>.<a href="dictionary_O.html#5072">Looper</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#1448">os</a>.<a href="dictionary_O.html#5073">Message</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#355">util</a>.<a href="dictionary_U.html#352">Log</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#354">io</a>.<a href="dictionary_I.html#350">File</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.lang.<a href="dictionary_L.html#5286">reflect</a>.<a href="dictionary_R.html#5066">Constructor</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.lang.<a href="dictionary_L.html#5286">reflect</a>.<a href="dictionary_R.html#5071">InvocationTargetException</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.lang.<a href="dictionary_L.html#5286">reflect</a>.<a href="dictionary_R.html#5074">Method</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#416">util</a>.<a href="dictionary_U.html#1025">ArrayList</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#416">util</a>.<a href="dictionary_U.html#1351">Arrays</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#416">util</a>.<a href="dictionary_U.html#1694">HashMap</a>;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#416">util</a>.<a href="dictionary_U.html#1026">List</a>;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#416">util</a>.<a href="dictionary_U.html#1696">Map</a>;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#5285">concurrent</a>.<a href="dictionary_C.html#5065">ConcurrentHashMap</a>;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#3243">exceptions</a>.<a href="dictionary_E.html#3242">RealmException</a>;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#3243">exceptions</a>.<a href="dictionary_E.html#4793">RealmIOException</a>;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#3243">exceptions</a>.<a href="dictionary_E.html#5037">RealmMigrationNeededException</a>;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#46">internal</a>.<a href="dictionary_I.html#378">ColumnType</a>;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#46">internal</a>.<a href="dictionary_I.html#2779">ImplicitTransaction</a>;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#46">internal</a>.<a href="dictionary_I.html#5287">Row</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#46">internal</a>.<a href="dictionary_I.html#1619">SharedGroup</a>;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">io.realm.<a href="dictionary_R.html#46">internal</a>.<a href="dictionary_I.html#376">Table</a>;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * &lt;p&gt;The Realm class is the storage and transactional manager of your object persistent store. Objects</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> * are created. Objects within a Realm can be queried and read at any time. Creating,</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"> * modifying, and deleting objects must be done through transactions.&lt;/p&gt;</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"> *</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> * &lt;p&gt;The transactions ensure that multiple instances (on multiple threads) can access the objects</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> * in a consistent state with full ACID guaranties.&lt;/p&gt;</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> *</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"> * &lt;p&gt;If auto-refresh is set the instance of the Realm will be automatically updated when another instance commits a</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"> * change (create, modify or delete an object). This feature requires the Realm instance to be residing in a</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment"> * thread attached to a Looper (the main thread has a Looper by default)&lt;/p&gt;</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"> *</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment"> *&lt;p&gt;For normal threads Android provides a utility class that can be used like this:&lt;/p&gt;</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment"> *</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"> * &lt;pre&gt;</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment"> * HandlerThread thread = new HandlerThread(&quot;MyThread&quot;) {</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"> *    @Override</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"> *    protected void onLooperPrepared() {</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment"> *       Realm realm = Realm.getInstance(getContext());</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"> *       // This realm will be updated by the event loop</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"> *       // on every commit performed by other realm instances</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"> *    }</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment"> * };</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment"> * thread.start();</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"> * &lt;/pre&gt;</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"> */</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_R.html#357">Realm</a> </span><span class="default">{</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    </span><span class="keyword">public static final <a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a> </span><span class="default">= </span><span class="string">&quot;default.realm&quot;</span><span class="default">;</span>
+<a name="74"><font size=-1>74     </font></a><span class="default"></span>
+<a name="75"><font size=-1>75     </font></a><span class="default">    </span><span class="keyword">private static final <a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5264">TAG</a> </span><span class="default">= </span><span class="string">&quot;REALM&quot;</span><span class="default">;</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    </span><span class="keyword">private static final <a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5263">TABLE_PREFIX</a> </span><span class="default">= </span><span class="string">&quot;class_&quot;</span><span class="default">;</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">    </span><span class="keyword">private static final <a href="dictionary_T.html#5282">ThreadLocal</a></span><span class="default">&lt;<a href="dictionary_U.html#1696">Map</a>&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_R.html#357">Realm</a>&gt;&gt; <a href="dictionary_R.html#5277">realmsCache</a> = </span><span class="keyword">new <a href="dictionary_T.html#5282">ThreadLocal</a></span><span class="default">&lt;Map&lt;String, Realm&gt;&gt;() {</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">        @<a href="dictionary_O.html#316">Override</a></span>
+<a name="79"><font size=-1>79     </font></a><span class="default">        </span><span class="keyword">protected <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_R.html#357">Realm</a>&gt; <a href="dictionary_Non-Alpha.html#5077">initialValue</a>() {</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">            </span><span class="keyword">return new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_R.html#357">Realm</a>&gt;();</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">        }</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">    };</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">    </span><span class="keyword">private static final int <a href="dictionary_R.html#5262">REALM_CHANGED</a> </span><span class="default">= </span><span class="number">14930352</span><span class="default">; </span><span class="comment">// Just a nice big Fibonacci number. For no reason :)</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">    </span><span class="keyword">private static final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_O.html#5068">Handler</a>, <a href="dictionary_I.html#1695">Integer</a>&gt; <a href="dictionary_R.html#5274">handlers</a> = </span><span class="keyword">new <a href="dictionary_C.html#5065">ConcurrentHashMap</a></span><span class="default">&lt;<a href="dictionary_O.html#5068">Handler</a>, <a href="dictionary_I.html#1695">Integer</a>&gt;();</span>
+<a name="85"><font size=-1>85     </font></a><span class="default"></span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    @<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">    </span><span class="keyword">private static <a href="dictionary_I.html#1619">SharedGroup</a></span><span class="default">.<a href="dictionary_S.html#2679">Durability</a> <a href="dictionary_R.html#5270">defaultDurability</a> = <a href="dictionary_I.html#1619">SharedGroup</a>.<a href="dictionary_S.html#2679">Durability</a>.<a href="dictionary_D.html#2685">FULL</a>;</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_R.html#5266">autoRefresh</a></span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_O.html#5068">Handler</a> <a href="dictionary_R.html#5273">handler</a></span><span class="default">;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    </span><span class="keyword">private final int <a href="dictionary_R.html#5275">id</a></span><span class="default">;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_I.html#1619">SharedGroup</a> <a href="dictionary_R.html#5278">sharedGroup</a></span><span class="default">;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_I.html#2779">ImplicitTransaction</a> <a href="dictionary_R.html#5281">transaction</a></span><span class="default">;</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_S.html#43">String</a>&gt; <a href="dictionary_R.html#5279">simpleClassNames</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_S.html#43">String</a>&gt;();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_C.html#1693">Class</a>&lt;?&gt;&gt; <a href="dictionary_R.html#5271">generatedClasses</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_C.html#1693">Class</a>&lt;?&gt;&gt;();</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_R.html#5066">Constructor</a>&gt; <a href="dictionary_R.html#5269">constructors</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_R.html#5066">Constructor</a>&gt;();</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_R.html#5074">Method</a>&gt; <a href="dictionary_R.html#5276">initTableMethods</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_R.html#5074">Method</a>&gt;();</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_R.html#5066">Constructor</a>&gt; <a href="dictionary_R.html#5272">generatedConstructors</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_R.html#5066">Constructor</a>&gt;();</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1026">List</a></span><span class="default">&lt;<a href="dictionary_R.html#4269">RealmChangeListener</a>&gt; <a href="dictionary_R.html#5267">changeListeners</a> = </span><span class="keyword">new <a href="dictionary_U.html#1025">ArrayList</a></span><span class="default">&lt;<a href="dictionary_R.html#4269">RealmChangeListener</a>&gt;();</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_I.html#376">Table</a>&gt; <a href="dictionary_R.html#5280">tables</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_C.html#1693">Class</a>&lt;?&gt;, <a href="dictionary_I.html#376">Table</a>&gt;();</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">    </span><span class="keyword">private static final long <a href="dictionary_R.html#5265">UNVERSIONED</a> </span><span class="default">= -</span><span class="number">1</span><span class="default">;</span>
+<a name="102"><font size=-1>102     </font></a><span class="default"></span>
+<a name="103"><font size=-1>103     </font></a><span class="default">    </span><span class="comment">// Package protected to be reachable by proxy classes</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">    </span><span class="keyword">static final <a href="dictionary_U.html#1696">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_U.html#1696">Map</a>&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_L.html#2648">Long</a>&gt;&gt; <a href="dictionary_R.html#5268">columnIndices</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_U.html#1696">Map</a>&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_L.html#2648">Long</a>&gt;&gt;();</span>
+<a name="105"><font size=-1>105     </font></a><span class="default"></span>
+<a name="106"><font size=-1>106     </font></a><span class="default">    </span><span class="comment">// The constructor in private to enforce the use of the static one</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_R.html#5082">Realm</a></span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_A.html#5083">absolutePath</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5085">key</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5084">autoRefresh</a></span><span class="default">) {</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_R.html#5278">sharedGroup</a> = </span><span class="keyword">new <a href="dictionary_S.html#2690">SharedGroup</a></span><span class="default">(<a href="dictionary_A.html#5083">absolutePath</a>, </span><span class="keyword">true</span><span class="default">, <a href="dictionary_K.html#5085">key</a>);</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_R.html#5281">transaction</a> = <a href="dictionary_R.html#5278">sharedGroup</a>.<a href="dictionary_S.html#2703">beginImplicitTransaction</a>();</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_R.html#5275">id</a> = <a href="dictionary_A.html#5083">absolutePath</a>.<a href="dictionary_H.html#1037">hashCode</a>();</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">        <a href="dictionary_R.html#5253">setAutoRefresh</a>(<a href="dictionary_A.html#5084">autoRefresh</a>);</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">    }</span>
+<a name="113"><font size=-1>113     </font></a><span class="default"></span>
+<a name="114"><font size=-1>114     </font></a><span class="default">    @<a href="dictionary_O.html#316">Override</a></span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    </span><span class="keyword">protected void <a href="dictionary_R.html#5174">finalize</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_T.html#45">Throwable</a> </span><span class="default">{</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">        <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_I.html#5296">endRead</a>();</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_F.html#5175">finalize</a>();</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">    }</span>
+<a name="119"><font size=-1>119     </font></a><span class="default"></span>
+<a name="120"><font size=-1>120     </font></a><span class="default">    </span><span class="keyword">private class <a href="dictionary_R.html#5078">RealmCallback</a> implements <a href="dictionary_H.html#5283">Handler</a></span><span class="default">.<a href="dictionary_H.html#5063">Callback</a> {</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">        @<a href="dictionary_O.html#316">Override</a></span>
+<a name="122"><font size=-1>122     </font></a><span class="default">        </span><span class="keyword">public boolean <a href="dictionary_R.html#5079">handleMessage</a></span><span class="default">(<a href="dictionary_O.html#5073">Message</a> <a href="dictionary_M.html#5080">message</a>) {</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#5080">message</a>.<a href="dictionary_W.html#5081">what</a> == <a href="dictionary_R.html#5262">REALM_CHANGED</a>) {</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">                <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_I.html#5288">advanceRead</a>();</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">                <a href="dictionary_R.html#5251">sendNotifications</a>();</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">            }</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">            </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">        }</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">    }</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">     * Retrieve the auto-refresh status of the Realm instance</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     * @return the auto-refresh status</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     */</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_R.html#5225">isAutoRefresh</a></span><span class="default">() {</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5266">autoRefresh</a></span><span class="default">;</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">    }</span>
+<a name="138"><font size=-1>138     </font></a><span class="default"></span>
+<a name="139"><font size=-1>139     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="140"><font size=-1>140     </font></a><span class="comment">     * Set the auto-refresh status of the Realm instance</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">     *</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">     * Auto-refresh is a feature to allows to automatically update the current realm instance and all its derived objects</span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">     * (RealmResults and RealmObjects instances) when a commit is performed on a Realm acting on the same file in another thread.</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">     * This feature is only available if the realm instance lives is a {@link android.os.Looper} enabled thread.</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">     *</span>
+<a name="146"><font size=-1>146     </font></a><span class="comment">     * @param autoRefresh true will turn auto-refresh on, false will turn it off</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">     * @throws java.lang.IllegalStateException if trying to enable auto-refresh in a thread without Looper</span>
+<a name="148"><font size=-1>148     </font></a><span class="comment">     */</span>
+<a name="149"><font size=-1>149     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#5253">setAutoRefresh</a></span><span class="default">(</span><span class="keyword">boolean <a href="dictionary_A.html#5256">autoRefresh</a></span><span class="default">) {</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_A.html#5256">autoRefresh</a> &amp;&amp; <a href="dictionary_O.html#5072">Looper</a>.<a href="dictionary_M.html#5254">myLooper</a>() == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_I.html#471">IllegalStateException</a></span><span class="default">(</span><span class="string">&quot;Cannot set auto-refresh in a Thread without a Looper&quot;</span><span class="default">);</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">        }</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+<a name="154"><font size=-1>154     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_A.html#5256">autoRefresh</a> &amp;&amp; !</span><span class="keyword">this</span><span class="default">.<a href="dictionary_R.html#5266">autoRefresh</a>) { </span><span class="comment">// Switch it on</span>
+<a name="155"><font size=-1>155     </font></a><span class="comment">            <a href="dictionary_R.html#5273">handler</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_O.html#5068">Handler</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_R.html#5078">RealmCallback</a></span><span class="default">());</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">            <a href="dictionary_R.html#5274">handlers</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_R.html#5273">handler</a>, <a href="dictionary_R.html#5275">id</a>);</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">        } </span><span class="keyword">else if </span><span class="default">(!<a href="dictionary_A.html#5256">autoRefresh</a> &amp;&amp; </span><span class="keyword">this</span><span class="default">.<a href="dictionary_R.html#5266">autoRefresh</a> &amp;&amp; <a href="dictionary_R.html#5273">handler</a> != </span><span class="keyword">null</span><span class="default">) { </span><span class="comment">// Switch it off</span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">            <a href="dictionary_R.html#5273">handler</a></span><span class="default">.<a href="dictionary_R.html#5255">removeCallbacksAndMessages</a>(</span><span class="keyword">null</span><span class="default">);</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">            <a href="dictionary_R.html#5274">handlers</a>.<a href="dictionary_R.html#4692">remove</a>(<a href="dictionary_R.html#5273">handler</a>);</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">        }</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_R.html#5266">autoRefresh</a> = <a href="dictionary_A.html#5256">autoRefresh</a>;</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">    }</span>
+<a name="163"><font size=-1>163     </font></a><span class="default"></span>
+<a name="164"><font size=-1>164     </font></a><span class="default"></span><span class="comment">//    public static void setDefaultDurability(SharedGroup.Durability durability) {</span>
+<a name="165"><font size=-1>165     </font></a><span class="comment">//        defaultDurability = durability;</span>
+<a name="166"><font size=-1>166     </font></a><span class="comment">//    }</span>
+<a name="167"><font size=-1>167     </font></a><span class="comment"></span>
+<a name="168"><font size=-1>168     </font></a><span class="comment">    // Public because of migrations</span>
+<a name="169"><font size=-1>169     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_I.html#376">Table</a> <a href="dictionary_R.html#1306">getTable</a></span><span class="default">(<a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_C.html#5221">clazz</a>) {</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">        <a href="dictionary_S.html#43">String</a> <a href="dictionary_S.html#5222">simpleClassName</a> = <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5221">clazz</a>);</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#5222">simpleClassName</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">            <a href="dictionary_S.html#5222">simpleClassName</a> = <a href="dictionary_C.html#5221">clazz</a>.<a href="dictionary_G.html#2994">getSimpleName</a>();</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">            <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5221">clazz</a>, <a href="dictionary_S.html#5222">simpleClassName</a>);</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">        }</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5281">transaction</a></span><span class="default">.<a href="dictionary_G.html#4900">getTable</a>(<a href="dictionary_R.html#5263">TABLE_PREFIX</a> + <a href="dictionary_S.html#5222">simpleClassName</a>);</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">    }</span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span>
+<a name="178"><font size=-1>178     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">     * Realm static constructor for the default realm &quot;default.realm&quot;</span>
+<a name="180"><font size=-1>180     </font></a><span class="comment">     *</span>
+<a name="181"><font size=-1>181     </font></a><span class="comment">     * It sets auto-refresh on</span>
+<a name="182"><font size=-1>182     </font></a><span class="comment">     *</span>
+<a name="183"><font size=-1>183     </font></a><span class="comment">     * @param context an Android {@link android.content.Context}</span>
+<a name="184"><font size=-1>184     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="185"><font size=-1>185     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="186"><font size=-1>186     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="187"><font size=-1>187     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="188"><font size=-1>188     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated in a Thread without</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment">     *                                         a {@link android.os.Looper}</span>
+<a name="190"><font size=-1>190     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="191"><font size=-1>191     </font></a><span class="comment">     */</span>
+<a name="192"><font size=-1>192     </font></a><span class="comment">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#362">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5194">context</a>) {</span>
+<a name="193"><font size=-1>193     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5212">getInstance</a>(<a href="dictionary_C.html#5194">context</a>, <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a>, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">    }</span>
+<a name="195"><font size=-1>195     </font></a><span class="default"></span>
+<a name="196"><font size=-1>196     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="197"><font size=-1>197     </font></a><span class="comment">     * Realm static constructor for the default realm &quot;default.realm&quot;</span>
+<a name="198"><font size=-1>198     </font></a><span class="comment">     *</span>
+<a name="199"><font size=-1>199     </font></a><span class="comment">     * @param context an Android context</span>
+<a name="200"><font size=-1>200     </font></a><span class="comment">     * @param autoRefresh whether the Realm object and its derived objects (RealmResults and RealmObjects)</span>
+<a name="201"><font size=-1>201     </font></a><span class="comment">     *                    should be automatically refreshed with the event loop (requires to be in a thread with a Looper)</span>
+<a name="202"><font size=-1>202     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="203"><font size=-1>203     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="204"><font size=-1>204     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="205"><font size=-1>205     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="206"><font size=-1>206     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated with auto-refresh</span>
+<a name="207"><font size=-1>207     </font></a><span class="comment">     *                                         in a Thread without a {@link android.os.Looper}</span>
+<a name="208"><font size=-1>208     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="209"><font size=-1>209     </font></a><span class="comment">     */</span>
+<a name="210"><font size=-1>210     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5195">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5197">context</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5196">autoRefresh</a></span><span class="default">) {</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5212">getInstance</a>(<a href="dictionary_C.html#5197">context</a>, <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_A.html#5196">autoRefresh</a>);</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">    }</span>
+<a name="214"><font size=-1>214     </font></a><span class="default"></span>
+<a name="215"><font size=-1>215     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="216"><font size=-1>216     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="217"><font size=-1>217     </font></a><span class="comment">     *</span>
+<a name="218"><font size=-1>218     </font></a><span class="comment">     * It sets auto-refresh on</span>
+<a name="219"><font size=-1>219     </font></a><span class="comment">     *</span>
+<a name="220"><font size=-1>220     </font></a><span class="comment">     * @param context  an Android {@link android.content.Context}</span>
+<a name="221"><font size=-1>221     </font></a><span class="comment">     * @param fileName the name of the file to save the Realm to</span>
+<a name="222"><font size=-1>222     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="223"><font size=-1>223     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="224"><font size=-1>224     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="225"><font size=-1>225     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="226"><font size=-1>226     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated in a Thread without</span>
+<a name="227"><font size=-1>227     </font></a><span class="comment">     *                                         a {@link android.os.Looper}</span>
+<a name="228"><font size=-1>228     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="229"><font size=-1>229     </font></a><span class="comment">     */</span>
+<a name="230"><font size=-1>230     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="231"><font size=-1>231     </font></a><span class="default">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5198">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5199">context</a>, <a href="dictionary_S.html#43">String</a> <a href="dictionary_F.html#5200">fileName</a>) {</span>
+<a name="232"><font size=-1>232     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5103">create</a>(<a href="dictionary_C.html#5199">context</a>.<a href="dictionary_G.html#4572">getFilesDir</a>(), <a href="dictionary_F.html#5200">fileName</a>, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="233"><font size=-1>233     </font></a><span class="default">    }</span>
+<a name="234"><font size=-1>234     </font></a><span class="default"></span>
+<a name="235"><font size=-1>235     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="236"><font size=-1>236     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="237"><font size=-1>237     </font></a><span class="comment">     *</span>
+<a name="238"><font size=-1>238     </font></a><span class="comment">     * @param context  an Android context</span>
+<a name="239"><font size=-1>239     </font></a><span class="comment">     * @param fileName the name of the file to save the Realm to</span>
+<a name="240"><font size=-1>240     </font></a><span class="comment">     * @param autoRefresh whether the Realm object and its derived objects (RealmResults and RealmObjects)</span>
+<a name="241"><font size=-1>241     </font></a><span class="comment">     *                    should be automatically refreshed with the event loop (requires to be in a thread with a Looper)</span>
+<a name="242"><font size=-1>242     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="243"><font size=-1>243     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="244"><font size=-1>244     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="245"><font size=-1>245     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="246"><font size=-1>246     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated with auto-refresh</span>
+<a name="247"><font size=-1>247     </font></a><span class="comment">     *                                         in a Thread without a {@link android.os.Looper}</span>
+<a name="248"><font size=-1>248     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="249"><font size=-1>249     </font></a><span class="comment">     */</span>
+<a name="250"><font size=-1>250     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="251"><font size=-1>251     </font></a><span class="default">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5201">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5203">context</a>, <a href="dictionary_S.html#43">String</a> <a href="dictionary_F.html#5204">fileName</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5202">autoRefresh</a></span><span class="default">) {</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5103">create</a>(<a href="dictionary_C.html#5203">context</a>.<a href="dictionary_G.html#4572">getFilesDir</a>(), <a href="dictionary_F.html#5204">fileName</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_A.html#5202">autoRefresh</a>);</span>
+<a name="253"><font size=-1>253     </font></a><span class="default">    }</span>
+<a name="254"><font size=-1>254     </font></a><span class="default"></span>
+<a name="255"><font size=-1>255     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="256"><font size=-1>256     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="257"><font size=-1>257     </font></a><span class="comment">     *</span>
+<a name="258"><font size=-1>258     </font></a><span class="comment">     * @param context an Android context</span>
+<a name="259"><font size=-1>259     </font></a><span class="comment">     * @param key     a 32-byte encryption key</span>
+<a name="260"><font size=-1>260     </font></a><span class="comment">     * @param autoRefresh whether the Realm object and its derived objects (RealmResults and RealmObjects)</span>
+<a name="261"><font size=-1>261     </font></a><span class="comment">     *                    should be automatically refreshed with the event loop (requires to be in a thread with a Looper)</span>
+<a name="262"><font size=-1>262     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="263"><font size=-1>263     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="264"><font size=-1>264     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="265"><font size=-1>265     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="266"><font size=-1>266     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated with auto-refresh</span>
+<a name="267"><font size=-1>267     </font></a><span class="comment">     *                                         in a Thread without a {@link android.os.Looper}</span>
+<a name="268"><font size=-1>268     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="269"><font size=-1>269     </font></a><span class="comment">     */</span>
+<a name="270"><font size=-1>270     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="271"><font size=-1>271     </font></a><span class="default">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5205">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5207">context</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5208">key</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5206">autoRefresh</a></span><span class="default">) {</span>
+<a name="272"><font size=-1>272     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5212">getInstance</a>(<a href="dictionary_C.html#5207">context</a>, <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a>, <a href="dictionary_K.html#5208">key</a>, <a href="dictionary_A.html#5206">autoRefresh</a>);</span>
+<a name="273"><font size=-1>273     </font></a><span class="default">    }</span>
+<a name="274"><font size=-1>274     </font></a><span class="default"></span>
+<a name="275"><font size=-1>275     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="276"><font size=-1>276     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="277"><font size=-1>277     </font></a><span class="comment">     *</span>
+<a name="278"><font size=-1>278     </font></a><span class="comment">     * It sets auto-refresh on</span>
+<a name="279"><font size=-1>279     </font></a><span class="comment">     *</span>
+<a name="280"><font size=-1>280     </font></a><span class="comment">     * @param context an Android {@link android.content.Context}</span>
+<a name="281"><font size=-1>281     </font></a><span class="comment">     * @param key     a 32-byte encryption key</span>
+<a name="282"><font size=-1>282     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="283"><font size=-1>283     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="284"><font size=-1>284     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="285"><font size=-1>285     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="286"><font size=-1>286     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated in a Thread without</span>
+<a name="287"><font size=-1>287     </font></a><span class="comment">     *                                         a {@link android.os.Looper}</span>
+<a name="288"><font size=-1>288     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="289"><font size=-1>289     </font></a><span class="comment">     */</span>
+<a name="290"><font size=-1>290     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="291"><font size=-1>291     </font></a><span class="default">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5209">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5210">context</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5211">key</a>) {</span>
+<a name="292"><font size=-1>292     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5212">getInstance</a>(<a href="dictionary_C.html#5210">context</a>, <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a>, <a href="dictionary_K.html#5211">key</a>, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="293"><font size=-1>293     </font></a><span class="default">    }</span>
+<a name="294"><font size=-1>294     </font></a><span class="default"></span>
+<a name="295"><font size=-1>295     </font></a><span class="default"></span>
+<a name="296"><font size=-1>296     </font></a><span class="default"></span>
+<a name="297"><font size=-1>297     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="298"><font size=-1>298     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="299"><font size=-1>299     </font></a><span class="comment">     *</span>
+<a name="300"><font size=-1>300     </font></a><span class="comment">     * @param context  an Android {@link android.content.Context}</span>
+<a name="301"><font size=-1>301     </font></a><span class="comment">     * @param fileName the name of the file to save the Realm to</span>
+<a name="302"><font size=-1>302     </font></a><span class="comment">     * @param key      a 32-byte encryption key</span>
+<a name="303"><font size=-1>303     </font></a><span class="comment">     * @param autoRefresh whether the Realm object and its derived objects (RealmResults and RealmObjects)</span>
+<a name="304"><font size=-1>304     </font></a><span class="comment">     *                    should be automatically refreshed with the event loop (requires to be in a thread with a Looper)</span>
+<a name="305"><font size=-1>305     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="306"><font size=-1>306     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="307"><font size=-1>307     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="308"><font size=-1>308     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="309"><font size=-1>309     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated in a Thread without</span>
+<a name="310"><font size=-1>310     </font></a><span class="comment">     *                                         a {@link android.os.Looper}</span>
+<a name="311"><font size=-1>311     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="312"><font size=-1>312     </font></a><span class="comment">     */</span>
+<a name="313"><font size=-1>313     </font></a><span class="comment">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5212">getInstance</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5214">context</a>, <a href="dictionary_S.html#43">String</a> <a href="dictionary_F.html#5215">fileName</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5216">key</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5213">autoRefresh</a></span><span class="default">) {</span>
+<a name="314"><font size=-1>314     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5103">create</a>(<a href="dictionary_C.html#5214">context</a>.<a href="dictionary_G.html#4572">getFilesDir</a>(), <a href="dictionary_F.html#5215">fileName</a>, <a href="dictionary_K.html#5216">key</a>, <a href="dictionary_A.html#5213">autoRefresh</a>);</span>
+<a name="315"><font size=-1>315     </font></a><span class="default">    }</span>
+<a name="316"><font size=-1>316     </font></a><span class="default"></span>
+<a name="317"><font size=-1>317     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="318"><font size=-1>318     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="319"><font size=-1>319     </font></a><span class="comment">     *</span>
+<a name="320"><font size=-1>320     </font></a><span class="comment">     * @param writableFolder absolute path to a writable directory</span>
+<a name="321"><font size=-1>321     </font></a><span class="comment">     * @param key            a 32-byte encryption key</span>
+<a name="322"><font size=-1>322     </font></a><span class="comment">     * @param autoRefresh whether the Realm object and its derived objects (RealmResults and RealmObjects)</span>
+<a name="323"><font size=-1>323     </font></a><span class="comment">     *                    should be automatically refreshed with the event loop (requires to be in a thread with a Looper)</span>
+<a name="324"><font size=-1>324     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="325"><font size=-1>325     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="326"><font size=-1>326     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="327"><font size=-1>327     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="328"><font size=-1>328     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated in a Thread without</span>
+<a name="329"><font size=-1>329     </font></a><span class="comment">     *                                         a {@link android.os.Looper}</span>
+<a name="330"><font size=-1>330     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="331"><font size=-1>331     </font></a><span class="comment">     */</span>
+<a name="332"><font size=-1>332     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="333"><font size=-1>333     </font></a><span class="default">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5217">getInstance</a></span><span class="default">(<a href="dictionary_I.html#350">File</a> <a href="dictionary_W.html#5220">writableFolder</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5219">key</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5218">autoRefresh</a></span><span class="default">) {</span>
+<a name="334"><font size=-1>334     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#357">Realm</a></span><span class="default">.<a href="dictionary_R.html#5103">create</a>(<a href="dictionary_W.html#5220">writableFolder</a>, <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a>, <a href="dictionary_K.html#5219">key</a>, <a href="dictionary_A.html#5218">autoRefresh</a>);</span>
+<a name="335"><font size=-1>335     </font></a><span class="default">    }</span>
+<a name="336"><font size=-1>336     </font></a><span class="default"></span>
+<a name="337"><font size=-1>337     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="338"><font size=-1>338     </font></a><span class="comment">     * Realm static constructor</span>
+<a name="339"><font size=-1>339     </font></a><span class="comment">     *</span>
+<a name="340"><font size=-1>340     </font></a><span class="comment">     * @param writableFolder absolute path to a writable directory</span>
+<a name="341"><font size=-1>341     </font></a><span class="comment">     * @param filename       the name of the file to save the Realm to</span>
+<a name="342"><font size=-1>342     </font></a><span class="comment">     * @param key            a 32-byte encryption key</span>
+<a name="343"><font size=-1>343     </font></a><span class="comment">     * @param autoRefresh whether the Realm object and its derived objects (RealmResults and RealmObjects)</span>
+<a name="344"><font size=-1>344     </font></a><span class="comment">     *                    should be automatically refreshed with the event loop (requires to be in a thread with a Looper)</span>
+<a name="345"><font size=-1>345     </font></a><span class="comment">     * @return an instance of the Realm class</span>
+<a name="346"><font size=-1>346     </font></a><span class="comment">     * @throws RealmMigrationNeededException The model classes have been changed and the Realm</span>
+<a name="347"><font size=-1>347     </font></a><span class="comment">     *                                       must be migrated</span>
+<a name="348"><font size=-1>348     </font></a><span class="comment">     * @throws RealmIOException              Error when accessing underlying file</span>
+<a name="349"><font size=-1>349     </font></a><span class="comment">     * @throws java.lang.IllegalStateException The Realm is being instantiated in a Thread without</span>
+<a name="350"><font size=-1>350     </font></a><span class="comment">     *                                         a {@link android.os.Looper}</span>
+<a name="351"><font size=-1>351     </font></a><span class="comment">     * @throws RealmException                Other errors</span>
+<a name="352"><font size=-1>352     </font></a><span class="comment">     */</span>
+<a name="353"><font size=-1>353     </font></a><span class="comment">    </span><span class="keyword">public static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5103">create</a></span><span class="default">(<a href="dictionary_I.html#350">File</a> <a href="dictionary_W.html#5108">writableFolder</a>, <a href="dictionary_S.html#43">String</a> <a href="dictionary_F.html#5106">filename</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5107">key</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5105">autoRefresh</a></span><span class="default">) {</span>
+<a name="354"><font size=-1>354     </font></a><span class="default">        <a href="dictionary_S.html#43">String</a> <a href="dictionary_A.html#5104">absolutePath</a> = </span><span class="keyword">new <a href="dictionary_I.html#350">File</a></span><span class="default">(<a href="dictionary_W.html#5108">writableFolder</a>, <a href="dictionary_F.html#5106">filename</a>).<a href="dictionary_G.html#4999">getAbsolutePath</a>();</span>
+<a name="355"><font size=-1>355     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5109">createAndValidate</a></span><span class="default">(<a href="dictionary_A.html#5104">absolutePath</a>, <a href="dictionary_K.html#5107">key</a>, </span><span class="keyword">true</span><span class="default">, <a href="dictionary_A.html#5105">autoRefresh</a>);</span>
+<a name="356"><font size=-1>356     </font></a><span class="default">    }</span>
+<a name="357"><font size=-1>357     </font></a><span class="default"></span>
+<a name="358"><font size=-1>358     </font></a><span class="default">    </span><span class="keyword">private static <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5109">createAndValidate</a></span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_A.html#5142">absolutePath</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5145">key</a>, </span><span class="keyword">boolean <a href="dictionary_V.html#5149">validateSchema</a></span><span class="default">, </span><span class="keyword">boolean <a href="dictionary_A.html#5143">autoRefresh</a></span><span class="default">) {</span>
+<a name="359"><font size=-1>359     </font></a><span class="default">        <a href="dictionary_U.html#1696">Map</a>&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_R.html#357">Realm</a>&gt; <a href="dictionary_R.html#5148">realms</a> = <a href="dictionary_R.html#5277">realmsCache</a>.<a href="dictionary_G.html#1061">get</a>();</span>
+<a name="360"><font size=-1>360     </font></a><span class="default">        <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5147">realm</a> = <a href="dictionary_R.html#5148">realms</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_A.html#5142">absolutePath</a>);</span>
+<a name="361"><font size=-1>361     </font></a><span class="default"></span>
+<a name="362"><font size=-1>362     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_R.html#5147">realm</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="363"><font size=-1>363     </font></a><span class="default">            <a href="dictionary_R.html#5147">realm</a> = </span><span class="keyword">new <a href="dictionary_R.html#5082">Realm</a></span><span class="default">(<a href="dictionary_A.html#5142">absolutePath</a>, <a href="dictionary_K.html#5145">key</a>, <a href="dictionary_A.html#5143">autoRefresh</a>);</span>
+<a name="364"><font size=-1>364     </font></a><span class="default">            <a href="dictionary_R.html#5148">realms</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_A.html#5142">absolutePath</a>, <a href="dictionary_R.html#5147">realm</a>);</span>
+<a name="365"><font size=-1>365     </font></a><span class="default">            <a href="dictionary_R.html#5277">realmsCache</a>.<a href="dictionary_S.html#5113">set</a>(<a href="dictionary_R.html#5148">realms</a>);</span>
+<a name="366"><font size=-1>366     </font></a><span class="default">        }</span>
+<a name="367"><font size=-1>367     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_V.html#5149">validateSchema</a>) {</span>
+<a name="368"><font size=-1>368     </font></a><span class="default">            <a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_V.html#5150">validationClass</a>;</span>
+<a name="369"><font size=-1>369     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="370"><font size=-1>370     </font></a><span class="default">                <a href="dictionary_V.html#5150">validationClass</a> = <a href="dictionary_C.html#1693">Class</a>.<a href="dictionary_F.html#5110">forName</a>(</span><span class="string">&quot;io.realm.ValidationList&quot;</span><span class="default">);</span>
+<a name="371"><font size=-1>371     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_C.html#5064">ClassNotFoundException</a> <a href="dictionary_E.html#5114">e</a>) {</span>
+<a name="372"><font size=-1>372     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the generated ValidationList class&quot;</span><span class="default">);</span>
+<a name="373"><font size=-1>373     </font></a><span class="default">            }</span>
+<a name="374"><font size=-1>374     </font></a><span class="default">            <a href="dictionary_R.html#5074">Method</a> <a href="dictionary_G.html#5144">getProxyClassesMethod</a>;</span>
+<a name="375"><font size=-1>375     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="376"><font size=-1>376     </font></a><span class="default">                <a href="dictionary_G.html#5144">getProxyClassesMethod</a> = <a href="dictionary_V.html#5150">validationClass</a>.<a href="dictionary_G.html#5111">getMethod</a>(</span><span class="string">&quot;getProxyClasses&quot;</span><span class="default">);</span>
+<a name="377"><font size=-1>377     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#5075">NoSuchMethodException</a> <a href="dictionary_E.html#5115">e</a>) {</span>
+<a name="378"><font size=-1>378     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the getProxyClasses method in the ValidationList class&quot;</span><span class="default">);</span>
+<a name="379"><font size=-1>379     </font></a><span class="default">            }</span>
+<a name="380"><font size=-1>380     </font></a><span class="default">            <a href="dictionary_U.html#1026">List</a>&lt;<a href="dictionary_S.html#43">String</a>&gt; <a href="dictionary_P.html#5146">proxyClasses</a>;</span>
+<a name="381"><font size=-1>381     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="382"><font size=-1>382     </font></a><span class="default">                </span><span class="comment">//noinspection unchecked</span>
+<a name="383"><font size=-1>383     </font></a><span class="comment">                <a href="dictionary_P.html#5146">proxyClasses</a> </span><span class="default">= (List&lt;<a href="dictionary_S.html#43">String</a>&gt;) <a href="dictionary_G.html#5144">getProxyClassesMethod</a>.<a href="dictionary_I.html#5112">invoke</a>(</span><span class="keyword">null</span><span class="default">);</span>
+<a name="384"><font size=-1>384     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5069">IllegalAccessException</a> <a href="dictionary_E.html#5116">e</a>) {</span>
+<a name="385"><font size=-1>385     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not execute the getProxyClasses method in the ValidationList class&quot;</span><span class="default">);</span>
+<a name="386"><font size=-1>386     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_R.html#5071">InvocationTargetException</a> <a href="dictionary_E.html#5117">e</a>) {</span>
+<a name="387"><font size=-1>387     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;An exception was thrown in the getProxyClasses method in the ValidationList class&quot;</span><span class="default">);</span>
+<a name="388"><font size=-1>388     </font></a><span class="default">            }</span>
+<a name="389"><font size=-1>389     </font></a><span class="default"></span>
+<a name="390"><font size=-1>390     </font></a><span class="default">            </span><span class="keyword">long <a href="dictionary_V.html#5151">version</a> </span><span class="default">= <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#3245">getVersion</a>();</span>
+<a name="391"><font size=-1>391     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="392"><font size=-1>392     </font></a><span class="default">                <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#363">beginTransaction</a>();</span>
+<a name="393"><font size=-1>393     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_V.html#5151">version</a> == <a href="dictionary_R.html#5265">UNVERSIONED</a>) {</span>
+<a name="394"><font size=-1>394     </font></a><span class="default">                    <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#3246">setVersion</a>(</span><span class="number">0</span><span class="default">);</span>
+<a name="395"><font size=-1>395     </font></a><span class="default">                }</span>
+<a name="396"><font size=-1>396     </font></a><span class="default"></span>
+<a name="397"><font size=-1>397     </font></a><span class="default">                </span><span class="keyword">for </span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_C.html#5132">className</a> : <a href="dictionary_P.html#5146">proxyClasses</a>) {</span>
+<a name="398"><font size=-1>398     </font></a><span class="default">                    <a href="dictionary_S.html#43">String</a>[] <a href="dictionary_S.html#5139">splitted</a> = <a href="dictionary_C.html#5132">className</a>.<a href="dictionary_S.html#5118">split</a>(</span><span class="string">&quot;\\.&quot;</span><span class="default">);</span>
+<a name="399"><font size=-1>399     </font></a><span class="default">                    <a href="dictionary_S.html#43">String</a> <a href="dictionary_M.html#5138">modelClassName</a> = <a href="dictionary_S.html#5139">splitted</a>[<a href="dictionary_S.html#5139">splitted</a>.length - </span><span class="number">1</span><span class="default">];</span>
+<a name="400"><font size=-1>400     </font></a><span class="default">                    <a href="dictionary_S.html#43">String</a> <a href="dictionary_G.html#5136">generatedClassName</a> = </span><span class="string">&quot;io.realm.&quot; </span><span class="default">+ <a href="dictionary_M.html#5138">modelClassName</a> + </span><span class="string">&quot;RealmProxy&quot;</span><span class="default">;</span>
+<a name="401"><font size=-1>401     </font></a><span class="default">                    <a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_G.html#5135">generatedClass</a>;</span>
+<a name="402"><font size=-1>402     </font></a><span class="default">                    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="403"><font size=-1>403     </font></a><span class="default">                        <a href="dictionary_G.html#5135">generatedClass</a> = <a href="dictionary_C.html#1693">Class</a>.<a href="dictionary_F.html#5110">forName</a>(<a href="dictionary_G.html#5136">generatedClassName</a>);</span>
+<a name="404"><font size=-1>404     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_C.html#5064">ClassNotFoundException</a> <a href="dictionary_E.html#5124">e</a>) {</span>
+<a name="405"><font size=-1>405     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the generated &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="406"><font size=-1>406     </font></a><span class="default">                    }</span>
+<a name="407"><font size=-1>407     </font></a><span class="default"></span>
+<a name="408"><font size=-1>408     </font></a><span class="default">                    </span><span class="comment">// if not versioned, create table</span>
+<a name="409"><font size=-1>409     </font></a><span class="comment">                    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_V.html#5151">version</a> == <a href="dictionary_R.html#5265">UNVERSIONED</a>) {</span>
+<a name="410"><font size=-1>410     </font></a><span class="default">                        <a href="dictionary_R.html#5074">Method</a> <a href="dictionary_I.html#5137">initTableMethod</a>;</span>
+<a name="411"><font size=-1>411     </font></a><span class="default">                        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="412"><font size=-1>412     </font></a><span class="default">                            <a href="dictionary_I.html#5137">initTableMethod</a> = <a href="dictionary_G.html#5135">generatedClass</a>.<a href="dictionary_G.html#5111">getMethod</a>(</span><span class="string">&quot;initTable&quot;</span><span class="default">, </span><span class="keyword">new <a href="dictionary_C.html#1693">Class</a></span><span class="default">[]{<a href="dictionary_I.html#2779">ImplicitTransaction</a>.</span><span class="keyword">class</span><span class="default">});</span>
+<a name="413"><font size=-1>413     </font></a><span class="default">                        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#5075">NoSuchMethodException</a> <a href="dictionary_E.html#5125">e</a>) {</span>
+<a name="414"><font size=-1>414     </font></a><span class="default">                            </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the initTable method in the generated &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="415"><font size=-1>415     </font></a><span class="default">                        }</span>
+<a name="416"><font size=-1>416     </font></a><span class="default">                        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="417"><font size=-1>417     </font></a><span class="default">                            <a href="dictionary_I.html#5137">initTableMethod</a>.<a href="dictionary_I.html#5112">invoke</a>(</span><span class="keyword">null</span><span class="default">, <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#5281">transaction</a>);</span>
+<a name="418"><font size=-1>418     </font></a><span class="default">                        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5069">IllegalAccessException</a> <a href="dictionary_E.html#5126">e</a>) {</span>
+<a name="419"><font size=-1>419     </font></a><span class="default">                            </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not execute the initTable method in the &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="420"><font size=-1>420     </font></a><span class="default">                        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_R.html#5071">InvocationTargetException</a> <a href="dictionary_E.html#5127">e</a>) {</span>
+<a name="421"><font size=-1>421     </font></a><span class="default">                            </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;An exception was thrown in the initTable method in the &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="422"><font size=-1>422     </font></a><span class="default">                        }</span>
+<a name="423"><font size=-1>423     </font></a><span class="default">                    }</span>
+<a name="424"><font size=-1>424     </font></a><span class="default"></span>
+<a name="425"><font size=-1>425     </font></a><span class="default">                    </span><span class="comment">// validate created table</span>
+<a name="426"><font size=-1>426     </font></a><span class="comment">                    <a href="dictionary_R.html#5074">Method</a> <a href="dictionary_V.html#5141">validateMethod</a></span><span class="default">;</span>
+<a name="427"><font size=-1>427     </font></a><span class="default">                    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="428"><font size=-1>428     </font></a><span class="default">                        <a href="dictionary_V.html#5141">validateMethod</a> = <a href="dictionary_G.html#5135">generatedClass</a>.<a href="dictionary_G.html#5111">getMethod</a>(</span><span class="string">&quot;validateTable&quot;</span><span class="default">, </span><span class="keyword">new <a href="dictionary_C.html#1693">Class</a></span><span class="default">[]{<a href="dictionary_I.html#2779">ImplicitTransaction</a>.</span><span class="keyword">class</span><span class="default">});</span>
+<a name="429"><font size=-1>429     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#5075">NoSuchMethodException</a> <a href="dictionary_E.html#5128">e</a>) {</span>
+<a name="430"><font size=-1>430     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the validateTable method in the generated &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="431"><font size=-1>431     </font></a><span class="default">                    }</span>
+<a name="432"><font size=-1>432     </font></a><span class="default">                    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="433"><font size=-1>433     </font></a><span class="default">                        <a href="dictionary_V.html#5141">validateMethod</a>.<a href="dictionary_I.html#5112">invoke</a>(</span><span class="keyword">null</span><span class="default">, <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#5281">transaction</a>);</span>
+<a name="434"><font size=-1>434     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5069">IllegalAccessException</a> <a href="dictionary_E.html#5119">e</a>) {</span>
+<a name="435"><font size=-1>435     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not execute the validateTable method in the &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="436"><font size=-1>436     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_R.html#5071">InvocationTargetException</a> <a href="dictionary_E.html#5120">e</a>) {</span>
+<a name="437"><font size=-1>437     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5294">RealmMigrationNeededException</a></span><span class="default">(<a href="dictionary_E.html#5120">e</a>.<a href="dictionary_G.html#3155">getMessage</a>(), <a href="dictionary_E.html#5120">e</a>);</span>
+<a name="438"><font size=-1>438     </font></a><span class="default">                    }</span>
+<a name="439"><font size=-1>439     </font></a><span class="default"></span>
+<a name="440"><font size=-1>440     </font></a><span class="default">                    </span><span class="comment">// Populate the columnIndices table</span>
+<a name="441"><font size=-1>441     </font></a><span class="comment">                    <a href="dictionary_R.html#5074">Method</a> <a href="dictionary_F.html#5134">fieldNamesMethod</a></span><span class="default">;</span>
+<a name="442"><font size=-1>442     </font></a><span class="default">                    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="443"><font size=-1>443     </font></a><span class="default">                        <a href="dictionary_F.html#5134">fieldNamesMethod</a> = <a href="dictionary_G.html#5135">generatedClass</a>.<a href="dictionary_G.html#5111">getMethod</a>(</span><span class="string">&quot;getFieldNames&quot;</span><span class="default">);</span>
+<a name="444"><font size=-1>444     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#5075">NoSuchMethodException</a> <a href="dictionary_E.html#5121">e</a>) {</span>
+<a name="445"><font size=-1>445     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the getFieldNames method in the generated &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="446"><font size=-1>446     </font></a><span class="default">                    }</span>
+<a name="447"><font size=-1>447     </font></a><span class="default">                    <a href="dictionary_U.html#1026">List</a>&lt;<a href="dictionary_S.html#43">String</a>&gt; <a href="dictionary_F.html#5133">fieldNames</a>;</span>
+<a name="448"><font size=-1>448     </font></a><span class="default">                    </span><span class="keyword">try </span><span class="default">{</span>
+<a name="449"><font size=-1>449     </font></a><span class="default">                        </span><span class="comment">//noinspection unchecked</span>
+<a name="450"><font size=-1>450     </font></a><span class="comment">                        <a href="dictionary_F.html#5133">fieldNames</a> </span><span class="default">= (List&lt;<a href="dictionary_S.html#43">String</a>&gt;) <a href="dictionary_F.html#5134">fieldNamesMethod</a>.<a href="dictionary_I.html#5112">invoke</a>(</span><span class="keyword">null</span><span class="default">);</span>
+<a name="451"><font size=-1>451     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5069">IllegalAccessException</a> <a href="dictionary_E.html#5122">e</a>) {</span>
+<a name="452"><font size=-1>452     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not execute the getFieldNames method in the generated &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="453"><font size=-1>453     </font></a><span class="default">                    } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_R.html#5071">InvocationTargetException</a> <a href="dictionary_E.html#5123">e</a>) {</span>
+<a name="454"><font size=-1>454     </font></a><span class="default">                        </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;An exception was thrown in the getFieldNames method in the generated &quot; </span><span class="default">+ <a href="dictionary_G.html#5136">generatedClassName</a> + </span><span class="string">&quot; class&quot;</span><span class="default">);</span>
+<a name="455"><font size=-1>455     </font></a><span class="default">                    }</span>
+<a name="456"><font size=-1>456     </font></a><span class="default">                    <a href="dictionary_I.html#376">Table</a> <a href="dictionary_T.html#5140">table</a> = <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_G.html#4900">getTable</a>(<a href="dictionary_R.html#5263">TABLE_PREFIX</a> + <a href="dictionary_M.html#5138">modelClassName</a>);</span>
+<a name="457"><font size=-1>457     </font></a><span class="default">                    </span><span class="keyword">for </span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_F.html#5130">fieldName</a> : <a href="dictionary_F.html#5133">fieldNames</a>) {</span>
+<a name="458"><font size=-1>458     </font></a><span class="default">                        </span><span class="keyword">long <a href="dictionary_C.html#5129">columnIndex</a> </span><span class="default">= <a href="dictionary_T.html#5140">table</a>.<a href="dictionary_T.html#1307">getColumnIndex</a>(<a href="dictionary_F.html#5130">fieldName</a>);</span>
+<a name="459"><font size=-1>459     </font></a><span class="default">                        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5129">columnIndex</a> == -</span><span class="number">1</span><span class="default">) {</span>
+<a name="460"><font size=-1>460     </font></a><span class="default">                            </span><span class="keyword">throw new <a href="dictionary_R.html#5295">RealmMigrationNeededException</a></span><span class="default">(</span><span class="string">&quot;Column '&quot; </span><span class="default">+ <a href="dictionary_F.html#5130">fieldName</a> + </span><span class="string">&quot;' not found for type '&quot; </span><span class="default">+ <a href="dictionary_M.html#5138">modelClassName</a> + </span><span class="string">&quot;'&quot;</span><span class="default">);</span>
+<a name="461"><font size=-1>461     </font></a><span class="default">                        }</span>
+<a name="462"><font size=-1>462     </font></a><span class="default">                        <a href="dictionary_U.html#1696">Map</a>&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_L.html#2648">Long</a>&gt; <a href="dictionary_I.html#5131">innerMap</a> = <a href="dictionary_R.html#5268">columnIndices</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_M.html#5138">modelClassName</a>);</span>
+<a name="463"><font size=-1>463     </font></a><span class="default">                        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#5131">innerMap</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="464"><font size=-1>464     </font></a><span class="default">                            <a href="dictionary_I.html#5131">innerMap</a> = </span><span class="keyword">new <a href="dictionary_U.html#1694">HashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_L.html#2648">Long</a>&gt;();</span>
+<a name="465"><font size=-1>465     </font></a><span class="default">                        }</span>
+<a name="466"><font size=-1>466     </font></a><span class="default">                        <a href="dictionary_I.html#5131">innerMap</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_F.html#5130">fieldName</a>, <a href="dictionary_C.html#5129">columnIndex</a>);</span>
+<a name="467"><font size=-1>467     </font></a><span class="default">                        <a href="dictionary_R.html#5268">columnIndices</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_M.html#5138">modelClassName</a>, <a href="dictionary_I.html#5131">innerMap</a>);</span>
+<a name="468"><font size=-1>468     </font></a><span class="default">                    }</span>
+<a name="469"><font size=-1>469     </font></a><span class="default">                }</span>
+<a name="470"><font size=-1>470     </font></a><span class="default">            } </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="471"><font size=-1>471     </font></a><span class="default">                <a href="dictionary_R.html#5147">realm</a>.<a href="dictionary_R.html#366">commitTransaction</a>();</span>
+<a name="472"><font size=-1>472     </font></a><span class="default">            }</span>
+<a name="473"><font size=-1>473     </font></a><span class="default">        }</span>
+<a name="474"><font size=-1>474     </font></a><span class="default"></span>
+<a name="475"><font size=-1>475     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5147">realm</a></span><span class="default">;</span>
+<a name="476"><font size=-1>476     </font></a><span class="default">    }</span>
+<a name="477"><font size=-1>477     </font></a><span class="default"></span>
+<a name="478"><font size=-1>478     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="479"><font size=-1>479     </font></a><span class="comment">     * Instantiates and adds a new object to the realm</span>
+<a name="480"><font size=-1>480     </font></a><span class="comment">     *</span>
+<a name="481"><font size=-1>481     </font></a><span class="comment">     * @param clazz The Class of the object to create</span>
+<a name="482"><font size=-1>482     </font></a><span class="comment">     * @return The new object</span>
+<a name="483"><font size=-1>483     </font></a><span class="comment">     * @throws RealmException An object could not be created</span>
+<a name="484"><font size=-1>484     </font></a><span class="comment">     */</span>
+<a name="485"><font size=-1>485     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">&lt;<a href="dictionary_C.html#5152">E</a> </span><span class="keyword">extends <a href="dictionary_R.html#418">RealmObject</a></span><span class="default">&gt; <a href="dictionary_C.html#5152">E</a> <a href="dictionary_R.html#364">createObject</a>(<a href="dictionary_C.html#1693">Class</a>&lt;<a href="dictionary_C.html#5152">E</a>&gt; <a href="dictionary_C.html#5157">clazz</a>) {</span>
+<a name="486"><font size=-1>486     </font></a><span class="default">        <a href="dictionary_I.html#376">Table</a> <a href="dictionary_T.html#5163">table</a>;</span>
+<a name="487"><font size=-1>487     </font></a><span class="default">        <a href="dictionary_T.html#5163">table</a> = <a href="dictionary_R.html#5280">tables</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5157">clazz</a>);</span>
+<a name="488"><font size=-1>488     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_T.html#5163">table</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="489"><font size=-1>489     </font></a><span class="default">            <a href="dictionary_S.html#43">String</a> <a href="dictionary_S.html#5162">simpleClassName</a> = <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5157">clazz</a>);</span>
+<a name="490"><font size=-1>490     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#5162">simpleClassName</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="491"><font size=-1>491     </font></a><span class="default">                <a href="dictionary_S.html#5162">simpleClassName</a> = <a href="dictionary_C.html#5157">clazz</a>.<a href="dictionary_G.html#2994">getSimpleName</a>();</span>
+<a name="492"><font size=-1>492     </font></a><span class="default">                <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5157">clazz</a>, <a href="dictionary_S.html#5162">simpleClassName</a>);</span>
+<a name="493"><font size=-1>493     </font></a><span class="default">            }</span>
+<a name="494"><font size=-1>494     </font></a><span class="default">            <a href="dictionary_S.html#43">String</a> <a href="dictionary_G.html#5159">generatedClassName</a> = </span><span class="string">&quot;io.realm.&quot; </span><span class="default">+ <a href="dictionary_S.html#5162">simpleClassName</a> + </span><span class="string">&quot;RealmProxy&quot;</span><span class="default">;</span>
+<a name="495"><font size=-1>495     </font></a><span class="default"></span>
+<a name="496"><font size=-1>496     </font></a><span class="default">            <a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_G.html#5158">generatedClass</a> = <a href="dictionary_R.html#5271">generatedClasses</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_G.html#5159">generatedClassName</a>);</span>
+<a name="497"><font size=-1>497     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_G.html#5158">generatedClass</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="498"><font size=-1>498     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="499"><font size=-1>499     </font></a><span class="default">                    <a href="dictionary_G.html#5158">generatedClass</a> = <a href="dictionary_C.html#1693">Class</a>.<a href="dictionary_F.html#5110">forName</a>(<a href="dictionary_G.html#5159">generatedClassName</a>);</span>
+<a name="500"><font size=-1>500     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_C.html#5064">ClassNotFoundException</a> <a href="dictionary_E.html#5153">e</a>) {</span>
+<a name="501"><font size=-1>501     </font></a><span class="default">                    </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the generated proxy class&quot;</span><span class="default">);</span>
+<a name="502"><font size=-1>502     </font></a><span class="default">                }</span>
+<a name="503"><font size=-1>503     </font></a><span class="default">                <a href="dictionary_R.html#5271">generatedClasses</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_G.html#5159">generatedClassName</a>, <a href="dictionary_G.html#5158">generatedClass</a>);</span>
+<a name="504"><font size=-1>504     </font></a><span class="default">            }</span>
+<a name="505"><font size=-1>505     </font></a><span class="default"></span>
+<a name="506"><font size=-1>506     </font></a><span class="default">            <a href="dictionary_R.html#5074">Method</a> <a href="dictionary_M.html#5160">method</a> = <a href="dictionary_R.html#5276">initTableMethods</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_G.html#5158">generatedClass</a>);</span>
+<a name="507"><font size=-1>507     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#5160">method</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="508"><font size=-1>508     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="509"><font size=-1>509     </font></a><span class="default">                    <a href="dictionary_M.html#5160">method</a> = <a href="dictionary_G.html#5158">generatedClass</a>.<a href="dictionary_G.html#5111">getMethod</a>(</span><span class="string">&quot;initTable&quot;</span><span class="default">, </span><span class="keyword">new <a href="dictionary_C.html#1693">Class</a></span><span class="default">[]{<a href="dictionary_I.html#2779">ImplicitTransaction</a>.</span><span class="keyword">class</span><span class="default">});</span>
+<a name="510"><font size=-1>510     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#5075">NoSuchMethodException</a> <a href="dictionary_E.html#5154">e</a>) {</span>
+<a name="511"><font size=-1>511     </font></a><span class="default">                    </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the initTable() method in generated proxy class&quot;</span><span class="default">);</span>
+<a name="512"><font size=-1>512     </font></a><span class="default">                }</span>
+<a name="513"><font size=-1>513     </font></a><span class="default">                <a href="dictionary_R.html#5276">initTableMethods</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_G.html#5158">generatedClass</a>, <a href="dictionary_M.html#5160">method</a>);</span>
+<a name="514"><font size=-1>514     </font></a><span class="default">            }</span>
+<a name="515"><font size=-1>515     </font></a><span class="default"></span>
+<a name="516"><font size=-1>516     </font></a><span class="default">            </span><span class="keyword">try </span><span class="default">{</span>
+<a name="517"><font size=-1>517     </font></a><span class="default">                <a href="dictionary_T.html#5163">table</a> = (Table) <a href="dictionary_M.html#5160">method</a>.<a href="dictionary_I.html#5112">invoke</a>(</span><span class="keyword">null</span><span class="default">, <a href="dictionary_R.html#5281">transaction</a>);</span>
+<a name="518"><font size=-1>518     </font></a><span class="default">                <a href="dictionary_R.html#5280">tables</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5157">clazz</a>, <a href="dictionary_T.html#5163">table</a>);</span>
+<a name="519"><font size=-1>519     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5069">IllegalAccessException</a> <a href="dictionary_E.html#5155">e</a>) {</span>
+<a name="520"><font size=-1>520     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not launch the initTable method&quot;</span><span class="default">);</span>
+<a name="521"><font size=-1>521     </font></a><span class="default">            } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_R.html#5071">InvocationTargetException</a> <a href="dictionary_E.html#5156">e</a>) {</span>
+<a name="522"><font size=-1>522     </font></a><span class="default">                <a href="dictionary_E.html#5156">e</a>.<a href="dictionary_P.html#5002">printStackTrace</a>();</span>
+<a name="523"><font size=-1>523     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;An exception occurred while running the initTable method&quot;</span><span class="default">);</span>
+<a name="524"><font size=-1>524     </font></a><span class="default">            }</span>
+<a name="525"><font size=-1>525     </font></a><span class="default">        }</span>
+<a name="526"><font size=-1>526     </font></a><span class="default"></span>
+<a name="527"><font size=-1>527     </font></a><span class="default">        </span><span class="keyword">long <a href="dictionary_R.html#5161">rowIndex</a> </span><span class="default">= <a href="dictionary_T.html#5163">table</a>.<a href="dictionary_T.html#2516">addEmptyRow</a>();</span>
+<a name="528"><font size=-1>528     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#1952">get</a></span><span class="default">(<a href="dictionary_C.html#5157">clazz</a>, <a href="dictionary_R.html#5161">rowIndex</a>);</span>
+<a name="529"><font size=-1>529     </font></a><span class="default">    }</span>
+<a name="530"><font size=-1>530     </font></a><span class="default"></span>
+<a name="531"><font size=-1>531     </font></a><span class="default">    &lt;<a href="dictionary_R.html#5244">E</a>&gt; </span><span class="keyword">void <a href="dictionary_R.html#3248">remove</a></span><span class="default">(<a href="dictionary_C.html#1693">Class</a>&lt;<a href="dictionary_R.html#5244">E</a>&gt; <a href="dictionary_C.html#5245">clazz</a>, </span><span class="keyword">long <a href="dictionary_O.html#5246">objectIndex</a></span><span class="default">) {</span>
+<a name="532"><font size=-1>532     </font></a><span class="default">        <a href="dictionary_R.html#1306">getTable</a>(<a href="dictionary_C.html#5245">clazz</a>).<a href="dictionary_T.html#5301">moveLastOver</a>(<a href="dictionary_O.html#5246">objectIndex</a>);</span>
+<a name="533"><font size=-1>533     </font></a><span class="default">    }</span>
+<a name="534"><font size=-1>534     </font></a><span class="default"></span>
+<a name="535"><font size=-1>535     </font></a><span class="default">    &lt;<a href="dictionary_G.html#5176">E</a> </span><span class="keyword">extends <a href="dictionary_R.html#418">RealmObject</a></span><span class="default">&gt; <a href="dictionary_G.html#5176">E</a> <a href="dictionary_R.html#1952">get</a>(<a href="dictionary_C.html#1693">Class</a>&lt;<a href="dictionary_G.html#5176">E</a>&gt; <a href="dictionary_C.html#5184">clazz</a>, </span><span class="keyword">long <a href="dictionary_R.html#5190">rowIndex</a></span><span class="default">) {</span>
+<a name="536"><font size=-1>536     </font></a><span class="default">        <a href="dictionary_G.html#5176">E</a> <a href="dictionary_R.html#5188">result</a>;</span>
+<a name="537"><font size=-1>537     </font></a><span class="default"></span>
+<a name="538"><font size=-1>538     </font></a><span class="default">        <a href="dictionary_I.html#376">Table</a> <a href="dictionary_T.html#5193">table</a> = <a href="dictionary_R.html#5280">tables</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5184">clazz</a>);</span>
+<a name="539"><font size=-1>539     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_T.html#5193">table</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="540"><font size=-1>540     </font></a><span class="default">            <a href="dictionary_S.html#43">String</a> <a href="dictionary_S.html#5191">simpleClassName</a> = <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5184">clazz</a>);</span>
+<a name="541"><font size=-1>541     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#5191">simpleClassName</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="542"><font size=-1>542     </font></a><span class="default">                <a href="dictionary_S.html#5191">simpleClassName</a> = <a href="dictionary_C.html#5184">clazz</a>.<a href="dictionary_G.html#2994">getSimpleName</a>();</span>
+<a name="543"><font size=-1>543     </font></a><span class="default">                <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5184">clazz</a>, <a href="dictionary_S.html#5191">simpleClassName</a>);</span>
+<a name="544"><font size=-1>544     </font></a><span class="default">            }</span>
+<a name="545"><font size=-1>545     </font></a><span class="default"></span>
+<a name="546"><font size=-1>546     </font></a><span class="default">            <a href="dictionary_T.html#5193">table</a> = <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_G.html#4900">getTable</a>(<a href="dictionary_R.html#5263">TABLE_PREFIX</a> + <a href="dictionary_S.html#5191">simpleClassName</a>);</span>
+<a name="547"><font size=-1>547     </font></a><span class="default">            <a href="dictionary_R.html#5280">tables</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5184">clazz</a>, <a href="dictionary_T.html#5193">table</a>);</span>
+<a name="548"><font size=-1>548     </font></a><span class="default">        }</span>
+<a name="549"><font size=-1>549     </font></a><span class="default"></span>
+<a name="550"><font size=-1>550     </font></a><span class="default">        <a href="dictionary_I.html#5287">Row</a> <a href="dictionary_R.html#5189">row</a> = <a href="dictionary_T.html#5193">table</a>.<a href="dictionary_T.html#5297">getRow</a>(<a href="dictionary_R.html#5190">rowIndex</a>);</span>
+<a name="551"><font size=-1>551     </font></a><span class="default"></span>
+<a name="552"><font size=-1>552     </font></a><span class="default">        <a href="dictionary_R.html#5066">Constructor</a> <a href="dictionary_C.html#5185">constructor</a> = <a href="dictionary_R.html#5272">generatedConstructors</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5184">clazz</a>);</span>
+<a name="553"><font size=-1>553     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5185">constructor</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="554"><font size=-1>554     </font></a><span class="default">            <a href="dictionary_S.html#43">String</a> <a href="dictionary_S.html#5192">simpleClassName</a> = <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5184">clazz</a>);</span>
+<a name="555"><font size=-1>555     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#5192">simpleClassName</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="556"><font size=-1>556     </font></a><span class="default">                <a href="dictionary_S.html#5192">simpleClassName</a> = <a href="dictionary_C.html#5184">clazz</a>.<a href="dictionary_G.html#2994">getSimpleName</a>();</span>
+<a name="557"><font size=-1>557     </font></a><span class="default">                <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5184">clazz</a>, <a href="dictionary_S.html#5192">simpleClassName</a>);</span>
+<a name="558"><font size=-1>558     </font></a><span class="default">            }</span>
+<a name="559"><font size=-1>559     </font></a><span class="default">            <a href="dictionary_S.html#43">String</a> <a href="dictionary_G.html#5187">generatedClassName</a> = </span><span class="string">&quot;io.realm.&quot; </span><span class="default">+ <a href="dictionary_S.html#5192">simpleClassName</a> + </span><span class="string">&quot;RealmProxy&quot;</span><span class="default">;</span>
+<a name="560"><font size=-1>560     </font></a><span class="default"></span>
+<a name="561"><font size=-1>561     </font></a><span class="default"></span>
+<a name="562"><font size=-1>562     </font></a><span class="default">            <a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_G.html#5186">generatedClass</a> = <a href="dictionary_R.html#5271">generatedClasses</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_G.html#5187">generatedClassName</a>);</span>
+<a name="563"><font size=-1>563     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_G.html#5186">generatedClass</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="564"><font size=-1>564     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="565"><font size=-1>565     </font></a><span class="default">                    <a href="dictionary_G.html#5186">generatedClass</a> = <a href="dictionary_C.html#1693">Class</a>.<a href="dictionary_F.html#5110">forName</a>(<a href="dictionary_G.html#5187">generatedClassName</a>);</span>
+<a name="566"><font size=-1>566     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_C.html#5064">ClassNotFoundException</a> <a href="dictionary_E.html#5179">e</a>) {</span>
+<a name="567"><font size=-1>567     </font></a><span class="default">                    </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the generated proxy class&quot;</span><span class="default">);</span>
+<a name="568"><font size=-1>568     </font></a><span class="default">                }</span>
+<a name="569"><font size=-1>569     </font></a><span class="default">                <a href="dictionary_R.html#5271">generatedClasses</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_G.html#5187">generatedClassName</a>, <a href="dictionary_G.html#5186">generatedClass</a>);</span>
+<a name="570"><font size=-1>570     </font></a><span class="default">            }</span>
+<a name="571"><font size=-1>571     </font></a><span class="default"></span>
+<a name="572"><font size=-1>572     </font></a><span class="default">            <a href="dictionary_C.html#5185">constructor</a> = <a href="dictionary_R.html#5269">constructors</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_G.html#5186">generatedClass</a>);</span>
+<a name="573"><font size=-1>573     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5185">constructor</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="574"><font size=-1>574     </font></a><span class="default">                </span><span class="keyword">try </span><span class="default">{</span>
+<a name="575"><font size=-1>575     </font></a><span class="default">                    <a href="dictionary_C.html#5185">constructor</a> = <a href="dictionary_G.html#5186">generatedClass</a>.<a href="dictionary_G.html#5177">getConstructor</a>();</span>
+<a name="576"><font size=-1>576     </font></a><span class="default">                } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#5075">NoSuchMethodException</a> <a href="dictionary_E.html#5180">e</a>) {</span>
+<a name="577"><font size=-1>577     </font></a><span class="default">                    </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not find the constructor in generated proxy class&quot;</span><span class="default">);</span>
+<a name="578"><font size=-1>578     </font></a><span class="default">                }</span>
+<a name="579"><font size=-1>579     </font></a><span class="default">                <a href="dictionary_R.html#5269">constructors</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_G.html#5186">generatedClass</a>, <a href="dictionary_C.html#5185">constructor</a>);</span>
+<a name="580"><font size=-1>580     </font></a><span class="default">                <a href="dictionary_R.html#5272">generatedConstructors</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5184">clazz</a>, <a href="dictionary_C.html#5185">constructor</a>);</span>
+<a name="581"><font size=-1>581     </font></a><span class="default">            }</span>
+<a name="582"><font size=-1>582     </font></a><span class="default">        }</span>
+<a name="583"><font size=-1>583     </font></a><span class="default"></span>
+<a name="584"><font size=-1>584     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="585"><font size=-1>585     </font></a><span class="default">            </span><span class="comment">// We are know the casted type since we generated the class</span>
+<a name="586"><font size=-1>586     </font></a><span class="comment">            //noinspection unchecked</span>
+<a name="587"><font size=-1>587     </font></a><span class="comment">            <a href="dictionary_R.html#5188">result</a> </span><span class="default">= (E) <a href="dictionary_C.html#5185">constructor</a>.<a href="dictionary_N.html#5178">newInstance</a>();</span>
+<a name="588"><font size=-1>588     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5070">InstantiationException</a> <a href="dictionary_E.html#5181">e</a>) {</span>
+<a name="589"><font size=-1>589     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not instantiate the proxy class&quot;</span><span class="default">);</span>
+<a name="590"><font size=-1>590     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#5069">IllegalAccessException</a> <a href="dictionary_E.html#5182">e</a>) {</span>
+<a name="591"><font size=-1>591     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;Could not run the constructor of the proxy class&quot;</span><span class="default">);</span>
+<a name="592"><font size=-1>592     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_R.html#5071">InvocationTargetException</a> <a href="dictionary_E.html#5183">e</a>) {</span>
+<a name="593"><font size=-1>593     </font></a><span class="default">            <a href="dictionary_E.html#5183">e</a>.<a href="dictionary_P.html#5002">printStackTrace</a>();</span>
+<a name="594"><font size=-1>594     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_R.html#5293">RealmException</a></span><span class="default">(</span><span class="string">&quot;An exception occurred while instantiating the proxy class&quot;</span><span class="default">);</span>
+<a name="595"><font size=-1>595     </font></a><span class="default">        }</span>
+<a name="596"><font size=-1>596     </font></a><span class="default">        <a href="dictionary_R.html#5188">result</a>.<a href="dictionary_R.html#5298">row</a> = <a href="dictionary_R.html#5189">row</a>;</span>
+<a name="597"><font size=-1>597     </font></a><span class="default">        <a href="dictionary_R.html#5188">result</a>.<a href="dictionary_R.html#5299">realm</a> = </span><span class="keyword">this</span><span class="default">;</span>
+<a name="598"><font size=-1>598     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5188">result</a></span><span class="default">;</span>
+<a name="599"><font size=-1>599     </font></a><span class="default">    }</span>
+<a name="600"><font size=-1>600     </font></a><span class="default"></span>
+<a name="601"><font size=-1>601     </font></a><span class="default">    </span><span class="keyword">boolean <a href="dictionary_R.html#3247">contains</a></span><span class="default">(<a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_C.html#5101">clazz</a>) {</span>
+<a name="602"><font size=-1>602     </font></a><span class="default">        <a href="dictionary_S.html#43">String</a> <a href="dictionary_S.html#5102">simpleClassName</a> = <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_G.html#1061">get</a>(<a href="dictionary_C.html#5101">clazz</a>);</span>
+<a name="603"><font size=-1>603     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#5102">simpleClassName</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="604"><font size=-1>604     </font></a><span class="default">            <a href="dictionary_S.html#5102">simpleClassName</a> = <a href="dictionary_C.html#5101">clazz</a>.<a href="dictionary_G.html#2994">getSimpleName</a>();</span>
+<a name="605"><font size=-1>605     </font></a><span class="default">            <a href="dictionary_R.html#5279">simpleClassNames</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_C.html#5101">clazz</a>, <a href="dictionary_S.html#5102">simpleClassName</a>);</span>
+<a name="606"><font size=-1>606     </font></a><span class="default">        }</span>
+<a name="607"><font size=-1>607     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5281">transaction</a></span><span class="default">.<a href="dictionary_G.html#5292">hasTable</a>(<a href="dictionary_R.html#5263">TABLE_PREFIX</a> + <a href="dictionary_S.html#5102">simpleClassName</a>);</span>
+<a name="608"><font size=-1>608     </font></a><span class="default">    }</span>
+<a name="609"><font size=-1>609     </font></a><span class="default"></span>
+<a name="610"><font size=-1>610     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="611"><font size=-1>611     </font></a><span class="comment">     * Returns a typed RealmQuery, which can be used to query for specific objects of this type</span>
+<a name="612"><font size=-1>612     </font></a><span class="comment">     *</span>
+<a name="613"><font size=-1>613     </font></a><span class="comment">     * @param clazz The class of the object which is to be queried for</span>
+<a name="614"><font size=-1>614     </font></a><span class="comment">     * @return A typed RealmQuery, which can be used to query for specific objects of this type</span>
+<a name="615"><font size=-1>615     </font></a><span class="comment">     * @throws java.lang.RuntimeException Any other error</span>
+<a name="616"><font size=-1>616     </font></a><span class="comment">     * @see io.realm.RealmQuery</span>
+<a name="617"><font size=-1>617     </font></a><span class="comment">     */</span>
+<a name="618"><font size=-1>618     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">&lt;<a href="dictionary_W.html#5259">E</a> </span><span class="keyword">extends <a href="dictionary_R.html#418">RealmObject</a></span><span class="default">&gt; <a href="dictionary_R.html#1191">RealmQuery</a>&lt;<a href="dictionary_W.html#5259">E</a>&gt; <a href="dictionary_R.html#1202">where</a>(<a href="dictionary_C.html#1693">Class</a>&lt;<a href="dictionary_W.html#5259">E</a>&gt; <a href="dictionary_C.html#5260">clazz</a>) {</span>
+<a name="619"><font size=-1>619     </font></a><span class="default">        </span><span class="keyword">return new <a href="dictionary_R.html#1698">RealmQuery</a></span><span class="default">&lt;<a href="dictionary_W.html#5259">E</a>&gt;(</span><span class="keyword">this</span><span class="default">, <a href="dictionary_C.html#5260">clazz</a>);</span>
+<a name="620"><font size=-1>620     </font></a><span class="default">    }</span>
+<a name="621"><font size=-1>621     </font></a><span class="default"></span>
+<a name="622"><font size=-1>622     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="623"><font size=-1>623     </font></a><span class="comment">     * Get all objects of a specific Class</span>
+<a name="624"><font size=-1>624     </font></a><span class="comment">     *</span>
+<a name="625"><font size=-1>625     </font></a><span class="comment">     * @param clazz the Class to get objects of</span>
+<a name="626"><font size=-1>626     </font></a><span class="comment">     * @return A RealmResult list containing the objects</span>
+<a name="627"><font size=-1>627     </font></a><span class="comment">     * @throws java.lang.RuntimeException Any other error</span>
+<a name="628"><font size=-1>628     </font></a><span class="comment">     * @see io.realm.RealmResults</span>
+<a name="629"><font size=-1>629     </font></a><span class="comment">     */</span>
+<a name="630"><font size=-1>630     </font></a><span class="comment">    </span><span class="keyword">public </span><span class="default">&lt;<a href="dictionary_A.html#5087">E</a> </span><span class="keyword">extends <a href="dictionary_R.html#418">RealmObject</a></span><span class="default">&gt; <a href="dictionary_R.html#325">RealmResults</a>&lt;<a href="dictionary_A.html#5087">E</a>&gt; <a href="dictionary_R.html#1193">allObjects</a>(<a href="dictionary_C.html#1693">Class</a>&lt;<a href="dictionary_A.html#5087">E</a>&gt; <a href="dictionary_C.html#5088">clazz</a>) {</span>
+<a name="631"><font size=-1>631     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#1202">where</a></span><span class="default">(<a href="dictionary_C.html#5088">clazz</a>).<a href="dictionary_R.html#1203">findAll</a>();</span>
+<a name="632"><font size=-1>632     </font></a><span class="default">    }</span>
+<a name="633"><font size=-1>633     </font></a><span class="default"></span>
+<a name="634"><font size=-1>634     </font></a><span class="default">    </span><span class="comment">// Notifications</span>
+<a name="635"><font size=-1>635     </font></a><span class="comment"></span>
+<a name="636"><font size=-1>636     </font></a><span class="comment">    /**</span>
+<a name="637"><font size=-1>637     </font></a><span class="comment">     * Add a change listener to the Realm</span>
+<a name="638"><font size=-1>638     </font></a><span class="comment">     *</span>
+<a name="639"><font size=-1>639     </font></a><span class="comment">     * @param listener the change listener</span>
+<a name="640"><font size=-1>640     </font></a><span class="comment">     * @see io.realm.RealmChangeListener</span>
+<a name="641"><font size=-1>641     </font></a><span class="comment">     */</span>
+<a name="642"><font size=-1>642     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#4268">addChangeListener</a></span><span class="default">(<a href="dictionary_R.html#4269">RealmChangeListener</a> <a href="dictionary_L.html#5086">listener</a>) {</span>
+<a name="643"><font size=-1>643     </font></a><span class="default">        <a href="dictionary_R.html#5267">changeListeners</a>.<a href="dictionary_A.html#1045">add</a>(<a href="dictionary_L.html#5086">listener</a>);</span>
+<a name="644"><font size=-1>644     </font></a><span class="default">    }</span>
+<a name="645"><font size=-1>645     </font></a><span class="default"></span>
+<a name="646"><font size=-1>646     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="647"><font size=-1>647     </font></a><span class="comment">     * Remove the specified change listener</span>
+<a name="648"><font size=-1>648     </font></a><span class="comment">     *</span>
+<a name="649"><font size=-1>649     </font></a><span class="comment">     * @param listener the change listener to be removed</span>
+<a name="650"><font size=-1>650     </font></a><span class="comment">     * @see io.realm.RealmChangeListener</span>
+<a name="651"><font size=-1>651     </font></a><span class="comment">     */</span>
+<a name="652"><font size=-1>652     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#5249">removeChangeListener</a></span><span class="default">(<a href="dictionary_R.html#4269">RealmChangeListener</a> <a href="dictionary_L.html#5250">listener</a>) {</span>
+<a name="653"><font size=-1>653     </font></a><span class="default">        <a href="dictionary_R.html#5267">changeListeners</a>.<a href="dictionary_R.html#4692">remove</a>(<a href="dictionary_L.html#5250">listener</a>);</span>
+<a name="654"><font size=-1>654     </font></a><span class="default">    }</span>
+<a name="655"><font size=-1>655     </font></a><span class="default"></span>
+<a name="656"><font size=-1>656     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="657"><font size=-1>657     </font></a><span class="comment">     * Remove all user-defined change listeners</span>
+<a name="658"><font size=-1>658     </font></a><span class="comment">     *</span>
+<a name="659"><font size=-1>659     </font></a><span class="comment">     * @see io.realm.RealmChangeListener</span>
+<a name="660"><font size=-1>660     </font></a><span class="comment">     */</span>
+<a name="661"><font size=-1>661     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#5247">removeAllChangeListeners</a></span><span class="default">() {</span>
+<a name="662"><font size=-1>662     </font></a><span class="default">        <a href="dictionary_R.html#5267">changeListeners</a>.<a href="dictionary_C.html#5248">clear</a>();</span>
+<a name="663"><font size=-1>663     </font></a><span class="default">    }</span>
+<a name="664"><font size=-1>664     </font></a><span class="default"></span>
+<a name="665"><font size=-1>665     </font></a><span class="default">    </span><span class="keyword">void <a href="dictionary_R.html#5251">sendNotifications</a></span><span class="default">() {</span>
+<a name="666"><font size=-1>666     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_R.html#4269">RealmChangeListener</a> <a href="dictionary_L.html#5252">listener</a> : <a href="dictionary_R.html#5267">changeListeners</a>) {</span>
+<a name="667"><font size=-1>667     </font></a><span class="default">            <a href="dictionary_L.html#5252">listener</a>.<a href="dictionary_R.html#4270">onChange</a>();</span>
+<a name="668"><font size=-1>668     </font></a><span class="default">        }</span>
+<a name="669"><font size=-1>669     </font></a><span class="default">    }</span>
+<a name="670"><font size=-1>670     </font></a><span class="default"></span>
+<a name="671"><font size=-1>671     </font></a><span class="default">    @<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="672"><font size=-1>672     </font></a><span class="default">    </span><span class="keyword">boolean <a href="dictionary_R.html#5224">hasChanged</a></span><span class="default">() {</span>
+<a name="673"><font size=-1>673     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5278">sharedGroup</a></span><span class="default">.<a href="dictionary_S.html#2728">hasChanged</a>();</span>
+<a name="674"><font size=-1>674     </font></a><span class="default">    }</span>
+<a name="675"><font size=-1>675     </font></a><span class="default"></span>
+<a name="676"><font size=-1>676     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="677"><font size=-1>677     </font></a><span class="comment">     * Transactions</span>
+<a name="678"><font size=-1>678     </font></a><span class="comment">     */</span>
+<a name="679"><font size=-1>679     </font></a><span class="comment"></span>
+<a name="680"><font size=-1>680     </font></a><span class="comment">    /**</span>
+<a name="681"><font size=-1>681     </font></a><span class="comment">     * Refresh the Realm instance and all the RealmResults and RealmObjects instances coming from it</span>
+<a name="682"><font size=-1>682     </font></a><span class="comment">     */</span>
+<a name="683"><font size=-1>683     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="684"><font size=-1>684     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_R.html#5243">refresh</a></span><span class="default">() {</span>
+<a name="685"><font size=-1>685     </font></a><span class="default">        <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_I.html#5288">advanceRead</a>();</span>
+<a name="686"><font size=-1>686     </font></a><span class="default">    }</span>
+<a name="687"><font size=-1>687     </font></a><span class="default"></span>
+<a name="688"><font size=-1>688     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="689"><font size=-1>689     </font></a><span class="comment">     * Starts a write transaction, this must be closed with {@link io.realm.Realm#commitTransaction()}</span>
+<a name="690"><font size=-1>690     </font></a><span class="comment">     * or aborted by @{link io.realm.Realm#cancelTransaction()}. Write transactions are used to</span>
+<a name="691"><font size=-1>691     </font></a><span class="comment">     * atomically create, update and delete objects within a realm.</span>
+<a name="692"><font size=-1>692     </font></a><span class="comment">     * &lt;br&gt;</span>
+<a name="693"><font size=-1>693     </font></a><span class="comment">     * Before beginning the write transaction, @{link io.realm.Realm#beginTransaction()} updates the</span>
+<a name="694"><font size=-1>694     </font></a><span class="comment">     * realm in the case of pending updates from other threads.</span>
+<a name="695"><font size=-1>695     </font></a><span class="comment">     * &lt;br&gt;</span>
+<a name="696"><font size=-1>696     </font></a><span class="comment">     * Notice: it is not possible to nest write transactions. If you start a write</span>
+<a name="697"><font size=-1>697     </font></a><span class="comment">     * transaction within a write transaction an exception is thrown.</span>
+<a name="698"><font size=-1>698     </font></a><span class="comment">     * &lt;br&gt;</span>
+<a name="699"><font size=-1>699     </font></a><span class="comment">     * @throws java.lang.IllegalStateException If already in a write transaction.</span>
+<a name="700"><font size=-1>700     </font></a><span class="comment">     *</span>
+<a name="701"><font size=-1>701     </font></a><span class="comment">     */</span>
+<a name="702"><font size=-1>702     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#363">beginTransaction</a></span><span class="default">() {</span>
+<a name="703"><font size=-1>703     </font></a><span class="default">        <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_I.html#5289">promoteToWrite</a>();</span>
+<a name="704"><font size=-1>704     </font></a><span class="default">    }</span>
+<a name="705"><font size=-1>705     </font></a><span class="default"></span>
+<a name="706"><font size=-1>706     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="707"><font size=-1>707     </font></a><span class="comment">     * All changes since @{link io.realm.Realm#beginTransaction()} are persisted to disk and the</span>
+<a name="708"><font size=-1>708     </font></a><span class="comment">     * realm reverts back to being read-only. An event is sent to notify all other realm instances</span>
+<a name="709"><font size=-1>709     </font></a><span class="comment">     * that a change has occurred. When the event is received, the other realms will get their</span>
+<a name="710"><font size=-1>710     </font></a><span class="comment">     * objects and @{link io.realm.RealmResults} updated to reflect</span>
+<a name="711"><font size=-1>711     </font></a><span class="comment">     * the changes from this commit.</span>
+<a name="712"><font size=-1>712     </font></a><span class="comment">     * </span>
+<a name="713"><font size=-1>713     </font></a><span class="comment">     * @throws java.lang.IllegalStateException If the write transaction is in an invalid state.</span>
+<a name="714"><font size=-1>714     </font></a><span class="comment">     */</span>
+<a name="715"><font size=-1>715     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#366">commitTransaction</a></span><span class="default">() {</span>
+<a name="716"><font size=-1>716     </font></a><span class="default">        <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_I.html#5291">commitAndContinueAsRead</a>();</span>
+<a name="717"><font size=-1>717     </font></a><span class="default"></span>
+<a name="718"><font size=-1>718     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_M.html#5284">Map</a>.<a href="dictionary_M.html#5067">Entry</a>&lt;<a href="dictionary_O.html#5068">Handler</a>, <a href="dictionary_I.html#1695">Integer</a>&gt; <a href="dictionary_H.html#5099">handlerIntegerEntry</a> : <a href="dictionary_R.html#5274">handlers</a>.<a href="dictionary_E.html#5090">entrySet</a>()) {</span>
+<a name="719"><font size=-1>719     </font></a><span class="default">            <a href="dictionary_O.html#5068">Handler</a> <a href="dictionary_H.html#5098">handler</a> = <a href="dictionary_H.html#5099">handlerIntegerEntry</a>.<a href="dictionary_G.html#5091">getKey</a>();</span>
+<a name="720"><font size=-1>720     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_R.html#5100">realmId</a> </span><span class="default">= <a href="dictionary_H.html#5099">handlerIntegerEntry</a>.<a href="dictionary_G.html#5094">getValue</a>();</span>
+<a name="721"><font size=-1>721     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(</span>
+<a name="722"><font size=-1>722     </font></a><span class="default">                    <a href="dictionary_R.html#5100">realmId</a> == <a href="dictionary_R.html#5275">id</a>                                </span><span class="comment">// It's the right realm</span>
+<a name="723"><font size=-1>723     </font></a><span class="comment">                    </span><span class="default">&amp;&amp; !<a href="dictionary_H.html#5098">handler</a>.<a href="dictionary_H.html#5095">hasMessages</a>(<a href="dictionary_R.html#5262">REALM_CHANGED</a>)       </span><span class="comment">// The right message</span>
+<a name="724"><font size=-1>724     </font></a><span class="comment">                    </span><span class="default">&amp;&amp; <a href="dictionary_H.html#5098">handler</a>.<a href="dictionary_G.html#5092">getLooper</a>().<a href="dictionary_G.html#5093">getThread</a>().<a href="dictionary_I.html#5096">isAlive</a>() </span><span class="comment">// The receiving thread is alive</span>
+<a name="725"><font size=-1>725     </font></a><span class="comment">            </span><span class="default">) {</span>
+<a name="726"><font size=-1>726     </font></a><span class="default">                <a href="dictionary_H.html#5098">handler</a>.<a href="dictionary_S.html#5097">sendEmptyMessage</a>(<a href="dictionary_R.html#5262">REALM_CHANGED</a>);</span>
+<a name="727"><font size=-1>727     </font></a><span class="default">            }</span>
+<a name="728"><font size=-1>728     </font></a><span class="default">        }</span>
+<a name="729"><font size=-1>729     </font></a><span class="default">    }</span>
+<a name="730"><font size=-1>730     </font></a><span class="default"></span>
+<a name="731"><font size=-1>731     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="732"><font size=-1>732     </font></a><span class="comment">     * Revert all writes (created, updated, or deleted objects) made in the current write</span>
+<a name="733"><font size=-1>733     </font></a><span class="comment">     * transaction and end the transaction.</span>
+<a name="734"><font size=-1>734     </font></a><span class="comment">     * &lt;br&gt;</span>
+<a name="735"><font size=-1>735     </font></a><span class="comment">     * The realm reverts back to read-only.</span>
+<a name="736"><font size=-1>736     </font></a><span class="comment">     * &lt;br&gt;</span>
+<a name="737"><font size=-1>737     </font></a><span class="comment">     * Calling this when not in a write transaction will throw an exception.</span>
+<a name="738"><font size=-1>738     </font></a><span class="comment">     *</span>
+<a name="739"><font size=-1>739     </font></a><span class="comment">     * @throws java.lang.IllegalStateException    If the write transaction is an invalid state or</span>
+<a name="740"><font size=-1>740     </font></a><span class="comment">    *                                             not in a write transaction.</span>
+<a name="741"><font size=-1>741     </font></a><span class="comment">    */</span>
+<a name="742"><font size=-1>742     </font></a><span class="comment">     </span><span class="keyword">public void <a href="dictionary_R.html#3244">cancelTransaction</a></span><span class="default">() {</span>
+<a name="743"><font size=-1>743     </font></a><span class="default">         <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_I.html#5290">rollbackAndContinueAsRead</a>();</span>
+<a name="744"><font size=-1>744     </font></a><span class="default">     }</span>
+<a name="745"><font size=-1>745     </font></a><span class="default"></span>
+<a name="746"><font size=-1>746     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="747"><font size=-1>747     </font></a><span class="comment">     * Remove all objects of the specified class.</span>
+<a name="748"><font size=-1>748     </font></a><span class="comment">     *</span>
+<a name="749"><font size=-1>749     </font></a><span class="comment">     * @param classSpec The class which objects should be removed</span>
+<a name="750"><font size=-1>750     </font></a><span class="comment">     * @throws java.lang.RuntimeException Any other error</span>
+<a name="751"><font size=-1>751     </font></a><span class="comment">     */</span>
+<a name="752"><font size=-1>752     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_R.html#1565">clear</a></span><span class="default">(<a href="dictionary_C.html#1693">Class</a>&lt;?&gt; <a href="dictionary_C.html#5089">classSpec</a>) {</span>
+<a name="753"><font size=-1>753     </font></a><span class="default">        <a href="dictionary_R.html#1306">getTable</a>(<a href="dictionary_C.html#5089">classSpec</a>).<a href="dictionary_T.html#4906">clear</a>();</span>
+<a name="754"><font size=-1>754     </font></a><span class="default">    }</span>
+<a name="755"><font size=-1>755     </font></a><span class="default"></span>
+<a name="756"><font size=-1>756     </font></a><span class="default">    </span><span class="comment">// package protected so unit tests can access it</span>
+<a name="757"><font size=-1>757     </font></a><span class="comment">    </span><span class="keyword">long <a href="dictionary_R.html#3245">getVersion</a></span><span class="default">() {</span>
+<a name="758"><font size=-1>758     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_G.html#5292">hasTable</a>(</span><span class="string">&quot;metadata&quot;</span><span class="default">)) {</span>
+<a name="759"><font size=-1>759     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_R.html#5265">UNVERSIONED</a></span><span class="default">;</span>
+<a name="760"><font size=-1>760     </font></a><span class="default">        }</span>
+<a name="761"><font size=-1>761     </font></a><span class="default">        <a href="dictionary_I.html#376">Table</a> <a href="dictionary_M.html#5223">metadataTable</a> = <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_G.html#4900">getTable</a>(</span><span class="string">&quot;metadata&quot;</span><span class="default">);</span>
+<a name="762"><font size=-1>762     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_M.html#5223">metadataTable</a></span><span class="default">.<a href="dictionary_T.html#5300">getLong</a>(</span><span class="number">0</span><span class="default">, </span><span class="number">0</span><span class="default">);</span>
+<a name="763"><font size=-1>763     </font></a><span class="default">    }</span>
+<a name="764"><font size=-1>764     </font></a><span class="default"></span>
+<a name="765"><font size=-1>765     </font></a><span class="default">    </span><span class="comment">// package protected so unit tests can access it</span>
+<a name="766"><font size=-1>766     </font></a><span class="comment">    </span><span class="keyword">void <a href="dictionary_R.html#3246">setVersion</a></span><span class="default">(</span><span class="keyword">long <a href="dictionary_V.html#5258">version</a></span><span class="default">) {</span>
+<a name="767"><font size=-1>767     </font></a><span class="default">        <a href="dictionary_I.html#376">Table</a> <a href="dictionary_M.html#5257">metadataTable</a> = <a href="dictionary_R.html#5281">transaction</a>.<a href="dictionary_G.html#4900">getTable</a>(</span><span class="string">&quot;metadata&quot;</span><span class="default">);</span>
+<a name="768"><font size=-1>768     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#5257">metadataTable</a>.<a href="dictionary_T.html#2550">getColumnCount</a>() == </span><span class="number">0</span><span class="default">) {</span>
+<a name="769"><font size=-1>769     </font></a><span class="default">            <a href="dictionary_M.html#5257">metadataTable</a>.<a href="dictionary_T.html#382">addColumn</a>(<a href="dictionary_I.html#378">ColumnType</a>.<a href="dictionary_C.html#1946">INTEGER</a>, </span><span class="string">&quot;version&quot;</span><span class="default">);</span>
+<a name="770"><font size=-1>770     </font></a><span class="default">            <a href="dictionary_M.html#5257">metadataTable</a>.<a href="dictionary_T.html#2516">addEmptyRow</a>();</span>
+<a name="771"><font size=-1>771     </font></a><span class="default">        }</span>
+<a name="772"><font size=-1>772     </font></a><span class="default">        <a href="dictionary_M.html#5257">metadataTable</a>.<a href="dictionary_T.html#2934">setLong</a>(</span><span class="number">0</span><span class="default">, </span><span class="number">0</span><span class="default">, <a href="dictionary_V.html#5258">version</a>);</span>
+<a name="773"><font size=-1>773     </font></a><span class="default">    }</span>
+<a name="774"><font size=-1>774     </font></a><span class="default"></span>
+<a name="775"><font size=-1>775     </font></a><span class="default">    @<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="776"><font size=-1>776     </font></a><span class="default">    </span><span class="keyword">static public void <a href="dictionary_R.html#5038">migrateRealmAtPath</a></span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5227">realmPath</a>, <a href="dictionary_R.html#1310">RealmMigration</a> <a href="dictionary_M.html#5226">migration</a>) {</span>
+<a name="777"><font size=-1>777     </font></a><span class="default">        <a href="dictionary_R.html#5236">migrateRealmAtPath</a>(<a href="dictionary_R.html#5227">realmPath</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_M.html#5226">migration</a>, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="778"><font size=-1>778     </font></a><span class="default">    }</span>
+<a name="779"><font size=-1>779     </font></a><span class="default"></span>
+<a name="780"><font size=-1>780     </font></a><span class="default">    </span><span class="keyword">static public void <a href="dictionary_R.html#5228">migrateRealmAtPath</a></span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5231">realmPath</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5229">key</a>, <a href="dictionary_R.html#1310">RealmMigration</a> <a href="dictionary_M.html#5230">migration</a>) {</span>
+<a name="781"><font size=-1>781     </font></a><span class="default">        <a href="dictionary_R.html#5236">migrateRealmAtPath</a>(<a href="dictionary_R.html#5231">realmPath</a>, <a href="dictionary_K.html#5229">key</a>, <a href="dictionary_M.html#5230">migration</a>, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="782"><font size=-1>782     </font></a><span class="default">    }</span>
+<a name="783"><font size=-1>783     </font></a><span class="default"></span>
+<a name="784"><font size=-1>784     </font></a><span class="default">    @<a href="dictionary_S.html#44">SuppressWarnings</a>(</span><span class="string">&quot;UnusedDeclaration&quot;</span><span class="default">)</span>
+<a name="785"><font size=-1>785     </font></a><span class="default">    </span><span class="keyword">static public void <a href="dictionary_R.html#5232">migrateRealmAtPath</a></span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5235">realmPath</a>, <a href="dictionary_R.html#1310">RealmMigration</a> <a href="dictionary_M.html#5234">migration</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5233">autoRefresh</a></span><span class="default">) {</span>
+<a name="786"><font size=-1>786     </font></a><span class="default">        <a href="dictionary_R.html#5236">migrateRealmAtPath</a>(<a href="dictionary_R.html#5235">realmPath</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_M.html#5234">migration</a>, <a href="dictionary_A.html#5233">autoRefresh</a>);</span>
+<a name="787"><font size=-1>787     </font></a><span class="default">    }</span>
+<a name="788"><font size=-1>788     </font></a><span class="default"></span>
+<a name="789"><font size=-1>789     </font></a><span class="default">    </span><span class="keyword">static public void <a href="dictionary_R.html#5236">migrateRealmAtPath</a></span><span class="default">(<a href="dictionary_S.html#43">String</a> <a href="dictionary_R.html#5241">realmPath</a>, </span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_K.html#5238">key</a>, <a href="dictionary_R.html#1310">RealmMigration</a> <a href="dictionary_M.html#5239">migration</a>, </span><span class="keyword">boolean <a href="dictionary_A.html#5237">autoUpdate</a></span><span class="default">) {</span>
+<a name="790"><font size=-1>790     </font></a><span class="default">        <a href="dictionary_R.html#357">Realm</a> <a href="dictionary_R.html#5240">realm</a> = <a href="dictionary_R.html#357">Realm</a>.<a href="dictionary_R.html#5109">createAndValidate</a>(<a href="dictionary_R.html#5241">realmPath</a>, <a href="dictionary_K.html#5238">key</a>, </span><span class="keyword">false</span><span class="default">, <a href="dictionary_A.html#5237">autoUpdate</a>);</span>
+<a name="791"><font size=-1>791     </font></a><span class="default">        <a href="dictionary_R.html#5240">realm</a>.<a href="dictionary_R.html#363">beginTransaction</a>();</span>
+<a name="792"><font size=-1>792     </font></a><span class="default">        <a href="dictionary_R.html#5240">realm</a>.<a href="dictionary_R.html#3246">setVersion</a>(<a href="dictionary_M.html#5239">migration</a>.<a href="dictionary_R.html#1311">execute</a>(<a href="dictionary_R.html#5240">realm</a>, <a href="dictionary_R.html#5240">realm</a>.<a href="dictionary_R.html#3245">getVersion</a>()));</span>
+<a name="793"><font size=-1>793     </font></a><span class="default">        <a href="dictionary_R.html#5240">realm</a>.<a href="dictionary_R.html#366">commitTransaction</a>();</span>
+<a name="794"><font size=-1>794     </font></a><span class="default"></span>
+<a name="795"><font size=-1>795     </font></a><span class="default">        <a href="dictionary_U.html#1696">Map</a>&lt;<a href="dictionary_S.html#43">String</a>, <a href="dictionary_R.html#357">Realm</a>&gt; <a href="dictionary_R.html#5242">realms</a> = <a href="dictionary_R.html#5277">realmsCache</a>.<a href="dictionary_G.html#1061">get</a>();</span>
+<a name="796"><font size=-1>796     </font></a><span class="default">        <a href="dictionary_R.html#5242">realms</a>.<a href="dictionary_P.html#1699">put</a>(<a href="dictionary_R.html#5241">realmPath</a>, </span><span class="keyword">new <a href="dictionary_R.html#5082">Realm</a></span><span class="default">(<a href="dictionary_R.html#5241">realmPath</a>, <a href="dictionary_K.html#5238">key</a>, <a href="dictionary_A.html#5237">autoUpdate</a>));</span>
+<a name="797"><font size=-1>797     </font></a><span class="default">        <a href="dictionary_R.html#5277">realmsCache</a>.<a href="dictionary_S.html#5113">set</a>(<a href="dictionary_R.html#5242">realms</a>);</span>
+<a name="798"><font size=-1>798     </font></a><span class="default">    }</span>
+<a name="799"><font size=-1>799     </font></a><span class="default"></span>
+<a name="800"><font size=-1>800     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="801"><font size=-1>801     </font></a><span class="comment">     * Delete the Realm file from the filesystem for the default Realm (named &quot;default.realm&quot;).</span>
+<a name="802"><font size=-1>802     </font></a><span class="comment">     * The realm must be unused and closed before calling this method.</span>
+<a name="803"><font size=-1>803     </font></a><span class="comment">     * WARNING: Your Realm must not be open (typically when your app launch).</span>
+<a name="804"><font size=-1>804     </font></a><span class="comment">     *</span>
+<a name="805"><font size=-1>805     </font></a><span class="comment">     * @param context an Android context.</span>
+<a name="806"><font size=-1>806     </font></a><span class="comment">     * @return false if a file could not be deleted. The failing file will be logged.</span>
+<a name="807"><font size=-1>807     </font></a><span class="comment">     * @see io.realm.Realm#clear(Class)</span>
+<a name="808"><font size=-1>808     </font></a><span class="comment">     */</span>
+<a name="809"><font size=-1>809     </font></a><span class="comment">    </span><span class="keyword">public static boolean <a href="dictionary_R.html#1192">deleteRealmFile</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5164">context</a>) {</span>
+<a name="810"><font size=-1>810     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5165">deleteRealmFile</a></span><span class="default">(<a href="dictionary_C.html#5164">context</a>, <a href="dictionary_R.html#5261">DEFAULT_REALM_NAME</a>);</span>
+<a name="811"><font size=-1>811     </font></a><span class="default">    }</span>
+<a name="812"><font size=-1>812     </font></a><span class="default"></span>
+<a name="813"><font size=-1>813     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="814"><font size=-1>814     </font></a><span class="comment">     * Delete the Realm file from the filesystem for a custom named Realm.</span>
+<a name="815"><font size=-1>815     </font></a><span class="comment">     * The realm must be unused and closed before calling this method.</span>
+<a name="816"><font size=-1>816     </font></a><span class="comment">     *</span>
+<a name="817"><font size=-1>817     </font></a><span class="comment">     * @param context  an Android @{{@link android.content.Context}.</span>
+<a name="818"><font size=-1>818     </font></a><span class="comment">     * @param fileName the name of the custom Realm (i.e. &quot;myCustomRealm.realm&quot;).</span>
+<a name="819"><font size=-1>819     </font></a><span class="comment">     * @return false if a file could not be deleted. The failing file will be logged.</span>
+<a name="820"><font size=-1>820     </font></a><span class="comment">     */</span>
+<a name="821"><font size=-1>821     </font></a><span class="comment">    </span><span class="keyword">public static boolean <a href="dictionary_R.html#5165">deleteRealmFile</a></span><span class="default">(<a href="dictionary_C.html#290">Context</a> <a href="dictionary_C.html#5169">context</a>, <a href="dictionary_S.html#43">String</a> <a href="dictionary_F.html#5170">fileName</a>) {</span>
+<a name="822"><font size=-1>822     </font></a><span class="default">        </span><span class="keyword">boolean <a href="dictionary_R.html#5172">result</a> </span><span class="default">= </span><span class="keyword">true</span><span class="default">;</span>
+<a name="823"><font size=-1>823     </font></a><span class="default">        <a href="dictionary_I.html#350">File</a> <a href="dictionary_W.html#5173">writableFolder</a> = <a href="dictionary_C.html#5169">context</a>.<a href="dictionary_G.html#4572">getFilesDir</a>();</span>
+<a name="824"><font size=-1>824     </font></a><span class="default">        <a href="dictionary_U.html#1026">List</a>&lt;<a href="dictionary_I.html#350">File</a>&gt; <a href="dictionary_F.html#5171">filesToDelete</a> = <a href="dictionary_U.html#1351">Arrays</a>.<a href="dictionary_A.html#1354">asList</a>(</span>
+<a name="825"><font size=-1>825     </font></a><span class="default">                </span><span class="keyword">new <a href="dictionary_I.html#350">File</a></span><span class="default">(<a href="dictionary_W.html#5173">writableFolder</a>, <a href="dictionary_F.html#5170">fileName</a>),</span>
+<a name="826"><font size=-1>826     </font></a><span class="default">                </span><span class="keyword">new <a href="dictionary_I.html#350">File</a></span><span class="default">(<a href="dictionary_W.html#5173">writableFolder</a>, <a href="dictionary_F.html#5170">fileName</a> + </span><span class="string">&quot;.lock&quot;</span><span class="default">));</span>
+<a name="827"><font size=-1>827     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_I.html#350">File</a> <a href="dictionary_F.html#5168">fileToDelete</a> : <a href="dictionary_F.html#5171">filesToDelete</a>) {</span>
+<a name="828"><font size=-1>828     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_F.html#5168">fileToDelete</a>.<a href="dictionary_E.html#4812">exists</a>()) {</span>
+<a name="829"><font size=-1>829     </font></a><span class="default">                </span><span class="keyword">boolean <a href="dictionary_D.html#5167">deleteResult</a> </span><span class="default">= <a href="dictionary_F.html#5168">fileToDelete</a>.<a href="dictionary_D.html#4811">delete</a>();</span>
+<a name="830"><font size=-1>830     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_D.html#5167">deleteResult</a>) {</span>
+<a name="831"><font size=-1>831     </font></a><span class="default">                    <a href="dictionary_R.html#5172">result</a> = </span><span class="keyword">false</span><span class="default">;</span>
+<a name="832"><font size=-1>832     </font></a><span class="default">                    <a href="dictionary_U.html#352">Log</a>.<a href="dictionary_W.html#5166">w</a>(<a href="dictionary_R.html#5264">TAG</a>, </span><span class="string">&quot;Could not delete the file &quot; </span><span class="default">+ <a href="dictionary_F.html#5168">fileToDelete</a>);</span>
+<a name="833"><font size=-1>833     </font></a><span class="default">                }</span>
+<a name="834"><font size=-1>834     </font></a><span class="default">            }</span>
+<a name="835"><font size=-1>835     </font></a><span class="default">        }</span>
+<a name="836"><font size=-1>836     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_R.html#5172">result</a></span><span class="default">;</span>
+<a name="837"><font size=-1>837     </font></a><span class="default">    }</span>
+<a name="838"><font size=-1>838     </font></a><span class="default">}</span>
+<a name="839"><font size=-1>839     </font></a><span class="default"></span>
+</pre></body></html>
