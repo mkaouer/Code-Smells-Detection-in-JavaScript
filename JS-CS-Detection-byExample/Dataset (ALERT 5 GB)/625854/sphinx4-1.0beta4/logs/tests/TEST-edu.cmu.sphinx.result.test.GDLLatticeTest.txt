@@ -1,0 +1,8 @@
+Testsuite: edu.cmu.sphinx.result.test.GDLLatticeTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,986 sec
+------------- Standard Error -----------------
+Dumping New Lattice to newLattice.gdl
+Dumping New Sausage to newSausage.gdl
+------------- ---------------- ---------------
+
+Testcase: testGDLLattice took 0,968 sec

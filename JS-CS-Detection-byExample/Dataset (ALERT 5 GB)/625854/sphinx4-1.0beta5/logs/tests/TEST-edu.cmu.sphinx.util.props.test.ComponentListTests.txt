@@ -1,0 +1,4 @@
+Testsuite: edu.cmu.sphinx.util.props.test.ComponentListTests
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,074 sec
+
+Testcase: testInvalidList took 0,047 sec

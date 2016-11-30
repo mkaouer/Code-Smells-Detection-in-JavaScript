@@ -1,0 +1,43 @@
+<html><head><title>FeatureScorePruner.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta4\src\research\edu\cmu\sphinx\research\parallel\FeatureScorePruner.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta4\\src\\research\\edu\\cmu\\sphinx\\research\\parallel\\FeatureScorePruner.java";
+top.document.title  = "FeatureScorePruner.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">* Copyright 1999-2002 Carnegie Mellon University.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">* Portions Copyright 2002 Sun Microsystems, Inc.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment">* Portions Copyright 2002 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment">* All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment">*</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment">* See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment">* redistribution of this file, and for a DISCLAIMER OF ALL</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment">* WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment">*</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment">*/</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.research.<a href="dictionary_E.html#2690">parallel</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.decoder.<a href="dictionary_E.html#204">search</a>.<a href="dictionary_E.html#232">Token</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="comment">/** Prunes an ActiveList of ParallelTokens based on their FeatureScore. */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#11595">FeatureScorePruner</a> extends <a href="dictionary_E.html#11599">TokenScorePruner</a> </span><span class="default">{</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">     * Returns the score that we use to compare this ParallelToken with other ParallelTokens.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">     *</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">     * @param token the ParallelToken to compare</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment">     * @return the score we use for comparison</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment">     */</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">    </span><span class="keyword">protected float <a href="dictionary_E.html#11596">getTokenScore</a></span><span class="default">(<a href="dictionary_E.html#232">Token</a> <a href="dictionary_E.html#11598">token</a>) {</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">        <a href="dictionary_E.html#2692">ParallelToken</a> <a href="dictionary_E.html#11597">parallelToken</a> = (ParallelToken) <a href="dictionary_E.html#11598">token</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#11597">parallelToken</a></span><span class="default">.<a href="dictionary_E.html#2702">getFeatureScore</a>();</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    }</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">}</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+</pre></body></html>

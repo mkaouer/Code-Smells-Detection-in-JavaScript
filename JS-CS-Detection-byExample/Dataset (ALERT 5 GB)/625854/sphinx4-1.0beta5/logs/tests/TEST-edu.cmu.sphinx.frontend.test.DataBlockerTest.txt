@@ -1,0 +1,6 @@
+Testsuite: edu.cmu.sphinx.frontend.test.DataBlockerTest
+Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0,063 sec
+
+Testcase: testLongInput took 0,016 sec
+Testcase: testUsualInput took 0 sec
+Testcase: skipLastSamples took 0 sec

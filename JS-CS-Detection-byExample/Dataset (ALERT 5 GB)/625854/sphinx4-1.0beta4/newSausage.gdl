@@ -1,0 +1,40 @@
+graph: {
+title: "New Sausage"
+display_edge_labels: yes
+orientation: left_to_right
+node: { title: "0" label: "0"}
+edge: { sourcename: "0" targetname: "1" label: "<s>:0.0" }
+node: { title: "1" label: "1"}
+edge: { sourcename: "1" targetname: "2" label: "of:-60584.80078125" }
+edge: { sourcename: "1" targetname: "2" label: "upper:-35872.76953125" }
+edge: { sourcename: "1" targetname: "2" label: "a:-17536.33203125" }
+edge: { sourcename: "1" targetname: "2" label: "up:-2270.14453125" }
+node: { title: "2" label: "2"}
+edge: { sourcename: "2" targetname: "3" label: "middle:-55809.231689453125" }
+edge: { sourcename: "2" targetname: "3" label: "little:-37336.325439453125" }
+edge: { sourcename: "2" targetname: "3" label: "purple:-280.4945983886719" }
+node: { title: "3" label: "3"}
+edge: { sourcename: "3" targetname: "4" label: "one:0.0" }
+node: { title: "4" label: "4"}
+edge: { sourcename: "4" targetname: "5" label: "on:0.0" }
+node: { title: "5" label: "5"}
+edge: { sourcename: "5" targetname: "6" label: "the:0.0" }
+node: { title: "6" label: "6"}
+edge: { sourcename: "6" targetname: "7" label: "top:0.0" }
+node: { title: "7" label: "7"}
+edge: { sourcename: "7" targetname: "8" label: "right:0.0" }
+node: { title: "8" label: "8"}
+edge: { sourcename: "8" targetname: "9" label: "corner:0.0" }
+node: { title: "9" label: "9"}
+edge: { sourcename: "9" targetname: "10" label: "are:-85674.0" }
+edge: { sourcename: "9" targetname: "10" label: "<noop>:-1.9001365900039673" }
+node: { title: "10" label: "10"}
+edge: { sourcename: "10" targetname: "11" label: "<noop>:-45203.71484375" }
+edge: { sourcename: "10" targetname: "11" label: "<sil>:-109.37621307373047" }
+node: { title: "11" label: "11"}
+edge: { sourcename: "11" targetname: "12" label: "<sil>:-7150.5712890625" }
+edge: { sourcename: "11" targetname: "12" label: "<noop>:-6715.49755859375" }
+node: { title: "12" label: "12"}
+edge: { sourcename: "12" targetname: "13" label: "</s>:0.0" }
+node: { title: "13" label: "13"}
+}

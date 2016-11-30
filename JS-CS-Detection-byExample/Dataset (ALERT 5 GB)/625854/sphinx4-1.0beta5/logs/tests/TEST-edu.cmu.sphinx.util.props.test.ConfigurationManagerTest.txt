@@ -1,0 +1,9 @@
+Testsuite: edu.cmu.sphinx.util.props.test.ConfigurationManagerTest
+Tests run: 6, Failures: 0, Errors: 0, Time elapsed: 0,307 sec
+
+Testcase: testDynamicConfCreation took 0,066 sec
+Testcase: testSerialization took 0,127 sec
+Testcase: testDynamicConfiguruationChange took 0,01 sec
+Testcase: testSerializeDynamicConfiguration took 0,003 sec
+Testcase: testXmlExtendedConfiguration took 0,053 sec
+Testcase: testGetComponentClass took 0,013 sec

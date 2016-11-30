@@ -1,0 +1,591 @@
+file: remoteX.txt
+date: Tue, 31 Aug 2010 23:07:57 (local)
+Linklint version: 2.3.5
+
+#------------------------------------------------------------
+# found 131 http links (cross referenced)
+#------------------------------------------------------------
+http://ant.apache.org
+    used in 2 files:
+    /
+    /index.html
+
+http://ant.apache.org/
+    used in 2 files:
+    /
+    /index.html
+
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.40.4377
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://cmusphinx.sourceforge.net
+    used in 2 files:
+    /
+    /index.html
+
+http://cmusphinx.sourceforge.net/sphinx4/javadoc/index.html
+    used in 2 files:
+    /
+    /index.html
+
+http://cmusphinx.sourceforge.net/sphinx4/src/apps/edu/cmu/sphinx/demo/zipcity/zipcity.jnlp
+    used in 2 files:
+    /
+    /index.html
+
+http://cmusphinx.sourceforge.net/wiki/
+    used in 2 files:
+    /
+    /index.html
+
+http://cygwin.com
+    used in 2 files:
+    /
+    /index.html
+
+http://freetts.sourceforge.net
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://java.sun.com
+    used in 2 files:
+    /
+    /index.html
+
+http://java.sun.com/products/java-media/speech/
+    used in 2 files:
+    /doc/ProgrammersGuide.html
+    /javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/JSGF/
+    used in 2 files:
+    /doc/Sphinx4-faq.html
+    /javadoc/edu/cmu/sphinx/jsgf/JSGFGrammar.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/AudioManager.html?is-external=true
+    used in 3 files:
+    /javadoc/com/sun/speech/engine/package-tree.html
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true
+    used in 4 files:
+    /javadoc/com/sun/speech/engine/package-tree.html
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#ALLOCATED
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#ALLOCATING_RESOURCES
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#DEALLOCATED
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#DEALLOCATING_RESOURCES
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#PAUSED
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#RESUMED
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#addEngineListener(javax.speech.EngineListener)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#allocate()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#deallocate()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#getAudioManager()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#getEngineModeDesc()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#getEngineProperties()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#getEngineState()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#getVocabManager()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#pause()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#removeEngineListener(javax.speech.EngineListener)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#resume()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#testEngineState(long)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/Engine.html?is-external=true#waitEngineState(long)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineCentral.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineCreate.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineErrorEvent.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineEvent.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineException.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true
+    used in 4 files:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+    /javadoc/com/sun/speech/engine/package-tree.html
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#engineAllocated(javax.speech.EngineEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#engineAllocatingResources(javax.speech.EngineEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#engineDeallocated(javax.speech.EngineEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#engineDeallocatingResources(javax.speech.EngineEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#engineError(javax.speech.EngineErrorEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#enginePaused(javax.speech.EngineEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineListener.html?is-external=true#engineResumed(javax.speech.EngineEvent)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/EngineMonitor.EngineMonitorEngineListener.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineModeDesc.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineProperties.html?is-external=true
+    used in 3 files:
+    /javadoc/com/sun/speech/engine/package-tree.html
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/EngineStateError.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/SpeechEvent.html?is-external=true
+    used in 7 files:
+    /javadoc/com/sun/speech/engine/SpeechEventDispatcher.html
+    /javadoc/com/sun/speech/engine/SpeechEventUtilities.SpeechAWTEvent.html
+    /javadoc/com/sun/speech/engine/SpeechEventUtilities.html
+    /javadoc/com/sun/speech/engine/package-tree.html
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+    /javadoc/serialized-form.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/VendorDataException.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/DictationGrammar.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/FinalDictationResult.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/FinalResult.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/FinalRuleResult.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Grammar.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/GrammarException.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#FOCUS_OFF
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#FOCUS_ON
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#LISTENING
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#PROCESSING
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#SUSPENDED
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#addResultListener(javax.speech.recognition.ResultListener)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#commitChanges()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#deleteRuleGrammar(javax.speech.recognition.RuleGrammar)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#forceFinalize(boolean)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#getDictationGrammar(java.lang.String)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#getRecognizerProperties()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#getRuleGrammar(java.lang.String)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#getSpeakerManager()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#listRuleGrammars()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#loadJSGF(java.io.Reader)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#loadJSGF(java.net.URL, java.lang.String)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#loadJSGF(java.net.URL, java.lang.String, boolean, boolean, java.util.Vector)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#newRuleGrammar(java.lang.String)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#readVendorGrammar(java.io.InputStream)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#readVendorResult(java.io.InputStream)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#releaseFocus()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#removeResultListener(javax.speech.recognition.ResultListener)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#requestFocus()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#suspend()
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#writeVendorGrammar(java.io.OutputStream, javax.speech.recognition.Grammar)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Recognizer.html?is-external=true#writeVendorResult(java.io.OutputStream, javax.speech.recognition.Result)
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RecognizerEvent.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RecognizerModeDesc.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RecognizerProperties.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Result.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/ResultEvent.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/ResultListener.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/ResultStateError.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/ResultToken.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/Rule.html?is-external=true
+    used in 3 files:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/edu/cmu/sphinx/tools/tags/ActionTagsUtilities.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RuleGrammar.html
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RuleGrammar.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RuleParse.html?is-external=true
+    used in 3 files:
+    /javadoc/edu/cmu/sphinx/tools/tags/ActionTagsParser.html
+    /javadoc/edu/cmu/sphinx/tools/tags/ActionTagsUtilities.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RuleSequence.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RuleTag.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/RuleToken.html?is-external=true
+    used in 1 file:
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/recognition/SpeakerManager.html?is-external=true
+    used in 1 file:
+    /javadoc/com/sun/speech/engine/recognition/BaseRecognizer.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/synthesis/Synthesizer.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/synthesis/SynthesizerListener.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/synthesis/SynthesizerProperties.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/synthesis/SynthesizerQueueItem.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://java.sun.com/products/java-media/speech/forDevelopers/jsapi-doc/javax/speech/synthesis/Voice.html?is-external=true
+    used in 2 files:
+    /javadoc/com/sun/speech/engine/synthesis/package-tree.html
+    /javadoc/overview-tree.html
+
+http://mistral.univ-avignon.fr/en/index.html
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://sourceforge.net/forum/?group_id=1904
+    used in 2 files:
+    /
+    /index.html
+
+http://sourceforge.net/forum/forum.php?forum_id=382337
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://sourceforge.net/project/showfiles.php?group_id=1904&package_id=117949
+    used in 2 files:
+    /
+    /index.html
+
+http://sourceforge.net/projects/cmusphinx
+    used in 2 files:
+    /
+    /index.html
+
+http://sourceforge.net/sflogo.php?group_id=1904&type=1
+    used in 2 files:
+    /
+    /index.html
+
+http://sourceforge.net/svn/?group_id=1904
+    used in 2 files:
+    /
+    /index.html
+
+http://subversion.tigris.org/
+    used in 2 files:
+    /
+    /index.html
+
+http://wave.ldc.upenn.edu/
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://www.ej-technologies.com/products/jprofiler/overview.html
+    used in 2 files:
+    /
+    /index.html
+
+http://www.jetbrains.com/idea/
+    used in 2 files:
+    /
+    /index.html
+
+http://www.jetbrains.com/idea/opensource/img/banners/idea88x31_blue.gif
+    used in 2 files:
+    /
+    /index.html
+
+http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC2000S88
+    used in 2 files:
+    /
+    /index.html
+
+http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC93S10
+    used in 2 files:
+    /
+    /index.html
+
+http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC93S3B
+    used in 2 files:
+    /
+    /index.html
+
+http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC93S6A
+    used in 2 files:
+    /
+    /index.html
+
+http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC93S9
+    used in 2 files:
+    /
+    /index.html
+
+http://www.ldc.upenn.edu/Catalog/CatalogEntry.jsp?catalogId=LDC94S13A
+    used in 2 files:
+    /
+    /index.html
+
+http://www.sourceforge.net
+    used in 2 files:
+    /
+    /index.html
+
+http://www.speech.cs.cmu.edu/SLM_info.html
+    used in 4 files:
+    /
+    /doc/ProgrammersGuide.html
+    /doc/Sphinx4-faq.html
+    /index.html
+
+http://www.speech.cs.cmu.edu/SphinxTrain/
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://www.speech.cs.cmu.edu/cgi-bin/cmudict
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://www.speech.cs.cmu.edu/comp.speech/Section6/Q6.6.html
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://www.speech.cs.cmu.edu/databases/an4/
+    used in 2 files:
+    /
+    /index.html
+
+http://www.sunlabs.com/research/speech/
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+
+http://www.sunlabs.com/techrep/2002/abstract-114.html
+    used in 1 file:
+    /doc/Sphinx4-faq.html
+

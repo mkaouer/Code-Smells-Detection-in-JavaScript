@@ -1,0 +1,104 @@
+<html><head><title>GDLLatticeFactory.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta2\src\sphinx4\edu\cmu\sphinx\result\GDLLatticeFactory.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta2\\src\\sphinx4\\edu\\cmu\\sphinx\\result\\GDLLatticeFactory.java";
+top.document.title  = "GDLLatticeFactory.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2002 Carnegie Mellon University.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2002 Sun Microsystems, Inc.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2002 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> *</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#302">result</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#584">dictionary</a>.<a href="dictionary_E.html#581">Dictionary</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#84">io</a>.<a href="dictionary_J.html#51">BufferedReader</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#84">io</a>.<a href="dictionary_J.html#54">FileReader</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#84">io</a>.<a href="dictionary_J.html#56">IOException</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> * Creates a Lattice from a GDL (AISee) Lattice file. One can obtain such a GDL file from a lattice by calling the</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * &lt;code&gt;Lattice.dumpAISee&lt;/code&gt; method.</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> */</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#7984">GDLLatticeFactory</a> </span><span class="default">{</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_E.html#12568">GDLLatticeFactory</a></span><span class="default">() {</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    }</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">     * Create a Lattice from a GDL (AISee) Lattice file.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment">     *</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">     * @param gdlFile    the lattice file</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">     * @param dictionary the dictionary to use to look up words</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">     */</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">    </span><span class="keyword">public static <a href="dictionary_E.html#2058">Lattice</a> <a href="dictionary_E.html#7985">getLattice</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12592">gdlFile</a>, <a href="dictionary_E.html#581">Dictionary</a> <a href="dictionary_E.html#12591">dictionary</a>)</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">            </span><span class="keyword">throws <a href="dictionary_J.html#56">IOException</a> </span><span class="default">{</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">        <a href="dictionary_E.html#2058">Lattice</a> <a href="dictionary_E.html#12593">lattice</a> = </span><span class="keyword">new <a href="dictionary_E.html#12599">Lattice</a></span><span class="default">();</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default">        <a href="dictionary_J.html#51">BufferedReader</a> <a href="dictionary_E.html#12595">reader</a> = </span><span class="keyword">new <a href="dictionary_J.html#51">BufferedReader</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_J.html#54">FileReader</a></span><span class="default">(<a href="dictionary_E.html#12592">gdlFile</a>));</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12594">line</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">((<a href="dictionary_E.html#12594">line</a> = <a href="dictionary_E.html#12595">reader</a>.<a href="dictionary_R.html#552">readLine</a>()) != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#12594">line</a>.<a href="dictionary_S.html#508">startsWith</a>(</span><span class="string">&quot;node&quot;</span><span class="default">)) {</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">                <a href="dictionary_E.html#12578">createNode</a>(<a href="dictionary_E.html#12594">line</a>, <a href="dictionary_E.html#12593">lattice</a>, <a href="dictionary_E.html#12591">dictionary</a>);</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#12594">line</a>.<a href="dictionary_S.html#508">startsWith</a>(</span><span class="string">&quot;edge&quot;</span><span class="default">)) {</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">                <a href="dictionary_E.html#12569">createEdge</a>(<a href="dictionary_E.html#12594">line</a>, <a href="dictionary_E.html#12593">lattice</a>);</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">            }</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">        }</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#12593">lattice</a></span><span class="default">;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    }</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default">    </span><span class="keyword">private static void <a href="dictionary_E.html#12578">createNode</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12585">line</a>, <a href="dictionary_E.html#2058">Lattice</a> <a href="dictionary_E.html#12584">lattice</a>,</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">                                   <a href="dictionary_E.html#581">Dictionary</a> <a href="dictionary_E.html#12581">dictionary</a>) {</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a>[] <a href="dictionary_E.html#12589">text</a> = <a href="dictionary_E.html#12585">line</a>.<a href="dictionary_S.html#373">split</a>(</span><span class="string">&quot;\\s&quot;</span><span class="default">);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12583">id</a> = <a href="dictionary_E.html#12589">text</a>[</span><span class="number">3</span><span class="default">].<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">1</span><span class="default">, <a href="dictionary_E.html#12589">text</a>[</span><span class="number">3</span><span class="default">].<a href="dictionary_L.html#337">length</a>() - </span><span class="number">1</span><span class="default">);</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12580">contents</a> = <a href="dictionary_E.html#12589">text</a>[</span><span class="number">5</span><span class="default">].<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">1</span><span class="default">);</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12587">posterior</a> = <a href="dictionary_E.html#12589">text</a>[</span><span class="number">6</span><span class="default">].<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">2</span><span class="default">, <a href="dictionary_E.html#12589">text</a>[</span><span class="number">6</span><span class="default">].<a href="dictionary_L.html#337">length</a>() - </span><span class="number">2</span><span class="default">);</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12590">word</a> = <a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_I.html#2478">indexOf</a>(</span><span class="string">'['</span><span class="default">));</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        <a href="dictionary_E.html#12580">contents</a> = <a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_S.html#2479">substring</a>(<a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_I.html#2478">indexOf</a>(</span><span class="string">'['</span><span class="default">) + </span><span class="number">1</span><span class="default">);</span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12588">start</a> = <a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_I.html#2478">indexOf</a>(</span><span class="string">','</span><span class="default">));</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12582">end</a> = <a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_S.html#2479">substring</a>(<a href="dictionary_E.html#12580">contents</a>.<a href="dictionary_I.html#2478">indexOf</a>(</span><span class="string">','</span><span class="default">) + </span><span class="number">1</span><span class="default">);</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        <a href="dictionary_E.html#4324">Node</a> <a href="dictionary_E.html#12586">node</a> = <a href="dictionary_E.html#12584">lattice</a>.<a href="dictionary_A.html#12579">addNode</a>(<a href="dictionary_E.html#12583">id</a>, <a href="dictionary_E.html#12581">dictionary</a>.<a href="dictionary_E.html#599">getWord</a>(<a href="dictionary_E.html#12590">word</a>),</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">                Integer.<a href="dictionary_P.html#507">parseInt</a>(<a href="dictionary_E.html#12588">start</a>),</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">                Integer.<a href="dictionary_P.html#507">parseInt</a>(<a href="dictionary_E.html#12582">end</a>));</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        <a href="dictionary_E.html#12586">node</a>.<a href="dictionary_E.html#12596">setPosterior</a>(Double.<a href="dictionary_P.html#12570">parseDouble</a>(<a href="dictionary_E.html#12587">posterior</a>));</span>
+<a name="73"><font size=-1>73     </font></a><span class="default"></span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#12590">word</a>.<a href="dictionary_E.html#505">equals</a>(</span><span class="string">&quot;&lt;s&gt;&quot;</span><span class="default">)) {</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">            <a href="dictionary_E.html#12584">lattice</a>.<a href="dictionary_E.html#12597">setInitialNode</a>(<a href="dictionary_E.html#12586">node</a>);</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">        } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#12590">word</a>.<a href="dictionary_E.html#505">equals</a>(</span><span class="string">&quot;&lt;/s&gt;&quot;</span><span class="default">)) {</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">            <a href="dictionary_E.html#12584">lattice</a>.<a href="dictionary_E.html#12598">setTerminalNode</a>(<a href="dictionary_E.html#12586">node</a>);</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">        }</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    }</span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span>
+<a name="81"><font size=-1>81     </font></a><span class="default"></span>
+<a name="82"><font size=-1>82     </font></a><span class="default">    </span><span class="keyword">private static void <a href="dictionary_E.html#12569">createEdge</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12574">line</a>, <a href="dictionary_E.html#2058">Lattice</a> <a href="dictionary_E.html#12573">lattice</a>) {</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a>[] <a href="dictionary_E.html#12577">text</a> = <a href="dictionary_E.html#12574">line</a>.<a href="dictionary_S.html#373">split</a>(</span><span class="string">&quot;\\s&quot;</span><span class="default">);</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12576">src</a> = <a href="dictionary_E.html#12577">text</a>[</span><span class="number">3</span><span class="default">].<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">1</span><span class="default">, <a href="dictionary_E.html#12577">text</a>[</span><span class="number">3</span><span class="default">].<a href="dictionary_L.html#337">length</a>() - </span><span class="number">1</span><span class="default">);</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12572">dest</a> = <a href="dictionary_E.html#12577">text</a>[</span><span class="number">5</span><span class="default">].<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">1</span><span class="default">, <a href="dictionary_E.html#12577">text</a>[</span><span class="number">5</span><span class="default">].<a href="dictionary_L.html#337">length</a>() - </span><span class="number">1</span><span class="default">);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#12571">contents</a> = <a href="dictionary_E.html#12577">text</a>[</span><span class="number">7</span><span class="default">].<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">1</span><span class="default">, <a href="dictionary_E.html#12577">text</a>[</span><span class="number">7</span><span class="default">].<a href="dictionary_L.html#337">length</a>() - </span><span class="number">1</span><span class="default">);</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a>[] <a href="dictionary_E.html#12575">scores</a> = <a href="dictionary_E.html#12571">contents</a>.<a href="dictionary_S.html#373">split</a>(</span><span class="string">&quot;,&quot;</span><span class="default">);</span>
+<a name="88"><font size=-1>88     </font></a><span class="default"></span>
+<a name="89"><font size=-1>89     </font></a><span class="default">        <a href="dictionary_E.html#12573">lattice</a>.<a href="dictionary_E.html#4328">addEdge</a>(<a href="dictionary_E.html#12573">lattice</a>.<a href="dictionary_E.html#4327">getNode</a>(<a href="dictionary_E.html#12576">src</a>), <a href="dictionary_E.html#12573">lattice</a>.<a href="dictionary_E.html#4327">getNode</a>(<a href="dictionary_E.html#12572">dest</a>),</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">                Double.<a href="dictionary_P.html#12570">parseDouble</a>(<a href="dictionary_E.html#12575">scores</a>[</span><span class="number">0</span><span class="default">]),</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">                Double.<a href="dictionary_P.html#12570">parseDouble</a>(<a href="dictionary_E.html#12575">scores</a>[</span><span class="number">1</span><span class="default">]));</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    }</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">}</span>
+<a name="94"><font size=-1>94     </font></a><span class="default"></span>
+</pre></body></html>

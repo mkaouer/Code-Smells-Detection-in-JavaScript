@@ -1,0 +1,12 @@
+Testsuite: edu.cmu.sphinx.result.test.DumpTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 7,131 sec
+------------- Standard Output ---------------
+best sausage hypothesis: "edu.cmu.sphinx.result.WordResultPath@151fe8a"
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+Dumping Full Token Graph to logs/tokengraph.gdl
+Dumping lattice to logs/lattice.gdl
+Dumping sausage decode to sausage.gdl
+------------- ---------------- ---------------
+
+Testcase: testDump took 7,107 sec

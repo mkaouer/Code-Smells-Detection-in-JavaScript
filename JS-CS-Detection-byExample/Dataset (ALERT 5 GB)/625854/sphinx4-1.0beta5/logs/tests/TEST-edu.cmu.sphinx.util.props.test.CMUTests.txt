@@ -1,0 +1,5 @@
+Testsuite: edu.cmu.sphinx.util.props.test.CMUTests
+Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0,211 sec
+
+Testcase: testClassTesting took 0,016 sec
+Testcase: setComponentPropertyTest took 0,167 sec

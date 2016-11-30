@@ -1,0 +1,54 @@
+Testsuite: edu.cmu.sphinx.linguist.language.grammar.BatchForcedAlignerGrammarTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,167 sec
+------------- Standard Error -----------------
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.dictionary.FastDictionary allocate
+INFO: Loading dictionary from: file:models/acoustic/wsj/dict/digits.dict
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.dictionary.FastDictionary allocate
+INFO: Loading filler dictionary from: file:models/acoustic/wsj/dict/fillerdict
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: HH
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: W
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: AH
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: N
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: T
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: UW
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: TH
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: R
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: IY
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+SMACK+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+AH+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+GRUNT+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+TONE+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+CLICK+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+SLAM+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+NOISE+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+RING+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.acoustic.UnitManager getUnit
+INFO: CI Unit: *+BREATH+
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.language.grammar.Grammar dumpStatistics
+INFO: Num nodes : 46
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.language.grammar.Grammar dumpStatistics
+INFO: Num arcs  : 78
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.language.grammar.Grammar dumpStatistics
+INFO: Avg arcs  : 1.6956521
+31.08.2010 22:26:18 edu.cmu.sphinx.linguist.language.grammar.Grammar postProcessGrammar
+INFO: Total number of nodes 46
+------------- ---------------- ---------------
+
+Testcase: testForcedAlignerGrammar took 0,142 sec

@@ -1,0 +1,206 @@
+<html><head><title>ClassBasedLanguageModel.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta5\src\sphinx4\edu\cmu\sphinx\linguist\language\classes\ClassBasedLanguageModel.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta5\\src\\sphinx4\\edu\\cmu\\sphinx\\linguist\\language\\classes\\ClassBasedLanguageModel.java";
+top.document.title  = "ClassBasedLanguageModel.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment">* Created on Jan 19, 2005</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment">*/</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.linguist.language.<a href="dictionary_E.html#4653">classes</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#173">linguist</a>.<a href="dictionary_E.html#175">WordSequence</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#181">dictionary</a>.<a href="dictionary_E.html#176">Word</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.language.<a href="dictionary_E.html#182">ngram</a>.<a href="dictionary_E.html#178">LanguageModel</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#79">util</a>.<a href="dictionary_E.html#461">LogMath</a>;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#78">props</a>.<a href="dictionary_E.html#89">PropertyException</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#78">props</a>.<a href="dictionary_E.html#87">PropertySheet</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#78">props</a>.<a href="dictionary_E.html#180">S4Component</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#80">io</a>.<a href="dictionary_J.html#73">IOException</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#82">util</a>.<a href="dictionary_J.html#2531">HashSet</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#82">util</a>.<a href="dictionary_J.html#171">Set</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> * An LM that computes a probability of a word sequence by</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> * converting words to classes and asking the class-based probability</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> * from a delegate LM.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> *</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * @author Tanel Alumae</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> */</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#8620">ClassBasedLanguageModel</a> implements <a href="dictionary_E.html#178">LanguageModel</a> </span><span class="default">{</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">     * The property that defines the logMath component.</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">     */</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_E.html#180">S4Component</a>(<a href="dictionary_E.html#184">type</a> = <a href="dictionary_E.html#461">LogMath</a>.</span><span class="keyword">class</span><span class="default">)</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="keyword">public final static <a href="dictionary_S.html#76">String</a> <a href="dictionary_E.html#8649">PROP_LOG_MATH</a> </span><span class="default">= </span><span class="string">&quot;logMath&quot;</span><span class="default">;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment">     * The property that defines the classLanguageModel component.</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">     */</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_E.html#180">S4Component</a>(<a href="dictionary_E.html#184">type</a> = <a href="dictionary_E.html#178">LanguageModel</a>.</span><span class="keyword">class</span><span class="default">)</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span><span class="keyword">public final static <a href="dictionary_S.html#76">String</a> <a href="dictionary_E.html#8647">PROP_CLASS_LANGUAGE_MODEL</a> </span><span class="default">= </span><span class="string">&quot;classLanguageModel&quot;</span><span class="default">;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span>
+<a name="38"><font size=-1>38     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">     * The property that defines the classMap component.</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">     */</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_E.html#180">S4Component</a>(<a href="dictionary_E.html#184">type</a> = <a href="dictionary_E.html#4612">ClassMap</a>.</span><span class="keyword">class</span><span class="default">)</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    </span><span class="keyword">public final static <a href="dictionary_S.html#76">String</a> <a href="dictionary_E.html#8648">PROP_CLASS_MAP</a> </span><span class="default">= </span><span class="string">&quot;classMap&quot;</span><span class="default">;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    </span><span class="comment">// ----------------------------</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">    // Configuration data</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">    // ----------------------------</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_E.html#178">LanguageModel</a> <a href="dictionary_E.html#8651">classLM</a></span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_J.html#171">Set</a></span><span class="default">&lt;<a href="dictionary_S.html#76">String</a>&gt; <a href="dictionary_E.html#8653">vocabulary</a>;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_E.html#8650">allocated</a> </span><span class="default">= </span><span class="keyword">false</span><span class="default">;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_E.html#4612">ClassMap</a> <a href="dictionary_E.html#8652">classMap</a></span><span class="default">;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#8621">ClassBasedLanguageModel</a></span><span class="default">(<a href="dictionary_E.html#4612">ClassMap</a> <a href="dictionary_E.html#8623">classMap</a>, <a href="dictionary_E.html#178">LanguageModel</a> <a href="dictionary_E.html#8622">classLM</a>, <a href="dictionary_E.html#461">LogMath</a> <a href="dictionary_E.html#8624">logMath</a> ) {</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#8652">classMap</a> = <a href="dictionary_E.html#8623">classMap</a>;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#8651">classLM</a> = <a href="dictionary_E.html#8622">classLM</a>;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    }</span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#8625">ClassBasedLanguageModel</a></span><span class="default">() {</span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    }</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        </span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">     * (non-Javadoc)</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">     *</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">     * @see edu.cmu.sphinx.util.props.Configurable#newProperties(edu.cmu.sphinx.util.props.PropertySheet)</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">     */</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#8643">newProperties</a></span><span class="default">(<a href="dictionary_E.html#87">PropertySheet</a> <a href="dictionary_E.html#8644">ps</a>) </span><span class="keyword">throws <a href="dictionary_E.html#89">PropertyException</a> </span><span class="default">{</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#8650">allocated</a>) {</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_E.html#2581">PropertyException</a></span><span class="default">(</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">                    <a href="dictionary_E.html#8620">ClassBasedLanguageModel</a>.</span><span class="keyword">class</span><span class="default">.<a href="dictionary_G.html#218">getName</a>(),</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">                    </span><span class="keyword">null</span><span class="default">,</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">                    </span><span class="string">&quot;Can't change properties after allocation&quot;</span><span class="default">);</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        }</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">        <a href="dictionary_E.html#8652">classMap</a> = (ClassMap) <a href="dictionary_E.html#8644">ps</a>.<a href="dictionary_E.html#211">getComponent</a>(<a href="dictionary_E.html#8648">PROP_CLASS_MAP</a>);</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">        <a href="dictionary_E.html#8651">classLM</a> = (LanguageModel) <a href="dictionary_E.html#8644">ps</a>.<a href="dictionary_E.html#211">getComponent</a>(<a href="dictionary_E.html#8647">PROP_CLASS_LANGUAGE_MODEL</a>);</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    }</span>
+<a name="79"><font size=-1>79     </font></a><span class="default"></span>
+<a name="80"><font size=-1>80     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">     * (non-Javadoc)</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">     *</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">     * @see edu.cmu.sphinx.linguist.language.ngram.LanguageModel#allocate()</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">     */</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#8626">allocate</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_J.html#73">IOException</a> </span><span class="default">{</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#8650">allocated</a>) {</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">            <a href="dictionary_E.html#8650">allocated</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">            <a href="dictionary_E.html#8652">classMap</a>.<a href="dictionary_E.html#4621">allocate</a>();</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">            <a href="dictionary_E.html#8651">classLM</a>.<a href="dictionary_E.html#189">allocate</a>();</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">            <a href="dictionary_E.html#8640">makeVocabulary</a>();</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        }</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    }</span>
+<a name="94"><font size=-1>94     </font></a><span class="default"></span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="97"><font size=-1>97     </font></a><span class="comment">    * (non-Javadoc)</span>
+<a name="98"><font size=-1>98     </font></a><span class="comment">    *</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">    * @see edu.cmu.sphinx.linguist.language.ngram.LanguageModel#deallocate()</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment">    */</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="102"><font size=-1>102     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#8627">deallocate</a></span><span class="default">() {</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">        <a href="dictionary_E.html#8650">allocated</a> = </span><span class="keyword">false</span><span class="default">;</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">        <a href="dictionary_E.html#8651">classLM</a>.<a href="dictionary_E.html#209">deallocate</a>();</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">        <a href="dictionary_E.html#8652">classMap</a>.<a href="dictionary_E.html#4627">deallocate</a>();</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        <a href="dictionary_E.html#8653">vocabulary</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    }</span>
+<a name="108"><font size=-1>108     </font></a><span class="default"></span>
+<a name="109"><font size=-1>109     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="110"><font size=-1>110     </font></a><span class="comment">     * Called before a recognition</span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">     */</span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#8645">start</a></span><span class="default">() {</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">    }</span>
+<a name="115"><font size=-1>115     </font></a><span class="default"></span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">     * Called after a recognition</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">     */</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="120"><font size=-1>120     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#8646">stop</a></span><span class="default">() {</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">    }</span>
+<a name="122"><font size=-1>122     </font></a><span class="default"></span>
+<a name="123"><font size=-1>123     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">     * Actual implementation of the class-based LM:</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">     * P=P(W|C1)*P(C1|C2,C3..)</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">     *</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">     * @see edu.cmu.sphinx.linguist.language.ngram.LanguageModel#getProbability(edu.cmu.sphinx.linguist.WordSequence)</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">     */</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="130"><font size=-1>130     </font></a><span class="default">    </span><span class="keyword">public float <a href="dictionary_E.html#8629">getProbability</a></span><span class="default">(<a href="dictionary_E.html#175">WordSequence</a> <a href="dictionary_E.html#8635">wordSequence</a>) {</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">        <a href="dictionary_E.html#176">Word</a>[] <a href="dictionary_E.html#8634">classes</a> = </span><span class="keyword">new <a href="dictionary_E.html#176">Word</a></span><span class="default">[<a href="dictionary_E.html#8635">wordSequence</a>.<a href="dictionary_E.html#5030">size</a>()];</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_E.html#8636">wordToClassProb</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#8631">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#8631">i</a> &lt; <a href="dictionary_E.html#8634">classes</a>.<a href="dictionary_L.html#481">length</a>; i++) {</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">            <a href="dictionary_E.html#176">Word</a> <a href="dictionary_E.html#8632">sourceWord</a> = <a href="dictionary_E.html#8635">wordSequence</a>.<a href="dictionary_E.html#8654">getWord</a>(<a href="dictionary_E.html#8631">i</a>);</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">            <a href="dictionary_E.html#4654">ClassProbability</a> <a href="dictionary_E.html#8630">classProbability</a> = <a href="dictionary_E.html#8652">classMap</a>.<a href="dictionary_E.html#4630">getClassProbability</a>(<a href="dictionary_E.html#8632">sourceWord</a>.<a href="dictionary_E.html#203">getSpelling</a>());</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">            <a href="dictionary_E.html#8634">classes</a>[<a href="dictionary_E.html#8631">i</a>] = (<a href="dictionary_E.html#8630">classProbability</a> == </span><span class="keyword">null </span><span class="default">? <a href="dictionary_E.html#8632">sourceWord</a> : <a href="dictionary_E.html#8652">classMap</a>.<a href="dictionary_E.html#4628">getClassAsWord</a>(<a href="dictionary_E.html#8630">classProbability</a>.<a href="dictionary_E.html#4655">getClassName</a>()));</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#8631">i</a> == <a href="dictionary_E.html#8634">classes</a>.<a href="dictionary_L.html#481">length</a> - </span><span class="number">1</span><span class="default">) {</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#8630">classProbability</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">                    </span><span class="comment">// the first word of the word sequence is a class</span>
+<a name="140"><font size=-1>140     </font></a><span class="comment">                    <a href="dictionary_E.html#8636">wordToClassProb</a> </span><span class="default">= <a href="dictionary_E.html#8630">classProbability</a>.<a href="dictionary_E.html#4656">getLogProbability</a>();</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">                }</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">            }</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">        }</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_E.html#8633">classBasedProbability</a> </span><span class="default">= <a href="dictionary_E.html#8651">classLM</a>.<a href="dictionary_E.html#206">getProbability</a>(</span><span class="keyword">new <a href="dictionary_E.html#205">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#8634">classes</a>));</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#8633">classBasedProbability</a> </span><span class="default">+ <a href="dictionary_E.html#8636">wordToClassProb</a>;</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">    }</span>
+<a name="147"><font size=-1>147     </font></a><span class="default"></span>
+<a name="148"><font size=-1>148     </font></a><span class="default"></span>
+<a name="149"><font size=-1>149     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="150"><font size=-1>150     </font></a><span class="comment">     * Gets the smear term for the given wordSequence</span>
+<a name="151"><font size=-1>151     </font></a><span class="comment">     *</span>
+<a name="152"><font size=-1>152     </font></a><span class="comment">     * @param wordSequence the word sequence</span>
+<a name="153"><font size=-1>153     </font></a><span class="comment">     * @return the smear term associated with this word sequence</span>
+<a name="154"><font size=-1>154     </font></a><span class="comment">     */</span>
+<a name="155"><font size=-1>155     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="156"><font size=-1>156     </font></a><span class="default">    </span><span class="keyword">public float <a href="dictionary_E.html#8637">getSmear</a></span><span class="default">(<a href="dictionary_E.html#175">WordSequence</a> <a href="dictionary_E.html#8638">wordSequence</a>) {</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">        </span><span class="keyword">return </span><span class="number">0.0f</span><span class="default">; </span><span class="comment">// TODO not implemented</span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">    </span><span class="default">}</span>
+<a name="159"><font size=-1>159     </font></a><span class="default"></span>
+<a name="160"><font size=-1>160     </font></a><span class="default">    </span><span class="comment">/* (non-Javadoc)</span>
+<a name="161"><font size=-1>161     </font></a><span class="comment">     * @see edu.cmu.sphinx.linguist.language.ngram.LanguageModel#getVocabulary()</span>
+<a name="162"><font size=-1>162     </font></a><span class="comment">     */</span>
+<a name="163"><font size=-1>163     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="164"><font size=-1>164     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_J.html#171">Set</a></span><span class="default">&lt;<a href="dictionary_S.html#76">String</a>&gt; <a href="dictionary_E.html#8639">getVocabulary</a>() {</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#8653">vocabulary</a></span><span class="default">;</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">    }</span>
+<a name="167"><font size=-1>167     </font></a><span class="default"></span>
+<a name="168"><font size=-1>168     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="169"><font size=-1>169     </font></a><span class="comment">     * Returns the maximum depth of the language model</span>
+<a name="170"><font size=-1>170     </font></a><span class="comment">     *</span>
+<a name="171"><font size=-1>171     </font></a><span class="comment">     * @return the maximum depth of the language mdoel</span>
+<a name="172"><font size=-1>172     </font></a><span class="comment">     */</span>
+<a name="173"><font size=-1>173     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="174"><font size=-1>174     </font></a><span class="default">    </span><span class="keyword">public int <a href="dictionary_E.html#8628">getMaxDepth</a></span><span class="default">() {</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#8651">classLM</a></span><span class="default">.<a href="dictionary_E.html#192">getMaxDepth</a>();</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">    }</span>
+<a name="177"><font size=-1>177     </font></a><span class="default"></span>
+<a name="178"><font size=-1>178     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">     * Converts a vocabulary of the class LM to a word vocabulary.</span>
+<a name="180"><font size=-1>180     </font></a><span class="comment">     */</span>
+<a name="181"><font size=-1>181     </font></a><span class="comment">    </span><span class="keyword">private void <a href="dictionary_E.html#8640">makeVocabulary</a></span><span class="default">() {</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">        <a href="dictionary_E.html#8653">vocabulary</a> = </span><span class="keyword">new <a href="dictionary_J.html#2531">HashSet</a></span><span class="default">&lt;<a href="dictionary_S.html#76">String</a>&gt;();</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_S.html#76">String</a> <a href="dictionary_E.html#8641">name</a> : <a href="dictionary_E.html#8651">classLM</a>.<a href="dictionary_E.html#193">getVocabulary</a>()) {</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">            <a href="dictionary_J.html#171">Set</a>&lt;<a href="dictionary_S.html#76">String</a>&gt; <a href="dictionary_E.html#8642">wordsInClass</a> = <a href="dictionary_E.html#8652">classMap</a>.<a href="dictionary_E.html#4632">getWordsInClass</a>(<a href="dictionary_E.html#8641">name</a>);</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#8642">wordsInClass</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">                </span><span class="comment">// 'name' not a class</span>
+<a name="187"><font size=-1>187     </font></a><span class="comment">                <a href="dictionary_E.html#8653">vocabulary</a></span><span class="default">.<a href="dictionary_A.html#153">add</a>(<a href="dictionary_E.html#8641">name</a>);</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">            } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">                <a href="dictionary_E.html#8653">vocabulary</a>.<a href="dictionary_A.html#1686">addAll</a>(<a href="dictionary_E.html#8642">wordsInClass</a>);</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">            }</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">        }</span>
+<a name="192"><font size=-1>192     </font></a><span class="default">    }</span>
+<a name="193"><font size=-1>193     </font></a><span class="default"></span>
+<a name="194"><font size=-1>194     </font></a><span class="default"></span>
+<a name="195"><font size=-1>195     </font></a><span class="default">}</span>
+<a name="196"><font size=-1>196     </font></a><span class="default"></span>
+</pre></body></html>

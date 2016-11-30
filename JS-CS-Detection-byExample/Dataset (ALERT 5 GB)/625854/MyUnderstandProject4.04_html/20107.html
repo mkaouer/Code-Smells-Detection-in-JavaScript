@@ -1,0 +1,51 @@
+<html><head><title>CustomThreadFactory.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta4\src\sphinx4\edu\cmu\sphinx\util\CustomThreadFactory.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta4\\src\\sphinx4\\edu\\cmu\\sphinx\\util\\CustomThreadFactory.java";
+top.document.title  = "CustomThreadFactory.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#222">util</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_J.html#2952">concurrent</a>.<a href="dictionary_J.html#20130">ThreadFactory</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.concurrent.<a href="dictionary_J.html#20131">atomic</a>.<a href="dictionary_J.html#20108">AtomicInteger</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * A custom thread factory, able to create threads with custom name prefix, daemon-ness and priority.</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * Based on java.util.concurrent.Executors.DefaultThreadFactory.</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * @author Yaniv Kunda</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * @see java.util.concurrent.Executors.DefaultThreadFactory</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> */</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#2953">CustomThreadFactory</a> implements <a href="dictionary_J.html#20130">ThreadFactory</a> </span><span class="default">{</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    </span><span class="keyword">static final <a href="dictionary_J.html#20108">AtomicInteger</a> <a href="dictionary_E.html#20126">poolNumber</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_J.html#20108">AtomicInteger</a></span><span class="default">(</span><span class="number">1</span><span class="default">);</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_T.html#10113">ThreadGroup</a> <a href="dictionary_E.html#20124">group</a></span><span class="default">;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_J.html#20108">AtomicInteger</a> <a href="dictionary_E.html#20128">threadNumber</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_J.html#20108">AtomicInteger</a></span><span class="default">(</span><span class="number">1</span><span class="default">);</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    </span><span class="keyword">final <a href="dictionary_S.html#28">String</a> <a href="dictionary_E.html#20125">namePrefix</a></span><span class="default">;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">    </span><span class="keyword">final boolean <a href="dictionary_E.html#20123">daemon</a></span><span class="default">;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">    </span><span class="keyword">final int <a href="dictionary_E.html#20127">priority</a></span><span class="default">;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#2958">CustomThreadFactory</a></span><span class="default">(<a href="dictionary_S.html#28">String</a> <a href="dictionary_E.html#20114">namePrefix</a>, </span><span class="keyword">boolean <a href="dictionary_E.html#20113">daemon</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_E.html#20115">priority</a></span><span class="default">) {</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#20115">priority</a> &gt; <a href="dictionary_T.html#961">Thread</a>.<a href="dictionary_M.html#20111">MAX_PRIORITY</a> || <a href="dictionary_E.html#20115">priority</a> &lt; <a href="dictionary_T.html#961">Thread</a>.<a href="dictionary_M.html#20112">MIN_PRIORITY</a>)</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_I.html#1043">IllegalArgumentException</a></span><span class="default">(</span><span class="string">&quot;illegal thread priority&quot;</span><span class="default">);</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">        <a href="dictionary_S.html#20129">SecurityManager</a> <a href="dictionary_E.html#20116">s</a> = System.<a href="dictionary_G.html#20110">getSecurityManager</a>();</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#20124">group</a> = <a href="dictionary_E.html#20116">s</a> != </span><span class="keyword">null </span><span class="default">? <a href="dictionary_E.html#20116">s</a>.<a href="dictionary_G.html#10089">getThreadGroup</a>() : <a href="dictionary_T.html#961">Thread</a>.<a href="dictionary_C.html#10086">currentThread</a>().<a href="dictionary_G.html#10089">getThreadGroup</a>();</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#20125">namePrefix</a> = <a href="dictionary_E.html#20114">namePrefix</a> + </span><span class="string">&quot;-&quot; </span><span class="default">+ <a href="dictionary_E.html#20126">poolNumber</a>.<a href="dictionary_G.html#20109">getAndIncrement</a>() + </span><span class="string">&quot;-thread-&quot;</span><span class="default">;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#20123">daemon</a> = <a href="dictionary_E.html#20113">daemon</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#20127">priority</a> = <a href="dictionary_E.html#20115">priority</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    }</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    @<a href="dictionary_O.html#3">Override</a></span>
+<a name="32"><font size=-1>32     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_T.html#961">Thread</a> <a href="dictionary_E.html#20117">newThread</a></span><span class="default">(<a href="dictionary_R.html#27">Runnable</a> <a href="dictionary_E.html#20121">r</a>) {</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">        <a href="dictionary_T.html#961">Thread</a> <a href="dictionary_E.html#20122">t</a> = </span><span class="keyword">new <a href="dictionary_T.html#961">Thread</a></span><span class="default">(<a href="dictionary_E.html#20124">group</a>, <a href="dictionary_E.html#20121">r</a>, <a href="dictionary_E.html#20125">namePrefix</a> + <a href="dictionary_E.html#20128">threadNumber</a>.<a href="dictionary_G.html#20109">getAndIncrement</a>(), </span><span class="number">0</span><span class="default">);</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#20122">t</a>.<a href="dictionary_I.html#20119">isDaemon</a>() != <a href="dictionary_E.html#20123">daemon</a>)</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">            <a href="dictionary_E.html#20122">t</a>.<a href="dictionary_S.html#7149">setDaemon</a>(<a href="dictionary_E.html#20123">daemon</a>);</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#20122">t</a>.<a href="dictionary_G.html#20118">getPriority</a>() != <a href="dictionary_E.html#20127">priority</a>)</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">            <a href="dictionary_E.html#20122">t</a>.<a href="dictionary_S.html#20120">setPriority</a>(<a href="dictionary_E.html#20127">priority</a>);</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#20122">t</a></span><span class="default">;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    }</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">}</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+</pre></body></html>

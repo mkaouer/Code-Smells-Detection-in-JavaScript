@@ -1,0 +1,1858 @@
+<html><head><title>Simple Invocation Tree [C]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td>A</td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td><a href="simpleinvtree_E.html">E</a></td><td>F</td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_C.html#7309">com.sun.speech.engine.BaseAudioManager.addAudioListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#7311">com.sun.speech.engine.BaseAudioManager.removeAudioListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#13892">com.sun.speech.engine.BaseEngine.addEngineListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#1829">com.sun.speech.engine.BaseEngine.allocate</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1833">com.sun.speech.engine.BaseEngine.postEngineAllocatingResources</a>
+| <a href="dictionary_C.html#1850">com.sun.speech.engine.BaseEngine.handleAllocate</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1635">com.sun.speech.engine.recognition.BaseRecognizer.handleAllocate</a><i>  (Virtual)</i>
+
+<a href="dictionary_C.html#1827">com.sun.speech.engine.BaseEngine.BaseEngine</a>
+| <a href="dictionary_C.html#1842">com.sun.speech.engine.BaseEngine.createEngineProperties</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1535">com.sun.speech.engine.recognition.BaseRecognizer.createEngineProperties</a><i>  (Virtual)</i>
+
+<a href="dictionary_C.html#13890">com.sun.speech.engine.BaseEngine.BaseEngine</a>
+| <a href="dictionary_C.html#1827">com.sun.speech.engine.BaseEngine.BaseEngine</a>
+
+<a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#13936">com.sun.speech.engine.BaseEngine.getEngineState</a>
+| <a href="dictionary_C.html#13961">com.sun.speech.engine.BaseEngine.stateToString</a>
+
+<a href="dictionary_C.html#1843">com.sun.speech.engine.BaseEngine.deallocate</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1844">com.sun.speech.engine.BaseEngine.postEngineDeallocatingResources</a>
+| <a href="dictionary_C.html#1851">com.sun.speech.engine.BaseEngine.handleDeallocate</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1636">com.sun.speech.engine.recognition.BaseRecognizer.handleDeallocate</a><i>  (Virtual)</i>
+
+<a href="dictionary_C.html#1846">com.sun.speech.engine.BaseEngine.dispatchSpeechEvent</a>
+| <a href="dictionary_G.html#1542">getId</a>
+| <a href="dictionary_C.html#13905">com.sun.speech.engine.BaseEngine.fireEngineAllocated</a>
+| <a href="dictionary_C.html#13910">com.sun.speech.engine.BaseEngine.fireEngineAllocatingResources</a>
+| <a href="dictionary_C.html#13915">com.sun.speech.engine.BaseEngine.fireEngineDeallocated</a>
+| <a href="dictionary_C.html#13920">com.sun.speech.engine.BaseEngine.fireEngineDeallocatingResources</a>
+| <a href="dictionary_C.html#13925">com.sun.speech.engine.BaseEngine.fireEnginePaused</a>
+| <a href="dictionary_C.html#13930">com.sun.speech.engine.BaseEngine.fireEngineResumed</a>
+
+<a href="dictionary_C.html#13905">com.sun.speech.engine.BaseEngine.fireEngineAllocated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_E.html#13906">engineAllocated</a>
+
+<a href="dictionary_C.html#13910">com.sun.speech.engine.BaseEngine.fireEngineAllocatingResources</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_E.html#13911">engineAllocatingResources</a>
+
+<a href="dictionary_C.html#13915">com.sun.speech.engine.BaseEngine.fireEngineDeallocated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_E.html#13916">engineDeallocated</a>
+
+<a href="dictionary_C.html#13920">com.sun.speech.engine.BaseEngine.fireEngineDeallocatingResources</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_E.html#13921">engineDeallocatingResources</a>
+
+<a href="dictionary_C.html#13925">com.sun.speech.engine.BaseEngine.fireEnginePaused</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_E.html#13926">enginePaused</a>
+
+<a href="dictionary_C.html#13930">com.sun.speech.engine.BaseEngine.fireEngineResumed</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_E.html#13931">engineResumed</a>
+
+<a href="dictionary_C.html#1848">com.sun.speech.engine.BaseEngine.getAudioManager</a>
+| <a href="dictionary_C.html#7308">com.sun.speech.engine.BaseAudioManager.BaseAudioManager</a>
+
+<a href="dictionary_C.html#4495">com.sun.speech.engine.BaseEngine.pause</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1852">com.sun.speech.engine.BaseEngine.handlePause</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1637">com.sun.speech.engine.recognition.BaseRecognizer.handlePause</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#13947">com.sun.speech.engine.BaseEngine.postEnginePaused</a>
+
+<a href="dictionary_C.html#1835">com.sun.speech.engine.BaseEngine.postEngineAllocated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1833">com.sun.speech.engine.BaseEngine.postEngineAllocatingResources</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1845">com.sun.speech.engine.BaseEngine.postEngineDeallocated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1844">com.sun.speech.engine.BaseEngine.postEngineDeallocatingResources</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#13947">com.sun.speech.engine.BaseEngine.postEnginePaused</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#13950">com.sun.speech.engine.BaseEngine.postEngineResumed</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#13953">com.sun.speech.engine.BaseEngine.removeEngineListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#4496">com.sun.speech.engine.BaseEngine.resume</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1853">com.sun.speech.engine.BaseEngine.handleResume</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1638">com.sun.speech.engine.recognition.BaseRecognizer.handleResume</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#13950">com.sun.speech.engine.BaseEngine.postEngineResumed</a>
+
+<a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_N.html#9410">notifyAll</a>
+
+<a href="dictionary_C.html#13961">com.sun.speech.engine.BaseEngine.stateToString</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_T.html#469">toString</a>
+
+<a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#13936">com.sun.speech.engine.BaseEngine.getEngineState</a>
+
+<a href="dictionary_C.html#1855">com.sun.speech.engine.BaseEngine.toString</a>
+| <a href="dictionary_C.html#13935">com.sun.speech.engine.BaseEngine.getEngineModeDesc</a>
+| <a href="dictionary_G.html#13965">getEngineName</a>
+| <a href="dictionary_G.html#13966">getModeName</a>
+
+<a href="dictionary_C.html#13967">com.sun.speech.engine.BaseEngine.waitEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_W.html#1405">wait</a>
+
+<a href="dictionary_C.html#10793">com.sun.speech.engine.BaseEngineProperties.addPropertyChangeListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#10795">com.sun.speech.engine.BaseEngineProperties.dispatchSpeechEvent</a>
+| <a href="dictionary_C.html#7318">com.sun.speech.engine.SpeechEventWrapper.getEventObject</a>
+| <a href="dictionary_C.html#10799">com.sun.speech.engine.BaseEngineProperties.firePropertyChangeEvent</a>
+
+<a href="dictionary_C.html#10799">com.sun.speech.engine.BaseEngineProperties.firePropertyChangeEvent</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_P.html#10800">propertyChange</a>
+
+<a href="dictionary_C.html#10805">com.sun.speech.engine.BaseEngineProperties.postPropertyChangeEvent</a>
+| <a href="dictionary_C.html#7316">com.sun.speech.engine.SpeechEventWrapper.SpeechEventWrapper</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#10811">com.sun.speech.engine.BaseEngineProperties.postPropertyChangeEvent</a>
+| <a href="dictionary_C.html#7316">com.sun.speech.engine.SpeechEventWrapper.SpeechEventWrapper</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#10817">com.sun.speech.engine.BaseEngineProperties.postPropertyChangeEvent</a>
+| <a href="dictionary_C.html#7316">com.sun.speech.engine.SpeechEventWrapper.SpeechEventWrapper</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#10823">com.sun.speech.engine.BaseEngineProperties.postPropertyChangeEvent</a>
+| <a href="dictionary_C.html#7316">com.sun.speech.engine.SpeechEventWrapper.SpeechEventWrapper</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#10829">com.sun.speech.engine.BaseEngineProperties.removePropertyChangeListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#5982">com.sun.speech.engine.EngineEventPanel.addText</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_G.html#6124">getHeight</a>
+| <a href="dictionary_G.html#12834">getViewport</a>
+| <a href="dictionary_S.html#14696">setViewPosition</a>
+
+<a href="dictionary_C.html#14699">com.sun.speech.engine.EngineEventPanel.clearText</a>
+| <a href="dictionary_S.html#9561">setText</a>
+
+<a href="dictionary_C.html#5981">com.sun.speech.engine.EngineEventPanel.EngineEventPanel</a>
+| <a href="dictionary_S.html#5955">setLayout</a>
+| <a href="dictionary_C.html#5953">createTitledBorder</a>
+| <a href="dictionary_S.html#5954">setBorder</a>
+| <a href="dictionary_S.html#9772">setMnemonic</a>
+| <a href="dictionary_A.html#9761">addActionListener</a>
+| <a href="dictionary_A.html#48">add</a>
+
+<a href="dictionary_C.html#14694">com.sun.speech.engine.EngineEventPanel.EngineEventPanel.(Anon_1).actionPerformed</a>
+| <a href="dictionary_C.html#14699">com.sun.speech.engine.EngineEventPanel.clearText</a>
+
+<a href="dictionary_C.html#14700">com.sun.speech.engine.EngineEventPanel.setText</a>
+| <a href="dictionary_S.html#9561">setText</a>
+
+<a href="dictionary_C.html#5943">com.sun.speech.engine.EngineMonitor.appendBuffer</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_A.html#627">append</a>
+
+<a href="dictionary_C.html#5940">com.sun.speech.engine.EngineMonitor.EngineMonitor</a>
+| <a href="dictionary_C.html#5950">com.sun.speech.engine.EngineMonitor.getEngineListener</a>
+| <a href="dictionary_A.html#5941">addEngineListener</a>
+
+<a href="dictionary_C.html#5926">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.engineAllocated</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5928">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.engineAllocatingResources</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5930">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.engineDeallocated</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5932">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.engineDeallocatingResources</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5934">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.engineError</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5936">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.enginePaused</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5938">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.engineResumed</a>
+| <a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+
+<a href="dictionary_C.html#5946">com.sun.speech.engine.EngineMonitor.engineStateString</a>
+| <a href="dictionary_C.html#5943">com.sun.speech.engine.EngineMonitor.appendBuffer</a>
+| <a href="dictionary_T.html#469">toString</a>
+
+<a href="dictionary_C.html#5950">com.sun.speech.engine.EngineMonitor.getEngineListener</a>
+| <a href="dictionary_C.html#5925">com.sun.speech.engine.EngineMonitor.EngineMonitorEngineListener.EngineMonitorEngineListener</a>
+
+<a href="dictionary_C.html#5951">com.sun.speech.engine.EngineMonitor.getEventPanel</a>
+| <a href="dictionary_C.html#5981">com.sun.speech.engine.EngineEventPanel.EngineEventPanel</a>
+
+<a href="dictionary_C.html#5952">com.sun.speech.engine.EngineMonitor.getStatePanel</a>
+| <a href="dictionary_S.html#5955">setLayout</a>
+| <a href="dictionary_C.html#5953">createTitledBorder</a>
+| <a href="dictionary_S.html#5954">setBorder</a>
+| <a href="dictionary_A.html#48">add</a>
+
+<a href="dictionary_C.html#5958">com.sun.speech.engine.EngineMonitor.handleEvent</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_C.html#5982">com.sun.speech.engine.EngineEventPanel.addText</a>
+| <a href="dictionary_G.html#5960">getOldEngineState</a>
+| <a href="dictionary_C.html#5946">com.sun.speech.engine.EngineMonitor.engineStateString</a>
+| <a href="dictionary_G.html#5959">getNewEngineState</a>
+| <a href="dictionary_C.html#5964">com.sun.speech.engine.EngineMonitor.updateGUIComponents</a>
+
+<a href="dictionary_C.html#5962">com.sun.speech.engine.EngineMonitor.updateEngineStateComponents</a>
+| <a href="dictionary_T.html#5963">testEngineState</a>
+| <a href="dictionary_S.html#3499">setEnabled</a>
+
+<a href="dictionary_C.html#5964">com.sun.speech.engine.EngineMonitor.updateGUIComponents</a>
+| <a href="dictionary_C.html#5962">com.sun.speech.engine.EngineMonitor.updateEngineStateComponents</a>
+
+<a href="dictionary_C.html#8850">com.sun.speech.engine.recognition.BaseGrammar.addGrammarListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#8852">com.sun.speech.engine.recognition.BaseGrammar.addResultListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#8854">com.sun.speech.engine.recognition.BaseGrammar.dispatchSpeechEvent</a>
+| <a href="dictionary_G.html#1542">getId</a>
+| <a href="dictionary_C.html#8863">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarActivated</a>
+| <a href="dictionary_C.html#8868">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarChangesCommitted</a>
+| <a href="dictionary_C.html#8873">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarDeactivated</a>
+| <a href="dictionary_C.html#8859">com.sun.speech.engine.recognition.BaseGrammar.fireAudioReleased</a>
+| <a href="dictionary_C.html#8878">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarFinalized</a>
+| <a href="dictionary_C.html#8882">com.sun.speech.engine.recognition.BaseGrammar.fireResultAccepted</a>
+| <a href="dictionary_C.html#8886">com.sun.speech.engine.recognition.BaseGrammar.fireResultCreated</a>
+| <a href="dictionary_C.html#8890">com.sun.speech.engine.recognition.BaseGrammar.fireResultRejected</a>
+| <a href="dictionary_C.html#8894">com.sun.speech.engine.recognition.BaseGrammar.fireResultUpdated</a>
+| <a href="dictionary_C.html#8898">com.sun.speech.engine.recognition.BaseGrammar.fireTrainingInfoReleased</a>
+
+<a href="dictionary_C.html#8859">com.sun.speech.engine.recognition.BaseGrammar.fireAudioReleased</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_A.html#1558">audioReleased</a>
+
+<a href="dictionary_C.html#8863">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarActivated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#8864">grammarActivated</a>
+
+<a href="dictionary_C.html#8868">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarChangesCommitted</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#8869">grammarChangesCommitted</a>
+
+<a href="dictionary_C.html#8873">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarDeactivated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#8874">grammarDeactivated</a>
+
+<a href="dictionary_C.html#8878">com.sun.speech.engine.recognition.BaseGrammar.fireGrammarFinalized</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#1578">grammarFinalized</a>
+
+<a href="dictionary_C.html#8882">com.sun.speech.engine.recognition.BaseGrammar.fireResultAccepted</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1593">resultAccepted</a>
+
+<a href="dictionary_C.html#8886">com.sun.speech.engine.recognition.BaseGrammar.fireResultCreated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1598">resultCreated</a>
+
+<a href="dictionary_C.html#8890">com.sun.speech.engine.recognition.BaseGrammar.fireResultRejected</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1603">resultRejected</a>
+
+<a href="dictionary_C.html#8894">com.sun.speech.engine.recognition.BaseGrammar.fireResultUpdated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1608">resultUpdated</a>
+
+<a href="dictionary_C.html#8898">com.sun.speech.engine.recognition.BaseGrammar.fireTrainingInfoReleased</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_T.html#1613">trainingInfoReleased</a>
+
+<a href="dictionary_C.html#8904">com.sun.speech.engine.recognition.BaseGrammar.isActive</a>
+| <a href="dictionary_C.html#1639">com.sun.speech.engine.recognition.BaseRecognizer.isActive</a>
+
+<a href="dictionary_C.html#8906">com.sun.speech.engine.recognition.BaseGrammar.postAudioReleased</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1858">com.sun.speech.engine.recognition.BaseGrammar.postGrammarActivated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1840">com.sun.speech.engine.recognition.BaseGrammar.postGrammarChangesCommitted</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1859">com.sun.speech.engine.recognition.BaseGrammar.postGrammarDeactivated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1864">com.sun.speech.engine.recognition.BaseGrammar.postGrammarFinalized</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1867">com.sun.speech.engine.recognition.BaseGrammar.postResultAccepted</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1862">com.sun.speech.engine.recognition.BaseGrammar.postResultCreated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#8911">com.sun.speech.engine.recognition.BaseGrammar.postResultRejected</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#8913">com.sun.speech.engine.recognition.BaseGrammar.postResultUpdated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#8915">com.sun.speech.engine.recognition.BaseGrammar.postTrainingInfoReleased</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#8917">com.sun.speech.engine.recognition.BaseGrammar.removeGrammarListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#8919">com.sun.speech.engine.recognition.BaseGrammar.removeResultListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#1485">com.sun.speech.engine.recognition.BaseRecognizer.addResultListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#1487">com.sun.speech.engine.recognition.BaseRecognizer.allocate</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1833">com.sun.speech.engine.BaseEngine.postEngineAllocatingResources</a>
+| <a href="dictionary_C.html#1835">com.sun.speech.engine.BaseEngine.postEngineAllocated</a>
+| <a href="dictionary_C.html#1635">com.sun.speech.engine.recognition.BaseRecognizer.handleAllocate</a>
+
+<a href="dictionary_C.html#1479">com.sun.speech.engine.recognition.BaseRecognizer.BaseRecognizer</a>
+| <a href="dictionary_C.html#1482">com.sun.speech.engine.recognition.BaseRecognizer.BaseRecognizer</a>
+
+<a href="dictionary_C.html#1480">com.sun.speech.engine.recognition.BaseRecognizer.BaseRecognizer</a>
+| <a href="dictionary_C.html#1482">com.sun.speech.engine.recognition.BaseRecognizer.BaseRecognizer</a>
+
+<a href="dictionary_C.html#1482">com.sun.speech.engine.recognition.BaseRecognizer.BaseRecognizer</a>
+| <a href="dictionary_C.html#1827">com.sun.speech.engine.BaseEngine.BaseEngine</a>
+
+<a href="dictionary_C.html#1502">com.sun.speech.engine.recognition.BaseRecognizer.checkForModalGrammars</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#1503">getActivationMode</a>
+
+<a href="dictionary_C.html#1507">com.sun.speech.engine.recognition.BaseRecognizer.commitChangeInternal</a>
+| <a href="dictionary_C.html#1645">com.sun.speech.engine.recognition.BaseRecognizer.listRuleGrammars</a>
+| <a href="dictionary_C.html#1836">com.sun.speech.engine.recognition.RecognizerUtilities.transform</a>
+| <a href="dictionary_P.html#19">printStackTrace</a>
+| <a href="dictionary_C.html#1773">com.sun.speech.engine.recognition.BaseRecognizer.startGrammarChanges</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_I.html#1513">isEnabled</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#1838">com.sun.speech.engine.recognition.BaseRuleGrammar.isRuleChanged</a>
+| <a href="dictionary_C.html#1839">com.sun.speech.engine.recognition.BaseRuleGrammar.setRuleChanged</a>
+| <a href="dictionary_I.html#1514">isRulePublic</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_C.html#1497">com.sun.speech.engine.recognition.BaseRecognizer.changeRule</a>
+| <a href="dictionary_C.html#1840">com.sun.speech.engine.recognition.BaseGrammar.postGrammarChangesCommitted</a>
+| <a href="dictionary_C.html#1556">com.sun.speech.engine.recognition.BaseRecognizer.endGrammarChanges</a>
+| <a href="dictionary_C.html#1495">com.sun.speech.engine.recognition.BaseRecognizer.changeEnabled</a>
+
+<a href="dictionary_C.html#1527">com.sun.speech.engine.recognition.BaseRecognizer.commitChanges</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1736">com.sun.speech.engine.recognition.BaseRecognizer.postRecognizerSuspended</a>
+| <a href="dictionary_C.html#1642">com.sun.speech.engine.recognition.BaseRecognizer.linkGrammars</a>
+| <a href="dictionary_C.html#1502">com.sun.speech.engine.recognition.BaseRecognizer.checkForModalGrammars</a>
+| <a href="dictionary_C.html#1709">com.sun.speech.engine.recognition.BaseRecognizer.notifyGrammarActivation</a>
+| <a href="dictionary_C.html#1721">com.sun.speech.engine.recognition.BaseRecognizer.postChangesCommitted</a>
+
+<a href="dictionary_C.html#1536">com.sun.speech.engine.recognition.BaseRecognizer.deallocate</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1762">com.sun.speech.engine.recognition.BaseRecognizer.releaseFocus</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1844">com.sun.speech.engine.BaseEngine.postEngineDeallocatingResources</a>
+| <a href="dictionary_C.html#1845">com.sun.speech.engine.BaseEngine.postEngineDeallocated</a>
+| <a href="dictionary_C.html#1636">com.sun.speech.engine.recognition.BaseRecognizer.handleDeallocate</a>
+
+<a href="dictionary_C.html#1538">com.sun.speech.engine.recognition.BaseRecognizer.deleteRuleGrammar</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_R.html#496">remove</a>
+
+<a href="dictionary_C.html#1541">com.sun.speech.engine.recognition.BaseRecognizer.dispatchSpeechEvent</a>
+| <a href="dictionary_G.html#1542">getId</a>
+| <a href="dictionary_C.html#1562">com.sun.speech.engine.recognition.BaseRecognizer.fireChangesCommitted</a>
+| <a href="dictionary_C.html#1567">com.sun.speech.engine.recognition.BaseRecognizer.fireFocusGained</a>
+| <a href="dictionary_C.html#1572">com.sun.speech.engine.recognition.BaseRecognizer.fireFocusLost</a>
+| <a href="dictionary_C.html#1582">com.sun.speech.engine.recognition.BaseRecognizer.fireRecognizerProcessing</a>
+| <a href="dictionary_C.html#1587">com.sun.speech.engine.recognition.BaseRecognizer.fireRecognizerSuspended</a>
+| <a href="dictionary_C.html#1557">com.sun.speech.engine.recognition.BaseRecognizer.fireAudioReleased</a>
+| <a href="dictionary_C.html#1577">com.sun.speech.engine.recognition.BaseRecognizer.fireGrammarFinalized</a>
+| <a href="dictionary_C.html#1592">com.sun.speech.engine.recognition.BaseRecognizer.fireResultAccepted</a>
+| <a href="dictionary_C.html#1597">com.sun.speech.engine.recognition.BaseRecognizer.fireResultCreated</a>
+| <a href="dictionary_C.html#1602">com.sun.speech.engine.recognition.BaseRecognizer.fireResultRejected</a>
+| <a href="dictionary_C.html#1607">com.sun.speech.engine.recognition.BaseRecognizer.fireResultUpdated</a>
+| <a href="dictionary_C.html#1612">com.sun.speech.engine.recognition.BaseRecognizer.fireTrainingInfoReleased</a>
+| <a href="dictionary_C.html#1846">com.sun.speech.engine.BaseEngine.dispatchSpeechEvent</a>
+
+<a href="dictionary_C.html#1557">com.sun.speech.engine.recognition.BaseRecognizer.fireAudioReleased</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_A.html#1558">audioReleased</a>
+
+<a href="dictionary_C.html#1562">com.sun.speech.engine.recognition.BaseRecognizer.fireChangesCommitted</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_C.html#1563">changesCommitted</a>
+
+<a href="dictionary_C.html#1567">com.sun.speech.engine.recognition.BaseRecognizer.fireFocusGained</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_F.html#1568">focusGained</a>
+
+<a href="dictionary_C.html#1572">com.sun.speech.engine.recognition.BaseRecognizer.fireFocusLost</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_F.html#1573">focusLost</a>
+
+<a href="dictionary_C.html#1577">com.sun.speech.engine.recognition.BaseRecognizer.fireGrammarFinalized</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#1578">grammarFinalized</a>
+
+<a href="dictionary_C.html#1582">com.sun.speech.engine.recognition.BaseRecognizer.fireRecognizerProcessing</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1583">recognizerProcessing</a>
+
+<a href="dictionary_C.html#1587">com.sun.speech.engine.recognition.BaseRecognizer.fireRecognizerSuspended</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1588">recognizerSuspended</a>
+
+<a href="dictionary_C.html#1592">com.sun.speech.engine.recognition.BaseRecognizer.fireResultAccepted</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1593">resultAccepted</a>
+
+<a href="dictionary_C.html#1597">com.sun.speech.engine.recognition.BaseRecognizer.fireResultCreated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1598">resultCreated</a>
+
+<a href="dictionary_C.html#1602">com.sun.speech.engine.recognition.BaseRecognizer.fireResultRejected</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1603">resultRejected</a>
+
+<a href="dictionary_C.html#1607">com.sun.speech.engine.recognition.BaseRecognizer.fireResultUpdated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1608">resultUpdated</a>
+
+<a href="dictionary_C.html#1612">com.sun.speech.engine.recognition.BaseRecognizer.fireTrainingInfoReleased</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_T.html#1613">trainingInfoReleased</a>
+
+<a href="dictionary_C.html#1617">com.sun.speech.engine.recognition.BaseRecognizer.forceFinalize</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+
+<a href="dictionary_C.html#1620">com.sun.speech.engine.recognition.BaseRecognizer.getDictationGrammar</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+
+<a href="dictionary_C.html#1622">com.sun.speech.engine.recognition.BaseRecognizer.getRecognizerProperties</a>
+| <a href="dictionary_C.html#1849">com.sun.speech.engine.BaseEngine.getEngineProperties</a>
+
+<a href="dictionary_C.html#1623">com.sun.speech.engine.recognition.BaseRecognizer.getRuleGrammar</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1770">com.sun.speech.engine.recognition.BaseRecognizer.retrieveGrammar</a>
+
+<a href="dictionary_C.html#1626">com.sun.speech.engine.recognition.BaseRecognizer.gnameToURL</a>
+| <a href="dictionary_R.html#722">replace</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_L.html#1628">lastIndexOf</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_C.html#1627">concat</a>
+| <a href="dictionary_G.html#1629">getSystemResource</a>
+
+<a href="dictionary_C.html#1639">com.sun.speech.engine.recognition.BaseRecognizer.isActive</a>
+| <a href="dictionary_I.html#1513">isEnabled</a>
+| <a href="dictionary_G.html#1503">getActivationMode</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+
+<a href="dictionary_C.html#1642">com.sun.speech.engine.recognition.BaseRecognizer.linkGrammars</a>
+| <a href="dictionary_C.html#1645">com.sun.speech.engine.recognition.BaseRecognizer.listRuleGrammars</a>
+| <a href="dictionary_C.html#1854">com.sun.speech.engine.recognition.BaseRuleGrammar.resolveAllRules</a>
+
+<a href="dictionary_C.html#1645">com.sun.speech.engine.recognition.BaseRecognizer.listRuleGrammars</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+
+<a href="dictionary_C.html#1649">com.sun.speech.engine.recognition.BaseRecognizer.loadAllImports</a>
+| <a href="dictionary_L.html#1650">listRuleGrammars</a>
+| <a href="dictionary_C.html#1674">com.sun.speech.engine.recognition.BaseRecognizer.loadImports</a>
+
+<a href="dictionary_C.html#1654">com.sun.speech.engine.recognition.BaseRecognizer.loadFullQualifiedRules</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_G.html#1657">getRuleInternal</a>
+| <a href="dictionary_C.html#1855">com.sun.speech.engine.BaseEngine.toString</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_I.html#672">indexOf</a>
+| <a href="dictionary_S.html#673">substring</a>
+| <a href="dictionary_T.html#1658">trim</a>
+| <a href="dictionary_G.html#1655">getFullGrammarName</a>
+| <a href="dictionary_G.html#1656">getRuleGrammar</a>
+| <a href="dictionary_C.html#1626">com.sun.speech.engine.recognition.BaseRecognizer.gnameToURL</a>
+| <a href="dictionary_C.html#791">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#1674">com.sun.speech.engine.recognition.BaseRecognizer.loadImports</a>
+
+<a href="dictionary_C.html#1674">com.sun.speech.engine.recognition.BaseRecognizer.loadImports</a>
+| <a href="dictionary_L.html#1675">listImports</a>
+| <a href="dictionary_G.html#1655">getFullGrammarName</a>
+| <a href="dictionary_G.html#1656">getRuleGrammar</a>
+| <a href="dictionary_C.html#1626">com.sun.speech.engine.recognition.BaseRecognizer.gnameToURL</a>
+| <a href="dictionary_C.html#791">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#1674">com.sun.speech.engine.recognition.BaseRecognizer.loadImports</a>
+| <a href="dictionary_C.html#1654">com.sun.speech.engine.recognition.BaseRecognizer.loadFullQualifiedRules</a>
+
+<a href="dictionary_C.html#1688">com.sun.speech.engine.recognition.BaseRecognizer.loadJSGF</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#783">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_C.html#1774">com.sun.speech.engine.recognition.BaseRecognizer.storeGrammar</a>
+
+<a href="dictionary_C.html#1691">com.sun.speech.engine.recognition.BaseRecognizer.loadJSGF</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1694">com.sun.speech.engine.recognition.BaseRecognizer.loadJSGF</a>
+
+<a href="dictionary_C.html#1694">com.sun.speech.engine.recognition.BaseRecognizer.loadJSGF</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1626">com.sun.speech.engine.recognition.BaseRecognizer.gnameToURL</a>
+| <a href="dictionary_N.html#1695">newGrammarFromJSGF</a>
+| <a href="dictionary_C.html#1674">com.sun.speech.engine.recognition.BaseRecognizer.loadImports</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_C.html#1774">com.sun.speech.engine.recognition.BaseRecognizer.storeGrammar</a>
+
+<a href="dictionary_C.html#1703">com.sun.speech.engine.recognition.BaseRecognizer.loadJSGF</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#775">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_C.html#1774">com.sun.speech.engine.recognition.BaseRecognizer.storeGrammar</a>
+
+<a href="dictionary_C.html#1706">com.sun.speech.engine.recognition.BaseRecognizer.newRuleGrammar</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1856">com.sun.speech.engine.recognition.BaseRuleGrammar.BaseRuleGrammar</a>
+| <a href="dictionary_C.html#1774">com.sun.speech.engine.recognition.BaseRecognizer.storeGrammar</a>
+
+<a href="dictionary_C.html#1709">com.sun.speech.engine.recognition.BaseRecognizer.notifyGrammarActivation</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_C.html#1639">com.sun.speech.engine.recognition.BaseRecognizer.isActive</a>
+| <a href="dictionary_C.html#1858">com.sun.speech.engine.recognition.BaseGrammar.postGrammarActivated</a>
+| <a href="dictionary_C.html#1859">com.sun.speech.engine.recognition.BaseGrammar.postGrammarDeactivated</a>
+
+<a href="dictionary_C.html#1713">com.sun.speech.engine.recognition.BaseRecognizer.notifyResult</a>
+| <a href="dictionary_C.html#1623">com.sun.speech.engine.recognition.BaseRecognizer.getRuleGrammar</a>
+| <a href="dictionary_C.html#1860">com.sun.speech.engine.recognition.RecognizerUtilities.debugMessageOut</a>
+| <a href="dictionary_C.html#1861">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+| <a href="dictionary_C.html#1862">com.sun.speech.engine.recognition.BaseGrammar.postResultCreated</a>
+| <a href="dictionary_C.html#1741">com.sun.speech.engine.recognition.BaseRecognizer.postResultCreated</a>
+| <a href="dictionary_C.html#1863">com.sun.speech.engine.recognition.BaseResult.postGrammarFinalized</a>
+| <a href="dictionary_C.html#1864">com.sun.speech.engine.recognition.BaseGrammar.postGrammarFinalized</a>
+| <a href="dictionary_C.html#1731">com.sun.speech.engine.recognition.BaseRecognizer.postGrammarFinalized</a>
+| <a href="dictionary_C.html#1865">com.sun.speech.engine.recognition.BaseResult.setResultState</a>
+| <a href="dictionary_C.html#1866">com.sun.speech.engine.recognition.BaseResult.postResultAccepted</a>
+| <a href="dictionary_C.html#1867">com.sun.speech.engine.recognition.BaseGrammar.postResultAccepted</a>
+| <a href="dictionary_C.html#1739">com.sun.speech.engine.recognition.BaseRecognizer.postResultAccepted</a>
+
+<a href="dictionary_C.html#1719">com.sun.speech.engine.recognition.BaseRecognizer.postAudioReleased</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1721">com.sun.speech.engine.recognition.BaseRecognizer.postChangesCommitted</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1725">com.sun.speech.engine.recognition.BaseRecognizer.postFocusGained</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1728">com.sun.speech.engine.recognition.BaseRecognizer.postFocusLost</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1731">com.sun.speech.engine.recognition.BaseRecognizer.postGrammarFinalized</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1733">com.sun.speech.engine.recognition.BaseRecognizer.postRecognizerProcessing</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1736">com.sun.speech.engine.recognition.BaseRecognizer.postRecognizerSuspended</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1739">com.sun.speech.engine.recognition.BaseRecognizer.postResultAccepted</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1741">com.sun.speech.engine.recognition.BaseRecognizer.postResultCreated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1743">com.sun.speech.engine.recognition.BaseRecognizer.postResultRejected</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1745">com.sun.speech.engine.recognition.BaseRecognizer.postResultUpdated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1747">com.sun.speech.engine.recognition.BaseRecognizer.postTrainingInfoReleased</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1749">com.sun.speech.engine.recognition.BaseRecognizer.readVendorGrammar</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_R.html#1750">readObject</a>
+| <a href="dictionary_C.html#1860">com.sun.speech.engine.recognition.RecognizerUtilities.debugMessageOut</a>
+
+<a href="dictionary_C.html#1755">com.sun.speech.engine.recognition.BaseRecognizer.readVendorResult</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_R.html#1750">readObject</a>
+| <a href="dictionary_C.html#1860">com.sun.speech.engine.recognition.RecognizerUtilities.debugMessageOut</a>
+
+<a href="dictionary_C.html#1760">com.sun.speech.engine.recognition.BaseRecognizer.rejectUtterance</a>
+| <a href="dictionary_C.html#1869">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+| <a href="dictionary_C.html#1741">com.sun.speech.engine.recognition.BaseRecognizer.postResultCreated</a>
+| <a href="dictionary_C.html#1870">com.sun.speech.engine.recognition.BaseResult.postResultRejected</a>
+| <a href="dictionary_C.html#1743">com.sun.speech.engine.recognition.BaseRecognizer.postResultRejected</a>
+
+<a href="dictionary_C.html#1762">com.sun.speech.engine.recognition.BaseRecognizer.releaseFocus</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1728">com.sun.speech.engine.recognition.BaseRecognizer.postFocusLost</a>
+| <a href="dictionary_C.html#1709">com.sun.speech.engine.recognition.BaseRecognizer.notifyGrammarActivation</a>
+
+<a href="dictionary_C.html#1765">com.sun.speech.engine.recognition.BaseRecognizer.removeResultListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#1768">com.sun.speech.engine.recognition.BaseRecognizer.requestFocus</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1725">com.sun.speech.engine.recognition.BaseRecognizer.postFocusGained</a>
+| <a href="dictionary_C.html#1709">com.sun.speech.engine.recognition.BaseRecognizer.notifyGrammarActivation</a>
+
+<a href="dictionary_C.html#1770">com.sun.speech.engine.recognition.BaseRecognizer.retrieveGrammar</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_T.html#1771">toLowerCase</a>
+
+<a href="dictionary_C.html#1774">com.sun.speech.engine.recognition.BaseRecognizer.storeGrammar</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_P.html#377">put</a>
+| <a href="dictionary_T.html#1771">toLowerCase</a>
+
+<a href="dictionary_C.html#1776">com.sun.speech.engine.recognition.BaseRecognizer.suspend</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_C.html#1830">com.sun.speech.engine.BaseEngine.testEngineState</a>
+| <a href="dictionary_C.html#1832">com.sun.speech.engine.BaseEngine.setEngineState</a>
+| <a href="dictionary_C.html#1736">com.sun.speech.engine.recognition.BaseRecognizer.postRecognizerSuspended</a>
+
+<a href="dictionary_C.html#1778">com.sun.speech.engine.recognition.BaseRecognizer.writeVendorGrammar</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_W.html#1779">writeObject</a>
+
+<a href="dictionary_C.html#1783">com.sun.speech.engine.recognition.BaseRecognizer.writeVendorResult</a>
+| <a href="dictionary_C.html#1841">com.sun.speech.engine.BaseEngine.checkEngineState</a>
+| <a href="dictionary_W.html#1779">writeObject</a>
+
+<a href="dictionary_C.html#7175">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.dispatchSpeechEvent</a>
+| <a href="dictionary_G.html#1542">getId</a>
+| <a href="dictionary_C.html#7180">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.fireAudioLevel</a>
+| <a href="dictionary_C.html#7185">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.fireSpeechStarted</a>
+| <a href="dictionary_C.html#7190">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.fireSpeechStopped</a>
+
+<a href="dictionary_C.html#7180">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.fireAudioLevel</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_A.html#7181">audioLevel</a>
+
+<a href="dictionary_C.html#7185">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.fireSpeechStarted</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_S.html#7186">speechStarted</a>
+
+<a href="dictionary_C.html#7190">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.fireSpeechStopped</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_S.html#7191">speechStopped</a>
+
+<a href="dictionary_C.html#7195">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.postAudioLevel</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#7198">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.postSpeechStarted</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#7200">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.postSpeechStopped</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#8951">com.sun.speech.engine.recognition.BaseResult.addResultListener</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#1861">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+| <a href="dictionary_C.html#9041">com.sun.speech.engine.recognition.BaseResult.tryTokens</a>
+
+<a href="dictionary_C.html#1869">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+| <a href="dictionary_C.html#1861">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+
+<a href="dictionary_C.html#8947">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+| <a href="dictionary_C.html#1869">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+
+<a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+| <a href="dictionary_C.html#9010">com.sun.speech.engine.recognition.BaseResult.getResultState</a>
+
+<a href="dictionary_C.html#8955">com.sun.speech.engine.recognition.BaseResult.copyResult</a>
+| <a href="dictionary_C.html#408">clone</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_G.html#8956">getGrammar</a>
+| <a href="dictionary_C.html#1869">com.sun.speech.engine.recognition.BaseResult.BaseResult</a>
+| <a href="dictionary_N.html#8957">numTokens</a>
+| <a href="dictionary_G.html#8959">getBestToken</a>
+| <a href="dictionary_G.html#3611">getSpokenText</a>
+
+<a href="dictionary_C.html#8963">com.sun.speech.engine.recognition.BaseResult.dispatchSpeechEvent</a>
+| <a href="dictionary_G.html#1542">getId</a>
+| <a href="dictionary_C.html#8965">com.sun.speech.engine.recognition.BaseResult.fireAudioReleased</a>
+| <a href="dictionary_C.html#8969">com.sun.speech.engine.recognition.BaseResult.fireGrammarFinalized</a>
+| <a href="dictionary_C.html#8973">com.sun.speech.engine.recognition.BaseResult.fireResultAccepted</a>
+| <a href="dictionary_C.html#8977">com.sun.speech.engine.recognition.BaseResult.fireResultCreated</a>
+| <a href="dictionary_C.html#8981">com.sun.speech.engine.recognition.BaseResult.fireResultRejected</a>
+| <a href="dictionary_C.html#8985">com.sun.speech.engine.recognition.BaseResult.fireResultUpdated</a>
+| <a href="dictionary_C.html#8989">com.sun.speech.engine.recognition.BaseResult.fireTrainingInfoReleased</a>
+
+<a href="dictionary_C.html#8965">com.sun.speech.engine.recognition.BaseResult.fireAudioReleased</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_A.html#1558">audioReleased</a>
+
+<a href="dictionary_C.html#8969">com.sun.speech.engine.recognition.BaseResult.fireGrammarFinalized</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_G.html#1578">grammarFinalized</a>
+
+<a href="dictionary_C.html#8973">com.sun.speech.engine.recognition.BaseResult.fireResultAccepted</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1593">resultAccepted</a>
+
+<a href="dictionary_C.html#8977">com.sun.speech.engine.recognition.BaseResult.fireResultCreated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1598">resultCreated</a>
+
+<a href="dictionary_C.html#8981">com.sun.speech.engine.recognition.BaseResult.fireResultRejected</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1603">resultRejected</a>
+
+<a href="dictionary_C.html#8985">com.sun.speech.engine.recognition.BaseResult.fireResultUpdated</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_R.html#1608">resultUpdated</a>
+
+<a href="dictionary_C.html#8989">com.sun.speech.engine.recognition.BaseResult.fireTrainingInfoReleased</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_T.html#1613">trainingInfoReleased</a>
+
+<a href="dictionary_C.html#8993">com.sun.speech.engine.recognition.BaseResult.getAlternativeTokens</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+| <a href="dictionary_C.html#9005">com.sun.speech.engine.recognition.BaseResult.getBestTokens</a>
+
+<a href="dictionary_C.html#8995">com.sun.speech.engine.recognition.BaseResult.getAlternativeTokens</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#8999">com.sun.speech.engine.recognition.BaseResult.getAudio</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9000">com.sun.speech.engine.recognition.BaseResult.getAudio</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9003">com.sun.speech.engine.recognition.BaseResult.getBestToken</a>
+| <a href="dictionary_C.html#8935">com.sun.speech.engine.recognition.BaseResult.BaseResultToken.BaseResultToken</a>
+
+<a href="dictionary_C.html#9005">com.sun.speech.engine.recognition.BaseResult.getBestTokens</a>
+| <a href="dictionary_C.html#9003">com.sun.speech.engine.recognition.BaseResult.getBestToken</a>
+
+<a href="dictionary_C.html#9009">com.sun.speech.engine.recognition.BaseResult.getNumberGuesses</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9011">com.sun.speech.engine.recognition.BaseResult.getRuleGrammar</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9013">com.sun.speech.engine.recognition.BaseResult.getRuleName</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9015">com.sun.speech.engine.recognition.BaseResult.getTags</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9017">com.sun.speech.engine.recognition.BaseResult.isAudioAvailable</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9018">com.sun.speech.engine.recognition.BaseResult.isTrainingInfoAvailable</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9020">com.sun.speech.engine.recognition.BaseResult.postAudioReleased</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1863">com.sun.speech.engine.recognition.BaseResult.postGrammarFinalized</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1866">com.sun.speech.engine.recognition.BaseResult.postResultAccepted</a>
+| <a href="dictionary_C.html#1865">com.sun.speech.engine.recognition.BaseResult.setResultState</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#9021">com.sun.speech.engine.recognition.BaseResult.postResultCreated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#1870">com.sun.speech.engine.recognition.BaseResult.postResultRejected</a>
+| <a href="dictionary_C.html#1865">com.sun.speech.engine.recognition.BaseResult.setResultState</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#9023">com.sun.speech.engine.recognition.BaseResult.postResultUpdated</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#9024">com.sun.speech.engine.recognition.BaseResult.postTrainingInfoReleased</a>
+| <a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#9025">com.sun.speech.engine.recognition.BaseResult.releaseAudio</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9026">com.sun.speech.engine.recognition.BaseResult.releaseTrainingInfo</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9027">com.sun.speech.engine.recognition.BaseResult.removeResultListener</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#9036">com.sun.speech.engine.recognition.BaseResult.tokenCorrection</a>
+| <a href="dictionary_C.html#8953">com.sun.speech.engine.recognition.BaseResult.checkResultState</a>
+
+<a href="dictionary_C.html#9032">com.sun.speech.engine.recognition.BaseResult.toString</a>
+| <a href="dictionary_C.html#9003">com.sun.speech.engine.recognition.BaseResult.getBestToken</a>
+| <a href="dictionary_G.html#9033">getWrittenText</a>
+| <a href="dictionary_C.html#9019">com.sun.speech.engine.recognition.BaseResult.numTokens</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_T.html#469">toString</a>
+
+<a href="dictionary_C.html#9041">com.sun.speech.engine.recognition.BaseResult.tryTokens</a>
+| <a href="dictionary_P.html#2697">parse</a>
+| <a href="dictionary_G.html#2703">getTags</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_G.html#3624">getSimpleRuleName</a>
+| <a href="dictionary_C.html#96">countTokens</a>
+| <a href="dictionary_H.html#50">hasMoreTokens</a>
+| <a href="dictionary_N.html#51">nextToken</a>
+
+<a href="dictionary_C.html#883">com.sun.speech.engine.recognition.BaseRuleGrammar</a>
+| <a href="dictionary_G.html#3562">getProperty</a>
+
+<a href="dictionary_C.html#3548">com.sun.speech.engine.recognition.BaseRuleGrammar.addImport</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#892">com.sun.speech.engine.recognition.BaseRuleGrammar.addImportDocComment</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_P.html#377">put</a>
+
+<a href="dictionary_C.html#900">com.sun.speech.engine.recognition.BaseRuleGrammar.addRuleDocComment</a>
+| <a href="dictionary_P.html#377">put</a>
+
+<a href="dictionary_C.html#905">com.sun.speech.engine.recognition.BaseRuleGrammar.addSampleSentence</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#1856">com.sun.speech.engine.recognition.BaseRuleGrammar.BaseRuleGrammar</a>
+| <a href="dictionary_C.html#3725">com.sun.speech.engine.recognition.BaseGrammar.BaseGrammar</a>
+
+<a href="dictionary_C.html#3557">com.sun.speech.engine.recognition.BaseRuleGrammar.deleteRule</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_R.html#496">remove</a>
+
+<a href="dictionary_C.html#3561">com.sun.speech.engine.recognition.BaseRuleGrammar.getImportDocComment</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_G.html#3562">getProperty</a>
+
+<a href="dictionary_C.html#3564">com.sun.speech.engine.recognition.BaseRuleGrammar.getJSGFTags</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3566">com.sun.speech.engine.recognition.BaseRuleGrammar.getRule</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_C.html#3567">copy</a>
+
+<a href="dictionary_C.html#3570">com.sun.speech.engine.recognition.BaseRuleGrammar.getRuleDocComment</a>
+| <a href="dictionary_G.html#3562">getProperty</a>
+
+<a href="dictionary_C.html#3572">com.sun.speech.engine.recognition.BaseRuleGrammar.getRuleID</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_H.html#1156">hashCode</a>
+
+<a href="dictionary_C.html#3575">com.sun.speech.engine.recognition.BaseRuleGrammar.getRuleInternal</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3578">com.sun.speech.engine.recognition.BaseRuleGrammar.getSampleSentences</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3581">com.sun.speech.engine.recognition.BaseRuleGrammar.getSourceLine</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3584">com.sun.speech.engine.recognition.BaseRuleGrammar.isEnabled</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#1838">com.sun.speech.engine.recognition.BaseRuleGrammar.isRuleChanged</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3589">com.sun.speech.engine.recognition.BaseRuleGrammar.isRulePublic</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3592">com.sun.speech.engine.recognition.BaseRuleGrammar.listImports</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+
+<a href="dictionary_C.html#3597">com.sun.speech.engine.recognition.BaseRuleGrammar.listRuleNames</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+
+<a href="dictionary_C.html#3602">com.sun.speech.engine.recognition.BaseRuleGrammar.parse</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_P.html#2697">parse</a>
+
+<a href="dictionary_C.html#3605">com.sun.speech.engine.recognition.BaseRuleGrammar.parse</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_P.html#2697">parse</a>
+
+<a href="dictionary_C.html#3608">com.sun.speech.engine.recognition.BaseRuleGrammar.parse</a>
+| <a href="dictionary_G.html#3609">getAlternativeTokens</a>
+| <a href="dictionary_G.html#3610">getBestTokens</a>
+| <a href="dictionary_G.html#3611">getSpokenText</a>
+| <a href="dictionary_C.html#3605">com.sun.speech.engine.recognition.BaseRuleGrammar.parse</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_P.html#2697">parse</a>
+
+<a href="dictionary_C.html#3618">com.sun.speech.engine.recognition.BaseRuleGrammar.removeImport</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_R.html#1766">removeElement</a>
+
+<a href="dictionary_C.html#3620">com.sun.speech.engine.recognition.BaseRuleGrammar.resolve</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_G.html#3624">getSimpleRuleName</a>
+| <a href="dictionary_G.html#3623">getSimpleGrammarName</a>
+| <a href="dictionary_G.html#3621">getPackageName</a>
+| <a href="dictionary_G.html#1655">getFullGrammarName</a>
+| <a href="dictionary_E.html#97">equals</a>
+| <a href="dictionary_C.html#3566">com.sun.speech.engine.recognition.BaseRuleGrammar.getRule</a>
+| <a href="dictionary_C.html#1623">com.sun.speech.engine.recognition.BaseRecognizer.getRuleGrammar</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_C.html#3592">com.sun.speech.engine.recognition.BaseRuleGrammar.listImports</a>
+| <a href="dictionary_C.html#3728">com.sun.speech.engine.recognition.BaseGrammar.getName</a>
+| <a href="dictionary_A.html#656">arraycopy</a>
+| <a href="dictionary_C.html#1860">com.sun.speech.engine.recognition.RecognizerUtilities.debugMessageOut</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_E.html#687">elementAt</a>
+| <a href="dictionary_T.html#469">toString</a>
+
+<a href="dictionary_C.html#1854">com.sun.speech.engine.recognition.BaseRuleGrammar.resolveAllRules</a>
+| <a href="dictionary_C.html#3592">com.sun.speech.engine.recognition.BaseRuleGrammar.listImports</a>
+| <a href="dictionary_G.html#1655">getFullGrammarName</a>
+| <a href="dictionary_C.html#1623">com.sun.speech.engine.recognition.BaseRecognizer.getRuleGrammar</a>
+| <a href="dictionary_C.html#3728">com.sun.speech.engine.recognition.BaseGrammar.getName</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_C.html#3597">com.sun.speech.engine.recognition.BaseRuleGrammar.listRuleNames</a>
+| <a href="dictionary_C.html#3575">com.sun.speech.engine.recognition.BaseRuleGrammar.getRuleInternal</a>
+| <a href="dictionary_C.html#3653">com.sun.speech.engine.recognition.BaseRuleGrammar.resolveRule</a>
+
+<a href="dictionary_C.html#3653">com.sun.speech.engine.recognition.BaseRuleGrammar.resolveRule</a>
+| <a href="dictionary_G.html#3654">getRules</a>
+| <a href="dictionary_C.html#3653">com.sun.speech.engine.recognition.BaseRuleGrammar.resolveRule</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_C.html#376">containsKey</a>
+| <a href="dictionary_P.html#377">put</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_G.html#3655">getTag</a>
+| <a href="dictionary_A.html#48">add</a>
+| <a href="dictionary_C.html#3620">com.sun.speech.engine.recognition.BaseRuleGrammar.resolve</a>
+| <a href="dictionary_C.html#3728">com.sun.speech.engine.recognition.BaseGrammar.getName</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_S.html#3656">setRuleName</a>
+
+<a href="dictionary_C.html#3669">com.sun.speech.engine.recognition.BaseRuleGrammar.ruleForJSGF</a>
+| <a href="dictionary_C.html#811">com.sun.speech.engine.recognition.JSGFParser.ruleForJSGF</a>
+
+<a href="dictionary_C.html#3671">com.sun.speech.engine.recognition.BaseRuleGrammar.setEnabled</a>
+| <a href="dictionary_C.html#3730">com.sun.speech.engine.recognition.BaseGrammar.setEnabled</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+
+<a href="dictionary_C.html#3675">com.sun.speech.engine.recognition.BaseRuleGrammar.setEnabled</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3679">com.sun.speech.engine.recognition.BaseRuleGrammar.setEnabled</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3684">com.sun.speech.engine.recognition.BaseRuleGrammar.setRule</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_C.html#3731">com.sun.speech.engine.recognition.BaseRuleName.copyForBaseRuleName</a>
+| <a href="dictionary_P.html#377">put</a>
+
+<a href="dictionary_C.html#1839">com.sun.speech.engine.recognition.BaseRuleGrammar.setRuleChanged</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3692">com.sun.speech.engine.recognition.BaseRuleGrammar.setRuleIsImported</a>
+| <a href="dictionary_C.html#395">contains</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#3694">com.sun.speech.engine.recognition.BaseRuleGrammar.setSampleSentences</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#902">com.sun.speech.engine.recognition.BaseRuleGrammar.setSourceLine</a>
+| <a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_G.html#49">get</a>
+
+<a href="dictionary_C.html#3701">com.sun.speech.engine.recognition.BaseRuleGrammar.stripRuleName</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+| <a href="dictionary_E.html#163">endsWith</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_S.html#673">substring</a>
+
+<a href="dictionary_C.html#3703">com.sun.speech.engine.recognition.BaseRuleGrammar.toString</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_C.html#3728">com.sun.speech.engine.recognition.BaseGrammar.getName</a>
+| <a href="dictionary_V.html#402">values</a>
+| <a href="dictionary_T.html#469">toString</a>
+
+<a href="dictionary_C.html#6051">com.sun.speech.engine.recognition.BaseRuleName.copy</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_C.html#6049">com.sun.speech.engine.recognition.BaseRuleName.BaseRuleName</a>
+
+<a href="dictionary_C.html#3731">com.sun.speech.engine.recognition.BaseRuleName.copyForBaseRuleName</a>
+| <a href="dictionary_G.html#3823">getText</a>
+| <a href="dictionary_G.html#3654">getRules</a>
+| <a href="dictionary_G.html#6053">getWeights</a>
+| <a href="dictionary_C.html#3731">com.sun.speech.engine.recognition.BaseRuleName.copyForBaseRuleName</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_G.html#5618">getCount</a>
+| <a href="dictionary_G.html#3655">getTag</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_C.html#6049">com.sun.speech.engine.recognition.BaseRuleName.BaseRuleName</a>
+
+<a href="dictionary_C.html#13796">com.sun.speech.engine.recognition.JavaCharStream.AdjustBuffSize</a>
+| <a href="dictionary_C.html#13798">com.sun.speech.engine.recognition.JavaCharStream.ExpandBuff</a>
+
+<a href="dictionary_C.html#5481">com.sun.speech.engine.recognition.JavaCharStream.BeginToken</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+
+<a href="dictionary_C.html#13798">com.sun.speech.engine.recognition.JavaCharStream.ExpandBuff</a>
+| <a href="dictionary_A.html#656">arraycopy</a>
+| <a href="dictionary_G.html#2778">getMessage</a>
+
+<a href="dictionary_C.html#13804">com.sun.speech.engine.recognition.JavaCharStream.FillBuff</a>
+| <a href="dictionary_R.html#693">read</a>
+| <a href="dictionary_C.html#1116">close</a>
+| <a href="dictionary_C.html#5478">com.sun.speech.engine.recognition.JavaCharStream.backup</a>
+
+<a href="dictionary_C.html#5477">com.sun.speech.engine.recognition.JavaCharStream.GetSuffix</a>
+| <a href="dictionary_A.html#656">arraycopy</a>
+
+<a href="dictionary_C.html#893">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_C.html#13819">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+
+<a href="dictionary_C.html#895">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_C.html#13809">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+
+<a href="dictionary_C.html#13817">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_C.html#13809">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+
+<a href="dictionary_C.html#13819">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_J.html#13820">JavaCharStream</a>
+
+<a href="dictionary_C.html#13828">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_C.html#13819">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+
+<a href="dictionary_C.html#13850">com.sun.speech.engine.recognition.JavaCharStream.ReadByte</a>
+| <a href="dictionary_C.html#13804">com.sun.speech.engine.recognition.JavaCharStream.FillBuff</a>
+
+<a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#13796">com.sun.speech.engine.recognition.JavaCharStream.AdjustBuffSize</a>
+| <a href="dictionary_C.html#13850">com.sun.speech.engine.recognition.JavaCharStream.ReadByte</a>
+| <a href="dictionary_C.html#13851">com.sun.speech.engine.recognition.JavaCharStream.UpdateLineColumn</a>
+| <a href="dictionary_C.html#5478">com.sun.speech.engine.recognition.JavaCharStream.backup</a>
+| <a href="dictionary_C.html#13866">com.sun.speech.engine.recognition.JavaCharStream.hexval</a>
+
+<a href="dictionary_C.html#897">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_C.html#13840">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+
+<a href="dictionary_C.html#899">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_C.html#13830">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+
+<a href="dictionary_C.html#13838">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_C.html#13830">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+
+<a href="dictionary_C.html#13840">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_R.html#798">ReInit</a>
+
+<a href="dictionary_C.html#13848">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_C.html#13840">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+
+<a href="dictionary_C.html#587">com.sun.speech.engine.recognition.JSGFParser</a>
+| <a href="dictionary_C.html#748">com.sun.speech.engine.recognition.JSGFParser.jj_la1_0</a>
+| <a href="dictionary_C.html#749">com.sun.speech.engine.recognition.JSGFParser.jj_la1_1</a>
+
+<a href="dictionary_C.html#654">com.sun.speech.engine.recognition.JSGFParser.alternatives</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#819">com.sun.speech.engine.recognition.JSGFParser.sequence</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#830">com.sun.speech.engine.recognition.JSGFParser.weight</a>
+| <a href="dictionary_A.html#656">arraycopy</a>
+| <a href="dictionary_C.html#896">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_C.html#657">copyInto</a>
+| <a href="dictionary_S.html#658">setWeights</a>
+| <a href="dictionary_P.html#11">println</a>
+
+<a href="dictionary_C.html#671">com.sun.speech.engine.recognition.JSGFParser.extractKeywords</a>
+| <a href="dictionary_I.html#672">indexOf</a>
+| <a href="dictionary_S.html#673">substring</a>
+| <a href="dictionary_C.html#905">com.sun.speech.engine.recognition.BaseRuleGrammar.addSampleSentence</a>
+
+<a href="dictionary_C.html#681">com.sun.speech.engine.recognition.JSGFParser.generateParseException</a>
+| <a href="dictionary_R.html#682">removeAllElements</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#751">com.sun.speech.engine.recognition.JSGFParser.jj_rescan_token</a>
+| <a href="dictionary_C.html#732">com.sun.speech.engine.recognition.JSGFParser.jj_add_error_token</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#687">elementAt</a>
+| <a href="dictionary_C.html#907">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+
+<a href="dictionary_C.html#691">com.sun.speech.engine.recognition.JSGFParser.getJSGFEncoding</a>
+| <a href="dictionary_M.html#692">mark</a>
+| <a href="dictionary_R.html#693">read</a>
+| <a href="dictionary_R.html#694">reset</a>
+| <a href="dictionary_H.html#50">hasMoreTokens</a>
+| <a href="dictionary_N.html#51">nextToken</a>
+| <a href="dictionary_E.html#97">equals</a>
+
+<a href="dictionary_C.html#710">com.sun.speech.engine.recognition.JSGFParser.getNextToken</a>
+| <a href="dictionary_C.html#909">com.sun.speech.engine.recognition.JSGFParserTokenManager.getNextToken</a>
+
+<a href="dictionary_C.html#711">com.sun.speech.engine.recognition.JSGFParser.getToken</a>
+| <a href="dictionary_C.html#909">com.sun.speech.engine.recognition.JSGFParserTokenManager.getNextToken</a>
+
+<a href="dictionary_C.html#594">com.sun.speech.engine.recognition.JSGFParser.GrammarDeclaration</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#626">com.sun.speech.engine.recognition.JSGFParser.Name</a>
+| <a href="dictionary_N.html#595">newRuleGrammar</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+| <a href="dictionary_C.html#888">com.sun.speech.engine.recognition.BaseRuleGrammar.addGrammarDocComment</a>
+
+<a href="dictionary_C.html#602">com.sun.speech.engine.recognition.JSGFParser.GrammarUnit</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#605">com.sun.speech.engine.recognition.JSGFParser.IdentHeader</a>
+| <a href="dictionary_C.html#594">com.sun.speech.engine.recognition.JSGFParser.GrammarDeclaration</a>
+| <a href="dictionary_C.html#606">com.sun.speech.engine.recognition.JSGFParser.ImportDeclaration</a>
+| <a href="dictionary_C.html#643">com.sun.speech.engine.recognition.JSGFParser.RuleDeclaration</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+
+<a href="dictionary_C.html#605">com.sun.speech.engine.recognition.JSGFParser.IdentHeader</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+
+<a href="dictionary_C.html#606">com.sun.speech.engine.recognition.JSGFParser.ImportDeclaration</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#626">com.sun.speech.engine.recognition.JSGFParser.Name</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_A.html#607">addImport</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+| <a href="dictionary_C.html#892">com.sun.speech.engine.recognition.BaseRuleGrammar.addImportDocComment</a>
+
+<a href="dictionary_C.html#715">com.sun.speech.engine.recognition.JSGFParser.importRef</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#626">com.sun.speech.engine.recognition.JSGFParser.Name</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+
+<a href="dictionary_C.html#719">com.sun.speech.engine.recognition.JSGFParser.item</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#826">com.sun.speech.engine.recognition.JSGFParser.terminal</a>
+| <a href="dictionary_C.html#816">com.sun.speech.engine.recognition.JSGFParser.ruleRef</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#896">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+| <a href="dictionary_C.html#823">com.sun.speech.engine.recognition.JSGFParser.tag</a>
+| <a href="dictionary_C.html#654">com.sun.speech.engine.recognition.JSGFParser.alternatives</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#687">elementAt</a>
+| <a href="dictionary_C.html#720">charAt</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_S.html#673">substring</a>
+| <a href="dictionary_R.html#722">replace</a>
+
+<a href="dictionary_C.html#728">com.sun.speech.engine.recognition.JSGFParser.jj_2_1</a>
+| <a href="dictionary_C.html#731">com.sun.speech.engine.recognition.JSGFParser.jj_3_1</a>
+| <a href="dictionary_C.html#754">com.sun.speech.engine.recognition.JSGFParser.jj_save</a>
+
+<a href="dictionary_C.html#731">com.sun.speech.engine.recognition.JSGFParser.jj_3_1</a>
+| <a href="dictionary_C.html#758">com.sun.speech.engine.recognition.JSGFParser.jj_scan_token</a>
+
+<a href="dictionary_C.html#732">com.sun.speech.engine.recognition.JSGFParser.jj_add_error_token</a>
+| <a href="dictionary_E.html#734">elements</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#909">com.sun.speech.engine.recognition.JSGFParserTokenManager.getNextToken</a>
+| <a href="dictionary_C.html#681">com.sun.speech.engine.recognition.JSGFParser.generateParseException</a>
+
+<a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#909">com.sun.speech.engine.recognition.JSGFParserTokenManager.getNextToken</a>
+
+<a href="dictionary_C.html#751">com.sun.speech.engine.recognition.JSGFParser.jj_rescan_token</a>
+| <a href="dictionary_C.html#731">com.sun.speech.engine.recognition.JSGFParser.jj_3_1</a>
+
+<a href="dictionary_C.html#758">com.sun.speech.engine.recognition.JSGFParser.jj_scan_token</a>
+| <a href="dictionary_C.html#909">com.sun.speech.engine.recognition.JSGFParserTokenManager.getNextToken</a>
+| <a href="dictionary_C.html#732">com.sun.speech.engine.recognition.JSGFParser.jj_add_error_token</a>
+
+<a href="dictionary_C.html#614">com.sun.speech.engine.recognition.JSGFParser.JSGFParser</a>
+| <a href="dictionary_C.html#893">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_C.html#894">com.sun.speech.engine.recognition.JSGFParserTokenManager.JSGFParserTokenManager</a>
+
+<a href="dictionary_C.html#618">com.sun.speech.engine.recognition.JSGFParser.JSGFParser</a>
+| <a href="dictionary_C.html#895">com.sun.speech.engine.recognition.JavaCharStream.JavaCharStream</a>
+| <a href="dictionary_C.html#894">com.sun.speech.engine.recognition.JSGFParserTokenManager.JSGFParserTokenManager</a>
+
+<a href="dictionary_C.html#762">com.sun.speech.engine.recognition.JSGFParser.main</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_G.html#763">getAbsolutePath</a>
+| <a href="dictionary_O.html#764">openStream</a>
+| <a href="dictionary_C.html#691">com.sun.speech.engine.recognition.JSGFParser.getJSGFEncoding</a>
+| <a href="dictionary_C.html#618">com.sun.speech.engine.recognition.JSGFParser.JSGFParser</a>
+| <a href="dictionary_C.html#602">com.sun.speech.engine.recognition.JSGFParser.GrammarUnit</a>
+| <a href="dictionary_C.html#912">com.sun.speech.engine.recognition.ParseException.getMessage</a>
+
+<a href="dictionary_C.html#626">com.sun.speech.engine.recognition.JSGFParser.Name</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#896">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_C.html#728">com.sun.speech.engine.recognition.JSGFParser.jj_2_1</a>
+| <a href="dictionary_T.html#469">toString</a>
+
+<a href="dictionary_C.html#775">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_C.html#614">com.sun.speech.engine.recognition.JSGFParser.JSGFParser</a>
+| <a href="dictionary_C.html#631">com.sun.speech.engine.recognition.JSGFParser.ReInit</a>
+| <a href="dictionary_C.html#602">com.sun.speech.engine.recognition.JSGFParser.GrammarUnit</a>
+| <a href="dictionary_C.html#912">com.sun.speech.engine.recognition.ParseException.getMessage</a>
+
+<a href="dictionary_C.html#783">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_C.html#618">com.sun.speech.engine.recognition.JSGFParser.JSGFParser</a>
+| <a href="dictionary_C.html#635">com.sun.speech.engine.recognition.JSGFParser.ReInit</a>
+| <a href="dictionary_C.html#602">com.sun.speech.engine.recognition.JSGFParser.GrammarUnit</a>
+| <a href="dictionary_C.html#912">com.sun.speech.engine.recognition.ParseException.getMessage</a>
+
+<a href="dictionary_C.html#791">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+| <a href="dictionary_O.html#764">openStream</a>
+| <a href="dictionary_C.html#691">com.sun.speech.engine.recognition.JSGFParser.getJSGFEncoding</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_C.html#783">com.sun.speech.engine.recognition.JSGFParser.newGrammarFromJSGF</a>
+
+<a href="dictionary_C.html#797">com.sun.speech.engine.recognition.JSGFParser.parseImport</a>
+| <a href="dictionary_G.html#799">getBytes</a>
+| <a href="dictionary_R.html#798">ReInit</a>
+| <a href="dictionary_C.html#715">com.sun.speech.engine.recognition.JSGFParser.importRef</a>
+
+<a href="dictionary_C.html#804">com.sun.speech.engine.recognition.JSGFParser.parseRuleName</a>
+| <a href="dictionary_G.html#799">getBytes</a>
+| <a href="dictionary_R.html#798">ReInit</a>
+| <a href="dictionary_C.html#816">com.sun.speech.engine.recognition.JSGFParser.ruleRef</a>
+
+<a href="dictionary_C.html#631">com.sun.speech.engine.recognition.JSGFParser.ReInit</a>
+| <a href="dictionary_C.html#897">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_C.html#898">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInit</a>
+
+<a href="dictionary_C.html#635">com.sun.speech.engine.recognition.JSGFParser.ReInit</a>
+| <a href="dictionary_C.html#899">com.sun.speech.engine.recognition.JavaCharStream.ReInit</a>
+| <a href="dictionary_C.html#898">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInit</a>
+
+<a href="dictionary_C.html#643">com.sun.speech.engine.recognition.JSGFParser.RuleDeclaration</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#809">com.sun.speech.engine.recognition.JSGFParser.ruleDef</a>
+| <a href="dictionary_C.html#654">com.sun.speech.engine.recognition.JSGFParser.alternatives</a>
+| <a href="dictionary_S.html#644">setRule</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+| <a href="dictionary_C.html#671">com.sun.speech.engine.recognition.JSGFParser.extractKeywords</a>
+| <a href="dictionary_C.html#900">com.sun.speech.engine.recognition.BaseRuleGrammar.addRuleDocComment</a>
+| <a href="dictionary_C.html#902">com.sun.speech.engine.recognition.BaseRuleGrammar.setSourceLine</a>
+| <a href="dictionary_P.html#11">println</a>
+
+<a href="dictionary_C.html#809">com.sun.speech.engine.recognition.JSGFParser.ruleDef</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#896">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+
+<a href="dictionary_C.html#811">com.sun.speech.engine.recognition.JSGFParser.ruleForJSGF</a>
+| <a href="dictionary_R.html#798">ReInit</a>
+| <a href="dictionary_C.html#654">com.sun.speech.engine.recognition.JSGFParser.alternatives</a>
+| <a href="dictionary_P.html#11">println</a>
+
+<a href="dictionary_C.html#816">com.sun.speech.engine.recognition.JSGFParser.ruleRef</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#626">com.sun.speech.engine.recognition.JSGFParser.Name</a>
+
+<a href="dictionary_C.html#819">com.sun.speech.engine.recognition.JSGFParser.sequence</a>
+| <a href="dictionary_C.html#719">com.sun.speech.engine.recognition.JSGFParser.item</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_C.html#657">copyInto</a>
+
+<a href="dictionary_C.html#823">com.sun.speech.engine.recognition.JSGFParser.tag</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+
+<a href="dictionary_C.html#826">com.sun.speech.engine.recognition.JSGFParser.terminal</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#896">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+| <a href="dictionary_E.html#163">endsWith</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_S.html#673">substring</a>
+
+<a href="dictionary_C.html#830">com.sun.speech.engine.recognition.JSGFParser.weight</a>
+| <a href="dictionary_C.html#743">com.sun.speech.engine.recognition.JSGFParser.jj_consume_token</a>
+| <a href="dictionary_C.html#750">com.sun.speech.engine.recognition.JSGFParser.jj_ntk</a>
+| <a href="dictionary_C.html#896">com.sun.speech.engine.recognition.ParseException.ParseException</a>
+| <a href="dictionary_V.html#832">valueOf</a>
+| <a href="dictionary_F.html#831">floatValue</a>
+
+<a href="dictionary_C.html#909">com.sun.speech.engine.recognition.JSGFParserTokenManager.getNextToken</a>
+| <a href="dictionary_C.html#5481">com.sun.speech.engine.recognition.JavaCharStream.BeginToken</a>
+| <a href="dictionary_C.html#5370">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjFillToken</a>
+| <a href="dictionary_C.html#5478">com.sun.speech.engine.recognition.JavaCharStream.backup</a>
+| <a href="dictionary_C.html#5396">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_0</a>
+| <a href="dictionary_C.html#5397">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_1</a>
+| <a href="dictionary_C.html#5398">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_2</a>
+| <a href="dictionary_C.html#5399">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_3</a>
+| <a href="dictionary_C.html#5330">com.sun.speech.engine.recognition.JSGFParserTokenManager.SkipLexicalActions</a>
+| <a href="dictionary_C.html#5323">com.sun.speech.engine.recognition.JSGFParserTokenManager.MoreLexicalActions</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5483">com.sun.speech.engine.recognition.JavaCharStream.getEndLine</a>
+| <a href="dictionary_C.html#5484">com.sun.speech.engine.recognition.JavaCharStream.getEndColumn</a>
+| <a href="dictionary_C.html#5485">com.sun.speech.engine.recognition.JavaCharStream.GetImage</a>
+| <a href="dictionary_C.html#5487">com.sun.speech.engine.recognition.TokenMgrError.TokenMgrError</a>
+
+<a href="dictionary_C.html#5362">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAddStates</a>
+| <a href="dictionary_C.html#5360">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAdd</a>
+
+<a href="dictionary_C.html#5365">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAddStates</a>
+| <a href="dictionary_C.html#5360">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAdd</a>
+
+<a href="dictionary_C.html#5367">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAddTwoStates</a>
+| <a href="dictionary_C.html#5360">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAdd</a>
+
+<a href="dictionary_C.html#5370">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjFillToken</a>
+| <a href="dictionary_C.html#5488">com.sun.speech.engine.recognition.Token.newToken</a>
+| <a href="dictionary_C.html#5485">com.sun.speech.engine.recognition.JavaCharStream.GetImage</a>
+| <a href="dictionary_C.html#5489">com.sun.speech.engine.recognition.JavaCharStream.getBeginLine</a>
+| <a href="dictionary_C.html#5490">com.sun.speech.engine.recognition.JavaCharStream.getBeginColumn</a>
+| <a href="dictionary_C.html#5483">com.sun.speech.engine.recognition.JavaCharStream.getEndLine</a>
+| <a href="dictionary_C.html#5484">com.sun.speech.engine.recognition.JavaCharStream.getEndColumn</a>
+
+<a href="dictionary_C.html#5373">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveNfa_0</a>
+| <a href="dictionary_C.html#5328">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInitRounds</a>
+| <a href="dictionary_C.html#5360">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAdd</a>
+| <a href="dictionary_C.html#5362">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAddStates</a>
+| <a href="dictionary_C.html#5345">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjAddStates</a>
+| <a href="dictionary_C.html#5367">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCheckNAddTwoStates</a>
+| <a href="dictionary_C.html#5354">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCanMove_1</a>
+| <a href="dictionary_C.html#5348">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjCanMove_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+
+<a href="dictionary_C.html#5387">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveNfa_1</a>
+| <a href="dictionary_C.html#5328">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInitRounds</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+
+<a href="dictionary_C.html#5396">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_0</a>
+| <a href="dictionary_C.html#5437">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopAtPos</a>
+| <a href="dictionary_C.html#5429">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfaWithStates_0</a>
+| <a href="dictionary_C.html#5400">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa1_0</a>
+| <a href="dictionary_C.html#5373">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveNfa_0</a>
+
+<a href="dictionary_C.html#5397">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_1</a>
+| <a href="dictionary_C.html#5387">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveNfa_1</a>
+
+<a href="dictionary_C.html#5398">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_2</a>
+| <a href="dictionary_C.html#5403">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa1_2</a>
+
+<a href="dictionary_C.html#5399">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa0_3</a>
+| <a href="dictionary_C.html#5406">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa1_3</a>
+
+<a href="dictionary_C.html#5400">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa1_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5429">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfaWithStates_0</a>
+| <a href="dictionary_C.html#5437">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopAtPos</a>
+| <a href="dictionary_C.html#5409">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa2_0</a>
+| <a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+
+<a href="dictionary_C.html#5403">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa1_2</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5437">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopAtPos</a>
+
+<a href="dictionary_C.html#5406">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa1_3</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5437">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopAtPos</a>
+
+<a href="dictionary_C.html#5409">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa2_0</a>
+| <a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5413">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa3_0</a>
+
+<a href="dictionary_C.html#5413">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa3_0</a>
+| <a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5437">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopAtPos</a>
+| <a href="dictionary_C.html#5417">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa4_0</a>
+
+<a href="dictionary_C.html#5417">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa4_0</a>
+| <a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5421">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa5_0</a>
+
+<a href="dictionary_C.html#5421">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa5_0</a>
+| <a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5425">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa6_0</a>
+| <a href="dictionary_C.html#5429">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfaWithStates_0</a>
+
+<a href="dictionary_C.html#5425">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveStringLiteralDfa6_0</a>
+| <a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5429">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfaWithStates_0</a>
+
+<a href="dictionary_C.html#5434">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfa_0</a>
+| <a href="dictionary_C.html#5440">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStopStringLiteralDfa_0</a>
+| <a href="dictionary_C.html#5373">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveNfa_0</a>
+
+<a href="dictionary_C.html#5429">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjStartNfaWithStates_0</a>
+| <a href="dictionary_C.html#5482">com.sun.speech.engine.recognition.JavaCharStream.readChar</a>
+| <a href="dictionary_C.html#5373">com.sun.speech.engine.recognition.JSGFParserTokenManager.jjMoveNfa_0</a>
+
+<a href="dictionary_C.html#5320">com.sun.speech.engine.recognition.JSGFParserTokenManager.JSGFParserTokenManager</a>
+| <a href="dictionary_C.html#894">com.sun.speech.engine.recognition.JSGFParserTokenManager.JSGFParserTokenManager</a>
+| <a href="dictionary_C.html#5332">com.sun.speech.engine.recognition.JSGFParserTokenManager.SwitchTo</a>
+
+<a href="dictionary_C.html#5323">com.sun.speech.engine.recognition.JSGFParserTokenManager.MoreLexicalActions</a>
+| <a href="dictionary_C.html#5477">com.sun.speech.engine.recognition.JavaCharStream.GetSuffix</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_C.html#5478">com.sun.speech.engine.recognition.JavaCharStream.backup</a>
+
+<a href="dictionary_C.html#898">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInit</a>
+| <a href="dictionary_C.html#5328">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInitRounds</a>
+
+<a href="dictionary_C.html#5325">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInit</a>
+| <a href="dictionary_C.html#898">com.sun.speech.engine.recognition.JSGFParserTokenManager.ReInit</a>
+| <a href="dictionary_C.html#5332">com.sun.speech.engine.recognition.JSGFParserTokenManager.SwitchTo</a>
+
+<a href="dictionary_C.html#5332">com.sun.speech.engine.recognition.JSGFParserTokenManager.SwitchTo</a>
+| <a href="dictionary_C.html#5480">com.sun.speech.engine.recognition.TokenMgrError.TokenMgrError</a>
+
+<a href="dictionary_C.html#884">com.sun.speech.engine.recognition.ParseException</a>
+| <a href="dictionary_G.html#3562">getProperty</a>
+
+<a href="dictionary_C.html#14526">com.sun.speech.engine.recognition.ParseException.add_escapes</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_C.html#720">charAt</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_S.html#673">substring</a>
+
+<a href="dictionary_C.html#912">com.sun.speech.engine.recognition.ParseException.getMessage</a>
+| <a href="dictionary_G.html#2778">getMessage</a>
+| <a href="dictionary_C.html#14526">com.sun.speech.engine.recognition.ParseException.add_escapes</a>
+
+<a href="dictionary_C.html#14722">com.sun.speech.engine.recognition.RecognizerUtilities.buildXrefTable</a>
+| <a href="dictionary_L.html#1650">listRuleGrammars</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_C.html#14768">com.sun.speech.engine.recognition.RecognizerUtilities.getRuleNameRefs</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#687">elementAt</a>
+| <a href="dictionary_C.html#3620">com.sun.speech.engine.recognition.BaseRuleGrammar.resolve</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_I.html#14723">intern</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_P.html#377">put</a>
+| <a href="dictionary_C.html#1860">com.sun.speech.engine.recognition.RecognizerUtilities.debugMessageOut</a>
+
+<a href="dictionary_C.html#14737">com.sun.speech.engine.recognition.RecognizerUtilities.copyGrammar</a>
+| <a href="dictionary_L.html#1675">listImports</a>
+| <a href="dictionary_A.html#607">addImport</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_I.html#1514">isRulePublic</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_S.html#644">setRule</a>
+| <a href="dictionary_I.html#1513">isEnabled</a>
+| <a href="dictionary_S.html#3499">setEnabled</a>
+| <a href="dictionary_C.html#3578">com.sun.speech.engine.recognition.BaseRuleGrammar.getSampleSentences</a>
+| <a href="dictionary_C.html#3694">com.sun.speech.engine.recognition.BaseRuleGrammar.setSampleSentences</a>
+
+<a href="dictionary_C.html#14750">com.sun.speech.engine.recognition.RecognizerUtilities.copyGrammars</a>
+| <a href="dictionary_L.html#1650">listRuleGrammars</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_G.html#1656">getRuleGrammar</a>
+| <a href="dictionary_N.html#595">newRuleGrammar</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_C.html#14737">com.sun.speech.engine.recognition.RecognizerUtilities.copyGrammar</a>
+
+<a href="dictionary_C.html#1860">com.sun.speech.engine.recognition.RecognizerUtilities.debugMessageOut</a>
+| <a href="dictionary_I.html#14723">intern</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_P.html#377">put</a>
+
+<a href="dictionary_C.html#14759">com.sun.speech.engine.recognition.RecognizerUtilities.getRefsToRuleName</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_G.html#3624">getSimpleRuleName</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_I.html#14723">intern</a>
+| <a href="dictionary_G.html#49">get</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_K.html#14760">keys</a>
+| <a href="dictionary_H.html#735">hasMoreElements</a>
+| <a href="dictionary_N.html#736">nextElement</a>
+
+<a href="dictionary_C.html#14768">com.sun.speech.engine.recognition.RecognizerUtilities.getRuleNameRefs</a>
+| <a href="dictionary_G.html#3654">getRules</a>
+| <a href="dictionary_C.html#14768">com.sun.speech.engine.recognition.RecognizerUtilities.getRuleNameRefs</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_A.html#655">addElement</a>
+
+<a href="dictionary_C.html#14774">com.sun.speech.engine.recognition.RecognizerUtilities.main</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_V.html#832">valueOf</a>
+| <a href="dictionary_B.html#14775">booleanValue</a>
+| <a href="dictionary_C.html#1479">com.sun.speech.engine.recognition.BaseRecognizer.BaseRecognizer</a>
+| <a href="dictionary_P.html#19">printStackTrace</a>
+| <a href="dictionary_A.html#9936">allocate</a>
+| <a href="dictionary_G.html#763">getAbsolutePath</a>
+| <a href="dictionary_L.html#11115">loadJSGF</a>
+| <a href="dictionary_C.html#11114">commitChanges</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_L.html#1650">listRuleGrammars</a>
+| <a href="dictionary_C.html#1836">com.sun.speech.engine.recognition.RecognizerUtilities.transform</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_P.html#1949">print</a>
+| <a href="dictionary_G.html#1657">getRuleInternal</a>
+
+<a href="dictionary_C.html#1836">com.sun.speech.engine.recognition.RecognizerUtilities.transform</a>
+| <a href="dictionary_C.html#408">clone</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_G.html#1657">getRuleInternal</a>
+| <a href="dictionary_C.html#14818">com.sun.speech.engine.recognition.RecognizerUtilities.transform</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_C.html#1856">com.sun.speech.engine.recognition.BaseRuleGrammar.BaseRuleGrammar</a>
+| <a href="dictionary_C.html#14737">com.sun.speech.engine.recognition.RecognizerUtilities.copyGrammar</a>
+| <a href="dictionary_I.html#1514">isRulePublic</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_S.html#644">setRule</a>
+| <a href="dictionary_C.html#14856">com.sun.speech.engine.recognition.RuleState.RuleState</a>
+| <a href="dictionary_D.html#14795">deleteRule</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_C.html#657">copyInto</a>
+
+<a href="dictionary_C.html#14818">com.sun.speech.engine.recognition.RecognizerUtilities.transform</a>
+| <a href="dictionary_G.html#3654">getRules</a>
+| <a href="dictionary_C.html#14818">com.sun.speech.engine.recognition.RecognizerUtilities.transform</a>
+| <a href="dictionary_C.html#14856">com.sun.speech.engine.recognition.RuleState.RuleState</a>
+| <a href="dictionary_C.html#3567">copy</a>
+| <a href="dictionary_S.html#14819">setRules</a>
+| <a href="dictionary_G.html#5618">getCount</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_G.html#3655">getTag</a>
+
+<a href="dictionary_C.html#5548">com.sun.speech.engine.recognition.RuleParser.emptyToken.emptyToken</a>
+| <a href="dictionary_C.html#5575">com.sun.speech.engine.recognition.RuleParser.jsgfRuleToken.jsgfRuleToken</a>
+
+<a href="dictionary_C.html#5584">com.sun.speech.engine.recognition.RuleParser.mparse</a>
+| <a href="dictionary_C.html#5694">com.sun.speech.engine.recognition.RuleParser.tokenize</a>
+| <a href="dictionary_C.html#5590">com.sun.speech.engine.recognition.RuleParser.mparse</a>
+
+<a href="dictionary_C.html#5590">com.sun.speech.engine.recognition.RuleParser.mparse</a>
+| <a href="dictionary_L.html#1511">listRuleNames</a>
+| <a href="dictionary_I.html#1513">isEnabled</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_C.html#5617">com.sun.speech.engine.recognition.RuleParser.parse</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#687">elementAt</a>
+| <a href="dictionary_C.html#5581">com.sun.speech.engine.recognition.RuleParser.tokenPos.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5550">com.sun.speech.engine.recognition.RuleParser.jsgfRuleParse.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5559">com.sun.speech.engine.recognition.RuleParser.jsgfRuleSequence.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5566">com.sun.speech.engine.recognition.RuleParser.jsgfRuleTag.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5574">com.sun.speech.engine.recognition.RuleParser.jsgfRuleToken.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_C.html#657">copyInto</a>
+
+<a href="dictionary_C.html#5605">com.sun.speech.engine.recognition.RuleParser.parse</a>
+| <a href="dictionary_C.html#5694">com.sun.speech.engine.recognition.RuleParser.tokenize</a>
+| <a href="dictionary_C.html#5611">com.sun.speech.engine.recognition.RuleParser.parse</a>
+
+<a href="dictionary_C.html#5611">com.sun.speech.engine.recognition.RuleParser.parse</a>
+| <a href="dictionary_C.html#5590">com.sun.speech.engine.recognition.RuleParser.mparse</a>
+
+<a href="dictionary_C.html#5617">com.sun.speech.engine.recognition.RuleParser.parse</a>
+| <a href="dictionary_G.html#1655">getFullGrammarName</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_G.html#3624">getSimpleRuleName</a>
+| <a href="dictionary_S.html#3656">setRuleName</a>
+| <a href="dictionary_E.html#97">equals</a>
+| <a href="dictionary_C.html#5552">com.sun.speech.engine.recognition.RuleParser.jsgfRuleParse.jsgfRuleParse</a>
+| <a href="dictionary_C.html#5555">com.sun.speech.engine.recognition.RuleParser.jsgfRuleParse.setPos</a>
+| <a href="dictionary_A.html#655">addElement</a>
+| <a href="dictionary_G.html#1512">getRule</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_G.html#1656">getRuleGrammar</a>
+| <a href="dictionary_P.html#11">println</a>
+| <a href="dictionary_G.html#3622">getRuleName</a>
+| <a href="dictionary_C.html#5617">com.sun.speech.engine.recognition.RuleParser.parse</a>
+| <a href="dictionary_S.html#53">size</a>
+| <a href="dictionary_E.html#687">elementAt</a>
+| <a href="dictionary_C.html#5581">com.sun.speech.engine.recognition.RuleParser.tokenPos.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5550">com.sun.speech.engine.recognition.RuleParser.jsgfRuleParse.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5559">com.sun.speech.engine.recognition.RuleParser.jsgfRuleSequence.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5566">com.sun.speech.engine.recognition.RuleParser.jsgfRuleTag.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#5574">com.sun.speech.engine.recognition.RuleParser.jsgfRuleToken.getPos</a><i>  (Virtual)</i>
+| <a href="dictionary_G.html#3823">getText</a>
+| <a href="dictionary_T.html#1771">toLowerCase</a>
+| <a href="dictionary_C.html#5575">com.sun.speech.engine.recognition.RuleParser.jsgfRuleToken.jsgfRuleToken</a>
+| <a href="dictionary_C.html#5577">com.sun.speech.engine.recognition.RuleParser.jsgfRuleToken.setPos</a>
+| <a href="dictionary_I.html#672">indexOf</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+| <a href="dictionary_C.html#5694">com.sun.speech.engine.recognition.RuleParser.tokenize</a>
+| <a href="dictionary_G.html#3654">getRules</a>
+| <a href="dictionary_C.html#5560">com.sun.speech.engine.recognition.RuleParser.jsgfRuleSequence.jsgfRuleSequence</a>
+| <a href="dictionary_C.html#5562">com.sun.speech.engine.recognition.RuleParser.jsgfRuleSequence.setPos</a>
+| <a href="dictionary_A.html#656">arraycopy</a>
+| <a href="dictionary_P.html#2697">parse</a>
+| <a href="dictionary_G.html#3655">getTag</a>
+| <a href="dictionary_C.html#5567">com.sun.speech.engine.recognition.RuleParser.jsgfRuleTag.jsgfRuleTag</a>
+| <a href="dictionary_C.html#5570">com.sun.speech.engine.recognition.RuleParser.jsgfRuleTag.setPos</a>
+| <a href="dictionary_G.html#5618">getCount</a>
+| <a href="dictionary_C.html#5548">com.sun.speech.engine.recognition.RuleParser.emptyToken.emptyToken</a>
+
+<a href="dictionary_C.html#5694">com.sun.speech.engine.recognition.RuleParser.tokenize</a>
+| <a href="dictionary_C.html#96">countTokens</a>
+| <a href="dictionary_H.html#50">hasMoreTokens</a>
+| <a href="dictionary_N.html#51">nextToken</a>
+| <a href="dictionary_T.html#1771">toLowerCase</a>
+
+<a href="dictionary_C.html#14864">com.sun.speech.engine.recognition.RuleState.getRule</a>
+| <a href="dictionary_G.html#3623">getSimpleGrammarName</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_E.html#97">equals</a>
+| <a href="dictionary_G.html#3624">getSimpleRuleName</a>
+| <a href="dictionary_G.html#1657">getRuleInternal</a>
+
+<a href="dictionary_C.html#14856">com.sun.speech.engine.recognition.RuleState.RuleState</a>
+| <a href="dictionary_G.html#3624">getSimpleRuleName</a>
+| <a href="dictionary_E.html#97">equals</a>
+| <a href="dictionary_C.html#14864">com.sun.speech.engine.recognition.RuleState.getRule</a>
+| <a href="dictionary_P.html#11">println</a>
+
+<a href="dictionary_C.html#8142">com.sun.speech.engine.recognition.TokenMgrError.addEscapes</a>
+| <a href="dictionary_L.html#721">length</a>
+| <a href="dictionary_C.html#720">charAt</a>
+| <a href="dictionary_A.html#627">append</a>
+| <a href="dictionary_T.html#469">toString</a>
+| <a href="dictionary_S.html#673">substring</a>
+
+<a href="dictionary_C.html#8148">com.sun.speech.engine.recognition.TokenMgrError.getMessage</a>
+| <a href="dictionary_G.html#2778">getMessage</a>
+
+<a href="dictionary_C.html#8125">com.sun.speech.engine.recognition.TokenMgrError.LexicalError</a>
+| <a href="dictionary_V.html#832">valueOf</a>
+| <a href="dictionary_C.html#8142">com.sun.speech.engine.recognition.TokenMgrError.addEscapes</a>
+
+<a href="dictionary_C.html#5487">com.sun.speech.engine.recognition.TokenMgrError.TokenMgrError</a>
+| <a href="dictionary_C.html#8125">com.sun.speech.engine.recognition.TokenMgrError.LexicalError</a>
+| <a href="dictionary_C.html#5480">com.sun.speech.engine.recognition.TokenMgrError.TokenMgrError</a>
+
+<a href="dictionary_C.html#8049">com.sun.speech.engine.SpeechEventUtilities.isAWTRunning</a>
+| <a href="dictionary_C.html#8051">currentThread</a>
+| <a href="dictionary_G.html#8054">getThreadGroup</a>
+| <a href="dictionary_G.html#8053">getParent</a>
+| <a href="dictionary_A.html#8050">activeCount</a>
+| <a href="dictionary_E.html#8052">enumerate</a>
+| <a href="dictionary_G.html#165">getName</a>
+| <a href="dictionary_S.html#481">startsWith</a>
+
+<a href="dictionary_C.html#1868">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+| <a href="dictionary_C.html#8065">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+
+<a href="dictionary_C.html#8065">com.sun.speech.engine.SpeechEventUtilities.postSpeechEvent</a>
+| <a href="dictionary_C.html#8049">com.sun.speech.engine.SpeechEventUtilities.isAWTRunning</a>
+| <a href="dictionary_C.html#8044">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEventTarget.SpeechAWTEventTarget</a>
+| <a href="dictionary_G.html#8066">getDefaultToolkit</a>
+| <a href="dictionary_G.html#8067">getSystemEventQueue</a>
+| <a href="dictionary_C.html#8033">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEvent.SpeechAWTEvent</a>
+| <a href="dictionary_P.html#8068">postEvent</a>
+| <a href="dictionary_W.html#1405">wait</a>
+| <a href="dictionary_C.html#8029">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEvent.SpeechAWTEvent</a>
+| <a href="dictionary_C.html#7206">com.sun.speech.engine.SpeechEventDispatcher.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#7175">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#8854">com.sun.speech.engine.recognition.BaseGrammar.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#8963">com.sun.speech.engine.recognition.BaseResult.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#10795">com.sun.speech.engine.BaseEngineProperties.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1846">com.sun.speech.engine.BaseEngine.dispatchSpeechEvent</a><i>  (Virtual)</i>
+
+<a href="dictionary_C.html#8029">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEvent.SpeechAWTEvent</a>
+| <a href="dictionary_C.html#8033">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEvent.SpeechAWTEvent</a>
+
+<a href="dictionary_C.html#8046">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEventTarget.processEvent</a>
+| <a href="dictionary_C.html#7206">com.sun.speech.engine.SpeechEventDispatcher.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#7175">com.sun.speech.engine.recognition.BaseRecognizerAudioManager.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#8854">com.sun.speech.engine.recognition.BaseGrammar.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#8963">com.sun.speech.engine.recognition.BaseResult.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#10795">com.sun.speech.engine.BaseEngineProperties.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1846">com.sun.speech.engine.BaseEngine.dispatchSpeechEvent</a><i>  (Virtual)</i>
+| <a href="dictionary_N.html#1396">notify</a>
+
+<a href="dictionary_C.html#8044">com.sun.speech.engine.SpeechEventUtilities.SpeechAWTEventTarget.SpeechAWTEventTarget</a>
+| <a href="dictionary_E.html#8045">enableEvents</a>
+
+<a href="dictionary_C.html#7316">com.sun.speech.engine.SpeechEventWrapper.SpeechEventWrapper</a>
+| <a href="dictionary_G.html#6086">getSource</a>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td>A</td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td><a href="simpleinvtree_E.html">E</a></td><td>F</td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td><a href="simpleinvtree_M.html">M</a></td><td>N</td><td>O</td><td>P</td><td>Q</td><td>R</td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td>V</td><td>W</td><td>X</td><td>Y</td><td>Z</td></tr></table></body></html>

@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ********************************************************** -->
+<!-- *                                                        * -->
+<!-- * Apache Ant build file used to build the Sphinx-4 demos.* -->
+<!-- * To build the demos, just type the following:           * -->
+<!-- *                                                        * -->
+<!-- *     ant -buildfile demo.xml                            * -->
+<!-- *                                                        * -->
+<!-- * For more information:  http://ant.apache.org/          * -->
+<!-- *                                                        * -->
+<!-- ********************************************************** -->
+
+<project basedir="." default="all" name="Sphinx-4">
+
+    <!-- ********************************************************** -->
+    <!-- *                                                        * -->
+    <!-- * Where to find things...                                * -->
+    <!-- *                                                        * -->
+    <!-- ********************************************************** -->
+
+    <property name="version" value="1_2_0"/>
+    <property name="demo_src_dir" value="src/apps"/>
+    <property name="build_dir" value="bld"/>
+    <property name="demo_classes_dir" value="${build_dir}"/>
+    <property name="lib_dir" value="lib"/>
+    <property name="bin_dir" value="bin"/>
+    <property name="deploy_dir" value="deploy"/>
+    <path id="libs">
+        <pathelement path="${demo_classes_dir}"/>
+        <pathelement location="${lib_dir}/sphinx4.jar"/>
+        <pathelement location="${lib_dir}/jsapi.jar"/>
+        <pathelement location="${lib_dir}/tags.jar"/>
+        <pathelement location="${lib_dir}/js.jar"/>
+        <pathelement location="${lib_dir}/junit-4.4.jar"/>
+    </path>
+
+
+    <!-- ********************************************************** -->
+    <!-- *                                                        * -->
+    <!-- * Checks for the presence of jsapi.jar.                  * -->
+    <!-- *                                                        * -->
+    <!-- ********************************************************** -->
+    <target name="check_jsapi_jar.isPresent">
+        <available file="lib/jsapi.jar" property="jsapi_jar.isPresent"/>
+    </target>
+
+    <target name="issue_jsapi_warning"
+            unless="jsapi_jar.isPresent">
+        <echo>
+
+            Cannot find lib/jsapi.jar. Will not build JSAPI demos.
+            See docs/jsapi_setup.html for information on setting up
+            your environment to use JSAPI.
+        </echo>
+    </target>
+
+
+    <!-- ********************************************************** -->
+    <!-- *                                                        * -->
+    <!-- * Builds just the demos (using package names for the     * -->
+    <!-- * demos would have made this easier).                    * -->
+    <!-- *                                                        * -->
+    <!-- ********************************************************** -->
+    <target name="all"
+            depends="make_lib_dir,
+	             check_jsapi_jar.isPresent,
+                     issue_jsapi_warning,
+	             compile_sphinx_demos"
+            description="Compiles and jars the demos"/>
+
+    <target name="make_lib_dir">
+        <mkdir dir="${lib_dir}"/>
+    </target>
+
+
+    <!-- Sphinx-4 (non-JSAPI) demos -->
+    <target name="compile_sphinx_demos"
+            depends="compile_sphinx_helloworld,
+	             compile_sphinx_hellodigits,
+		     compile_sphinx_hellongram,
+		     compile_sphinx_lattice,
+		     compile_sphinx_confidence,
+	             compile_jsapi_dialog,
+	             compile_jsapi_jsgf,
+	             compile_zipcity,
+                     compile_sphinx_wavfile,
+                     compile_sphinx_transcriber,
+	             compile_tags"
+            description="Compiles Sphinx-4 demos"/>
+
+    <target name="compile_sphinx_helloworld">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/helloworld"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               destdir="${demo_classes_dir}"
+               includes="edu/cmu/sphinx/demo/helloworld/**">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/helloworld/hello.gram"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/helloworld"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/helloworld/helloworld.config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/helloworld"/>
+        <mkdir dir="${bin_dir}"/>
+        <jar destfile="${bin_dir}/HelloWorld.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/helloworld/helloworld.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/helloworld/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_sphinx_hellodigits">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/hellodigits"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/hellodigits/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/hellodigits/digits.gram"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/hellodigits"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/hellodigits/hellodigits.config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/hellodigits"/>
+        <jar destfile="${bin_dir}/HelloDigits.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/hellodigits/hellodigits.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/hellodigits/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_jsapi_dialog" if="jsapi_jar.isPresent">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/dialog"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/jsapi/dialog/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/dialog">
+            <fileset dir="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/dialog">
+                <include name="**/*.gram"/>
+                <include name="**/playlist.txt"/>
+                <include name="**/weather.lm"/>
+            </fileset>
+        </copy>
+
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/dialog/dialog.config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/dialog"/>
+        <jar destfile="${bin_dir}/Dialog.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/dialog/dialog.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/jsapi/dialog/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_jsapi_jsgf" if="jsapi_jar.isPresent">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/jsgf"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/jsapi/jsgf/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/jsgf">
+            <fileset dir="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/jsgf">
+                <include name="**/*.gram"/>
+            </fileset>
+        </copy>
+
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/jsgf/jsgf.config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/jsgf"/>
+        <jar destfile="${bin_dir}/JSGFDemo.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/jsgf/jsgf.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/jsapi/jsgf/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_sphinx_hellongram">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/hellongram"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/hellongram/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/hellongram/hellongram.trigram.lm"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/hellongram"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/hellongram/hellongram.config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/hellongram"/>
+        <mkdir dir="${bin_dir}"/>
+        <jar destfile="${bin_dir}/HelloNGram.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/hellongram/hellongram.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/hellongram/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_sphinx_lattice">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/lattice"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/lattice/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/lattice/10001-90210-01803.wav"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/lattice"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/lattice/config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/lattice"/>
+        <mkdir dir="${bin_dir}"/>
+        <jar destfile="${bin_dir}/LatticeDemo.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/lattice/latticedemo.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/lattice/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_sphinx_wavfile">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/wavfile"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/wavfile/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/wavfile/config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/wavfile"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/wavfile/12345.wav"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/wavfile"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/wavfile/digits.gram"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/wavfile"/>
+        <mkdir dir="${bin_dir}"/>
+        <jar destfile="${bin_dir}/WavFile.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/wavfile/wavfile.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/wavfile/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_sphinx_transcriber">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/transcriber"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/transcriber/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/transcriber/config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/transcriber"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/transcriber/10001-90210-01803.wav"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/transcriber"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/transcriber/digits.gram"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/transcriber"/>
+        <mkdir dir="${bin_dir}"/>
+        <jar destfile="${bin_dir}/Transcriber.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/transcriber/transcriber.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/transcriber/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="init">
+        <available property="keystore.exists" file="tempKeystore"/>
+        <tstamp/>
+    </target>
+
+    <target name="keystore" unless="keystore.exists">
+        <genkey alias="zipcity" storepass="public" keystore="tempKeystore"
+                dname="CN=Sphinx-4, OU=Sphinx, o=Carnegie Mellon University, c=us"/>
+    </target>
+
+    <target name="compile_tags" if="jsapi_jar.isPresent">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/tags"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/jsapi/tags/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+
+        <copy todir="${demo_classes_dir}/edu/cmu/sphinx/demo/jsapi/tags">
+            <fileset dir="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/tags">
+                <include name="**/*.gram"/>
+            </fileset>
+        </copy>
+
+        <jar destfile="${bin_dir}/FeatureValueDemo.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/tags/fvd.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/jsapi/tags/**"
+             excludes="demo/jsapi/tags/LiveConnectDemo**"
+             filesonly="true"
+             compress="true"/>
+
+        <jar destfile="${bin_dir}/LiveConnectDemo.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/jsapi/tags/lcd.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/jsapi/tags/**"
+             excludes="demo/jsapi/tags/FeatureValueDemo**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="compile_zipcity" depends="init,keystore">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/zipcity"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               includes="edu/cmu/sphinx/demo/zipcity/**"
+               destdir="${demo_classes_dir}">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/zipcity.gram"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/zipcity"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/zipcity.config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/zipcity"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/zip.txt"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/zipcity"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/s4.jpg"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/zipcity"/>
+        <jar destfile="${bin_dir}/ZipCity.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/zipcity.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/zipcity/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+    <target name="release_zipcity" depends="compile_zipcity">
+        <copy todir="bld/zipcity" file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/zipcity.jnlp"/>
+        <copy todir="bld/zipcity" file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/s4.jpg"/>
+        <copy todir="bld/zipcity" file="${demo_src_dir}/edu/cmu/sphinx/demo/zipcity/README.html"/>
+        <copy todir="bld/zipcity" file="bin/ZipCity.jar"/>
+        <copy todir="bld/zipcity" file="lib/sphinx4.jar"/>
+        <copy todir="bld/zipcity" file="lib/jsapi.jar"/>
+        <copy todir="bld/zipcity"
+              file="lib/TIDIGITS_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar"/>
+
+        <signjar jar="bld/zipcity/ZipCity.jar" alias="zipcity"
+                 storepass="public" keystore="tempKeystore"/>
+        <signjar jar="bld/zipcity/sphinx4.jar" alias="zipcity"
+                 storepass="public" keystore="tempKeystore"/>
+        <signjar jar="bld/zipcity/jsapi.jar" alias="zipcity"
+                 storepass="public" keystore="tempKeystore"/>
+        <signjar jar="bld/zipcity/TIDIGITS_8gau_13dCep_16k_40mel_130Hz_6800Hz.jar"
+                 alias="zipcity" storepass="public" keystore="tempKeystore"/>
+    </target>
+
+
+    <target name="compile_sphinx_confidence">
+        <mkdir dir="${demo_classes_dir}/edu/cmu/sphinx/demo/confidence"/>
+        <javac debug="true"
+               source="1.5"
+               listfiles="true"
+               deprecation="true"
+               srcdir="${demo_src_dir}"
+               destdir="${demo_classes_dir}"
+               includes="edu/cmu/sphinx/demo/confidence/**">
+            <classpath refid="libs"/>
+        </javac>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/confidence/config.xml"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/confidence"/>
+        <copy file="${demo_src_dir}/edu/cmu/sphinx/demo/confidence/confidence.trigram.lm"
+              todir="${demo_classes_dir}/edu/cmu/sphinx/demo/confidence"/>
+        <mkdir dir="${bin_dir}"/>
+        <jar destfile="${bin_dir}/Confidence.jar"
+             manifest="${demo_src_dir}/edu/cmu/sphinx/demo/confidence/confidence.Manifest"
+             basedir="${demo_classes_dir}"
+             includes="edu/cmu/sphinx/demo/confidence/**"
+             filesonly="true"
+             compress="true"/>
+    </target>
+
+
+</project>

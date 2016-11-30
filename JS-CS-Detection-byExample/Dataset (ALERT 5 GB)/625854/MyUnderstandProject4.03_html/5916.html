@@ -1,0 +1,266 @@
+<html><head><title>EngineMonitor.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta3\src\research\com\sun\speech\engine\EngineMonitor.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta3\\src\\research\\com\\sun\\speech\\engine\\EngineMonitor.java";
+top.document.title  = "EngineMonitor.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1998-2003 Sun Microsystems, Inc.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL </span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> */</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">com.sun.speech.<a href="dictionary_C.html#873">engine</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#1818">speech</a>.<a href="dictionary_J.html#5919">Engine</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#1818">speech</a>.<a href="dictionary_J.html#5920">EngineErrorEvent</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#1818">speech</a>.<a href="dictionary_J.html#5921">EngineEvent</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#1818">speech</a>.<a href="dictionary_J.html#5922">EngineListener</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#5979">swing</a>.*;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#5978">awt</a>.*;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#116">util</a>.<a href="dictionary_J.html#5918">Date</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> * Simple GUI for monitoring events and state changes of an &lt;code&gt;Engine&lt;/code&gt;.  Used for debugging and testing</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> * purposes.</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> */</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_C.html#5923">EngineMonitor</a> </span><span class="default">{</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">    </span><span class="comment">/** The &lt;code&gt;Engine&lt;/code&gt; to monitor. */</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5919">Engine</a> <a href="dictionary_C.html#5969">engine</a></span><span class="default">;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">    </span><span class="comment">/** The &lt;code&gt;EngineListener&lt;/code&gt; registered with the engine. */</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5922">EngineListener</a> <a href="dictionary_C.html#5970">engineListener</a></span><span class="default">;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="comment">/** The panel used to post engine events. */</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_C.html#5980">EngineEventPanel</a> <a href="dictionary_C.html#5971">eventPanel</a></span><span class="default">;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    </span><span class="comment">/** The panel containing the current engine states. */</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5977">JPanel</a> <a href="dictionary_C.html#5974">statePanel</a></span><span class="default">;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span><span class="comment">/** The label containing the string &quot;deallocated&quot;. */</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5976">JLabel</a> <a href="dictionary_C.html#5967">deallocatedLabel</a></span><span class="default">;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    </span><span class="comment">/** The label containing the string &quot;allocating resources&quot;. */</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5976">JLabel</a> <a href="dictionary_C.html#5966">allocatingResourcesLabel</a></span><span class="default">;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    </span><span class="comment">/** The label containing the string &quot;allocated&quot;. */</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5976">JLabel</a> <a href="dictionary_C.html#5965">allocatedLabel</a></span><span class="default">;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="comment">/** The label containing the string &quot;deallocating resources&quot;. */</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5976">JLabel</a> <a href="dictionary_C.html#5968">deallocatingResourcesLabel</a></span><span class="default">;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    </span><span class="comment">/** The label containing the string &quot;paused&quot;. */</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5976">JLabel</a> <a href="dictionary_C.html#5972">pausedLabel</a></span><span class="default">;</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="comment">/** The label containing the string &quot;resumed&quot;. */</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5976">JLabel</a> <a href="dictionary_C.html#5973">resumedLabel</a></span><span class="default">;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default"></span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">     * Class constructor.</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     *</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * @param eng the &lt;code&gt;Engine&lt;/code&gt; to watch</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     */</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#5940">EngineMonitor</a></span><span class="default">(<a href="dictionary_J.html#5919">Engine</a> <a href="dictionary_C.html#5942">eng</a>) {</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_C.html#5969">engine</a> = <a href="dictionary_C.html#5942">eng</a>;</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_A.html#5941">addEngineListener</a>(<a href="dictionary_C.html#5950">getEngineListener</a>());</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    }</span>
+<a name="64"><font size=-1>64     </font></a><span class="default"></span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">     * Creates the engine listener if necessary, and then returns it. There should be only one.</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment">     *</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">     * @return the engine listener</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">     */</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#5922">EngineListener</a> <a href="dictionary_C.html#5950">getEngineListener</a></span><span class="default">() {</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5970">engineListener</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">            <a href="dictionary_C.html#5970">engineListener</a> = </span><span class="keyword">new <a href="dictionary_C.html#5925">EngineMonitorEngineListener</a></span><span class="default">();</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        }</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#5970">engineListener</a></span><span class="default">;</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    }</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+<a name="78"><font size=-1>78     </font></a><span class="default"></span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">     * Gets the panel containing the area to post engine events in.</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">     *</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">     * @return the panel containing the area to post engine events in</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">     */</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#5917">Component</a> <a href="dictionary_C.html#5951">getEventPanel</a></span><span class="default">() {</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5971">eventPanel</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">            <a href="dictionary_C.html#5971">eventPanel</a> = </span><span class="keyword">new <a href="dictionary_C.html#5981">EngineEventPanel</a></span><span class="default">();</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        }</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#5971">eventPanel</a></span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">    }</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default"></span>
+<a name="92"><font size=-1>92     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">     * Gets the panel containing the labels for representing the current engine state.</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">     *</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">     * @return the panel containing the labels for representing the current engine state.</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">     */</span>
+<a name="97"><font size=-1>97     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#5917">Component</a> <a href="dictionary_C.html#5952">getStatePanel</a></span><span class="default">() {</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5974">statePanel</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="99"><font size=-1>99     </font></a><span class="default">            <a href="dictionary_J.html#5977">JPanel</a> <a href="dictionary_C.html#5957">newStatePanel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5977">JPanel</a></span><span class="default">();</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">            <a href="dictionary_C.html#5957">newStatePanel</a>.<a href="dictionary_S.html#5955">setLayout</a>(</span><span class="keyword">new <a href="dictionary_G.html#5975">GridLayout</a></span><span class="default">(</span><span class="number">1</span><span class="default">, </span><span class="number">2</span><span class="default">));</span>
+<a name="101"><font size=-1>101     </font></a><span class="default"></span>
+<a name="102"><font size=-1>102     </font></a><span class="default">            <a href="dictionary_J.html#5977">JPanel</a> <a href="dictionary_C.html#5956">engineStatePanel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5977">JPanel</a></span><span class="default">();</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_S.html#5955">setLayout</a>(</span><span class="keyword">new <a href="dictionary_G.html#5975">GridLayout</a></span><span class="default">(</span><span class="number">4</span><span class="default">, </span><span class="number">2</span><span class="default">));</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_S.html#5954">setBorder</a>(</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">                    BorderFactory.<a href="dictionary_C.html#5953">createTitledBorder</a>(</span><span class="string">&quot;Engine State:&quot;</span><span class="default">));</span>
+<a name="106"><font size=-1>106     </font></a><span class="default"></span>
+<a name="107"><font size=-1>107     </font></a><span class="default">            <a href="dictionary_C.html#5967">deallocatedLabel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;DEALLOCATED&quot;</span><span class="default">);</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">            <a href="dictionary_C.html#5966">allocatingResourcesLabel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;ALLOCATING_RESOURCES&quot;</span><span class="default">);</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">            <a href="dictionary_C.html#5965">allocatedLabel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;ALLOCATED&quot;</span><span class="default">);</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">            <a href="dictionary_C.html#5968">deallocatingResourcesLabel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;DEALLOCATING_RESOURCES&quot;</span><span class="default">);</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">            <a href="dictionary_C.html#5972">pausedLabel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;PAUSED&quot;</span><span class="default">);</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">            <a href="dictionary_C.html#5973">resumedLabel</a> = </span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;RESUMED&quot;</span><span class="default">);</span>
+<a name="113"><font size=-1>113     </font></a><span class="default"></span>
+<a name="114"><font size=-1>114     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5967">deallocatedLabel</a>);</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5972">pausedLabel</a>);</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5965">allocatedLabel</a>);</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5973">resumedLabel</a>);</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5968">deallocatingResourcesLabel</a>);</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(</span><span class="keyword">new <a href="dictionary_J.html#5976">JLabel</a></span><span class="default">(</span><span class="string">&quot;&quot;</span><span class="default">));</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">            <a href="dictionary_C.html#5956">engineStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5966">allocatingResourcesLabel</a>);</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">            <a href="dictionary_C.html#5957">newStatePanel</a>.<a href="dictionary_A.html#48">add</a>(<a href="dictionary_C.html#5956">engineStatePanel</a>);</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">            <a href="dictionary_C.html#5974">statePanel</a> = <a href="dictionary_C.html#5957">newStatePanel</a>;</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">        }</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#5974">statePanel</a></span><span class="default">;</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">    }</span>
+<a name="126"><font size=-1>126     </font></a><span class="default"></span>
+<a name="127"><font size=-1>127     </font></a><span class="default"></span>
+<a name="128"><font size=-1>128     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">     * Handles an event from the engine.</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">     *</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">     * @param e the event from the engine</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">     */</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_C.html#5958">handleEvent</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5961">e</a>) {</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5971">eventPanel</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">            <a href="dictionary_C.html#5971">eventPanel</a>.<a href="dictionary_C.html#5982">addText</a>(</span><span class="keyword">new <a href="dictionary_J.html#5918">Date</a></span><span class="default">().<a href="dictionary_T.html#469">toString</a>() + </span><span class="string">&quot;: &quot;</span>
+<a name="136"><font size=-1>136     </font></a><span class="string">                    </span><span class="default">+ <a href="dictionary_C.html#5961">e</a>.<a href="dictionary_T.html#469">toString</a>()</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">                    + </span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">            <a href="dictionary_C.html#5971">eventPanel</a>.<a href="dictionary_C.html#5982">addText</a>(</span><span class="string">&quot;   Old state: &quot;</span>
+<a name="139"><font size=-1>139     </font></a><span class="string">                    </span><span class="default">+ <a href="dictionary_C.html#5946">engineStateString</a>(<a href="dictionary_C.html#5961">e</a>.<a href="dictionary_G.html#5960">getOldEngineState</a>())</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">                    + </span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">            <a href="dictionary_C.html#5971">eventPanel</a>.<a href="dictionary_C.html#5982">addText</a>(</span><span class="string">&quot;   New state: &quot;</span>
+<a name="142"><font size=-1>142     </font></a><span class="string">                    </span><span class="default">+ <a href="dictionary_C.html#5946">engineStateString</a>(<a href="dictionary_C.html#5961">e</a>.<a href="dictionary_G.html#5959">getNewEngineState</a>())</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">                    + </span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        }</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">        <a href="dictionary_C.html#5964">updateGUIComponents</a>();</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">    }</span>
+<a name="147"><font size=-1>147     </font></a><span class="default"></span>
+<a name="148"><font size=-1>148     </font></a><span class="default"></span>
+<a name="149"><font size=-1>149     </font></a><span class="default">    </span><span class="comment">/** Checks the current state of the engine and makes sure the GUI components reflect this state accurately. */</span>
+<a name="150"><font size=-1>150     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_C.html#5964">updateGUIComponents</a></span><span class="default">() {</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">        <a href="dictionary_C.html#5962">updateEngineStateComponents</a>();</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">    }</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default">    </span><span class="comment">/** Checks the current state of the engine and makes sure the GUI components reflect this state accurately. */</span>
+<a name="156"><font size=-1>156     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_C.html#5962">updateEngineStateComponents</a></span><span class="default">() {</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5974">statePanel</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">            <a href="dictionary_C.html#5967">deallocatedLabel</a>.<a href="dictionary_S.html#3499">setEnabled</a>(</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">                    <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_T.html#5963">testEngineState</a>(<a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_D.html#1528">DEALLOCATED</a>));</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">            <a href="dictionary_C.html#5966">allocatingResourcesLabel</a>.<a href="dictionary_S.html#3499">setEnabled</a>(</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">                    <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_T.html#5963">testEngineState</a>(<a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_A.html#1489">ALLOCATING_RESOURCES</a>));</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">            <a href="dictionary_C.html#5965">allocatedLabel</a>.<a href="dictionary_S.html#3499">setEnabled</a>(</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">                    <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_T.html#5963">testEngineState</a>(<a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_A.html#1488">ALLOCATED</a>));</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">            <a href="dictionary_C.html#5968">deallocatingResourcesLabel</a>.<a href="dictionary_S.html#3499">setEnabled</a>(</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">                    <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_T.html#5963">testEngineState</a>(<a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_D.html#1529">DEALLOCATING_RESOURCES</a>));</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">            <a href="dictionary_C.html#5972">pausedLabel</a>.<a href="dictionary_S.html#3499">setEnabled</a>(</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">                    <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_T.html#5963">testEngineState</a>(<a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_P.html#5947">PAUSED</a>));</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">            <a href="dictionary_C.html#5973">resumedLabel</a>.<a href="dictionary_S.html#3499">setEnabled</a>(</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">                    <a href="dictionary_C.html#5969">engine</a>.<a href="dictionary_T.html#5963">testEngineState</a>(<a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_R.html#1492">RESUMED</a>));</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">        }</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">    }</span>
+<a name="172"><font size=-1>172     </font></a><span class="default"></span>
+<a name="173"><font size=-1>173     </font></a><span class="default"></span>
+<a name="174"><font size=-1>174     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="175"><font size=-1>175     </font></a><span class="comment">     * Returns a &lt;code&gt;String&lt;/code&gt; representing the &lt;code&gt;state&lt;/code&gt;.</span>
+<a name="176"><font size=-1>176     </font></a><span class="comment">     *</span>
+<a name="177"><font size=-1>177     </font></a><span class="comment">     * @param state the state to turn into a &lt;code&gt;String&lt;/code&gt;</span>
+<a name="178"><font size=-1>178     </font></a><span class="comment">     * @return a &lt;code&gt;String&lt;/code&gt; representing the &lt;code&gt;state&lt;/code&gt;</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">     */</span>
+<a name="180"><font size=-1>180     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_S.html#110">String</a> <a href="dictionary_C.html#5946">engineStateString</a></span><span class="default">(</span><span class="keyword">long <a href="dictionary_C.html#5949">state</a></span><span class="default">) {</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">        <a href="dictionary_S.html#869">StringBuffer</a> <a href="dictionary_C.html#5948">buf</a> = </span><span class="keyword">new <a href="dictionary_S.html#869">StringBuffer</a></span><span class="default">();</span>
+<a name="182"><font size=-1>182     </font></a><span class="default"></span>
+<a name="183"><font size=-1>183     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#5949">state</a> &amp; <a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_D.html#1528">DEALLOCATED</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">            <a href="dictionary_C.html#5943">appendBuffer</a>(<a href="dictionary_C.html#5948">buf</a>, </span><span class="string">&quot;DEALLOCATED&quot;</span><span class="default">);</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#5949">state</a> &amp; <a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_A.html#1489">ALLOCATING_RESOURCES</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">            <a href="dictionary_C.html#5943">appendBuffer</a>(<a href="dictionary_C.html#5948">buf</a>, </span><span class="string">&quot;ALLOCATING_RESOURCES&quot;</span><span class="default">);</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#5949">state</a> &amp; <a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_A.html#1488">ALLOCATED</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">            <a href="dictionary_C.html#5943">appendBuffer</a>(<a href="dictionary_C.html#5948">buf</a>, </span><span class="string">&quot;ALLOCATED&quot;</span><span class="default">);</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#5949">state</a> &amp; <a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_D.html#1529">DEALLOCATING_RESOURCES</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">            <a href="dictionary_C.html#5943">appendBuffer</a>(<a href="dictionary_C.html#5948">buf</a>, </span><span class="string">&quot;DEALLOCATING_RESOURCES&quot;</span><span class="default">);</span>
+<a name="191"><font size=-1>191     </font></a><span class="default"></span>
+<a name="192"><font size=-1>192     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#5949">state</a> &amp; <a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_P.html#5947">PAUSED</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="193"><font size=-1>193     </font></a><span class="default">            <a href="dictionary_C.html#5943">appendBuffer</a>(<a href="dictionary_C.html#5948">buf</a>, </span><span class="string">&quot;PAUSED&quot;</span><span class="default">);</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#5949">state</a> &amp; <a href="dictionary_J.html#5919">Engine</a>.<a href="dictionary_R.html#1492">RESUMED</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">            <a href="dictionary_C.html#5943">appendBuffer</a>(<a href="dictionary_C.html#5948">buf</a>, </span><span class="string">&quot;RESUMED&quot;</span><span class="default">);</span>
+<a name="196"><font size=-1>196     </font></a><span class="default"></span>
+<a name="197"><font size=-1>197     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#5948">buf</a></span><span class="default">.<a href="dictionary_T.html#469">toString</a>();</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">    }</span>
+<a name="199"><font size=-1>199     </font></a><span class="default"></span>
+<a name="200"><font size=-1>200     </font></a><span class="default"></span>
+<a name="201"><font size=-1>201     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="202"><font size=-1>202     </font></a><span class="comment">     * Adds a &lt;code&gt;String&lt;/code&gt; to a buffer, with each &lt;code&gt;String&lt;/code&gt; being separated by a &quot;:&quot;.</span>
+<a name="203"><font size=-1>203     </font></a><span class="comment">     *</span>
+<a name="204"><font size=-1>204     </font></a><span class="comment">     * @param b the buffer to which to append &lt;code&gt;s&lt;/code to</span>
+<a name="205"><font size=-1>205     </font></a><span class="comment">     * @param s the &lt;code&gt;String&lt;/code&gt; to append to &lt;code&gt;b&lt;/code&gt;</span>
+<a name="206"><font size=-1>206     </font></a><span class="comment">     */</span>
+<a name="207"><font size=-1>207     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_C.html#5943">appendBuffer</a></span><span class="default">(<a href="dictionary_S.html#869">StringBuffer</a> <a href="dictionary_C.html#5944">b</a>, <a href="dictionary_S.html#110">String</a> <a href="dictionary_C.html#5945">s</a>) {</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#5944">b</a>.<a href="dictionary_L.html#721">length</a>() &gt; </span><span class="number">0</span><span class="default">)</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">            <a href="dictionary_C.html#5944">b</a>.<a href="dictionary_A.html#627">append</a>(</span><span class="string">&quot;:&quot;</span><span class="default">);</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">        <a href="dictionary_C.html#5944">b</a>.<a href="dictionary_A.html#627">append</a>(<a href="dictionary_C.html#5945">s</a>);</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">    }</span>
+<a name="212"><font size=-1>212     </font></a><span class="default"></span>
+<a name="213"><font size=-1>213     </font></a><span class="default"></span>
+<a name="214"><font size=-1>214     </font></a><span class="default">    </span><span class="comment">/** Handles engine events from the engine. */</span>
+<a name="215"><font size=-1>215     </font></a><span class="comment">    </span><span class="keyword">protected class <a href="dictionary_C.html#5924">EngineMonitorEngineListener</a> implements <a href="dictionary_J.html#5922">EngineListener</a> </span><span class="default">{</span>
+<a name="216"><font size=-1>216     </font></a><span class="default"></span>
+<a name="217"><font size=-1>217     </font></a><span class="default">        </span><span class="keyword">public <a href="dictionary_C.html#5925">EngineMonitorEngineListener</a></span><span class="default">() {</span>
+<a name="218"><font size=-1>218     </font></a><span class="default">        }</span>
+<a name="219"><font size=-1>219     </font></a><span class="default"></span>
+<a name="220"><font size=-1>220     </font></a><span class="default"></span>
+<a name="221"><font size=-1>221     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5936">enginePaused</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5937">e</a>) {</span>
+<a name="222"><font size=-1>222     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5937">e</a>);</span>
+<a name="223"><font size=-1>223     </font></a><span class="default">        }</span>
+<a name="224"><font size=-1>224     </font></a><span class="default"></span>
+<a name="225"><font size=-1>225     </font></a><span class="default"></span>
+<a name="226"><font size=-1>226     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5938">engineResumed</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5939">e</a>) {</span>
+<a name="227"><font size=-1>227     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5939">e</a>);</span>
+<a name="228"><font size=-1>228     </font></a><span class="default">        }</span>
+<a name="229"><font size=-1>229     </font></a><span class="default"></span>
+<a name="230"><font size=-1>230     </font></a><span class="default"></span>
+<a name="231"><font size=-1>231     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5926">engineAllocated</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5927">e</a>) {</span>
+<a name="232"><font size=-1>232     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5927">e</a>);</span>
+<a name="233"><font size=-1>233     </font></a><span class="default">        }</span>
+<a name="234"><font size=-1>234     </font></a><span class="default"></span>
+<a name="235"><font size=-1>235     </font></a><span class="default"></span>
+<a name="236"><font size=-1>236     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5930">engineDeallocated</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5931">e</a>) {</span>
+<a name="237"><font size=-1>237     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5931">e</a>);</span>
+<a name="238"><font size=-1>238     </font></a><span class="default">        }</span>
+<a name="239"><font size=-1>239     </font></a><span class="default"></span>
+<a name="240"><font size=-1>240     </font></a><span class="default"></span>
+<a name="241"><font size=-1>241     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5928">engineAllocatingResources</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5929">e</a>) {</span>
+<a name="242"><font size=-1>242     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5929">e</a>);</span>
+<a name="243"><font size=-1>243     </font></a><span class="default">        }</span>
+<a name="244"><font size=-1>244     </font></a><span class="default"></span>
+<a name="245"><font size=-1>245     </font></a><span class="default"></span>
+<a name="246"><font size=-1>246     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5932">engineDeallocatingResources</a></span><span class="default">(<a href="dictionary_J.html#5921">EngineEvent</a> <a href="dictionary_C.html#5933">e</a>) {</span>
+<a name="247"><font size=-1>247     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5933">e</a>);</span>
+<a name="248"><font size=-1>248     </font></a><span class="default">        }</span>
+<a name="249"><font size=-1>249     </font></a><span class="default"></span>
+<a name="250"><font size=-1>250     </font></a><span class="default"></span>
+<a name="251"><font size=-1>251     </font></a><span class="default">        </span><span class="keyword">public void <a href="dictionary_C.html#5934">engineError</a></span><span class="default">(<a href="dictionary_J.html#5920">EngineErrorEvent</a> <a href="dictionary_C.html#5935">e</a>) {</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">            <a href="dictionary_C.html#5958">handleEvent</a>(<a href="dictionary_C.html#5935">e</a>);</span>
+<a name="253"><font size=-1>253     </font></a><span class="default">        }</span>
+<a name="254"><font size=-1>254     </font></a><span class="default">    }</span>
+<a name="255"><font size=-1>255     </font></a><span class="default">}</span>
+<a name="256"><font size=-1>256     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,35 @@
+Testsuite: edu.cmu.sphinx.jsgf.test.JSGFTest
+Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 3,189 sec
+------------- Standard Output ---------------
+#JSGF V1.0;
+
+/**
+  */**
+  * * JSGF Grammar for Hello World example
+  * */
+  */
+grammar test;
+
+<threes> = <NULL> ( three [and] three );
+
+public <rightRecursion> = <test.action> | ( <test.action> and <test.rightRecursion> );
+
+public <command> = <polite.startPolite> <test.commandAction> <polite.endPolite>;
+
+public <repeatTest> = <polite.startPolite> * don't crash;
+
+<action> = stop | start;
+
+<twos> = <NULL> ( two [and] two );
+
+public <nulltest> = <test.ones> <test.twos> <test.threes>;
+
+<ones> = <NULL> ( one [and] one );
+
+<commandAction> = go * | stop +;
+
+
+------------- ---------------- ---------------
+
+Testcase: testParser took 2,786 sec
+Testcase: testSave took 0,367 sec

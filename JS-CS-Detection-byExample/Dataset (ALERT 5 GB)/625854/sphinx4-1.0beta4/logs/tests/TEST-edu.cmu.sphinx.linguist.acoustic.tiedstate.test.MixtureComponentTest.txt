@@ -1,0 +1,10 @@
+Testsuite: edu.cmu.sphinx.linguist.acoustic.tiedstate.test.MixtureComponentTest
+Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0,067 sec
+------------- Standard Error -----------------
+Creating new instance of LogMath while another instance is already present
+Creating new instance of LogMath while another instance is already present
+------------- ---------------- ---------------
+
+Testcase: testUnivariateDensity took 0,044 sec
+Testcase: testUnivariateMeanTransformation took 0,002 sec
+Testcase: testClone took 0,001 sec

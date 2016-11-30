@@ -1,0 +1,463 @@
+<html><head><title>BaseSynthesizer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta6\src\jsapi\com\sun\speech\engine\synthesis\BaseSynthesizer.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta6\\src\\jsapi\\com\\sun\\speech\\engine\\synthesis\\BaseSynthesizer.java";
+top.document.title  = "BaseSynthesizer.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1998-2001 Sun Microsystems, Inc.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * </span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL </span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> */</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">com.sun.speech.engine.<a href="dictionary_C.html#1251">synthesis</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#182">io</a>.<a href="dictionary_J.html#165">IOException</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#91">net</a>.<a href="dictionary_J.html#1318">MalformedURLException</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#91">net</a>.<a href="dictionary_J.html#84">URL</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#4739">Collection</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#2291">Enumeration</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#362">speech</a>.<a href="dictionary_J.html#3362">EngineListener</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#362">speech</a>.EngineStateError;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.<a href="dictionary_J.html#362">speech</a>.<a href="dictionary_J.html#1594">SpeechEvent</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.synthesis.JSMLException;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.<a href="dictionary_J.html#2299">Speakable</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.<a href="dictionary_J.html#359">SpeakableListener</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.<a href="dictionary_J.html#732">Synthesizer</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.<a href="dictionary_J.html#2302">SynthesizerEvent</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.<a href="dictionary_J.html#2303">SynthesizerListener</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.SynthesizerModeDesc;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#363">synthesis</a>.<a href="dictionary_J.html#734">SynthesizerProperties</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.sun.speech.<a href="dictionary_C.html#1248">engine</a>.<a href="dictionary_C.html#17333">BaseEngine</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.sun.speech.<a href="dictionary_C.html#1248">engine</a>.<a href="dictionary_C.html#5268">BaseEngineProperties</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.sun.speech.<a href="dictionary_C.html#1248">engine</a>.<a href="dictionary_C.html#2097">SpeechEventDispatcher</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.sun.speech.<a href="dictionary_C.html#1248">engine</a>.<a href="dictionary_C.html#2035">SpeechEventUtilities</a>;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * Supports the JSAPI 1.0 &lt;code&gt;Synthesizer&lt;/code&gt; interface that</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * performs the core non-engine-specific functions.</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * </span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * &lt;p&gt;An actual JSAPI synthesizer implementation needs to extend or</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * modify this implementation.</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> */</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"></span><span class="keyword">abstract public class <a href="dictionary_C.html#6389">BaseSynthesizer</a> extends <a href="dictionary_C.html#17333">BaseEngine</a></span>
+<a name="41"><font size=-1>41     </font></a><span class="keyword">    implements <a href="dictionary_J.html#732">Synthesizer</a></span><span class="default">, <a href="dictionary_C.html#2097">SpeechEventDispatcher</a> {</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">     * Set of speakable listeners belonging to the &lt;code&gt;Synthesizer&lt;/code&gt;.</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">     * Each item on queue may have an individual listener too.</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">     *</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">     * @see SpeakableListener</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     */</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_J.html#4739">Collection</a></span><span class="default">&lt;<a href="dictionary_J.html#359">SpeakableListener</a>&gt; <a href="dictionary_C.html#6399">speakableListeners</a>;</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">     * The set of voices available in this &lt;code&gt;Synthesizer&lt;/code&gt;.</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">     * The list can be created in the constructor methods.</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">     */</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_C.html#1211">VoiceList</a> <a href="dictionary_C.html#18873">voiceList</a></span><span class="default">;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">    </span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * Creates a new Synthesizer in the &lt;code&gt;DEALLOCATED&lt;/code&gt; state.</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     *</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     * @param mode the operating mode of this &lt;code&gt;Synthesizer&lt;/code&gt;</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">     */</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_C.html#18809">BaseSynthesizer</a></span><span class="default">(SynthesizerModeDesc <a href="dictionary_C.html#18810">mode</a>) {</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_C.html#18810">mode</a>);</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        <a href="dictionary_C.html#6399">speakableListeners</a> = </span><span class="keyword">new </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#1210">ArrayList</a>&lt;<a href="dictionary_J.html#359">SpeakableListener</a>&gt;();</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">        <a href="dictionary_C.html#18873">voiceList</a> = </span><span class="keyword">new <a href="dictionary_C.html#1213">VoiceList</a></span><span class="default">(<a href="dictionary_C.html#18810">mode</a>);</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    }</span>
+<a name="67"><font size=-1>67     </font></a><span class="default"></span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment">     * Speaks JSML text provided as a &lt;code&gt;Speakable&lt;/code&gt; object.</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">     *</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">     * @param jsmlText the JSML text to speak</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">     * @param listener the listener to be notified as the</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">     *   &lt;code&gt;jsmlText&lt;/code&gt; is processed</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">     *</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">     * @throws JSMLException if the JSML text contains errors</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">     */</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18853">speak</a></span><span class="default">(<a href="dictionary_J.html#2299">Speakable</a> <a href="dictionary_C.html#18855">jsmlText</a>, <a href="dictionary_J.html#359">SpeakableListener</a> <a href="dictionary_C.html#18856">listener</a>)</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">JSMLException, EngineStateError {</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">        <a href="dictionary_C.html#17341">checkEngineState</a>(<a href="dictionary_J.html#2326">DEALLOCATED</a> | <a href="dictionary_J.html#2331">DEALLOCATING_RESOURCES</a>);</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">        <a href="dictionary_C.html#6301">BaseSynthesizerQueueItem</a> <a href="dictionary_C.html#18854">item</a> = <a href="dictionary_C.html#18826">createQueueItem</a>();</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        <a href="dictionary_C.html#18854">item</a>.<a href="dictionary_C.html#6360">setData</a>(</span><span class="keyword">this</span><span class="default">, <a href="dictionary_C.html#18855">jsmlText</a>, <a href="dictionary_C.html#18856">listener</a>);</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">        <a href="dictionary_C.html#18813">appendQueue</a>(<a href="dictionary_C.html#18854">item</a>);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">    }</span>
+<a name="87"><font size=-1>87     </font></a><span class="default"></span>
+<a name="88"><font size=-1>88     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="89"><font size=-1>89     </font></a><span class="comment">     * Speaks JSML text provided as a &lt;code&gt;URL&lt;/code&gt;.</span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">     *</span>
+<a name="91"><font size=-1>91     </font></a><span class="comment">     * @param jsmlURL the &lt;code&gt;URL&lt;/code&gt; containing JSML text</span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">     * @param listener the listener to be notified as the</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">     *   JSML text is processed</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">     *</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="97"><font size=-1>97     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="98"><font size=-1>98     </font></a><span class="comment">     * @throws IOException</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">     *    if errors are encountered with the &lt;code&gt;JSMLurl&lt;/code&gt;</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment">     * @throws JSMLException if the JSML text contains errors</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">     * @throws MalformedURLException</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">     *    if errors are encountered with the &lt;code&gt;JSMLurl&lt;/code&gt;</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     */</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18857">speak</a></span><span class="default">(<a href="dictionary_J.html#84">URL</a> <a href="dictionary_C.html#18859">jsmlURL</a>, <a href="dictionary_J.html#359">SpeakableListener</a> <a href="dictionary_C.html#18860">listener</a>)</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">JSMLException, <a href="dictionary_J.html#1318">MalformedURLException</a>,</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        <a href="dictionary_J.html#165">IOException</a>, EngineStateError {</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        <a href="dictionary_C.html#17341">checkEngineState</a>(<a href="dictionary_J.html#2326">DEALLOCATED</a> | <a href="dictionary_J.html#2331">DEALLOCATING_RESOURCES</a>);</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        <a href="dictionary_C.html#6301">BaseSynthesizerQueueItem</a> <a href="dictionary_C.html#18858">item</a> = <a href="dictionary_C.html#18826">createQueueItem</a>();</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        <a href="dictionary_C.html#18858">item</a>.<a href="dictionary_C.html#6372">setData</a>(</span><span class="keyword">this</span><span class="default">, <a href="dictionary_C.html#18859">jsmlURL</a>, <a href="dictionary_C.html#18860">listener</a>);</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">        <a href="dictionary_C.html#18813">appendQueue</a>(<a href="dictionary_C.html#18858">item</a>);</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">    }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">     * Speaks JSML text provided as a &lt;code&gt;String&lt;/code&gt;.</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">     *</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">     * @param jsmlText a &lt;code&gt;String&lt;/code&gt; containing JSML.</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">     * @param listener the listener to be notified as the</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">     *   JSML text is processed</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">     *</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">     * @throws JSMLException if the JSML text contains errors</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">     */</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18861">speak</a></span><span class="default">(<a href="dictionary_S.html#81">String</a> <a href="dictionary_C.html#18863">jsmlText</a>, <a href="dictionary_J.html#359">SpeakableListener</a> <a href="dictionary_C.html#18864">listener</a>)</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">JSMLException, EngineStateError {</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">        <a href="dictionary_C.html#17341">checkEngineState</a>(<a href="dictionary_J.html#2326">DEALLOCATED</a> | <a href="dictionary_J.html#2331">DEALLOCATING_RESOURCES</a>);</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">        <a href="dictionary_C.html#6301">BaseSynthesizerQueueItem</a> <a href="dictionary_C.html#18862">item</a> = <a href="dictionary_C.html#18826">createQueueItem</a>();</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">        <a href="dictionary_C.html#18862">item</a>.<a href="dictionary_C.html#6367">setData</a>(</span><span class="keyword">this</span><span class="default">, <a href="dictionary_C.html#18863">jsmlText</a>, </span><span class="keyword">false</span><span class="default">, <a href="dictionary_C.html#18864">listener</a>);</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">        <a href="dictionary_C.html#18813">appendQueue</a>(<a href="dictionary_C.html#18862">item</a>);</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">    }</span>
+<a name="132"><font size=-1>132     </font></a><span class="default"></span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     * Speaks a plain text &lt;code&gt;String&lt;/code&gt;.  No JSML parsing is</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">     * performed.</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">     *</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">     * @param text a &lt;code&gt;String&lt;/code&gt; containing plain text.</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">     * @param listener the listener to be notified as the</span>
+<a name="139"><font size=-1>139     </font></a><span class="comment">     *   text is processed</span>
+<a name="140"><font size=-1>140     </font></a><span class="comment">     *</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">     */</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18865">speakPlainText</a></span><span class="default">(<a href="dictionary_S.html#81">String</a> <a href="dictionary_C.html#18869">text</a>, <a href="dictionary_J.html#359">SpeakableListener</a> <a href="dictionary_C.html#18868">listener</a>)</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">        </span><span class="keyword">throws </span><span class="default">EngineStateError {</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">        <a href="dictionary_C.html#17341">checkEngineState</a>(<a href="dictionary_J.html#2326">DEALLOCATED</a> | <a href="dictionary_J.html#2331">DEALLOCATING_RESOURCES</a>);</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">            <a href="dictionary_C.html#6301">BaseSynthesizerQueueItem</a> <a href="dictionary_C.html#18867">item</a> = <a href="dictionary_C.html#18826">createQueueItem</a>();</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">            <a href="dictionary_C.html#18867">item</a>.<a href="dictionary_C.html#6367">setData</a>(</span><span class="keyword">this</span><span class="default">, <a href="dictionary_C.html#18869">text</a>, </span><span class="keyword">true</span><span class="default">, <a href="dictionary_C.html#18868">listener</a>);</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">            <a href="dictionary_C.html#18813">appendQueue</a>(<a href="dictionary_C.html#18867">item</a>);</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(JSMLException <a href="dictionary_C.html#18866">e</a>) {</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_R.html#1074">RuntimeException</a></span><span class="default">(</span><span class="string">&quot;JSMLException should never occur&quot;</span><span class="default">);</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">        }</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">    }</span>
+<a name="156"><font size=-1>156     </font></a><span class="default"></span>
+<a name="157"><font size=-1>157     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">     * Returns a String of the names of all the states implied</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment">     * in the given bit pattern.</span>
+<a name="160"><font size=-1>160     </font></a><span class="comment">     *</span>
+<a name="161"><font size=-1>161     </font></a><span class="comment">     * @param state the bit pattern of states</span>
+<a name="162"><font size=-1>162     </font></a><span class="comment">     *</span>
+<a name="163"><font size=-1>163     </font></a><span class="comment">     * @return a String of the names of all the states implied</span>
+<a name="164"><font size=-1>164     </font></a><span class="comment">     *   in the given bit pattern.</span>
+<a name="165"><font size=-1>165     </font></a><span class="comment">     */</span>
+<a name="166"><font size=-1>166     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_S.html#81">String</a> <a href="dictionary_C.html#18870">stateToString</a></span><span class="default">(</span><span class="keyword">long <a href="dictionary_C.html#18872">state</a></span><span class="default">) {</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">	    <a href="dictionary_S.html#2637">StringBuilder</a> <a href="dictionary_C.html#18871">buf</a> = </span><span class="keyword">new <a href="dictionary_S.html#2637">StringBuilder</a></span><span class="default">();</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#18872">state</a> &amp; <a href="dictionary_J.html#732">Synthesizer</a>.<a href="dictionary_J.html#2319">QUEUE_EMPTY</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">            <a href="dictionary_C.html#18871">buf</a>.<a href="dictionary_A.html#1540">append</a>(</span><span class="string">&quot; QUEUE_EMPTY &quot;</span><span class="default">);</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">((<a href="dictionary_C.html#18872">state</a> &amp; <a href="dictionary_J.html#732">Synthesizer</a>.<a href="dictionary_J.html#2346">QUEUE_NOT_EMPTY</a>) != </span><span class="number">0</span><span class="default">)</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">            <a href="dictionary_C.html#18871">buf</a>.<a href="dictionary_A.html#1540">append</a>(</span><span class="string">&quot; QUEUE_NOT_EMPTY &quot;</span><span class="default">);</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">	    </span><span class="keyword">return super</span><span class="default">.<a href="dictionary_C.html#17411">stateToString</a>(<a href="dictionary_C.html#18872">state</a>) + <a href="dictionary_C.html#18871">buf</a>.<a href="dictionary_T.html#56">toString</a>();</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">    }</span>
+<a name="174"><font size=-1>174     </font></a><span class="default"></span>
+<a name="175"><font size=-1>175     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="176"><font size=-1>176     </font></a><span class="comment">     * Puts an item on the speaking queue and sends a queue updated</span>
+<a name="177"><font size=-1>177     </font></a><span class="comment">     * event.</span>
+<a name="178"><font size=-1>178     </font></a><span class="comment">     *</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">     * @param item the item to add to the queue</span>
+<a name="180"><font size=-1>180     </font></a><span class="comment">     *</span>
+<a name="181"><font size=-1>181     </font></a><span class="comment">     */</span>
+<a name="182"><font size=-1>182     </font></a><span class="comment">    </span><span class="keyword">abstract protected void <a href="dictionary_C.html#18813">appendQueue</a></span><span class="default">(<a href="dictionary_C.html#6301">BaseSynthesizerQueueItem</a> <a href="dictionary_C.html#18814">item</a>);</span>
+<a name="183"><font size=-1>183     </font></a><span class="default"></span>
+<a name="184"><font size=-1>184     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="185"><font size=-1>185     </font></a><span class="comment">     * Optional method that converts a text string to a phoneme string.</span>
+<a name="186"><font size=-1>186     </font></a><span class="comment">     *</span>
+<a name="187"><font size=-1>187     </font></a><span class="comment">     * @param text</span>
+<a name="188"><font size=-1>188     </font></a><span class="comment">     *   plain text to be converted to phonemes</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment">     *</span>
+<a name="190"><font size=-1>190     </font></a><span class="comment">     * @return</span>
+<a name="191"><font size=-1>191     </font></a><span class="comment">     *   IPA phonemic representation of text or &lt;code&gt;null&lt;/code&gt;</span>
+<a name="192"><font size=-1>192     </font></a><span class="comment">     *</span>
+<a name="193"><font size=-1>193     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="194"><font size=-1>194     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="195"><font size=-1>195     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="196"><font size=-1>196     </font></a><span class="comment">     */</span>
+<a name="197"><font size=-1>197     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#81">String</a> <a href="dictionary_C.html#18842">phoneme</a></span><span class="default">(<a href="dictionary_S.html#81">String</a> <a href="dictionary_C.html#18843">text</a>) </span><span class="keyword">throws </span><span class="default">EngineStateError {</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">        <a href="dictionary_C.html#17341">checkEngineState</a>(<a href="dictionary_J.html#2326">DEALLOCATED</a> | <a href="dictionary_J.html#2331">DEALLOCATING_RESOURCES</a>);</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">        </span>
+<a name="200"><font size=-1>200     </font></a><span class="default">        </span><span class="comment">// BaseSynthesizer does not implement phoneme.  The sub-class</span>
+<a name="201"><font size=-1>201     </font></a><span class="comment">        // should override this method if it supports text to phoneme</span>
+<a name="202"><font size=-1>202     </font></a><span class="comment">        // conversion.  Returning null is legal behavior.</span>
+<a name="203"><font size=-1>203     </font></a><span class="comment">        //</span>
+<a name="204"><font size=-1>204     </font></a><span class="comment">        </span><span class="keyword">return null</span><span class="default">;</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">    }</span>
+<a name="206"><font size=-1>206     </font></a><span class="default"></span>
+<a name="207"><font size=-1>207     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="208"><font size=-1>208     </font></a><span class="comment">     * Returns an enumeration of the queue.</span>
+<a name="209"><font size=-1>209     </font></a><span class="comment">     *</span>
+<a name="210"><font size=-1>210     </font></a><span class="comment">     * @return</span>
+<a name="211"><font size=-1>211     </font></a><span class="comment">     *   an &lt;code&gt;Enumeration&lt;/code&gt; of the speech output queue or</span>
+<a name="212"><font size=-1>212     </font></a><span class="comment">     *   &lt;code&gt;null&lt;/code&gt;.</span>
+<a name="213"><font size=-1>213     </font></a><span class="comment">     *</span>
+<a name="214"><font size=-1>214     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="215"><font size=-1>215     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="216"><font size=-1>216     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="217"><font size=-1>217     </font></a><span class="comment">     */</span>
+<a name="218"><font size=-1>218     </font></a><span class="comment">    </span><span class="keyword">abstract public <a href="dictionary_J.html#2291">Enumeration</a></span><span class="default">&lt;?&gt; <a href="dictionary_C.html#18829">enumerateQueue</a>() </span><span class="keyword">throws </span><span class="default">EngineStateError;</span>
+<a name="219"><font size=-1>219     </font></a><span class="default"></span>
+<a name="220"><font size=-1>220     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="221"><font size=-1>221     </font></a><span class="comment">     * Cancels the item at the top of the queue.</span>
+<a name="222"><font size=-1>222     </font></a><span class="comment">     *</span>
+<a name="223"><font size=-1>223     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="224"><font size=-1>224     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="225"><font size=-1>225     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="226"><font size=-1>226     </font></a><span class="comment">     */</span>
+<a name="227"><font size=-1>227     </font></a><span class="comment">    </span><span class="keyword">abstract public void <a href="dictionary_C.html#18815">cancel</a></span><span class="default">() </span><span class="keyword">throws </span><span class="default">EngineStateError;</span>
+<a name="228"><font size=-1>228     </font></a><span class="default"></span>
+<a name="229"><font size=-1>229     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="230"><font size=-1>230     </font></a><span class="comment">     * Cancels a specific object on the queue.</span>
+<a name="231"><font size=-1>231     </font></a><span class="comment">     *</span>
+<a name="232"><font size=-1>232     </font></a><span class="comment">     * @param source</span>
+<a name="233"><font size=-1>233     </font></a><span class="comment">     *    object to be removed from the speech output queue</span>
+<a name="234"><font size=-1>234     </font></a><span class="comment">     *</span>
+<a name="235"><font size=-1>235     </font></a><span class="comment">     * @throws IllegalArgumentException</span>
+<a name="236"><font size=-1>236     </font></a><span class="comment">     *  if the source object is not found in the speech output queue.</span>
+<a name="237"><font size=-1>237     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="238"><font size=-1>238     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="239"><font size=-1>239     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="240"><font size=-1>240     </font></a><span class="comment">     */</span>
+<a name="241"><font size=-1>241     </font></a><span class="comment">    </span><span class="keyword">abstract public void <a href="dictionary_C.html#18816">cancel</a></span><span class="default">(Object <a href="dictionary_C.html#18817">source</a>)</span>
+<a name="242"><font size=-1>242     </font></a><span class="default">        </span><span class="keyword">throws <a href="dictionary_I.html#729">IllegalArgumentException</a></span><span class="default">, EngineStateError;</span>
+<a name="243"><font size=-1>243     </font></a><span class="default"></span>
+<a name="244"><font size=-1>244     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="245"><font size=-1>245     </font></a><span class="comment">     * Cancels all items on the output queue.</span>
+<a name="246"><font size=-1>246     </font></a><span class="comment">     *</span>
+<a name="247"><font size=-1>247     </font></a><span class="comment">     * @throws EngineStateError </span>
+<a name="248"><font size=-1>248     </font></a><span class="comment">     *   if this &lt;code&gt;Synthesizer&lt;/code&gt; in the &lt;code&gt;DEALLOCATED&lt;/code&gt; or </span>
+<a name="249"><font size=-1>249     </font></a><span class="comment">     *   &lt;code&gt;DEALLOCATING_RESOURCES&lt;/code&gt; states</span>
+<a name="250"><font size=-1>250     </font></a><span class="comment">     */</span>
+<a name="251"><font size=-1>251     </font></a><span class="comment">    </span><span class="keyword">abstract public void <a href="dictionary_C.html#18818">cancelAll</a></span><span class="default">() </span><span class="keyword">throws </span><span class="default">EngineStateError;</span>
+<a name="252"><font size=-1>252     </font></a><span class="default"></span>
+<a name="253"><font size=-1>253     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="254"><font size=-1>254     </font></a><span class="comment">     * Returns the &lt;code&gt;SynthesizerProperties&lt;/code&gt; object (a JavaBean). </span>
+<a name="255"><font size=-1>255     </font></a><span class="comment">     * The method returns exactly the same object as the</span>
+<a name="256"><font size=-1>256     </font></a><span class="comment">     * &lt;code&gt;getEngineProperties&lt;/code&gt; method in the &lt;code&gt;Engine&lt;/code&gt;</span>
+<a name="257"><font size=-1>257     </font></a><span class="comment">     * interface.  However, with the &lt;code&gt;getSynthesizerProperties&lt;/code&gt;</span>
+<a name="258"><font size=-1>258     </font></a><span class="comment">     * method, an application does not need to cast the return value.</span>
+<a name="259"><font size=-1>259     </font></a><span class="comment">     *</span>
+<a name="260"><font size=-1>260     </font></a><span class="comment">     * @return the &lt;code&gt;SynthesizerProperties&lt;/code&gt; object for this</span>
+<a name="261"><font size=-1>261     </font></a><span class="comment">     *   &lt;code&gt;Synthesizer&lt;/code&gt;</span>
+<a name="262"><font size=-1>262     </font></a><span class="comment">     */</span>
+<a name="263"><font size=-1>263     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_J.html#734">SynthesizerProperties</a> <a href="dictionary_C.html#18840">getSynthesizerProperties</a></span><span class="default">() {</span>
+<a name="264"><font size=-1>264     </font></a><span class="default">        <a href="dictionary_C.html#17341">checkEngineState</a>(<a href="dictionary_J.html#2326">DEALLOCATED</a> | <a href="dictionary_J.html#2331">DEALLOCATING_RESOURCES</a>);</span>
+<a name="265"><font size=-1>265     </font></a><span class="default">        </span><span class="keyword">return </span><span class="default">(SynthesizerProperties) <a href="dictionary_C.html#17375">getEngineProperties</a>();</span>
+<a name="266"><font size=-1>266     </font></a><span class="default">    }</span>
+<a name="267"><font size=-1>267     </font></a><span class="default"></span>
+<a name="268"><font size=-1>268     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="269"><font size=-1>269     </font></a><span class="comment">     * Adds a &lt;code&gt;SpeakableListener&lt;/code&gt; to this &lt;code&gt;Synthesizer&lt;/code&gt;.</span>
+<a name="270"><font size=-1>270     </font></a><span class="comment">     *</span>
+<a name="271"><font size=-1>271     </font></a><span class="comment">     * @param listener the listener to add</span>
+<a name="272"><font size=-1>272     </font></a><span class="comment">     *</span>
+<a name="273"><font size=-1>273     </font></a><span class="comment">     * @see #removeSpeakableListener</span>
+<a name="274"><font size=-1>274     </font></a><span class="comment">     */</span>
+<a name="275"><font size=-1>275     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18811">addSpeakableListener</a></span><span class="default">(<a href="dictionary_J.html#359">SpeakableListener</a> <a href="dictionary_C.html#18812">listener</a>) {</span>
+<a name="276"><font size=-1>276     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_C.html#6399">speakableListeners</a>.<a href="dictionary_C.html#1219">contains</a>(<a href="dictionary_C.html#18812">listener</a>)) {</span>
+<a name="277"><font size=-1>277     </font></a><span class="default">            <a href="dictionary_C.html#6399">speakableListeners</a>.<a href="dictionary_A.html#422">add</a>(<a href="dictionary_C.html#18812">listener</a>);</span>
+<a name="278"><font size=-1>278     </font></a><span class="default">        }</span>
+<a name="279"><font size=-1>279     </font></a><span class="default">    }</span>
+<a name="280"><font size=-1>280     </font></a><span class="default"></span>
+<a name="281"><font size=-1>281     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="282"><font size=-1>282     </font></a><span class="comment">     * Removes a &lt;code&gt;SpeakableListener&lt;/code&gt; from this</span>
+<a name="283"><font size=-1>283     </font></a><span class="comment">     * &lt;code&gt;Synthesizer&lt;/code&gt;.</span>
+<a name="284"><font size=-1>284     </font></a><span class="comment">     *</span>
+<a name="285"><font size=-1>285     </font></a><span class="comment">     * @param listener the listener to remove</span>
+<a name="286"><font size=-1>286     </font></a><span class="comment">     *</span>
+<a name="287"><font size=-1>287     </font></a><span class="comment">     * @see #addSpeakableListener</span>
+<a name="288"><font size=-1>288     </font></a><span class="comment">     */</span>
+<a name="289"><font size=-1>289     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18851">removeSpeakableListener</a></span><span class="default">(<a href="dictionary_J.html#359">SpeakableListener</a> <a href="dictionary_C.html#18852">listener</a>) {</span>
+<a name="290"><font size=-1>290     </font></a><span class="default">        <a href="dictionary_C.html#6399">speakableListeners</a>.<a href="dictionary_R.html#1244">remove</a>(<a href="dictionary_C.html#18852">listener</a>);</span>
+<a name="291"><font size=-1>291     </font></a><span class="default">    }</span>
+<a name="292"><font size=-1>292     </font></a><span class="default"></span>
+<a name="293"><font size=-1>293     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="294"><font size=-1>294     </font></a><span class="comment">     * Factory constructor for &lt;code&gt;EngineProperties&lt;/code&gt; object.</span>
+<a name="295"><font size=-1>295     </font></a><span class="comment">     * Gets the default speaking voice from the</span>
+<a name="296"><font size=-1>296     </font></a><span class="comment">     * &lt;code&gt;SynthesizerModeDesc&lt;/code&gt;.</span>
+<a name="297"><font size=-1>297     </font></a><span class="comment">     * Takes the default prosody values (pitch, range, volume, rate)</span>
+<a name="298"><font size=-1>298     </font></a><span class="comment">     * from the default voice.  Override to set engine-specific defaults.</span>
+<a name="299"><font size=-1>299     </font></a><span class="comment">     *</span>
+<a name="300"><font size=-1>300     </font></a><span class="comment">     * @return a &lt;code&gt;BaseEngineProperties&lt;/code&gt; object specific to</span>
+<a name="301"><font size=-1>301     </font></a><span class="comment">     *   a subclass.</span>
+<a name="302"><font size=-1>302     </font></a><span class="comment">     */</span>
+<a name="303"><font size=-1>303     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_C.html#5268">BaseEngineProperties</a> <a href="dictionary_C.html#18819">createEngineProperties</a></span><span class="default">() {</span>
+<a name="304"><font size=-1>304     </font></a><span class="default">        SynthesizerModeDesc <a href="dictionary_C.html#18825">desc</a> = (SynthesizerModeDesc)<a href="dictionary_C.html#17423">engineModeDesc</a>;</span>
+<a name="305"><font size=-1>305     </font></a><span class="default">        <a href="dictionary_C.html#1253">BaseVoice</a> <a href="dictionary_C.html#18823">defaultVoice</a> = (BaseVoice)(<a href="dictionary_C.html#18825">desc</a>.<a href="dictionary_G.html#1214">getVoices</a>()[</span><span class="number">0</span><span class="default">]);</span>
+<a name="306"><font size=-1>306     </font></a><span class="default">        </span>
+<a name="307"><font size=-1>307     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_C.html#18820">defaultPitch</a> </span><span class="default">= <a href="dictionary_C.html#18823">defaultVoice</a>.<a href="dictionary_C.html#12472">defaultPitch</a>;</span>
+<a name="308"><font size=-1>308     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_C.html#18821">defaultPitchRange</a> </span><span class="default">= <a href="dictionary_C.html#18823">defaultVoice</a>.<a href="dictionary_C.html#12473">defaultPitchRange</a>;</span>
+<a name="309"><font size=-1>309     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_C.html#18822">defaultSpeakingRate</a> </span><span class="default">= <a href="dictionary_C.html#18823">defaultVoice</a>.<a href="dictionary_C.html#12474">defaultSpeakingRate</a>;</span>
+<a name="310"><font size=-1>310     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_C.html#18824">defaultVolume</a> </span><span class="default">= <a href="dictionary_C.html#18823">defaultVoice</a>.<a href="dictionary_C.html#12475">defaultVolume</a>;</span>
+<a name="311"><font size=-1>311     </font></a><span class="default">        </span>
+<a name="312"><font size=-1>312     </font></a><span class="default">        </span><span class="keyword">return new <a href="dictionary_C.html#18875">BaseSynthesizerProperties</a></span><span class="default">(<a href="dictionary_C.html#18823">defaultVoice</a>,</span>
+<a name="313"><font size=-1>313     </font></a><span class="default">                                             <a href="dictionary_C.html#18820">defaultPitch</a>,</span>
+<a name="314"><font size=-1>314     </font></a><span class="default">                                             <a href="dictionary_C.html#18821">defaultPitchRange</a>,</span>
+<a name="315"><font size=-1>315     </font></a><span class="default">                                             <a href="dictionary_C.html#18822">defaultSpeakingRate</a>,</span>
+<a name="316"><font size=-1>316     </font></a><span class="default">                                             <a href="dictionary_C.html#18824">defaultVolume</a>);</span>
+<a name="317"><font size=-1>317     </font></a><span class="default">    }</span>
+<a name="318"><font size=-1>318     </font></a><span class="default"></span>
+<a name="319"><font size=-1>319     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="320"><font size=-1>320     </font></a><span class="comment">     * Factory method that creates a &lt;code&gt;BaseSynthesizerQueueItem&lt;/code&gt;.</span>
+<a name="321"><font size=-1>321     </font></a><span class="comment">     * Override if the synthesizer specializes the</span>
+<a name="322"><font size=-1>322     </font></a><span class="comment">     * &lt;code&gt;BaseSynthesizerQueueItem&lt;/code&gt; class.</span>
+<a name="323"><font size=-1>323     </font></a><span class="comment">     */</span>
+<a name="324"><font size=-1>324     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_C.html#6301">BaseSynthesizerQueueItem</a> <a href="dictionary_C.html#18826">createQueueItem</a></span><span class="default">() {</span>
+<a name="325"><font size=-1>325     </font></a><span class="default">        </span><span class="keyword">return new <a href="dictionary_C.html#6302">BaseSynthesizerQueueItem</a></span><span class="default">();</span>
+<a name="326"><font size=-1>326     </font></a><span class="default">    }</span>
+<a name="327"><font size=-1>327     </font></a><span class="default"></span>
+<a name="328"><font size=-1>328     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="329"><font size=-1>329     </font></a><span class="comment">     * Returns the list of voices for this &lt;code&gt;Synthesizer&lt;/code&gt;.</span>
+<a name="330"><font size=-1>330     </font></a><span class="comment">     *</span>
+<a name="331"><font size=-1>331     </font></a><span class="comment">     * @return the list of voices for this &lt;code&gt;Synthesizer&lt;/code&gt;.</span>
+<a name="332"><font size=-1>332     </font></a><span class="comment">     */</span>
+<a name="333"><font size=-1>333     </font></a><span class="comment">    </span><span class="keyword">protected <a href="dictionary_C.html#1211">VoiceList</a> <a href="dictionary_C.html#18841">getVoiceList</a></span><span class="default">() {</span>
+<a name="334"><font size=-1>334     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#18873">voiceList</a></span><span class="default">;</span>
+<a name="335"><font size=-1>335     </font></a><span class="default">    }    </span>
+<a name="336"><font size=-1>336     </font></a><span class="default"></span>
+<a name="337"><font size=-1>337     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="338"><font size=-1>338     </font></a><span class="comment">     * Utility function that generates &lt;code&gt;QUEUE_UPDATED&lt;/code&gt;</span>
+<a name="339"><font size=-1>339     </font></a><span class="comment">     * event and posts it to the event queue.  Eventually</span>
+<a name="340"><font size=-1>340     </font></a><span class="comment">     * &lt;code&gt;fireQueueUpdated&lt;/code&gt; will be called</span>
+<a name="341"><font size=-1>341     </font></a><span class="comment">     * by &lt;code&gt;dispatchSpeechEvent&lt;/code&gt; as a result of this action.</span>
+<a name="342"><font size=-1>342     </font></a><span class="comment">     *</span>
+<a name="343"><font size=-1>343     </font></a><span class="comment">     * @param topOfQueueChanged &lt;code&gt;true&lt;/code&gt; if the top of the</span>
+<a name="344"><font size=-1>344     </font></a><span class="comment">     *   queue has changed</span>
+<a name="345"><font size=-1>345     </font></a><span class="comment">     * @param oldState the old state of this &lt;code&gt;Synthesizer&lt;/code&gt;</span>
+<a name="346"><font size=-1>346     </font></a><span class="comment">     * @param newState the new state of this &lt;code&gt;Synthesizer&lt;/code&gt;</span>
+<a name="347"><font size=-1>347     </font></a><span class="comment">     *</span>
+<a name="348"><font size=-1>348     </font></a><span class="comment">     * @see #fireQueueUpdated</span>
+<a name="349"><font size=-1>349     </font></a><span class="comment">     * @see #dispatchSpeechEvent</span>
+<a name="350"><font size=-1>350     </font></a><span class="comment">     * </span>
+<a name="351"><font size=-1>351     </font></a><span class="comment">     */</span>
+<a name="352"><font size=-1>352     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18847">postQueueUpdated</a></span><span class="default">(</span><span class="keyword">boolean <a href="dictionary_C.html#18850">topOfQueueChanged</a></span><span class="default">,</span>
+<a name="353"><font size=-1>353     </font></a><span class="default">                                 </span><span class="keyword">long <a href="dictionary_C.html#18849">oldState</a></span><span class="default">, </span><span class="keyword">long <a href="dictionary_C.html#18848">newState</a></span><span class="default">) {</span>
+<a name="354"><font size=-1>354     </font></a><span class="default">        <a href="dictionary_C.html#2035">SpeechEventUtilities</a>.<a href="dictionary_C.html#2073">postSpeechEvent</a>(</span>
+<a name="355"><font size=-1>355     </font></a><span class="default">            </span><span class="keyword">this</span><span class="default">,</span>
+<a name="356"><font size=-1>356     </font></a><span class="default">            </span><span class="keyword">new <a href="dictionary_J.html#2351">SynthesizerEvent</a></span><span class="default">(</span><span class="keyword">this</span><span class="default">,</span>
+<a name="357"><font size=-1>357     </font></a><span class="default">                                 <a href="dictionary_J.html#2302">SynthesizerEvent</a>.<a href="dictionary_J.html#2355">QUEUE_UPDATED</a>,</span>
+<a name="358"><font size=-1>358     </font></a><span class="default">                                 <a href="dictionary_C.html#18850">topOfQueueChanged</a>,</span>
+<a name="359"><font size=-1>359     </font></a><span class="default">                                 <a href="dictionary_C.html#18849">oldState</a>, <a href="dictionary_C.html#18848">newState</a>));</span>
+<a name="360"><font size=-1>360     </font></a><span class="default">    }</span>
+<a name="361"><font size=-1>361     </font></a><span class="default">    </span>
+<a name="362"><font size=-1>362     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="363"><font size=-1>363     </font></a><span class="comment">     * Utility function that sends a &lt;code&gt;QUEUE_UPDATED&lt;/code&gt;</span>
+<a name="364"><font size=-1>364     </font></a><span class="comment">     * event to all &lt;code&gt;SynthesizerListeners&lt;/code&gt;.  </span>
+<a name="365"><font size=-1>365     </font></a><span class="comment">     *</span>
+<a name="366"><font size=-1>366     </font></a><span class="comment">     * @param event the &lt;code&gt;QUEUE_UPDATED&lt;/code&gt; event</span>
+<a name="367"><font size=-1>367     </font></a><span class="comment">     *</span>
+<a name="368"><font size=-1>368     </font></a><span class="comment">     * @see #postQueueUpdated</span>
+<a name="369"><font size=-1>369     </font></a><span class="comment">     * @see #dispatchSpeechEvent</span>
+<a name="370"><font size=-1>370     </font></a><span class="comment">     */</span>
+<a name="371"><font size=-1>371     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18835">fireQueueUpdated</a></span><span class="default">(<a href="dictionary_J.html#2302">SynthesizerEvent</a> <a href="dictionary_C.html#18839">event</a>) {</span>
+<a name="372"><font size=-1>372     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#17422">engineListeners</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="373"><font size=-1>373     </font></a><span class="default">            </span><span class="keyword">return</span><span class="default">;</span>
+<a name="374"><font size=-1>374     </font></a><span class="default">        }</span>
+<a name="375"><font size=-1>375     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_J.html#3362">EngineListener</a> <a href="dictionary_C.html#18837">el</a> : <a href="dictionary_C.html#17422">engineListeners</a>) {</span>
+<a name="376"><font size=-1>376     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#18837">el</a> </span><span class="keyword">instanceof <a href="dictionary_J.html#2303">SynthesizerListener</a></span><span class="default">) {</span>
+<a name="377"><font size=-1>377     </font></a><span class="default">                <a href="dictionary_J.html#2303">SynthesizerListener</a> <a href="dictionary_C.html#18838">sl</a> = (SynthesizerListener)<a href="dictionary_C.html#18837">el</a>;</span>
+<a name="378"><font size=-1>378     </font></a><span class="default">                <a href="dictionary_C.html#18838">sl</a>.<a href="dictionary_Q.html#18836">queueUpdated</a>(<a href="dictionary_C.html#18839">event</a>);</span>
+<a name="379"><font size=-1>379     </font></a><span class="default">            }</span>
+<a name="380"><font size=-1>380     </font></a><span class="default">        }</span>
+<a name="381"><font size=-1>381     </font></a><span class="default">    }</span>
+<a name="382"><font size=-1>382     </font></a><span class="default">    </span>
+<a name="383"><font size=-1>383     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="384"><font size=-1>384     </font></a><span class="comment">     * Utility function that generates &lt;code&gt;QUEUE_EMPTIED&lt;/code&gt;</span>
+<a name="385"><font size=-1>385     </font></a><span class="comment">     * event and posts it to the event queue.  Eventually</span>
+<a name="386"><font size=-1>386     </font></a><span class="comment">     * &lt;code&gt;fireQueueEmptied&lt;/code&gt; will be called</span>
+<a name="387"><font size=-1>387     </font></a><span class="comment">     * by &lt;code&gt;dispatchSpeechEvent&lt;/code&gt; as a result of this action.</span>
+<a name="388"><font size=-1>388     </font></a><span class="comment">     *</span>
+<a name="389"><font size=-1>389     </font></a><span class="comment">     * @param oldState the old state of this &lt;code&gt;Synthesizer&lt;/code&gt;</span>
+<a name="390"><font size=-1>390     </font></a><span class="comment">     * @param newState the new state of this &lt;code&gt;Synthesizer&lt;/code&gt;</span>
+<a name="391"><font size=-1>391     </font></a><span class="comment">     *</span>
+<a name="392"><font size=-1>392     </font></a><span class="comment">     * @see #fireQueueEmptied</span>
+<a name="393"><font size=-1>393     </font></a><span class="comment">     * @see #dispatchSpeechEvent</span>
+<a name="394"><font size=-1>394     </font></a><span class="comment">     */</span>
+<a name="395"><font size=-1>395     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18844">postQueueEmptied</a></span><span class="default">(</span><span class="keyword">long <a href="dictionary_C.html#18846">oldState</a></span><span class="default">, </span><span class="keyword">long <a href="dictionary_C.html#18845">newState</a></span><span class="default">) {</span>
+<a name="396"><font size=-1>396     </font></a><span class="default">        <a href="dictionary_C.html#2035">SpeechEventUtilities</a>.<a href="dictionary_C.html#2073">postSpeechEvent</a>(</span>
+<a name="397"><font size=-1>397     </font></a><span class="default">            </span><span class="keyword">this</span><span class="default">,</span>
+<a name="398"><font size=-1>398     </font></a><span class="default">            </span><span class="keyword">new <a href="dictionary_J.html#2351">SynthesizerEvent</a></span><span class="default">(</span><span class="keyword">this</span><span class="default">,</span>
+<a name="399"><font size=-1>399     </font></a><span class="default">                                 <a href="dictionary_J.html#2302">SynthesizerEvent</a>.<a href="dictionary_J.html#2356">QUEUE_EMPTIED</a>,</span>
+<a name="400"><font size=-1>400     </font></a><span class="default">                                 </span><span class="keyword">false</span><span class="default">,</span>
+<a name="401"><font size=-1>401     </font></a><span class="default">                                 <a href="dictionary_C.html#18846">oldState</a>, <a href="dictionary_C.html#18845">newState</a>));</span>
+<a name="402"><font size=-1>402     </font></a><span class="default">    }</span>
+<a name="403"><font size=-1>403     </font></a><span class="default">    </span>
+<a name="404"><font size=-1>404     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="405"><font size=-1>405     </font></a><span class="comment">     * Utility function that sends a &lt;code&gt;QUEUE_EMPTIED&lt;/code&gt;</span>
+<a name="406"><font size=-1>406     </font></a><span class="comment">     * event to all &lt;code&gt;SynthesizerListeners&lt;/code&gt;.  </span>
+<a name="407"><font size=-1>407     </font></a><span class="comment">     *</span>
+<a name="408"><font size=-1>408     </font></a><span class="comment">     * @param event the &lt;code&gt;QUEUE_EMPTIED&lt;/code&gt; event</span>
+<a name="409"><font size=-1>409     </font></a><span class="comment">     *</span>
+<a name="410"><font size=-1>410     </font></a><span class="comment">     * @see #postQueueEmptied</span>
+<a name="411"><font size=-1>411     </font></a><span class="comment">     * @see #dispatchSpeechEvent</span>
+<a name="412"><font size=-1>412     </font></a><span class="comment">     */</span>
+<a name="413"><font size=-1>413     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18830">fireQueueEmptied</a></span><span class="default">(<a href="dictionary_J.html#2302">SynthesizerEvent</a> <a href="dictionary_C.html#18834">event</a>) {</span>
+<a name="414"><font size=-1>414     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#17422">engineListeners</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="415"><font size=-1>415     </font></a><span class="default">            </span><span class="keyword">return</span><span class="default">;</span>
+<a name="416"><font size=-1>416     </font></a><span class="default">        }</span>
+<a name="417"><font size=-1>417     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_J.html#3362">EngineListener</a> <a href="dictionary_C.html#18832">el</a> : <a href="dictionary_C.html#17422">engineListeners</a>) {</span>
+<a name="418"><font size=-1>418     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#18832">el</a> </span><span class="keyword">instanceof <a href="dictionary_J.html#2303">SynthesizerListener</a></span><span class="default">) {</span>
+<a name="419"><font size=-1>419     </font></a><span class="default">                <a href="dictionary_J.html#2303">SynthesizerListener</a> <a href="dictionary_C.html#18833">sl</a> = (SynthesizerListener)<a href="dictionary_C.html#18832">el</a>;</span>
+<a name="420"><font size=-1>420     </font></a><span class="default">                <a href="dictionary_C.html#18833">sl</a>.<a href="dictionary_Q.html#18831">queueEmptied</a>(<a href="dictionary_C.html#18834">event</a>);</span>
+<a name="421"><font size=-1>421     </font></a><span class="default">            }</span>
+<a name="422"><font size=-1>422     </font></a><span class="default">        }</span>
+<a name="423"><font size=-1>423     </font></a><span class="default">    }</span>
+<a name="424"><font size=-1>424     </font></a><span class="default"></span>
+<a name="425"><font size=-1>425     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="426"><font size=-1>426     </font></a><span class="comment">     * Dispatches a &lt;code&gt;SpeechEvent&lt;/code&gt;.</span>
+<a name="427"><font size=-1>427     </font></a><span class="comment">     * The dispatcher should notify all &lt;code&gt;SynthesizerListeners&lt;/code&gt;</span>
+<a name="428"><font size=-1>428     </font></a><span class="comment">     * from this method.  The &lt;code&gt;SpeechEvent&lt;/code&gt; was added</span>
+<a name="429"><font size=-1>429     </font></a><span class="comment">     * via the various post methods of this class.</span>
+<a name="430"><font size=-1>430     </font></a><span class="comment">     *</span>
+<a name="431"><font size=-1>431     </font></a><span class="comment">     * @param event the &lt;code&gt;SpeechEvent&lt;/code&gt; to dispatch</span>
+<a name="432"><font size=-1>432     </font></a><span class="comment">     *</span>
+<a name="433"><font size=-1>433     </font></a><span class="comment">     * @see #postQueueUpdated</span>
+<a name="434"><font size=-1>434     </font></a><span class="comment">     * @see #postQueueEmptied</span>
+<a name="435"><font size=-1>435     </font></a><span class="comment">     */</span>
+<a name="436"><font size=-1>436     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_C.html#18827">dispatchSpeechEvent</a></span><span class="default">(<a href="dictionary_J.html#1594">SpeechEvent</a> <a href="dictionary_C.html#18828">event</a>) {</span>
+<a name="437"><font size=-1>437     </font></a><span class="default">        </span><span class="keyword">switch </span><span class="default">(<a href="dictionary_C.html#18828">event</a>.<a href="dictionary_J.html#1597">getId</a>()) {</span>
+<a name="438"><font size=-1>438     </font></a><span class="default">            </span><span class="keyword">case <a href="dictionary_J.html#2302">SynthesizerEvent</a></span><span class="default">.<a href="dictionary_J.html#2356">QUEUE_EMPTIED</a>:</span>
+<a name="439"><font size=-1>439     </font></a><span class="default">                <a href="dictionary_C.html#18830">fireQueueEmptied</a>((SynthesizerEvent) <a href="dictionary_C.html#18828">event</a>);</span>
+<a name="440"><font size=-1>440     </font></a><span class="default">                </span><span class="keyword">break</span><span class="default">;</span>
+<a name="441"><font size=-1>441     </font></a><span class="default">            </span><span class="keyword">case <a href="dictionary_J.html#2302">SynthesizerEvent</a></span><span class="default">.<a href="dictionary_J.html#2355">QUEUE_UPDATED</a>:</span>
+<a name="442"><font size=-1>442     </font></a><span class="default">                <a href="dictionary_C.html#18835">fireQueueUpdated</a>((SynthesizerEvent) <a href="dictionary_C.html#18828">event</a>);</span>
+<a name="443"><font size=-1>443     </font></a><span class="default">                </span><span class="keyword">break</span><span class="default">;</span>
+<a name="444"><font size=-1>444     </font></a><span class="default"></span>
+<a name="445"><font size=-1>445     </font></a><span class="default">            </span><span class="comment">// Defer to BaseEngine to handle the rest.</span>
+<a name="446"><font size=-1>446     </font></a><span class="comment">            //</span>
+<a name="447"><font size=-1>447     </font></a><span class="comment">            </span><span class="keyword">default</span><span class="default">:</span>
+<a name="448"><font size=-1>448     </font></a><span class="default">                </span><span class="keyword">super</span><span class="default">.<a href="dictionary_C.html#17347">dispatchSpeechEvent</a>(<a href="dictionary_C.html#18828">event</a>);</span>
+<a name="449"><font size=-1>449     </font></a><span class="default">                </span><span class="keyword">break</span><span class="default">;</span>
+<a name="450"><font size=-1>450     </font></a><span class="default">        }</span>
+<a name="451"><font size=-1>451     </font></a><span class="default">    }</span>
+<a name="452"><font size=-1>452     </font></a><span class="default">}</span>
+<a name="453"><font size=-1>453     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,73 @@
+<html><head><title>JSGFTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta4\src\test\edu\cmu\sphinx\jsgf\test\JSGFTest.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta4\\src\\test\\edu\\cmu\\sphinx\\jsgf\\test\\JSGFTest.java";
+top.document.title  = "JSGFTest.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2004 Carnegie Mellon University.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2004 Sun Microsystems, Inc.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2004 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> *</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.jsgf.<a href="dictionary_E.html#14465">test</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#475">jsapi</a>.<a href="dictionary_E.html#403">JSGFGrammar</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#37">props</a>.<a href="dictionary_E.html#382">ConfigurationManager</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#202">io</a>.<a href="dictionary_J.html#2064">File</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#202">io</a>.<a href="dictionary_J.html#59">IOException</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#32">util</a>.<a href="dictionary_J.html#6264">Scanner</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#381">recognition</a>.<a href="dictionary_J.html#361">RuleGrammar</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#381">recognition</a>.<a href="dictionary_J.html#1145">RuleParse</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#381">recognition</a>.<a href="dictionary_J.html#310">GrammarException</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">junit.<a href="dictionary_J.html#14466">framework</a>.<a href="dictionary_J.html#14455">Assert</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.<a href="dictionary_O.html#2076">junit</a>.<a href="dictionary_O.html#2075">Test</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * A test program for JSGF grammars. This program will generate a number of</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * random sentences from a JSGF grammar and attempt to validate them via a rule</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * parse. A count of valid and invalid sentences is reported after the run.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * </span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * This test will detect and reports only certain grammar failures. It will</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * detect when a JSGFGrammar generates invalid sentences. It will not detect the</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * case where a valid sentence can never be generated by the JSGFGrammar.</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * </span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * Note that there is a bug in the Rule Grammar parse where rules with nested</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> * recursion cause a stack overflow error.</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"> * </span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"> */</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#14456">JSGFTest</a> </span><span class="default">{</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default">    @<a href="dictionary_O.html#2075">Test</a></span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#14457">testParser</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_J.html#59">IOException</a></span><span class="default">, <a href="dictionary_J.html#310">GrammarException</a> {</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">        <a href="dictionary_E.html#382">ConfigurationManager</a> <a href="dictionary_E.html#14459">cm</a> = </span><span class="keyword">new <a href="dictionary_E.html#1790">ConfigurationManager</a></span><span class="default">(</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">                </span><span class="string">&quot;src/test/edu/cmu/sphinx/jsgf/test/jsgftest.config.xml&quot;</span><span class="default">);</span>
+<a name="48"><font size=-1>48     </font></a><span class="default"></span>
+<a name="49"><font size=-1>49     </font></a><span class="default">        <a href="dictionary_E.html#403">JSGFGrammar</a> <a href="dictionary_E.html#14461">jsgfGrammar</a> = (JSGFGrammar) <a href="dictionary_E.html#14459">cm</a>.<a href="dictionary_E.html#386">lookup</a>(</span><span class="string">&quot;jsgfGrammar&quot;</span><span class="default">);</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">        <a href="dictionary_E.html#14461">jsgfGrammar</a>.<a href="dictionary_E.html#2331">allocate</a>();</span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span>
+<a name="53"><font size=-1>53     </font></a><span class="default">        <a href="dictionary_J.html#361">RuleGrammar</a> <a href="dictionary_E.html#14460">grammar</a> = <a href="dictionary_E.html#14461">jsgfGrammar</a>.<a href="dictionary_E.html#405">getRuleGrammar</a>();</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">        <a href="dictionary_J.html#6264">Scanner</a> <a href="dictionary_E.html#14463">scanner</a> = </span><span class="keyword">new <a href="dictionary_J.html#6264">Scanner</a> </span><span class="default">(</span><span class="keyword">new <a href="dictionary_J.html#2064">File</a> </span><span class="default">(</span><span class="string">&quot;src/test/edu/cmu/sphinx/jsgf/test/input.txt&quot;</span><span class="default">));</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">        <a href="dictionary_E.html#14463">scanner</a>.<a href="dictionary_U.html#14458">useDelimiter</a>(</span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#14463">scanner</a>.<a href="dictionary_H.html#1164">hasNext</a>()) {</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">            <a href="dictionary_S.html#28">String</a> <a href="dictionary_E.html#14464">sentence</a> = <a href="dictionary_E.html#14463">scanner</a>.<a href="dictionary_N.html#1170">next</a>();</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">            <a href="dictionary_J.html#1145">RuleParse</a> <a href="dictionary_E.html#14462">rp</a> = <a href="dictionary_E.html#14460">grammar</a>.<a href="dictionary_P.html#5572">parse</a>(<a href="dictionary_E.html#14464">sentence</a>, </span><span class="keyword">null</span><span class="default">);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">            <a href="dictionary_J.html#14455">Assert</a>.<a href="dictionary_A.html#12443">assertNotNull</a>(<a href="dictionary_E.html#14462">rp</a>);</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">        }</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    }</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">}</span>
+<a name="63"><font size=-1>63     </font></a><span class="default"></span>
+</pre></body></html>

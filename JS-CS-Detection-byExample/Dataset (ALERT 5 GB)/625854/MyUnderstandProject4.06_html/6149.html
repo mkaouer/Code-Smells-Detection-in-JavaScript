@@ -1,0 +1,272 @@
+<html><head><title>WordSequence.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta6\src\sphinx4\edu\cmu\sphinx\linguist\WordSequence.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta6\\src\\sphinx4\\edu\\cmu\\sphinx\\linguist\\WordSequence.java";
+top.document.title  = "WordSequence.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2002 Carnegie Mellon University.  </span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2002 Sun Microsystems, Inc.  </span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2002 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * </span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL </span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#104">linguist</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#188">dictionary</a>.<a href="dictionary_E.html#1077">Word</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#1210">ArrayList</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#203">List</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> * This class can be used to keep track of a word sequence.  This class is an immutable class. It can never be modified</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * once it is created (except, perhaps for transient, cached things such as a precalculated hashcode).</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> */</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"></span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"></span><span class="keyword">public final class <a href="dictionary_E.html#184">WordSequence</a> </span><span class="default">{</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    </span><span class="keyword">private final <a href="dictionary_E.html#1077">Word</a></span><span class="default">[] <a href="dictionary_E.html#6190">words</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    </span><span class="keyword">private transient int <a href="dictionary_E.html#6189">hashCode</a> </span><span class="default">= -</span><span class="number">1</span><span class="default">;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="comment">/** an empty word sequence, that is, it has no words. */</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">    </span><span class="keyword">public final static <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6188">EMPTY</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_E.html#6150">WordSequence</a></span><span class="default">(</span><span class="number">0</span><span class="default">);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">     * Constructs a word sequence with the given depth.</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">     *</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">     * @param size the maximum depth of the word history</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">     */</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_E.html#6150">WordSequence</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6151">size</a></span><span class="default">) {</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">        <a href="dictionary_E.html#6190">words</a> = </span><span class="keyword">new <a href="dictionary_E.html#1077">Word</a></span><span class="default">[<a href="dictionary_E.html#6151">size</a>];</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    }</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">     * Constructs a word sequence with the given word IDs</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">     *</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     * @param words the word IDs of the word sequence</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">     */</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#1175">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#1077">Word</a>[] <a href="dictionary_E.html#6152">words</a>) {</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#6190">words</a> = <a href="dictionary_E.html#6152">words</a>.<a href="dictionary_C.html#3272">clone</a>();</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">        <a href="dictionary_E.html#6161">check</a>();</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    }</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default"></span>
+<a name="56"><font size=-1>56     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     * Constructs a word sequence from the list of words</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     *</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     * @param list the list of words</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     */</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#6153">WordSequence</a></span><span class="default">(<a href="dictionary_J.html#203">List</a>&lt;<a href="dictionary_E.html#1077">Word</a>&gt; <a href="dictionary_E.html#6154">list</a>) {</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#6190">words</a> = <a href="dictionary_E.html#6154">list</a>.<a href="dictionary_T.html#2812">toArray</a>(</span><span class="keyword">new <a href="dictionary_E.html#1077">Word</a></span><span class="default">[<a href="dictionary_E.html#6154">list</a>.<a href="dictionary_S.html#229">size</a>()]);</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">        <a href="dictionary_E.html#6161">check</a>();</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">    }</span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span>
+<a name="66"><font size=-1>66     </font></a><span class="default"></span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_E.html#6161">check</a></span><span class="default">() {</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#1077">Word</a> <a href="dictionary_E.html#6162">word</a> : <a href="dictionary_E.html#6190">words</a>)</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6162">word</a> == </span><span class="keyword">null</span><span class="default">)</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_E.html#201">Error</a></span><span class="default">(</span><span class="string">&quot;WordSequence should not have null Words.&quot;</span><span class="default">);</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">    }</span>
+<a name="72"><font size=-1>72     </font></a><span class="default"></span>
+<a name="73"><font size=-1>73     </font></a><span class="default"></span>
+<a name="74"><font size=-1>74     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">     * Returns a new word sequence with the given word added to the sequence</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">     *</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">     * @param word    the word to add to the sequence</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">     * @param maxSize the maximum size of the generated sequence</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">     * @return a new word sequence with the word added (but trimmed to maxSize).</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">     */</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#1122">addWord</a></span><span class="default">(<a href="dictionary_E.html#1077">Word</a> <a href="dictionary_E.html#6160">word</a>, </span><span class="keyword">int <a href="dictionary_E.html#6155">maxSize</a></span><span class="default">) {</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6155">maxSize</a> &lt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#6188">EMPTY</a></span><span class="default">;</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        }</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_E.html#6158">nextSize</a> </span><span class="default">= ((<a href="dictionary_E.html#6180">size</a>() + </span><span class="number">1</span><span class="default">) &gt; <a href="dictionary_E.html#6155">maxSize</a>) ? <a href="dictionary_E.html#6155">maxSize</a> : (<a href="dictionary_E.html#6180">size</a>() + </span><span class="number">1</span><span class="default">);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">        <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6156">next</a> = </span><span class="keyword">new <a href="dictionary_E.html#6150">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#6158">nextSize</a>);</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_E.html#6157">nextIndex</a> </span><span class="default">= <a href="dictionary_E.html#6158">nextSize</a> - </span><span class="number">1</span><span class="default">;</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_E.html#6159">thisIndex</a> </span><span class="default">= <a href="dictionary_E.html#6180">size</a>() - </span><span class="number">1</span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">        <a href="dictionary_E.html#6156">next</a>.<a href="dictionary_E.html#6190">words</a>[nextIndex--] = <a href="dictionary_E.html#6160">word</a>;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#6157">nextIndex</a> &gt;= </span><span class="number">0 </span><span class="default">&amp;&amp; <a href="dictionary_E.html#6159">thisIndex</a> &gt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">            <a href="dictionary_E.html#6156">next</a>.<a href="dictionary_E.html#6190">words</a>[nextIndex--] = </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#6190">words</a>[thisIndex--];</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">        }</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">        <a href="dictionary_E.html#6156">next</a>.<a href="dictionary_E.html#6161">check</a>();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6156">next</a></span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">    }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">     * Returns the oldest words in the sequence (the newest word is omitted)</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">     *</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     * @return the oldest words in the sequence, with the newest word omitted</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">     */</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6168">getOldest</a></span><span class="default">() {</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6169">next</a> = <a href="dictionary_E.html#6188">EMPTY</a>;</span>
+<a name="107"><font size=-1>107     </font></a><span class="default"></span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6180">size</a>() &gt;= </span><span class="number">1</span><span class="default">) {</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">            <a href="dictionary_E.html#6169">next</a> = </span><span class="keyword">new <a href="dictionary_E.html#6150">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a> - </span><span class="number">1</span><span class="default">);</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">            System.<a href="dictionary_A.html#1892">arraycopy</a>(</span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#6190">words</a>, </span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#6169">next</a>.<a href="dictionary_E.html#6190">words</a>, </span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#6169">next</a>.<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a>);</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">        }</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6169">next</a></span><span class="default">;</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    }</span>
+<a name="114"><font size=-1>114     </font></a><span class="default"></span>
+<a name="115"><font size=-1>115     </font></a><span class="default"></span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">     * Returns the newest words in the sequence (the old word is omitted)</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">     *</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">     * @return the newest words in the sequence with the oldest word omitted</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">     */</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6166">getNewest</a></span><span class="default">() {</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">        <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6167">next</a> = <a href="dictionary_E.html#6188">EMPTY</a>;</span>
+<a name="123"><font size=-1>123     </font></a><span class="default"></span>
+<a name="124"><font size=-1>124     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6180">size</a>() &gt;= </span><span class="number">1</span><span class="default">) {</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">            <a href="dictionary_E.html#6167">next</a> = </span><span class="keyword">new <a href="dictionary_E.html#6150">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a> - </span><span class="number">1</span><span class="default">);</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">            System.<a href="dictionary_A.html#1892">arraycopy</a>(</span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#6190">words</a>, </span><span class="number">1</span><span class="default">, <a href="dictionary_E.html#6167">next</a>.<a href="dictionary_E.html#6190">words</a>, </span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#6167">next</a>.<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a>);</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">        }</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6167">next</a></span><span class="default">;</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">    }</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default"></span>
+<a name="132"><font size=-1>132     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     * Returns a word sequence that is no longer than the given size, that is filled in with the newest words from this</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     * sequence</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">     *</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">     * @param maxSize the maximum size of the sequence</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">     * @return a new word sequence, trimmed to maxSize.</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">     */</span>
+<a name="139"><font size=-1>139     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#1126">trim</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6184">maxSize</a></span><span class="default">) {</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6184">maxSize</a> &lt;= </span><span class="number">0 </span><span class="default">|| <a href="dictionary_E.html#6180">size</a>() == </span><span class="number">0</span><span class="default">) {</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#6188">EMPTY</a></span><span class="default">;</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">        } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#6184">maxSize</a> == <a href="dictionary_E.html#6180">size</a>()) {</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">            </span><span class="keyword">return this</span><span class="default">;</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6184">maxSize</a> &gt; <a href="dictionary_E.html#6180">size</a>()) {</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">                <a href="dictionary_E.html#6184">maxSize</a> = <a href="dictionary_E.html#6180">size</a>();</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">            }</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">            <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6185">next</a> = </span><span class="keyword">new <a href="dictionary_E.html#6150">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#6184">maxSize</a>);</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_E.html#6187">thisIndex</a> </span><span class="default">= <a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a> - </span><span class="number">1</span><span class="default">;</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_E.html#6186">nextIndex</a> </span><span class="default">= <a href="dictionary_E.html#6185">next</a>.<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a> - </span><span class="number">1</span><span class="default">;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default"></span>
+<a name="152"><font size=-1>152     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6183">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#6183">i</a> &lt; <a href="dictionary_E.html#6184">maxSize</a>; i++) {</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">                <a href="dictionary_E.html#6185">next</a>.<a href="dictionary_E.html#6190">words</a>[nextIndex--] = </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#6190">words</a>[thisIndex--];</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">            }</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#6185">next</a></span><span class="default">;</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">        }</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">    }</span>
+<a name="158"><font size=-1>158     </font></a><span class="default"></span>
+<a name="159"><font size=-1>159     </font></a><span class="default"></span>
+<a name="160"><font size=-1>160     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="161"><font size=-1>161     </font></a><span class="comment">     * Returns the n-th word in this sequence</span>
+<a name="162"><font size=-1>162     </font></a><span class="comment">     *</span>
+<a name="163"><font size=-1>163     </font></a><span class="comment">     * @param n which word to return</span>
+<a name="164"><font size=-1>164     </font></a><span class="comment">     * @return the n-th word in this sequence</span>
+<a name="165"><font size=-1>165     </font></a><span class="comment">     */</span>
+<a name="166"><font size=-1>166     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#1077">Word</a> <a href="dictionary_E.html#6175">getWord</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6176">n</a></span><span class="default">) {</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6176">n</a> &gt;= <a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a>) {</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">            </span><span class="keyword">throw new <a href="dictionary_A.html#3073">ArrayIndexOutOfBoundsException</a></span><span class="default">(<a href="dictionary_E.html#6176">n</a>);</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">        }</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6190">words</a></span><span class="default">[<a href="dictionary_E.html#6176">n</a>];</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">    }</span>
+<a name="172"><font size=-1>172     </font></a><span class="default"></span>
+<a name="173"><font size=-1>173     </font></a><span class="default"></span>
+<a name="174"><font size=-1>174     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="175"><font size=-1>175     </font></a><span class="comment">     * Returns the number of words in this sequence</span>
+<a name="176"><font size=-1>176     </font></a><span class="comment">     *</span>
+<a name="177"><font size=-1>177     </font></a><span class="comment">     * @return the number of words</span>
+<a name="178"><font size=-1>178     </font></a><span class="comment">     */</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_E.html#6180">size</a></span><span class="default">() {</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6190">words</a></span><span class="default">.<a href="dictionary_L.html#40">length</a>;</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">    }</span>
+<a name="182"><font size=-1>182     </font></a><span class="default"></span>
+<a name="183"><font size=-1>183     </font></a><span class="default"></span>
+<a name="184"><font size=-1>184     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="185"><font size=-1>185     </font></a><span class="comment">     * Returns a string representation of this word sequence. The format is: [ID_0][ID_1][ID_2].</span>
+<a name="186"><font size=-1>186     </font></a><span class="comment">     *</span>
+<a name="187"><font size=-1>187     </font></a><span class="comment">     * @return the string</span>
+<a name="188"><font size=-1>188     </font></a><span class="comment">     */</span>
+<a name="189"><font size=-1>189     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#2">Override</a></span>
+<a name="190"><font size=-1>190     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_S.html#81">String</a> <a href="dictionary_E.html#1133">toString</a></span><span class="default">() {</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">        <a href="dictionary_S.html#2637">StringBuilder</a> <a href="dictionary_E.html#6182">sb</a> = </span><span class="keyword">new <a href="dictionary_S.html#2637">StringBuilder</a></span><span class="default">();</span>
+<a name="192"><font size=-1>192     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#1077">Word</a> <a href="dictionary_E.html#6181">word</a> : <a href="dictionary_E.html#6190">words</a>)</span>
+<a name="193"><font size=-1>193     </font></a><span class="default">            <a href="dictionary_E.html#6182">sb</a>.<a href="dictionary_A.html#1540">append</a>(</span><span class="string">'['</span><span class="default">).<a href="dictionary_A.html#1540">append</a>(<a href="dictionary_E.html#6181">word</a>).<a href="dictionary_A.html#1540">append</a>(</span><span class="string">']'</span><span class="default">);</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6182">sb</a></span><span class="default">.<a href="dictionary_T.html#56">toString</a>();</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">    }</span>
+<a name="196"><font size=-1>196     </font></a><span class="default"></span>
+<a name="197"><font size=-1>197     </font></a><span class="default"></span>
+<a name="198"><font size=-1>198     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="199"><font size=-1>199     </font></a><span class="comment">     * Calculates the hashcode for this object</span>
+<a name="200"><font size=-1>200     </font></a><span class="comment">     *</span>
+<a name="201"><font size=-1>201     </font></a><span class="comment">     * @return a hashcode for this object</span>
+<a name="202"><font size=-1>202     </font></a><span class="comment">     */</span>
+<a name="203"><font size=-1>203     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#2">Override</a></span>
+<a name="204"><font size=-1>204     </font></a><span class="default">    </span><span class="keyword">public int <a href="dictionary_E.html#1138">hashCode</a></span><span class="default">() {</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6189">hashCode</a> == -</span><span class="number">1</span><span class="default">) {</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_E.html#6179">code</a> </span><span class="default">= </span><span class="number">123</span><span class="default">;</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6178">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#6178">i</a> &lt; <a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a>; i++) {</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">                code += <a href="dictionary_E.html#6190">words</a>[<a href="dictionary_E.html#6178">i</a>].<a href="dictionary_E.html#6191">hashCode</a>() * (</span><span class="number">2 </span><span class="default">* <a href="dictionary_E.html#6178">i</a> + </span><span class="number">1</span><span class="default">);</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">            }</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">            <a href="dictionary_E.html#6189">hashCode</a> = <a href="dictionary_E.html#6179">code</a>;</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">        }</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6189">hashCode</a></span><span class="default">;</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">    }</span>
+<a name="214"><font size=-1>214     </font></a><span class="default"></span>
+<a name="215"><font size=-1>215     </font></a><span class="default"></span>
+<a name="216"><font size=-1>216     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="217"><font size=-1>217     </font></a><span class="comment">     * compares the given object to see if it is identical to this WordSequence</span>
+<a name="218"><font size=-1>218     </font></a><span class="comment">     *</span>
+<a name="219"><font size=-1>219     </font></a><span class="comment">     * @param o the object to compare this to</span>
+<a name="220"><font size=-1>220     </font></a><span class="comment">     * @return true if the given object is equal to this object</span>
+<a name="221"><font size=-1>221     </font></a><span class="comment">     */</span>
+<a name="222"><font size=-1>222     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#2">Override</a></span>
+<a name="223"><font size=-1>223     </font></a><span class="default">    </span><span class="keyword">public boolean <a href="dictionary_E.html#1127">equals</a></span><span class="default">(Object <a href="dictionary_E.html#6164">o</a>) {</span>
+<a name="224"><font size=-1>224     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(</span><span class="keyword">this </span><span class="default">== <a href="dictionary_E.html#6164">o</a>) {</span>
+<a name="225"><font size=-1>225     </font></a><span class="default">            </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="226"><font size=-1>226     </font></a><span class="default">        } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#6164">o</a> </span><span class="keyword">instanceof <a href="dictionary_E.html#184">WordSequence</a></span><span class="default">) {</span>
+<a name="227"><font size=-1>227     </font></a><span class="default">            <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6165">other</a> = (WordSequence) <a href="dictionary_E.html#6164">o</a>;</span>
+<a name="228"><font size=-1>228     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a> == <a href="dictionary_E.html#6165">other</a>.<a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a>) {</span>
+<a name="229"><font size=-1>229     </font></a><span class="default">                </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6163">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#6163">i</a> &lt; <a href="dictionary_E.html#6190">words</a>.<a href="dictionary_L.html#40">length</a>; i++) {</span>
+<a name="230"><font size=-1>230     </font></a><span class="default">                    </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#6190">words</a>[<a href="dictionary_E.html#6163">i</a>].<a href="dictionary_E.html#2984">equals</a>(<a href="dictionary_E.html#6165">other</a>.<a href="dictionary_E.html#6190">words</a>[<a href="dictionary_E.html#6163">i</a>])) {</span>
+<a name="231"><font size=-1>231     </font></a><span class="default">                        </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="232"><font size=-1>232     </font></a><span class="default">                    }</span>
+<a name="233"><font size=-1>233     </font></a><span class="default">                }</span>
+<a name="234"><font size=-1>234     </font></a><span class="default">                </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="235"><font size=-1>235     </font></a><span class="default">            }</span>
+<a name="236"><font size=-1>236     </font></a><span class="default">        }</span>
+<a name="237"><font size=-1>237     </font></a><span class="default">        </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="238"><font size=-1>238     </font></a><span class="default">    }</span>
+<a name="239"><font size=-1>239     </font></a><span class="default"></span>
+<a name="240"><font size=-1>240     </font></a><span class="default"></span>
+<a name="241"><font size=-1>241     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="242"><font size=-1>242     </font></a><span class="comment">     * @return a subsequence with both &lt;code&gt;startIndex&lt;/code&gt; and &lt;code&gt;stopIndex&lt;/code&gt; exclusive.</span>
+<a name="243"><font size=-1>243     </font></a><span class="comment">     */</span>
+<a name="244"><font size=-1>244     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#184">WordSequence</a> <a href="dictionary_E.html#6170">getSubSequence</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6172">startIndex</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_E.html#6173">stopIndex</a></span><span class="default">) {</span>
+<a name="245"><font size=-1>245     </font></a><span class="default">        <a href="dictionary_J.html#203">List</a>&lt;<a href="dictionary_E.html#1077">Word</a>&gt; <a href="dictionary_E.html#6174">subseqWords</a> = </span><span class="keyword">new <a href="dictionary_J.html#1210">ArrayList</a></span><span class="default">&lt;<a href="dictionary_E.html#1077">Word</a>&gt;();</span>
+<a name="246"><font size=-1>246     </font></a><span class="default"></span>
+<a name="247"><font size=-1>247     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6171">i</a> </span><span class="default">= <a href="dictionary_E.html#6172">startIndex</a>; <a href="dictionary_E.html#6171">i</a> &lt; <a href="dictionary_E.html#6173">stopIndex</a>; i++) {</span>
+<a name="248"><font size=-1>248     </font></a><span class="default">            <a href="dictionary_E.html#6174">subseqWords</a>.<a href="dictionary_A.html#422">add</a>(<a href="dictionary_E.html#6175">getWord</a>(<a href="dictionary_E.html#6171">i</a>));</span>
+<a name="249"><font size=-1>249     </font></a><span class="default">        }</span>
+<a name="250"><font size=-1>250     </font></a><span class="default"></span>
+<a name="251"><font size=-1>251     </font></a><span class="default">        </span><span class="keyword">return new <a href="dictionary_E.html#6153">WordSequence</a></span><span class="default">(<a href="dictionary_E.html#6174">subseqWords</a>);</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">    }</span>
+<a name="253"><font size=-1>253     </font></a><span class="default"></span>
+<a name="254"><font size=-1>254     </font></a><span class="default"></span>
+<a name="255"><font size=-1>255     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="256"><font size=-1>256     </font></a><span class="comment">     * @return the words of the &lt;code&gt;WordSequence&lt;/code&gt;.</span>
+<a name="257"><font size=-1>257     </font></a><span class="comment">     */</span>
+<a name="258"><font size=-1>258     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#1077">Word</a></span><span class="default">[] <a href="dictionary_E.html#6177">getWords</a>() {</span>
+<a name="259"><font size=-1>259     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6170">getSubSequence</a></span><span class="default">(</span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#6180">size</a>()).<a href="dictionary_E.html#6190">words</a>; </span><span class="comment">//create a copy to keep the class immutable</span>
+<a name="260"><font size=-1>260     </font></a><span class="comment">    </span><span class="default">}</span>
+<a name="261"><font size=-1>261     </font></a><span class="default">}</span>
+<a name="262"><font size=-1>262     </font></a><span class="default"></span>
+</pre></body></html>

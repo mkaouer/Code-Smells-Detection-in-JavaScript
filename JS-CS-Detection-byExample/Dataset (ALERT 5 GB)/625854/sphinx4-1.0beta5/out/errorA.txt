@@ -1,0 +1,14 @@
+file: errorA.txt
+date: Tue, 31 Aug 2010 23:07:57 (local)
+Linklint version: 2.3.5
+
+#------------------------------------------------------------
+# ERROR   6 missing named anchors
+#------------------------------------------------------------
+/javadoc/edu/cmu/sphinx/util/props/S4Double.html#NOT_DEFINED
+/javadoc/edu/cmu/sphinx/util/props/S4Double.html#annotation_type_element_detail
+/javadoc/edu/cmu/sphinx/util/props/S4Integer.html#NOT_DEFINED
+/javadoc/edu/cmu/sphinx/util/props/S4Integer.html#annotation_type_element_detail
+/javadoc/edu/cmu/sphinx/util/props/S4String.html#NOT_DEFINED
+/javadoc/edu/cmu/sphinx/util/props/S4String.html#annotation_type_element_detail
+

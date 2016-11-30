@@ -1,0 +1,163 @@
+<html><head><title>AudioFormat.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta6\src\jsapi2\org.jvoicexml.jsapi2\src\org\jvoicexml\jsapi2\AudioFormat.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta6\\src\\jsapi2\\org.jvoicexml.jsapi2\\src\\org\\jvoicexml\\jsapi2\\AudioFormat.java";
+top.document.title  = "AudioFormat.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">org.jvoicexml.<a href="dictionary_O.html#85">jsapi2</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Simple container for an audio format.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * </span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * @author Dirk Schnelle-Walka</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> */</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"></span><span class="keyword">public final class <a href="dictionary_O.html#18214">AudioFormat</a> </span><span class="default">{</span>
+<a name="9"><font size=-1>9     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment">     * The audio encoding technique used by this format.</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment">     */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#19278">encoding</a></span><span class="default">;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment">     * The number of samples played or recorded per second, for sounds that have</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment">     * this format.</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment">     */</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment">    </span><span class="keyword">private float <a href="dictionary_O.html#19281">sampleRate</a></span><span class="default">;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span>
+<a name="20"><font size=-1>20     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment">     * The number of bits in each sample of a sound that has this format.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment">     */</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">    </span><span class="keyword">private int <a href="dictionary_O.html#19282">sampleSizeInBits</a></span><span class="default">;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span>
+<a name="25"><font size=-1>25     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">     * The number of audio channels in this format (1 for mono, 2 for stereo).</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">     */</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">    </span><span class="keyword">private int <a href="dictionary_O.html#19277">channels</a></span><span class="default">;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">     * The number of bytes in each frame of a sound that has this format.</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">     */</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment">    </span><span class="keyword">private int <a href="dictionary_O.html#19280">frameSize</a></span><span class="default">;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment">     * The number of frames played or recorded per second, for sounds that have</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">     * this format.</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">     */</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">    </span><span class="keyword">private float <a href="dictionary_O.html#19279">frameRate</a></span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">     * Indicates whether the audio data is stored in big-endian or little-endian</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">     * order.</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">     */</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">    </span><span class="keyword">private boolean <a href="dictionary_O.html#19276">bigEndian</a></span><span class="default">;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     * Constructs an &lt;code&gt;AudioFormat&lt;/code&gt; with the given parameters.</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">     * </span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">     * @param enc</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">     *            the audio encoding technique</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">     * @param smpRate</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">     *            the number of samples per second</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">     * @param smpSize</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">     *            the number of bits in each sample</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">     * @param chan</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     *            the number of channels (1 for mono, 2 for stereo, and so on)</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * @param frmSize</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     *            the number of bytes in each frame</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     * @param frmRate</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">     *            the number of frames per second</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">     * @param bigend</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">     *            indicates whether the data for a single sample is stored in</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">     *            big-endian byte order (&lt;code&gt;false&lt;/code&gt; means little-endian)</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">     */</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_O.html#19035">AudioFormat</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#19264">enc</a></span><span class="default">, </span><span class="keyword">final float <a href="dictionary_O.html#19267">smpRate</a></span><span class="default">,</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">            </span><span class="keyword">final int <a href="dictionary_O.html#19268">smpSize</a></span><span class="default">, </span><span class="keyword">final int <a href="dictionary_O.html#19263">chan</a></span><span class="default">, </span><span class="keyword">final int <a href="dictionary_O.html#19266">frmSize</a></span><span class="default">,</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">            </span><span class="keyword">final float <a href="dictionary_O.html#19265">frmRate</a></span><span class="default">, </span><span class="keyword">final boolean <a href="dictionary_O.html#19262">bigend</a></span><span class="default">) {</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        <a href="dictionary_O.html#19278">encoding</a> = <a href="dictionary_O.html#19264">enc</a>;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        <a href="dictionary_O.html#19281">sampleRate</a> = <a href="dictionary_O.html#19267">smpRate</a>;</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">        <a href="dictionary_O.html#19282">sampleSizeInBits</a> = <a href="dictionary_O.html#19268">smpSize</a>;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        <a href="dictionary_O.html#19277">channels</a> = <a href="dictionary_O.html#19263">chan</a>;</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">        <a href="dictionary_O.html#19280">frameSize</a> = <a href="dictionary_O.html#19266">frmSize</a>;</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        <a href="dictionary_O.html#19279">frameRate</a> = <a href="dictionary_O.html#19265">frmRate</a>;</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">        <a href="dictionary_O.html#19276">bigEndian</a> = <a href="dictionary_O.html#19262">bigend</a>;</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    }</span>
+<a name="77"><font size=-1>77     </font></a><span class="default"></span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">     * Obtains the type of encoding for sounds in this format.</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">     * </span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">     * @return the encoding type</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">     */</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#19270">getEncoding</a></span><span class="default">() {</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19278">encoding</a></span><span class="default">;</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    }</span>
+<a name="86"><font size=-1>86     </font></a><span class="default"></span>
+<a name="87"><font size=-1>87     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">     * Obtains the sample rate.</span>
+<a name="89"><font size=-1>89     </font></a><span class="comment">     * </span>
+<a name="90"><font size=-1>90     </font></a><span class="comment">     * @return the number of samples per second</span>
+<a name="91"><font size=-1>91     </font></a><span class="comment">     * </span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">     * @see #getFrameRate()</span>
+<a name="93"><font size=-1>93     </font></a><span class="comment">     */</span>
+<a name="94"><font size=-1>94     </font></a><span class="comment">    </span><span class="keyword">public float <a href="dictionary_O.html#19273">getSampleRate</a></span><span class="default">() {</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19281">sampleRate</a></span><span class="default">;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    }</span>
+<a name="97"><font size=-1>97     </font></a><span class="default"></span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">     * Obtains the size of a sample.</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment">     * </span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">     * @return the number of bits in each sample</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">     * </span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     * @see #getFrameSize()</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">     */</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_O.html#19274">getSampleSizeInBits</a></span><span class="default">() {</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19282">sampleSizeInBits</a></span><span class="default">;</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    }</span>
+<a name="108"><font size=-1>108     </font></a><span class="default"></span>
+<a name="109"><font size=-1>109     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="110"><font size=-1>110     </font></a><span class="comment">     * Obtains the number of channels. </span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">     * </span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">     * @return The number of channels (1 for mono, 2 for stereo, etc.</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">     */</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_O.html#19269">getChannels</a></span><span class="default">() {</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19277">channels</a></span><span class="default">;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    }</span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">     * Obtains the frame size in bytes.</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">     * </span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">     * @return the number of bytes per frame</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">     * </span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">     * @see #getSampleSizeInBits()</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">     */</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_O.html#19272">getFrameSize</a></span><span class="default">() {</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19280">frameSize</a></span><span class="default">;</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">    }</span>
+<a name="128"><font size=-1>128     </font></a><span class="default"></span>
+<a name="129"><font size=-1>129     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">     * Obtains the frame rate in frames per second.</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">     * </span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">     * @return the number of frames per second</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     * </span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     * @see #getSampleRate()</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">     */</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">    </span><span class="keyword">public float <a href="dictionary_O.html#19271">getFrameRate</a></span><span class="default">() {</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19279">frameRate</a></span><span class="default">;</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">    }</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">     * Indicates whether the audio data is stored in big-endian or little-endian</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">     * byte order. If the sample size is not more than one byte, the return</span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">     * value is irrelevant.</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">     * </span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">     * @return &lt;code&gt;true&lt;/code&gt; if the data is stored in big-endian byte order,</span>
+<a name="146"><font size=-1>146     </font></a><span class="comment">     *         &lt;code&gt;false&lt;/code&gt; if little-endian</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">     */</span>
+<a name="148"><font size=-1>148     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_O.html#19275">isBigEndian</a></span><span class="default">() {</span>
+<a name="149"><font size=-1>149     </font></a><span class="default"></span>
+<a name="150"><font size=-1>150     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#19276">bigEndian</a></span><span class="default">;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">    }</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">}</span>
+<a name="153"><font size=-1>153     </font></a><span class="default"></span>
+</pre></body></html>

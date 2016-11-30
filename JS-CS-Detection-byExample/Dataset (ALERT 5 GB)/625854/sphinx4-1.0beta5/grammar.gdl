@@ -1,0 +1,59 @@
+digraph "grammar.gdl" {
+rankdir = LR
+
+	node6 [ label="<sil>", color=green, shape=box ]
+
+	node6 -> node7 [ label=0.0 ]
+	node7 [ label="three", color=green, shape=box ]
+
+	node7 -> node1 [ label=0.0 ]
+	node1 [ label="", color=red, shape=circle ]
+
+	node7 -> node9 [ label=0.0 ]
+	node9 [ label="", color=grey, shape=circle ]
+
+	node9 -> node11 [ label=0.0 ]
+	node11 [ label="++lip_smack++", color=green, shape=box ]
+
+	node11 -> node10 [ label=0.0 ]
+	node10 [ label="", color=grey, shape=circle ]
+
+	node10 -> node9 [ label=0.0 ]
+	node10 -> node1 [ label=0.0 ]
+	node9 -> node12 [ label=0.0 ]
+	node12 [ label="++ah++", color=green, shape=box ]
+
+	node12 -> node10 [ label=0.0 ]
+	node9 -> node13 [ label=0.0 ]
+	node13 [ label="++grunt++", color=green, shape=box ]
+
+	node13 -> node10 [ label=0.0 ]
+	node9 -> node14 [ label=0.0 ]
+	node14 [ label="++beep++", color=green, shape=box ]
+
+	node14 -> node10 [ label=0.0 ]
+	node9 -> node15 [ label=0.0 ]
+	node15 [ label="++click++", color=green, shape=box ]
+
+	node15 -> node10 [ label=0.0 ]
+	node9 -> node16 [ label=0.0 ]
+	node16 [ label="++door_slam++", color=green, shape=box ]
+
+	node16 -> node10 [ label=0.0 ]
+	node9 -> node17 [ label=0.0 ]
+	node17 [ label="<sil>", color=green, shape=box ]
+
+	node17 -> node10 [ label=0.0 ]
+	node9 -> node18 [ label=0.0 ]
+	node18 [ label="++noise++", color=green, shape=box ]
+
+	node18 -> node10 [ label=0.0 ]
+	node9 -> node19 [ label=0.0 ]
+	node19 [ label="++phone_ring++", color=green, shape=box ]
+
+	node19 -> node10 [ label=0.0 ]
+	node9 -> node20 [ label=0.0 ]
+	node20 [ label="++breath++", color=green, shape=box ]
+
+	node20 -> node10 [ label=0.0 ]
+}

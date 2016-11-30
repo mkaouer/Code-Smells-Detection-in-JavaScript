@@ -1,0 +1,51 @@
+<html><head><title>Segmenter.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta5\src\sphinx4\edu\cmu\sphinx\tools\endpoint\Segmenter.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta5\\src\\sphinx4\\edu\\cmu\\sphinx\\tools\\endpoint\\Segmenter.java";
+top.document.title  = "Segmenter.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.tools.<a href="dictionary_E.html#14266">endpoint</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#80">io</a>.<a href="dictionary_J.html#71">File</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#274">net</a>.<a href="dictionary_J.html#1441">MalformedURLException</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#274">net</a>.<a href="dictionary_J.html#270">URL</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#1053">frontend</a>.<a href="dictionary_E.html#1056">Data</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#1053">frontend</a>.<a href="dictionary_E.html#2100">FrontEnd</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.frontend.<a href="dictionary_E.html#281">util</a>.<a href="dictionary_E.html#2181">AudioFileDataSource</a>;</span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#78">props</a>.<a href="dictionary_E.html#85">ConfigurationManager</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_E.html#14257">Segmenter</a> </span><span class="default">{</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_E.html#14258">main</a></span><span class="default">(<a href="dictionary_S.html#76">String</a>[] <a href="dictionary_E.html#14259">args</a>) </span><span class="keyword">throws <a href="dictionary_J.html#1441">MalformedURLException</a> </span><span class="default">{</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">	       <a href="dictionary_J.html#270">URL</a> <a href="dictionary_E.html#14260">audioURL</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default">	        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#14259">args</a>.<a href="dictionary_L.html#481">length</a> == </span><span class="number">1</span><span class="default">) {</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">	            <a href="dictionary_E.html#14260">audioURL</a> = </span><span class="keyword">new <a href="dictionary_J.html#71">File</a></span><span class="default">(<a href="dictionary_E.html#14259">args</a>[</span><span class="number">0</span><span class="default">]).<a href="dictionary_T.html#37">toURI</a>().<a href="dictionary_T.html#38">toURL</a>();</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">	        } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">	            System.out.<a href="dictionary_P.html#152">println</a> (</span><span class="string">&quot;Usage: java -cp lib/batch.jar:lib/sphinx4.jar edu.cmu.sphinx.tools.enpoint.Segmenter &lt;filename&gt;&quot;</span><span class="default">);</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">	            </span><span class="keyword">return</span><span class="default">;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">	        }</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span>
+<a name="24"><font size=-1>24     </font></a><span class="default">	        <a href="dictionary_J.html#270">URL</a> <a href="dictionary_E.html#14262">configURL</a> = <a href="dictionary_E.html#14257">Segmenter</a>.</span><span class="keyword">class</span><span class="default">.<a href="dictionary_G.html#2057">getResource</a>(</span><span class="string">&quot;frontend.config.xml&quot;</span><span class="default">);</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span>
+<a name="26"><font size=-1>26     </font></a><span class="default">	        <a href="dictionary_E.html#85">ConfigurationManager</a> <a href="dictionary_E.html#14261">cm</a> = </span><span class="keyword">new <a href="dictionary_E.html#283">ConfigurationManager</a></span><span class="default">(<a href="dictionary_E.html#14262">configURL</a>);</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">	        <a href="dictionary_E.html#2100">FrontEnd</a> <a href="dictionary_E.html#14265">frontend</a> = (FrontEnd) <a href="dictionary_E.html#14261">cm</a>.<a href="dictionary_E.html#98">lookup</a>(</span><span class="string">&quot;endpointer&quot;</span><span class="default">);</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default">	        <a href="dictionary_E.html#14265">frontend</a>.<a href="dictionary_E.html#13645">initialize</a>();</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">	        </span><span class="comment">// configure the audio input for the recognizer</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">	        <a href="dictionary_E.html#2181">AudioFileDataSource</a> <a href="dictionary_E.html#14264">dataSource</a> </span><span class="default">= (AudioFileDataSource) <a href="dictionary_E.html#14261">cm</a>.<a href="dictionary_E.html#98">lookup</a>(</span><span class="string">&quot;audioFileDataSource&quot;</span><span class="default">);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">	        <a href="dictionary_E.html#14264">dataSource</a>.<a href="dictionary_E.html#8778">setAudioFile</a>(<a href="dictionary_E.html#14260">audioURL</a>, </span><span class="keyword">null</span><span class="default">);</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">	        </span>
+<a name="35"><font size=-1>35     </font></a><span class="default">	        <a href="dictionary_E.html#1056">Data</a> <a href="dictionary_E.html#14263">data</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">	        </span><span class="keyword">do </span><span class="default">{</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">	        	<a href="dictionary_E.html#14263">data</a> = <a href="dictionary_E.html#14265">frontend</a>.<a href="dictionary_E.html#2101">getData</a>();</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">	        } </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#14263">data</a> != </span><span class="keyword">null</span><span class="default">);</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">	        }</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">}</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+</pre></body></html>

@@ -1,0 +1,6 @@
+Testsuite: edu.cmu.sphinx.linguist.acoustic.tiedstate.test.MixtureComponentTest
+Tests run: 3, Failures: 0, Errors: 0, Time elapsed: 0,089 sec
+
+Testcase: testUnivariateDensity took 0,043 sec
+Testcase: testUnivariateMeanTransformation took 0,001 sec
+Testcase: testClone took 0,001 sec

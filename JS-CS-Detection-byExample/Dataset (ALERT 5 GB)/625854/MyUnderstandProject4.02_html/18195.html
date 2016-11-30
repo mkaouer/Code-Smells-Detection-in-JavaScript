@@ -1,0 +1,157 @@
+<html><head><title>SimpleWordResult.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta2\src\sphinx4\edu\cmu\sphinx\result\SimpleWordResult.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta2\\src\\sphinx4\\edu\\cmu\\sphinx\\result\\SimpleWordResult.java";
+top.document.title  = "SimpleWordResult.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2004 Carnegie Mellon University.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2004 Sun Microsystems, Inc.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2004 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> *</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> *</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * Created on Aug 31, 2004</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> */</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"></span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#302">result</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#24">frontend</a>.<a href="dictionary_E.html#29">Data</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#584">dictionary</a>.<a href="dictionary_E.html#2356">Pronunciation</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#584">dictionary</a>.<a href="dictionary_E.html#582">Word</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#304">util</a>.<a href="dictionary_E.html#303">LogMath</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * Represents a single word result with associated scoring and timing information.</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> *</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> * @author pgorniak</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> */</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#310">SimpleWordResult</a> implements <a href="dictionary_E.html#306">WordResult</a> </span><span class="default">{</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#18224">word</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_E.html#18223">startFrame</a></span><span class="default">;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="keyword">int <a href="dictionary_E.html#18220">endFrame</a></span><span class="default">;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">    </span><span class="keyword">double <a href="dictionary_E.html#18222">score</a></span><span class="default">;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    </span><span class="keyword">double <a href="dictionary_E.html#18219">confidence</a></span><span class="default">;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">    <a href="dictionary_E.html#303">LogMath</a> <a href="dictionary_E.html#18221">logMath</a>;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">     * Construct a word result from a string and a confidence score. Note that</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">     *</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">     * @param w          the word</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">     * @param confidence the confidence for this word</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">     */</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#312">SimpleWordResult</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#18199">w</a>, </span><span class="keyword">double <a href="dictionary_E.html#18196">confidence</a></span><span class="default">, <a href="dictionary_E.html#303">LogMath</a> <a href="dictionary_E.html#18197">logMath</a>) {</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">        <a href="dictionary_E.html#2356">Pronunciation</a>[] <a href="dictionary_E.html#18198">pros</a> = {<a href="dictionary_E.html#2356">Pronunciation</a>.<a href="dictionary_E.html#12845">UNKNOWN</a>};</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18224">word</a> = </span><span class="keyword">new <a href="dictionary_E.html#6392">Word</a></span><span class="default">(<a href="dictionary_E.html#18199">w</a>, <a href="dictionary_E.html#18198">pros</a>, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18219">confidence</a> = <a href="dictionary_E.html#18196">confidence</a>;</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18222">score</a> = <a href="dictionary_E.html#303">LogMath</a>.<a href="dictionary_E.html#314">getLogZero</a>();</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18221">logMath</a> = <a href="dictionary_E.html#18197">logMath</a>;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">    }</span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default"></span>
+<a name="52"><font size=-1>52     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">     * Construct a word result with full information.</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">     *</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">     * @param w          the word object to store</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">     * @param sf         word start time</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     * @param ef         word end time</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     * @param score      score of the word</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     * @param confidence confidence (posterior) of the word</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     */</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#18200">SimpleWordResult</a></span><span class="default">(<a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#18206">w</a>, </span><span class="keyword">int <a href="dictionary_E.html#18205">sf</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_E.html#18202">ef</a></span><span class="default">, </span><span class="keyword">double <a href="dictionary_E.html#18204">score</a></span><span class="default">,</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">                            </span><span class="keyword">double <a href="dictionary_E.html#18201">confidence</a></span><span class="default">, <a href="dictionary_E.html#303">LogMath</a> <a href="dictionary_E.html#18203">logMath</a>) {</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18224">word</a> = <a href="dictionary_E.html#18206">w</a>;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18223">startFrame</a> = <a href="dictionary_E.html#18205">sf</a>;</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18220">endFrame</a> = <a href="dictionary_E.html#18202">ef</a>;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18222">score</a> = <a href="dictionary_E.html#18204">score</a>;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18219">confidence</a> = <a href="dictionary_E.html#18201">confidence</a>;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#18221">logMath</a> = <a href="dictionary_E.html#18203">logMath</a>;</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    }</span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">     * Construct a WordResult using a Node object and a confidence (posterior). This does not use the posterior stored</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">     * in the Node object, just its word, start and end. TODO: score is currently set to zero</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">     *</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">     * @param node       the node to extract information from</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">     * @param confidence the confidence (posterior) to assign</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">     */</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#12313">SimpleWordResult</a></span><span class="default">(<a href="dictionary_E.html#4324">Node</a> <a href="dictionary_E.html#18209">node</a>, </span><span class="keyword">double <a href="dictionary_E.html#18207">confidence</a></span><span class="default">, <a href="dictionary_E.html#303">LogMath</a> <a href="dictionary_E.html#18208">logMath</a>) {</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">(<a href="dictionary_E.html#18209">node</a>.<a href="dictionary_E.html#8551">getWord</a>(), <a href="dictionary_E.html#18209">node</a>.<a href="dictionary_E.html#8553">getBeginTime</a>(), <a href="dictionary_E.html#18209">node</a>.<a href="dictionary_E.html#8554">getEndTime</a>(),</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">                <a href="dictionary_E.html#303">LogMath</a>.<a href="dictionary_E.html#314">getLogZero</a>(), <a href="dictionary_E.html#18207">confidence</a>, <a href="dictionary_E.html#18208">logMath</a>);</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">    }</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default"></span>
+<a name="85"><font size=-1>85     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getScore() */</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">    </span><span class="keyword">public double <a href="dictionary_E.html#18215">getScore</a></span><span class="default">() {</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18222">score</a></span><span class="default">;</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">    }</span>
+<a name="89"><font size=-1>89     </font></a><span class="default"></span>
+<a name="90"><font size=-1>90     </font></a><span class="default"></span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getConfidence() */</span>
+<a name="92"><font size=-1>92     </font></a><span class="comment">    </span><span class="keyword">public double <a href="dictionary_E.html#18210">getConfidence</a></span><span class="default">() {</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#18219">confidence</a> &gt; <a href="dictionary_E.html#303">LogMath</a>.<a href="dictionary_E.html#316">getLogOne</a>()) {</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#303">LogMath</a></span><span class="default">.<a href="dictionary_E.html#316">getLogOne</a>();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">        } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#18219">confidence</a></span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">        }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    }</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default"></span>
+<a name="101"><font size=-1>101     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getLogMath() */</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#303">LogMath</a> <a href="dictionary_E.html#18213">getLogMath</a></span><span class="default">() {</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18221">logMath</a></span><span class="default">;</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">    }</span>
+<a name="105"><font size=-1>105     </font></a><span class="default"></span>
+<a name="106"><font size=-1>106     </font></a><span class="default"></span>
+<a name="107"><font size=-1>107     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getPronunciation() */</span>
+<a name="108"><font size=-1>108     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#2356">Pronunciation</a> <a href="dictionary_E.html#18214">getPronunciation</a></span><span class="default">() {</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18224">word</a></span><span class="default">.<a href="dictionary_E.html#12834">getMostLikelyPronunciation</a>();</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    }</span>
+<a name="111"><font size=-1>111     </font></a><span class="default"></span>
+<a name="112"><font size=-1>112     </font></a><span class="default"></span>
+<a name="113"><font size=-1>113     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getStartFrame() */</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_E.html#18216">getStartFrame</a></span><span class="default">() {</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18223">startFrame</a></span><span class="default">;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">    }</span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default"></span>
+<a name="119"><font size=-1>119     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getEndFrame() */</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_E.html#18212">getEndFrame</a></span><span class="default">() {</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18220">endFrame</a></span><span class="default">;</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">    }</span>
+<a name="123"><font size=-1>123     </font></a><span class="default"></span>
+<a name="124"><font size=-1>124     </font></a><span class="default"></span>
+<a name="125"><font size=-1>125     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">     * Return this WordResult as a string.</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">     *</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">     * @return the word stored here as a string</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">     */</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#18218">toString</a></span><span class="default">() {</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18224">word</a></span><span class="default">.<a href="dictionary_E.html#4769">toString</a>();</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">    }</span>
+<a name="133"><font size=-1>133     </font></a><span class="default"></span>
+<a name="134"><font size=-1>134     </font></a><span class="default"></span>
+<a name="135"><font size=-1>135     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#getDataFrames() */</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#29">Data</a></span><span class="default">[] <a href="dictionary_E.html#18211">getDataFrames</a>() {</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">        </span><span class="comment">// TODO not yet implemented</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">        </span><span class="keyword">return null</span><span class="default">;</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">    }</span>
+<a name="140"><font size=-1>140     </font></a><span class="default"></span>
+<a name="141"><font size=-1>141     </font></a><span class="default"></span>
+<a name="142"><font size=-1>142     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.WordResult#isFiller() */</span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">    </span><span class="keyword">public boolean <a href="dictionary_E.html#18217">isFiller</a></span><span class="default">() {</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18224">word</a></span><span class="default">.<a href="dictionary_E.html#2362">isFiller</a>() || <a href="dictionary_E.html#18224">word</a>.<a href="dictionary_E.html#4769">toString</a>().<a href="dictionary_E.html#505">equals</a>(</span><span class="string">&quot;&lt;noop&gt;&quot;</span><span class="default">);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">    }</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">}</span>
+<a name="147"><font size=-1>147     </font></a><span class="default"></span>
+</pre></body></html>

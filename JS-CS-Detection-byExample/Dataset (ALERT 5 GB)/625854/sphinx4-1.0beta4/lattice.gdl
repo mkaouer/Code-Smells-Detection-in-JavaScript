@@ -1,0 +1,54 @@
+graph: {
+title: "lattice"
+display_edge_labels: yes
+node: { title: "32401875" label: "right[79,104 p:log zero]" }
+node: { title: "24228422" label: "<sil>[178,219 p:log zero]" }
+node: { title: "2144034" label: "<sil>[176,179 p:log zero]" }
+node: { title: "12400378" label: "right[79,104 p:log zero]" }
+node: { title: "26614404" label: "</s>[219,-1 p:log zero]" }
+node: { title: "18075465" label: "a[216,219 p:log zero]" }
+node: { title: "27717291" label: "middle[127,178 p:log zero]" }
+node: { title: "27104945" label: "<sil>[178,216 p:log zero]" }
+node: { title: "28914982" label: "middle[127,176 p:log zero]" }
+node: { title: "15547219" label: "one[66,79 p:log zero]" }
+node: { title: "27147812" label: "in[104,118 p:log zero]" }
+node: { title: "22488224" label: "green[39,68 p:log zero]" }
+node: { title: "8836503" label: "the[118,127 p:log zero]" }
+node: { title: "30021687" label: "<sil>[179,219 p:log zero]" }
+node: { title: "21250841" label: "<sil>[178,219 p:log zero]" }
+node: { title: "30791525" label: "middle[127,153 p:log zero]" }
+node: { title: "17832284" label: "green[39,66 p:log zero]" }
+node: { title: "23816663" label: "the[28,39 p:log zero]" }
+node: { title: "32857262" label: "<sil>[0,28 p:log zero]" }
+node: { title: "25717300" label: "all[153,178 p:log zero]" }
+node: { title: "101915" label: "<s>[0,0 p:log zero]" }
+node: { title: "2650295" label: "on[68,79 p:log zero]" }
+edge: { sourcename: "27104945" targetname: "18075465" label: "93865.140625,-367480.1875" }
+edge: { sourcename: "27717291" targetname: "21250841" label: "8371043.5,0.0" }
+edge: { sourcename: "30791525" targetname: "25717300" label: "1821525.75,-325112.625" }
+edge: { sourcename: "27717291" targetname: "27104945" label: "7931659.0,0.0" }
+edge: { sourcename: "23816663" targetname: "22488224" label: "-26799.400390625,-83256.4296875" }
+edge: { sourcename: "18075465" targetname: "26614404" label: "0.0,-331437.1875" }
+edge: { sourcename: "24228422" targetname: "26614404" label: "0.0,-174465.15625" }
+edge: { sourcename: "27147812" targetname: "8836503" label: "745119.125,-12764.046875" }
+edge: { sourcename: "17832284" targetname: "15547219" label: "-27346.5859375,-78743.875" }
+edge: { sourcename: "15547219" targetname: "12400378" label: "516912.875,-249656.46875" }
+edge: { sourcename: "21250841" targetname: "26614404" label: "0.0,-94811.7578125" }
+edge: { sourcename: "27717291" targetname: "26614404" label: "8371043.5,-94811.7578125" }
+edge: { sourcename: "30021687" targetname: "26614404" label: "0.0,-94811.7578125" }
+edge: { sourcename: "101915" targetname: "32857262" label: "4350452.5,0.0" }
+edge: { sourcename: "8836503" targetname: "28914982" label: "3214128.5,-83981.65625" }
+edge: { sourcename: "23816663" targetname: "17832284" label: "176553.625,-83256.4296875" }
+edge: { sourcename: "25717300" targetname: "24228422" label: "8371043.5,0.0" }
+edge: { sourcename: "2144034" targetname: "26614404" label: "8176088.5,-94811.7578125" }
+edge: { sourcename: "28914982" targetname: "2144034" label: "491099.75,0.0" }
+edge: { sourcename: "2650295" targetname: "32401875" label: "516912.875,-346930.84375" }
+edge: { sourcename: "8836503" targetname: "27717291" label: "3556389.25,-83981.65625" }
+edge: { sourcename: "25717300" targetname: "26614404" label: "8371043.5,-174465.15625" }
+edge: { sourcename: "32857262" targetname: "23816663" label: "33100.8125,-102080.1875" }
+edge: { sourcename: "32401875" targetname: "27147812" label: "1065830.625,-73828.4375" }
+edge: { sourcename: "12400378" targetname: "27147812" label: "1065830.625,-73828.4375" }
+edge: { sourcename: "22488224" targetname: "2650295" label: "36369.53125,-259342.3125" }
+edge: { sourcename: "8836503" targetname: "30791525" label: "1452480.25,-83981.65625" }
+edge: { sourcename: "2144034" targetname: "30021687" label: "8176088.5,0.0" }
+}

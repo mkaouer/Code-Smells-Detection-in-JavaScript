@@ -1,0 +1,181 @@
+<html><head><title>Sphinx4ResultListener.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta6\src\jsapi2\org.jvoicexml.jsapi2.jse.sphinx4\src\org\jvoicexml\jsapi2\jse\recognition\sphinx4\Sphinx4ResultListener.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta6\\src\\jsapi2\\org.jvoicexml.jsapi2.jse.sphinx4\\src\\org\\jvoicexml\\jsapi2\\jse\\recognition\\sphinx4\\Sphinx4ResultListener.java";
+top.document.title  = "Sphinx4ResultListener.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * File:    $HeadURL: https://jsapi.svn.sourceforge.net/svnroot/jsapi/trunk/org.jvoicexml.jsapi2.jse/src/org/jvoicexml/jsapi2/jse/recognition/sphinx4/Sphinx4ResultListener.java $</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Version: $LastChangedRevision: 608 $</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Date:    $Date: 2010-12-08 13:15:40 +0100 (Mi, 08 Dez 2010) $</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * Author:  $LastChangedBy: sterad $</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> *</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * JVoiceXML - A free VoiceXML implementation.</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> *</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * Copyright (C) 2005-2008 JVoiceXML group - http://jvoicexml.sourceforge.net</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> *  This library is free software; you can redistribute it and/or</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> *  modify it under the terms of the GNU Library General Public</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> *  License as published by the Free Software Foundation; either</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> *  version 2 of the License, or (at your option) any later version.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> *</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"> *  This library is distributed in the hope that it will be useful,</span>
+<a name="17"><font size=-1>17     </font></a><span class="comment"> *  but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<a name="18"><font size=-1>18     </font></a><span class="comment"> *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> *  Library General Public License for more details.</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> *</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> *  You should have received a copy of the GNU Library General Public</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> *  License along with this library; if not, write to the Free Software</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> *</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> */</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"></span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jvoicexml.jsapi2.jse.recognition.<a href="dictionary_O.html#1474">sphinx4</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#616">StringTokenizer</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_J.html#261">logging</a>.<a href="dictionary_J.html#204">Logger</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#1306">recognition</a>.<a href="dictionary_J.html#1311">GrammarException</a>;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#1306">recognition</a>.<a href="dictionary_J.html#1586">ResultEvent</a>;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#1306">recognition</a>.<a href="dictionary_J.html#1588">ResultToken</a>;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.speech.<a href="dictionary_J.html#1306">recognition</a>.<a href="dictionary_J.html#1266">RuleGrammar</a>;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jvoicexml.jsapi2.jse.<a href="dictionary_O.html#1473">recognition</a>.<a href="dictionary_O.html#9535">BaseResult</a>;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.jvoicexml.jsapi2.<a href="dictionary_O.html#2899">recognition</a>.<a href="dictionary_O.html#3042">BaseResultToken</a>;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#147">decoder</a>.<a href="dictionary_E.html#3440">ResultListener</a>;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#1618">result</a>.<a href="dictionary_E.html#1616">Result</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#187">props</a>.<a href="dictionary_E.html#262">PropertyException</a>;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#187">props</a>.<a href="dictionary_E.html#263">PropertySheet</a>;</span>
+<a name="44"><font size=-1>44     </font></a><span class="default"></span>
+<a name="45"><font size=-1>45     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * Result listener for results from the sphinx recognizer.</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * </span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> * @author Dirk Schnelle</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"> * @author Stefan Radomski</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"> * @version $Revision: 608 $</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> * </span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> *          &lt;p&gt;</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> *          Copyright &amp;copy; 2005-2008 JVoiceXML group - &lt;a</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"> *          href=&quot;http://jvoicexml.sourceforge.net&quot;&gt;</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"> *          http://jvoicexml.sourceforge.net/&lt;/a&gt;</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment"> *          &lt;/p&gt;</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"> */</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment"></span><span class="keyword">class <a href="dictionary_O.html#9537">Sphinx4ResultListener</a> implements <a href="dictionary_E.html#3440">ResultListener</a> </span><span class="default">{</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">    </span><span class="comment">/** Logger for this class. */</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">    </span><span class="keyword">private static final <a href="dictionary_J.html#204">Logger</a> <a href="dictionary_O.html#20192">LOGGER</a> </span><span class="default">= <a href="dictionary_J.html#204">Logger</a></span>
+<a name="61"><font size=-1>61     </font></a><span class="default">            .<a href="dictionary_G.html#218">getLogger</a>(<a href="dictionary_O.html#9537">Sphinx4ResultListener</a>.</span><span class="keyword">class</span><span class="default">.<a href="dictionary_G.html#219">getName</a>());</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    </span><span class="comment">/** The recognizer which is notified when a result is obtained. */</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">    </span><span class="keyword">private final <a href="dictionary_O.html#1486">Sphinx4Recognizer</a> <a href="dictionary_O.html#20194">recognizer</a></span><span class="default">;</span>
+<a name="65"><font size=-1>65     </font></a><span class="default"></span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="comment">/** The current Result. */</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_O.html#9535">BaseResult</a> <a href="dictionary_O.html#20193">currentResult</a></span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default"></span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment">     * Construct a new result listener.</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">     * </span>
+<a name="72"><font size=-1>72     </font></a><span class="comment">     * @param rec</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">     *            The recognizer.</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">     */</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_O.html#9544">Sphinx4ResultListener</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_O.html#1486">Sphinx4Recognizer</a> <a href="dictionary_O.html#20169">rec</a></span><span class="default">) {</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">        <a href="dictionary_O.html#20194">recognizer</a> = <a href="dictionary_O.html#20169">rec</a>;</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">    }</span>
+<a name="78"><font size=-1>78     </font></a><span class="default"></span>
+<a name="79"><font size=-1>79     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">     * Creates a vector of ResultToken (jsapi) from a sphinx result.</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">     * </span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">     * @param result</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">     *            The Sphinx4 result</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">     * @param current</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">     *            The current BaseResult (jsapi)</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">     * @return ResultToken[]</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">     */</span>
+<a name="88"><font size=-1>88     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_J.html#1588">ResultToken</a></span><span class="default">[] <a href="dictionary_O.html#20182">sphinx4ResultToResultToken</a>(</span><span class="keyword">final <a href="dictionary_E.html#1616">Result</a> <a href="dictionary_O.html#20189">result</a></span><span class="default">,</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">            </span><span class="keyword">final <a href="dictionary_O.html#9535">BaseResult</a> <a href="dictionary_O.html#20186">current</a></span><span class="default">) {</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#20191">strRes</a> = <a href="dictionary_O.html#20189">result</a>.<a href="dictionary_E.html#10416">getBestFinalResultNoFiller</a>();</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        <a href="dictionary_J.html#616">StringTokenizer</a> <a href="dictionary_O.html#20190">st</a> = </span><span class="keyword">new <a href="dictionary_J.html#616">StringTokenizer</a></span><span class="default">(<a href="dictionary_O.html#20191">strRes</a>);</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_O.html#20187">nTokens</a> </span><span class="default">= <a href="dictionary_O.html#20190">st</a>.<a href="dictionary_C.html#10031">countTokens</a>();</span>
+<a name="93"><font size=-1>93     </font></a><span class="default"></span>
+<a name="94"><font size=-1>94     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_J.html#1588">ResultToken</a></span><span class="default">[] <a href="dictionary_O.html#20188">res</a> = </span><span class="keyword">new <a href="dictionary_J.html#1588">ResultToken</a></span><span class="default">[<a href="dictionary_O.html#20187">nTokens</a>];</span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_O.html#20184">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_O.html#20184">i</a> &lt; <a href="dictionary_O.html#20187">nTokens</a>; ++i) {</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">            <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#20185">text</a> = <a href="dictionary_O.html#20190">st</a>.<a href="dictionary_N.html#502">nextToken</a>();</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default">            <a href="dictionary_O.html#3042">BaseResultToken</a> <a href="dictionary_O.html#20183">brt</a> = </span><span class="keyword">new <a href="dictionary_O.html#3043">BaseResultToken</a></span><span class="default">(<a href="dictionary_O.html#20186">current</a>, <a href="dictionary_O.html#20185">text</a>);</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#20186">current</a>.<a href="dictionary_O.html#9967">getResultState</a>() == <a href="dictionary_O.html#9535">BaseResult</a>.<a href="dictionary_J.html#3066">ACCEPTED</a>) {</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">                </span><span class="comment">// @todo set confidenceLevel, startTime and end time,</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">                // of each token</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">            </span><span class="default">}</span>
+<a name="104"><font size=-1>104     </font></a><span class="default"></span>
+<a name="105"><font size=-1>105     </font></a><span class="default">            <a href="dictionary_O.html#20188">res</a>[<a href="dictionary_O.html#20184">i</a>] = <a href="dictionary_O.html#20183">brt</a>;</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        }</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_O.html#20188">res</a></span><span class="default">;</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">    }</span>
+<a name="109"><font size=-1>109     </font></a><span class="default"></span>
+<a name="110"><font size=-1>110     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">     * Method called when a result is generated.</span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">     * </span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">     * @param result</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">     *            The new result.</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">     */</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_O.html#20172">newResult</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_E.html#1616">Result</a> <a href="dictionary_O.html#20180">result</a></span><span class="default">) {</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">        <a href="dictionary_O.html#20192">LOGGER</a>.<a href="dictionary_I.html#2560">info</a>(</span><span class="string">&quot;received result: &quot; </span><span class="default">+ <a href="dictionary_O.html#20180">result</a>);</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">        <a href="dictionary_O.html#20192">LOGGER</a>.<a href="dictionary_I.html#2560">info</a>(</span><span class="string">&quot;isFinal: &quot; </span><span class="default">+ <a href="dictionary_O.html#20180">result</a>.<a href="dictionary_E.html#3449">isFinal</a>());</span>
+<a name="119"><font size=-1>119     </font></a><span class="default"></span>
+<a name="120"><font size=-1>120     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_O.html#20180">result</a>.<a href="dictionary_E.html#3449">isFinal</a>()) {</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">            <a href="dictionary_O.html#20192">LOGGER</a>.<a href="dictionary_W.html#253">warning</a>(</span><span class="string">&quot;result is not final. forget about it.&quot;</span><span class="default">);</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">            </span><span class="keyword">return</span><span class="default">;</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">        }</span>
+<a name="124"><font size=-1>124     </font></a><span class="default"></span>
+<a name="125"><font size=-1>125     </font></a><span class="default">        </span><span class="comment">/**</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">         * For the current implementation with the SRGSGrammarContainer in</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">         * Sphinx4, all active grammars are actually a single one. Call the</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">         * recognizer with the best token and let him figure out, which grammar</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">         * actually produced the result.</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">         */</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">        </span><span class="keyword">final <a href="dictionary_J.html#1266">RuleGrammar</a> <a href="dictionary_O.html#20176">grammar</a> </span><span class="default">= <a href="dictionary_O.html#20194">recognizer</a>.<a href="dictionary_O.html#9491">getRuleGrammar</a>(<a href="dictionary_O.html#20180">result</a></span>
+<a name="132"><font size=-1>132     </font></a><span class="default">                .<a href="dictionary_E.html#10902">getBestFinalToken</a>());</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">            <a href="dictionary_O.html#20193">currentResult</a> = </span><span class="keyword">new <a href="dictionary_O.html#9910">BaseResult</a></span><span class="default">(<a href="dictionary_O.html#20176">grammar</a>);</span>
+<a name="135"><font size=-1>135     </font></a><span class="default">        } </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_J.html#1311">GrammarException</a> <a href="dictionary_O.html#20173">e</a>) {</span>
+<a name="136"><font size=-1>136     </font></a><span class="default">            <a href="dictionary_O.html#20192">LOGGER</a>.<a href="dictionary_W.html#253">warning</a>(<a href="dictionary_O.html#20173">e</a>.<a href="dictionary_G.html#1647">getMessage</a>());</span>
+<a name="137"><font size=-1>137     </font></a><span class="default">            </span><span class="keyword">return</span><span class="default">;</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">        }</span>
+<a name="139"><font size=-1>139     </font></a><span class="default"></span>
+<a name="140"><font size=-1>140     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_J.html#1586">ResultEvent</a> <a href="dictionary_O.html#20175">created</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_J.html#20195">ResultEvent</a></span><span class="default">(<a href="dictionary_O.html#20193">currentResult</a>,</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">                <a href="dictionary_J.html#1586">ResultEvent</a>.<a href="dictionary_J.html#19697">RESULT_CREATED</a>, </span><span class="keyword">false</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">        <a href="dictionary_O.html#20194">recognizer</a>.<a href="dictionary_O.html#9510">postResultEvent</a>(<a href="dictionary_O.html#20175">created</a>);</span>
+<a name="143"><font size=-1>143     </font></a><span class="default"></span>
+<a name="144"><font size=-1>144     </font></a><span class="default">        <a href="dictionary_J.html#1588">ResultToken</a>[] <a href="dictionary_O.html#20181">rt</a> = <a href="dictionary_O.html#20182">sphinx4ResultToResultToken</a>(<a href="dictionary_O.html#20180">result</a>, <a href="dictionary_O.html#20193">currentResult</a>);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_O.html#20178">numTokens</a> </span><span class="default">= <a href="dictionary_O.html#20181">rt</a>.<a href="dictionary_L.html#40">length</a>;</span>
+<a name="146"><font size=-1>146     </font></a><span class="default"></span>
+<a name="147"><font size=-1>147     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_J.html#1586">ResultEvent</a> <a href="dictionary_O.html#20177">grammarFinalized</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_J.html#11363">ResultEvent</a></span><span class="default">(<a href="dictionary_O.html#20193">currentResult</a>,</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">                <a href="dictionary_J.html#1586">ResultEvent</a>.<a href="dictionary_J.html#19696">GRAMMAR_FINALIZED</a>);</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">        <a href="dictionary_O.html#20194">recognizer</a>.<a href="dictionary_O.html#9510">postResultEvent</a>(<a href="dictionary_O.html#20177">grammarFinalized</a>);</span>
+<a name="150"><font size=-1>150     </font></a><span class="default"></span>
+<a name="151"><font size=-1>151     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#20178">numTokens</a> == </span><span class="number">0</span><span class="default">) {</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">            <a href="dictionary_O.html#20193">currentResult</a>.<a href="dictionary_O.html#10012">setResultState</a>(<a href="dictionary_O.html#9535">BaseResult</a>.<a href="dictionary_J.html#10049">REJECTED</a>);</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">            </span><span class="keyword">final <a href="dictionary_J.html#1586">ResultEvent</a> <a href="dictionary_O.html#20179">rejected</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_J.html#20195">ResultEvent</a></span><span class="default">(<a href="dictionary_O.html#20193">currentResult</a>,</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">                    <a href="dictionary_J.html#1586">ResultEvent</a>.<a href="dictionary_J.html#11362">RESULT_REJECTED</a>, </span><span class="keyword">false</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">            <a href="dictionary_O.html#20194">recognizer</a>.<a href="dictionary_O.html#9510">postResultEvent</a>(<a href="dictionary_O.html#20179">rejected</a>);</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">        } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">            <a href="dictionary_O.html#20193">currentResult</a>.<a href="dictionary_O.html#10012">setResultState</a>(<a href="dictionary_O.html#9535">BaseResult</a>.<a href="dictionary_J.html#3066">ACCEPTED</a>);</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">            <a href="dictionary_O.html#20193">currentResult</a>.<a href="dictionary_O.html#10008">setNumTokens</a>(<a href="dictionary_O.html#20178">numTokens</a>);</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">            <a href="dictionary_O.html#20193">currentResult</a>.<a href="dictionary_O.html#10014">setTokens</a>(<a href="dictionary_O.html#20181">rt</a>);</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">            </span><span class="keyword">final <a href="dictionary_J.html#1586">ResultEvent</a> <a href="dictionary_O.html#20174">accepted</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_J.html#20195">ResultEvent</a></span><span class="default">(<a href="dictionary_O.html#20193">currentResult</a>,</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">                    <a href="dictionary_J.html#1586">ResultEvent</a>.<a href="dictionary_J.html#1598">RESULT_ACCEPTED</a>, </span><span class="keyword">false</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">            <a href="dictionary_O.html#20194">recognizer</a>.<a href="dictionary_O.html#9510">postResultEvent</a>(<a href="dictionary_O.html#20174">accepted</a>);</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">        }</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">    }</span>
+<a name="165"><font size=-1>165     </font></a><span class="default"></span>
+<a name="166"><font size=-1>166     </font></a><span class="default">    @<a href="dictionary_O.html#2">Override</a></span>
+<a name="167"><font size=-1>167     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_O.html#20170">newProperties</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_E.html#263">PropertySheet</a> <a href="dictionary_O.html#20171">sheet</a></span><span class="default">)</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">            </span><span class="keyword">throws <a href="dictionary_E.html#262">PropertyException</a> </span><span class="default">{</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">    }</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">}</span>
+<a name="171"><font size=-1>171     </font></a><span class="default"></span>
+</pre></body></html>

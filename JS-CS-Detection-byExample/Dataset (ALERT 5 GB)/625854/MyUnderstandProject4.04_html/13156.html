@@ -1,0 +1,386 @@
+<html><head><title>SausageMaker.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta4\src\sphinx4\edu\cmu\sphinx\result\SausageMaker.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta4\\src\\sphinx4\\edu\\cmu\\sphinx\\result\\SausageMaker.java";
+top.document.title  = "SausageMaker.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2004 Carnegie Mellon University.</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2004 Sun Microsystems, Inc.</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2004 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> *</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> *</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * Created on Aug 10, 2004</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> */</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#221">result</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#436">dictionary</a>.<a href="dictionary_E.html#1037">Pronunciation</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#222">util</a>.<a href="dictionary_E.html#213">LogMath</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#32">util</a>.*;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * The SausageMaker takes word lattices as input and turns them into sausages (Confusion Networks) according to Mangu,</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> * Brill and Stolcke, &quot;Finding Consensus in Speech Recognition: word error minimization and other applications of</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> * confusion networks&quot;, Computer Speech and Language, 2000. Note that the &lt;code&gt;getBestHypothesis&lt;/code&gt; of the</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> * ConfidenceResult object returned by the {@link #score(Result) score} method returns the path where all the words have</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> * the highest posterior probability within its corresponding time slot. &lt;/p&gt;</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> *</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * @author pgorniak</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> */</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#2079">SausageMaker</a> extends <a href="dictionary_E.html#2763">AbstractSausageMaker</a> </span><span class="default">{</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    </span><span class="comment">/** Construct an empty sausage maker */</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#13157">SausageMaker</a></span><span class="default">() {</span>
+<a name="35"><font size=-1>35     </font></a><span class="default">    }</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span>
+<a name="37"><font size=-1>37     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#13158">SausageMaker</a></span><span class="default">(</span><span class="keyword">float <a href="dictionary_E.html#13159">languageWieght</a></span><span class="default">) {</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#2841">languageWeight</a> = <a href="dictionary_E.html#13159">languageWieght</a>;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">    }</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">     * Construct a sausage maker</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">     *</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">     * @param l the lattice to construct a sausage from</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">     */</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#2083">SausageMaker</a></span><span class="default">(<a href="dictionary_E.html#1806">Lattice</a> <a href="dictionary_E.html#13160">l</a>) {</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">        <a href="dictionary_E.html#2842">lattice</a> = <a href="dictionary_E.html#13160">l</a>;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    }</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default"></span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment">     * Perform the inter word clustering stage of the algorithm</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment">     *</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment">     * @param clusters the current cluster set</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">     */</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_E.html#13192">interWordCluster</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13193">clusters</a>) {</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#13194">interWordClusterStep</a>(<a href="dictionary_E.html#13193">clusters</a>)) ;</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">    }</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default"></span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">     * Returns the latest begin time of all nodes in the given cluster.</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">     *</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">     * @param cluster the cluster to examine</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">     * @return the latest begin time</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment">     */</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_E.html#13176">getLatestBeginTime</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2005">Node</a>&gt; <a href="dictionary_E.html#13178">cluster</a>) {</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13178">cluster</a>.<a href="dictionary_I.html#342">isEmpty</a>()) {</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">            </span><span class="keyword">return </span><span class="default">-</span><span class="number">1</span><span class="default">;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        }</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_E.html#13179">startTime</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13177">n</a> : <a href="dictionary_E.html#13178">cluster</a>) {</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13177">n</a>.<a href="dictionary_E.html#2844">getBeginTime</a>() &gt; <a href="dictionary_E.html#13179">startTime</a>) {</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">                <a href="dictionary_E.html#13179">startTime</a> = <a href="dictionary_E.html#13177">n</a>.<a href="dictionary_E.html#2844">getBeginTime</a>();</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">            }</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">        }</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#13179">startTime</a></span><span class="default">;</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    }</span>
+<a name="79"><font size=-1>79     </font></a><span class="default"></span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span>
+<a name="81"><font size=-1>81     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment">     * Returns the earliest end time of all nodes in the given cluster.</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment">     *</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment">     * @param cluster the cluster to examine</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment">     * @return the earliest end time</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment">     */</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment">    </span><span class="keyword">public int <a href="dictionary_E.html#13172">getEarliestEndTime</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2005">Node</a>&gt; <a href="dictionary_E.html#13174">cluster</a>) {</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13174">cluster</a>.<a href="dictionary_I.html#342">isEmpty</a>()) {</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">            </span><span class="keyword">return </span><span class="default">-</span><span class="number">1</span><span class="default">;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        }</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_E.html#13175">endTime</a> </span><span class="default">= Integer.MAX_VALUE;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13173">n</a> : <a href="dictionary_E.html#13174">cluster</a>) {</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13173">n</a>.<a href="dictionary_E.html#2845">getEndTime</a>() &lt; <a href="dictionary_E.html#13175">endTime</a>) {</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">                <a href="dictionary_E.html#13175">endTime</a> = <a href="dictionary_E.html#13173">n</a>.<a href="dictionary_E.html#2845">getEndTime</a>();</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">            }</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">        }</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#13175">endTime</a></span><span class="default">;</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">    }</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default"></span>
+<a name="101"><font size=-1>101     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">     * Perform one inter word clustering step of the algorithm</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     *</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">     * @param clusters the current cluster set</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">     */</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">    </span><span class="keyword">protected boolean <a href="dictionary_E.html#13194">interWordClusterStep</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13197">clusters</a>) {</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13202">toBeMerged1</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">        <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13203">toBeMerged2</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">double <a href="dictionary_E.html#13200">maxSim</a> </span><span class="default">= Double.NEGATIVE_INFINITY;</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">        <a href="dictionary_L.html#2002">ListIterator</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13198">i</a> = <a href="dictionary_E.html#13197">clusters</a>.<a href="dictionary_L.html#1894">listIterator</a>();</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#13198">i</a>.<a href="dictionary_H.html#1164">hasNext</a>()) {</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">            <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13195">c1</a> = <a href="dictionary_E.html#13198">i</a>.<a href="dictionary_N.html#1170">next</a>();</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#13198">i</a>.<a href="dictionary_H.html#1164">hasNext</a>()) {</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">                </span><span class="keyword">break</span><span class="default">;</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">            }</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">            <a href="dictionary_L.html#2002">ListIterator</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13199">j</a> = <a href="dictionary_E.html#13197">clusters</a>.<a href="dictionary_L.html#1894">listIterator</a>(<a href="dictionary_E.html#13198">i</a>.<a href="dictionary_N.html#2822">nextIndex</a>());</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">            </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#13199">j</a>.<a href="dictionary_H.html#1164">hasNext</a>()) {</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">                <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13196">c2</a> = <a href="dictionary_E.html#13199">j</a>.<a href="dictionary_N.html#1170">next</a>();</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">                </span><span class="keyword">double <a href="dictionary_E.html#13201">sim</a> </span><span class="default">= <a href="dictionary_E.html#13180">interClusterDistance</a>(<a href="dictionary_E.html#13195">c1</a>, <a href="dictionary_E.html#13196">c2</a>);</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13201">sim</a> &gt; <a href="dictionary_E.html#13200">maxSim</a> &amp;&amp; <a href="dictionary_E.html#2806">hasOverlap</a>(<a href="dictionary_E.html#13195">c1</a>, <a href="dictionary_E.html#13196">c2</a>)) {</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">                    <a href="dictionary_E.html#13200">maxSim</a> = <a href="dictionary_E.html#13201">sim</a>;</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">                    <a href="dictionary_E.html#13202">toBeMerged1</a> = <a href="dictionary_E.html#13195">c1</a>;</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">                    <a href="dictionary_E.html#13203">toBeMerged2</a> = <a href="dictionary_E.html#13196">c2</a>;</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">                }</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">            }</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">        }</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13202">toBeMerged1</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">            <a href="dictionary_E.html#13197">clusters</a>.<a href="dictionary_R.html#989">remove</a>(<a href="dictionary_E.html#13203">toBeMerged2</a>);</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">            <a href="dictionary_E.html#13202">toBeMerged1</a>.<a href="dictionary_E.html#2772">add</a>(<a href="dictionary_E.html#13203">toBeMerged2</a>);</span>
+<a name="130"><font size=-1>130     </font></a><span class="default">            </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="131"><font size=-1>131     </font></a><span class="default">        }</span>
+<a name="132"><font size=-1>132     </font></a><span class="default">        </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">    }</span>
+<a name="134"><font size=-1>134     </font></a><span class="default"></span>
+<a name="135"><font size=-1>135     </font></a><span class="default"></span>
+<a name="136"><font size=-1>136     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">     * Find the string edit distance between to lists of objects. </span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">     * Objects are compared using .equals() </span>
+<a name="139"><font size=-1>139     </font></a><span class="comment">     * TODO: could be moved to a general utility class</span>
+<a name="140"><font size=-1>140     </font></a><span class="comment">     *</span>
+<a name="141"><font size=-1>141     </font></a><span class="comment">     * @param p1 the first list</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">     * @param p2 the second list</span>
+<a name="143"><font size=-1>143     </font></a><span class="comment">     * @return the string edit distance between the two lists</span>
+<a name="144"><font size=-1>144     </font></a><span class="comment">     */</span>
+<a name="145"><font size=-1>145     </font></a><span class="comment">    </span><span class="keyword">protected static int <a href="dictionary_E.html#13229">stringEditDistance</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;?&gt; <a href="dictionary_E.html#13236">p1</a>, <a href="dictionary_L.html#62">List</a>&lt;?&gt; <a href="dictionary_E.html#13237">p2</a>) {</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13236">p1</a>.<a href="dictionary_I.html#342">isEmpty</a>()) {</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#13237">p2</a></span><span class="default">.<a href="dictionary_S.html#151">size</a>();</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">        }</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13237">p2</a>.<a href="dictionary_I.html#342">isEmpty</a>()) {</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#13236">p1</a></span><span class="default">.<a href="dictionary_S.html#151">size</a>();</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">        }</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">        </span><span class="keyword">int</span><span class="default">[][] <a href="dictionary_E.html#13235">distances</a> = </span><span class="keyword">new int</span><span class="default">[<a href="dictionary_E.html#13236">p1</a>.<a href="dictionary_S.html#151">size</a>() + </span><span class="number">1</span><span class="default">][<a href="dictionary_E.html#13237">p2</a>.<a href="dictionary_S.html#151">size</a>() + </span><span class="number">1</span><span class="default">];</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#13230">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#13230">i</a> &lt;= <a href="dictionary_E.html#13236">p1</a>.<a href="dictionary_S.html#151">size</a>(); i++) {</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">            <a href="dictionary_E.html#13235">distances</a>[<a href="dictionary_E.html#13230">i</a>][</span><span class="number">0</span><span class="default">] = <a href="dictionary_E.html#13230">i</a>;</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">        }</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#13231">j</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#13231">j</a> &lt;= <a href="dictionary_E.html#13237">p2</a>.<a href="dictionary_S.html#151">size</a>(); j++) {</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">            <a href="dictionary_E.html#13235">distances</a>[</span><span class="number">0</span><span class="default">][<a href="dictionary_E.html#13231">j</a>] = <a href="dictionary_E.html#13231">j</a>;</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">        }</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#13234">i</a> </span><span class="default">= </span><span class="number">1</span><span class="default">; <a href="dictionary_E.html#13234">i</a> &lt;= <a href="dictionary_E.html#13236">p1</a>.<a href="dictionary_S.html#151">size</a>(); i++) {</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#13232">j</a> </span><span class="default">= </span><span class="number">1</span><span class="default">; <a href="dictionary_E.html#13232">j</a> &lt;= <a href="dictionary_E.html#13237">p2</a>.<a href="dictionary_S.html#151">size</a>(); j++) {</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">                </span><span class="keyword">int <a href="dictionary_E.html#13233">min</a> </span><span class="default">= Math.<a href="dictionary_M.html#2799">min</a>(<a href="dictionary_E.html#13235">distances</a>[<a href="dictionary_E.html#13234">i</a> - </span><span class="number">1</span><span class="default">][<a href="dictionary_E.html#13232">j</a> - </span><span class="number">1</span><span class="default">]</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">                        + (<a href="dictionary_E.html#13236">p1</a>.<a href="dictionary_G.html#99">get</a>(<a href="dictionary_E.html#13234">i</a> - </span><span class="number">1</span><span class="default">).<a href="dictionary_E.html#119">equals</a>(<a href="dictionary_E.html#13237">p2</a>.<a href="dictionary_G.html#99">get</a>(<a href="dictionary_E.html#13232">j</a> - </span><span class="number">1</span><span class="default">)) ? </span><span class="number">0 </span><span class="default">: </span><span class="number">1</span><span class="default">),</span>
+<a name="163"><font size=-1>163     </font></a><span class="default">                        <a href="dictionary_E.html#13235">distances</a>[<a href="dictionary_E.html#13234">i</a> - </span><span class="number">1</span><span class="default">][<a href="dictionary_E.html#13232">j</a>] + </span><span class="number">1</span><span class="default">);</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">                <a href="dictionary_E.html#13233">min</a> = Math.<a href="dictionary_M.html#2799">min</a>(<a href="dictionary_E.html#13233">min</a>, <a href="dictionary_E.html#13235">distances</a>[<a href="dictionary_E.html#13234">i</a>][<a href="dictionary_E.html#13232">j</a> - </span><span class="number">1</span><span class="default">] + </span><span class="number">1</span><span class="default">);</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">                <a href="dictionary_E.html#13235">distances</a>[<a href="dictionary_E.html#13234">i</a>][<a href="dictionary_E.html#13232">j</a>] = <a href="dictionary_E.html#13233">min</a>;</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">            }</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">        }</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#13235">distances</a></span><span class="default">[<a href="dictionary_E.html#13236">p1</a>.<a href="dictionary_S.html#151">size</a>()][<a href="dictionary_E.html#13237">p2</a>.<a href="dictionary_S.html#151">size</a>()];</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">    }</span>
+<a name="170"><font size=-1>170     </font></a><span class="default"></span>
+<a name="171"><font size=-1>171     </font></a><span class="default"></span>
+<a name="172"><font size=-1>172     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="173"><font size=-1>173     </font></a><span class="comment">     * Compute the phonetic similarity of two lattice nodes, based on the string edit distance between their most likely</span>
+<a name="174"><font size=-1>174     </font></a><span class="comment">     * pronunciations. TODO: maybe move to Node.java?</span>
+<a name="175"><font size=-1>175     </font></a><span class="comment">     *</span>
+<a name="176"><font size=-1>176     </font></a><span class="comment">     * @param n1 the first node</span>
+<a name="177"><font size=-1>177     </font></a><span class="comment">     * @param n2 the second node</span>
+<a name="178"><font size=-1>178     </font></a><span class="comment">     * @return the phonetic similarity, between 0 and 1</span>
+<a name="179"><font size=-1>179     </font></a><span class="comment">     */</span>
+<a name="180"><font size=-1>180     </font></a><span class="comment">    </span><span class="keyword">protected double <a href="dictionary_E.html#13166">computePhoneticSimilarity</a></span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13167">n1</a>, <a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13168">n2</a>) {</span>
+<a name="181"><font size=-1>181     </font></a><span class="default">        <a href="dictionary_E.html#1037">Pronunciation</a> <a href="dictionary_E.html#13169">p1</a> = <a href="dictionary_E.html#13167">n1</a>.<a href="dictionary_E.html#2025">getWord</a>().<a href="dictionary_E.html#1018">getMostLikelyPronunciation</a>();</span>
+<a name="182"><font size=-1>182     </font></a><span class="default">        <a href="dictionary_E.html#1037">Pronunciation</a> <a href="dictionary_E.html#13170">p2</a> = <a href="dictionary_E.html#13168">n2</a>.<a href="dictionary_E.html#2025">getWord</a>().<a href="dictionary_E.html#1018">getMostLikelyPronunciation</a>();</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">        </span><span class="keyword">double <a href="dictionary_E.html#13171">sim</a> </span><span class="default">= <a href="dictionary_E.html#13229">stringEditDistance</a>(Arrays.<a href="dictionary_A.html#1390">asList</a>(<a href="dictionary_E.html#13169">p1</a>.<a href="dictionary_E.html#1544">getUnits</a>()),</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">                Arrays.<a href="dictionary_A.html#1390">asList</a>(<a href="dictionary_E.html#13170">p2</a>.<a href="dictionary_E.html#1544">getUnits</a>()));</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">        sim /= (</span><span class="keyword">double</span><span class="default">) (<a href="dictionary_E.html#13169">p1</a>.<a href="dictionary_E.html#1544">getUnits</a>().<a href="dictionary_L.html#384">length</a> + <a href="dictionary_E.html#13170">p2</a>.<a href="dictionary_E.html#1544">getUnits</a>().<a href="dictionary_L.html#384">length</a>);</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">        </span><span class="keyword">return </span><span class="number">1 </span><span class="default">- <a href="dictionary_E.html#13171">sim</a>;</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">    }</span>
+<a name="188"><font size=-1>188     </font></a><span class="default"></span>
+<a name="189"><font size=-1>189     </font></a><span class="default"></span>
+<a name="190"><font size=-1>190     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="191"><font size=-1>191     </font></a><span class="comment">     * Calculate the distance between two clusters</span>
+<a name="192"><font size=-1>192     </font></a><span class="comment">     *</span>
+<a name="193"><font size=-1>193     </font></a><span class="comment">     * @param c1 the first cluster</span>
+<a name="194"><font size=-1>194     </font></a><span class="comment">     * @param c2 the second cluster</span>
+<a name="195"><font size=-1>195     </font></a><span class="comment">     * @return the inter cluster similarity, or Double.NEGATIVE_INFINITY if these clusters should never be clustered</span>
+<a name="196"><font size=-1>196     </font></a><span class="comment">     *         together.</span>
+<a name="197"><font size=-1>197     </font></a><span class="comment">     */</span>
+<a name="198"><font size=-1>198     </font></a><span class="comment">    </span><span class="keyword">protected double <a href="dictionary_E.html#13180">interClusterDistance</a></span><span class="default">(<a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13187">c1</a>, <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13188">c2</a>) {</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13161">areClustersInRelation</a>(<a href="dictionary_E.html#13187">c1</a>, <a href="dictionary_E.html#13188">c2</a>)) {</span>
+<a name="200"><font size=-1>200     </font></a><span class="default">            </span><span class="keyword">return </span><span class="default">Double.NEGATIVE_INFINITY;</span>
+<a name="201"><font size=-1>201     </font></a><span class="default">        }</span>
+<a name="202"><font size=-1>202     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_E.html#13189">totalSim</a> </span><span class="default">= <a href="dictionary_E.html#213">LogMath</a>.<a href="dictionary_E.html#1536">getLogZero</a>();</span>
+<a name="203"><font size=-1>203     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_E.html#13190">wordPairCount</a> </span><span class="default">= (</span><span class="keyword">float</span><span class="default">) </span><span class="number">0.0</span><span class="default">;</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">        <a href="dictionary_H.html#58">HashSet</a>&lt;<a href="dictionary_S.html#28">String</a>&gt; <a href="dictionary_E.html#13191">wordsSeen1</a> = </span><span class="keyword">new <a href="dictionary_H.html#58">HashSet</a></span><span class="default">&lt;<a href="dictionary_S.html#28">String</a>&gt;();</span>
+<a name="205"><font size=-1>205     </font></a><span class="default"></span>
+<a name="206"><font size=-1>206     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13184">node1</a> : <a href="dictionary_E.html#13187">c1</a>.<a href="dictionary_E.html#2774">getElements</a>()) {</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">            <a href="dictionary_S.html#28">String</a> <a href="dictionary_E.html#13185">word1</a> = <a href="dictionary_E.html#13184">node1</a>.<a href="dictionary_E.html#2025">getWord</a>().<a href="dictionary_E.html#1025">getSpelling</a>();</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13191">wordsSeen1</a>.<a href="dictionary_C.html#317">contains</a>(<a href="dictionary_E.html#13185">word1</a>)) {</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">                </span><span class="keyword">continue</span><span class="default">;</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">            }</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">            <a href="dictionary_E.html#13191">wordsSeen1</a>.<a href="dictionary_A.html#85">add</a>(<a href="dictionary_E.html#13185">word1</a>);</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">            <a href="dictionary_H.html#58">HashSet</a>&lt;<a href="dictionary_S.html#28">String</a>&gt; <a href="dictionary_E.html#13186">wordsSeen2</a> = </span><span class="keyword">new <a href="dictionary_H.html#58">HashSet</a></span><span class="default">&lt;<a href="dictionary_S.html#28">String</a>&gt;();</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13181">node2</a> : <a href="dictionary_E.html#13188">c2</a>.<a href="dictionary_E.html#2774">getElements</a>()) {</span>
+<a name="214"><font size=-1>214     </font></a><span class="default">                <a href="dictionary_S.html#28">String</a> <a href="dictionary_E.html#13183">word2</a> = <a href="dictionary_E.html#13181">node2</a>.<a href="dictionary_E.html#2025">getWord</a>().<a href="dictionary_E.html#1025">getSpelling</a>();</span>
+<a name="215"><font size=-1>215     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13186">wordsSeen2</a>.<a href="dictionary_C.html#317">contains</a>(<a href="dictionary_E.html#13183">word2</a>)) {</span>
+<a name="216"><font size=-1>216     </font></a><span class="default">                    </span><span class="keyword">continue</span><span class="default">;</span>
+<a name="217"><font size=-1>217     </font></a><span class="default">                }</span>
+<a name="218"><font size=-1>218     </font></a><span class="default">                <a href="dictionary_E.html#13186">wordsSeen2</a>.<a href="dictionary_A.html#85">add</a>(<a href="dictionary_E.html#13183">word2</a>);</span>
+<a name="219"><font size=-1>219     </font></a><span class="default">                </span><span class="keyword">float <a href="dictionary_E.html#13182">sim</a> </span><span class="default">= (</span><span class="keyword">float</span><span class="default">) <a href="dictionary_E.html#13166">computePhoneticSimilarity</a>(<a href="dictionary_E.html#13184">node1</a>, <a href="dictionary_E.html#13181">node2</a>);</span>
+<a name="220"><font size=-1>220     </font></a><span class="default">                <a href="dictionary_E.html#13182">sim</a> = <a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1940">getLogMath</a>().<a href="dictionary_E.html#234">linearToLog</a>(<a href="dictionary_E.html#13182">sim</a>);</span>
+<a name="221"><font size=-1>221     </font></a><span class="default">                sim += <a href="dictionary_E.html#2837">wordSubClusterProbability</a>(<a href="dictionary_E.html#13187">c1</a>, <a href="dictionary_E.html#13185">word1</a>);</span>
+<a name="222"><font size=-1>222     </font></a><span class="default">                sim += <a href="dictionary_E.html#2837">wordSubClusterProbability</a>(<a href="dictionary_E.html#13188">c2</a>, <a href="dictionary_E.html#13183">word2</a>);</span>
+<a name="223"><font size=-1>223     </font></a><span class="default">                <a href="dictionary_E.html#13189">totalSim</a> = <a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1940">getLogMath</a>().<a href="dictionary_E.html#841">addAsLinear</a>(<a href="dictionary_E.html#13189">totalSim</a>, <a href="dictionary_E.html#13182">sim</a>);</span>
+<a name="224"><font size=-1>224     </font></a><span class="default">                wordPairCount++;</span>
+<a name="225"><font size=-1>225     </font></a><span class="default">            }</span>
+<a name="226"><font size=-1>226     </font></a><span class="default">        }</span>
+<a name="227"><font size=-1>227     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#13189">totalSim</a> </span><span class="default">- <a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1940">getLogMath</a>().<a href="dictionary_E.html#3695">logToLinear</a>(<a href="dictionary_E.html#13190">wordPairCount</a>);</span>
+<a name="228"><font size=-1>228     </font></a><span class="default">    }</span>
+<a name="229"><font size=-1>229     </font></a><span class="default"></span>
+<a name="230"><font size=-1>230     </font></a><span class="default"></span>
+<a name="231"><font size=-1>231     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="232"><font size=-1>232     </font></a><span class="comment">     * Check whether these to clusters stand in a relation to each other. Two clusters are related if a member of one is</span>
+<a name="233"><font size=-1>233     </font></a><span class="comment">     * an ancestor of a member of the other cluster.</span>
+<a name="234"><font size=-1>234     </font></a><span class="comment">     *</span>
+<a name="235"><font size=-1>235     </font></a><span class="comment">     * @param cluster1 the first cluster</span>
+<a name="236"><font size=-1>236     </font></a><span class="comment">     * @param cluster2 the second cluster</span>
+<a name="237"><font size=-1>237     </font></a><span class="comment">     * @return true if the clusters are related</span>
+<a name="238"><font size=-1>238     </font></a><span class="comment">     */</span>
+<a name="239"><font size=-1>239     </font></a><span class="comment">    </span><span class="keyword">protected boolean <a href="dictionary_E.html#13161">areClustersInRelation</a></span><span class="default">(<a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13164">cluster1</a>, <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13165">cluster2</a>) {</span>
+<a name="240"><font size=-1>240     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13163">n1</a>: <a href="dictionary_E.html#13164">cluster1</a>.<a href="dictionary_E.html#2774">getElements</a>()) {</span>
+<a name="241"><font size=-1>241     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13162">n2</a>: <a href="dictionary_E.html#13165">cluster2</a>.<a href="dictionary_E.html#2774">getElements</a>()) {</span>
+<a name="242"><font size=-1>242     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13163">n1</a>.<a href="dictionary_E.html#13243">hasAncestralRelationship</a>(<a href="dictionary_E.html#13162">n2</a>)) {</span>
+<a name="243"><font size=-1>243     </font></a><span class="default">                    </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="244"><font size=-1>244     </font></a><span class="default">                }</span>
+<a name="245"><font size=-1>245     </font></a><span class="default">            }</span>
+<a name="246"><font size=-1>246     </font></a><span class="default">        }</span>
+<a name="247"><font size=-1>247     </font></a><span class="default">        </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="248"><font size=-1>248     </font></a><span class="default">    }</span>
+<a name="249"><font size=-1>249     </font></a><span class="default"></span>
+<a name="250"><font size=-1>250     </font></a><span class="default"></span>
+<a name="251"><font size=-1>251     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="252"><font size=-1>252     </font></a><span class="comment">     * Calculate the distance between two clusters, forcing them to have the same words in them, and to not be related</span>
+<a name="253"><font size=-1>253     </font></a><span class="comment">     * to each other.</span>
+<a name="254"><font size=-1>254     </font></a><span class="comment">     *</span>
+<a name="255"><font size=-1>255     </font></a><span class="comment">     * @param cluster1 the first cluster</span>
+<a name="256"><font size=-1>256     </font></a><span class="comment">     * @param cluster2 the second cluster</span>
+<a name="257"><font size=-1>257     </font></a><span class="comment">     * @return The intra-cluster distance, or Double.NEGATIVE_INFINITY if the clusters should never be clustered</span>
+<a name="258"><font size=-1>258     </font></a><span class="comment">     *         together.</span>
+<a name="259"><font size=-1>259     </font></a><span class="comment">     */</span>
+<a name="260"><font size=-1>260     </font></a><span class="comment">    </span><span class="keyword">protected double <a href="dictionary_E.html#13204">intraClusterDistance</a></span><span class="default">(<a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13208">cluster1</a>, <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13209">cluster2</a>) {</span>
+<a name="261"><font size=-1>261     </font></a><span class="default">        </span><span class="keyword">double <a href="dictionary_E.html#13210">maxSim</a> </span><span class="default">= Double.NEGATIVE_INFINITY;</span>
+<a name="262"><font size=-1>262     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13207">node1</a> : <a href="dictionary_E.html#13208">cluster1</a>.<a href="dictionary_E.html#2774">getElements</a>()) {</span>
+<a name="263"><font size=-1>263     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13205">node2</a> : <a href="dictionary_E.html#13209">cluster2</a>.<a href="dictionary_E.html#2774">getElements</a>()) {</span>
+<a name="264"><font size=-1>264     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#13207">node1</a>.<a href="dictionary_E.html#2025">getWord</a>().<a href="dictionary_E.html#1025">getSpelling</a>().<a href="dictionary_E.html#119">equals</a>(<a href="dictionary_E.html#13205">node2</a>.<a href="dictionary_E.html#2025">getWord</a>().<a href="dictionary_E.html#1025">getSpelling</a>())) {</span>
+<a name="265"><font size=-1>265     </font></a><span class="default">                    </span><span class="keyword">return </span><span class="default">Double.NEGATIVE_INFINITY;</span>
+<a name="266"><font size=-1>266     </font></a><span class="default">                }</span>
+<a name="267"><font size=-1>267     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13207">node1</a>.<a href="dictionary_E.html#13243">hasAncestralRelationship</a>(<a href="dictionary_E.html#13205">node2</a>)) {</span>
+<a name="268"><font size=-1>268     </font></a><span class="default">                    </span><span class="keyword">return </span><span class="default">Double.NEGATIVE_INFINITY;</span>
+<a name="269"><font size=-1>269     </font></a><span class="default">                }</span>
+<a name="270"><font size=-1>270     </font></a><span class="default">                </span><span class="keyword">double <a href="dictionary_E.html#13206">overlap</a> </span><span class="default">= <a href="dictionary_E.html#2803">getOverlap</a>(<a href="dictionary_E.html#13207">node1</a>, <a href="dictionary_E.html#13205">node2</a>);</span>
+<a name="271"><font size=-1>271     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13206">overlap</a> &gt; </span><span class="number">0.0</span><span class="default">) {</span>
+<a name="272"><font size=-1>272     </font></a><span class="default">                    <a href="dictionary_E.html#13206">overlap</a> = <a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1940">getLogMath</a>().<a href="dictionary_E.html#3695">logToLinear</a>((</span><span class="keyword">float</span><span class="default">) <a href="dictionary_E.html#13206">overlap</a>);</span>
+<a name="273"><font size=-1>273     </font></a><span class="default">                    overlap += <a href="dictionary_E.html#13207">node1</a>.<a href="dictionary_E.html#2847">getPosterior</a>() + <a href="dictionary_E.html#13205">node2</a>.<a href="dictionary_E.html#2847">getPosterior</a>();</span>
+<a name="274"><font size=-1>274     </font></a><span class="default">                    </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13206">overlap</a> &gt; <a href="dictionary_E.html#13210">maxSim</a>) {</span>
+<a name="275"><font size=-1>275     </font></a><span class="default">                        <a href="dictionary_E.html#13210">maxSim</a> = <a href="dictionary_E.html#13206">overlap</a>;</span>
+<a name="276"><font size=-1>276     </font></a><span class="default">                    }</span>
+<a name="277"><font size=-1>277     </font></a><span class="default">                }</span>
+<a name="278"><font size=-1>278     </font></a><span class="default">            }</span>
+<a name="279"><font size=-1>279     </font></a><span class="default">        }</span>
+<a name="280"><font size=-1>280     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#13210">maxSim</a></span><span class="default">;</span>
+<a name="281"><font size=-1>281     </font></a><span class="default">    }</span>
+<a name="282"><font size=-1>282     </font></a><span class="default"></span>
+<a name="283"><font size=-1>283     </font></a><span class="default"></span>
+<a name="284"><font size=-1>284     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="285"><font size=-1>285     </font></a><span class="comment">     * Perform the intra word clustering stage of the algorithm</span>
+<a name="286"><font size=-1>286     </font></a><span class="comment">     *</span>
+<a name="287"><font size=-1>287     </font></a><span class="comment">     * @param clusters the current list of clusters</span>
+<a name="288"><font size=-1>288     </font></a><span class="comment">     */</span>
+<a name="289"><font size=-1>289     </font></a><span class="comment">    </span><span class="keyword">protected void <a href="dictionary_E.html#13211">intraWordCluster</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13212">clusters</a>) {</span>
+<a name="290"><font size=-1>290     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(<a href="dictionary_E.html#13213">intraWordClusterStep</a>(<a href="dictionary_E.html#13212">clusters</a>)) ;</span>
+<a name="291"><font size=-1>291     </font></a><span class="default">    }</span>
+<a name="292"><font size=-1>292     </font></a><span class="default"></span>
+<a name="293"><font size=-1>293     </font></a><span class="default"></span>
+<a name="294"><font size=-1>294     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="295"><font size=-1>295     </font></a><span class="comment">     * Perform a step of the intra word clustering stage</span>
+<a name="296"><font size=-1>296     </font></a><span class="comment">     *</span>
+<a name="297"><font size=-1>297     </font></a><span class="comment">     * @param clusters the current list of clusters</span>
+<a name="298"><font size=-1>298     </font></a><span class="comment">     * @return did two clusters get merged?</span>
+<a name="299"><font size=-1>299     </font></a><span class="comment">     */</span>
+<a name="300"><font size=-1>300     </font></a><span class="comment">    </span><span class="keyword">protected boolean <a href="dictionary_E.html#13213">intraWordClusterStep</a></span><span class="default">(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13219">clusters</a>) {</span>
+<a name="301"><font size=-1>301     </font></a><span class="default">        <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13221">toBeMerged1</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="302"><font size=-1>302     </font></a><span class="default">        <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13222">toBeMerged2</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="303"><font size=-1>303     </font></a><span class="default">        </span><span class="keyword">double <a href="dictionary_E.html#13220">maxSim</a> </span><span class="default">= Double.NEGATIVE_INFINITY;</span>
+<a name="304"><font size=-1>304     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_L.html#2002">ListIterator</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13218">i</a> = <a href="dictionary_E.html#13219">clusters</a>.<a href="dictionary_L.html#1894">listIterator</a>(); <a href="dictionary_E.html#13218">i</a>.<a href="dictionary_H.html#1164">hasNext</a>();) {</span>
+<a name="305"><font size=-1>305     </font></a><span class="default">            <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13217">c1</a> = <a href="dictionary_E.html#13218">i</a>.<a href="dictionary_N.html#1170">next</a>();</span>
+<a name="306"><font size=-1>306     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#13218">i</a>.<a href="dictionary_H.html#1164">hasNext</a>()) {</span>
+<a name="307"><font size=-1>307     </font></a><span class="default">                </span><span class="keyword">break</span><span class="default">;</span>
+<a name="308"><font size=-1>308     </font></a><span class="default">            }</span>
+<a name="309"><font size=-1>309     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_L.html#2002">ListIterator</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13215">j</a> = <a href="dictionary_E.html#13219">clusters</a>.<a href="dictionary_L.html#1894">listIterator</a>(<a href="dictionary_E.html#13218">i</a>.<a href="dictionary_N.html#2822">nextIndex</a>()); <a href="dictionary_E.html#13215">j</a>.<a href="dictionary_H.html#1164">hasNext</a>();) {</span>
+<a name="310"><font size=-1>310     </font></a><span class="default">                <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13214">c2</a> = <a href="dictionary_E.html#13215">j</a>.<a href="dictionary_N.html#1170">next</a>();</span>
+<a name="311"><font size=-1>311     </font></a><span class="default">                </span><span class="keyword">double <a href="dictionary_E.html#13216">sim</a> </span><span class="default">= <a href="dictionary_E.html#13204">intraClusterDistance</a>(<a href="dictionary_E.html#13217">c1</a>, <a href="dictionary_E.html#13214">c2</a>);</span>
+<a name="312"><font size=-1>312     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13216">sim</a> &gt; <a href="dictionary_E.html#13220">maxSim</a>) {</span>
+<a name="313"><font size=-1>313     </font></a><span class="default">                    <a href="dictionary_E.html#13220">maxSim</a> = <a href="dictionary_E.html#13216">sim</a>;</span>
+<a name="314"><font size=-1>314     </font></a><span class="default">                    <a href="dictionary_E.html#13221">toBeMerged1</a> = <a href="dictionary_E.html#13217">c1</a>;</span>
+<a name="315"><font size=-1>315     </font></a><span class="default">                    <a href="dictionary_E.html#13222">toBeMerged2</a> = <a href="dictionary_E.html#13214">c2</a>;</span>
+<a name="316"><font size=-1>316     </font></a><span class="default">                }</span>
+<a name="317"><font size=-1>317     </font></a><span class="default">            }</span>
+<a name="318"><font size=-1>318     </font></a><span class="default">        }</span>
+<a name="319"><font size=-1>319     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#13221">toBeMerged1</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="320"><font size=-1>320     </font></a><span class="default">            <a href="dictionary_E.html#13219">clusters</a>.<a href="dictionary_R.html#989">remove</a>(<a href="dictionary_E.html#13222">toBeMerged2</a>);</span>
+<a name="321"><font size=-1>321     </font></a><span class="default">            <a href="dictionary_E.html#13221">toBeMerged1</a>.<a href="dictionary_E.html#2772">add</a>(<a href="dictionary_E.html#13222">toBeMerged2</a>);</span>
+<a name="322"><font size=-1>322     </font></a><span class="default">            </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="323"><font size=-1>323     </font></a><span class="default">        }</span>
+<a name="324"><font size=-1>324     </font></a><span class="default">        </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="325"><font size=-1>325     </font></a><span class="default">    }</span>
+<a name="326"><font size=-1>326     </font></a><span class="default"></span>
+<a name="327"><font size=-1>327     </font></a><span class="default"></span>
+<a name="328"><font size=-1>328     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="329"><font size=-1>329     </font></a><span class="comment">     * Turn the lattice contained in this sausage maker into a sausage object.</span>
+<a name="330"><font size=-1>330     </font></a><span class="comment">     *</span>
+<a name="331"><font size=-1>331     </font></a><span class="comment">     * @return the sausage producing by collapsing the lattice.</span>
+<a name="332"><font size=-1>332     </font></a><span class="comment">     */</span>
+<a name="333"><font size=-1>333     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#2080">Sausage</a> <a href="dictionary_E.html#2084">makeSausage</a></span><span class="default">() {</span>
+<a name="334"><font size=-1>334     </font></a><span class="default">        <a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13225">clusters</a> = </span><span class="keyword">new <a href="dictionary_A.html#292">ArrayList</a></span><span class="default">&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt;(<a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1998">nodes</a>.<a href="dictionary_S.html#151">size</a>());</span>
+<a name="335"><font size=-1>335     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2005">Node</a> <a href="dictionary_E.html#13224">n</a> : <a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1998">nodes</a>.<a href="dictionary_V.html#1314">values</a>()) {</span>
+<a name="336"><font size=-1>336     </font></a><span class="default">            <a href="dictionary_E.html#13224">n</a>.<a href="dictionary_E.html#13244">cacheDescendants</a>();</span>
+<a name="337"><font size=-1>337     </font></a><span class="default">            <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13223">bucket</a> = </span><span class="keyword">new <a href="dictionary_E.html#2765">Cluster</a></span><span class="default">(<a href="dictionary_E.html#13224">n</a>);</span>
+<a name="338"><font size=-1>338     </font></a><span class="default">            <a href="dictionary_E.html#13225">clusters</a>.<a href="dictionary_A.html#85">add</a>(<a href="dictionary_E.html#13223">bucket</a>);</span>
+<a name="339"><font size=-1>339     </font></a><span class="default">        }</span>
+<a name="340"><font size=-1>340     </font></a><span class="default">        <a href="dictionary_E.html#13211">intraWordCluster</a>(<a href="dictionary_E.html#13225">clusters</a>);</span>
+<a name="341"><font size=-1>341     </font></a><span class="default">        <a href="dictionary_E.html#13192">interWordCluster</a>(<a href="dictionary_E.html#13225">clusters</a>);</span>
+<a name="342"><font size=-1>342     </font></a><span class="default">        <a href="dictionary_E.html#13225">clusters</a> = <a href="dictionary_E.html#13238">topologicalSort</a>(<a href="dictionary_E.html#13225">clusters</a>);</span>
+<a name="343"><font size=-1>343     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#2825">sausageFromClusters</a></span><span class="default">(<a href="dictionary_E.html#13225">clusters</a>);</span>
+<a name="344"><font size=-1>344     </font></a><span class="default">    }</span>
+<a name="345"><font size=-1>345     </font></a><span class="default"></span>
+<a name="346"><font size=-1>346     </font></a><span class="default"></span>
+<a name="347"><font size=-1>347     </font></a><span class="default">    </span><span class="comment">/** @see edu.cmu.sphinx.result.ConfidenceScorer#score(edu.cmu.sphinx.result.Result) */</span>
+<a name="348"><font size=-1>348     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#3">Override</a></span>
+<a name="349"><font size=-1>349     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#2152">ConfidenceResult</a> <a href="dictionary_E.html#13226">score</a></span><span class="default">(<a href="dictionary_E.html#212">Result</a> <a href="dictionary_E.html#13228">result</a>) {</span>
+<a name="350"><font size=-1>350     </font></a><span class="default">        <a href="dictionary_E.html#2842">lattice</a> = </span><span class="keyword">new <a href="dictionary_E.html#1810">Lattice</a></span><span class="default">(<a href="dictionary_E.html#13228">result</a>);</span>
+<a name="351"><font size=-1>351     </font></a><span class="default">        <a href="dictionary_E.html#2155">LatticeOptimizer</a> <a href="dictionary_E.html#13227">lop</a> = </span><span class="keyword">new <a href="dictionary_E.html#2163">LatticeOptimizer</a></span><span class="default">(<a href="dictionary_E.html#2842">lattice</a>);</span>
+<a name="352"><font size=-1>352     </font></a><span class="default">        <a href="dictionary_E.html#13227">lop</a>.<a href="dictionary_E.html#2164">optimize</a>();</span>
+<a name="353"><font size=-1>353     </font></a><span class="default">        <a href="dictionary_E.html#2842">lattice</a>.<a href="dictionary_E.html#1890">computeNodePosteriors</a>(<a href="dictionary_E.html#2841">languageWeight</a>);</span>
+<a name="354"><font size=-1>354     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#2084">makeSausage</a></span><span class="default">();</span>
+<a name="355"><font size=-1>355     </font></a><span class="default">    }</span>
+<a name="356"><font size=-1>356     </font></a><span class="default"></span>
+<a name="357"><font size=-1>357     </font></a><span class="default"></span>
+<a name="358"><font size=-1>358     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="359"><font size=-1>359     </font></a><span class="comment">     * Topologically sort the clusters. Note that this is a brute force sort by removing the min cluster from the list</span>
+<a name="360"><font size=-1>360     </font></a><span class="comment">     * of clusters, since Collections.sort() does not work in all cases.</span>
+<a name="361"><font size=-1>361     </font></a><span class="comment">     *</span>
+<a name="362"><font size=-1>362     </font></a><span class="comment">     * @param clusters the list of clusters to be topologically sorted</span>
+<a name="363"><font size=-1>363     </font></a><span class="comment">     * @return a topologically sorted list of clusters</span>
+<a name="364"><font size=-1>364     </font></a><span class="comment">     */</span>
+<a name="365"><font size=-1>365     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_L.html#62">List</a></span><span class="default">&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13238">topologicalSort</a>(<a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13240">clusters</a>) {</span>
+<a name="366"><font size=-1>366     </font></a><span class="default">        <a href="dictionary_C.html#2843">Comparator</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13241">comparator</a> = </span><span class="keyword">new <a href="dictionary_E.html#2784">ClusterComparator</a></span><span class="default">();</span>
+<a name="367"><font size=-1>367     </font></a><span class="default">        <a href="dictionary_L.html#62">List</a>&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt; <a href="dictionary_E.html#13242">sorted</a> = </span><span class="keyword">new <a href="dictionary_A.html#292">ArrayList</a></span><span class="default">&lt;<a href="dictionary_E.html#2764">Cluster</a>&gt;(<a href="dictionary_E.html#13240">clusters</a>.<a href="dictionary_S.html#151">size</a>());</span>
+<a name="368"><font size=-1>368     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">(!<a href="dictionary_E.html#13240">clusters</a>.<a href="dictionary_I.html#342">isEmpty</a>()) {</span>
+<a name="369"><font size=-1>369     </font></a><span class="default">            <a href="dictionary_E.html#2764">Cluster</a> <a href="dictionary_E.html#13239">cluster</a> = Collections.<a href="dictionary_M.html#2799">min</a>(<a href="dictionary_E.html#13240">clusters</a>, <a href="dictionary_E.html#13241">comparator</a>);</span>
+<a name="370"><font size=-1>370     </font></a><span class="default">            <a href="dictionary_E.html#13240">clusters</a>.<a href="dictionary_R.html#989">remove</a>(<a href="dictionary_E.html#13239">cluster</a>);</span>
+<a name="371"><font size=-1>371     </font></a><span class="default">            <a href="dictionary_E.html#13242">sorted</a>.<a href="dictionary_A.html#85">add</a>(<a href="dictionary_E.html#13239">cluster</a>);</span>
+<a name="372"><font size=-1>372     </font></a><span class="default">        }</span>
+<a name="373"><font size=-1>373     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#13242">sorted</a></span><span class="default">;</span>
+<a name="374"><font size=-1>374     </font></a><span class="default">    }</span>
+<a name="375"><font size=-1>375     </font></a><span class="default">}</span>
+<a name="376"><font size=-1>376     </font></a><span class="default"></span>
+</pre></body></html>

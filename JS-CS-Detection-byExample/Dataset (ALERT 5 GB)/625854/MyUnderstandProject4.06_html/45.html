@@ -1,0 +1,133 @@
+<html><head><title>JavaSoundParser.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta6\src\jsapi2\org.jvoicexml.jsapi2.jse\src\org\jvoicexml\jsapi2\jse\protocols\JavaSoundParser.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta6\\src\\jsapi2\\org.jvoicexml.jsapi2.jse\\src\\org\\jvoicexml\\jsapi2\\jse\\protocols\\JavaSoundParser.java";
+top.document.title  = "JavaSoundParser.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * File:    $HeadURL: https://jsapi.svn.sourceforge.net/svnroot/jsapi/trunk/org.jvoicexml.jsapi2.jse/src/org/jvoicexml/jsapi2/jse/protocols/JavaSoundParser.java $</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Version: $LastChangedRevision: 292 $</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Date:    $LastChangedDate $</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * Author:  $LastChangedBy: schnelle $</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> *</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * JSAPI - An base implementation for JSR 113.</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> *</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * Copyright (C) 2009 JVoiceXML group - http://jvoicexml.sourceforge.net</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">org.jvoicexml.jsapi2.jse.<a href="dictionary_O.html#89">protocols</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#91">net</a>.<a href="dictionary_J.html#82">URI</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#91">net</a>.<a href="dictionary_J.html#83">URISyntaxException</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#91">net</a>.<a href="dictionary_J.html#84">URL</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#48">HashMap</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#93">util</a>.<a href="dictionary_J.html#80">Map</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.sound.<a href="dictionary_J.html#92">sampled</a>.<a href="dictionary_J.html#46">AudioFormat</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> * A parser for the javasound URL schema.</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> *</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> * @author Dirk Schnelle-Walka</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> *</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> */</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"></span><span class="keyword">public final class <a href="dictionary_O.html#49">JavaSoundParser</a> </span><span class="default">{</span>
+<a name="30"><font size=-1>30     </font></a><span class="default">    </span><span class="comment">/** The default sample rate. */</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment">    </span><span class="keyword">public static final int <a href="dictionary_O.html#79">DEFAULT_SAMPLE_RATE</a> </span><span class="default">= </span><span class="number">8000</span><span class="default">;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span>
+<a name="33"><font size=-1>33     </font></a><span class="default">    </span><span class="comment">/** Number of bits per byte. */</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">    </span><span class="keyword">private static final int <a href="dictionary_O.html#78">BITS_PER_BYTE</a> </span><span class="default">= </span><span class="number">8</span><span class="default">;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment">     * Prevent construction from outside.</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">     */</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_O.html#50">JavaSoundParser</a></span><span class="default">() {</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">    }</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span>
+<a name="42"><font size=-1>42     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment">     * Parses the given URI into an audio format.</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">     *</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment">     * @param url</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment">     *            the URL to parse.</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment">     * @return audio format.</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment">     * @throws URISyntaxException</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment">     *         error parsing the URL</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment">     */</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment">    </span><span class="keyword">public static <a href="dictionary_J.html#46">AudioFormat</a> <a href="dictionary_O.html#51">parse</a></span><span class="default">(</span><span class="keyword">final <a href="dictionary_J.html#84">URL</a> <a href="dictionary_O.html#77">url</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_J.html#83">URISyntaxException</a> </span><span class="default">{</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">        <a href="dictionary_J.html#82">URI</a> <a href="dictionary_O.html#76">uri</a> = <a href="dictionary_O.html#77">url</a>.<a href="dictionary_T.html#57">toURI</a>();</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_J.html#80">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#81">String</a>, <a href="dictionary_S.html#81">String</a>&gt; <a href="dictionary_O.html#70">parameters</a> = </span><span class="keyword">new <a href="dictionary_J.html#48">HashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#81">String</a>, <a href="dictionary_S.html#81">String</a>&gt;();</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#76">uri</a>.<a href="dictionary_G.html#54">getQuery</a>() != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">            <a href="dictionary_S.html#81">String</a>[] <a href="dictionary_O.html#71">parametersString</a> = <a href="dictionary_O.html#76">uri</a>.<a href="dictionary_G.html#54">getQuery</a>().<a href="dictionary_S.html#55">split</a>(</span><span class="string">&quot;\\&amp;&quot;</span><span class="default">);</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#60">part</a> : <a href="dictionary_O.html#71">parametersString</a>) {</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">                <a href="dictionary_S.html#81">String</a>[] <a href="dictionary_O.html#61">queryElement</a> = <a href="dictionary_O.html#60">part</a>.<a href="dictionary_S.html#55">split</a>(</span><span class="string">&quot;\\=&quot;</span><span class="default">);</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">                <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_P.html#59">put</a>(<a href="dictionary_O.html#61">queryElement</a>[</span><span class="number">0</span><span class="default">], <a href="dictionary_O.html#61">queryElement</a>[</span><span class="number">1</span><span class="default">]);</span>
+<a name="59"><font size=-1>59     </font></a><span class="default">            }</span>
+<a name="60"><font size=-1>60     </font></a><span class="default">        }</span>
+<a name="61"><font size=-1>61     </font></a><span class="default"></span>
+<a name="62"><font size=-1>62     </font></a><span class="default">        </span><span class="comment">// Default values for AudioFormat parameters</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">        <a href="dictionary_A.html#90">AudioFormat</a></span><span class="default">.<a href="dictionary_A.html#47">Encoding</a> <a href="dictionary_O.html#66">encoding</a> = <a href="dictionary_A.html#90">AudioFormat</a>.Encoding.ULAW;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">        </span><span class="keyword">float <a href="dictionary_O.html#73">sampleRate</a> </span><span class="default">= <a href="dictionary_O.html#79">DEFAULT_SAMPLE_RATE</a>;</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_O.html#62">bits</a> </span><span class="default">= <a href="dictionary_O.html#78">BITS_PER_BYTE</a>;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        </span><span class="keyword">int <a href="dictionary_O.html#64">channels</a> </span><span class="default">= </span><span class="number">1</span><span class="default">;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        </span><span class="keyword">boolean <a href="dictionary_O.html#68">endian</a> </span><span class="default">= </span><span class="keyword">true</span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        </span><span class="keyword">boolean <a href="dictionary_O.html#74">signed</a> </span><span class="default">= </span><span class="keyword">true</span><span class="default">;</span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        </span><span class="comment">// Change default values as specified</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment">        </span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#75">signedStr</a> </span><span class="default">= <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_G.html#53">get</a>(</span><span class="string">&quot;signed&quot;</span><span class="default">);</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#75">signedStr</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">            <a href="dictionary_O.html#74">signed</a> = Boolean.<a href="dictionary_V.html#58">valueOf</a>(<a href="dictionary_O.html#75">signedStr</a>);</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        }</span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span>
+<a name="76"><font size=-1>76     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#67">encodingStr</a> </span><span class="default">= <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_G.html#53">get</a>(</span><span class="string">&quot;encoding&quot;</span><span class="default">);</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#67">encodingStr</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#67">encodingStr</a>.<a href="dictionary_E.html#52">equals</a>(</span><span class="string">&quot;pcm&quot;</span><span class="default">)) {</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#74">signed</a>) {</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">                    <a href="dictionary_O.html#66">encoding</a> = <a href="dictionary_A.html#90">AudioFormat</a>.Encoding.PCM_SIGNED;</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">                } </span><span class="keyword">else </span><span class="default">{</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">                    <a href="dictionary_O.html#66">encoding</a> = <a href="dictionary_A.html#90">AudioFormat</a>.Encoding.PCM_UNSIGNED;</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">                }</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_O.html#67">encodingStr</a>.<a href="dictionary_E.html#52">equals</a>(</span><span class="string">&quot;alaw&quot;</span><span class="default">)) {</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">                <a href="dictionary_O.html#66">encoding</a> = <a href="dictionary_A.html#90">AudioFormat</a>.Encoding.ALAW;</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_O.html#67">encodingStr</a>.<a href="dictionary_E.html#52">equals</a>(</span><span class="string">&quot;ulaw&quot;</span><span class="default">)) {</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">                <a href="dictionary_O.html#66">encoding</a> = <a href="dictionary_A.html#90">AudioFormat</a>.Encoding.ULAW;</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_O.html#67">encodingStr</a>.<a href="dictionary_E.html#52">equals</a>(</span><span class="string">&quot;gsm&quot;</span><span class="default">)) {</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">                </span><span class="keyword">throw new <a href="dictionary_J.html#83">URISyntaxException</a></span><span class="default">(<a href="dictionary_O.html#77">url</a>.<a href="dictionary_T.html#56">toString</a>(),</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">                        </span><span class="string">&quot;gsm is currently not supported!&quot;</span><span class="default">);</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">            }</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        }</span>
+<a name="93"><font size=-1>93     </font></a><span class="default"></span>
+<a name="94"><font size=-1>94     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#72">rateStr</a> </span><span class="default">= <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_G.html#53">get</a>(</span><span class="string">&quot;rate&quot;</span><span class="default">);</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#72">rateStr</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">            <a href="dictionary_O.html#73">sampleRate</a> = Float.<a href="dictionary_V.html#58">valueOf</a>(<a href="dictionary_O.html#72">rateStr</a>);</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">        }</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#63">bitsStr</a> </span><span class="default">= <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_G.html#53">get</a>(</span><span class="string">&quot;bits&quot;</span><span class="default">);</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#63">bitsStr</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">            <a href="dictionary_O.html#62">bits</a> = Integer.<a href="dictionary_V.html#58">valueOf</a>(<a href="dictionary_O.html#63">bitsStr</a>);</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">        }</span>
+<a name="103"><font size=-1>103     </font></a><span class="default"></span>
+<a name="104"><font size=-1>104     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#65">channelsStr</a> </span><span class="default">= <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_G.html#53">get</a>(</span><span class="string">&quot;channels&quot;</span><span class="default">);</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#65">channelsStr</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">            <a href="dictionary_O.html#64">channels</a> = Integer.<a href="dictionary_V.html#58">valueOf</a>(<a href="dictionary_O.html#65">channelsStr</a>);</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        }</span>
+<a name="108"><font size=-1>108     </font></a><span class="default"></span>
+<a name="109"><font size=-1>109     </font></a><span class="default">        </span><span class="keyword">final <a href="dictionary_S.html#81">String</a> <a href="dictionary_O.html#69">endianStr</a> </span><span class="default">= <a href="dictionary_O.html#70">parameters</a>.<a href="dictionary_G.html#53">get</a>(</span><span class="string">&quot;endian&quot;</span><span class="default">);</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#69">endianStr</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#69">endianStr</a>.<a href="dictionary_E.html#52">equals</a>(</span><span class="string">&quot;little&quot;</span><span class="default">)) {</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">                <a href="dictionary_O.html#68">endian</a> = </span><span class="keyword">false</span><span class="default">;</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_O.html#69">endianStr</a>.<a href="dictionary_E.html#52">equals</a>(</span><span class="string">&quot;big&quot;</span><span class="default">)) {</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">                <a href="dictionary_O.html#68">endian</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">            }</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">        }</span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default">        </span><span class="comment">// Construct the AudioFormat</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">        </span><span class="keyword">return new <a href="dictionary_J.html#46">AudioFormat</a></span><span class="default">(<a href="dictionary_O.html#66">encoding</a>, <a href="dictionary_O.html#73">sampleRate</a>,</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">                <a href="dictionary_O.html#62">bits</a>, <a href="dictionary_O.html#64">channels</a>, <a href="dictionary_O.html#62">bits</a> / <a href="dictionary_O.html#78">BITS_PER_BYTE</a>, <a href="dictionary_O.html#73">sampleRate</a>, <a href="dictionary_O.html#68">endian</a>);</span>
+<a name="121"><font size=-1>121     </font></a><span class="default">    }</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">}</span>
+<a name="123"><font size=-1>123     </font></a><span class="default"></span>
+</pre></body></html>

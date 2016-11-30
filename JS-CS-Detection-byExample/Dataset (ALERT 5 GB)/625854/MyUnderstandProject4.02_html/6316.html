@@ -1,0 +1,396 @@
+<html><head><title>FullDictionary.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta2\src\sphinx4\edu\cmu\sphinx\linguist\dictionary\FullDictionary.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta2\\src\\sphinx4\\edu\\cmu\\sphinx\\linguist\\dictionary\\FullDictionary.java";
+top.document.title  = "FullDictionary.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2002 Carnegie Mellon University.  </span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2002 Sun Microsystems, Inc.  </span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2002 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * </span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL </span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#584">dictionary</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#169">acoustic</a>.<a href="dictionary_E.html#1316">Context</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#169">acoustic</a>.<a href="dictionary_E.html#175">Unit</a>;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#169">acoustic</a>.<a href="dictionary_E.html#1313">UnitManager</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#304">util</a>.<a href="dictionary_E.html#1303">ExtendedStreamTokenizer</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#304">util</a>.<a href="dictionary_E.html#2164">Timer</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#35">props</a>.<a href="dictionary_E.html#583">ConfigurationManagerUtils</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#35">props</a>.<a href="dictionary_E.html#32">PropertyException</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#35">props</a>.<a href="dictionary_E.html#33">PropertySheet</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#84">io</a>.<a href="dictionary_J.html#56">IOException</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#84">io</a>.<a href="dictionary_J.html#1669">InputStream</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#85">net</a>.<a href="dictionary_J.html#60">URL</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#26">util</a>.*;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_J.html#578">logging</a>.<a href="dictionary_J.html#456">Logger</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * Creates a dictionary by reading in an ASCII-based Sphinx-3 format dictionary. Each line of the dictionary specifies</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * the word, followed by spaces or tab, followed by the pronuncation (by way of the list of phones) of the word. Each</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * word can have more than one pronunciations. For example, a digits dictionary will look like:</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * &lt;pre&gt;</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * ONE                  HH W AH N</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * ONE(2)               W AH N</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * TWO                  T UW</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * THREE                TH R IY</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> * FOUR                 F AO R</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"> * FIVE                 F AY V</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"> * SIX                  S IH K S</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment"> * SEVEN                S EH V AH N</span>
+<a name="43"><font size=-1>43     </font></a><span class="comment"> * EIGHT                EY T</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment"> * NINE                 N AY N</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"> * ZERO                 Z IH R OW</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * ZERO(2)              Z IY R OW</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * OH                   OW</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> * &lt;/pre&gt;</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"> * In the above example, the words &quot;one&quot; and &quot;zero&quot; have two pronunciations each.</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> * This dictionary will read in all the words and its pronunciation(s) at startup. Therefore, if the dictionary is big,</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> * it will take longer to load and will consume more memory.</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"> */</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#6317">FullDictionary</a> implements <a href="dictionary_E.html#581">Dictionary</a> </span><span class="default">{</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    </span><span class="comment">// ----------------------------------</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">    // configuration variables</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">    // ----------------------------------</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_J.html#456">Logger</a> <a href="dictionary_E.html#6383">logger</a></span><span class="default">;</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_E.html#6376">addSilEndingPronunciation</a></span><span class="default">;</span>
+<a name="62"><font size=-1>62     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_E.html#6378">allowMissingWords</a></span><span class="default">;</span>
+<a name="63"><font size=-1>63     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_E.html#6379">createMissingWords</a></span><span class="default">;</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6387">wordReplacement</a></span><span class="default">;</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_J.html#60">URL</a> <a href="dictionary_E.html#6386">wordDictionaryFile</a></span><span class="default">;</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_J.html#60">URL</a> <a href="dictionary_E.html#6381">fillerDictionaryFile</a></span><span class="default">;</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">    </span><span class="keyword">private boolean <a href="dictionary_E.html#6377">allocated</a> </span><span class="default">= </span><span class="keyword">false</span><span class="default">;</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_E.html#1313">UnitManager</a> <a href="dictionary_E.html#6384">unitManager</a></span><span class="default">;</span>
+<a name="69"><font size=-1>69     </font></a><span class="default"></span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_M.html#457">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#21">String</a>, Object&gt; <a href="dictionary_E.html#6385">wordDictionary</a>;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_M.html#457">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#21">String</a>, Object&gt; <a href="dictionary_E.html#6380">fillerDictionary</a>;</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_E.html#2164">Timer</a> <a href="dictionary_E.html#6382">loadTimer</a></span><span class="default">;</span>
+<a name="74"><font size=-1>74     </font></a><span class="default"></span>
+<a name="75"><font size=-1>75     </font></a><span class="default"></span>
+<a name="76"><font size=-1>76     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">    * (non-Javadoc)</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">    *</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">    * @see edu.cmu.sphinx.util.props.Configurable#newProperties(edu.cmu.sphinx.util.props.PropertySheet)</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">    */</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_E.html#6369">newProperties</a></span><span class="default">(<a href="dictionary_E.html#33">PropertySheet</a> <a href="dictionary_E.html#6370">ps</a>) </span><span class="keyword">throws <a href="dictionary_E.html#32">PropertyException</a> </span><span class="default">{</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">        <a href="dictionary_E.html#6383">logger</a> = <a href="dictionary_E.html#6370">ps</a>.<a href="dictionary_E.html#603">getLogger</a>();</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        <a href="dictionary_E.html#6386">wordDictionaryFile</a> = <a href="dictionary_E.html#583">ConfigurationManagerUtils</a>.<a href="dictionary_E.html#606">getResource</a>(<a href="dictionary_E.html#6403">PROP_DICTIONARY</a>, <a href="dictionary_E.html#6370">ps</a>);</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">        <a href="dictionary_E.html#6381">fillerDictionaryFile</a> = <a href="dictionary_E.html#583">ConfigurationManagerUtils</a>.<a href="dictionary_E.html#606">getResource</a>(<a href="dictionary_E.html#6404">PROP_FILLER_DICTIONARY</a>, <a href="dictionary_E.html#6370">ps</a>);</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">        <a href="dictionary_E.html#6376">addSilEndingPronunciation</a> = <a href="dictionary_E.html#6370">ps</a>.<a href="dictionary_E.html#443">getBoolean</a>(<a href="dictionary_E.html#6405">PROP_ADD_SIL_ENDING_PRONUNCIATION</a>);</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">        <a href="dictionary_E.html#6387">wordReplacement</a> = <a href="dictionary_E.html#6370">ps</a>.<a href="dictionary_E.html#444">getString</a>(<a href="dictionary_E.html#581">Dictionary</a>.<a href="dictionary_E.html#6406">PROP_WORD_REPLACEMENT</a>);</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">        <a href="dictionary_E.html#6378">allowMissingWords</a> = <a href="dictionary_E.html#6370">ps</a>.<a href="dictionary_E.html#443">getBoolean</a>(<a href="dictionary_E.html#581">Dictionary</a>.<a href="dictionary_E.html#6407">PROP_ALLOW_MISSING_WORDS</a>);</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">        <a href="dictionary_E.html#6379">createMissingWords</a> = <a href="dictionary_E.html#6370">ps</a>.<a href="dictionary_E.html#443">getBoolean</a>(<a href="dictionary_E.html#6408">PROP_CREATE_MISSING_WORDS</a>);</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        <a href="dictionary_E.html#6384">unitManager</a> = (UnitManager) <a href="dictionary_E.html#6370">ps</a>.<a href="dictionary_E.html#442">getComponent</a>(<a href="dictionary_E.html#6409">PROP_UNIT_MANAGER</a>);</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">    }</span>
+<a name="92"><font size=-1>92     </font></a><span class="default"></span>
+<a name="93"><font size=-1>93     </font></a><span class="default"></span>
+<a name="94"><font size=-1>94     </font></a><span class="default">    </span><span class="comment">/* (non-Javadoc)</span>
+<a name="95"><font size=-1>95     </font></a><span class="comment">    * @see edu.cmu.sphinx.linguist.dictionary.Dictionary#allocate()</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">    */</span>
+<a name="97"><font size=-1>97     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_E.html#6318">allocate</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_J.html#56">IOException</a> </span><span class="default">{</span>
+<a name="98"><font size=-1>98     </font></a><span class="default"></span>
+<a name="99"><font size=-1>99     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#6377">allocated</a>) {</span>
+<a name="100"><font size=-1>100     </font></a><span class="default">            <a href="dictionary_E.html#6382">loadTimer</a> = <a href="dictionary_E.html#2164">Timer</a>.<a href="dictionary_E.html#3144">getTimer</a>(</span><span class="string">&quot;DictionaryLoad&quot;</span><span class="default">);</span>
+<a name="101"><font size=-1>101     </font></a><span class="default">            <a href="dictionary_E.html#6382">loadTimer</a>.<a href="dictionary_E.html#3138">start</a>();</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">            </span><span class="comment">// NOTE: &quot;location&quot; can be null here, in which case the</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">            // &quot;wordDictionaryFile&quot; and &quot;fillerDictionaryFile&quot; should</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">            // contain the full path to the Dictionaries.</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">            <a href="dictionary_E.html#6383">logger</a></span><span class="default">.<a href="dictionary_I.html#1191">info</a>(</span><span class="string">&quot;Loading dictionary from: &quot; </span><span class="default">+ <a href="dictionary_E.html#6386">wordDictionaryFile</a>);</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">            <a href="dictionary_E.html#6385">wordDictionary</a> =</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">                    <a href="dictionary_E.html#6353">loadDictionary</a>(<a href="dictionary_E.html#6386">wordDictionaryFile</a>.<a href="dictionary_O.html#545">openStream</a>(), </span><span class="keyword">false</span><span class="default">);</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">            <a href="dictionary_E.html#6383">logger</a>.<a href="dictionary_I.html#1191">info</a>(</span><span class="string">&quot;Loading filler dictionary from: &quot; </span><span class="default">+</span>
+<a name="109"><font size=-1>109     </font></a><span class="default">                    <a href="dictionary_E.html#6381">fillerDictionaryFile</a>);</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">            <a href="dictionary_E.html#6380">fillerDictionary</a> =</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">                    <a href="dictionary_E.html#6353">loadDictionary</a>(<a href="dictionary_E.html#6381">fillerDictionaryFile</a>.<a href="dictionary_O.html#545">openStream</a>(), </span><span class="keyword">true</span><span class="default">);</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">            <a href="dictionary_E.html#6382">loadTimer</a>.<a href="dictionary_E.html#3139">stop</a>();</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">            <a href="dictionary_E.html#6377">allocated</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">        }</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">    }</span>
+<a name="116"><font size=-1>116     </font></a><span class="default"></span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default">    </span><span class="comment">/* (non-Javadoc)</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">    * @see edu.cmu.sphinx.linguist.dictionary.Dictionary#deallocate()</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">    */</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_E.html#6330">deallocate</a></span><span class="default">() {</span>
+<a name="122"><font size=-1>122     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6377">allocated</a>) {</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">            <a href="dictionary_E.html#6380">fillerDictionary</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">            <a href="dictionary_E.html#6385">wordDictionary</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="125"><font size=-1>125     </font></a><span class="default">            <a href="dictionary_E.html#6382">loadTimer</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="126"><font size=-1>126     </font></a><span class="default">            <a href="dictionary_E.html#6377">allocated</a> = </span><span class="keyword">false</span><span class="default">;</span>
+<a name="127"><font size=-1>127     </font></a><span class="default">        }</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">    }</span>
+<a name="129"><font size=-1>129     </font></a><span class="default"></span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">     * Loads the given sphinx3 style simple dictionary from the given InputStream. The InputStream is assumed to contain</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     * ASCII data.</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     *</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">     * @param inputStream  the InputStream of the dictionary</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">     * @param isFillerDict true if this is a filler dictionary, false otherwise</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">     * @throws java.io.IOException if there is an error reading the dictionary</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">     */</span>
+<a name="139"><font size=-1>139     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#4120">SuppressWarnings</a>({</span><span class="string">&quot;unchecked&quot;</span><span class="default">})</span>
+<a name="140"><font size=-1>140     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_M.html#457">Map</a></span><span class="default">&lt;<a href="dictionary_S.html#21">String</a>, Object&gt; <a href="dictionary_E.html#6353">loadDictionary</a>(<a href="dictionary_J.html#1669">InputStream</a> <a href="dictionary_E.html#6356">inputStream</a>, </span><span class="keyword">boolean <a href="dictionary_E.html#6357">isFillerDict</a></span><span class="default">)</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">            </span><span class="keyword">throws <a href="dictionary_J.html#56">IOException</a> </span><span class="default">{</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">        <a href="dictionary_M.html#457">Map</a>&lt;<a href="dictionary_S.html#21">String</a>, Object&gt; <a href="dictionary_E.html#6354">dictionary</a> = </span><span class="keyword">new <a href="dictionary_H.html#452">HashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#21">String</a>, Object&gt;();</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">        <a href="dictionary_E.html#1303">ExtendedStreamTokenizer</a> <a href="dictionary_E.html#6355">est</a> = </span><span class="keyword">new <a href="dictionary_E.html#6401">ExtendedStreamTokenizer</a></span><span class="default">(<a href="dictionary_E.html#6356">inputStream</a>,</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">                </span><span class="keyword">true</span><span class="default">);</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6365">word</a>;</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">        </span><span class="keyword">while </span><span class="default">((<a href="dictionary_E.html#6365">word</a> = <a href="dictionary_E.html#6355">est</a>.<a href="dictionary_E.html#1348">getString</a>()) != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">            <a href="dictionary_E.html#6365">word</a> = <a href="dictionary_E.html#6371">removeParensFromWord</a>(<a href="dictionary_E.html#6365">word</a>);</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">            <a href="dictionary_E.html#6365">word</a> = <a href="dictionary_E.html#6365">word</a>.<a href="dictionary_T.html#510">toLowerCase</a>();</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">            <a href="dictionary_L.html#212">List</a>&lt;<a href="dictionary_E.html#175">Unit</a>&gt; <a href="dictionary_E.html#6362">units</a> = </span><span class="keyword">new <a href="dictionary_A.html#451">ArrayList</a></span><span class="default">&lt;<a href="dictionary_E.html#175">Unit</a>&gt;(</span><span class="number">20</span><span class="default">);</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">            <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6361">unitText</a>;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">            </span><span class="keyword">while </span><span class="default">((<a href="dictionary_E.html#6361">unitText</a> = <a href="dictionary_E.html#6355">est</a>.<a href="dictionary_E.html#1348">getString</a>()) != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">                <a href="dictionary_E.html#6362">units</a>.<a href="dictionary_A.html#5">add</a>(<a href="dictionary_E.html#6339">getCIUnit</a>(<a href="dictionary_E.html#6361">unitText</a>, <a href="dictionary_E.html#6357">isFillerDict</a>));</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">            }</span>
+<a name="154"><font size=-1>154     </font></a><span class="default">            <a href="dictionary_E.html#175">Unit</a>[] <a href="dictionary_E.html#6363">unitsArray</a> = <a href="dictionary_E.html#6362">units</a>.<a href="dictionary_T.html#339">toArray</a>(</span><span class="keyword">new <a href="dictionary_E.html#175">Unit</a></span><span class="default">[<a href="dictionary_E.html#6362">units</a>.<a href="dictionary_S.html#234">size</a>()]);</span>
+<a name="155"><font size=-1>155     </font></a><span class="default">            <a href="dictionary_L.html#212">List</a>&lt;<a href="dictionary_E.html#2356">Pronunciation</a>&gt; <a href="dictionary_E.html#6360">pronunciations</a> = (List&lt;<a href="dictionary_E.html#2356">Pronunciation</a>&gt;) <a href="dictionary_E.html#6354">dictionary</a>.<a href="dictionary_G.html#118">get</a>(<a href="dictionary_E.html#6365">word</a>);</span>
+<a name="156"><font size=-1>156     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6360">pronunciations</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="157"><font size=-1>157     </font></a><span class="default">                <a href="dictionary_E.html#6360">pronunciations</a> = </span><span class="keyword">new <a href="dictionary_L.html#2218">LinkedList</a></span><span class="default">&lt;<a href="dictionary_E.html#2356">Pronunciation</a>&gt;();</span>
+<a name="158"><font size=-1>158     </font></a><span class="default">            }</span>
+<a name="159"><font size=-1>159     </font></a><span class="default">            <a href="dictionary_E.html#2356">Pronunciation</a> <a href="dictionary_E.html#6358">pronunciation</a> = </span><span class="keyword">new <a href="dictionary_E.html#6402">Pronunciation</a></span><span class="default">(<a href="dictionary_E.html#6363">unitsArray</a>, </span><span class="keyword">null</span><span class="default">,</span>
+<a name="160"><font size=-1>160     </font></a><span class="default">                    </span><span class="keyword">null</span><span class="default">, </span><span class="number">1.0f</span><span class="default">);</span>
+<a name="161"><font size=-1>161     </font></a><span class="default">            <a href="dictionary_E.html#6360">pronunciations</a>.<a href="dictionary_A.html#5">add</a>(<a href="dictionary_E.html#6358">pronunciation</a>);</span>
+<a name="162"><font size=-1>162     </font></a><span class="default">            </span><span class="comment">// if we are adding a SIL ending duplicate</span>
+<a name="163"><font size=-1>163     </font></a><span class="comment">            </span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#6357">isFillerDict</a> &amp;&amp; <a href="dictionary_E.html#6376">addSilEndingPronunciation</a>) {</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">                <a href="dictionary_E.html#6362">units</a>.<a href="dictionary_A.html#5">add</a>(<a href="dictionary_E.html#1313">UnitManager</a>.<a href="dictionary_E.html#1353">SILENCE</a>);</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">                <a href="dictionary_E.html#175">Unit</a>[] <a href="dictionary_E.html#6364">unitsArray2</a> = <a href="dictionary_E.html#6362">units</a>.<a href="dictionary_T.html#339">toArray</a>(</span><span class="keyword">new <a href="dictionary_E.html#175">Unit</a></span><span class="default">[<a href="dictionary_E.html#6362">units</a></span>
+<a name="166"><font size=-1>166     </font></a><span class="default">                        .<a href="dictionary_S.html#234">size</a>()]);</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">                <a href="dictionary_E.html#2356">Pronunciation</a> <a href="dictionary_E.html#6359">pronunciation2</a> = </span><span class="keyword">new <a href="dictionary_E.html#6402">Pronunciation</a></span><span class="default">(<a href="dictionary_E.html#6364">unitsArray2</a>,</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">                        </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">null</span><span class="default">, </span><span class="number">1.0f</span><span class="default">);</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">                <a href="dictionary_E.html#6360">pronunciations</a>.<a href="dictionary_A.html#5">add</a>(<a href="dictionary_E.html#6359">pronunciation2</a>);</span>
+<a name="170"><font size=-1>170     </font></a><span class="default">            }</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">            <a href="dictionary_E.html#6354">dictionary</a>.<a href="dictionary_P.html#261">put</a>(<a href="dictionary_E.html#6365">word</a>, <a href="dictionary_E.html#6360">pronunciations</a>);</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">        }</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">        <a href="dictionary_E.html#6356">inputStream</a>.<a href="dictionary_C.html#239">close</a>();</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">        <a href="dictionary_E.html#6355">est</a>.<a href="dictionary_E.html#1347">close</a>();</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">        <a href="dictionary_E.html#6319">createWords</a>(<a href="dictionary_E.html#6354">dictionary</a>, <a href="dictionary_E.html#6357">isFillerDict</a>);</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6354">dictionary</a></span><span class="default">;</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">    }</span>
+<a name="178"><font size=-1>178     </font></a><span class="default"></span>
+<a name="179"><font size=-1>179     </font></a><span class="default"></span>
+<a name="180"><font size=-1>180     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="181"><font size=-1>181     </font></a><span class="comment">     * Converts the spelling/Pronunciations mappings in the dictionary into spelling/Word mappings.</span>
+<a name="182"><font size=-1>182     </font></a><span class="comment">     *</span>
+<a name="183"><font size=-1>183     </font></a><span class="comment">     * @param isFillerDict if true this is a filler dictionary</span>
+<a name="184"><font size=-1>184     </font></a><span class="comment">     */</span>
+<a name="185"><font size=-1>185     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_S.html#4120">SuppressWarnings</a>({</span><span class="string">&quot;unchecked&quot;</span><span class="default">})</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">    </span><span class="keyword">private void <a href="dictionary_E.html#6319">createWords</a></span><span class="default">(<a href="dictionary_M.html#457">Map</a>&lt;<a href="dictionary_S.html#21">String</a>, Object&gt; <a href="dictionary_E.html#6327">dictionary</a>, </span><span class="keyword">boolean <a href="dictionary_E.html#6328">isFillerDict</a></span><span class="default">) {</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">        <a href="dictionary_S.html#300">Set</a>&lt;<a href="dictionary_S.html#21">String</a>&gt; <a href="dictionary_E.html#6329">spellings</a> = <a href="dictionary_E.html#6327">dictionary</a>.<a href="dictionary_K.html#110">keySet</a>();</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(<a href="dictionary_I.html#211">Iterator</a>&lt;<a href="dictionary_S.html#21">String</a>&gt; <a href="dictionary_E.html#6324">s</a> = <a href="dictionary_E.html#6329">spellings</a>.<a href="dictionary_I.html#109">iterator</a>(); <a href="dictionary_E.html#6324">s</a>.<a href="dictionary_H.html#232">hasNext</a>();) {</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">            <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6325">spelling</a> = <a href="dictionary_E.html#6324">s</a>.<a href="dictionary_N.html#233">next</a>();</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">            <a href="dictionary_L.html#212">List</a>&lt;<a href="dictionary_E.html#2356">Pronunciation</a>&gt; <a href="dictionary_E.html#6322">pronunciations</a> = (List&lt;<a href="dictionary_E.html#2356">Pronunciation</a>&gt;) <a href="dictionary_E.html#6327">dictionary</a>.<a href="dictionary_G.html#118">get</a>(<a href="dictionary_E.html#6325">spelling</a>);</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">            <a href="dictionary_E.html#2356">Pronunciation</a>[] <a href="dictionary_E.html#6323">pros</a> = </span><span class="keyword">new <a href="dictionary_E.html#2356">Pronunciation</a></span><span class="default">[<a href="dictionary_E.html#6322">pronunciations</a>.<a href="dictionary_S.html#234">size</a>()];</span>
+<a name="192"><font size=-1>192     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6320">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#6320">i</a> &lt; <a href="dictionary_E.html#6323">pros</a>.<a href="dictionary_L.html#192">length</a>; i++) {</span>
+<a name="193"><font size=-1>193     </font></a><span class="default">                <a href="dictionary_E.html#6323">pros</a>[<a href="dictionary_E.html#6320">i</a>] = <a href="dictionary_E.html#6322">pronunciations</a>.<a href="dictionary_G.html#118">get</a>(<a href="dictionary_E.html#6320">i</a>);</span>
+<a name="194"><font size=-1>194     </font></a><span class="default">            }</span>
+<a name="195"><font size=-1>195     </font></a><span class="default">            <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6326">word</a> = </span><span class="keyword">new <a href="dictionary_E.html#6392">Word</a></span><span class="default">(<a href="dictionary_E.html#6325">spelling</a>, <a href="dictionary_E.html#6323">pros</a>, <a href="dictionary_E.html#6328">isFillerDict</a>);</span>
+<a name="196"><font size=-1>196     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#6321">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#6321">i</a> &lt; <a href="dictionary_E.html#6323">pros</a>.<a href="dictionary_L.html#192">length</a>; i++) {</span>
+<a name="197"><font size=-1>197     </font></a><span class="default">                <a href="dictionary_E.html#6323">pros</a>[<a href="dictionary_E.html#6321">i</a>].<a href="dictionary_E.html#6393">setWord</a>(<a href="dictionary_E.html#6326">word</a>);</span>
+<a name="198"><font size=-1>198     </font></a><span class="default">            }</span>
+<a name="199"><font size=-1>199     </font></a><span class="default">            <a href="dictionary_E.html#6327">dictionary</a>.<a href="dictionary_P.html#261">put</a>(<a href="dictionary_E.html#6325">spelling</a>, <a href="dictionary_E.html#6326">word</a>);</span>
+<a name="200"><font size=-1>200     </font></a><span class="default">        }</span>
+<a name="201"><font size=-1>201     </font></a><span class="default">    }</span>
+<a name="202"><font size=-1>202     </font></a><span class="default"></span>
+<a name="203"><font size=-1>203     </font></a><span class="default"></span>
+<a name="204"><font size=-1>204     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="205"><font size=-1>205     </font></a><span class="comment">     * Gets a context independent unit. There should only be one instance of any CI unit</span>
+<a name="206"><font size=-1>206     </font></a><span class="comment">     *</span>
+<a name="207"><font size=-1>207     </font></a><span class="comment">     * @param name     the name of the unit</span>
+<a name="208"><font size=-1>208     </font></a><span class="comment">     * @param isFiller if true, the unit is a filler unit</span>
+<a name="209"><font size=-1>209     </font></a><span class="comment">     * @return the unit</span>
+<a name="210"><font size=-1>210     </font></a><span class="comment">     */</span>
+<a name="211"><font size=-1>211     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_E.html#175">Unit</a> <a href="dictionary_E.html#6339">getCIUnit</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6341">name</a>, </span><span class="keyword">boolean <a href="dictionary_E.html#6340">isFiller</a></span><span class="default">) {</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6384">unitManager</a></span><span class="default">.<a href="dictionary_E.html#1358">getUnit</a>(<a href="dictionary_E.html#6341">name</a>, <a href="dictionary_E.html#6340">isFiller</a>, <a href="dictionary_E.html#1316">Context</a>.<a href="dictionary_E.html#5796">EMPTY_CONTEXT</a>);</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">    }</span>
+<a name="214"><font size=-1>214     </font></a><span class="default"></span>
+<a name="215"><font size=-1>215     </font></a><span class="default"></span>
+<a name="216"><font size=-1>216     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="217"><font size=-1>217     </font></a><span class="comment">     * Returns a new string that is the given word but with the ending parenthesis removed.</span>
+<a name="218"><font size=-1>218     </font></a><span class="comment">     * &lt;p/&gt;</span>
+<a name="219"><font size=-1>219     </font></a><span class="comment">     * Example:</span>
+<a name="220"><font size=-1>220     </font></a><span class="comment">     * &lt;p/&gt;</span>
+<a name="221"><font size=-1>221     </font></a><span class="comment">     * &lt;pre&gt;</span>
+<a name="222"><font size=-1>222     </font></a><span class="comment">     *  &quot;LEAD(2)&quot; returns &quot;LEAD&quot;</span>
+<a name="223"><font size=-1>223     </font></a><span class="comment">     *  &quot;LEAD&quot; returns &quot;LEAD&quot;</span>
+<a name="224"><font size=-1>224     </font></a><span class="comment">     *  @param word</span>
+<a name="225"><font size=-1>225     </font></a><span class="comment">     *  the word to be stripped</span>
+<a name="226"><font size=-1>226     </font></a><span class="comment">     * &lt;p/&gt;</span>
+<a name="227"><font size=-1>227     </font></a><span class="comment">     *  @return the given word but with all characters from the first</span>
+<a name="228"><font size=-1>228     </font></a><span class="comment">     *  open parentheses removed</span>
+<a name="229"><font size=-1>229     </font></a><span class="comment">     */</span>
+<a name="230"><font size=-1>230     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6371">removeParensFromWord</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6374">word</a>) {</span>
+<a name="231"><font size=-1>231     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6374">word</a>.<a href="dictionary_C.html#2526">charAt</a>(<a href="dictionary_E.html#6374">word</a>.<a href="dictionary_L.html#337">length</a>() - </span><span class="number">1</span><span class="default">) == </span><span class="string">')'</span><span class="default">) {</span>
+<a name="232"><font size=-1>232     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_E.html#6373">index</a> </span><span class="default">= <a href="dictionary_E.html#6374">word</a>.<a href="dictionary_L.html#6372">lastIndexOf</a>(</span><span class="string">'('</span><span class="default">);</span>
+<a name="233"><font size=-1>233     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6373">index</a> &gt; </span><span class="number">0</span><span class="default">) {</span>
+<a name="234"><font size=-1>234     </font></a><span class="default">                <a href="dictionary_E.html#6374">word</a> = <a href="dictionary_E.html#6374">word</a>.<a href="dictionary_S.html#2479">substring</a>(</span><span class="number">0</span><span class="default">, <a href="dictionary_E.html#6373">index</a>);</span>
+<a name="235"><font size=-1>235     </font></a><span class="default">            }</span>
+<a name="236"><font size=-1>236     </font></a><span class="default">        }</span>
+<a name="237"><font size=-1>237     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6374">word</a></span><span class="default">;</span>
+<a name="238"><font size=-1>238     </font></a><span class="default">    }</span>
+<a name="239"><font size=-1>239     </font></a><span class="default"></span>
+<a name="240"><font size=-1>240     </font></a><span class="default"></span>
+<a name="241"><font size=-1>241     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="242"><font size=-1>242     </font></a><span class="comment">     * Returns a Word object based on the spelling and its classification. The behavior of this method is affected by</span>
+<a name="243"><font size=-1>243     </font></a><span class="comment">     * the properties wordReplacement, allowMissingWords, and createMissingWords.</span>
+<a name="244"><font size=-1>244     </font></a><span class="comment">     *</span>
+<a name="245"><font size=-1>245     </font></a><span class="comment">     * @param text the spelling of the word of interest.</span>
+<a name="246"><font size=-1>246     </font></a><span class="comment">     * @return a Word object</span>
+<a name="247"><font size=-1>247     </font></a><span class="comment">     * @see edu.cmu.sphinx.linguist.dictionary.Word</span>
+<a name="248"><font size=-1>248     </font></a><span class="comment">     */</span>
+<a name="249"><font size=-1>249     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6348">getWord</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6350">text</a>) {</span>
+<a name="250"><font size=-1>250     </font></a><span class="default">        <a href="dictionary_E.html#6350">text</a> = <a href="dictionary_E.html#6350">text</a>.<a href="dictionary_T.html#510">toLowerCase</a>();</span>
+<a name="251"><font size=-1>251     </font></a><span class="default">        <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6351">word</a> = <a href="dictionary_E.html#6366">lookupWord</a>(<a href="dictionary_E.html#6350">text</a>);</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6351">word</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="253"><font size=-1>253     </font></a><span class="default">            <a href="dictionary_E.html#6383">logger</a>.<a href="dictionary_W.html#6349">warning</a>(</span><span class="string">&quot;Missing word: &quot; </span><span class="default">+ <a href="dictionary_E.html#6350">text</a>);</span>
+<a name="254"><font size=-1>254     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6387">wordReplacement</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="255"><font size=-1>255     </font></a><span class="default">                <a href="dictionary_E.html#6351">word</a> = <a href="dictionary_E.html#6366">lookupWord</a>(<a href="dictionary_E.html#6387">wordReplacement</a>);</span>
+<a name="256"><font size=-1>256     </font></a><span class="default">                <a href="dictionary_E.html#6383">logger</a>.<a href="dictionary_W.html#6349">warning</a>(</span><span class="string">&quot;Replacing &quot; </span><span class="default">+ <a href="dictionary_E.html#6350">text</a> + </span><span class="string">&quot; with &quot; </span><span class="default">+</span>
+<a name="257"><font size=-1>257     </font></a><span class="default">                        <a href="dictionary_E.html#6387">wordReplacement</a>);</span>
+<a name="258"><font size=-1>258     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6351">word</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="259"><font size=-1>259     </font></a><span class="default">                    <a href="dictionary_E.html#6383">logger</a>.<a href="dictionary_S.html#2882">severe</a>(</span><span class="string">&quot;Replacement word &quot; </span><span class="default">+ <a href="dictionary_E.html#6387">wordReplacement</a></span>
+<a name="260"><font size=-1>260     </font></a><span class="default">                            + </span><span class="string">&quot; not found!&quot;</span><span class="default">);</span>
+<a name="261"><font size=-1>261     </font></a><span class="default">                }</span>
+<a name="262"><font size=-1>262     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#6378">allowMissingWords</a>) {</span>
+<a name="263"><font size=-1>263     </font></a><span class="default">                </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6379">createMissingWords</a>) {</span>
+<a name="264"><font size=-1>264     </font></a><span class="default">                    <a href="dictionary_E.html#6351">word</a> = </span><span class="keyword">new <a href="dictionary_E.html#6392">Word</a></span><span class="default">(<a href="dictionary_E.html#6350">text</a>, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="265"><font size=-1>265     </font></a><span class="default">                    <a href="dictionary_E.html#6385">wordDictionary</a>.<a href="dictionary_P.html#261">put</a>(<a href="dictionary_E.html#6350">text</a>, <a href="dictionary_E.html#6351">word</a>);</span>
+<a name="266"><font size=-1>266     </font></a><span class="default">                }</span>
+<a name="267"><font size=-1>267     </font></a><span class="default">                </span><span class="keyword">return null</span><span class="default">;</span>
+<a name="268"><font size=-1>268     </font></a><span class="default">            }</span>
+<a name="269"><font size=-1>269     </font></a><span class="default">        }</span>
+<a name="270"><font size=-1>270     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6351">word</a></span><span class="default">;</span>
+<a name="271"><font size=-1>271     </font></a><span class="default">    }</span>
+<a name="272"><font size=-1>272     </font></a><span class="default"></span>
+<a name="273"><font size=-1>273     </font></a><span class="default"></span>
+<a name="274"><font size=-1>274     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="275"><font size=-1>275     </font></a><span class="comment">     * Lookups up a word</span>
+<a name="276"><font size=-1>276     </font></a><span class="comment">     *</span>
+<a name="277"><font size=-1>277     </font></a><span class="comment">     * @param spelling the spellling of the word</span>
+<a name="278"><font size=-1>278     </font></a><span class="comment">     * @return the word or null</span>
+<a name="279"><font size=-1>279     </font></a><span class="comment">     */</span>
+<a name="280"><font size=-1>280     </font></a><span class="comment">    </span><span class="keyword">private <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6366">lookupWord</a></span><span class="default">(<a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6367">spelling</a>) {</span>
+<a name="281"><font size=-1>281     </font></a><span class="default">        <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6368">word</a> = (Word) <a href="dictionary_E.html#6385">wordDictionary</a>.<a href="dictionary_G.html#118">get</a>(<a href="dictionary_E.html#6367">spelling</a>);</span>
+<a name="282"><font size=-1>282     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#6368">word</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="283"><font size=-1>283     </font></a><span class="default">            <a href="dictionary_E.html#6368">word</a> = (Word) <a href="dictionary_E.html#6380">fillerDictionary</a>.<a href="dictionary_G.html#118">get</a>(<a href="dictionary_E.html#6367">spelling</a>);</span>
+<a name="284"><font size=-1>284     </font></a><span class="default">        }</span>
+<a name="285"><font size=-1>285     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6368">word</a></span><span class="default">;</span>
+<a name="286"><font size=-1>286     </font></a><span class="default">    }</span>
+<a name="287"><font size=-1>287     </font></a><span class="default"></span>
+<a name="288"><font size=-1>288     </font></a><span class="default"></span>
+<a name="289"><font size=-1>289     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="290"><font size=-1>290     </font></a><span class="comment">     * Returns the sentence start word.</span>
+<a name="291"><font size=-1>291     </font></a><span class="comment">     *</span>
+<a name="292"><font size=-1>292     </font></a><span class="comment">     * @return the sentence start word</span>
+<a name="293"><font size=-1>293     </font></a><span class="comment">     */</span>
+<a name="294"><font size=-1>294     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6346">getSentenceStartWord</a></span><span class="default">() {</span>
+<a name="295"><font size=-1>295     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6348">getWord</a></span><span class="default">(<a href="dictionary_E.html#4765">SENTENCE_START_SPELLING</a>);</span>
+<a name="296"><font size=-1>296     </font></a><span class="default">    }</span>
+<a name="297"><font size=-1>297     </font></a><span class="default"></span>
+<a name="298"><font size=-1>298     </font></a><span class="default"></span>
+<a name="299"><font size=-1>299     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="300"><font size=-1>300     </font></a><span class="comment">     * Returns the sentence end word.</span>
+<a name="301"><font size=-1>301     </font></a><span class="comment">     *</span>
+<a name="302"><font size=-1>302     </font></a><span class="comment">     * @return the sentence end word</span>
+<a name="303"><font size=-1>303     </font></a><span class="comment">     */</span>
+<a name="304"><font size=-1>304     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6345">getSentenceEndWord</a></span><span class="default">() {</span>
+<a name="305"><font size=-1>305     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6348">getWord</a></span><span class="default">(<a href="dictionary_E.html#6398">SENTENCE_END_SPELLING</a>);</span>
+<a name="306"><font size=-1>306     </font></a><span class="default">    }</span>
+<a name="307"><font size=-1>307     </font></a><span class="default"></span>
+<a name="308"><font size=-1>308     </font></a><span class="default"></span>
+<a name="309"><font size=-1>309     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="310"><font size=-1>310     </font></a><span class="comment">     * Returns the silence word.</span>
+<a name="311"><font size=-1>311     </font></a><span class="comment">     *</span>
+<a name="312"><font size=-1>312     </font></a><span class="comment">     * @return the silence word</span>
+<a name="313"><font size=-1>313     </font></a><span class="comment">     */</span>
+<a name="314"><font size=-1>314     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6347">getSilenceWord</a></span><span class="default">() {</span>
+<a name="315"><font size=-1>315     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6348">getWord</a></span><span class="default">(<a href="dictionary_E.html#6173">SILENCE_SPELLING</a>);</span>
+<a name="316"><font size=-1>316     </font></a><span class="default">    }</span>
+<a name="317"><font size=-1>317     </font></a><span class="default"></span>
+<a name="318"><font size=-1>318     </font></a><span class="default"></span>
+<a name="319"><font size=-1>319     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="320"><font size=-1>320     </font></a><span class="comment">     * Returns the set of all possible word classifications for this dictionary.</span>
+<a name="321"><font size=-1>321     </font></a><span class="comment">     *</span>
+<a name="322"><font size=-1>322     </font></a><span class="comment">     * @return the set of all possible word classifications</span>
+<a name="323"><font size=-1>323     </font></a><span class="comment">     */</span>
+<a name="324"><font size=-1>324     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#6390">WordClassification</a></span><span class="default">[] <a href="dictionary_E.html#6344">getPossibleWordClassifications</a>() {</span>
+<a name="325"><font size=-1>325     </font></a><span class="default">        </span><span class="keyword">return null</span><span class="default">;</span>
+<a name="326"><font size=-1>326     </font></a><span class="default">    }</span>
+<a name="327"><font size=-1>327     </font></a><span class="default"></span>
+<a name="328"><font size=-1>328     </font></a><span class="default"></span>
+<a name="329"><font size=-1>329     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="330"><font size=-1>330     </font></a><span class="comment">     * Get the word dictionary file</span>
+<a name="331"><font size=-1>331     </font></a><span class="comment">     *</span>
+<a name="332"><font size=-1>332     </font></a><span class="comment">     * @return the URL of the word dictionary file</span>
+<a name="333"><font size=-1>333     </font></a><span class="comment">     */</span>
+<a name="334"><font size=-1>334     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_J.html#60">URL</a> <a href="dictionary_E.html#6352">getWordDictionaryFile</a></span><span class="default">() {</span>
+<a name="335"><font size=-1>335     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6386">wordDictionaryFile</a></span><span class="default">;</span>
+<a name="336"><font size=-1>336     </font></a><span class="default">    }</span>
+<a name="337"><font size=-1>337     </font></a><span class="default"></span>
+<a name="338"><font size=-1>338     </font></a><span class="default"></span>
+<a name="339"><font size=-1>339     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="340"><font size=-1>340     </font></a><span class="comment">     * Get the filler dictionary file</span>
+<a name="341"><font size=-1>341     </font></a><span class="comment">     *</span>
+<a name="342"><font size=-1>342     </font></a><span class="comment">     * @return the URL of the filler dictionary file</span>
+<a name="343"><font size=-1>343     </font></a><span class="comment">     */</span>
+<a name="344"><font size=-1>344     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_J.html#60">URL</a> <a href="dictionary_E.html#6342">getFillerDictionaryFile</a></span><span class="default">() {</span>
+<a name="345"><font size=-1>345     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6381">fillerDictionaryFile</a></span><span class="default">;</span>
+<a name="346"><font size=-1>346     </font></a><span class="default">    }</span>
+<a name="347"><font size=-1>347     </font></a><span class="default"></span>
+<a name="348"><font size=-1>348     </font></a><span class="default"></span>
+<a name="349"><font size=-1>349     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="350"><font size=-1>350     </font></a><span class="comment">     * Returns a string representation of this FullDictionary in alphabetical order.</span>
+<a name="351"><font size=-1>351     </font></a><span class="comment">     *</span>
+<a name="352"><font size=-1>352     </font></a><span class="comment">     * @return a string representation of this FullDictionary</span>
+<a name="353"><font size=-1>353     </font></a><span class="comment">     */</span>
+<a name="354"><font size=-1>354     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6375">toString</a></span><span class="default">() {</span>
+<a name="355"><font size=-1>355     </font></a><span class="default">        </span><span class="keyword">return super</span><span class="default">.<a href="dictionary_T.html#243">toString</a>() + </span><span class="string">&quot;numWords=&quot; </span><span class="default">+ <a href="dictionary_E.html#6385">wordDictionary</a>.<a href="dictionary_S.html#234">size</a>() + </span><span class="string">&quot; dictLlocation=&quot; </span><span class="default">+ <a href="dictionary_E.html#6352">getWordDictionaryFile</a>();</span>
+<a name="356"><font size=-1>356     </font></a><span class="default">    }</span>
+<a name="357"><font size=-1>357     </font></a><span class="default"></span>
+<a name="358"><font size=-1>358     </font></a><span class="default"></span>
+<a name="359"><font size=-1>359     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6331">dumpToString</a></span><span class="default">() {</span>
+<a name="360"><font size=-1>360     </font></a><span class="default">        <a href="dictionary_S.html#6388">SortedMap</a>&lt;<a href="dictionary_S.html#21">String</a>, Object&gt; <a href="dictionary_E.html#6338">sorted</a> = </span><span class="keyword">new <a href="dictionary_T.html#6389">TreeMap</a></span><span class="default">&lt;<a href="dictionary_S.html#21">String</a>, Object&gt;(<a href="dictionary_E.html#6385">wordDictionary</a>);</span>
+<a name="361"><font size=-1>361     </font></a><span class="default">        <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6337">result</a> = </span><span class="string">&quot;&quot;</span><span class="default">;</span>
+<a name="362"><font size=-1>362     </font></a><span class="default">        <a href="dictionary_E.html#6338">sorted</a>.<a href="dictionary_P.html#4397">putAll</a>(<a href="dictionary_E.html#6380">fillerDictionary</a>);</span>
+<a name="363"><font size=-1>363     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(Object <a href="dictionary_E.html#6333">o</a> : <a href="dictionary_E.html#6338">sorted</a>.<a href="dictionary_K.html#110">keySet</a>()) {</span>
+<a name="364"><font size=-1>364     </font></a><span class="default">            <a href="dictionary_S.html#21">String</a> <a href="dictionary_E.html#6335">text</a> = (String) <a href="dictionary_E.html#6333">o</a>;</span>
+<a name="365"><font size=-1>365     </font></a><span class="default">            <a href="dictionary_E.html#582">Word</a> <a href="dictionary_E.html#6336">word</a> = <a href="dictionary_E.html#6348">getWord</a>(<a href="dictionary_E.html#6335">text</a>);</span>
+<a name="366"><font size=-1>366     </font></a><span class="default">            <a href="dictionary_E.html#2356">Pronunciation</a>[] <a href="dictionary_E.html#6334">pronunciations</a> = <a href="dictionary_E.html#6336">word</a>.<a href="dictionary_E.html#4766">getPronunciations</a>(</span><span class="keyword">null</span><span class="default">);</span>
+<a name="367"><font size=-1>367     </font></a><span class="default">            result += (<a href="dictionary_E.html#6336">word</a> + </span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="368"><font size=-1>368     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#2356">Pronunciation</a> <a href="dictionary_E.html#6332">pronunciation</a> : <a href="dictionary_E.html#6334">pronunciations</a>) {</span>
+<a name="369"><font size=-1>369     </font></a><span class="default">                result += (</span><span class="string">&quot;   &quot; </span><span class="default">+ <a href="dictionary_E.html#6332">pronunciation</a>.<a href="dictionary_E.html#4782">toString</a>() + </span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="370"><font size=-1>370     </font></a><span class="default">            }</span>
+<a name="371"><font size=-1>371     </font></a><span class="default">        }</span>
+<a name="372"><font size=-1>372     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6337">result</a></span><span class="default">;</span>
+<a name="373"><font size=-1>373     </font></a><span class="default">    }</span>
+<a name="374"><font size=-1>374     </font></a><span class="default"></span>
+<a name="375"><font size=-1>375     </font></a><span class="default"></span>
+<a name="376"><font size=-1>376     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="377"><font size=-1>377     </font></a><span class="comment">     * Gets the set of all filler words in the dictionary</span>
+<a name="378"><font size=-1>378     </font></a><span class="comment">     *</span>
+<a name="379"><font size=-1>379     </font></a><span class="comment">     * @return an array (possibly empty) of all filler words</span>
+<a name="380"><font size=-1>380     </font></a><span class="comment">     */</span>
+<a name="381"><font size=-1>381     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_E.html#582">Word</a></span><span class="default">[] <a href="dictionary_E.html#6343">getFillerWords</a>() {</span>
+<a name="382"><font size=-1>382     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#6380">fillerDictionary</a></span><span class="default">.<a href="dictionary_V.html#112">values</a>().<a href="dictionary_T.html#339">toArray</a>(</span>
+<a name="383"><font size=-1>383     </font></a><span class="default">                </span><span class="keyword">new <a href="dictionary_E.html#582">Word</a></span><span class="default">[<a href="dictionary_E.html#6380">fillerDictionary</a>.<a href="dictionary_V.html#112">values</a>().<a href="dictionary_S.html#234">size</a>()]);</span>
+<a name="384"><font size=-1>384     </font></a><span class="default">    }</span>
+<a name="385"><font size=-1>385     </font></a><span class="default">}</span>
+<a name="386"><font size=-1>386     </font></a><span class="default"></span>
+</pre></body></html>

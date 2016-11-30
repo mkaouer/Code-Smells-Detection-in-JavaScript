@@ -1,0 +1,21 @@
+file: index.txt
+date: Tue, 31 Aug 2010 23:07:57 (local)
+Linklint version: 2.3.5
+
+ summary.txt: summary of results
+     log.txt: log of progress
+      dir.txt: found  84 directories with files
+     file.txt: found 723 files
+    fileX.txt: found 723 files (cross referenced)
+    fileF.txt: found 500 files with forward links
+   remote.txt: found 131 other links
+  remoteX.txt: found 131 other links (cross referenced)
+   anchor.txt: found 11895 named anchors
+  anchorX.txt: found 11895 named anchors (cross referenced)
+  skipped.txt: ----- 195 files skipped
+    skipX.txt: ----- 195 files skipped (cross referenced)
+    error.txt: ERROR   1 missing file
+   errorX.txt: ERROR   1 missing file (cross referenced)
+   errorF.txt: ERROR 485 files had broken links
+   errorA.txt: ERROR   6 missing named anchors
+  errorAX.txt: ERROR   6 missing named anchors (cross referenced)

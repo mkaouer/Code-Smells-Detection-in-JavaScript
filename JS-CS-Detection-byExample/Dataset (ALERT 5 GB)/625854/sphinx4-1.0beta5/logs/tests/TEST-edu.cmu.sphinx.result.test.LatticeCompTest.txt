@@ -1,0 +1,50 @@
+Testsuite: edu.cmu.sphinx.result.test.LatticeCompTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 23,962 sec
+------------- Standard Output ---------------
+
+# --------------- Summary statistics ---------
+   Total Time Audio: 2,20s  Proc: 0,81s  Speed: 0,37 X real time
+# edges: 1 1
+# edges: 1 1
+# edges: 2 2
+# edges: 1 1
+# edges: 1 1
+# edges: 1 1
+# edges: 1 1
+# edges: 2 2
+# edges: 3 3
+# edges: 0 0
+# edges: 1 1
+# edges: 0 0
+# edges: 1 1
+# edges: 1 1
+# edges: 0 0
+# edges: 1 1
+# edges: 2 2
+# edges: 0 0
+# edges: 1 1
+# edges: 0 0
+# edges: 1 1
+# edges: 1 1
+# edges: 1 1
+# edges: 1 1
+# edges: 2 2
+# edges: 3 3
+# edges: 0 0
+# edges: 1 1
+# edges: 0 0
+# edges: 1 1
+# edges: 1 1
+# edges: 0 0
+# edges: 1 1
+# edges: 2 2
+# edges: 0 0
+# edges: 1 1
+# edges: 0 0
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+Dumping lattice to logs/lattice.gdl
+Dumping All Lattice to logs/allLattice.gdl
+------------- ---------------- ---------------
+
+Testcase: testLatticeComp took 23,937 sec

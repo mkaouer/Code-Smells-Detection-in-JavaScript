@@ -1,0 +1,4 @@
+Testsuite: edu.cmu.sphinx.jsgf.test.JSGFTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 2,974 sec
+
+Testcase: testParser took 2,95 sec

@@ -1,0 +1,96 @@
+graph: {
+title: "Full Token Graph"
+display_edge_labels: yes
+node: { title: "0" label: "[0.00.0,0.0]" color:  }
+edge: { sourcename: "0" targetname: "1" }
+node: { title: "1" label: "</s>[0.00.0,-94811.76]" color: magenta }
+edge: { sourcename: "1" targetname: "2" }
+node: { title: "2" label: "[4257813.03978941.5,0.0]" color:  }
+edge: { sourcename: "2" targetname: "3" }
+node: { title: "3" label: "middle[0.00.0,277136.9]" color: lightblue }
+edge: { sourcename: "3" targetname: "4" }
+node: { title: "4" label: "[988794.11630308.6,-361118.56]" color:  }
+edge: { sourcename: "4" targetname: "5" }
+node: { title: "5" label: "the[0.00.0,170821.75]" color: lightblue }
+edge: { sourcename: "5" targetname: "6" }
+node: { title: "6" label: "[398075.06-311364.5,-183585.8]" color:  }
+edge: { sourcename: "6" targetname: "7" }
+node: { title: "7" label: "in[0.00.0,216351.62]" color: lightblue }
+edge: { sourcename: "7" targetname: "8" }
+node: { title: "8" label: "[-65325.945438140.53,-290180.06]" color:  }
+edge: { sourcename: "8" targetname: "9" }
+node: { title: "9" label: "right[0.00.0,51746.062]" color: lightblue }
+edge: { sourcename: "9" targetname: "10" }
+node: { title: "10" label: "[-454901.66207103.03,-301402.53]" color:  }
+edge: { sourcename: "10" targetname: "11" }
+node: { title: "11" label: "one[0.00.0,216820.5]" color: lightblue }
+edge: { sourcename: "11" targetname: "12" }
+node: { title: "12" label: "[-538102.3-125326.91,-295564.38]" color:  }
+edge: { sourcename: "12" targetname: "13" }
+node: { title: "13" label: "green[0.00.0,119749.586]" color: lightblue }
+edge: { sourcename: "13" targetname: "14" }
+node: { title: "14" label: "[-52356.492-554806.25,-203006.02]" color:  }
+edge: { sourcename: "14" targetname: "15" }
+node: { title: "15" label: "the[0.00.0,81505.61]" color: lightblue }
+edge: { sourcename: "15" targetname: "16" }
+node: { title: "16" label: "[-54323.01-593269.06,-183585.8]" color:  }
+edge: { sourcename: "16" targetname: "17" }
+node: { title: "17" label: "<sil>[0.00.0,0.0]" color: lightblue }
+edge: { sourcename: "17" targetname: "18" }
+node: { title: "18" label: "[2003180.12228377.0,0.0]" color:  }
+edge: { sourcename: "18" targetname: "19" }
+node: { title: "19" label: "<s>[0.00.0,0.0]" color: lightblue }
+edge: { sourcename: "7" targetname: "20" }
+node: { title: "20" label: "[144527.8208397.23,-290180.06]" color:  }
+edge: { sourcename: "20" targetname: "21" }
+node: { title: "21" label: "right[0.00.0,-45528.312]" color: lightblue }
+edge: { sourcename: "21" targetname: "22" }
+node: { title: "22" label: "[-454901.66207103.03,-301402.53]" color:  }
+edge: { sourcename: "22" targetname: "23" }
+node: { title: "23" label: "on[0.00.0,51835.375]" color: lightblue }
+edge: { sourcename: "23" targetname: "24" }
+node: { title: "24" label: "[-36552.742-615535.5,-311177.7]" color:  }
+edge: { sourcename: "24" targetname: "25" }
+node: { title: "25" label: "green[0.00.0,119749.586]" color: lightblue }
+edge: { sourcename: "25" targetname: "26" }
+node: { title: "26" label: "[-182638.75-640167.06,-203006.02]" color:  }
+edge: { sourcename: "26" targetname: "15" }
+edge: { sourcename: "1" targetname: "27" }
+node: { title: "27" label: "[0.00.0,0.0]" color:  }
+edge: { sourcename: "27" targetname: "28" }
+node: { title: "28" label: "<sil>[0.00.0,0.0]" color: lightblue }
+edge: { sourcename: "28" targetname: "2" }
+node: { title: "29" label: "[0.00.0,0.0]" color:  }
+edge: { sourcename: "29" targetname: "30" }
+node: { title: "30" label: "</s>[0.00.0,-174465.16]" color: magenta }
+edge: { sourcename: "30" targetname: "31" }
+node: { title: "31" label: "[4257813.03978941.5,0.0]" color:  }
+edge: { sourcename: "31" targetname: "32" }
+node: { title: "32" label: "all[0.00.0,102341.0]" color: lightblue }
+edge: { sourcename: "32" targetname: "33" }
+node: { title: "33" label: "[583303.5474710.72,-427453.62]" color:  }
+edge: { sourcename: "33" targetname: "34" }
+node: { title: "34" label: "middle[0.00.0,277136.9]" color: lightblue }
+edge: { sourcename: "34" targetname: "35" }
+node: { title: "35" label: "[386831.97277795.88,-361118.56]" color:  }
+edge: { sourcename: "35" targetname: "5" }
+edge: { sourcename: "30" targetname: "36" }
+node: { title: "36" label: "[0.00.0,0.0]" color:  }
+edge: { sourcename: "36" targetname: "37" }
+node: { title: "37" label: "<sil>[0.00.0,0.0]" color: lightblue }
+edge: { sourcename: "37" targetname: "31" }
+node: { title: "38" label: "[0.00.0,0.0]" color:  }
+edge: { sourcename: "38" targetname: "39" }
+node: { title: "39" label: "</s>[0.00.0,-331437.2]" color: magenta }
+edge: { sourcename: "39" targetname: "40" }
+node: { title: "40" label: "[0.00.0,0.0]" color:  }
+edge: { sourcename: "40" targetname: "41" }
+node: { title: "41" label: "a[0.00.0,-69057.69]" color: lightblue }
+edge: { sourcename: "41" targetname: "42" }
+node: { title: "42" label: "[87753.125-385800.06,-298422.5]" color:  }
+edge: { sourcename: "42" targetname: "43" }
+node: { title: "43" label: "<sil>[0.00.0,0.0]" color: lightblue }
+edge: { sourcename: "43" targetname: "44" }
+node: { title: "44" label: "[3838612.83961700.2,0.0]" color:  }
+edge: { sourcename: "44" targetname: "3" }
+}

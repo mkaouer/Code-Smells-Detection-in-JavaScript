@@ -1,0 +1,18 @@
+file: summary.txt
+date: Tue, 31 Aug 2010 23:07:57 (local)
+Linklint version: 2.3.5
+
+Linklint found 723 files in 84 directories and checked 500 html files.
+There was 1 missing file. 485 files had broken links.
+7 errors, no warnings.  Parsed ~ 100.0 files/second.
+
+found  84 directories with files
+found   2 default indexes
+found 693 html files
+found  15 image files
+found  13 other files
+found 131 http links
+found 11895 named anchors
+----- 195 files skipped
+ERROR   1 missing html file
+ERROR   6 missing named anchors

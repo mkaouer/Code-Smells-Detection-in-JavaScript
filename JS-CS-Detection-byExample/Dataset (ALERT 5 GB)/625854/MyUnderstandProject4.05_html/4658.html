@@ -1,0 +1,38 @@
+<html><head><title>BatchForcedAlignerGrammarTest.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta5\src\test\edu\cmu\sphinx\linguist\language\grammar\BatchForcedAlignerGrammarTest.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta5\\src\\test\\edu\\cmu\\sphinx\\linguist\\language\\grammar\\BatchForcedAlignerGrammarTest.java";
+top.document.title  = "BatchForcedAlignerGrammarTest.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.linguist.language.<a href="dictionary_E.html#174">grammar</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import static </span><span class="default">org.junit.Assert.assertTrue;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#80">io</a>.<a href="dictionary_J.html#73">IOException</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#274">net</a>.<a href="dictionary_J.html#270">URL</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">org.<a href="dictionary_O.html#81">junit</a>.<a href="dictionary_O.html#77">Test</a>;</span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span>
+<a name="10"><font size=-1>10     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#354">acoustic</a>.<a href="dictionary_E.html#1192">UnitManager</a>;</span>
+<a name="11"><font size=-1>11     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#181">dictionary</a>.<a href="dictionary_E.html#177">Dictionary</a>;</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.<a href="dictionary_E.html#181">dictionary</a>.<a href="dictionary_E.html#1322">FastDictionary</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.linguist.language.<a href="dictionary_E.html#174">grammar</a>.<a href="dictionary_E.html#4664">BatchForcedAlignerGrammar</a>;</span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_E.html#4659">BatchForcedAlignerGrammarTest</a> </span><span class="default">{</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    @<a href="dictionary_O.html#77">Test</a></span>
+<a name="18"><font size=-1>18     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#4660">testForcedAlignerGrammar</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_J.html#73">IOException</a> </span><span class="default">{</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">        <a href="dictionary_E.html#177">Dictionary</a> <a href="dictionary_E.html#4661">dictionary</a> = </span><span class="keyword">new <a href="dictionary_E.html#1332">FastDictionary</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_J.html#270">URL</a></span><span class="default">(</span><span class="string">&quot;file:models/acoustic/wsj/dict/digits.dict&quot;</span><span class="default">), </span><span class="keyword">new <a href="dictionary_J.html#270">URL</a></span><span class="default">(</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">                </span><span class="string">&quot;file:models/acoustic/wsj/dict/fillerdict&quot;</span><span class="default">), </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">false</span><span class="default">, </span><span class="keyword">null</span><span class="default">, </span><span class="keyword">false</span><span class="default">, </span><span class="keyword">false</span><span class="default">, </span><span class="keyword">new <a href="dictionary_E.html#4665">UnitManager</a></span><span class="default">());</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">        <a href="dictionary_E.html#4664">BatchForcedAlignerGrammar</a> <a href="dictionary_E.html#4662">grammar</a> = </span><span class="keyword">new <a href="dictionary_E.html#4666">BatchForcedAlignerGrammar</a></span><span class="default">(</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">                </span><span class="string">&quot;src/test/edu/cmu/sphinx/linguist/language/grammar/utts.transcription&quot;</span><span class="default">, </span><span class="keyword">true</span><span class="default">, </span><span class="keyword">true</span><span class="default">, </span><span class="keyword">true</span><span class="default">, </span><span class="keyword">true</span><span class="default">, <a href="dictionary_E.html#4661">dictionary</a>);</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">        <a href="dictionary_E.html#4662">grammar</a>.<a href="dictionary_E.html#4667">allocate</a>();</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">        <a href="dictionary_S.html#76">String</a> <a href="dictionary_E.html#4663">sentence</a> = <a href="dictionary_E.html#4662">grammar</a>.<a href="dictionary_E.html#3385">getRandomSentence</a>();</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">        <a href="dictionary_A.html#28">assertTrue</a>(<a href="dictionary_E.html#4663">sentence</a>.<a href="dictionary_E.html#67">equals</a>(</span><span class="string">&quot;one&quot;</span><span class="default">) || <a href="dictionary_E.html#4663">sentence</a>.<a href="dictionary_E.html#67">equals</a>(</span><span class="string">&quot;two&quot;</span><span class="default">) || <a href="dictionary_E.html#4663">sentence</a>.<a href="dictionary_E.html#67">equals</a>(</span><span class="string">&quot;three&quot;</span><span class="default">));</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">    }</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">}</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span>
+</pre></body></html>

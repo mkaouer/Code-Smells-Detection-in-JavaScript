@@ -1,0 +1,69 @@
+<html><head><title>DiscreteCosineTransform2.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta5\src\sphinx4\edu\cmu\sphinx\frontend\transform\DiscreteCosineTransform2.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta5\\src\\sphinx4\\edu\\cmu\\sphinx\\frontend\\transform\\DiscreteCosineTransform2.java";
+top.document.title  = "DiscreteCosineTransform2.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.frontend.<a href="dictionary_E.html#2190">transform</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#78">props</a>.<a href="dictionary_E.html#87">PropertySheet</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#78">props</a>.<a href="dictionary_E.html#89">PropertyException</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="comment">/** Applies the optimized MelCosine filter used in pocketsphinx to the given melspectrum. */</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#18374">DiscreteCosineTransform2</a> extends <a href="dictionary_E.html#2179">DiscreteCosineTransform</a> </span><span class="default">{</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#18375">DiscreteCosineTransform2</a></span><span class="default">( </span><span class="keyword">int <a href="dictionary_E.html#18377">numberMelFilters</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_E.html#18376">cepstrumSize</a> </span><span class="default">) {</span>
+<a name="10"><font size=-1>10     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">(<a href="dictionary_E.html#18377">numberMelFilters</a>,<a href="dictionary_E.html#18376">cepstrumSize</a>);</span>
+<a name="11"><font size=-1>11     </font></a><span class="default">    }</span>
+<a name="12"><font size=-1>12     </font></a><span class="default"></span>
+<a name="13"><font size=-1>13     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#18378">DiscreteCosineTransform2</a></span><span class="default">( ) {</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">    }</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default">    @<a href="dictionary_O.html#170">Override</a></span>
+<a name="17"><font size=-1>17     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#18388">newProperties</a></span><span class="default">(<a href="dictionary_E.html#87">PropertySheet</a> <a href="dictionary_E.html#18389">ps</a>) </span><span class="keyword">throws <a href="dictionary_E.html#89">PropertyException</a> </span><span class="default">{</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_E.html#17418">newProperties</a>(<a href="dictionary_E.html#18389">ps</a>);</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">    }</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment">     * Apply the optimized MelCosine filter used in pocketsphinx to the given melspectrum.</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment">     *</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment">     * @param melspectrum the MelSpectrum data</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment">     * @return MelCepstrum data produced by apply the MelCosine filter to the MelSpectrum data</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment">     */</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#170">Override</a></span>
+<a name="29"><font size=-1>29     </font></a><span class="default">    </span><span class="keyword">protected double</span><span class="default">[] <a href="dictionary_E.html#18379">applyMelCosine</a>(</span><span class="keyword">double</span><span class="default">[] <a href="dictionary_E.html#18385">melspectrum</a>) {</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">        </span><span class="comment">// create the cepstrum</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">        </span><span class="keyword">double</span><span class="default">[] <a href="dictionary_E.html#18384">cepstrum</a> = </span><span class="keyword">new double</span><span class="default">[<a href="dictionary_E.html#17427">cepstrumSize</a>];</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">        </span><span class="keyword">double <a href="dictionary_E.html#18387">sqrt_inv_n</a> </span><span class="default">= Math.<a href="dictionary_S.html#11816">sqrt</a>(</span><span class="number">1.0 </span><span class="default">/ <a href="dictionary_E.html#17429">numberMelFilters</a>);</span>
+<a name="34"><font size=-1>34     </font></a><span class="default">        </span><span class="keyword">double <a href="dictionary_E.html#18386">sqrt_inv_2n</a> </span><span class="default">= Math.<a href="dictionary_S.html#11816">sqrt</a>(</span><span class="number">2.0 </span><span class="default">/ <a href="dictionary_E.html#17429">numberMelFilters</a>);</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">        <a href="dictionary_E.html#18384">cepstrum</a>[</span><span class="number">0</span><span class="default">] = <a href="dictionary_E.html#18385">melspectrum</a>[</span><span class="number">0</span><span class="default">];</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#18380">j</a> </span><span class="default">= </span><span class="number">1</span><span class="default">; <a href="dictionary_E.html#18380">j</a> &lt; <a href="dictionary_E.html#17429">numberMelFilters</a>; j++) {</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">            cepstrum[</span><span class="number">0</span><span class="default">] += <a href="dictionary_E.html#18385">melspectrum</a>[<a href="dictionary_E.html#18380">j</a>];</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">        }</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default">        cepstrum[</span><span class="number">0</span><span class="default">] *= <a href="dictionary_E.html#18387">sqrt_inv_n</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#17429">numberMelFilters</a> &lt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">            </span><span class="keyword">return <a href="dictionary_E.html#18384">cepstrum</a></span><span class="default">;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">        }</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">        </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#18381">i</a> </span><span class="default">= </span><span class="number">1</span><span class="default">; <a href="dictionary_E.html#18381">i</a> &lt; <a href="dictionary_E.html#18384">cepstrum</a>.<a href="dictionary_L.html#481">length</a>; i++) {</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">            </span><span class="keyword">double</span><span class="default">[] <a href="dictionary_E.html#18383">melcosine_i</a> = <a href="dictionary_E.html#17428">melcosine</a>[<a href="dictionary_E.html#18381">i</a>];</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">            </span><span class="keyword">int <a href="dictionary_E.html#18382">j</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">            <a href="dictionary_E.html#18384">cepstrum</a>[<a href="dictionary_E.html#18381">i</a>] = </span><span class="number">0</span><span class="default">;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(<a href="dictionary_E.html#18382">j</a> = </span><span class="number">0</span><span class="default">; <a href="dictionary_E.html#18382">j</a> &lt; <a href="dictionary_E.html#17429">numberMelFilters</a>; j++) {</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">                cepstrum[<a href="dictionary_E.html#18381">i</a>] += (<a href="dictionary_E.html#18385">melspectrum</a>[<a href="dictionary_E.html#18382">j</a>] * <a href="dictionary_E.html#18383">melcosine_i</a>[<a href="dictionary_E.html#18382">j</a>]);</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">            }</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">            cepstrum[<a href="dictionary_E.html#18381">i</a>] *= <a href="dictionary_E.html#18386">sqrt_inv_2n</a>;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">        }</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#18384">cepstrum</a></span><span class="default">;</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    }</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">}</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+</pre></body></html>

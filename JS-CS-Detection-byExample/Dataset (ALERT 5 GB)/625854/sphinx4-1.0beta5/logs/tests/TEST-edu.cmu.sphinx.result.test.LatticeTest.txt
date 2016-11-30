@@ -1,0 +1,19 @@
+Testsuite: edu.cmu.sphinx.result.test.LatticeTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0,102 sec
+------------- Standard Output ---------------
+ 0 1 4
+ 0 1 3 4
+ 0 1 2 4
+ 0 2 3 4
+ 0 1 4
+ 0 1 3 4
+ 0 1 2 4
+ 0 2 3 4
+------------- ---------------- ---------------
+------------- Standard Error -----------------
+Building test Lattice
+Lattice has 7 nodes and 9 edges
+Testing Save/Load .LAT file
+------------- ---------------- ---------------
+
+Testcase: testLattice took 0,077 sec

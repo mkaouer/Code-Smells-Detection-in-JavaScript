@@ -1,0 +1,131 @@
+<html><head><title>Preemphasizer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta4\src\sphinx4\edu\cmu\sphinx\frontend\filter\Preemphasizer.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta4\\src\\sphinx4\\edu\\cmu\\sphinx\\frontend\\filter\\Preemphasizer.java";
+top.document.title  = "Preemphasizer.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2004 Carnegie Mellon University.  </span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2002-2004 Sun Microsystems, Inc.  </span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2002-2004 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * </span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL </span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">edu.cmu.sphinx.frontend.<a href="dictionary_E.html#10402">filter</a>;</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.<a href="dictionary_E.html#219">frontend</a>.*;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.frontend.<a href="dictionary_E.html#2221">endpoint</a>.*;</span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">edu.cmu.sphinx.util.<a href="dictionary_E.html#37">props</a>.*;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="19"><font size=-1>19     </font></a><span class="comment"> * Implements a high-pass filter that compensates for attenuation in the audio data. Speech signals have an attenuation</span>
+<a name="20"><font size=-1>20     </font></a><span class="comment"> * (a decrease in intensity of a signal) of 20 dB/dec. It increases the relative magnitude of the higher frequencies</span>
+<a name="21"><font size=-1>21     </font></a><span class="comment"> * with respect to the lower frequencies.</span>
+<a name="22"><font size=-1>22     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="23"><font size=-1>23     </font></a><span class="comment"> * The Preemphasizer takes a {@link Data}object that usually represents audio data as input, and outputs the same {@link</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> * Data}object, but with preemphasis applied. For each value X[i] in the input Data object X, the following formula is</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> * applied to obtain the output Data object Y:</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="27"><font size=-1>27     </font></a><span class="comment"> * &lt;code&gt; Y[i] = X[i] - (X[i-1] * preemphasisFactor) &lt;/code&gt;</span>
+<a name="28"><font size=-1>28     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * where 'i' denotes time.</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * The preemphasis factor has a value defined by the field {@link #PROP_PREEMPHASIS_FACTOR} of 0.97. A common value for</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * this factor is something around 0.97.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"> * Other {@link Data}objects are passed along unchanged through this Preemphasizer.</span>
+<a name="35"><font size=-1>35     </font></a><span class="comment"> * &lt;p/&gt;</span>
+<a name="36"><font size=-1>36     </font></a><span class="comment"> * The Preemphasizer emphasizes the high frequency components, because they usually contain much less energy than lower</span>
+<a name="37"><font size=-1>37     </font></a><span class="comment"> * frequency components, even though they are still important for speech recognition. It is a high-pass filter because</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment"> * it allows the high frequency components to &quot;pass through&quot;, while weakening or filtering out the low frequency</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment"> * components.</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment"> */</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_E.html#10398">Preemphasizer</a> extends <a href="dictionary_E.html#941">BaseDataProcessor</a> </span><span class="default">{</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">    </span><span class="comment">/** The property for preemphasis factor/alpha. */</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_E.html#226">S4Double</a>(<a href="dictionary_E.html#227">defaultValue</a> = </span><span class="number">0.97</span><span class="default">)</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">    </span><span class="keyword">public static final <a href="dictionary_S.html#28">String</a> <a href="dictionary_E.html#17011">PROP_PREEMPHASIS_FACTOR</a> </span><span class="default">= </span><span class="string">&quot;factor&quot;</span><span class="default">;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">    </span><span class="keyword">private double <a href="dictionary_E.html#17012">preemphasisFactor</a></span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">    </span><span class="keyword">private double <a href="dictionary_E.html#17013">prior</a></span><span class="default">;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#10406">Preemphasizer</a></span><span class="default">( </span><span class="keyword">double <a href="dictionary_E.html#16999">preemphasisFactor</a> </span><span class="default">) {</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">        <a href="dictionary_E.html#947">initLogger</a>();</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">        </span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#17012">preemphasisFactor</a> = <a href="dictionary_E.html#16999">preemphasisFactor</a>;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    }</span>
+<a name="54"><font size=-1>54     </font></a><span class="default"></span>
+<a name="55"><font size=-1>55     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#17000">Preemphasizer</a></span><span class="default">( ) {</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default">    }</span>
+<a name="58"><font size=-1>58     </font></a><span class="default"></span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">    * (non-Javadoc)</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">    *</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">    * @see edu.cmu.sphinx.util.props.Configurable#newProperties(edu.cmu.sphinx.util.props.PropertySheet)</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">    */</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#3">Override</a></span>
+<a name="66"><font size=-1>66     </font></a><span class="default">    </span><span class="keyword">public void <a href="dictionary_E.html#17009">newProperties</a></span><span class="default">(<a href="dictionary_E.html#45">PropertySheet</a> <a href="dictionary_E.html#17010">ps</a>) </span><span class="keyword">throws <a href="dictionary_E.html#47">PropertyException</a> </span><span class="default">{</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">        </span><span class="keyword">super</span><span class="default">.<a href="dictionary_E.html#954">newProperties</a>(<a href="dictionary_E.html#17010">ps</a>);</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        <a href="dictionary_E.html#17012">preemphasisFactor</a> = <a href="dictionary_E.html#17010">ps</a>.<a href="dictionary_E.html#272">getDouble</a>(<a href="dictionary_E.html#17011">PROP_PREEMPHASIS_FACTOR</a>);</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">    }</span>
+<a name="70"><font size=-1>70     </font></a><span class="default"></span>
+<a name="71"><font size=-1>71     </font></a><span class="default"></span>
+<a name="72"><font size=-1>72     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment">     * Returns the next Data object being processed by this Preemphasizer, or if it is a Signal, it is returned without</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment">     * modification.</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment">     *</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment">     * @return the next available Data object, returns null if no Data object is available</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment">     * @throws DataProcessingException if there is a processing error</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment">     * @see Data</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment">     */</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment">    </span><span class="default">@<a href="dictionary_O.html#3">Override</a></span>
+<a name="81"><font size=-1>81     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_E.html#207">Data</a> <a href="dictionary_E.html#17007">getData</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_E.html#942">DataProcessingException</a> </span><span class="default">{</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">        <a href="dictionary_E.html#207">Data</a> <a href="dictionary_E.html#17008">input</a> = <a href="dictionary_E.html#2229">getPredecessor</a>().<a href="dictionary_E.html#2230">getData</a>();</span>
+<a name="83"><font size=-1>83     </font></a><span class="default">        <a href="dictionary_E.html#949">getTimer</a>().<a href="dictionary_E.html#260">start</a>();</span>
+<a name="84"><font size=-1>84     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#17008">input</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">            </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#17008">input</a> </span><span class="keyword">instanceof <a href="dictionary_E.html#946">DoubleData</a></span><span class="default">) {</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">                <a href="dictionary_E.html#17001">applyPreemphasis</a>(((DoubleData) <a href="dictionary_E.html#17008">input</a>).<a href="dictionary_E.html#2225">getValues</a>());</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">            } </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#17008">input</a> </span><span class="keyword">instanceof <a href="dictionary_E.html#943">DataEndSignal</a> </span><span class="default">|| <a href="dictionary_E.html#17008">input</a> </span><span class="keyword">instanceof <a href="dictionary_E.html#2303">SpeechEndSignal</a></span><span class="default">) {</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">                <a href="dictionary_E.html#17013">prior</a> = </span><span class="number">0</span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">            }</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">        }</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">        <a href="dictionary_E.html#949">getTimer</a>().<a href="dictionary_E.html#264">stop</a>();</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_E.html#17008">input</a></span><span class="default">;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">    }</span>
+<a name="94"><font size=-1>94     </font></a><span class="default"></span>
+<a name="95"><font size=-1>95     </font></a><span class="default"></span>
+<a name="96"><font size=-1>96     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="97"><font size=-1>97     </font></a><span class="comment">     * Applies pre-emphasis filter to the given Audio. The preemphasis is applied in place.</span>
+<a name="98"><font size=-1>98     </font></a><span class="comment">     *</span>
+<a name="99"><font size=-1>99     </font></a><span class="comment">     * @param in audio data</span>
+<a name="100"><font size=-1>100     </font></a><span class="comment">     */</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">    </span><span class="keyword">private void <a href="dictionary_E.html#17001">applyPreemphasis</a></span><span class="default">(</span><span class="keyword">double</span><span class="default">[] <a href="dictionary_E.html#17004">in</a>) {</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">        </span><span class="comment">// set the prior value for the next Audio</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">        </span><span class="keyword">double <a href="dictionary_E.html#17005">nextPrior</a> </span><span class="default">= <a href="dictionary_E.html#17013">prior</a>;</span>
+<a name="104"><font size=-1>104     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#17004">in</a>.<a href="dictionary_L.html#384">length</a> &gt; </span><span class="number">0</span><span class="default">) {</span>
+<a name="105"><font size=-1>105     </font></a><span class="default">            <a href="dictionary_E.html#17005">nextPrior</a> = <a href="dictionary_E.html#17004">in</a>[<a href="dictionary_E.html#17004">in</a>.<a href="dictionary_L.html#384">length</a> - </span><span class="number">1</span><span class="default">];</span>
+<a name="106"><font size=-1>106     </font></a><span class="default">        }</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#17004">in</a>.<a href="dictionary_L.html#384">length</a> &gt; </span><span class="number">1 </span><span class="default">&amp;&amp; <a href="dictionary_E.html#17012">preemphasisFactor</a> != </span><span class="number">0.0</span><span class="default">) {</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">            </span><span class="comment">// do preemphasis</span>
+<a name="109"><font size=-1>109     </font></a><span class="comment">            </span><span class="keyword">double <a href="dictionary_E.html#17003">current</a></span><span class="default">;</span>
+<a name="110"><font size=-1>110     </font></a><span class="default">            </span><span class="keyword">double <a href="dictionary_E.html#17006">previous</a> </span><span class="default">= <a href="dictionary_E.html#17004">in</a>[</span><span class="number">0</span><span class="default">];</span>
+<a name="111"><font size=-1>111     </font></a><span class="default">            <a href="dictionary_E.html#17004">in</a>[</span><span class="number">0</span><span class="default">] = <a href="dictionary_E.html#17006">previous</a> - <a href="dictionary_E.html#17012">preemphasisFactor</a> * <a href="dictionary_E.html#17013">prior</a>;</span>
+<a name="112"><font size=-1>112     </font></a><span class="default">            </span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_E.html#17002">i</a> </span><span class="default">= </span><span class="number">1</span><span class="default">; <a href="dictionary_E.html#17002">i</a> &lt; <a href="dictionary_E.html#17004">in</a>.<a href="dictionary_L.html#384">length</a>; i++) {</span>
+<a name="113"><font size=-1>113     </font></a><span class="default">                <a href="dictionary_E.html#17003">current</a> = <a href="dictionary_E.html#17004">in</a>[<a href="dictionary_E.html#17002">i</a>];</span>
+<a name="114"><font size=-1>114     </font></a><span class="default">                <a href="dictionary_E.html#17004">in</a>[<a href="dictionary_E.html#17002">i</a>] = <a href="dictionary_E.html#17003">current</a> - <a href="dictionary_E.html#17012">preemphasisFactor</a> * <a href="dictionary_E.html#17006">previous</a>;</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">                <a href="dictionary_E.html#17006">previous</a> = <a href="dictionary_E.html#17003">current</a>;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">            }</span>
+<a name="117"><font size=-1>117     </font></a><span class="default">        }</span>
+<a name="118"><font size=-1>118     </font></a><span class="default">        <a href="dictionary_E.html#17013">prior</a> = <a href="dictionary_E.html#17005">nextPrior</a>;</span>
+<a name="119"><font size=-1>119     </font></a><span class="default">    }</span>
+<a name="120"><font size=-1>120     </font></a><span class="default">}</span>
+<a name="121"><font size=-1>121     </font></a><span class="default"></span>
+</pre></body></html>

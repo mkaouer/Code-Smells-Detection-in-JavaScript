@@ -1,0 +1,29 @@
+Testsuite: edu.cmu.sphinx.result.test.MAPConfidenceTest
+Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 7,496 sec
+------------- Standard Output ---------------
+<s>
+   (confidence: 1.0)
+<sil>
+   (confidence: 1.0)
+the
+   (confidence: 0.9999749974137323)
+green
+   (confidence: 0.999949995452594)
+one
+   (confidence: 0.9999374947037151)
+right
+   (confidence: 0.9999249941147504)
+in
+   (confidence: 0.9999374947037151)
+the
+   (confidence: 0.9998874932854956)
+middle
+   (confidence: 0.9998999934056426)
+</s>
+   (confidence: 1.0)
+
+<s> <sil> the green one right in the middle </s>
+   (confidence: 0.999512562300856)
+------------- ---------------- ---------------
+
+Testcase: testMAPConfidence took 7,47 sec

@@ -1,0 +1,90 @@
+<html><head><title>AudioPlayer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\Jeremy Andrews\Documents\CIS 375\Sphinx\sphinx4-1.0beta2\tests\live\AudioPlayer.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\Jeremy Andrews\\Documents\\CIS 375\\Sphinx\\sphinx4-1.0beta2\\tests\\live\\AudioPlayer.java";
+top.document.title  = "AudioPlayer.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 1999-2002 Carnegie Mellon University.  </span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> * Portions Copyright 2002 Sun Microsystems, Inc.  </span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Portions Copyright 2002 Mitsubishi Electric Research Laboratories.</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * All Rights Reserved.  Use is subject to license terms.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * </span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> * See the file &quot;license.terms&quot; for information on usage and</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * redistribution of this file, and for a DISCLAIMER OF ALL </span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * WARRANTIES.</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> *</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"></span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">tests.<a href="dictionary_T.html#1593">live</a>;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.sound.<a href="dictionary_J.html#1596">sampled</a>.<a href="dictionary_J.html#1573">AudioFormat</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.sound.<a href="dictionary_J.html#1596">sampled</a>.<a href="dictionary_J.html#1588">AudioSystem</a>;</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.sound.<a href="dictionary_J.html#1596">sampled</a>.<a href="dictionary_J.html#1589">DataLine</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.sound.<a href="dictionary_J.html#1596">sampled</a>.<a href="dictionary_J.html#1591">LineUnavailableException</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">javax.sound.<a href="dictionary_J.html#1596">sampled</a>.<a href="dictionary_J.html#1592">SourceDataLine</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="24"><font size=-1>24     </font></a><span class="comment"> * Plays audio data to the System's audio device.</span>
+<a name="25"><font size=-1>25     </font></a><span class="comment"> */</span>
+<a name="26"><font size=-1>26     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_T.html#1574">AudioPlayer</a> </span><span class="default">{</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    </span><span class="keyword">private <a href="dictionary_J.html#1592">SourceDataLine</a> <a href="dictionary_T.html#1587">line</a></span><span class="default">;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment">     * Constructs a default AudioPlayer.</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment">     */</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment">    </span><span class="keyword">public <a href="dictionary_T.html#1575">AudioPlayer</a></span><span class="default">() {}</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span>
+<a name="37"><font size=-1>37     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="38"><font size=-1>38     </font></a><span class="comment">     * Plays the given byte array audio to the System's audio device.</span>
+<a name="39"><font size=-1>39     </font></a><span class="comment">     *</span>
+<a name="40"><font size=-1>40     </font></a><span class="comment">     * @param audio the audio data to play</span>
+<a name="41"><font size=-1>41     </font></a><span class="comment">     */</span>
+<a name="42"><font size=-1>42     </font></a><span class="comment">    </span><span class="keyword">public void <a href="dictionary_T.html#1582">play</a></span><span class="default">(</span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_T.html#1585">audio</a>, <a href="dictionary_J.html#1573">AudioFormat</a> <a href="dictionary_T.html#1586">format</a>) {</span>
+<a name="43"><font size=-1>43     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_T.html#1576">openLine</a>(<a href="dictionary_T.html#1586">format</a>)) {</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_S.html#376">start</a>();</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_W.html#242">write</a>(<a href="dictionary_T.html#1585">audio</a>, </span><span class="number">0</span><span class="default">, <a href="dictionary_T.html#1585">audio</a>.<a href="dictionary_L.html#192">length</a>);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_D.html#1583">drain</a>();</span>
+<a name="47"><font size=-1>47     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_S.html#1584">stop</a>();</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_C.html#239">close</a>();</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">        }</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">    }</span>
+<a name="52"><font size=-1>52     </font></a><span class="default"></span>
+<a name="53"><font size=-1>53     </font></a><span class="default">    </span>
+<a name="54"><font size=-1>54     </font></a><span class="default">    </span><span class="comment">/**</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment">     * Opens the audio</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment">     *</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment">     * @param format the format for the audio</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment">     *</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment">     * @return true if the audio line is successfully opened</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment">     *         false if the audio line cannot be opened</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment">     *</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment">     * @throws UnsupportedOperationException if the line cannot be opened with</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment">     *     the given format</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment">     */</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment">    </span><span class="keyword">private boolean <a href="dictionary_T.html#1576">openLine</a></span><span class="default">(<a href="dictionary_J.html#1573">AudioFormat</a> <a href="dictionary_T.html#1580">format</a>) {</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">        </span><span class="keyword">if </span><span class="default">(<a href="dictionary_T.html#1587">line</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="67"><font size=-1>67     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_C.html#239">close</a>();</span>
+<a name="68"><font size=-1>68     </font></a><span class="default">        }</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">        <a href="dictionary_D.html#1595">DataLine</a>.<a href="dictionary_D.html#1590">Info</a> <a href="dictionary_T.html#1581">info</a> = </span><span class="keyword">new <a href="dictionary_J.html#1589">DataLine</a></span><span class="default">.<a href="dictionary_D.html#1590">Info</a>(<a href="dictionary_J.html#1592">SourceDataLine</a>.</span><span class="keyword">class</span><span class="default">, <a href="dictionary_T.html#1580">format</a>);</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">        </span><span class="keyword">try </span><span class="default">{</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a> = (SourceDataLine) <a href="dictionary_J.html#1588">AudioSystem</a>.<a href="dictionary_G.html#1577">getLine</a>(<a href="dictionary_T.html#1581">info</a>);</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">            <a href="dictionary_T.html#1587">line</a>.<a href="dictionary_O.html#1578">open</a>(<a href="dictionary_T.html#1580">format</a>);</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">            </span><span class="keyword">return true</span><span class="default">;</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">        } </span><span class="keyword">catch</span><span class="default">(<a href="dictionary_J.html#1591">LineUnavailableException</a> <a href="dictionary_T.html#1579">lue</a>) {</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">            System.err.<a href="dictionary_P.html#241">println</a>(</span><span class="string">&quot;Can't open line &quot; </span><span class="default">+ <a href="dictionary_T.html#1579">lue</a>);</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">            </span><span class="keyword">return false</span><span class="default">;</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">        }   </span>
+<a name="78"><font size=-1>78     </font></a><span class="default">    }</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">}</span>
+<a name="80"><font size=-1>80     </font></a><span class="default"></span>
+</pre></body></html>
