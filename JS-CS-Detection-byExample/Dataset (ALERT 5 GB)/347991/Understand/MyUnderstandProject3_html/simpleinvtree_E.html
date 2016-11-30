@@ -1,0 +1,828 @@
+<html><head><title>Simple Invocation Tree [E]</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body bgcolor="#ffffff" TEXT="#000000"><h2>Simple Invocation Tree</h2><hr><pre>
+</pre><table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td><a href="simpleinvtree_M.html">M</a></td><td><a href="simpleinvtree_N.html">N</a></td><td>O</td><td><a href="simpleinvtree_P.html">P</a></td><td>Q</td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table><pre>
+
+<a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+| <a href="dictionary_C.html#3518">content::RenderView::GetWebView</a>
+| <a href="dictionary_M.html#3520">mainFrame</a>
+| <a href="dictionary_A.html#3528">addMessageToConsole</a>
+| <a href="dictionary_B.html#3529">blink::WebConsoleMessage</a>
+| <a href="dictionary_B.html#56">base::UTF8ToUTF16</a>
+
+<a href="dictionary_E.html#2963">extensions::console::AddMessage</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_L.html#27">LOG</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#1919">extensions::console::AsV8Object</a>
+| <a href="dictionary_I.html#3545">Isolate::GetCurrent</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_O.html#1873">Object::New</a>
+| <a href="dictionary_E.html#3494">extensions::console::BindLogMethod</a>
+| <a href="dictionary_E.html#2953">extensions::console::Debug</a>
+| <a href="dictionary_E.html#2954">extensions::console::Log</a>
+| <a href="dictionary_E.html#1831">extensions::console::Warn</a>
+| <a href="dictionary_E.html#1826">extensions::console::Error</a>
+| <a href="dictionary_E.html#214">Escape</a>
+
+<a href="dictionary_E.html#3494">extensions::console::BindLogMethod</a>
+| <a href="dictionary_F.html#2460">FunctionTemplate::New</a>
+| <a href="dictionary_E.html#3489">extensions::console::BoundLogMethodCallback</a>
+| <a href="dictionary_E.html#1875">External::New</a>
+| <a href="dictionary_S.html#1894">Set</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_G.html#3500">GetFunction</a>
+
+<a href="dictionary_E.html#3489">extensions::console::BoundLogMethodCallback</a>
+| <a href="dictionary_D.html#1974">Data</a>
+| <a href="dictionary_A.html#2039">As</a>
+| <a href="dictionary_V.html#1983">Value</a>
+| <a href="dictionary_L.html#2027">Length</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_G.html#1827">GetCallingContext</a>
+
+<a href="dictionary_E.html#3482">extensions::console::CheckWithMinidump</a>
+| <a href="dictionary_D.html#3486">debug::Alias</a>
+| <a href="dictionary_B.html#3487">base::snprintf</a>
+| <a href="dictionary_A.html#1928">arraysize</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+
+<a href="dictionary_E.html#2953">extensions::console::Debug</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#2958">extensions::console::Debug</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#1826">extensions::console::Error</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#2961">extensions::console::Error</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#2955">extensions::console::Fatal</a>
+| <a href="dictionary_E.html#1826">extensions::console::Error</a>
+| <a href="dictionary_E.html#3482">extensions::console::CheckWithMinidump</a>
+
+<a href="dictionary_E.html#2962">extensions::console::Fatal</a>
+| <a href="dictionary_E.html#1826">extensions::console::Error</a>
+| <a href="dictionary_E.html#3482">extensions::console::CheckWithMinidump</a>
+
+<a href="dictionary_E.html#2954">extensions::console::Log</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#2959">extensions::console::Log</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#1831">extensions::console::Warn</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#2960">extensions::console::Warn</a>
+| <a href="dictionary_E.html#2956">extensions::console::AddMessage</a>
+
+<a href="dictionary_E.html#200">extensions::Context::CallFunction</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#207">extensions::Context::isolate</a>
+| <a href="dictionary_S.html#210">scope</a>
+| <a href="dictionary_E.html#211">extensions::Context::v8_context</a>
+| <a href="dictionary_E.html#186">extensions::Context::is_valid</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_V.html#215">v8::Local</a>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_C.html#220">Call</a>
+| <a href="dictionary_B.html#222">blink::WebFrame::callFunctionEvenIfScriptDisabled</a>
+
+<a href="dictionary_E.html#165">extensions::Context::Context</a>
+| <a href="dictionary_E.html#174">extensions::ScopedPersistent::ScopedPersistent</a>
+| <a href="dictionary_E.html#178">extensions::SafeBuiltins::SafeBuiltins</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_V.html#181">VLOG</a>
+
+<a href="dictionary_E.html#190">extensions::Context::GetRenderView</a>
+| <a href="dictionary_B.html#192">blink::WebFrame::view</a>
+| <a href="dictionary_C.html#193">content::RenderView::FromWebView</a>
+
+<a href="dictionary_E.html#194">extensions::Context::GetURL</a>
+| <a href="dictionary_G.html#196">GURL</a>
+| <a href="dictionary_B.html#197">blink::WebFrame::document</a>
+| <a href="dictionary_U.html#198">url</a>
+| <a href="dictionary_S.html#199">string</a>
+
+<a href="dictionary_E.html#183">extensions::Context::Invalidate</a>
+| <a href="dictionary_E.html#186">extensions::Context::is_valid</a>
+| <a href="dictionary_I.html#188">Invalidate</a>
+| <a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+
+<a href="dictionary_E.html#186">extensions::Context::is_valid</a>
+| <a href="dictionary_E.html#1207">extensions::ScopedPersistent::IsEmpty</a>
+
+<a href="dictionary_E.html#2802">extensions::Context::module_system</a>
+| <a href="dictionary_G.html#95">get</a>
+
+<a href="dictionary_E.html#2800">extensions::Context::set_module_system</a>
+| <a href="dictionary_P.html#23">Pass</a>
+
+<a href="dictionary_E.html#211">extensions::Context::v8_context</a>
+| <a href="dictionary_E.html#1208">extensions::ScopedPersistent::NewHandle</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+
+<a href="dictionary_E.html#182">extensions::Context::~Context</a>
+| <a href="dictionary_V.html#181">VLOG</a>
+| <a href="dictionary_E.html#183">extensions::Context::Invalidate</a>
+| <a href="dictionary_E.html#184">extensions::SafeBuiltins::~SafeBuiltins</a>
+| <a href="dictionary_E.html#185">extensions::ScopedPersistent::~ScopedPersistent</a>
+
+<a href="dictionary_E.html#1836">extensions::DefaultExceptionHandler::HandleUncaughtException</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1009">extensions::ScriptContext::isolate</a>
+| <a href="dictionary_S.html#1842">StackTrace</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_S.html#1845">stack_value</a>
+| <a href="dictionary_A.html#1846">assign</a>
+| <a href="dictionary_L.html#1107">length</a>
+| <a href="dictionary_E.html#1821">extensions::Fatal</a>
+| <a href="dictionary_E.html#1847">extensions::ModuleSystem::ExceptionHandler::CreateExceptionString</a>
+
+<a href="dictionary_E.html#836">extensions::Dispatcher::DidCreateScriptContext</a>
+| <a href="dictionary_E.html#843">extensions::ScriptContext::ScriptContext</a>
+| <a href="dictionary_E.html#845">extensions::ModuleSystem::ModuleSystem</a>
+| <a href="dictionary_E.html#847">extensions::ScriptContext::set_module_system</a>
+| <a href="dictionary_P.html#23">Pass</a>
+| <a href="dictionary_E.html#849">extensions::ScriptContext::module_system</a>
+| <a href="dictionary_E.html#851">extensions::ModuleSystem::NativesEnabledScope::NativesEnabledScope</a>
+| <a href="dictionary_E.html#853">extensions::Dispatcher::RegisterNativeHandlers</a>
+| <a href="dictionary_E.html#854">extensions::ModuleSystem::Require</a>
+| <a href="dictionary_L.html#27">LOG</a>
+| <a href="dictionary_E.html#855">extensions::ModuleSystem::NativesEnabledScope::~NativesEnabledScope</a>
+
+<a href="dictionary_E.html#820">extensions::Dispatcher::Dispatcher</a>
+| <a href="dictionary_C.html#822">content::RenderThread::Get</a>
+| <a href="dictionary_R.html#823">RegisterExtension</a>
+| <a href="dictionary_E.html#824">extensions::SafeBuiltins::CreateV8Extension</a>
+| <a href="dictionary_E.html#825">extensions::Dispatcher::PopulateSourceMap</a>
+| <a href="dictionary_E.html#828">extensions::LocalSourceMap::LocalSourceMap</a>
+
+<a href="dictionary_E.html#869">extensions::Dispatcher::EnableCustomElementWhiteList</a>
+| <a href="dictionary_W.html#872">WebCustomElement::addEmbedderCustomElementName</a>
+
+<a href="dictionary_E.html#825">extensions::Dispatcher::PopulateSourceMap</a>
+| <a href="dictionary_E.html#835">extensions::LocalSourceMap::RegisterSource</a>
+
+<a href="dictionary_E.html#853">extensions::Dispatcher::RegisterNativeHandlers</a>
+| <a href="dictionary_E.html#858">extensions::ModuleSystem::RegisterNativeHandler</a>
+| <a href="dictionary_E.html#861">extensions::DocumentCustomBindings::DocumentCustomBindings</a>
+
+<a href="dictionary_E.html#868">extensions::Dispatcher::WebKitInitialized</a>
+| <a href="dictionary_E.html#869">extensions::Dispatcher::EnableCustomElementWhiteList</a>
+
+<a href="dictionary_E.html#829">extensions::Dispatcher::~Dispatcher</a>
+| <a href="dictionary_E.html#830">extensions::LocalSourceMap::~LocalSourceMap</a>
+
+<a href="dictionary_E.html#861">extensions::DocumentCustomBindings::DocumentCustomBindings</a>
+| <a href="dictionary_E.html#1608">extensions::ObjectBackedNativeHandler::ObjectBackedNativeHandler</a>
+| <a href="dictionary_E.html#1613">extensions::ObjectBackedNativeHandler::RouteFunction</a>
+| <a href="dictionary_B.html#655">base::Bind</a>
+| <a href="dictionary_E.html#1805">extensions::DocumentCustomBindings::RegisterElement</a>
+| <a href="dictionary_B.html#1865">base::Unretained</a>
+
+<a href="dictionary_E.html#1805">extensions::DocumentCustomBindings::RegisterElement</a>
+| <a href="dictionary_L.html#2027">Length</a>
+| <a href="dictionary_I.html#4118">IsString</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_N.html#1296">NOTREACHED</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_L.html#27">LOG</a>
+| <a href="dictionary_T.html#4103">ToObject</a>
+| <a href="dictionary_E.html#1614">extensions::ObjectBackedNativeHandler::context</a>
+| <a href="dictionary_E.html#1015">extensions::ScriptContext::web_frame</a>
+| <a href="dictionary_B.html#197">blink::WebFrame::document</a>
+| <a href="dictionary_B.html#4214">blink::WebDocument::registerEmbedderCustomElement</a>
+| <a href="dictionary_W.html#4216">WebString::fromUTF8</a>
+| <a href="dictionary_G.html#1893">GetReturnValue</a>
+| <a href="dictionary_S.html#1894">Set</a>
+
+<a href="dictionary_E.html#4109">extensions::ExtensionImpl::Apply</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_L.html#2027">Length</a>
+| <a href="dictionary_I.html#1949">IsFunction</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_I.html#4115">IsInt32</a>
+| <a href="dictionary_A.html#2039">As</a>
+| <a href="dictionary_T.html#4103">ToObject</a>
+| <a href="dictionary_I.html#4118">IsString</a>
+| <a href="dictionary_S.html#4120">StringObject::New</a>
+| <a href="dictionary_T.html#1854">ToString</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_T.html#2030">ThrowException</a>
+| <a href="dictionary_E.html#4122">Exception::TypeError</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_T.html#4125">ToInt32</a>
+| <a href="dictionary_V.html#1983">Value</a>
+| <a href="dictionary_H.html#1990">Has</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_C.html#220">Call</a>
+| <a href="dictionary_G.html#95">get</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_G.html#1893">GetReturnValue</a>
+| <a href="dictionary_S.html#1894">Set</a>
+
+<a href="dictionary_E.html#4106">extensions::ExtensionImpl::GetNativeFunctionTemplate</a>
+| <a href="dictionary_E.html#4113">Equals</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_F.html#2460">FunctionTemplate::New</a>
+| <a href="dictionary_E.html#4109">extensions::ExtensionImpl::Apply</a>
+| <a href="dictionary_E.html#4111">extensions::ExtensionImpl::Save</a>
+| <a href="dictionary_N.html#1296">NOTREACHED</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+
+<a href="dictionary_E.html#4111">extensions::ExtensionImpl::Save</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_L.html#2027">Length</a>
+| <a href="dictionary_I.html#4118">IsString</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_E.html#4095">extensions::SaveImpl</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_G.html#1827">GetCallingContext</a>
+
+<a href="dictionary_E.html#1821">extensions::Fatal</a>
+| <a href="dictionary_E.html#1002">extensions::ScriptContext::is_valid</a>
+| <a href="dictionary_E.html#1826">extensions::console::Error</a>
+| <a href="dictionary_E.html#1009">extensions::ScriptContext::isolate</a>
+| <a href="dictionary_G.html#1827">GetCallingContext</a>
+
+<a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_G.html#1899">GetHiddenValue</a>
+| <a href="dictionary_E.html#4092">extensions::MakeKey</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_T.html#4103">ToObject</a>
+
+<a href="dictionary_E.html#1187">extensions::LocalSourceMap::Contains</a>
+| <a href="dictionary_S.html#1191">std::map::count</a>
+
+<a href="dictionary_E.html#1188">extensions::LocalSourceMap::ConvertString</a>
+| <a href="dictionary_S.html#1196">String::NewExternal</a>
+| <a href="dictionary_E.html#1198">extensions::StaticV8ExternalAsciiStringResource::StaticV8ExternalAsciiStringResource</a>
+| <a href="dictionary_B.html#1194">base::StringPiece</a>
+
+<a href="dictionary_E.html#1183">extensions::LocalSourceMap::GetSource</a>
+| <a href="dictionary_E.html#1187">extensions::LocalSourceMap::Contains</a><i>  (Virtual)</i>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_E.html#1188">extensions::LocalSourceMap::ConvertString</a>
+
+<a href="dictionary_E.html#830">extensions::LocalSourceMap::~LocalSourceMap</a>
+| <a href="dictionary_E.html#1180">extensions::ModuleSystem::SourceMap::~SourceMap</a>
+
+<a href="dictionary_E.html#4092">extensions::MakeKey</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_B.html#1725">base::StringPrintf</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+
+<a href="dictionary_E.html#1930">extensions::ModuleSystem::CallModuleMethod</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_E.html#1930">extensions::ModuleSystem::CallModuleMethod</a>
+
+<a href="dictionary_E.html#1934">extensions::ModuleSystem::CallModuleMethod</a>
+| <a href="dictionary_E.html#1930">extensions::ModuleSystem::CallModuleMethod</a>
+| <a href="dictionary_S.html#979">std::vector::size</a>
+| <a href="dictionary_V.html#1938">vector_as_array</a>
+
+<a href="dictionary_E.html#1939">extensions::ModuleSystem::CallModuleMethod</a>
+| <a href="dictionary_T.html#1944">TRACE_EVENT2</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_C.html#1896">context_scope</a>
+| <a href="dictionary_E.html#1614">extensions::ObjectBackedNativeHandler::context</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_E.html#851">extensions::ModuleSystem::NativesEnabledScope::NativesEnabledScope</a>
+| <a href="dictionary_E.html#1890">extensions::ModuleSystem::RequireForJsInner</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_E.html#855">extensions::ModuleSystem::NativesEnabledScope::~NativesEnabledScope</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_E.html#1821">extensions::Fatal</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_C.html#1902">Cast</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_I.html#1949">IsFunction</a>
+| <a href="dictionary_S.html#1927">SetCaptureMessage</a>
+| <a href="dictionary_E.html#1005">extensions::ScriptContext::CallFunction</a>
+| <a href="dictionary_H.html#1929">HasCaught</a>
+| <a href="dictionary_E.html#1886">extensions::ModuleSystem::HandleException</a>
+
+<a href="dictionary_E.html#1847">extensions::ModuleSystem::ExceptionHandler::CreateExceptionString</a>
+| <a href="dictionary_M.html#1849">Message</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_G.html#1852">GetScriptResourceName</a>
+| <a href="dictionary_R.html#1853">resource_name_v8</a>
+| <a href="dictionary_T.html#1854">ToString</a>
+| <a href="dictionary_A.html#1846">assign</a>
+| <a href="dictionary_L.html#1107">length</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_E.html#1856">error_message_v8</a>
+| <a href="dictionary_B.html#1725">base::StringPrintf</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_G.html#1857">GetLineNumber</a>
+
+<a href="dictionary_E.html#1907">extensions::ModuleSystem::GetSource</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_E.html#1189">extensions::ModuleSystem::SourceMap::Contains</a><i>  (Virtual)</i>
+| <a href="dictionary_E.html#1187">extensions::LocalSourceMap::Contains</a><i>  (Virtual)</i>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_E.html#1184">extensions::ModuleSystem::SourceMap::GetSource</a><i>  (Virtual)</i>
+| <a href="dictionary_E.html#1183">extensions::LocalSourceMap::GetSource</a><i>  (Virtual)</i>
+
+<a href="dictionary_E.html#1886">extensions::ModuleSystem::HandleException</a>
+| <a href="dictionary_H.html#1888">HandleUncaughtException</a>
+
+<a href="dictionary_E.html#1879">extensions::ModuleSystem::Invalidate</a>
+| <a href="dictionary_E.html#989">extensions::NativeHandler::is_valid</a>
+| <a href="dictionary_S.html#210">scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_E.html#1614">extensions::ObjectBackedNativeHandler::context</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_D.html#1881">DeleteHiddenValue</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_S.html#1096">std::map::begin</a>
+| <a href="dictionary_S.html#1097">std::map::end</a>
+| <a href="dictionary_I.html#188">Invalidate</a>
+| <a href="dictionary_E.html#1615">extensions::ObjectBackedNativeHandler::Invalidate</a>
+
+<a href="dictionary_E.html#1967">extensions::ModuleSystem::LazyFieldGetter</a>
+| <a href="dictionary_E.html#1965">extensions::ModuleSystem::LazyFieldGetterInner</a>
+| <a href="dictionary_E.html#854">extensions::ModuleSystem::Require</a>
+
+<a href="dictionary_E.html#1965">extensions::ModuleSystem::LazyFieldGetterInner</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_D.html#1974">Data</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_C.html#1902">Cast</a>
+| <a href="dictionary_C.html#1977">CreationContext</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_G.html#1899">GetHiddenValue</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_I.html#1980">IsExternal</a>
+| <a href="dictionary_E.html#1828">extensions::Warn</a>
+| <a href="dictionary_V.html#1983">Value</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_T.html#1854">ToString</a>
+| <a href="dictionary_C.html#1896">context_scope</a>
+| <a href="dictionary_E.html#851">extensions::ModuleSystem::NativesEnabledScope::NativesEnabledScope</a>
+| <a href="dictionary_H.html#1929">HasCaught</a>
+| <a href="dictionary_E.html#1886">extensions::ModuleSystem::HandleException</a>
+| <a href="dictionary_H.html#1990">Has</a>
+| <a href="dictionary_E.html#1821">extensions::Fatal</a>
+| <a href="dictionary_T.html#1994">This</a>
+| <a href="dictionary_D.html#1995">Delete</a>
+| <a href="dictionary_S.html#1894">Set</a>
+| <a href="dictionary_G.html#1893">GetReturnValue</a>
+| <a href="dictionary_E.html#855">extensions::ModuleSystem::NativesEnabledScope::~NativesEnabledScope</a>
+
+<a href="dictionary_E.html#845">extensions::ModuleSystem::ModuleSystem</a>
+| <a href="dictionary_E.html#1608">extensions::ObjectBackedNativeHandler::ObjectBackedNativeHandler</a>
+| <a href="dictionary_E.html#1834">extensions::DefaultExceptionHandler::DefaultExceptionHandler</a>
+| <a href="dictionary_E.html#1613">extensions::ObjectBackedNativeHandler::RouteFunction</a>
+| <a href="dictionary_B.html#655">base::Bind</a>
+| <a href="dictionary_E.html#1864">extensions::ModuleSystem::RequireForJs</a>
+| <a href="dictionary_B.html#1865">base::Unretained</a>
+| <a href="dictionary_E.html#1866">extensions::ModuleSystem::RequireNative</a>
+| <a href="dictionary_E.html#1867">extensions::ModuleSystem::Private</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_E.html#1009">extensions::ScriptContext::isolate</a>
+| <a href="dictionary_S.html#1870">SetHiddenValue</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_O.html#1873">Object::New</a>
+| <a href="dictionary_E.html#1875">External::New</a>
+
+<a href="dictionary_E.html#1961">extensions::ModuleSystem::NativeLazyFieldGetter</a>
+| <a href="dictionary_E.html#1965">extensions::ModuleSystem::LazyFieldGetterInner</a>
+| <a href="dictionary_E.html#1966">extensions::ModuleSystem::RequireNativeFromString</a>
+
+<a href="dictionary_E.html#855">extensions::ModuleSystem::NativesEnabledScope::~NativesEnabledScope</a>
+| <a href="dictionary_C.html#1885">CHECK_GE</a>
+
+<a href="dictionary_E.html#1955">extensions::ModuleSystem::OverrideNativeHandlerForTest</a>
+| <a href="dictionary_S.html#1957">std::set::insert</a>
+
+<a href="dictionary_E.html#1867">extensions::ModuleSystem::Private</a>
+| <a href="dictionary_C.html#2026">CHECK_EQ</a>
+| <a href="dictionary_L.html#2027">Length</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_A.html#2039">As</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_G.html#1899">GetHiddenValue</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_O.html#1873">Object::New</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_S.html#1870">SetHiddenValue</a>
+| <a href="dictionary_G.html#1893">GetReturnValue</a>
+| <a href="dictionary_S.html#1894">Set</a>
+
+<a href="dictionary_E.html#858">extensions::ModuleSystem::RegisterNativeHandler</a>
+| <a href="dictionary_L.html#1309">linked_ptr</a>
+| <a href="dictionary_R.html#342">release</a>
+
+<a href="dictionary_E.html#854">extensions::ModuleSystem::Require</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_E.html#1890">extensions::ModuleSystem::RequireForJsInner</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+
+<a href="dictionary_E.html#1864">extensions::ModuleSystem::RequireForJs</a>
+| <a href="dictionary_T.html#1854">ToString</a>
+| <a href="dictionary_G.html#1893">GetReturnValue</a>
+| <a href="dictionary_S.html#1894">Set</a>
+| <a href="dictionary_E.html#1890">extensions::ModuleSystem::RequireForJsInner</a>
+
+<a href="dictionary_E.html#1890">extensions::ModuleSystem::RequireForJsInner</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_C.html#1896">context_scope</a>
+| <a href="dictionary_E.html#1614">extensions::ObjectBackedNativeHandler::context</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_G.html#1899">GetHiddenValue</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_I.html#1900">IsUndefined</a>
+| <a href="dictionary_E.html#1828">extensions::Warn</a>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_C.html#1902">Cast</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_E.html#1907">extensions::ModuleSystem::GetSource</a>
+| <a href="dictionary_E.html#1821">extensions::Fatal</a>
+| <a href="dictionary_E.html#1909">extensions::ModuleSystem::WrapSource</a>
+| <a href="dictionary_E.html#1913">extensions::ModuleSystem::RunString</a>
+| <a href="dictionary_O.html#1873">Object::New</a>
+| <a href="dictionary_E.html#1610">extensions::ObjectBackedNativeHandler::NewInstance</a><i>  (Virtual)</i>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_E.html#1919">extensions::console::AsV8Object</a>
+| <a href="dictionary_E.html#1204">extensions::ScriptContext::safe_builtins</a>
+| <a href="dictionary_E.html#1920">extensions::SafeBuiltins::GetArray</a>
+| <a href="dictionary_E.html#1921">extensions::SafeBuiltins::GetFunction</a>
+| <a href="dictionary_E.html#1922">extensions::SafeBuiltins::GetJSON</a>
+| <a href="dictionary_E.html#1923">extensions::SafeBuiltins::GetObjekt</a>
+| <a href="dictionary_E.html#1924">extensions::SafeBuiltins::GetRegExp</a>
+| <a href="dictionary_E.html#1925">extensions::SafeBuiltins::GetString</a>
+| <a href="dictionary_S.html#1927">SetCaptureMessage</a>
+| <a href="dictionary_E.html#1005">extensions::ScriptContext::CallFunction</a>
+| <a href="dictionary_A.html#1928">arraysize</a>
+| <a href="dictionary_H.html#1929">HasCaught</a>
+| <a href="dictionary_E.html#1886">extensions::ModuleSystem::HandleException</a>
+| <a href="dictionary_S.html#1894">Set</a>
+
+<a href="dictionary_E.html#1866">extensions::ModuleSystem::RequireNative</a>
+| <a href="dictionary_C.html#2026">CHECK_EQ</a>
+| <a href="dictionary_L.html#2027">Length</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_T.html#1854">ToString</a>
+| <a href="dictionary_G.html#1893">GetReturnValue</a>
+| <a href="dictionary_S.html#1894">Set</a>
+| <a href="dictionary_E.html#1966">extensions::ModuleSystem::RequireNativeFromString</a>
+
+<a href="dictionary_E.html#1966">extensions::ModuleSystem::RequireNativeFromString</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_T.html#2030">ThrowException</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_E.html#1821">extensions::Fatal</a>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_S.html#2031">std::set::count</a>
+| <a href="dictionary_E.html#1890">extensions::ModuleSystem::RequireForJsInner</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_S.html#1133">std::map::find</a>
+| <a href="dictionary_S.html#1097">std::map::end</a>
+| <a href="dictionary_N.html#2032">NewInstance</a>
+
+<a href="dictionary_E.html#1913">extensions::ModuleSystem::RunString</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_C.html#1896">context_scope</a>
+| <a href="dictionary_E.html#1614">extensions::ObjectBackedNativeHandler::context</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_B.html#1725">base::StringPrintf</a>
+| <a href="dictionary_S.html#1906">String::Utf8Value</a>
+| <a href="dictionary_S.html#1927">SetCaptureMessage</a>
+| <a href="dictionary_S.html#2020">Script::Compile</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_S.html#114">size</a>
+| <a href="dictionary_H.html#1929">HasCaught</a>
+| <a href="dictionary_E.html#1886">extensions::ModuleSystem::HandleException</a>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_R.html#87">Run</a>
+| <a href="dictionary_E.html#214">Escape</a>
+
+<a href="dictionary_E.html#1958">extensions::ModuleSystem::RunString</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_E.html#1913">extensions::ModuleSystem::RunString</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+
+<a href="dictionary_E.html#4453">extensions::ModuleSystem::SetExceptionHandlerForTest</a>
+| <a href="dictionary_P.html#23">Pass</a>
+
+<a href="dictionary_E.html#1996">extensions::ModuleSystem::SetLazyField</a>
+| <a href="dictionary_E.html#1996">extensions::ModuleSystem::SetLazyField</a>
+| <a href="dictionary_E.html#1967">extensions::ModuleSystem::LazyFieldGetter</a>
+
+<a href="dictionary_E.html#2001">extensions::ModuleSystem::SetLazyField</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_O.html#1873">Object::New</a>
+| <a href="dictionary_S.html#1894">Set</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_S.html#2009">SetAccessor</a>
+
+<a href="dictionary_E.html#2010">extensions::ModuleSystem::SetNativeLazyField</a>
+| <a href="dictionary_E.html#1996">extensions::ModuleSystem::SetLazyField</a>
+| <a href="dictionary_E.html#1961">extensions::ModuleSystem::NativeLazyFieldGetter</a>
+
+<a href="dictionary_E.html#1909">extensions::ModuleSystem::WrapSource</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_S.html#2036">String::Concat</a>
+
+<a href="dictionary_E.html#1878">extensions::ModuleSystem::~ModuleSystem</a>
+| <a href="dictionary_E.html#1879">extensions::ModuleSystem::Invalidate</a><i>  (Virtual)</i>
+| <a href="dictionary_E.html#1609">extensions::ObjectBackedNativeHandler::~ObjectBackedNativeHandler</a>
+
+<a href="dictionary_E.html#1611">extensions::ObjectBackedNativeHandler::GetIsolate</a>
+| <a href="dictionary_E.html#1009">extensions::ScriptContext::isolate</a>
+
+<a href="dictionary_E.html#1615">extensions::ObjectBackedNativeHandler::Invalidate</a>
+| <a href="dictionary_E.html#989">extensions::NativeHandler::is_valid</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_C.html#1896">context_scope</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_S.html#2463">Size</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_A.html#2039">As</a>
+| <a href="dictionary_V.html#1983">Value</a>
+| <a href="dictionary_D.html#1995">Delete</a>
+| <a href="dictionary_C.html#78">Clear</a>
+| <a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+| <a href="dictionary_E.html#988">extensions::NativeHandler::Invalidate</a>
+
+<a href="dictionary_E.html#1610">extensions::ObjectBackedNativeHandler::NewInstance</a>
+| <a href="dictionary_E.html#1208">extensions::ScopedPersistent::NewHandle</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+| <a href="dictionary_N.html#2032">NewInstance</a>
+
+<a href="dictionary_E.html#1608">extensions::ObjectBackedNativeHandler::ObjectBackedNativeHandler</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_E.html#174">extensions::ScopedPersistent::ScopedPersistent</a>
+| <a href="dictionary_O.html#2449">ObjectTemplate::New</a>
+| <a href="dictionary_E.html#985">extensions::NativeHandler::NativeHandler</a>
+
+<a href="dictionary_E.html#1613">extensions::ObjectBackedNativeHandler::RouteFunction</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_C.html#1896">context_scope</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_O.html#1873">Object::New</a>
+| <a href="dictionary_S.html#1894">Set</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_E.html#1875">External::New</a>
+| <a href="dictionary_F.html#2460">FunctionTemplate::New</a>
+| <a href="dictionary_E.html#1616">extensions::ObjectBackedNativeHandler::Router</a>
+| <a href="dictionary_E.html#1208">extensions::ScopedPersistent::NewHandle</a>
+| <a href="dictionary_C.html#1732">c_str</a>
+| <a href="dictionary_A.html#649">Append</a>
+
+<a href="dictionary_E.html#1616">extensions::ObjectBackedNativeHandler::Router</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_D.html#1974">Data</a>
+| <a href="dictionary_A.html#2039">As</a>
+| <a href="dictionary_G.html#1250">Get</a>
+| <a href="dictionary_S.html#1871">String::NewFromUtf8</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_I.html#1900">IsUndefined</a>
+| <a href="dictionary_L.html#27">LOG</a>
+| <a href="dictionary_D.html#343">DCHECK</a>
+| <a href="dictionary_I.html#1980">IsExternal</a>
+| <a href="dictionary_V.html#1983">Value</a>
+| <a href="dictionary_R.html#87">Run</a>
+
+<a href="dictionary_E.html#1609">extensions::ObjectBackedNativeHandler::~ObjectBackedNativeHandler</a>
+| <a href="dictionary_E.html#1615">extensions::ObjectBackedNativeHandler::Invalidate</a><i>  (Virtual)</i>
+| <a href="dictionary_E.html#1879">extensions::ModuleSystem::Invalidate</a><i>  (Virtual)</i>
+| <a href="dictionary_E.html#185">extensions::ScopedPersistent::~ScopedPersistent</a>
+| <a href="dictionary_E.html#986">extensions::NativeHandler::~NativeHandler</a>
+
+<a href="dictionary_E.html#824">extensions::SafeBuiltins::CreateV8Extension</a>
+| <a href="dictionary_E.html#4105">extensions::ExtensionImpl::ExtensionImpl</a>
+
+<a href="dictionary_E.html#1920">extensions::SafeBuiltins::GetArray</a>
+| <a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+
+<a href="dictionary_E.html#1921">extensions::SafeBuiltins::GetFunction</a>
+| <a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+
+<a href="dictionary_E.html#1922">extensions::SafeBuiltins::GetJSON</a>
+| <a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+
+<a href="dictionary_E.html#1923">extensions::SafeBuiltins::GetObjekt</a>
+| <a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+
+<a href="dictionary_E.html#1924">extensions::SafeBuiltins::GetRegExp</a>
+| <a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+
+<a href="dictionary_E.html#1925">extensions::SafeBuiltins::GetString</a>
+| <a href="dictionary_E.html#4099">extensions::Load</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+
+<a href="dictionary_E.html#4095">extensions::SaveImpl</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_I.html#1947">IsObject</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_S.html#1870">SetHiddenValue</a>
+| <a href="dictionary_E.html#4092">extensions::MakeKey</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+
+<a href="dictionary_E.html#693">extensions::ScopedPersistent::GetIsolate</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+
+<a href="dictionary_E.html#2786">extensions::ScopedPersistent::GetIsolate</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_E.html#2786">extensions::ScopedPersistent::GetIsolate</a>
+| <a href="dictionary_C.html#1977">CreationContext</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+
+<a href="dictionary_E.html#4220">extensions::ScopedPersistent::GetIsolate</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_G.html#2450">GetCurrent</a>
+
+<a href="dictionary_E.html#1207">extensions::ScopedPersistent::IsEmpty</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+
+<a href="dictionary_E.html#1208">extensions::ScopedPersistent::NewHandle</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_V.html#215">v8::Local</a>
+| <a href="dictionary_N.html#2796">New</a>
+| <a href="dictionary_E.html#2786">extensions::ScopedPersistent::GetIsolate</a>
+
+<a href="dictionary_E.html#2778">extensions::ScopedPersistent::NewHandle</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_V.html#215">v8::Local</a>
+| <a href="dictionary_N.html#2796">New</a>
+
+<a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+| <a href="dictionary_I.html#1843">IsEmpty</a>
+| <a href="dictionary_R.html#504">Reset</a>
+| <a href="dictionary_E.html#2786">extensions::ScopedPersistent::GetIsolate</a>
+| <a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+
+<a href="dictionary_E.html#2777">extensions::ScopedPersistent::reset</a>
+| <a href="dictionary_R.html#504">Reset</a>
+
+<a href="dictionary_E.html#2774">extensions::ScopedPersistent::ScopedPersistent</a>
+| <a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+
+<a href="dictionary_E.html#2780">extensions::ScopedPersistent::SetWeak</a>
+| <a href="dictionary_S.html#2797">SetWeak</a>
+
+<a href="dictionary_E.html#185">extensions::ScopedPersistent::~ScopedPersistent</a>
+| <a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+
+<a href="dictionary_E.html#1005">extensions::ScriptContext::CallFunction</a>
+| <a href="dictionary_H.html#206">handle_scope</a>
+| <a href="dictionary_E.html#1009">extensions::ScriptContext::isolate</a>
+| <a href="dictionary_S.html#210">scope</a>
+| <a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_E.html#1002">extensions::ScriptContext::is_valid</a>
+| <a href="dictionary_E.html#214">Escape</a>
+| <a href="dictionary_V.html#215">v8::Local</a>
+| <a href="dictionary_V.html#217">v8::Undefined</a>
+| <a href="dictionary_G.html#219">Global</a>
+| <a href="dictionary_C.html#220">Call</a>
+| <a href="dictionary_B.html#222">blink::WebFrame::callFunctionEvenIfScriptDisabled</a>
+
+<a href="dictionary_E.html#1012">extensions::ScriptContext::DispatchOnUnloadEvent</a>
+| <a href="dictionary_C.html#1013">CallModuleMethod</a>
+
+<a href="dictionary_E.html#1016">extensions::ScriptContext::GetDataSourceURLForFrame</a>
+| <a href="dictionary_B.html#1018">blink::WebFrame::provisionalDataSource</a>
+| <a href="dictionary_B.html#1021">blink::WebFrame::dataSource</a>
+| <a href="dictionary_C.html#1022">CHECK</a>
+| <a href="dictionary_G.html#196">GURL</a>
+| <a href="dictionary_R.html#1023">request</a>
+| <a href="dictionary_U.html#198">url</a>
+
+<a href="dictionary_E.html#1024">extensions::ScriptContext::GetEffectiveDocumentURL</a>
+| <a href="dictionary_G.html#1028">GURL::SchemeIs</a>
+| <a href="dictionary_B.html#1031">blink::WebFrame::parent</a>
+| <a href="dictionary_B.html#1032">blink::WebFrame::opener</a>
+| <a href="dictionary_G.html#196">GURL</a>
+| <a href="dictionary_B.html#197">blink::WebFrame::document</a>
+| <a href="dictionary_U.html#198">url</a>
+| <a href="dictionary_S.html#1033">SchemeIs</a>
+| <a href="dictionary_S.html#1035">securityOrigin</a>
+| <a href="dictionary_C.html#1036">canAccess</a>
+| <a href="dictionary_B.html#1037">blink::WebDocument::securityOrigin</a>
+| <a href="dictionary_B.html#1038">blink::WebDocument::url</a>
+
+<a href="dictionary_E.html#1004">extensions::ScriptContext::GetRenderView</a>
+| <a href="dictionary_B.html#192">blink::WebFrame::view</a>
+| <a href="dictionary_C.html#193">content::RenderView::FromWebView</a>
+
+<a href="dictionary_E.html#1014">extensions::ScriptContext::GetURL</a>
+| <a href="dictionary_E.html#1015">extensions::ScriptContext::web_frame</a>
+| <a href="dictionary_E.html#1016">extensions::ScriptContext::GetDataSourceURLForFrame</a>
+| <a href="dictionary_G.html#196">GURL</a>
+
+<a href="dictionary_E.html#1001">extensions::ScriptContext::Invalidate</a>
+| <a href="dictionary_E.html#1002">extensions::ScriptContext::is_valid</a>
+| <a href="dictionary_I.html#188">Invalidate</a>
+| <a href="dictionary_E.html#189">extensions::ScopedPersistent::reset</a>
+
+<a href="dictionary_E.html#1002">extensions::ScriptContext::is_valid</a>
+| <a href="dictionary_E.html#1207">extensions::ScopedPersistent::IsEmpty</a>
+
+<a href="dictionary_E.html#849">extensions::ScriptContext::module_system</a>
+| <a href="dictionary_G.html#95">get</a>
+
+<a href="dictionary_E.html#843">extensions::ScriptContext::ScriptContext</a>
+| <a href="dictionary_E.html#174">extensions::ScopedPersistent::ScopedPersistent</a>
+| <a href="dictionary_E.html#178">extensions::SafeBuiltins::SafeBuiltins</a>
+| <a href="dictionary_G.html#180">GetIsolate</a>
+| <a href="dictionary_V.html#181">VLOG</a>
+
+<a href="dictionary_E.html#847">extensions::ScriptContext::set_module_system</a>
+| <a href="dictionary_P.html#23">Pass</a>
+
+<a href="dictionary_E.html#1010">extensions::ScriptContext::v8_context</a>
+| <a href="dictionary_E.html#1208">extensions::ScopedPersistent::NewHandle</a>
+| <a href="dictionary_E.html#1009">extensions::ScriptContext::isolate</a>
+
+<a href="dictionary_E.html#1000">extensions::ScriptContext::~ScriptContext</a>
+| <a href="dictionary_V.html#181">VLOG</a>
+| <a href="dictionary_E.html#1001">extensions::ScriptContext::Invalidate</a>
+| <a href="dictionary_E.html#184">extensions::SafeBuiltins::~SafeBuiltins</a>
+| <a href="dictionary_E.html#185">extensions::ScopedPersistent::~ScopedPersistent</a>
+
+<a href="dictionary_E.html#2469">extensions::StaticV8ExternalAsciiStringResource::data</a>
+| <a href="dictionary_D.html#2076">data</a>
+
+<a href="dictionary_E.html#2470">extensions::StaticV8ExternalAsciiStringResource::length</a>
+| <a href="dictionary_L.html#1107">length</a>
+
+<a href="dictionary_E.html#496">extensions::UnsafePersistent::dispose</a>
+| <a href="dictionary_H.html#503">handle</a>
+| <a href="dictionary_R.html#504">Reset</a>
+
+<a href="dictionary_E.html#497">extensions::UnsafePersistent::newLocal</a>
+| <a href="dictionary_N.html#505">New</a>
+| <a href="dictionary_V.html#215">v8::Local</a>
+
+<a href="dictionary_E.html#489">extensions::UnsafePersistent::UnsafePersistent</a>
+| <a href="dictionary_C.html#500">ClearAndLeak</a>
+
+<a href="dictionary_E.html#492">extensions::UnsafePersistent::UnsafePersistent</a>
+| <a href="dictionary_P.html#502">persistent</a>
+| <a href="dictionary_C.html#500">ClearAndLeak</a>
+
+<a href="dictionary_E.html#1828">extensions::Warn</a>
+| <a href="dictionary_E.html#1831">extensions::console::Warn</a>
+| <a href="dictionary_G.html#1827">GetCallingContext</a>
+</pre><hr>
+<table BORDER CELLPADDING=4><tr><td>Non-Alpha</td><td><a href="simpleinvtree_A.html">A</a></td><td>B</td><td><a href="simpleinvtree_C.html">C</a></td><td>D</td><td><a href="simpleinvtree_E.html">E</a></td><td><a href="simpleinvtree_F.html">F</a></td><td><a href="simpleinvtree_G.html">G</a></td><td>H</td><td>I</td><td>J</td><td>K</td><td>L</td><td><a href="simpleinvtree_M.html">M</a></td><td><a href="simpleinvtree_N.html">N</a></td><td>O</td><td><a href="simpleinvtree_P.html">P</a></td><td>Q</td><td><a href="simpleinvtree_R.html">R</a></td><td><a href="simpleinvtree_S.html">S</a></td><td><a href="simpleinvtree_T.html">T</a></td><td>U</td><td><a href="simpleinvtree_V.html">V</a></td><td>W</td><td><a href="simpleinvtree_X.html">X</a></td><td>Y</td><td>Z</td></tr></table></body></html>
