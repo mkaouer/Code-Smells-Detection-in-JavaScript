@@ -1,0 +1,77 @@
+/*
+ * Copyright 2010 László Balázs-Csíki
+ *
+ * This file is part of Pixelitor. Pixelitor is free software: you
+ * can redistribute it and/or modify it under the terms of the GNU
+ * General Public License, version 3 as published by the Free
+ * Software Foundation.
+ *
+ * Pixelitor is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Pixelitor.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package pixelitor.operations.jhlabsproxies;
+
+import com.jhlabs.image.WaterFilter;
+import pixelitor.ImageChangeReason;
+import pixelitor.operations.OperationWithParametrizedGUI;
+import pixelitor.operations.gui.ImagePositionParam;
+import pixelitor.operations.gui.IntChoiceParam;
+import pixelitor.operations.gui.RangeParam;
+import pixelitor.operations.gui.ParamSet;
+
+import java.awt.image.BufferedImage;
+
+/**
+ * Water Ripple based on the JHLabs WaterFilter
+ */
+public class JHWaterRipple extends OperationWithParametrizedGUI {
+    private ImagePositionParam center = new ImagePositionParam("Center");
+
+    private RangeParam radius = new RangeParam("Radius", 1, 500, 200);
+    private RangeParam wavelength = new RangeParam("Wavelength", 1, 250, 15);
+    private RangeParam amplitude = new RangeParam("Amplitude", 1, 100, 50);
+    private RangeParam phase = new RangeParam("Phase (Time)", 0, 360, 0);
+
+    private IntChoiceParam edgeAction = IntChoiceParam.getEdgeActionChoices();
+    private IntChoiceParam interpolation = IntChoiceParam.getInterpolationChoices();
+
+
+    private WaterFilter filter;
+
+    public JHWaterRipple() {
+        super("Water Ripple", true);
+        paramSet = new ParamSet(
+                center,
+                radius,
+                wavelength,
+                amplitude,
+                phase,
+                edgeAction,
+                interpolation
+        );
+    }
+
+    @Override
+    public BufferedImage transform(BufferedImage src, BufferedImage dest, ImageChangeReason changeReason) {
+        if (filter == null) {
+            filter = new WaterFilter();
+        }
+
+        filter.setCentreX(center.getRelativeX());
+        filter.setCentreY(center.getRelativeY());
+        filter.setRadius(radius.getValue());
+        filter.setWavelength(wavelength.getValue());
+        filter.setAmplitude(amplitude.getValueAsPercentage());
+        filter.setPhase(phase.getValueInRadians());
+        filter.setEdgeAction(edgeAction.getCurrentInt());
+        filter.setInterpolation(interpolation.getCurrentInt());
+
+        dest = filter.filter(src, dest);
+        return dest;
+    }
+}

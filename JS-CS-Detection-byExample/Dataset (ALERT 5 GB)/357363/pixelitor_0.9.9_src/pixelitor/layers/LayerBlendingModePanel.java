@@ -1,0 +1,150 @@
+/*
+ * Copyright 2009-2010 László Balázs-Csíki
+ *
+ * This file is part of Pixelitor. Pixelitor is free software: you
+ * can redistribute it and/or modify it under the terms of the GNU
+ * General Public License, version 3 as published by the Free
+ * Software Foundation.
+ *
+ * Pixelitor is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Pixelitor.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package pixelitor.layers;
+
+import pixelitor.AppLogic;
+import pixelitor.Composition;
+import pixelitor.utils.BlendingModePanel;
+import pixelitor.utils.ImageSwitchListener;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+/**
+ * The GUI selector for the opacity and blending mode of the layers
+ */
+public class LayerBlendingModePanel extends BlendingModePanel implements ImageSwitchListener, LayerChangeListener {
+    private boolean userInteractionChange = true;
+
+    public static LayerBlendingModePanel INSTANCE = new LayerBlendingModePanel();
+
+    private LayerBlendingModePanel() {
+        super(false);
+
+        AppLogic.addImageChangeListener(this);
+        AppLogic.addLayerChangeListener(this);
+
+        opacityTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (userInteractionChange) {
+                    opacityChanged();
+                }
+            }
+        });
+
+        blendingModeCombo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (userInteractionChange) {
+                    blendingModeChanged();
+                }
+            }
+        });
+    }
+
+
+    private void opacityChanged() {
+        Composition comp = AppLogic.getActiveComp();
+
+        if (comp != null) {
+            Layer activeLayer = comp.getActiveLayer();
+
+            if (activeLayer != null) {
+                float floatValue = getOpacity();
+                activeLayer.setOpacity(floatValue, false, false);
+            }
+        }
+    }
+
+    private void blendingModeChanged() {
+        Composition comp = AppLogic.getActiveComp();
+
+        if (comp != null) {
+            Layer activeLayer = comp.getActiveLayer();
+
+            if (activeLayer != null) {
+                BlendingMode blendingMode = getBlendingMode();
+                activeLayer.setBlendingMode(blendingMode, false, false);
+            }
+        }
+    }
+
+    @Override
+    public void noOpenImageAnymore() {
+        setEnabled(false);
+    }
+
+    @Override
+    public void newImageOpened() {
+        setEnabled(true);
+    }
+
+    @Override
+    public void activeImageHasChanged(Composition comp) {
+        setEnabled(true);
+
+        Layer layer = comp.getActiveLayer();
+        activeLayerChanged(layer);
+    }
+
+    @Override
+    public void layerCountChanged(int newLayerCount) {
+//        if (newLayerCount < 2) {
+//            blendingModeCombo.setSelectedIndex(0);
+//            opacityTextField.setText("100");
+//            setEnabled(false);
+//        } else {
+//            setEnabled(true);
+//        }
+    }
+
+    @Override
+    public void activeLayerChanged(Layer newActiveLayer) {
+        float floatOpacity = newActiveLayer.getOpacity();
+        int intOpacity = (int) (floatOpacity * 100);
+        opacityTextField.setText(String.valueOf(intOpacity));
+
+        BlendingMode bm = newActiveLayer.getBlendingMode();
+        try {
+            userInteractionChange = false;
+            blendingModeCombo.setSelectedItem(bm);
+        } finally {
+            userInteractionChange = true;
+        }
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        opacityTextField.setEnabled(enabled);
+        blendingModeCombo.setEnabled(enabled);
+    }
+
+    public void setOpacity(float f) {
+        int intValue = (int) (f * 100);
+        opacityTextField.setText(String.valueOf(intValue));
+    }
+
+    public void setBlendingModeNotUI(BlendingMode bm) {
+        try {
+            userInteractionChange = false;
+            blendingModeCombo.setSelectedItem(bm);
+        } finally {
+            userInteractionChange = true;
+        }
+    }
+}
