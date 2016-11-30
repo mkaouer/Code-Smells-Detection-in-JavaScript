@@ -1,0 +1,653 @@
+################################################################################
+# vlc (VideoLAN Client) main makefile
+# (c)1998 VideoLAN
+################################################################################
+# This makefile is the main makefile for the VideoLAN client.
+################################################################################
+
+################################################################################
+# Configuration
+################################################################################
+
+# Debugging mode on or off (set to 1 to activate)
+DEBUG=@DEBUG@
+STATS=@STATS@
+OPTIMS=@OPTIMS@
+
+SYS=@SYS@
+PLUGINS=@PLUGINS@
+SNAPSHOTDIR=vlc-@VLC_VERSION@
+INSTALL=@INSTALL@
+ARCH=@ARCH@
+prefix=@prefix@
+CC=@CC@
+SHELL=@SHELL@
+
+LIB_SDL=@LIB_SDL@
+LIB_GLIDE=@LIB_GLIDE@
+LIB_GGI=@LIB_GGI@
+
+#----------------- do not change anything below this line ----------------------
+
+################################################################################
+# Configuration pre-processing
+################################################################################
+
+# PROGRAM_OPTIONS is an identification string of the compilation options
+PROGRAM_OPTIONS = $(SYS) $(ARCH)
+ifeq ($(DEBUG),1)
+PROGRAM_OPTIONS += DEBUG
+DEFINE += -DDEBUG
+endif
+ifeq ($(STATS),1)
+PROGRAM_OPTIONS += DEBUG
+DEFINE += -DSTATS
+endif
+
+# PROGRAM_BUILD is a complete identification of the build
+# ( we can't use fancy options with date since OSes like Solaris
+# or FreeBSD have strange date implementations )
+PROGRAM_BUILD = `date` $(USER)
+# XXX: beos does not support hostname
+#PROGRAM_BUILD = `date` $(USER)@`hostname`
+
+# DEFINE will contain some of the constants definitions decided in Makefile, 
+# including SYS_xx. It will be passed to C compiler.
+DEFINE += -DSYS_$(shell echo $(SYS) | sed 's/-.*//' | tr a-z. A-Z_)
+
+################################################################################
+# Tuning and other variables - do not change anything except if you know
+# exactly what you are doing
+################################################################################
+
+#
+# C headers directories
+#
+INCLUDE += -Iinclude -I/usr/local/include -I/usr/X11R6/include
+
+#
+# Libraries
+#
+ifeq ($(SYS),gnu)
+LIB += -lthreads -ldl
+endif
+
+ifneq (,$(findstring bsd,$(SYS)))
+LIB += -pthread -lgnugetopt
+LIB += -L/usr/local/lib
+endif
+
+ifneq (,$(findstring linux,$(SYS)))
+LIB += -lpthread -ldl
+endif
+
+ifneq (,$(findstring solaris,$(SYS)))
+LIB += -ldl -lsocket -lnsl -lpthread
+endif
+
+ifeq ($(SYS),beos)
+LIB += -lbe -lroot -lgame
+else
+LIB += -lm
+endif
+
+#
+# C compiler flags: mainstream compilation
+#
+CFLAGS += $(DEFINE) $(INCLUDE)
+CFLAGS += -Wall -Winline
+CFLAGS += -D_REENTRANT
+CFLAGS += -D_GNU_SOURCE
+
+# flags needed for clean beos compilation
+ifeq ($(SYS),beos)
+CFLAGS += -Wno-multichar -Wno-ctor-dtor-privacy -Woverloaded-virtual
+endif
+
+# Optimizations : don't compile debug versions with them
+ifeq ($(OPTIMS),1)
+CFLAGS += -O3
+CFLAGS += -ffast-math -funroll-loops
+CFLAGS += -fomit-frame-pointer
+
+# Optimizations for x86 familiy
+ifneq (,$(findstring 86,$(ARCH)))
+CFLAGS += -malign-double
+# Optional Pentium Pro optimizations
+ifneq (,$(findstring ppro,$(ARCH)))
+CFLAGS += -march=pentiumpro -mcpu=pentiumpro
+else
+CFLAGS += -march=pentium -mcpu=pentium
+endif
+endif
+
+# Optimizations for PowerPC
+ifneq (,$(findstring powerpc,$(ARCH)))
+# 604e
+CFLAGS += -mcpu=604e -mmultiple -mhard-float -mstring
+# G3
+#CFLAGS += -mcpu=750 -mmultiple -mhard-float -mstring
+# G4
+#CFLAGS += -mcpu=7400 -mmultiple -mhard-float -mstring
+endif
+
+# Optimizations for Sparc
+ifneq (,$(findstring sparc,$(ARCH)))
+CFLAGS += -mhard-float
+endif
+
+#end of optimisations
+endif
+
+# Optional MMX optimizations for x86
+ifneq (,$(findstring mmx,$(ARCH)))
+CFLAGS += -DHAVE_MMX
+endif
+
+#
+# C compiler flags: plugin compilation
+#
+PCFLAGS += -fPIC
+
+#
+# C compiler flags: dependancies
+#
+DCFLAGS += $(INCLUDE)
+DCFLAGS += -MM
+
+#
+# C compiler flags: linking
+#
+LCFLAGS += $(LIB)
+LCFLAGS += -Wall
+#LCFLAGS += -s
+
+#
+# Debugging and profiling support (unless optimisations are active)
+#
+ifneq ($(OPTIMS),1)
+CFLAGS += -g
+endif
+
+#################################################################################
+# Objects and files
+#################################################################################
+
+#
+# C Objects
+# 
+INTERFACE =	src/interface/main.o \
+		src/interface/interface.o \
+		src/interface/intf_msg.o \
+		src/interface/intf_cmd.o \
+		src/interface/intf_ctrl.o \
+		src/interface/intf_console.o
+
+INPUT =		src/input/mpeg_system.o \
+		src/input/input_ext-dec.o \
+		src/input/input_dec.o \
+		src/input/input_programs.o \
+		src/input/input_netlist.o \
+		src/input/input.o
+
+AUDIO_OUTPUT = 	src/audio_output/audio_output.o
+
+VIDEO_OUTPUT = 	src/video_output/video_output.o \
+		src/video_output/video_text.o \
+		src/video_output/video_spu.o \
+		src/video_output/video_yuv.o
+
+AC3_DECODER =	src/ac3_decoder/ac3_decoder_thread.o \
+		src/ac3_decoder/ac3_decoder.o \
+		src/ac3_decoder/ac3_parse.o \
+		src/ac3_decoder/ac3_exponent.o \
+		src/ac3_decoder/ac3_bit_allocate.o \
+		src/ac3_decoder/ac3_mantissa.o \
+		src/ac3_decoder/ac3_rematrix.o \
+		src/ac3_decoder/ac3_imdct.o \
+		src/ac3_decoder/ac3_downmix.o
+
+LPCM_DECODER =	src/lpcm_decoder/lpcm_decoder_thread.o \
+		src/lpcm_decoder/lpcm_decoder.o
+
+AUDIO_DECODER =	src/audio_decoder/audio_decoder.o \
+		src/audio_decoder/adec_generic.o \
+		src/audio_decoder/adec_layer1.o \
+		src/audio_decoder/adec_layer2.o \
+		src/audio_decoder/adec_math.o
+
+SPU_DECODER =	src/spu_decoder/spu_decoder.o
+
+#GEN_DECODER =	src/generic_decoder/generic_decoder.o
+
+VIDEO_PARSER = 	src/video_parser/video_parser.o \
+		src/video_parser/vpar_headers.o \
+		src/video_parser/vpar_blocks.o \
+		src/video_parser/vpar_synchro.o \
+		src/video_parser/video_fifo.o
+
+VIDEO_DECODER =	src/video_decoder/video_decoder.o
+
+MISC =		src/misc/mtime.o \
+		src/misc/tests.o \
+		src/misc/rsc_files.o \
+		src/misc/modules.o \
+		src/misc/netutils.o \
+		src/misc/playlist.o \
+		src/misc/plugins.o
+
+
+C_OBJ =		$(INTERFACE) \
+		$(INPUT) \
+		$(VIDEO_OUTPUT) \
+		$(AUDIO_OUTPUT) \
+		$(AC3_DECODER) \
+		$(LPCM_DECODER) \
+		$(AUDIO_DECODER) \
+		$(SPU_DECODER) \
+		$(GEN_DECODER) \
+		$(VIDEO_PARSER) \
+		$(VIDEO_DECODER) \
+		$(MISC)
+
+
+#
+# CPP Objects
+# 
+ifeq ($(SYS),beos)
+CPP_OBJ =	src/misc/beos_specific.o
+endif
+
+#
+# Assembler Objects
+# 
+ifneq (,$(findstring 86,$(ARCH)))
+ifneq (,$(findstring mmx,$(ARCH)))
+ASM_OBJ =		
+STD_PLUGIN_ASM = 	
+endif
+endif
+
+#
+# Plugins
+#
+PLUGIN_BEOS =	plugins/beos/beos.o \
+		plugins/beos/aout_beos.o \
+		plugins/beos/intf_beos.o \
+		plugins/beos/vout_beos.o
+
+PLUGIN_DSP =	plugins/dsp/dsp.o \
+		plugins/dsp/aout_dsp.o
+
+
+PLUGIN_DUMMY =	plugins/dummy/dummy.o \
+		plugins/dummy/aout_dummy.o \
+		plugins/dummy/intf_dummy.o \
+		plugins/dummy/vout_dummy.o
+
+PLUGIN_ESD =	plugins/esd/esd.o \
+		plugins/esd/aout_esd.o
+
+PLUGIN_FB =	plugins/fb/fb.o \
+		plugins/fb/intf_fb.o \
+		plugins/fb/vout_fb.o
+
+PLUGIN_GGI =	plugins/ggi/ggi.o \
+		plugins/ggi/intf_ggi.o \
+		plugins/ggi/vout_ggi.o
+
+PLUGIN_SDL =	plugins/sdl/sdl.o \
+		plugins/sdl/intf_sdl.o \
+		plugins/sdl/vout_sdl.o \
+		plugins/sdl/aout_sdl.o 
+
+PLUGIN_NULL =	plugins/null/null.o
+
+PLUGIN_GLIDE =	plugins/glide/glide.o \
+		plugins/glide/intf_glide.o \
+		plugins/glide/vout_glide.o
+
+PLUGIN_GNOME =	plugins/gnome/gnome.o \
+		plugins/gnome/intf_gnome.o \
+		plugins/gnome/intf_gnome_callbacks.o \
+		plugins/gnome/intf_gnome_interface.o \
+		plugins/gnome/intf_gnome_support.o \
+		plugins/gnome/vout_gnome.o
+
+PLUGIN_MGA =	plugins/mga/mga.o \
+		plugins/mga/intf_mga.o \
+		plugins/mga/vout_mga.o
+
+PLUGIN_X11=	plugins/x11/x11.o \
+		plugins/x11/intf_x11.o \
+		plugins/x11/vout_x11.o
+
+PLUGIN_YUV =	plugins/yuv/yuv.o \
+		plugins/yuv/video_yuv.o \
+		plugins/yuv/transforms_yuv.o
+
+PLUGIN_YUVMMX =	plugins/yuv/yuvmmx.o \
+		plugins/yuv/video_yuvmmx.o \
+		plugins/yuv/transforms_yuvmmx.o
+
+PLUGIN_MOTION =	plugins/motion/motion.o \
+		plugins/motion/vdec_motion_common.o \
+		plugins/motion/vdec_motion_inner.o
+
+PLUGIN_MOTIONMMX =	plugins/motion/motionmmx.o \
+			plugins/motion/vdec_motion_common.o \
+			plugins/motion/vdec_motion_inner_mmx.o
+
+PLUGIN_MOTIONMMXEXT =	plugins/motion/motionmmxext.o \
+			plugins/motion/vdec_motion_common.o \
+			plugins/motion/vdec_motion_inner_mmxext.o
+
+PLUGIN_IDCT =	plugins/idct/idct.o \
+		plugins/idct/idct_common.o
+
+PLUGIN_IDCTCLASSIC =	plugins/idct/idctclassic.o \
+			plugins/idct/idct_common.o
+
+PLUGIN_IDCTMMX =	plugins/idct/idctmmx.o \
+			plugins/idct/idct_common.o
+
+PLUGIN_IDCTMMXEXT =	plugins/idct/idctmmxext.o \
+			plugins/idct/idct_common.o
+
+PLUGIN_ALSA =	plugins/alsa/alsa.o \
+		plugins/alsa/aout_alsa.o
+
+PLUGIN_PS =	plugins/mpeg/ps.o \
+		plugins/mpeg/input_ps.o
+
+STD_PLUGIN_OBJ =$(PLUGIN_BEOS) \
+		$(PLUGIN_DSP) \
+		$(PLUGIN_DUMMY) \
+		$(PLUGIN_ESD) \
+		$(PLUGIN_FB) \
+		$(PLUGIN_GGI) \
+		$(PLUGIN_MGA) \
+		$(PLUGIN_X11) \
+		$(PLUGIN_YUV) \
+		$(PLUGIN_YUVMMX) \
+		$(PLUGIN_MOTION) \
+		$(PLUGIN_MOTIONMMX) \
+		$(PLUGIN_MOTIONMMXEXT) \
+		$(PLUGIN_IDCT) \
+		$(PLUGIN_IDCTCLASSIC) \
+		$(PLUGIN_IDCTMMX) \
+		$(PLUGIN_IDCTMMXEXT) \
+		$(PLUGIN_SDL) \
+		$(PLUGIN_ALSA) \
+		$(PLUGIN_NULL)
+
+# list duplicates
+STD_PLUGIN_COMMON =	plugins/idct/idct_common.o \
+			plugins/motion/vdec_motion_common.o
+
+# filter out duplicates from the plugin object lists
+STD_PLUGIN_OBJ :=	$(filter-out $(STD_PLUGIN_COMMON) $(STD_PLUGIN_ASM), \
+				 $(STD_PLUGIN_OBJ)) $(STD_PLUGIN_COMMON)
+
+#
+# Other lists of files
+#
+objects := $(C_OBJ) $(CPP_OBJ) $(ASM_OBJ) $(STD_PLUGIN_OBJ) $(STD_PLUGIN_ASM)
+dependancies := $(objects:%.o=.dep/%.d)
+
+# All symbols must be exported
+export
+
+################################################################################
+# Targets
+################################################################################
+
+#
+# Virtual targets
+#
+all: vlc @ALIASES@ plugins
+
+clean:
+	rm -f $(C_OBJ) $(CPP_OBJ) $(ASM_OBJ) $(STD_PLUGIN_OBJ)
+	rm -f plugins/*/*.o src/*/*.o lib/*.so
+	rm -f vlc @ALIASES@
+
+distclean: clean
+	rm -f src/*/*.o plugins/*/*.o **/*~ *.log
+	rm -f Makefile include/defs.h include/config.h
+	rm -f config.status config.cache config.log
+	rm -f gmon.out core build-stamp
+	rm -rf .dep
+
+install:
+	mkdir -p $(prefix)/bin
+	$(INSTALL) vlc $(prefix)/bin
+# ugly
+	for alias in "" @ALIASES@ ; do if test $$alias ; then rm -f $(prefix)/bin/$$alias && ln -s vlc $(prefix)/bin/$$alias ; fi ; done
+	mkdir -p $(prefix)/lib/videolan/vlc
+	$(INSTALL) -m 644 $(PLUGINS:%=lib/%.so) $(prefix)/lib/videolan/vlc
+	mkdir -p $(prefix)/share/videolan
+	$(INSTALL) -m 644 share/*.psf $(prefix)/share/videolan
+	$(INSTALL) -m 644 share/*.png $(prefix)/share/videolan
+
+show:
+	@echo CC: $(CC)
+	@echo CFLAGS: $(CFLAGS)
+	@echo DCFLAGS: $(DCFLAGS)
+	@echo LCFLAGS: $(LCFLAGS)
+	@echo STD_PLUGIN_OBJ: $(STD_PLUGIN_OBJ)
+
+# ugliest of all, but I have no time to do it -- sam
+snapshot:
+	rm -rf /tmp/${SNAPSHOTDIR}
+	mkdir /tmp/${SNAPSHOTDIR}
+	cp -a * /tmp/${SNAPSHOTDIR}
+		(cd /tmp/${SNAPSHOTDIR} ; \
+		make distclean ; \
+		find . -type d -name CVS | xargs rm -rf ; \
+		find . -type f -name '.*.swp' | xargs rm -f ; \
+		find . -type f -name '.cvsignore' | xargs rm -f ; \
+		cd .. ; \
+		tar czvf ${SNAPSHOTDIR}.tar.gz ${SNAPSHOTDIR} ; \
+		tar cIvf ${SNAPSHOTDIR}.tar.bz2 ${SNAPSHOTDIR} )
+	rm -rf /tmp/${SNAPSHOTDIR}
+	mv /tmp/${SNAPSHOTDIR}.tar.gz ..
+	mv /tmp/${SNAPSHOTDIR}.tar.bz2 ..
+	@echo "Sources are in ../${SNAPSHOTDIR}.tar.[gz,bz2]"
+
+plugins: $(PLUGINS:%=lib/%.so)
+
+FORCE:
+
+#
+# Gnome and Framebuffer aliases - don't add new aliases which could bloat
+# the namespace
+#
+gvlc fbvlc: vlc
+	rm -f $@ && ln -s vlc $@
+
+
+#
+# Generic rules (see below)
+#
+$(dependancies): %.d: FORCE
+	@$(MAKE) -s --no-print-directory -f Makefile.dep $@
+
+$(C_OBJ): %.o: Makefile.dep
+$(C_OBJ): %.o: .dep/%.d
+$(C_OBJ): %.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(CPP_OBJ): %.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(ASM_OBJ): %.o: Makefile.dep
+$(ASM_OBJ): %.o: %.S
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(STD_PLUGIN_OBJ): %.o: Makefile.dep
+$(STD_PLUGIN_OBJ): %.o: .dep/%.d
+$(STD_PLUGIN_OBJ): %.o: %.c
+	$(CC) $(CFLAGS) $(PCFLAGS) -c -o $@ $<
+
+$(STD_PLUGIN_ASM): %.o: Makefile.dep
+$(STD_PLUGIN_ASM): %.o: %.S
+	$(CC) $(CFLAGS) $(PCFLAGS) -c -o $@ $<
+
+$(PLUGIN_GNOME): %.o: Makefile.dep
+$(PLUGIN_GNOME): %.o: %.c
+	$(CC) $(CFLAGS) $(PCFLAGS) `gnome-config --cflags gnomeui` -c -o $@ $<
+
+$(PLUGIN_GLIDE): %.o: Makefile.dep
+$(PLUGIN_GLIDE): %.o: %.c
+	$(CC) $(CFLAGS) $(PCFLAGS) -I/usr/include/glide -c -o $@ $<
+
+#
+# Main application target
+#
+
+vlc: $(C_OBJ) $(CPP_OBJ) $(ASM_OBJ)
+ifeq ($(SYS),beos)
+	$(CC) $(CFLAGS) $(LCFLAGS) -Xlinker -soname=_APP_ -o $@ $(C_OBJ) $(CPP_OBJ) $(ASM_OBJ)
+	rm -f ./plugins/_APP_
+	ln -s ../vlc ./plugins/_APP_
+else
+	$(CC) $(CFLAGS) $(LCFLAGS) --export-dynamic @DYNAMIC_FLAG@ -o $@ $(C_OBJ) $(CPP_OBJ) $(ASM_OBJ)	
+endif
+
+#
+# Plugin targets
+#
+
+lib/beos.so: $(PLUGIN_BEOS)
+	$(CC) $(PCFLAGS) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/esd.so: $(PLUGIN_ESD)
+ifneq (,$(findstring bsd,$(SYS)))
+	$(CC) $(PCFLAGS) -shared -o $@ $^ -lesd
+else
+	$(CC) $(PCFLAGS) -shared -o $@ $^ -laudiofile -lesd
+endif
+
+lib/dsp.so: $(PLUGIN_DSP)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/alsa.so: $(PLUGIN_ALSA)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ -lasound
+
+lib/fb.so: $(PLUGIN_FB)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/x11.so: $(PLUGIN_X11)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ -L/usr/X11R6/lib -lX11 -lXext
+
+lib/mga.so: $(PLUGIN_MGA)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ -L/usr/X11R6/lib -lX11 -lXext
+
+lib/gnome.so: $(PLUGIN_GNOME)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ `gnome-config --libs gnomeui | sed 's,-rdynamic,,'`
+
+lib/glide.so: $(PLUGIN_GLIDE)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ $(LIB_GLIDE)
+
+lib/ggi.so: $(PLUGIN_GGI)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ $(LIB_GGI)
+
+lib/sdl.so: $(PLUGIN_SDL)
+	$(CC) $(PCFLAGS) -shared -o $@ $^ $(LIB_SDL)
+
+ifeq ($(SYS),beos)
+lib/null.so: $(PLUGIN_NULL)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/dummy.so: $(PLUGIN_DUMMY)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/yuv.so: $(PLUGIN_YUV)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/yuvmmx.so: $(PLUGIN_YUVMMX)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/motion.so: $(PLUGIN_MOTION)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/motionmmx.so: $(PLUGIN_MOTIONMMX)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/motionmmxext.so: $(PLUGIN_MOTIONMMXEXT)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/idct.so: $(PLUGIN_IDCT)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/idctclassic.so: $(PLUGIN_IDCTCLASSIC)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/idctmmx.so: $(PLUGIN_IDCTMMX)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/idctmmxext.so: $(PLUGIN_IDCTMMXEXT)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+
+lib/ps.so: $(PLUGIN_PS)
+	$(CC) -nostart -Xlinker -soname=$@ -o $@ $^ plugins/_APP_
+else
+lib/null.so: $(PLUGIN_NULL)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/dummy.so: $(PLUGIN_DUMMY)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/yuv.so: $(PLUGIN_YUV)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/yuvmmx.so: $(PLUGIN_YUVMMX)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/motion.so: $(PLUGIN_MOTION)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/motionmmx.so: $(PLUGIN_MOTIONMMX)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/motionmmxext.so: $(PLUGIN_MOTIONMMXEXT)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/idct.so: $(PLUGIN_IDCT)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/idctclassic.so: $(PLUGIN_IDCTCLASSIC)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/idctmmx.so: $(PLUGIN_IDCTMMX)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/idctmmxext.so: $(PLUGIN_IDCTMMXEXT)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+
+lib/ps.so: $(PLUGIN_PS)
+	$(CC) $(PCFLAGS) -shared -o $@ $^
+endif
+
+################################################################################
+# Note on generic rules and dependancies
+################################################################################
+
+# Note on dependancies: each .c file is associated with a .d file, which
+# depends of it. The .o file associated with a .c file depends of the .d, of the
+# .c itself, and of Makefile. The .d files are stored in a separate .dep/
+# directory.
+# The dep directory should be ignored by CVS.
+
+# Note on inclusions: depending of the target, the dependancies files must
+# or must not be included. The problem is that if we ask make to include a file,
+# and this file does not exist, it is made before it can be included. In a
+# general way, a .d file should be included if and only if the corresponding .o
+# needs to be re-made.
+
+# Two makefiles are used: the main one (this one) has regular generic rules,
+# except for .o files, for which it calls the object Makefile. Dependancies
+# are not included in this file.
+# The object Makefile known how to make a .o from a .c, and includes
+# dependancies for the target, but only those required.

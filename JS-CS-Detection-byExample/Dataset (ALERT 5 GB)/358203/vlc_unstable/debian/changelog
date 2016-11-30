@@ -1,0 +1,124 @@
+vlc (0.2.50-1) unstable; urgency=low
+
+  * Unstable release.
+
+ -- Samuel Hocevar <sam@zoy.org>  Wed, 31 Jan 2001 04:30:37 +0100
+
+vlc (0.1.99i) unstable; urgency=low
+
+  * Fixed the framerate display
+
+ -- Samuel Hocevar <sam@zoy.org>  Tue, 24 Oct 2000 11:08:01 +0200
+
+vlc (0.1.99i) unstable; urgency=low
+
+  * fixed the support for field pictures, which involved a few dozens
+    bugs in the video parser and video decoder.
+  * renamed an inconsistent variable in src/input/input_file.c.
+  * added support for I+ synchro (all Is and the first P).
+  * fixed a motion compensation bug which generated some distortion
+    on B images.
+  * fixed a motion compensation bug for skipped macroblocks.
+  * fixed a synchro bug for field images.
+  * fixed the --server option which didn't work if a ~/.vlcrc existed.
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Mon, 28 Aug 2000 02:34:18 +0200
+
+vlc (0.1.99h) unstable; urgency=low
+
+  * added support for the SDL vout : the --display fullscreen allows
+    fullscreen when possible. Disabled by default.
+  * updated debian directory to build vlc-sdl.
+  * removed CCFLAGS flags which were improperly used.
+  * added hints for powerpc build.
+  * fixed the input_file exit bug.
+  * removed the frame statistics output.
+  * removed a verbose message in intf_sdl.c.
+  * added a few sanity checks in the audio mpeg and ac3 decoders.
+  * temporarily got rid of vlc.channels.
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Tue, 22 Aug 2000 01:31:58 +0200
+
+vlc (0.1.99g) unstable; urgency=low
+
+  * removed all "*vlc" aliases except "gvlc" and "fbvlc". The other sucked.
+  * new --synchro flag which lets you force which images are decoded.
+  * fixed 32bpp MMX YUV, made the comments clearer, removed an emms.
+  * now scaling is on by default, so that people won't tell that the vlc
+    cannot do scaling :-)
+  * fixed 8bpp YUV.
+  * fixed the fscked up Bresenham algorithm in all YUV functions.
+  * fixed a dumb bug in the Makefile that prevented inclusion of the
+    -march=pentium directive. thanks Meuuh, blame sam.
+  * separate Debian packages
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Wed, 16 Aug 2000 01:07:14 +0200
+
+vlc (0.1.99f) unstable; urgency=low
+
+  * plugin detection now works
+  * "gvlc", "fbvlc", "ggivlc" aliases now work
+  * fixed functions that weren't properly inlined
+  * removed bloat from the MMX YUV plugin
+  * vlc.init becomes ~/.vlcrc
+  * removed float operations in the video decoder, and all emms asm functions
+  * borrowed linuxvideo's MMX motion compensation
+  * fixed an undefined symbol in the MMX YUV plugin
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Tue,  8 Aug 2000 11:24:01 +0200
+
+vlc (0.1.99e) unstable; urgency=low
+
+  * new bitstream syntax and slight performance increase
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Thu, 20 Jul 2000 15:14:06 +0200
+
+vlc (0.1.99d) unstable; urgency=low
+
+  * .deb is now more lintian-friendly
+  * removed a few useless warning messages
+  * new plugin API
+  * plugin auto-detection
+  * removed the default --enable-ppro option because it didn't work on K6-2
+  * the framebuffer client now leaves the console in a working state
+  * the dithered 8 bpp YUV transformation works again (blame bbp !)
+  * the YUV transformations are now plugins as well
+  * alternative symlinks like gvlc, fbvlc are now created at compile time
+  * borrowed libmpeg2's GPLed MMX YUV transformations (16 and 32 bits)
+  * fixed an endianness problem which occured on iMacs
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Wed, 12 Jul 2000 01:24:40 +0200
+
+vlc (0.1.99c) unstable; urgency=low
+
+  * Caught Delete Window event in Gnome and X11 modes
+  * Fixed manpage
+  * GGI output now works
+  * Fixed a segfault on exit for the Gnome plugin
+  * Sound support almost works under BeOS
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Tue, 20 Jun 2000 03:01:12 +0200
+
+vlc (0.1.99b) unstable; urgency=low
+
+  * Added a ChangeLog file
+  * Updated the VLAN code
+  * Fixed a bug preventing to quit
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Sat, 17 Jun 2000 03:46:16 +0200
+
+vlc (0.1.99a) unstable; urgency=low
+
+  * Fixed some compile flag errors
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Thu, 15 Jun 2000 20:48:54 +0200
+
+vlc (0.1.99-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Samuel Hocevar <sam@via.ecp.fr>  Mon, 13 Mar 2000 02:21:45 +0100
+
+Local variables:
+mode: debian-changelog
+End:

@@ -1,0 +1,71 @@
+List of known vlc bugs $Id: BUGS,v 1.9 2002/03/20 23:00:16 gbazin Exp $
+
+   Please try to keep this file up to date. Also, grep for FIXME in the
+source files for more and more bugs to fix.
+
+   For information on how to post a useful bug report, please read
+doc/bugreport-howto.txt.
+
+
+Core:
+
+  * vlc_cond_broadcast unimplemented on most plaforms.
+
+
+Input:
+
+  * DVD raw device support doesn't seem to work.
+
+  * HTTP input seems to lose packets during pre-parsing.
+
+  * TS input doesn't work under Windows 98 when the server address is
+  specified.
+
+  * Stopping and playing again a network stream often makes vlc crash
+  under Windows.
+
+
+Audio output:
+
+  * Audio output stutters on some audio cards. For instance kwyxz's SB
+  128 with an es1371 chip.
+
+
+Video output:
+
+  * We don't render subtitles on RGB surfaces.
+
+  * The QNX video output plugin is broken because of vout4.
+
+  * The MGA video output plugin makes the picture stutter when
+  MGA_NUM_FRAMES is set to a value higher than 1.
+
+  * The SPU decoder doesn't detect when the video output failed to
+  launch itself, and we segfault.
+
+  * On-the-fly resizing doesn't work when using a chroma transformation.
+
+
+Chroma transformations:
+
+  * Most chroma transformation modules completely ignore margins.
+
+  * Most chroma transformation modules restrict the width of a picture
+  to multiples of 8 or even 16. We can achieve better than that.
+
+
+Filters:
+
+  * Most filters completely ignore margins.
+
+
+Gtk interface:
+
+  * Playing like a madman with the `Playlist' button makes the interface
+  crash.
+
+
+Misc:
+
+  * The Jin-Roh DVD seems to segfault.
+

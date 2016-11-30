@@ -1,0 +1,78 @@
+--- configure	2008-04-06 09:07:25.000000000 +0200
++++ configure	2008-04-06 09:10:52.000000000 +0200
+@@ -343,6 +343,7 @@
+ # autodetect options that weren't forced nor disabled
+ 
+ libpthread=""
++extradef=""
+ if test "$pthread" = "auto" ; then
+     pthread="no"
+     case $SYS in
+@@ -350,13 +351,13 @@
+             pthread="yes"
+             ;;
+         MINGW)
+-            if cc_check pthread.h -lpthread "pthread_create(0,0,0,0);" ; then
++            if cc_check pthread.h -lpthread "pthread_create(0,0,0,0); pthread_num_processors_np();" ; then
+                 pthread="yes"
+                 libpthread="-lpthread"
+-            elif cc_check pthread.h -lpthreadGC2 "pthread_create(0,0,0,0);" ; then
++            elif cc_check pthread.h -lpthreadGC2 "pthread_create(0,0,0,0); pthread_num_processors_np(); " ; then
+                 pthread="yes"
+                 libpthread="-lpthreadGC2"
+-            elif cc_check pthread.h "-lpthreadGC2 -lwsock32 -DPTW32_STATIC_LIB" "pthread_create(0,0,0,0);" ; then
++            elif cc_check pthread.h "-lpthreadGC2 -lwsock32 -DPTW32_STATIC_LIB" "pthread_create(0,0,0,0); pthread_num_processors_np();" ; then
+                 pthread="yes"
+                 libpthread="-lpthreadGC2 -lwsock32"
+                 CFLAGS="$CFLAGS -DPTW32_STATIC_LIB"
+@@ -443,6 +444,10 @@
+ ASFLAGS=$ASFLAGS
+ GTK=$gtk
+ EXE=$EXE
++AR=$AR
++STRIP=$STRIP
++AROPTS=$AROPTS
++RANLIB=$RANLIB
+ VIS=$vis
+ HAVE_GETOPT_LONG=$HAVE_GETOPT_LONG
+ DEVNULL=$DEVNULL
+@@ -495,7 +500,7 @@
+ Description: H.264 (MPEG4 AVC) encoder library
+ Version: $(grep POINTVER < config.h | sed -e 's/.* "//; s/".*//')
+ Libs: $pclibs
+-Cflags: -I$includedir
++Cflags: -I$includedir $extradef
+ EOF
+ 
+ 
+--- Makefile	2008-04-06 09:07:25.000000000 +0200
++++ Makefile	2008-04-06 09:11:39.000000000 +0200
+@@ -72,8 +72,8 @@
+ default: $(DEP) x264$(EXE)
+ 
+ libx264.a: .depend $(OBJS) $(OBJASM)
+-	ar rc libx264.a $(OBJS) $(OBJASM)
+-	ranlib libx264.a
++	$(AR) rc libx264.a $(OBJS) $(OBJASM)
++	$(RANLIB) libx264.a
+ 
+ $(SONAME): .depend $(OBJS) $(OBJASM)
+ 	$(CC) -shared -o $@ $(OBJS) $(OBJASM) $(SOFLAGS) $(LDFLAGS)
+@@ -90,7 +90,7 @@
+ %.o: %.asm
+ 	$(AS) $(ASFLAGS) -o $@ $<
+ # delete local/anonymous symbols, so they don't show up in oprofile
+-	-@ strip -x $@
++	-@ $(STRIP) -x $@
+ 
+ .depend: config.mak
+ 	rm -f .depend
+@@ -155,7 +155,7 @@
+ 	install -m 644 libx264.a $(DESTDIR)$(libdir)
+ 	install -m 644 x264.pc $(DESTDIR)$(libdir)/pkgconfig
+ 	install x264$(EXE) $(DESTDIR)$(bindir)
+-	ranlib $(DESTDIR)$(libdir)/libx264.a
++	$(RANLIB) $(DESTDIR)$(libdir)/libx264.a
+ ifeq ($(SYS),MINGW)
+ 	$(if $(SONAME), install -m 755 $(SONAME) $(DESTDIR)$(bindir))
+ else

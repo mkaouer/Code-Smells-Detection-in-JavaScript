@@ -1,0 +1,155 @@
+0.1.99j:
+
+  * Added hardware YUV overlay support (SDL). Huge performance
+    increase.
+  * Minor changes in the Debian files.
+  * Fixed fps display.
+  * Fixed MPEG1 video decoding. We don't read MPEG 1 PS files for the
+    moment.
+  * Fixed a 100% cpu usage bug, in the dummy aout.
+  * Added a 'f' shortcut to switch between Windowed and Fullscreen
+    mode.
+  * Added --broadcast option for network input.
+  * Screen is now emptied when framebuffer output exits.
+  * Totally new frame dropping algorithm.
+  * Fixed a bug in video_ouput.c which trashed more late pictures than
+    necessary.
+  * Fixed the DEBUG mode in the Makefile.
+  * Fixed a bug in mwait() which made us wait too long.
+  * The video_decoder can now be split into several threads to take
+    advantage of the SMP machines.
+  * Added --enable-debug, --enable-stats, and --disable-optims in the
+    GNU configure stuff.
+  * Added alsa audio support (plugin)  
+  * vlc is now compiled without the STATS mode by default.
+  * Fixed a bug which made frames go backwards with some displays (the
+    video_decoder thread is now niced).
+  * Added intf_WarnMsg(), and made use of it in the most needed places.
+
+Mon, 28 Aug 2000 02:34:18 +0200
+0.1.99i :
+
+  * fixed the support for field pictures, which involved a few dozens
+    bugs in the video parser and video decoder.
+  * put names of authors under a lot of source files, for historical
+    purposes.
+  * fixed another input_file exit bug for the beos version.
+  * fixed the aliases install.
+  * renamed an inconsistent variable in src/input/input_file.c.
+  * added support for I+ synchro (all Is and the first P).
+  * fixed a motion compensation bug which generated some distortion
+    on B images.
+  * fixed a motion compensation bug for skipped macroblocks.
+  * fixed a synchro bug for field images.
+  * cleaned Octplane's crappy indentation.
+  * fixed the --server option which didn't work if a ~/.vlcrc existed.
+
+Tue, 22 Aug 2000 01:31:58 +0200
+0.1.99h :
+
+  * fixed the sound issue under beos.
+  * fixed a bug that was making the crash randomly under beos.
+  * fixed a bug that was exhausting system ressources under beos.
+  * improved the cond_var for beos.
+  * added support for the SDL vout : the --display fullscreen allows 
+    fullscreen when possible. Disabled by default.
+  * added sdlvlc (which probably should start in fullscreen, no ?)
+  * removed sdlvlc :)
+  * updated debian directory to build vlc-sdl.
+  * removed CCFLAGS flags which were improperly used.
+  * added hints for powerpc build.
+  * fixed the input_file exit bug.
+  * fixed a Makefile bug which removed the CVS directory.
+  * removed the frame statistics output.
+  * removed a verbose message in intf_sdl.c.
+  * added a few sanity checks in the audio mpeg and ac3 decoders.
+  * temporarily got rid of vlc.channels.
+  * added notice in debian/control about unencrypted DVDs.
+  * fixed PowerPC .deb build.
+ 
+Wed, 16 Aug 2000 01:07:14 +0200
+0.1.99g :
+
+  * removed all "*vlc" aliases except "gvlc" and "fbvlc". The other sucked.
+  * new --synchro flag which lets you force which images are decoded.
+  * removed an unused variable in the MMX YUVs.
+  * fixed 32bpp MMX YUV, made the comments clearer, removed an emms.
+  * now scaling is on by default, so that people won't tell that the vlc
+    cannot do scaling :-)
+  * fixed a few long lines.
+  * fixed 8bpp YUV.
+  * fixed the fscked up Bresenham algorithm in all YUV functions.
+  * fixed a dumb bug in the Makefile that prevented inclusion of the
+    -march=pentium directive. thanks Meuuh, blame sam.
+  * fixed a warning in main.c.
+  * separate Debian packages.
+  * added request for ALSA support in the TODO list.
+  * changed "pentiumpro" to "ppro" in the ./configure, it was misleading.
+
+Tue,  8 Aug 2000 11:24:01 +0200
+0.1.99f :
+
+  * plugin detection now works
+  * "gvlc", "fbvlc", "ggivlc" aliases now work
+  * fixed functions that weren't properly inlined
+  * removed bloat from the MMX YUV plugin
+  * vlc.init becomes ~/.vlcrc
+  * removed float operations in the video decoder, and all emms asm functions
+  * borrowed linuxvideo's MMX motion compensation
+  * fixed an undefined symbol in the MMX YUV plugin
+
+Thu, 20 Jul 2000 15:14:06 +0200
+0.1.99e :
+
+  * new bitstream syntax and slight performance increase
+  * BeOS build fix
+  * removed the sample code from the reference decoder
+
+Wed, 12 Jul 2000 01:24:40 +0200
+0.1.99d :
+
+  * fixed RPM build
+  * .deb is now more lintian-friendly
+  * fixed vlc.spec to install nicely
+  * PLUGIN_PATH and DATA_PATH now in include/*.h
+  * removed a few useless warning messages
+  * removed remaining header stuff related to the old non-free decoder
+  * fixed the MGA build (doesn't work yet, though)
+  * new plugin API
+  * updated the INSTALL document
+  * plugin auto-detection
+  * fixed a few misspellings in the code
+  * removed the default --enable-ppro option because it didn't work on K6-2
+  * the framebuffer client now leaves the console in a working state
+  * the dithered 8 bpp YUV transformation works again (blame bbp !)
+  * the YUV transformations are now plugins as well
+  * alternative symlinks like gvlc, fbvlc are now created at compile time
+  * borrowed libmpeg2's GPLed MMX YUV transformations (16 and 32 bits)
+  * fixed an endianness problem which occured on iMacs
+  * fixed the build for the Mandrake distribution
+
+Sun, 18 Jun 2000 18:54:48 +0200
+0.1.99c :
+
+  * fixed Makefile.in for debug version
+  * caught Delete Window event in Gnome and X11 modes
+  * fixed man page
+  * GGI output now works
+  * fixed a segfault on exit for the Gnome plugin
+  * fixed compile problems for BeOS
+  * sound support almost works under BeOS
+  * fixed a warning in ac3_exponent.c
+  * automatic support for .rpm and .deb building
+
+Sat, 17 Jun 2000 03:35:02 +0200
+0.1.99b :
+
+  * fixed a bug preventing to quit when run with no arguments
+  * new VLAN changing code
+  * created the ChangeLog file :)
+
+Thu, 15 Jun 2000 20:48:54 +0200
+0.1.99a :
+
+  * first public release
+
