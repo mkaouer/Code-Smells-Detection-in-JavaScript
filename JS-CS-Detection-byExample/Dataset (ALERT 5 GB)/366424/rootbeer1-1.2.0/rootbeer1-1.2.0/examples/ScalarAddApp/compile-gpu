@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd ../../
+ant clean
+ant jar
+./pack-rootbeer
+cd examples/ScalarAddApp/
+ant jar
+java -jar ../../Rootbeer.jar dist/ScalarAddApp.jar dist/ScalarAddApp-GPU.jar -64bit

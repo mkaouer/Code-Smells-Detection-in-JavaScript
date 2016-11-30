@@ -1,0 +1,16 @@
+<project>
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" classpath="../../../Rootbeer.jar:../mandellib.jar" />
+    </target>
+    <target name="jar" depends="compile">
+        <jar destfile="../MegaMandel2.jar" basedir="build/classes">
+          <manifest>
+            <attribute name="Main-Class" value="megamandel2.MegaMandel2"/>
+          </manifest>
+        </jar>
+    </target>
+</project>

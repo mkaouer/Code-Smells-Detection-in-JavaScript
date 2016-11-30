@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -Xmx10g -cp ../../Rootbeer.jar:MatrixApp.jar rootbeer.examples.gtc2013.MatrixApp 

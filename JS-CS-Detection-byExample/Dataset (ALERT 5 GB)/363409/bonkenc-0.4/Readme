@@ -1,0 +1,30 @@
+BonkEnc version 0.4
+
+BonkEnc is an encoder for the new BONK audio format. BONK offers better sound
+quality at lower bit rates than MP3. BonkEnc can also encode MP3 files if you
+have the BladeEnc DLL installed (http://bladeenc.mp3.no).
+
+Requirements:
+
+- Windows NT/2000/XP, Windows 95/98/SE/ME
+- A 200MHz processor or better for playing BONK files
+- Winamp is required to play BONK files in Windows
+
+Requirements for compiling the sources:
+
+- MinGW32 v1.0 (http://mingw.sf.net)
+- SMOOTH v0.8.55.0 (http://smooth.sf.net)
+
+Problems:
+
+- The current version of Paul Harrison's BONK encoder still has a few bugs.
+  Please contact him (pfh@csse.monash.edu.au) if BonkEnc generates BONK files with errors.
+
+- BonkEnc can use 44.1 kHz, 16 bit wave files only. Don't try to use another format for input.
+
+
+The official BonkEnc homepage: http://bonkenc.sf.net
+Paul Harrison's BONK page: http://yoyo.cc.monash.edu.au/~pfh/bonk
+
+robert.kausch@gmx.net,
+Robert Kausch

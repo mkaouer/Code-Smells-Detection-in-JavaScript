@@ -1,0 +1,16 @@
+<project>
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" classpath="../../../Rootbeer.jar:../raylib.jar" />
+    </target>
+    <target name="jar" depends="compile">
+        <jar destfile="../MultiDimRay2.jar" basedir="build/classes">
+          <manifest>
+            <attribute name="Main-Class" value="multidimray2.MultiDimRay2"/>
+          </manifest>
+        </jar>
+    </target>
+</project>

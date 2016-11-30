@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ../../
+ant clean
+ant jar
+./pack-rootbeer
+cd examples/sort/
+ant jar
+java -jar ../../Rootbeer.jar dist/sorter.jar dist/sorter-gpu.jar -64bit

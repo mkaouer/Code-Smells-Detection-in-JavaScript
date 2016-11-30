@@ -1,0 +1,6 @@
+#!/bin/sh
+
+mkdir ../build/classes/org/trifort/rootbeer/runtime/binaries/
+cp *.so.1 ../build/classes/org/trifort/rootbeer/runtime/binaries/
+cp *.dll ../build/classes/org/trifort/rootbeer/runtime/binaries/
+cp *.dylib ../build/classes/org/trifort/rootbeer/runtime/binaries/

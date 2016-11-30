@@ -1,0 +1,16 @@
+<project>
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+    <target name="compile">
+        <mkdir dir="build/classes"/>
+        <javac srcdir="src" destdir="build/classes" classpath="../../Rootbeer.jar" />
+    </target>
+    <target name="jar" depends="compile">
+        <jar destfile="MultiGpuApp.jar" basedir="build/classes">
+            <manifest>
+                <attribute name="Main-Class" value="org.trifort.rootbeer.examples.multigpu.MultiGpuApp"/>
+            </manifest>
+        </jar>
+    </target>
+</project>

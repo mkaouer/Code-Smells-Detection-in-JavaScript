@@ -1,0 +1,9 @@
+#!/bin/sh
+
+cd ../../
+ant jar
+./pack-rootbeer
+
+cd examples/MultiGpu/
+ant jar
+java -jar ../../Rootbeer.jar MultiGpuApp.jar MultiGpuApp-GPU.jar -64bit

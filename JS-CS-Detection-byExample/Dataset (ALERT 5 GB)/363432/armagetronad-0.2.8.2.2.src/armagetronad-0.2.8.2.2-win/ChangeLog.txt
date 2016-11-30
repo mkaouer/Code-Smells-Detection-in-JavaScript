@@ -1,0 +1,6873 @@
+2006-06-02 22:33  z-man
+
+	* NEWS: Removed (seemingly) redundant line. They were indeed
+	  different bugfixes, but to the reader of this file, the
+	  difference is not visible.
+
+2006-05-31 15:18  z-man
+
+	* NEWS: logged bugfixes
+
+2006-05-31 15:17  z-man
+
+	* src/tron/gCycle.cpp: disabled situation where two cycles were
+	  allowed to pass through each other.
+
+2006-05-31 15:16  z-man
+
+	* config/examples/cvs_test/fortress_politics.cfg: allow larger
+	  messages.
+
+2006-05-27 20:16  z-man
+
+	* src/tron/gAIBase.cpp: NULL pointer check.
+
+2006-05-27 14:37  z-man
+
+	* src/engine/ePlayer.cpp: Backported fix that belonged here in the
+	  first place: worked around mysterious VisualC++ compiler bug.
+
+2006-05-27 11:12  z-man
+
+	* Makefile.manual: Tuned cvs2cl to b0_2_8_2
+
+2006-05-27 10:59  z-man
+
+	* NEWS: Logged new bugfixes.
+
+2006-05-27 10:56  z-man
+
+	* config/rc.config.in: Added warning comment that the data
+	  directory will get chowned to the armagetronad user.
+
+2006-05-27 10:56  z-man
+
+	* batch/: masterstarter.in, serverstarter.in: Added emergency code
+	  handling the failure of jobs -p to log the server process PID.
+
+2006-05-27 10:54  z-man
+
+	* batch/rcd_startstop.in: Removed dangerous chowning of log and pid
+	  directories.
+
+2006-05-24 12:01  z-man
+
+	* src/engine/ePlayer.cpp: Fixed negative index subscript error in
+	  string lookup (leading to reads from uninitialized memory in
+	  optimized mode).
+
+2006-05-24 08:40  z-man
+
+	* config/settings.cfg, language/english_base_notranslate.txt: Made
+	  packet loss waiting time in network syncing code configurable.
+
+2006-05-24 08:39  z-man
+
+	* src/tron/gCycleMovement.cpp: Detect fake packet loss.  Made
+	  packet loss tolerance wait time configurable.
+
+2006-05-20 22:21  nemostultae
+
+	* src/tools/tDirectories.cpp: Mac OS X now compiles cleanly.
+	  FindDataPath() and FindConfigurationPath() are not called on Mac
+	  OS X, so disabling them has done no harm
+
+2006-05-20 20:49  z-man
+
+	* batch/sysinstall.in: Corrected printed name of user that is
+	  created (was armagetronad-dedicated, should be armagetronad)
+
+2006-05-20 12:40  z-man
+
+	* NEWS: Added missing entry
+
+2006-05-20 12:40  z-man
+
+	* config/settings.cfg, src/tron/gCycleMovement.cpp: Default of
+	  CYCLE_RUBBER_MINADJUST is now 0.05 (was 0.01 in 0.2.8.1 and 0.2
+	  in previous CVS)
+
+2006-05-14 23:55  z-man
+
+	* configure.ac, batch/sysinstall.in: Disabled init script
+	  installation per default on the client.  Check for write
+	  permissions before installing init scripts.
+
+2006-05-14 22:21  z-man
+
+	* src/tron/gCycle.cpp: Fixed crash due to modification of grid data
+	  on future wall owner kill; the modified data is traversed one
+	  level higher. Now the forced wall drop in Kill() no longer
+	  inserts walls into the grid directly.
+
+2006-05-14 18:31  z-man
+
+	* NEWS, configure.ac: Put changes that were accidentally commited
+	  into b0_2_8 to b0_2_8_2
+
+2006-05-13 23:02  z-man
+
+	* src/engine/ePlayer.cpp: Hopeless team change wishes (when
+	  teamplay is disabled) are now discarded.
+
+2006-05-12 23:47  z-man
+
+	* src/tron/gParser.cpp: Disabled settings parsing on the client.
+
+2006-05-12 23:47  z-man
+
+	* src/tron/gCycle.cpp: Workaround for the future wall crossing
+	  problem: the future wall owner is killed.
+
+2006-05-12 23:37  z-man
+
+	* NEWS: Added forgotten news items
+
+2006-05-07 15:02  z-man
+
+	* batch/make/fingerprint: Avoided recursive directory creation from
+	  hell
+
+2006-05-07 12:51  z-man
+
+	* src/tron/gStuff.h: Removed outrageously low value of floating
+	  point tolerance value EPS
+
+2006-05-07 12:24  z-man
+
+	* batch/make/fingerprint, src/tron/gGame.cpp: Avoided use of
+	  pushd/popd Avoided == in test The source directory is no longer
+	  used for temporary stuff
+
+2006-05-07 11:58  z-man
+
+	* src/engine/ePlayer.cpp: Added '.' to list of characters illegal
+	  at name ends
+
+2006-05-07 11:20  z-man
+
+	* src/tron/gCycle.cpp: VisualC 6 compatibility
+
+2006-05-06 23:14  z-man
+
+	* src/tron/gGame.cpp: Fixed time slicing, it was advancing more
+	  than actually requested.
+
+2006-05-06 22:30  z-man
+
+	* batch/make/fingerprint, batch/make/regenerate_fingerprint,
+	  Makefile.manual: Outsourced fingerprint generation into a script.
+	  Added detection of tagged releases, the fingerprint is
+	  especially lean then.
+
+2006-05-06 21:13  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/tron/gCycle.cpp: Added brake toggle button.
+
+2006-05-05 22:43  z-man
+
+	* src/engine/ePlayer.cpp: Refactored name stripping.
+
+2006-05-05 21:44  z-man
+
+	* src/engine/ePlayer.cpp: Removed one assgnment that completely
+	  ruined the impostor protection for mutliple renames.	When a
+	  player quits, his last pending rename is no longer executed.
+
+2006-05-05 14:51  z-man
+
+	* language/english_base.txt, src/engine/ePlayer.cpp: Uses
+	  eVoter::AllowNameChange() to see if players are allowed to rename
+	  now.	Impostor detection is case insensitive.  Trailing and
+	  leading spaces are stripped from player names.
+
+2006-05-05 14:50  z-man
+
+	* src/engine/: eVoter.cpp, eVoter.h: Added AllowNameChange(), a
+	  function that determines wheter a player should be allowed to
+	  change his name.
+
+2006-05-05 12:13  z-man
+
+	* src/tron/gGame.cpp: Err, disabled negative timesteps again.
+
+2006-05-05 11:40  z-man
+
+	* src/tron/gCycle.cpp: Attempt to make cycle collision handling
+	  truly order independant.  When a cycle crosses a wall that is
+	  built in its future, it no longer sees it as a danger. Until it
+	  truly hits it, but then it notices it's from the future and
+	  kills/resets the other cycle instead.
+
+2006-05-05 11:38  z-man
+
+	* config/settings.cfg, language/english_base_notranslate.txt,
+	  src/tron/gGame.cpp: Simulation steps are now chopped into small
+	  (configurable) pieces on the global level.
+
+2006-05-05 00:46  z-man
+
+	* NEWS: updated
+
+2006-05-05 00:44  z-man
+
+	* src/engine/ePlayer.cpp: Added another call to su_ClearKeys()
+	  right at the beginning of chat handling to smuggle cycle or
+	  camera input (keypress ends) around chat input blocker.
+
+2006-05-05 00:42  z-man
+
+	* src/tron/gCycle.cpp: Fixed doublebind brake double destination
+	  send
+
+2006-05-04 18:49  z-man
+
+	* src/tron/gCycleMovement.cpp: Moved acceleration application
+	  completely to TimestepCore() and made it revert to the old value
+	  if the function was exited for whatever reason.
+
+2006-05-04 18:38  z-man
+
+	* src/tron/gCycleMovement.cpp: Moved acceleration application in
+	  verlet mode to TimestepCore().
+
+2006-05-02 12:03  z-man
+
+	* src/engine/eTeam.cpp: Fixed involuntary team change wish transfer
+	  on team place shuffling.
+
+2006-04-27 15:13  z-man
+
+	* src/network/: nNetwork.h, nNetwork.cpp: Added debug recording
+	  checkpoints to bandwidth usage.  Message size length changes from
+	  time of recording and time of playback (from language file
+	  changes, say) were affecting bandwith throttling and thus broke
+	  playback. They still do, but not at higher debug levels.
+
+2006-04-27 11:13  z-man
+
+	* configure.ac: Activated custom directories, they seem to be safe.
+
+2006-04-27 11:11  z-man
+
+	* language/deutsch.txt: Translated new team related messages.
+
+2006-04-27 11:11  z-man
+
+	* language/english_base.txt: Color coded team change message blue.
+
+2006-04-27 08:47  z-man
+
+	* language/english_base.txt, src/engine/eTeam.cpp: Added team
+	  change message
+
+2006-04-26 17:50  z-man
+
+	* src/: ui/uInputQueue.cpp, tron/gCycleMovement.cpp,
+	  thirdparty/particles/system.cpp, tools/tMemManager.cpp,
+	  tron/gCycle.cpp, network/nSocket.cpp: "inline" -> "static inline"
+	  to avoid linker collisions
+
+2006-04-26 13:42  z-man
+
+	* src/tools/tMemManager.cpp: Fixed uninitialized variables.
+
+2006-04-26 12:32  z-man
+
+	* src/: tron/gTeam.cpp, engine/ePlayer.cpp, engine/eTeam.cpp: Empty
+	  teams now disappear from the list on the client.  Player names in
+	  the team menu are uncolored now.
+
+2006-04-26 12:14  z-man
+
+	* language/english_base.txt, src/engine/eGameObject.cpp,
+	  src/engine/ePlayer.cpp, src/engine/eTeam.cpp,
+	  src/tron/gAIBase.cpp: Team change refinements: After possible
+	  team deletions/additions, netoject deletion messages are sent
+	  immediately.	Circular swapping of players is always an allowed
+	  change.
+
+2006-04-26 11:32  z-man
+
+	* src/engine/ePlayer.cpp: Adaptions to team changes
+
+2006-04-26 10:15  z-man
+
+	* src/tron/gAIBase.cpp, src/tron/gGame.cpp, src/tron/gGame.h,
+	  src/tron/gTeam.cpp, NEWS, config/settings_dedicated.cfg,
+	  language/english_base.txt, src/engine/eTeam.cpp,
+	  src/engine/eTeam.h: Team change logic overhaul.  Team changes
+	  between rounds are now only done if they don't violate balancing
+	  constraints, players swapping teams is explicitly allowed.  The
+	  need for the perm_imbalance setting has gone away and it has been
+	  removed.
+
+2006-04-26 09:11  z-man
+
+	* src/engine/ePlayer.cpp: Switching spectator state is now
+	  considered activity
+
+2006-04-26 08:15  z-man
+
+	* src/tron/gCycleMovement.cpp: Debug checkpoints in acceleration
+	  calculation
+
+2006-04-25 19:22  z-man
+
+	* src/tron/gCycleMovement.cpp: Mode debug checkpoints
+
+2006-04-25 16:40  z-man
+
+	* src/engine/eGameObject.cpp: Added console filter that declares
+	  anything that happens during face finding a probable bug.
+
+2006-04-25 16:39  z-man
+
+	* src/engine/eGrid.cpp: Err, now really fixed the insideness
+	  tolerance, it should be constant.
+
+2006-04-25 16:39  z-man
+
+	* src/tron/gCycleMovement.cpp: More debug checkpoints, getting
+	  closer
+
+2006-04-25 13:54  z-man
+
+	* src/tron/gCycleMovement.cpp: Yet more debug checkpoints in
+	  MaxSpaceAhead
+
+2006-04-25 08:46  z-man
+
+	* src/engine/eGrid.cpp: Corrected tolerance calculation in
+	  insideness
+
+2006-04-25 08:45  z-man
+
+	* src/tron/gCycleMovement.cpp: Added more debug recording
+	  checkpoints
+
+2006-04-25 08:44  z-man
+
+	* src/tools/tConfiguration.cpp: Uppercase conversion for veto check
+
+2006-04-24 16:58  z-man
+
+	* src/tron/gCycle.cpp: Whoops, referenced a nonexisting variable.
+
+2006-04-24 15:55  z-man
+
+	* src/tron/gCycle.cpp: Reactivated continuous position syncs.
+
+2006-04-24 15:53  z-man
+
+	* src/network/nNetwork.cpp: Bandwidth management syncs are now at
+	  lower priority.
+
+2006-04-24 15:53  z-man
+
+	* NEWS: Added Wrtls /msg improvement
+
+2006-04-24 15:14  z-man
+
+	* src/tron/gCycle.cpp: Fixed turning wall loss bug.
+
+2006-04-24 15:14  z-man
+
+	* src/engine/eGrid.cpp: Made insideness calculation more precise.
+
+2006-04-24 14:30  z-man
+
+	* src/tron/gCycle.cpp, src/tron/gCycle.h, config/settings.cfg,
+	  language/english_base_notranslate.txt: Moved the perfect 180 hack
+	  once again, this time into gCycle::DoTurn.  When a cycle drops
+	  its current wall, all other cycles check their faces immediately.
+	  Anti-Phasing walldrops now have a limited frequency.
+
+2006-04-23 20:18  z-man
+
+	* src/network/nNetwork.cpp: More debug checkpoint data logged in a
+	  recording: message sizes, message sends and rate control.
+
+2006-04-23 20:01  z-man
+
+	* src/tools/tDirectories.cpp: Better check whether AA is run from
+	  the build directory: it looks for the makefile.  String operation
+	  range fixes when run with ./armagetronad without binreloc
+	  support.
+
+2006-04-23 19:59  z-man
+
+	* src/tools/tString.cpp: Added range check assertion to SubStr.
+
+2006-04-23 18:17  z-man
+
+	* Makefile.manual: Fixed "make distprep", it removed a file without
+	  checking whether it exists.
+
+2006-04-23 18:10  z-man
+
+	* NEWS: NEWS updates.
+
+2006-04-23 18:10  z-man
+
+	* Makefile.manual, batch/Makefile.am: Small fixes to fingerprint
+	  generation
+
+2006-04-23 18:10  z-man
+
+	* src/engine/eVoter.cpp: Spectators can't vote again.
+
+2006-04-23 17:48  z-man
+
+	* Makefile.am, Makefile.manual, batch/make/regenerate_fingerprint:
+	  Added CVS state fingerprint to distribution.
+
+2006-04-23 15:45  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed bad CYCLE_RUBBER_DELAY and
+	  packet loss tolerance interaction.
+
+2006-04-23 01:11  z-man
+
+	* src/tron/gGame.cpp: Improved spawn point group hack, the groups
+	  are now populated more equally.
+
+2006-04-23 00:47  z-man
+
+	* src/engine/eTeam.cpp: Only the one AI team is now called "AI
+	  Team", and it's members aren't announced as such, they only
+	  "enter the game".
+
+2006-04-23 00:11  z-man
+
+	* src/engine/eTeam.cpp: More team message changes.
+
+2006-04-22 23:43  z-man
+
+	* language/english_base.txt: Fixed typo.
+
+2006-04-22 23:42  z-man
+
+	* language/deutsch.txt: Translated stuff.
+
+2006-04-22 23:38  z-man
+
+	* src/engine/ePlayer.cpp, src/engine/eTeam.cpp,
+	  language/english_base.txt, language/french.txt,
+	  language/spanish.txt, language/deutsch.txt: Color coded team
+	  join/leave messages.
+
+2006-04-22 11:23  z-man
+
+	* src/tools/tDirectories.cpp: Fixed relocatability in Windows, one
+	  path separator was hardcoded to /.
+
+2006-04-22 11:20  z-man
+
+	* src/tron/: gCycle.cpp, gWall.cpp: Random VisualC fixes
+
+2006-04-21 20:13  z-man
+
+	* src/tron/gGame.cpp: Bugfix: on save, an empty entry was added to
+	  highscore tables.  Highscores are now also written to disk while
+	  playing back, but into different files.
+
+2006-04-21 19:54  z-man
+
+	* src/tools/tDirectories.cpp: Removed tRecorder include
+
+2006-04-21 15:44  z-man
+
+	* src/tools/: tConfiguration.cpp, tRecorder.cpp: Better support for
+	  recording and playing back at the same time.
+
+2006-04-21 11:17  z-man
+
+	* src/tron/gAIBase.cpp: Disabled one debug test run with real
+	  random numbers.
+
+2006-04-21 11:16  z-man
+
+	* src/tools/tConfiguration.cpp: Avoid file inclusion in playback
+	  mode
+
+2006-04-21 10:45  z-man
+
+	* src/network/nNetwork.cpp: Disabled annoying assertion in
+	  nMachine::GetMachine, it now returns a dummy machine on the
+	  client all the time.
+
+2006-04-18 09:18  z-man
+
+	* src/tron/gGame.cpp: Slight improvement of respawn hack, if you
+	  die at the rim, you will be clamped inside and drive inside in
+	  your next life.
+
+2006-04-17 21:31  z-man
+
+	* src/tron/gAIBase.cpp: Adaptions of balancing to visible
+	  spectators.
+
+2006-04-17 21:31  z-man
+
+	* src/engine/eTeam.cpp: Unified player join/leave messages. All
+	  kinds of those are now handled in eTeam::Add/RemovePlayer.  The
+	  AI team now is always called AI Team, even if it has only one
+	  member. There were confusing "Armagetron joined GLTron" messages
+	  otherwise.
+
+2006-04-17 21:29  z-man
+
+	* src/tron/gTeam.cpp: Adaptions to spectator changes, spectators
+	  don't get a team menu.
+
+2006-04-17 21:29  z-man
+
+	* src/network/nConfig.cpp: Bumped network version for visible
+	  spectators.
+
+2006-04-17 21:28  z-man
+
+	* language/english_base.txt, src/engine/ePlayer.cpp,
+	  src/engine/ePlayer.h: Spectators, if both server and client
+	  support it, are now visible and can chat.
+
+2006-04-17 18:26  z-man
+
+	* src/render/rTexture.cpp: Replaced GL_CLAMP with GL_CLAMP_TO_EDGE
+	  which should give more consistent results.
+
+2006-04-17 17:09  z-man
+
+	* src/tools/tDirectories.cpp: For the Nth time, disabled path debug
+	  output after forgetting about it in the last commit.
+
+2006-04-17 16:36  z-man
+
+	* src/tools/tDirectories.cpp: Fixes for the case where relocation
+	  doesn't work and the hardcoded paths need to be used.
+
+2006-04-17 16:35  z-man
+
+	* acinclude.m4, configure.ac, batch/Makefile.am: Various FreeBSD
+	  adaptions.  sed doesn't know uppercase transition and T branching
+	  there.  sdl-config is sdl11-config there.
+
+2006-04-17 15:50  z-man
+
+	* src/tron/gCycle.cpp: More safety against DropWall teleports
+
+2006-04-17 15:50  z-man
+
+	* src/tools/tRecorder.cpp: Added documentation sniplets
+
+2006-04-16 21:55  z-man
+
+	* src/tools/tRecorder.cpp: EOF signal of text file reader now comes
+	  really when the next GetLine would fail.
+
+2006-04-16 21:29  z-man
+
+	* src/tron/gAICharacter.cpp: Migrated AI loading to new generic
+	  file loading with playback support.
+
+2006-04-16 21:29  z-man
+
+	* src/tron/gGame.cpp: Loading of highscores is now properly
+	  recorded and played back.
+
+2006-04-16 21:28  z-man
+
+	* src/network/nNetwork.cpp: Loading of bans.txt is now properly
+	  recorded and played back.
+
+2006-04-16 21:28  z-man
+
+	* src/tools/: tRecorder.cpp, tRecorder.h: Added generic
+	  line-by-line text file loading with playback.
+
+2006-04-16 13:19  z-man
+
+	* src/engine/ePlayer.cpp: Whoops, fixed dedicated server.
+
+2006-04-16 13:14  z-man
+
+	* NEWS, src/engine/ePlayer.cpp: Fixed ALLOW_CONTROL_DURING_CHAT: It
+	  now excludes modifier keys from triggering control events.
+
+2006-04-16 12:52  z-man
+
+	* src/tron/gWall.cpp: Fixed rare crash in hole blowing code when
+	  the cycle pointer was NULL
+
+2006-04-16 12:51  z-man
+
+	* src/engine/eCamera.cpp: Fixed camera stuck in free mode bug
+
+2006-04-15 17:36  wrtlprnft
+
+	* language/english_base.txt, src/engine/ePlayer.cpp: Made the code
+	  that handles /msg commands first convert the pattern to the
+	  internal player name so typing "/msg öäü hi" actually finds a
+	  match if there's a user named öäü with an internal name or oau.
+	  Also localized the error messages.
+
+2006-04-15 14:14  z-man
+
+	* src/tron/gCycle.cpp: Weakened findCurrentFace direction override
+	  after wall insertion.  On complex face substitutions, it was
+	  causing teleports.
+
+2006-04-14 20:06  z-man
+
+	* src/network/nConfig.cpp: Better version name for revision 12
+
+2006-04-14 20:05  z-man
+
+	* src/engine/ePlayer.cpp: Rebeautified.
+
+2006-04-14 20:03  z-man
+
+	* src/: engine/eCamera.cpp, tron/gCycleMovement.cpp: Fixed spawn
+	  camera bug.
+
+2006-04-14 14:37  z-man
+
+	* NEWS: Updated.
+
+2006-04-14 14:31  z-man
+
+	* Makefile.am: Added accustomdir to distributed files.
+
+2006-04-14 14:31  z-man
+
+	* configure.ac: Refined default deviation warning, if you
+	  explicitly ask for an off-default value, it won't come.
+
+2006-04-14 13:54  z-man
+
+	* configure.ac: Bending of localstatedir to /var is only done if
+	  automake default doesn't exist.  Added warning about various
+	  things that go outside of ${prefix} at the end of the run.
+
+2006-04-14 11:17  z-man
+
+	* src/tron/gCycle.cpp: Ok, now the perfect 180s really work
+	  reliably and you never end up on the wrong side.  Before the
+	  current face is found, the directions are blown up to gigantic
+	  proportions to tell the face-finding code that they're much more
+	  important than the current position (which will be exactly on top
+	  of a grid point).  Sometimes, you'll get stuck on your own wall,
+	  though. We'll have to live with that.
+
+2006-04-13 23:51  z-man
+
+	* config/settings.cfg: Increased CYCLE_RUBBER_MINADJUST for
+	  techical reasons: avoids graphical artefacts, and gives the cycle
+	  movement code a bit more floating point resolution to work with.
+
+2006-04-13 23:50  z-man
+
+	* src/tron/gCycle.cpp: Installed better hack to find a good face
+	  after a turn, postscriptum: Also handled the other kind of
+	  perfect 180 better.
+
+2006-04-13 23:15  z-man
+
+	* src/tron/: gCycleMovement.cpp, gCycle.cpp: Installed better hack
+	  to find a good face after a turn: After the cycle wall is
+	  tropped, we call eGameObject::FindCurrentFace so that it finds
+	  the face the cycle is about to enter.
+
+2006-04-13 21:42  z-man
+
+	* src/tools/tDirectories.cpp: Compatibility for non-autoconfed
+	  systems restored.
+
+2006-04-12 23:28  wrtlprnft
+
+	* src/: engine/ePlayer.cpp, tron/gGame.cpp: - improved scorelog.txt
+	  by adding team scores and timestamps - added more characters to
+	  the replacing list used to get the internal player name and made
+	  it case insensitive - trailing spaces in player names are now
+	  ignored for the internal player names, resulting in "PlAyEr 1
+	  " and "player 1" being regarded the same name
+
+2006-04-12 11:29  luke-jr
+
+	* accustomdir.m4, acinclude.m4, configure.ac: autoconf custom
+	  directory support, disabled
+
+2006-04-11 23:05  z-man
+
+	* src/tron/: gCycle.h, gWall.cpp: Repaired topology police, it was
+	  throwing unhandled exceptions.
+
+2006-04-08 00:26  z-man
+
+	* language/deutsch.txt: Translated the various items that have
+	  accumulated.
+
+2006-04-08 00:24  z-man
+
+	* language/english_base.txt, src/engine/eTeam.cpp,
+	  config/settings_dedicated.cfg: Added TEAM_CENTER_IS_BOSS to
+	  control who gets to name the team and call chat timeouts.
+
+2006-04-06 19:32  z-man
+
+	* src/engine/ePlayer.cpp: Better error message for /teamleave if it
+	  is not supported /shuffle is now an alias for /teamshuffle
+
+2006-04-05 10:41  z-man
+
+	* Makefile.am: Fixed bindir location of master server installation.
+
+2006-04-05 10:21  z-man
+
+	* language/english_base.txt, src/tron/gMenus.cpp: Added missing
+	  persistency of 24 hour clock flag.
+
+2006-04-05 10:19  z-man
+
+	* configure.ac: More flexible SDL library detection, checks the
+	  result of sdl-config --libs to get the name of the SDL libray
+	  (isn't always SDL)
+
+2006-04-05 09:45  z-man
+
+	* language/deutsch.txt: Clarifying warnings about dangerous
+	  settings.
+
+2006-04-05 09:45  z-man
+
+	* config/settings.cfg: Pointed out that the file must be in TEXT
+	  MODE.
+
+2006-04-05 09:44  z-man
+
+	* src/Makefile.am, batch/Makefile.am: Added remake rules for
+	  universal variables.
+
+2006-04-05 09:44  z-man
+
+	* src/ui/uInput.cpp: Removed input timer smoothing.
+
+2006-04-05 09:44  z-man
+
+	* language/english_base.txt, src/engine/ePlayer.cpp,
+	  src/engine/ePlayer.h, src/engine/eTeam.cpp, src/engine/eTeam.h,
+	  config/settings_dedicated.cfg: New chat commands: /teamleave to
+	  leave the team and /teamshuffle to change position in your team.
+
+2006-04-05 09:42  z-man
+
+	* src/network/nServerInfo.cpp: Servers polled over master now get a
+	  10% chance of being polled again, so they can be removed from the
+	  list eventually as they go offline.
+
+2006-04-05 09:42  z-man
+
+	* src/engine/eCamera.cpp: Fixed framerate dependency, a faulty
+	  assignment slipped in somewhere in the middle of the smart camera
+	  code.
+
+2006-03-30 09:53  z-man
+
+	* acinclude.m4: Directory command lines now use --with, not
+	  --enable.
+
+2006-03-30 09:52  z-man
+
+	* batch/sysinstall.in: Bugfix: disabled configuration movement on
+	  uninstall.
+
+2006-03-30 09:04  z-man
+
+	* Makefile.am, Makefile.manual, Makefile.paths, batch/Makefile.am,
+	  batch/make/uninstall, config/Makefile.am, desktop/Makefile.am,
+	  resource/Makefile.am, src/Makefile.am, src/doc/HtmlMakefile,
+	  src/doc/Makefile.am, src/first/Makefile.am: Moved all paths from
+	  Makefile.pats back to the individual Makefile.am's. All the
+	  shared information now is passed down from the configure script
+	  directly and determined there.
+
+2006-03-30 00:35  z-man
+
+	* config/rc.config.in: Added examples for other var directories.
+
+2006-03-30 00:34  z-man
+
+	* Makefile.manual: Added test for var directory moving.
+
+2006-03-30 00:34  z-man
+
+	* configure.ac: Added moving of old var directory.  Added searching
+	  for more gamy binary directory.
+
+2006-03-30 00:33  z-man
+
+	* acinclude.m4, batch/sysinstall.in: Optimized script relocation.
+	  Added moving of old var directory.
+
+2006-03-29 20:34  z-man
+
+	* src/tools/tDirectories.cpp, Makefile.manual, configure.ac,
+	  batch/sysinstall.in, config/rc.config.in, src/Makefile.am: New
+	  internal relocation mechanism (like sed -e
+	  "s,^${prefix_compiled},${prefix_installed},") and various
+	  adaptions. We should now be fully auto* compliant.
+
+2006-03-29 17:28  z-man
+
+	* batch/Makefile.am, batch/rcd_config.in, batch/sysinstall.in,
+	  src/tools/tDirectories.cpp, Makefile.am, Makefile.paths,
+	  configure.ac: First round of path adaptions. All scripts now use
+	  the new system exclusively.
+
+2006-03-29 16:24  z-man
+
+	* Makefile.manual, batch/sysinstall.in: Disabled useradd waring in
+	  installation test mode.
+
+2006-03-29 16:21  z-man
+
+	* configure.ac: Added all automake contributed paths to the
+	  unversal variable and relocation system. Now we just have to use
+	  them :)
+
+2006-03-29 16:21  z-man
+
+	* src/Makefile.am: Added dependency of tDirectories on
+	  tUniversalVariables.h
+
+2006-03-29 16:18  z-man
+
+	* acinclude.m4: Removed some output clutter, added more support
+	  macros around AC_AA_DIR.
+
+2006-03-29 14:29  z-man
+
+	* Makefile.am: Fixed dist-hook: calling the bootstrap script from
+	  the source directory instead of the distribution directory did
+	  not work. I wonder how it ever could work, and why I chose this.
+	  Anyway, now bootstrap.sh is copied into ${distdir} and called
+	  directly from there.	Added new distclean removals of files
+	  generated by the universal variable scheme.
+
+2006-03-29 14:24  z-man
+
+	* batch/sysinstall.in: Added support for automatic relocation
+	  directories.
+
+2006-03-29 14:23  z-man
+
+	* batch/masterstarter.in: Removed --deamon command line, the master
+	  does not support it (copy/paste error)
+
+2006-03-29 14:15  z-man
+
+	* src/Makefile.am: Added generation of tUniversalVariables.h from
+	  tUniversalVariables.h.in (generated by config.status) via the sed
+	  replacement script from the top directory (generated by a
+	  makefile included here, generated by config.status, phew).
+
+2006-03-29 14:13  z-man
+
+	* batch/Makefile.am: Added universal variable substitution to
+	  script generation make rule.	Special make rule for sysinstall:
+	  the sed rules for relocation get injected.
+
+2006-03-29 14:08  z-man
+
+	* configure.ac: Repaired gnu make deteciton (now really) Added
+	  hooks so AC_SUBST_UNIVERSAL and AC_AA_PATH work and the makefiles
+	  that rely on it don't fail.
+
+2006-03-29 14:01  z-man
+
+	* acinclude.m4: Added universal variables (available in .in
+	  substitutions, as CPP #defines and makefile variables) and
+	  adapted directories to use them.
+
+2006-03-29 01:09  z-man
+
+	* acinclude.m4: Added preliminary version automatic path
+	  substitution macro.
+
+2006-03-28 09:10  z-man
+
+	* src/doc/faq.html.m4: Added link to WIKI faq.
+
+2006-03-28 09:03  z-man
+
+	* NEWS: Added bugfix.
+
+2006-03-28 09:02  z-man
+
+	* Makefile.am, Makefile.manual, batch/make/uninstall: Smaller
+	  refinements, no functional changes.
+
+2006-03-28 09:02  z-man
+
+	* AUTHORS: Added new members and contributions.
+
+2006-03-28 00:33  z-man
+
+	* src/network/nServerInfo.cpp: Master server selection now uses a
+	  reproducible randomizer, making recordings with multiple master
+	  server visits reliable.
+
+2006-03-28 00:06  z-man
+
+	* batch/sysinstall.in: More BSD stuff: aactl script is now
+	  installed into ${prefix}/sbin, and master server support was
+	  added as well (untested).  System touching stuff now is only
+	  executed if DESTDIR and ROOTDIR are empty.
+
+2006-03-28 00:04  z-man
+
+	* Makefile.am, configure.ac, src/Makefile.am, src/first/.cvsignore,
+	  src/first/Makefile.am: Added call to uninstallation script of
+	  previous version at the start of "make install".  This probably
+	  breaks --enable-multiver. No active build configuration uses
+	  that, so it's likely it's in a bad state anyway.
+
+2006-03-27 21:11  z-man
+
+	* src/Makefile.am, Makefile.am, Makefile.manual,
+	  batch/sysinstall.in, batch/make/uninstall: Handling of DESTDIR
+	  completely fixed.  New installation relevant variable: ROOTDIR.
+	  It marks the place where the files will end up at.
+
+2006-03-27 21:10  z-man
+
+	* NEWS: BSD compatibility, DESTDIR fixes.
+
+2006-03-27 21:08  z-man
+
+	* batch/rcd_startstop.in: Added deletion of (probably stale) PID
+	  files on startup.
+
+2006-03-27 21:08  z-man
+
+	* batch/: masterstarter.in, serverstarter.in: Switched strange echo
+	  "commands" | bash -i construct with a regular bash function Added
+	  guards that prevent the servers from starting too quickly
+
+2006-03-27 21:07  z-man
+
+	* configure.ac: Fixed bash and gmake detection Refactored unix
+	  flavor handling to be less redundant Added detection of OpenBSD
+	  and its special init script handling
+
+2006-03-27 20:17  z-man
+
+	* configure.ac: Fixed GNU Make and bash detection
+
+2006-03-26 19:55  luke-jr
+
+	* batch/sysinstall.in: Fix DESTDIR handling. fullcheck is broken,
+	  don't ask me why.
+
+2006-03-26 17:11  z-man
+
+	* src/: engine/eTeam.cpp, network/nSocket.cpp,
+	  tools/tDirectories.cpp: VisualC 6 compatibility
+
+2006-03-25 22:07  z-man
+
+	* NEWS, config/settings_dedicated.cfg, language/deutsch.txt,
+	  language/english_base.txt,
+	  resource/proto/Luke-Jr/n-gon/40-gon.map.xml,
+	  src/tools/tConfiguration.cpp, src/tools/tDirectories.cpp,
+	  src/tools/tDirectories.h, src/tron/gArmagetron.cpp,
+	  src/tron/gGame.cpp, textures/title.jpg: merged changes from
+	  b0_2_8_0 using -j v0_2_8_0 -j v0_2_8_1
+
+2006-03-25 09:32  z-man
+
+	* src/tools/tDirectories.cpp: Disaled path debug output.  Fixed
+	  debug configuration path fallback, the configuration search order
+	  was wrong.
+
+2006-03-25 09:31  z-man
+
+	* config/settings.cfg, language/english_base_notranslate.txt,
+	  src/render/rFont.cpp: Made font selection configurable.
+
+2006-03-25 00:54  z-man
+
+	* src/: tools/tDirectories.cpp, tools/tMemManager.cpp,
+	  tools/tMemManager.h, network/nSocket.cpp: Fixed OpenBSD
+	  compilation security warnings, stopped using strcpy and sprintf.
+
+2006-03-24 23:19  z-man
+
+	* NEWS, batch/sysinstall.in: Various BSD compatibility issues
+	  fixed, server-running user can now be added with pw.
+
+2006-03-24 23:19  z-man
+
+	* src/tools/tDirectories.cpp: Flexibilized relocation code, it now
+	  gets the executable path from three sources: binreloc, the
+	  compmpiled in prefix, or the command line used for starting.
+
+2006-03-24 23:18  z-man
+
+	* src/: tron/gArmagetron.cpp, tron/gGame.cpp, ui/uInputQueue.cpp,
+	  ui/uInputQueue.h, ui/uMenu.cpp: Added ENDINPUT marker to
+	  recordings so a quick keypress after leaving a submenu does not
+	  cause havoc.
+
+2006-03-24 23:17  z-man
+
+	* src/tron/gParser.cpp: More flexible detection of the xml catalog.
+
+2006-03-24 23:16  z-man
+
+	* src/engine/eSound.cpp: Added bogus use of otherwise unused
+	  variable.
+
+2006-03-24 23:15  z-man
+
+	* src/engine/ePlayer.cpp: Sane use of ?:, the two arguments had
+	  different types sometimes.
+
+2006-03-24 23:14  z-man
+
+	* config/rc.config.in: User running the server is now armagetronad,
+	  not armagetronad-dedicated.
+
+2006-03-24 23:14  z-man
+
+	* batch/make/sortresources: Failure -> exit 1, was failure -> exit
+	  -1 which was incompatible with BSD.
+
+2006-03-24 23:13  z-man
+
+	* batch/make/uninstall: Fixed interpreter generation, "#/bin/sh" ->
+	  "#! /bin/sh".
+
+2006-03-24 23:12  z-man
+
+	* batch/rcd_startstop.in: Removed interpreter, this script is only
+	  sourced.  Belenus' random BSD compatibility reworkings.
+
+2006-03-24 23:11  z-man
+
+	* batch/rcd_config.in: Removed interpreter, this script is only
+	  sourced.
+
+2006-03-24 23:10  z-man
+
+	* batch/Makefile.am: Added rewriting of /bin/bash to wherever the
+	  real bash is found.
+
+2006-03-24 23:09  z-man
+
+	* configure.ac: Compiled-in PREFIX now correctly set to allow the
+	  game to work where binreloc is not supported (without
+	  relocation).
+
+2006-03-23 18:40  z-man
+
+	* batch/sysinstall.in: Added a couple of missing $DESTDIRs, please
+	  use "make cvscheck" to test installation/uninstallation/server
+	  init scripts.
+
+2006-03-23 18:10  z-man
+
+	* config/settings_dedicated.cfg, language/deutsch.txt,
+	  language/english_base.txt: Added AUTO_TEAM setting to disable
+	  automatic assignment to teams.
+
+2006-03-23 18:10  z-man
+
+	* src/engine/ePlayer.cpp: Added custom reason to KICK command.
+	  Added AUTO_TEAM setting to disable automatic assignment to teams.
+
+2006-03-23 18:09  z-man
+
+	* src/network/nNetwork.cpp: Set client ID to zero on default so
+	  logins and polling servers works irrespective of MAXCLIENTS.
+
+2006-03-23 18:08  z-man
+
+	* src/tools/tDirectories.cpp: Fixed warning message.
+
+2006-03-23 17:26  z-man
+
+	* src/network/nNetwork.cpp: Fallback code for GetMachine, it only
+	  gives real machines in server mode.
+
+2006-03-23 17:26  z-man
+
+	* src/engine/ePlayer.cpp: Voters are no longer created in client
+	  mode, they're useless there.
+
+2006-03-23 17:25  z-man
+
+	* config/examples/cvs_test/fortress_politics.cfg: Harsher voting
+	  restrictions
+
+2006-03-23 17:24  z-man
+
+	* config/examples/fortress_soccer.cfg: Removed URI hack, it's no
+	  longer required.
+
+2006-03-22 00:52  z-man
+
+	* src/tools/tConfiguration.cpp: Instant chat settings for ingame
+	  admin logins are now filtered, the password is removed.
+
+2006-03-21 21:47  luke-jr
+
+	* src/tools/tDirectories.cpp: Use environment variables when
+	  present
+
+2006-03-20 20:13  luke-jr
+
+	* batch/sysinstall.in: fix more directory bugs in sysinstall
+
+2006-03-18 01:14  z-man
+
+	* Makefile.am, NEWS, configure.ac, batch/.cvsignore,
+	  batch/Makefile.am, batch/install.in, batch/pushscores.in,
+	  batch/sysinstall.in, batch/make/sortresources,
+	  batch/make/sortresources.py, config/settings.cfg,
+	  desktop/.cvsignore, language/deutsch.txt,
+	  language/english_base.txt, language/english_base_notranslate.txt,
+	  resource/Makefile.am, resource/proto/map.dtd,
+	  resource/proto/AATeam/map-0.2.8.0_rc4.dtd, src/.cvsignore,
+	  src/Makefile.am, src/doc/Makefile.am, src/doc/net/Makefile.am,
+	  src/engine/eCamera.cpp, src/engine/ePlayer.cpp,
+	  src/engine/eSound.cpp, src/network/nNetObject.cpp,
+	  src/network/nNetwork.cpp, src/thirdparty/particles/.cvsignore,
+	  src/tools/tDirectories.cpp, src/tools/tResourceManager.cpp,
+	  src/tron/gArmagetron.cpp, textures/rim_wall.png,
+	  textures/sky.png: merged b0_2_8 using cvs update -j v0_2_8_0_rc4
+	  -j v0_2_8_0
+
+2006-03-15 23:36  z-man
+
+	* resource/proto/AATeam/map-0.2.8.0_rc4.dtd: file
+	  map-0.2.8.0_rc4.dtd was added on branch b0_2_8 on 2006-03-18
+	  00:14:47 +0000
+
+2006-03-15 22:08  klaxnek
+
+	* language/spanish.txt: Uptodate. Lost in translation ;p
+
+2006-03-13 15:43  z-man
+
+	* src/network/nNetwork.cpp: Whoops, no login failure messages were
+	  sent. Fixed.
+
+2006-03-13 10:55  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/ePlayer.cpp: Added
+	  stripping of junk from player names' ends (optional, default on).
+
+2006-03-11 19:05  z-man
+
+	* src/tron/gWall.cpp: Added consistency check for MaxLength().
+
+2006-03-11 19:04  z-man
+
+	* src/network/nNetwork.cpp: Login and logout packets don't trigger
+	  acknowledgements from the server.
+
+2006-03-11 19:03  z-man
+
+	* language/english_base_notranslate.txt: Fixed typo
+
+2006-03-11 18:19  z-man
+
+	* NEWS: Added respawning hack protected by #ifdef RESPAWN_HACK to
+	  test clientside respawning preparation (and for daring server
+	  admins to activate) Login flood protection added.  Test versions
+	  refuse to connect to servers two or more protocol versions ahead.
+
+2006-03-11 18:18  z-man
+
+	* src/tron/gGame.cpp: Added respawning hack protected by #ifdef
+	  RESPAWN_HACK to test clientside respawning preparation (and for
+	  daring server admins to activate)
+
+2006-03-11 18:12  z-man
+
+	* src/network/: nServerInfo.cpp, nNetwork.cpp: Login flood
+	  protection added.  Test versions refuse to connect to servers two
+	  or more protocol versions ahead.
+
+2006-03-11 18:07  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, language/english_base_notranslate.txt,
+	  src/engine/eCamera.cpp, src/engine/eGameObject.cpp,
+	  src/tron/gCycle.cpp, src/tron/gCycle.h,
+	  src/tron/gCycleMovement.cpp, src/tron/gCycleMovement.h,
+	  src/tron/gWall.cpp: Prepared client for servers with respawning.
+
+2006-03-11 18:06  z-man
+
+	* src/network/nConfig.cpp: Bumped protocol version to 12.
+
+2006-03-11 14:30  z-man
+
+	* src/ui/uMenu.cpp: Beautified.
+
+2006-03-11 14:29  z-man
+
+	* src/engine/eTeam.cpp: Lonely players don't get the full team
+	  score on team capable servers.
+
+2006-03-09 16:16  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed wrong test of pending turn
+	  queue (it was correct on the trunk version).
+
+2006-03-08 23:42  z-man
+
+	* NEWS, configure.ac, batch/make/sortresources,
+	  config/settings.cfg, config/settings_visual.cfg,
+	  config/examples/cvs_test/fortress_complete.cfg,
+	  config/examples/cvs_test/sumo_complete.cfg, language/deutsch.txt,
+	  language/english_base.txt, language/english_base_notranslate.txt,
+	  resource/Makefile.am, resource/proto/map-0.2.8_beta3.dtd,
+	  resource/proto/map.dtd, resource/proto/Anonymous/README,
+	  resource/proto/Anonymous/original/original.map.xml,
+	  resource/proto/Anonymous/shapes/diamond.aamap.xml,
+	  src/doc/Content_Creation/Howto-Maps.txt, src/engine/eCamera.cpp,
+	  src/engine/ePlayer.cpp, src/render/rFont.cpp,
+	  src/tools/tConfiguration.cpp, src/tools/tDirectories.cpp,
+	  src/tools/tDirectories.h, src/tools/tError.cpp,
+	  src/tools/tResourceManager.cpp, src/tron/gCycleMovement.cpp,
+	  src/tron/gGame.cpp, src/tron/gGame.h, src/tron/gHud.cpp,
+	  src/tron/gHud.h, src/tron/gMenus.cpp, src/tron/gParser.cpp,
+	  src/tron/gParser.h, src/tron/gServerBrowser.cpp,
+	  src/tron/gServerFavorites.cpp, src/tron/gServerFavorites.h,
+	  textures/title.jpg: Merged changes up to rc4 into b0_2_8 branch
+	  using -j v0_2_8_0_rc3 -j v0_2_8_0_rc4
+
+2006-03-07 13:16  z-man
+
+	* src/network/nConfig.cpp, src/tron/gCycle.cpp, src/tron/gCycle.h,
+	  src/tron/gWall.cpp, language/deutsch.txt,
+	  language/english_base.txt, language/english_base_notranslate.txt,
+	  config/settings.cfg, config/examples/health_is_wall_length.cfg:
+	  Added CYCLE_RUBBER_WALL_SHRINK to combat the death-by-own-trail
+	  problem.
+
+2006-03-06 15:01  z-man
+
+	* src/engine/: ePlayer.cpp, ePlayer.h: Player name updates
+	  sanitized.
+
+2006-03-06 15:01  z-man
+
+	* NEWS, src/engine/eTeam.cpp, src/tron/gTeam.cpp: Disabled
+	  complicated feasibility tests for team menu entries, they did not
+	  have the full information and were often wrong
+
+2006-03-05 01:26  z-man
+
+	* src/network/nNetwork.cpp: Replaced invalid ID error in
+	  nMachine::GetMachine() with returning a special machine info.
+
+2006-03-05 01:24  z-man
+
+	* src/network/nNetObject.cpp: Fixed error triggered on clients by
+	  server: IDs of objects only get recycled when they are really
+	  deleted.
+
+2006-03-03 12:46  z-man
+
+	* NEWS: Wingman configurability and ban reason documented.
+
+2006-03-03 12:02  z-man
+
+	* config/settings.cfg, src/tron/gSpawn.cpp: Wingman spawn setup is
+	  now configurable.
+
+2006-03-03 12:02  z-man
+
+	* src/tron/gCycleMovement.cpp: Beautified.
+
+2006-03-03 12:00  z-man
+
+	* src/tron/gGame.cpp, language/deutsch.txt,
+	  language/english_base.txt, src/engine/ePlayer.cpp,
+	  src/network/nNetwork.cpp, src/network/nNetwork.h: BAN and BAN_IP
+	  now support a third argument giving additional ban info.
+
+2006-03-03 11:56  z-man
+
+	* language/: french.txt, spanish.txt: BAN and BAN_IP now support a
+	  third argument giving additional ban info.
+
+2006-03-03 10:48  z-man
+
+	* language/spanish.txt: Updated network_ban
+
+2006-03-03 08:04  z-man
+
+	* resource/proto/map-0.2.8_beta3.dtd: file map-0.2.8_beta3.dtd was
+	  added on branch b0_2_8 on 2006-03-08 22:42:02 +0000
+
+2006-03-02 22:27  nemostultae
+
+	* language/english_base.txt, src/tron/gServerBrowser.cpp: Master
+	  browser now shows: Users online/Max users
+
+2006-03-02 13:38  z-man
+
+	* config/examples/cvs_test/fortress_politics.cfg: Added setting so
+	  that all players rushing in at the beginning can find a place in
+	  a team.
+
+2006-03-02 13:36  z-man
+
+	* src/: engine/ePlayer.cpp, engine/eTeam.cpp, engine/eTeam.h,
+	  tron/gGame.cpp: Team placement is less chaotic now, new players
+	  are added to the outside, and if players leave, the players
+	  further down are all pushed one place up.
+
+2006-03-01 19:28  z-man
+
+	* src/ui/uMenu.cpp: Fixed dedicated server compilation bug.
+
+2006-03-01 19:28  z-man
+
+	* src/tron/gGame.cpp, language/deutsch.txt,
+	  language/english_base.txt, src/network/nNetwork.cpp,
+	  src/network/nNetwork.h, NEWS, config/settings.cfg: Added
+	  automatic banning of spectators.
+
+2006-02-27 13:32  z-man
+
+	* src/network/nNetwork.cpp: Fixed strange disconnecting messages.
+
+2006-02-25 01:45  nemostultae
+
+	* src/ui/uMenu.cpp: Added C-p and C-n for history
+
+2006-02-25 01:28  nemostultae
+
+	* src/ui/uMenu.cpp: Move cursor to end of input when using history
+
+2006-02-25 00:48  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/ePlayer.cpp,
+	  src/tron/gGame.cpp, src/tron/gMenus.cpp, src/ui/uMenu.cpp,
+	  src/ui/uMenu.h, NEWS: Merged wrtlprnft's chat and console
+	  history.
+
+2006-02-24 09:44  z-man
+
+	* src/engine/ePlayer.cpp: /msg now prefers exact matches, so "/msg
+	  foo" will work if foo and fooBar are online.
+
+2006-02-24 09:22  z-man
+
+	* src/tron/: gGame.cpp, gGame.h: Players are now only sent to the
+	  server when the client is synced.
+
+2006-02-23 09:07  z-man
+
+	* src/thirdparty/shttpd/.cvsignore, www-root/.cvsignore: Added
+	  generated makefiles to ignore list.
+
+2006-02-23 08:54  z-man
+
+	* src/tron/gCycle.cpp, src/tron/gCycleMovement.cpp,
+	  src/tron/gCycleMovement.h, language/deutsch.txt,
+	  language/english_base.txt, NEWS: Merged wrtl´s cycle turn memory.
+
+2006-02-21 13:34  z-man
+
+	* src/engine/ePlayer.cpp: Player is now greeted right on joining.
+
+2006-02-21 13:33  z-man
+
+	* src/tron/gGame.cpp: Added updating of team properties when
+	  switching from single- to multiplayer mode.
+
+2006-02-21 00:15  z-man
+
+	* src/engine/eTeam.cpp: Teams don't change color when other teams
+	  leave any more.
+
+2006-02-20 00:13  davidfancella
+
+	* desktop/icons/: large/armagetronad.png, medium/armagetronad.png,
+	  small/armagetronad.png: New linux icons
+
+2006-02-07 10:53  z-man
+
+	* src/network/nServerInfo.cpp: Refined banning for multiple query
+	  messages in one packet.
+
+2006-02-05 20:54  z-man
+
+	* Makefile.am, Makefile.manual, NEWS, config/Makefile.am,
+	  config/settings.cfg, config/settings_dedicated.cfg,
+	  config/settings_visual.cfg, config/examples/fortress_soccer.cfg,
+	  config/examples/cvs_test/fortress_complete.cfg,
+	  config/examples/cvs_test/fortress_physics.cfg,
+	  config/examples/cvs_test/fortress_politics.cfg,
+	  config/examples/cvs_test/fortress_scoring.cfg,
+	  config/examples/cvs_test/sumo_complete.cfg, language/deutsch.txt,
+	  language/english_base.txt, language/english_base_notranslate.txt,
+	  language/french.txt, language/spanish.txt, language/update.py,
+	  resource/proto/Anonymous/original/original.map.xml,
+	  resource/proto/Anonymous/shapes/diamond.aamap.xml,
+	  resource/proto/Z-Man/fortress_for_old_clients.aamap.xml,
+	  resource/proto/Z-Man/fourfold_fortress_for_old_clients.aamap.xml,
+	  resource/proto/Z-Man/sumo_4x4.aamap.xml,
+	  resource/proto/Z-Man/sumo_8x2.aamap.xml,
+	  resource/proto/Z-Man/zonetest.aamap.xml, src/doc/Makefile.am,
+	  src/engine/eDisplay.cpp, src/network/nNetObject.cpp,
+	  src/network/nNetwork.cpp, src/network/nNetwork.h,
+	  src/network/nServerInfo.cpp, src/tools/tConfiguration.cpp,
+	  src/tron/gAIBase.cpp, src/tron/gCycle.cpp,
+	  src/tron/gCycleMovement.cpp, src/tron/gGame.cpp,
+	  src/tron/gHud.cpp, src/tron/gServerBrowser.cpp,
+	  src/tron/gWall.cpp, src/win32/config_common.h,
+	  textures/cycle_body.png, textures/cycle_wheel.png,
+	  textures/dir_wall.png, textures/floor.png, textures/floor_a.png,
+	  textures/floor_b.png, textures/font.png, textures/font.xcf,
+	  textures/font_extra.png, textures/font_extra.xcf,
+	  textures/font_s.png, textures/font_s.xcf, textures/rim_wall.png,
+	  textures/sky.png, textures/title.jpg: Merged b0_2_8_0 branch up
+	  to rc3 with -j Root_b0_2_8_0 -j v0_2_8_0_rc3
+
+2006-02-05 15:20  z-man
+
+	* textures/font.xcf: file font.xcf was added on branch b0_2_8 on
+	  2006-02-05 19:54:55 +0000
+
+2006-02-05 15:20  z-man
+
+	* textures/font_extra.xcf: file font_extra.xcf was added on branch
+	  b0_2_8 on 2006-02-05 19:54:55 +0000
+
+2006-02-05 15:20  z-man
+
+	* textures/font_s.xcf: file font_s.xcf was added on branch b0_2_8
+	  on 2006-02-05 19:54:55 +0000
+
+2006-02-05 08:47  philippeqc
+
+	* src/tron/gParser.cpp: Removed the fallback mecanism for
+	  Alternatives so the parger ignore unknown elements
+
+2006-02-03 21:20  z-man
+
+	* language/english_base_notranslate.txt: file
+	  english_base_notranslate.txt was added on branch b0_2_8 on
+	  2006-02-05 19:54:54 +0000
+
+2006-02-03 00:09  z-man
+
+	* config/settings_visual.cfg: file settings_visual.cfg was added on
+	  branch b0_2_8 on 2006-02-05 19:54:53 +0000
+
+2006-02-02 17:28  z-man
+
+	* config/examples/cvs_test/sumo_complete.cfg: file
+	  sumo_complete.cfg was added on branch b0_2_8 on 2006-02-05
+	  19:54:53 +0000
+
+2006-02-02 16:59  z-man
+
+	* config/examples/cvs_test/fortress_complete.cfg: file
+	  fortress_complete.cfg was added on branch b0_2_8 on 2006-02-05
+	  19:54:53 +0000
+
+2006-02-02 16:59  z-man
+
+	* config/examples/cvs_test/fortress_physics.cfg: file
+	  fortress_physics.cfg was added on branch b0_2_8 on 2006-02-05
+	  19:54:53 +0000
+
+2006-02-02 16:59  z-man
+
+	* config/examples/cvs_test/fortress_politics.cfg: file
+	  fortress_politics.cfg was added on branch b0_2_8 on 2006-02-05
+	  19:54:53 +0000
+
+2006-02-02 16:59  z-man
+
+	* config/examples/cvs_test/fortress_scoring.cfg: file
+	  fortress_scoring.cfg was added on branch b0_2_8 on 2006-02-05
+	  19:54:53 +0000
+
+2006-01-30 12:01  z-man
+
+	* NEWS, src/tron/gCycleMovement.cpp: Packet loss tolerance from
+	  ping fluctuations is now clamped by the packet loss tolerance
+	  time from ping alone.
+
+2006-01-27 23:31  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Removed
+	  absolute path
+
+2006-01-26 15:11  z-man
+
+	* src/: engine/ePlayer.cpp, network/nNetwork.cpp: Added IP adress
+	  to all player messages.
+
+2006-01-26 13:27  z-man
+
+	* src/engine/ePlayer.cpp: Added IP to player join message.
+
+2006-01-26 13:17  z-man
+
+	* src/tron/gGame.cpp: Disabled half of the ePlayerNetID::Update()
+	  calls on the server, they only lead to annoying rename messages
+	  (some messing with the ladder log).
+
+2006-01-26 13:17  z-man
+
+	* src/engine/ePlayer.cpp: Added player enter/rename/leave messages
+	  to ladderlog.txt
+
+2006-01-26 00:52  z-man
+
+	* src/network/nNetObject.cpp: Added timeout to stored netobject
+	  deletion messages, the server seems to send too many sometimes.
+
+2006-01-26 00:50  z-man
+
+	* src/render/rConsoleCout.cpp: Console center messages now go to
+	  stdout, not stderr.
+
+2006-01-25 12:02  z-man
+
+	* src/engine/eGameObject.cpp: Removed debug breakpoint.
+
+2006-01-25 12:02  z-man
+
+	* src/network/: nNetObject.cpp, nNetwork.cpp: Fixed local deletion
+	  proliferation bug: after a local object was deleted on the client
+	  (such as when you go to spectator mode), all following objects
+	  that would get the same ID were deleted immediately. Local
+	  deletions are now memorized and remote deletion followup messages
+	  are ignored.
+
+2006-01-24 15:12  z-man
+
+	* src/network/nNetwork.cpp: Fixed UNBAN_IP, it was never working.
+	  Left todo: the output is a bit cryptic.
+
+2006-01-24 11:40  z-man
+
+	* config/settings.cfg: Reverted to GRID_SIZE=1 for rendering
+	  problems.
+
+2006-01-21 21:19  z-man
+
+	* src/engine/eTeam.cpp: Fixed uninitialized variables (team color)
+	  so valgrind does not complain. It was not really dangerous,
+	  though.
+
+2006-01-21 19:36  z-man
+
+	* NEWS, src/engine/ePlayer.cpp: Ai players were reliably removed by
+	  the chatbot removal code if it was active...
+
+2006-01-21 19:10  z-man
+
+	* NEWS, language/deutsch.txt, language/english_base.txt,
+	  src/tron/gWinZone.cpp: Added owner of zone to conquest messages.
+
+2006-01-21 18:14  z-man
+
+	* NEWS: Added changes since rc1.
+
+2006-01-21 18:10  z-man
+
+	* config/settings.cfg: Darkened floor.	Stretched rim wall texture
+	  in y-direction.
+
+2006-01-21 17:41  z-man
+
+	* src/engine/ePlayer.cpp: Added more ingame admin messages like
+	  "login denied" and "unknown chat command".  Todo: make them
+	  translatable.
+
+2006-01-21 15:50  z-man
+
+	* src/tools/: tConfiguration.cpp, tConfiguration.h: Removed error
+	  messages from reading user.cfg.
+
+2006-01-20 22:39  philippeqc
+
+	* src/tron/gParser.cpp: All the isElement outside of InstantiateMap
+	  need to operate with keyword
+
+2006-01-20 20:31  z-man
+
+	* src/network/: nNetObject.cpp, nNetwork.h: Server triggered syncs
+	  now don't block the client with the two-way server client
+	  communication, as they will wait for the server to complete
+	  transmission anyway.
+
+2006-01-20 19:39  z-man
+
+	* src/tron/gServerFavorites.cpp: Removed color codes from menu
+	  entries, rendering did not work correctly.
+
+2006-01-20 19:38  z-man
+
+	* src/tron/gGame.cpp: Beautified.
+
+2006-01-20 16:37  z-man
+
+	* src/tron/gGame.cpp: Made debug breakpoint runtime modifiable to
+	  catch multiple spots in one run.
+
+2006-01-20 11:25  z-man
+
+	* resource/proto/Z-Man/sumo_4x4.aamap.xml: Removed winzone, it can
+	  be spawned by the game code when needed. Many noobs try to get to
+	  it and die trying if it is there from the beginning.	Spawn
+	  points are now in inwards roulette configuration, let's see how
+	  that works out.
+
+2006-01-20 01:36  z-man
+
+	* src/engine/eCamera.cpp: Fixed custom camera not turning when
+	  centering of the internal camera was disabled.
+
+2006-01-20 00:31  z-man
+
+	* src/engine/ePlayer.cpp: Crashfix when kicking idle players, array
+	  index was out of bounds.  Scores can only be displayed while a
+	  game is running.
+
+2006-01-20 00:27  z-man
+
+	* src/tron/gServerBrowser.cpp: Fixed too much cutting away from
+	  colored server names.
+
+2006-01-20 00:02  z-man
+
+	* src/tools/tString.cpp: Fixed tColorString::SetPos() when color
+	  codes need to be removed from the end.
+
+2006-01-20 00:01  z-man
+
+	* src/render/rFont.cpp: Rendering dark color strings also are
+	  readable when alpha blending is disabled.
+
+2006-01-19 16:43  z-man
+
+	* src/tron/gCycleMovement.cpp: Ultra-small timesteps in turn
+	  findining are avoided now.  A special flag now makes sure turns
+	  are executed at the right time and not one frame too late.
+
+2006-01-19 16:41  z-man
+
+	* src/network/nNetObject.cpp: Overflow warnings now come with
+	  continually reducing frequency.
+
+2006-01-19 16:41  z-man
+
+	* src/engine/ePlayer.cpp: Disabled BUG breakpoint, it comes too
+	  late anyway.
+
+2006-01-19 00:16  philippeqc
+
+	* src/tron/: gParser.cpp, gParser.h: Alternative are now self
+	  standing elements and fallback ones version tag for Alternative
+	  support "-C,E,G-J" type of ranges a version subrange cannot mix
+	  types ie: dot numbers and text version tag is white space
+	  tolerant
+
+2006-01-19 00:10  z-man
+
+	* src/engine/eCamera.cpp: Reverted custom camera behavior not
+	  related to glancing.
+
+2006-01-18 12:24  z-man
+
+	* src/network/nServerInfo.cpp: Removed double saving of release
+	  tag.
+
+2006-01-18 10:06  z-man
+
+	* src/tools/tColor.h: Fixed constructor: it was ignoring the passed
+	  alpha value.
+
+2006-01-18 10:05  z-man
+
+	* src/render/rFont.cpp: Pre-blending is now only done if alpha
+	  blending is disabled, otherwise fading text in and out is
+	  impossible.
+
+2006-01-18 01:16  z-man
+
+	* Makefile.manual: Noticed the branch detection will not work on a
+	  tagged release. Hardcoding branch for now.
+
+2006-01-18 00:53  z-man
+
+	* src/tron/gGame.cpp: NEW_MATCH now actually appears in
+	  ladderlog.txt.
+
+2006-01-18 00:36  z-man
+
+	* Makefile.manual: ChangeLog generation now respects branches and
+	  keeps changes to the trunk out.
+
+2006-01-18 00:31  z-man
+
+	* src/tron/gCycle.cpp: Added check for right format to cycle
+	  texture modifying function.
+
+2006-01-18 00:29  z-man
+
+	* src/render/: rFont.cpp, rFont.h: When rendered without alpha
+	  blending, the font nowlooks the same as if rendered with alpha
+	  blending on a black background.
+
+2006-01-18 00:27  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/tron/gServerBrowser.cpp, config/settings.cfg: Renamed server
+	  browser name filtering to FILTER_COLOR_SERVER_NAMES
+	  (consistency), added documentation and settings.cfg entry.
+
+2006-01-17 15:25  z-man
+
+	* src/tron/gWall.cpp: Made configuration items exist on the
+	  server,too.
+
+2006-01-16 22:44  z-man
+
+	* batch/ladder.py: I think I'm done experimenting seems to work
+	  well. Last commit before I refactor the interface.
+
+2006-01-16 22:40  z-man
+
+	* language/: deutsch.txt, french.txt, spanish.txt: Added newline to
+	  config_command_unknown.
+
+2006-01-16 22:30  z-man
+
+	* configure.ac: Removed output of date command test.
+
+2006-01-16 22:29  z-man
+
+	* src/tools/tConfiguration.cpp: Added new visual items to veto
+	  list.
+
+2006-01-16 22:29  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/tron/gWall.cpp, config/settings.cfg: New settings to control
+	  rim wall texture wrapping and scaling.
+
+2006-01-16 22:25  z-man
+
+	* src/engine/eGameObject.cpp: Refined movement fix to deal with
+	  pathological travel distances.
+
+2006-01-16 16:21  z-man
+
+	* src/engine/eGameObject.cpp: Fixed wrong selection of exit edge
+	  during move: long edges were unduly prefered.
+
+2006-01-15 22:07  z-man
+
+	* configure.ac: Fixed FreeBSD compatibility of socklen_t test:
+	  sys/types.h needs to be included along sys/socket.h.
+
+2006-01-15 22:06  z-man
+
+	* NEWS: Reformated.
+
+2006-01-15 22:06  z-man
+
+	* batch/ladder.py, src/engine/eDisplay.cpp: Removed config variable
+	  for dedicated server.
+
+2006-01-15 00:01  z-man
+
+	* src/engine/ePlayer.cpp: Respected VC8's warning about
+	  -0x80000000.
+
+2006-01-14 23:39  z-man
+
+	* src/engine/ePlayer.cpp: VisualC compatibility
+
+2006-01-14 23:38  z-man
+
+	* batch/ladder.py: Fixed division by zero error.  Changed score to
+	  be based on the maximum score anyone got that round.
+
+2006-01-14 19:22  klaxnek
+
+	* language/spanish.txt: fixed last translation
+
+2006-01-14 16:25  klaxnek
+
+	* language/spanish.txt: updated with missing translations
+
+2006-01-14 15:57  z-man
+
+	* batch/ladder.py: Added ladderlog.txt parser
+
+2006-01-14 15:55  z-man
+
+	* NEWS: More news items for 0.2.8.0_rc1
+
+2006-01-14 15:55  z-man
+
+	* src/Makefile.am: Removed file lists for full build if only master
+	  server is built.
+
+2006-01-14 15:51  z-man
+
+	* src/network/: nNetObject.cpp, nNetwork.cpp: Bugfix: arena was
+	  sometimes created before the arena size was transmitted.  Sync
+	  calls on the client now wait for all messages from the server to
+	  be transmitted (if the server supports it).
+
+2006-01-14 15:47  z-man
+
+	* src/: engine/ePlayer.cpp, engine/ePlayer.h, tron/gCycle.cpp,
+	  tron/gGame.cpp: Added new log file with machine readable content:
+	  ladderlog.txt
+
+2006-01-14 15:44  z-man
+
+	* src/tron/: gWall.cpp, gWall.h: Fixed temporarily invisible wall
+	  segments.
+
+2006-01-14 15:44  z-man
+
+	* textures/: font.png, font_extra.png, font_s.png: More chars by
+	  wrtlprnft
+
+2006-01-13 16:31  nemostultae
+
+	* MacOS/build_tools/process_files.rb: Fixed stupid if statement
+
+2006-01-13 16:10  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Removed a
+	  file that got in by accident
+
+2006-01-13 15:57  nemostultae
+
+	* README-CVS: Updated docs for Mac OS X project
+
+2006-01-12 00:18  z-man
+
+	* NEWS, AUTHORS: Added info for 0.2.8.0_rc1
+
+2006-01-11 23:45  z-man
+
+	* src/tron/: gCycleMovement.cpp, gCycleMovement.h: Added
+	  gCycleMovement::MaximalSpeed that returns the theoretical top
+	  speed of a cycle.
+
+2006-01-11 21:48  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/tools/tResourceManager.cpp: Made resource messages and errors
+	  translatable.
+
+2006-01-11 17:57  z-man
+
+	* src/render/rConsoleGraph.cpp: Fixed leftover default text color.
+
+2006-01-11 17:57  z-man
+
+	* src/tron/gCycle.cpp: New suicide vs. teamkill logic: the time
+	  relevant for team kills can't be later than the last turn of the
+	  killer. So, if you drive into the straight long wall of a
+	  teammate, that's suicide.
+
+2006-01-11 10:31  z-man
+
+	* textures/font_s.png: New characters and 0 distinguishable from o
+	  by wrtlpnft
+
+2006-01-10 21:44  z-man
+
+	* src/network/nNetObject.cpp: Finally fixed the strange connection
+	  loss error on the client side.
+
+2006-01-10 12:00  z-man
+
+	* src/tools/tConfiguration.cpp: Added MOVIEPACK_HACK to list of
+	  accepted, but obsoleted, setting items.
+
+2006-01-10 00:54  z-man
+
+	* src/: tron/gGame.cpp, tools/tConsole.cpp,
+	  tools/tResourceManager.cpp: Console log is added to map load
+	  error messages on the client. That way, you see better what went
+	  wrong.
+
+2006-01-09 14:09  z-man
+
+	* src/tron/gCycleMovement.cpp: Whoops, disabled debug output.
+
+2006-01-09 09:49  z-man
+
+	* src/engine/ePlayer.cpp: Disabled redundant team change wish
+	  messages.
+
+2006-01-09 09:34  z-man
+
+	* src/tools/tConfiguration.cpp: Whoops, fixed dublicate symbols.
+
+2006-01-09 01:32  z-man
+
+	* src/engine/ePlayer.cpp: Turned blocking of obnoxious team change
+	  messages into spam detection.
+
+2006-01-09 01:18  z-man
+
+	* src/tools/tConfiguration.cpp: Added config items not present in
+	  non-debug mode.
+
+2006-01-09 01:17  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed brake meter animation.
+
+2006-01-09 00:16  z-man
+
+	* src/tron/gArmagetron.cpp, config/settings.cfg,
+	  config/settings_dedicated.cfg, src/tools/tConfiguration.cpp:
+	  Enabled error messages when loading the configuration files.
+
+2006-01-08 23:03  z-man
+
+	* src/engine/ePlayer.cpp: Added color code filter for player names.
+
+2006-01-08 23:02  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/eCamera.cpp: Added
+	  serverside custom camera speed settings.
+
+2006-01-08 20:51  z-man
+
+	* src/network/: nNetwork.cpp, nNetObject.cpp: Unused network object
+	  IDs are no longer open for immediate recycling.
+
+2006-01-08 19:59  z-man
+
+	* src/tron/gCycleMovement.cpp: If rubber is active, turns are
+	  executed on the server based on the timestamp.
+
+2006-01-07 14:57  z-man
+
+	* src/tron/gParser.cpp: Texture coordinate reset added every round.
+
+2006-01-07 01:05  z-man
+
+	* src/engine/ePlayer.cpp: Avoided team change spam.
+
+2006-01-06 10:31  z-man
+
+	* src/tron/gWall.cpp: Fixed crash with moviepack and negative
+	  texture coordinates.
+
+2006-01-05 08:42  z-man
+
+	* src/tron/gWinZone.cpp: Moved zone spawn messages from constructor
+	  to spawn function.
+
+2006-01-04 09:54  z-man
+
+	* config/settings.cfg: Clarified RESOURCE_REPOSITORY_CLIENT
+	  comment.
+
+2006-01-03 23:37  z-man
+
+	* src/tron/gGame.cpp: Dedicated server compiles now without
+	  warnings.
+
+2006-01-03 23:35  z-man
+
+	* config/settings.cfg: Removed obsoleted setting.
+
+2006-01-03 23:28  z-man
+
+	* src/tron/gGame.cpp, config/default.cfg: Made pause game, reload
+	  textures and the dreaded mouse grab buttons configurable.
+
+2006-01-03 23:27  z-man
+
+	* src/engine/ePlayer.h, src/tron/gMenus.cpp,
+	  language/english_base.txt, src/engine/eCamera.cpp,
+	  src/engine/ePlayer.cpp, language/deutsch.txt: Made smart camera
+	  glancing behavior configurable in the camera menu.
+
+2006-01-03 18:44  z-man
+
+	* src/engine/ePlayer.cpp: Player list now fits the screen with two
+	  teams and sixteen players.
+
+2006-01-02 23:12  z-man
+
+	* src/engine/ePlayer.cpp: More useful chat wait state output.
+
+2006-01-02 21:43  z-man
+
+	* src/engine/ePlayer.cpp: Avoided wait-for-finish-to-chat message
+	  spam.
+
+2006-01-02 15:35  z-man
+
+	* src/engine/eVoter.cpp: Fixed crash in vote item destructor when a
+	  menu item was still attached.
+
+2006-01-02 13:05  z-man
+
+	* config/examples/fortress_soccer.cfg: Changed to unified MAP_FILE
+	  syntax.
+
+2006-01-02 12:32  z-man
+
+	* src/: tron/gGame.cpp, engine/ePlayer.cpp, engine/ePlayer.h,
+	  engine/eTeam.cpp: Refactored kick-on-idle code so it really is
+	  only called once per round.
+
+2006-01-02 12:31  z-man
+
+	* src/network/nNetObject.cpp: Corrected old sync filtering, it was
+	  not working properly for objects created on the client after
+	  changing a server. Visible consequence: Your own ping was
+	  displayed as zero and you had no team.
+
+2006-01-02 10:00  z-man
+
+	* src/tron/gGame.cpp: Players without a team count as spectators
+	  and don't spawn game rounds.
+
+2006-01-02 09:58  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/engine/eTeam.cpp, config/settings.cfg: Added code to remove
+	  idle/chatbotting players from the game or server.
+
+2006-01-02 09:58  z-man
+
+	* src/engine/eNetGameObject.cpp: Internal leakfix: object detaches
+	  from player on remote deletion.
+
+2006-01-02 09:57  z-man
+
+	* src/engine/: ePlayer.cpp, ePlayer.h: Removed team score display
+	  whenever it is redundant.  Added activity timestamp.
+
+2006-01-01 12:32  z-man
+
+	* src/tron/gCycleMovement.cpp: Clientside defaults for various
+	  RUBBER_MINDISTANCE settings are now all zero. This may rip old
+	  servers, but not more than a 0.2.7.0 client.
+
+2006-01-01 12:31  z-man
+
+	* src/tron/gGame.cpp: Timer is now reset before game objects are
+	  created.
+
+2006-01-01 12:31  z-man
+
+	* src/engine/eCamera.cpp: Fixed camera forbid settings not being
+	  respected on startup.
+
+2005-12-29 22:46  z-man
+
+	* language/english_base.txt: Completed suicide timeout help.
+
+2005-12-29 20:48  klaxnek
+
+	* language/spanish.txt: uptodate translations
+
+2005-12-29 02:25  z-man
+
+	* src/tron/: gParser.cpp, gWinZone.cpp: Fix-Fix: the zone creator
+	  is now responsible for setting the correct time.
+
+2005-12-29 01:45  z-man
+
+	* src/network/nNetObject.cpp: Fixed error message typo.
+
+2005-12-29 01:45  z-man
+
+	* src/network/nConfig.cpp: Warning messages about unknown net
+	  config items are only printed once.
+
+2005-12-29 01:44  z-man
+
+	* src/engine/ePlayer.cpp: Moved impostor prevention to
+	  ePlayerNetID::ReadSync().
+
+2005-12-28 19:44  z-man
+
+	* src/tron/: gParser.cpp, gWinZone.cpp: Fixed zone initialization
+	  omissions.
+
+2005-12-28 08:37  nemostultae
+
+	* src/macosx/config_common.h: Mac OS X 10.2.8 build uses a newer
+	  libxml2
+
+2005-12-28 08:32  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Restored Mac
+	  OS X 10.2.8 compatibilty
+
+2005-12-27 06:56  nemostultae
+
+	* MacOS/build_tools/process_files.rb: configCommon -> config_common
+
+2005-12-24 14:46  z-man
+
+	* src/engine/eTeam.cpp: AI teams are now removed when they are no
+	  longer needed to keep the minimum number of teams.
+
+2005-12-24 00:51  z-man
+
+	* src/tron/gWinZone.cpp: Fixed division by zero bug.
+
+2005-12-23 23:19  z-man
+
+	* config/settings.cfg, resource/proto/Z-Man/sumo_4x4.aamap.xml,
+	  src/tron/gGame.cpp: Remedy for the "odd player" problem in
+	  multi-combat-zone maps such as 4x4 sumo. Spawn points can be
+	  divided into groups of equal size (minimum three), and no group
+	  will be left with just one player.
+
+2005-12-22 21:43  z-man
+
+	* resource/proto/Z-Man/sumo_4x4.aamap.xml: Doubled zone size so for
+	  the same size, the zones are closer together.
+
+2005-12-22 19:00  z-man
+
+	* config/settings.cfg: Added FORTRESS_MAX_PER_TEAM setting.
+
+2005-12-22 19:00  z-man
+
+	* src/tron/gWinZone.cpp, src/tron/gWinZone.h,
+	  resource/proto/Z-Man/sumo_4x4.aamap.xml,
+	  resource/proto/Z-Man/sumo_8x2.aamap.xml: Added
+	  FORTRESS_MAX_PER_TEAM setting
+
+2005-12-22 18:59  z-man
+
+	* AUTHORS, src/engine/ePlayer.cpp: Added credit for new instant
+	  chats.
+
+2005-12-22 17:28  z-man
+
+	* src/macosx/client/config.h: Beautified.
+
+2005-12-22 04:17  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Added
+	  dedicated target removed package build target Cleaned up some
+	  scripts resources are only sorted when the build is from CVS
+
+2005-12-22 02:13  nemostultae
+
+	* language/languages.txt.in: Reverted accidental old edit
+
+2005-12-22 02:05  nemostultae
+
+	* MacOS/build_tools/process_files.rb: Fixed replacing version tag
+	  in config.h file
+
+2005-12-22 02:00  nemostultae
+
+	* MacOS/build_tools/process_files.rb, src/macosx/config_common.h:
+	  fixed typos
+
+2005-12-22 01:37  nemostultae
+
+	* src/macosx/: client/config.h, dedicated/config.h: Mac OS X
+	  project maintenance
+
+2005-12-22 01:34  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Mac OS X
+	  project maintenance switched over to libpng framework
+
+2005-12-22 01:29  nemostultae
+
+	* MacOS/build_tools/process_files.rb, src/Makefile.am: Mac OS X
+	  project maintenance
+
+2005-12-22 01:24  nemostultae
+
+	* src/macosx/: config_common.h, English.lproj/InfoPlist.strings.in:
+	  Mac OS X project maintenance
+
+2005-12-21 19:40  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/tron/gCycle.cpp: Added messages for kills without points.
+
+2005-12-21 19:39  z-man
+
+	* src/engine/: eDisplay.cpp, eGrid.h: Fixed floor reflection bug
+	  when camera is outside of arena.
+
+2005-12-21 08:35  z-man
+
+	* configure.ac: Another go at the date -r problem.
+
+2005-12-20 21:35  z-man
+
+	* language/english_base.txt: Slightly better formulation of team
+	  kill message.
+
+2005-12-20 21:34  z-man
+
+	* src/tron/gCycle.cpp: Time influence is now calcualted before all
+	  penalties are applied.
+
+2005-12-20 20:53  z-man
+
+	* src/tron/gCycle.cpp, src/tron/gCycle.h,
+	  src/tron/gCycleMovement.cpp, src/tron/gCycleMovement.h,
+	  config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/network/nNetwork.cpp: More
+	  flexible (and better) determination of the player who gets the
+	  credit/blame for a kill.
+
+2005-12-19 00:06  z-man
+
+	* src/engine/eVoter.cpp: Fixed Windows compatibility bug pointed
+	  out by joda.bot.
+
+2005-12-18 15:40  z-man
+
+	* configure.ac, src/doc/HtmlMakefile: configure tests whether "date
+	  -r <file>" is accepted and the HtmlMakefile does not use it if
+	  that's not the case.
+
+2005-12-18 15:19  z-man
+
+	* src/tron/gCycleMovement.cpp, config/settings.cfg: Changed brake
+	  setting fallback for old clients to use the generic setting
+	  compatibility mechanism. This gives the admin better control.
+
+2005-12-18 14:38  z-man
+
+	* src/network/nNetwork.cpp: Trailing incomplete color codes are
+	  removed from strings from the clients. I thought we did this
+	  already...
+
+2005-12-18 14:33  z-man
+
+	* config/settings.cfg: Disabled chat wait in the default settings.
+
+2005-12-18 14:32  z-man
+
+	* language/: spanish.txt, french.txt: Master server connection
+	  message now includes master server name.
+
+2005-12-18 14:23  z-man
+
+	* language/: deutsch.txt, english_base.txt: Master server
+	  connection message now includes master server name.
+
+2005-12-18 14:21  z-man
+
+	* src/: tron/gGame.cpp, network/nConfig.cpp, network/nConfig.h,
+	  network/nNetwork.cpp, network/nNetwork.h,
+	  network/nServerInfo.cpp, network/nServerInfo.h: Login process now
+	  safely recognizes new version clients even if they sent old login
+	  messages (the messages have been appended to).  Connections to
+	  the master server no longer attempt to use the old login method
+	  if the new method fails.  Network aware configuration is now
+	  saved before entering a server and restored later.
+
+2005-12-18 14:18  z-man
+
+	* src/engine/eVoter.cpp: Fixed GCC 3.4 and later compatibility, a
+	  bug in 3.3 made it fail to see a variable's protection status.
+
+2005-12-18 00:45  z-man
+
+	* src/tron/gGame.cpp: Added extra pause at beginning of the round
+	  and calls to the "wait for players to leave chat" function.
+
+2005-12-18 00:26  z-man
+
+	* language/english_base.txt, config/settings.cfg,
+	  language/deutsch.txt: Added config item descriptions and language
+	  items for new pause-at-round-start functions.
+
+2005-12-18 00:25  z-man
+
+	* src/engine/: ePlayer.cpp, ePlayer.h: Added WaitToLeaveChat(), a
+	  function that allows wating for players to leave chat state (with
+	  timeouts and stuff).
+
+2005-12-17 21:41  z-man
+
+	* src/render/rFont.cpp: Fixed cursor rendering position.
+
+2005-12-17 21:32  z-man
+
+	* src/engine/eVoter.cpp: Beautified.
+
+2005-12-17 21:29  z-man
+
+	* src/tron/gGame.cpp: Automatic voting menu no longer pops up while
+	  another menu is active.  Automatic voting menu now enables chat
+	  state.
+
+2005-12-17 21:29  z-man
+
+	* src/ui/: uMenu.cpp, uMenu.h: Added flag indicating current menu
+	  activity.  Disabled automatic console rendering while it is
+	  active to avoid menu flickering between rounds.
+
+2005-12-17 21:28  z-man
+
+	* src/render/: rConsole.cpp, rConsole.h: Added possibility to
+	  disable automatic rendering whenever a newline is printed to the
+	  console (happens between rounds).
+
+2005-12-17 19:40  z-man
+
+	* config/settings_dedicated.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/eVoter.cpp: Future proofed
+	  voting: there is now a server controlled voting item, kick votes
+	  can use it (disabled by default as it is incompatible with older
+	  clients).
+
+2005-12-17 19:37  z-man
+
+	* src/: doc/versions.html.m4, network/nConfig.cpp,
+	  network/nNetwork.cpp: Bumped network version number. Only
+	  nConfig.cpp needs to be edited in the future.
+
+2005-12-17 11:06  z-man
+
+	* src/tron/gHud.cpp: Removed extra factor of 10 in rubber HUD
+	  display.
+
+2005-12-15 08:47  z-man
+
+	* src/engine/eTeam.cpp: Team finding now only executed on the
+	  server.
+
+2005-12-15 07:27  davidfancella
+
+	* config/examples/: breakfast_in_hell.cfg, death_zone.cfg,
+	  fortress_soccer.cfg: More config presets
+
+2005-12-15 07:12  davidfancella
+
+	* config/Makefile.am: Added installation and dist stuff for new
+	  presets
+
+2005-12-15 07:02  davidfancella
+
+	* config/examples/: breakfast_in_hell.cfg, single_use_turbo.cfg:
+	  Added some settings presets
+
+2005-12-15 06:59  davidfancella
+
+	* config/examples/breakfast_in_hell.cfg: file breakfast_in_hell.cfg
+	  was added on branch b0_2_8 on 2005-12-15 06:02:51 +0000
+
+2005-12-15 06:59  davidfancella
+
+	* config/examples/single_use_turbo.cfg: file single_use_turbo.cfg
+	  was added on branch b0_2_8 on 2005-12-15 06:02:51 +0000
+
+2005-12-13 13:42  z-man
+
+	* desktop/armagetronad.desktop.in: Added trailing semicolon.
+
+2005-12-12 18:52  z-man
+
+	* language/english_base.txt: his -> its
+
+2005-12-12 18:52  z-man
+
+	* src/tron/gGame.cpp: No "Winner" display and scoring in freestyle
+	  game mode.
+
+2005-12-12 18:51  z-man
+
+	* src/tron/gWinZone.cpp: Score is halved if you're outside of the
+	  zone at the time of conquest.
+
+2005-12-12 18:36  z-man
+
+	* src/tools/: tString.cpp, tString.h: Auto-beautified.
+
+2005-12-12 18:35  z-man
+
+	* src/tron/gWinZone.cpp: Dead teams now don't get points for
+	  conquering a base.
+
+2005-12-12 14:48  z-man
+
+	* src/tron/: gWinZone.cpp, gWinZone.h: When all zones disappear
+	  simultaneously, nobody gets the survivor points.  The zone
+	  vanishing kills only get applied if an enemty was inside the
+	  zone.
+
+2005-12-12 14:47  z-man
+
+	* src/engine/eTeam.cpp: Fixed last (I hope) of the places that
+	  caused TEAM_MAX_PLAYERS and TEAMS_MAX not to be respected.  Fixed
+	  spectators getting penalty points on the ladder.
+
+2005-12-12 06:59  nemostultae
+
+	* src/tron/gServerBrowser.cpp: Fixed truncating servername with
+	  color strings removed
+
+2005-12-12 06:39  nemostultae
+
+	* src/: tools/tString.cpp, tools/tString.h,
+	  tron/gServerBrowser.cpp: Added tString::Truncate() Long Server
+	  names are now truncated in the master browser
+
+2005-12-12 03:29  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: -O2 for
+	  release builds
+
+2005-12-11 22:08  z-man
+
+	* src/engine/: ePlayer.cpp, eTeam.cpp: Now TEAM_MAX_PLAYERS an
+	  TEAMS_MAX are really both respected.
+
+2005-12-11 15:09  z-man
+
+	* src/engine/ePlayer.cpp: Players are now left without a team if
+	  they don't fit in one and can't create one.
+
+2005-12-11 15:09  z-man
+
+	* src/engine/eTeam.cpp: Teamless players are now constantly put in
+	  a team if possible.
+
+2005-12-10 23:41  z-man
+
+	* src/: network/nNetwork.cpp, tools/tRecorder.cpp,
+	  tools/tRecorder.h: Made debug compilation work again.
+
+2005-12-10 23:14  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h, nNetObject.h,
+	  nConfig.cpp, nConfig.h, nNetObject.cpp: Incoming message IDs are
+	  blown up to long ints (32 bits) so higher level systems have an
+	  easier time determining if an update message is new or old.
+	  Configuration system and NetObject syncing use it.
+
+2005-12-10 16:33  z-man
+
+	* src/engine/eCamera.cpp: Fixed insecure initialization of
+	  centerSpeedSmooth.
+
+2005-12-10 13:36  z-man
+
+	* src/engine/eVoter.cpp: Fixed another vote-not-appearing client
+	  bug: some code that was meant to run only server-side got
+	  executed on the client.
+
+2005-12-09 20:43  klaxnek
+
+	* language/spanish.txt: Updated translations
+
+2005-12-09 20:42  klaxnek
+
+	* language/english_base.txt: Fix typo
+
+2005-12-09 17:19  z-man
+
+	* src/engine/eCamera.cpp: Disabled switching of cammera mode from
+	  custom camera to smart camera on death.
+
+2005-12-09 17:19  z-man
+
+	* config/settings.cfg: Disabled initial zoom of custom camera.
+
+2005-12-09 11:41  z-man
+
+	* src/tron/gAIBase.cpp: Boolean logic course for z-man again :)
+
+2005-12-09 09:53  z-man
+
+	* src/tron/: gAIBase.cpp, gAIBase.h, gGame.cpp: Whoops, the last
+	  commit disabled the AI on fortress. Readded it and done something
+	  different about the AIs that get added and deleted without
+	  reason.
+
+2005-12-09 00:36  z-man
+
+	* src/tron/gGame.cpp: Used new ePlayerNetID cleanup function.
+
+2005-12-09 00:36  z-man
+
+	* src/tron/gAIBase.cpp: Removed a reduntant message.  Fixed
+	  balancing with MIN_TEAMS, one team to many was kept around.
+
+2005-12-09 00:35  z-man
+
+	* src/engine/: ePlayer.cpp, ePlayer.h: Added seperate cleanup
+	  function that removes all ePlayerNetIDs. Used to clean up after a
+	  game.  Sanitized messages.
+
+2005-12-08 17:48  z-man
+
+	* src/: network/nNetwork.cpp, engine/ePlayer.cpp: Fixed "User 0
+	  timed out" bugs.
+
+2005-12-08 15:47  z-man
+
+	* src/engine/eTeam.cpp: Disabled message generation on the client.
+	  Fixed almost endless balancing on exit.
+
+2005-12-08 12:21  nemostultae
+
+	* src/engine/ePlayer.cpp: Added log messages for when a user
+	  fails/succeeds to authenticate via remote admin
+
+2005-12-07 09:09  z-man
+
+	* src/tron/: gCycleMovement.cpp, gCycleMovement.h, gWall.cpp: Tail
+	  end extrapolation now takes rubber slowdown into account.
+
+2005-12-07 08:47  z-man
+
+	* src/tron/gWall.cpp: Added extrapolation to the read end of a
+	  cycle's wall. High ping players could effectively lock the
+	  fortress zone tight.
+
+2005-12-07 08:47  z-man
+
+	* src/render/: rFont.cpp, rFont.h: Fixed missing breaks of overlong
+	  words
+
+2005-12-07 01:55  nemostultae
+
+	* src/render/rFont.cpp: Scratch that last change, it broke moving
+	  the cursor
+
+2005-12-07 00:16  nemostultae
+
+	* src/render/rFont.cpp: Fixed cursorPos getting stuck at 0 when
+	  entering color codes
+
+2005-12-06 23:00  z-man
+
+	* src/render/: rFont.cpp, rFont.h: Fixed automatic line breaks on
+	  words with color codes in them, the word got repeated on the next
+	  line.
+
+2005-12-05 21:28  z-man
+
+	* src/tron/gWall.cpp: Fixed another performance eating bug caused
+	  by the last commit.
+
+2005-12-05 18:42  z-man
+
+	* src/tron/gWall.cpp: Fixed uninitialized variable.
+
+2005-12-05 14:44  z-man
+
+	* NEWS: Added changes since beta_4.
+
+2005-12-05 14:30  z-man
+
+	* src/render/rViewport.cpp: Made sure that if the w/h ratio of the
+	  screen is bigger than 5/3 (as, for example, in splitscreen mode)
+	  FOV is added to the left and right instead of taken from the top
+	  and bottom. In effect, the FOV you give is now the horizontal FOV
+	  of the biggest 5/3 screen that fits into your window.
+
+2005-12-05 14:28  z-man
+
+	* config/settings.cfg: Updated custom camera default settings, old
+	  values are copied and commented out.
+
+2005-12-05 14:28  z-man
+
+	* src/engine/: eCamera.cpp, eCamera.h: Speed used by the custom
+	  camera for the viewing distance is now smoothed.
+
+2005-12-05 11:24  z-man
+
+	* src/tron/gGame.cpp: Removed debug breakpoint.
+
+2005-12-05 10:11  nemostultae
+
+	* language/english_base.txt: added network_login_failed
+
+2005-12-05 09:14  z-man
+
+	* language/english_base.txt: Fixed "zone zone" typos.
+
+2005-12-05 09:09  z-man
+
+	* src/engine/ePlayer.cpp: Client now accepts name syncs for his own
+	  players.
+
+2005-12-05 09:09  z-man
+
+	* src/tron/gCycle.cpp: Fixed messed up first cycle wall creation.
+
+2005-12-05 00:50  z-man
+
+	* src/engine/eCamera.cpp: Accidentally committed the mercam.
+
+2005-12-05 00:45  z-man
+
+	* src/network/nNetwork.cpp: Ping calculation is now more careful
+	  and adds fluctuations.
+
+2005-12-05 00:44  z-man
+
+	* src/tron/gCycle.cpp: The first wall that gets created is no
+	  longer lost.
+
+2005-12-05 00:43  z-man
+
+	* src/tron/gCycleMovement.cpp: Debug possibility for false
+	  movements.
+
+2005-12-05 00:43  z-man
+
+	* src/engine/ePlayer.cpp: Added option to rename players that take
+	  other players' names while both are online.
+
+2005-12-05 00:42  z-man
+
+	* src/engine/eGameObject.cpp: Movement bugfix: The point for
+	  leaving the current face is now always clamped to the movement
+	  line segment without penalty.
+
+2005-12-05 00:41  z-man
+
+	* src/engine/: eCamera.cpp, eCamera.h: New settings that let the
+	  custom camera slide out when you go faster.  New setting for
+	  custom camera turn speed after a 180.  Tweaked smart camera.	On
+	  forced glance release after turn, the camera position now stays
+	  unchanged.
+
+2005-12-05 00:40  z-man
+
+	* language/english_base.txt, language/deutsch.txt,
+	  config/settings.cfg: Added new settings for custom camera and
+	  player names.
+
+2005-12-04 14:56  z-man
+
+	* src/tools/tDirectories.cpp: Found other way to work around the
+	  GetSpecialFolderPath problem with mingw.
+
+2005-12-04 13:20  z-man
+
+	* src/: engine/ePlayer.cpp, tools/tConfiguration.h,
+	  tools/tDirectories.cpp, win32/config_common.h: MSVC compatibility
+	  restored.
+
+2005-12-03 17:57  z-man
+
+	* src/tron/gWinZone.cpp: Fixed rendering of zones on client when
+	  connected to old servers, they would sometimes send updates long
+	  after the zone was created, and the legacy algorithm was not
+	  prepared.
+
+2005-12-03 17:33  z-man
+
+	* src/render/rFont.cpp: Fixed cursor position when rendering
+	  colored strings.
+
+2005-12-03 17:32  z-man
+
+	* configure.ac: Removed sizeof(enum)==sizeof(int) test, it is no
+	  longer needed.
+
+2005-12-03 17:32  z-man
+
+	* src/: tools/tConfiguration.cpp, tools/tRecorder.h,
+	  tron/gAIBase.cpp, ui/uInput.cpp: GCC 4.1 compatibility: replaced
+	  C style casts with const_casts.
+
+2005-12-03 17:31  z-man
+
+	* src/: tron/gGame.cpp, engine/ePlayer.cpp, engine/ePlayer.h,
+	  render/rScreen.cpp: Fixed aliasing warnings pointed out by GCC
+	  4.1 according to SuSE maintainer.
+
+2005-12-03 17:30  z-man
+
+	* src/tools/tConfiguration.h: Made enum config items possible.
+
+2005-12-03 11:48  z-man
+
+	* config/master.srv: Added fourth master.
+
+2005-12-03 10:52  z-man
+
+	* configure.ac: Removed redundant xml2 compilation and linking
+	  flags.
+
+2005-12-03 00:01  z-man
+
+	* src/tron/gArmagetron.cpp: Added explicit query for debug state so
+	  it does not bounce around the code implicitly, messing up
+	  recordings.
+
+2005-12-02 12:26  z-man
+
+	* configure.ac: Fixed checking for client libraries when only the
+	  master should be built.
+
+2005-12-02 10:21  z-man
+
+	* src/tron/gWall.cpp: Fixed server transmitted walls from lingering
+	  around for too long.
+
+2005-12-01 17:35  z-man
+
+	* src/tron/gGame.cpp: Whoops, settings should only be updated on
+	  the server.
+
+2005-12-01 16:38  z-man
+
+	* src/tron/gGame.cpp: Team settings are now active all of the time.
+
+2005-12-01 16:37  z-man
+
+	* src/: network/nServerInfo.cpp, tools/tString.cpp,
+	  tron/gServerBrowser.cpp: Beautified.
+
+2005-12-01 16:37  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/engine/ePlayer.cpp, src/engine/eTeam.cpp: Reworked team
+	  join/leave messages (remove clutter, wishes are announced).
+	  Players are forced to create a new team right away if TEAMS_MIN
+	  says so (before: players joined a team and were removed later).
+
+2005-12-01 08:24  z-man
+
+	* src/tron/gServerFavorites.cpp: Whoops, fixed crash on custom
+	  connect.
+
+2005-12-01 01:58  nemostultae
+
+	* src/: network/nServerInfo.cpp, tools/tString.cpp,
+	  tools/tString.h, tron/gServerBrowser.cpp: Fixed bug in sorting by
+	  server name ( actually just moved to using strcasecmp() ) Added
+	  case-insensitive tString::Compare() Colors in server names are
+	  now disregarded when sorting by name Added setting to remove
+	  colors from server names in the master browser,
+	  FILTER_SERVER_NAME_COLOR_STRINGS
+
+2005-12-01 00:30  z-man
+
+	* src/tron/: gServerFavorites.h, gGame.cpp, gServerFavorites.cpp:
+	  Re-added custom connect menu.
+
+2005-11-30 11:25  z-man
+
+	* src/tron/gWall.cpp: Increased basic timeout for wall deletion.
+
+2005-11-30 10:49  z-man
+
+	* src/doc/network.html.m4: Added paragraph about master servers.
+
+2005-11-30 10:47  z-man
+
+	* src/tron/gWall.cpp: Fixed invisiwalls when no wall updates arrive
+	  from the server at all.
+
+2005-11-30 08:32  z-man
+
+	* src/tools/tString.cpp: Fixed double 0 termination of return
+	  string of SubStr() when the full rest is requested.
+
+2005-11-29 23:01  z-man
+
+	* config/master.srv: Switched antix's master from IP to DNS name.
+
+2005-11-29 23:00  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/render/rConsole.cpp, src/render/rConsoleGraph.cpp: Added
+	  CONSOLE_COLUMNS, CONSOLE_ROWS and CONSOLE_ROWS_MAX console items
+	  to customize console scale.
+
+2005-11-29 22:57  z-man
+
+	* src/render/rFont.cpp: Reverted to old font selection behavior.
+
+2005-11-29 16:07  z-man
+
+	* config/master.srv: Added antix' master server (raw IP for
+	  testing).
+
+2005-11-29 15:49  z-man
+
+	* src/tron/gGame.cpp: Added recording timestamp.
+
+2005-11-29 15:48  z-man
+
+	* src/tron/gCycle.cpp: tNEWed explosions.  Re-Added explosion on
+	  player exit, the cycle just disappearing looked odd.
+
+2005-11-29 15:47  z-man
+
+	* src/engine/eTeam.cpp: BALANCE_ON_QUIT now only triggers a
+	  redistribution of players for the next round, not immediately.
+
+2005-11-29 12:08  z-man
+
+	* src/tron/gWinZone.cpp: Switched zone rendering to wireframe if
+	  alpha blending is disabled.
+
+2005-11-29 11:47  z-man
+
+	* src/tron/gCycleMovement.cpp, config/settings.cfg,
+	  language/deutsch.txt, language/english_base.txt: Added
+	  CYCLE_SPEED_MIN to set minimal cycle speed.  Bugfix: The return
+	  value of Speed() now respects clamping and is never negative
+	  (this confused the smart camera).
+
+2005-11-29 11:44  z-man
+
+	* src/network/: nConfig.cpp, nNetwork.cpp: Bumped protocol version
+	  to 9.
+
+2005-11-29 11:44  z-man
+
+	* src/tron/gMenus.cpp: Beautified.
+
+2005-11-29 11:20  z-man
+
+	* config/master.srv: That last change slipped in accidentally.
+	  Reverting.
+
+2005-11-29 11:18  z-man
+
+	* src/tron/gMenus.cpp, config/master.srv, src/render/rScreen.cpp:
+	  Font filtering may now only be nearest or linear, no mipmaps.
+
+2005-11-28 23:58  z-man
+
+	* Makefile.am, Makefile.manual, configure.ac, src/Makefile.am:
+	  Added --disable-main option to configure to disable building of
+	  the client/server executable.
+
+2005-11-28 14:55  z-man
+
+	* config/settings_dedicated.cfg: Changed default for
+	  BALANCE_ON_QUIT to 1.
+
+2005-11-27 21:26  z-man
+
+	* src/render/: rConsoleGraph.cpp, rFont.cpp, rScreen.cpp: Allowed
+	  big font in console.	Default font texture filtering mode is now
+	  bilinear without mipmaps.  Lowered small font replacement
+	  threshold.
+
+2005-11-27 21:24  z-man
+
+	* src/engine/ePlayer.cpp: Names consisting only of blanks are now
+	  illegal.  Genter-neutralized instant chat.
+
+2005-11-27 21:24  z-man
+
+	* config/default.cfg: Added "T" keybinding for team chat.
+
+2005-11-27 21:23  z-man
+
+	* src/doc/network.html.m4: Added instant chat docs.
+
+2005-11-27 11:58  z-man
+
+	* src/tron/gArmagetron.cpp: Players are deleted earlier so their
+	  destruction message does not get sent to stdout.
+
+2005-11-26 17:24  z-man
+
+	* src/tools/tCommandLine.cpp: Fixed Unix compilation.
+
+2005-11-26 17:07  z-man
+
+	* src/tron/: gCycle.cpp, gCycleMovement.cpp, gCycleMovement.h:
+	  Replaced protected alive with private alive_ in gCycleMovement;
+	  it can be set with Die(). Adapted ghCycle.cpp to the change. This
+	  should work against invisible walls.
+
+2005-11-26 17:04  z-man
+
+	* src/: tools/tCommandLine.cpp, tron/gArmagetron.cpp: New debug
+	  output (needs to be activated).
+
+2005-11-26 17:04  z-man
+
+	* src/tools/tDirectories.cpp: New debug output (needs to be
+	  activated).  Fixed memory overwrite in special folder handling.
+
+2005-11-26 17:03  z-man
+
+	* src/tools/: tError.cpp, tError.h: New debug macro: tERR_MESSAGE.
+	  Displays a messagebox for Windows users, goes to stderr for Unix.
+
+2005-11-26 15:28  z-man
+
+	* src/engine/ePlayer.cpp: More filtering for the player name: it is
+	  now done on the client, too, and color code only names are
+	  recognized as illegal.
+
+2005-11-26 15:27  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/network/nNetwork.cpp: Added new
+	  option FILTER_COLOR_STRINGS to filter out all color codes from
+	  strings received over the network.
+
+2005-11-25 15:47  z-man
+
+	* src/ui/uMenu.cpp: Reload textures in error message display
+	  (attempt to fix Fonkay's black screen bug).
+
+2005-11-25 15:47  z-man
+
+	* src/engine/ePlayer.cpp: Disallowed empty player name.
+
+2005-11-25 11:41  z-man
+
+	* src/engine/eTeam.cpp: On team change or if the color of a team
+	  changes, colored player names are regenerated.
+
+2005-11-24 19:56  z-man
+
+	* src/tools/tDirectories.cpp: Another leakfix in a corner case.
+	  Fixed last slash/backslash discrimination.
+
+2005-11-24 19:36  z-man
+
+	* src/render/rConsole.cpp: Fixed another instance of missing lines,
+	  happening only when multiple lines were printed at once.
+
+2005-11-24 18:44  z-man
+
+	* src/engine/ePlayer.cpp: Fixed exit on thrown exception when the
+	  chat key and a controll key were pressed almost simultaneously
+	  (during one frame).
+
+2005-11-24 15:09  z-man
+
+	* src/engine/eTeam.cpp: Removed empty team list message.
+
+2005-11-24 15:07  z-man
+
+	* src/: tron/gCycle.cpp, engine/eNetGameObject.cpp: Fixed
+	  laggometer at start and with enabled prediction.
+
+2005-11-23 15:55  z-man
+
+	* src/render/rScreen.cpp: Textures are unloaded now if the app
+	  loses focus and stops rendering.
+
+2005-11-23 15:40  z-man
+
+	* src/engine/eCamera.cpp: Fixed spectator camera initial position
+	  bug.
+
+2005-11-22 18:26  z-man
+
+	* src/tools/tDirectories.cpp: Beautified (invisible to me, but I'm
+	  not arguing with astyle).
+
+2005-11-22 18:26  z-man
+
+	* src/engine/ePlayer.cpp: Fixed no-newline bug for chat. It only
+	  hit very old clients (pre 0.2.6) or if the connection failed on
+	  the first attempt and the client started a seccond try, behaving
+	  like an old client.
+
+2005-11-22 17:43  z-man
+
+	* config/settings_dedicated.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/eVoter.cpp: Instead of
+	  reinterpreting an old setting, a new setting has been added for
+	  voting timeouts.
+
+2005-11-22 17:16  z-man
+
+	* src/engine/eVoter.cpp: Fixed disappearing vote bug.
+
+2005-11-22 14:22  z-man
+
+	* src/tools/tResourceManager.cpp: Fixed memory leaks.
+
+2005-11-22 12:47  z-man
+
+	* src/tron/gParser.cpp: Beautified.
+
+2005-11-22 12:46  z-man
+
+	* src/: tron/gCycle.cpp, engine/ePlayer.cpp: Made it possible for
+	  the client to connect to a server with more than 16 clients.
+
+2005-11-22 00:01  z-man
+
+	* src/config_ide.h: Changed version to CVS, will be overridden on
+	  every release.
+
+2005-11-22 00:00  z-man
+
+	* src/tools/tDirectories.cpp: Added tests for \ in addition to / in
+	  path manipulations.
+
+2005-11-21 12:00  z-man
+
+	* src/network/nNetwork.cpp: Fixed Ack-Ack bug: Ack packets were
+	  sent with an ID and got an Ack response. If both client and
+	  server were affected, this results in high (but generally
+	  unproblematic) network load.
+
+2005-11-21 11:59  z-man
+
+	* src/tron/gWinZone.cpp: Changed fortess game settings to
+	  tSettingItem. The clients don't need to know about it.
+
+2005-11-20 21:05  philippeqc
+
+	* config/settings.cfg: Removed reference to MAP_URI, now deprecated
+
+2005-11-20 14:15  philippeqc
+
+	* src/tron/: gParser.cpp, gParser.h: Added support for Alternative
+	  and other future proofing elements
+
+2005-11-19 23:35  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Cleanup of
+	  build scripts
+
+2005-11-19 19:48  z-man
+
+	* src/engine/eCamera.cpp: Fixed VC6 compilation error.
+
+2005-11-19 18:50  klaxnek
+
+	* src/tron/gCycleMovement.h: Missing gCycle class declaration
+	  needed for latest g++ 4.0.x
+
+2005-11-19 18:04  klaxnek
+
+	* language/spanish.txt: Updated translations
+
+2005-11-19 16:25  z-man
+
+	* NEWS: Added bugfixes to log.
+
+2005-11-19 16:22  z-man
+
+	* src/ui/uMenu.cpp: Fixed the last fix, it made the string longer
+	  and longer...
+
+2005-11-19 16:22  z-man
+
+	* src/render/rConsole.cpp: Fixed losing every 100th console line.
+
+2005-11-19 16:21  z-man
+
+	* src/engine/: eCamera.cpp, eCamera.h: Fixed random focus switching
+	  bug.
+
+2005-11-19 02:18  z-man
+
+	* src/ui/uMenu.cpp: Null-terminated editing string.
+
+2005-11-19 02:17  z-man
+
+	* src/tools/tRandom.cpp: Worked around really well hidded compiler
+	  bug in VisualC 6.
+
+2005-11-18 22:01  z-man
+
+	* src/tron/gGame.cpp: Added another point where opject deletion
+	  messages would be purged.
+
+2005-11-18 21:57  z-man
+
+	* config/master.srv: Took out test master 3, two main masters
+	  remain.
+
+2005-11-18 21:49  z-man
+
+	* src/network/nNetObject.cpp: Added an extra spot to send out
+	  netobject kill messages.
+
+2005-11-18 21:42  z-man
+
+	* language/english_base.txt: Clarified bandwidth control help.
+
+2005-11-18 21:41  z-man
+
+	* src/engine/eTimer.cpp: Fixed uninitialized variables on the
+	  client.
+
+2005-11-18 18:49  z-man
+
+	* src/tron/gGame.cpp: Fixed extra round bug. The reason was a
+	  boolean clause that evaluated slightly differently than
+	  anticipated (Brainbug).
+
+2005-11-18 16:14  z-man
+
+	* NEWS: Added changes since beta3.
+
+2005-11-18 02:39  nemostultae
+
+	* src/tools/tString.cpp: Added comma to list of default word
+	  delimiters
+
+2005-11-18 00:41  z-man
+
+	* config/default.cfg: Added keybindings to new instant chat macros.
+	  Made F13 (Mac) a screenshot key.
+
+2005-11-17 23:55  z-man
+
+	* src/tools/: tConfiguration.cpp, tString.cpp: Allowed safe saving
+	  and restoring of line strings ending in a backslash.
+
+2005-11-17 23:54  z-man
+
+	* src/engine/: ePlayer.cpp, ePlayer.h: Instant chat strings ending
+	  in a backslash will not be sent immediately, they open up the
+	  chat line with the corresponding text.  Updated default instant
+	  chat lines.
+
+2005-11-17 22:49  nemostultae
+
+	* src/tools/tString.cpp: Added dash to default delimiters
+
+2005-11-17 22:40  nemostultae
+
+	* src/tools/tString.cpp: Changed WORD_DELIMITERS's tConfItemLine
+	  object name
+
+2005-11-17 22:26  nemostultae
+
+	* src/ui/uMenu.cpp: Changed a '=' to a '==' in Mac OS X keybindings
+
+2005-11-17 20:03  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Copy libpng
+	  to application bundle
+
+2005-11-17 18:43  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Fixed last
+	  fix, checking the file has been modified
+
+2005-11-17 15:18  z-man
+
+	* src/network/nNetObject.cpp: Object destroy messages are no longer
+	  sent at all opportunities (they are not high priority); rather,
+	  they wait for other sync messages to sit in the same UDP packet
+	  so they don't waste as much bandwidth.
+
+2005-11-17 15:13  z-man
+
+	* src/network/nNetwork.cpp: Removed another wait cycle for ack
+	  sending. Ping measurements are now even lower.  Ack messages are
+	  now sent as attachments to all packets, whether there is
+	  bandwidth available or not. They need this priority.
+
+2005-11-17 13:49  z-man
+
+	* src/ui/uMenu.cpp: Added Nemo's extended line editing keybindings.
+	  Fixed bug where trying to write beyond the line limit, the keys
+	  got interpreted by the generic input system and could trigger
+	  other events.
+
+2005-11-17 13:46  z-man
+
+	* src/tools/: tString.cpp, tString.h: Added Nemo's new string
+	  manipulation and searching functions: Skip over words and remove
+	  substrings.
+
+2005-11-17 09:43  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Modified
+	  checking to see if file was edited (partial fix of last commit)
+
+2005-11-17 08:39  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Fixed
+	  problem with Xcode recompiling whole project
+
+2005-11-17 08:08  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Moved back
+	  to non-framework libpng
+
+2005-11-17 05:01  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Keep map.dtd
+	  around unless this is a Release version
+
+2005-11-17 04:45  nemostultae
+
+	* src/tools/tDirectories.cpp: Updated directory structure on Mac OS
+	  X
+
+2005-11-17 04:12  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: [no log
+	  message]
+
+2005-11-17 03:48  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Small change
+	  to determine_version_release (was returning an array filled with
+	  a string, we just want the string)
+
+2005-11-17 03:39  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Remove files
+	  from project that are in CVS checkouts but absent from release
+	  sources
+
+2005-11-17 03:30  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Adapted to
+	  changes in map sorting script
+
+2005-11-17 02:36  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Updated
+	  build scripts to work on release sorces.
+
+2005-11-16 11:35  z-man
+
+	* src/tools/tRecorder.cpp: Z-Man needs some lessons in boolean
+	  algebra :) Fixed line string reading of escaped characters.
+
+2005-11-16 10:14  z-man
+
+	* src/tron/gGame.cpp: Reshuffled deconstruction of game: first come
+	  the objects, then the grid. This fixes the bogus "possible phase
+	  bug" warning.
+
+2005-11-16 09:22  z-man
+
+	* config/settings_dedicated.cfg: Added a clarifying comment.
+
+2005-11-16 09:21  z-man
+
+	* src/engine/ePlayer.cpp: Chat string insertion now honors the
+	  maxial string length.
+
+2005-11-15 15:42  z-man
+
+	* src/tron/gCycle.cpp: Set last driving direction in SyncEnemy().
+
+2005-11-15 15:30  z-man
+
+	* src/engine/eCamera.cpp: Beautified.
+
+2005-11-15 15:29  z-man
+
+	* src/tron/gCycleMovement.cpp: Bugfix: last driving direction
+	  always pointed into the wrong direction, causing phasing.
+
+2005-11-15 15:28  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/eCamera.cpp: Bugfix: after
+	  a DB 180, the internal and custom cameras no longer stay locked
+	  in the wrong direction.  Added settings for camera turn speed.
+
+2005-11-15 13:34  z-man
+
+	* src/engine/ePlayer.cpp: Fixed nonsensical sending of team change
+	  wish message right after player creation on the client.
+
+2005-11-15 11:46  z-man
+
+	* src/tron/gArmagetron.cpp: Clarified misleading Windows error
+	  messages.
+
+2005-11-15 11:38  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/eCamera.cpp: Added new
+	  property to custom camera: it now zooms out from a closeup of the
+	  team formation to its final position during the countdown. This
+	  makes it easier to know where your position in the team is.
+
+2005-11-14 23:56  z-man
+
+	* src/engine/ePlayer.cpp: Added BUG_COLOR_OVERFLOW (default: old
+	  behavior, flag is enabled) so server admins can disable the trail
+	  color bug if it annoys them. The color values are always clamped
+	  if the player is member of a team.
+
+2005-11-14 23:54  z-man
+
+	* src/engine/eCamera.cpp: Forgot to check index validity in last
+	  fix.
+
+2005-11-14 23:21  z-man
+
+	* src/engine/eCamera.cpp: Picked wrong object ID in last bugfix.
+
+2005-11-14 14:36  z-man
+
+	* desktop/armagetronad.desktop.in: Removed redundant
+	  Type=Application entry.
+
+2005-11-14 14:33  z-man
+
+	* src/tools/tRecorder.cpp: Added escaping of backslash character in
+	  strings so a \n can be distinguished from \\n.
+
+2005-11-14 09:44  z-man
+
+	* src/engine/eTimer.cpp: Fixed inaccuracy of average frame time
+	  when paused for too long.
+
+2005-11-14 09:43  z-man
+
+	* src/network/nNetwork.cpp: Mr. Spock like ban time display
+	  replaced by value rounded to full minutes.
+
+2005-11-14 09:43  z-man
+
+	* src/engine/ePlayer.cpp: Fixed instant chat keys not marking an
+	  event as used.
+
+2005-11-14 08:37  z-man
+
+	* src/engine/ePlayer.cpp: Fixed empty team chat bug.
+
+2005-11-14 08:37  z-man
+
+	* minor_version: YYYYMMDD in minor_version is replaced by DATE. We
+	  need to stick to a single date format.
+
+2005-11-14 08:37  z-man
+
+	* batch/make/version: Version generation now understands CVS tags:
+	  if the sources are locked to a version tag, the version is
+	  generated from that. If the sources are locked to a date tag,
+	  that date is used instead of the touch date.	YYYYMMDD in
+	  minor_version is replaced by DATE. We need to stick to a single
+	  date format.
+
+2005-11-13 19:13  z-man
+
+	* src/tron/: gWall.cpp, gWall.h: Improved replacement of
+	  preliminary walls with final walls: the overlap of the new
+	  (final) and old (preliminary) wall in creation time is taken as
+	  the main criterion, and the direction of the two walls.  If it is
+	  noticed that the current wall of a cycle has gotten a final
+	  replacement (this was ignored before), a flag is set in the wall
+	  that causes it to be inserted into the grid (and thus deleted)
+	  immediately after the cycle's next turn.
+
+2005-11-13 19:09  z-man
+
+	* src/: engine/eTimer.cpp, engine/eTimer.h, tron/gGame.cpp,
+	  tron/gHud.cpp: The screen now stays blank as long as the timer
+	  says synchronization is not yet complete, just as it does the
+	  first half second of every round.  The timer detects that by
+	  measuring the variance of the received syncs. The non-complete
+	  status stays in effect for at most ten seconds, starting with the
+	  timer's creation.
+
+2005-11-13 19:07  z-man
+
+	* src/tools/tString.cpp: Changes to SubStr: the len parameter has
+	  to be smaller than zero to trigger taking the whole rest of the
+	  string; sometimes you really want a zero length substring (to
+	  avoid having to do special case coding).
+
+2005-11-13 19:05  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/ePlayer.cpp: Pressing
+	  instant chat keys, should they be keys that don't generate
+	  characters (function keys, cursor keys) during chat now insert
+	  the corresponding instant chat.  Added a configuration item that
+	  allows issuing cycle control commands from whithin chat (thereby
+	  losing chat protection status, of course).
+
+2005-11-13 19:02  z-man
+
+	* config/default.cfg: Added console input key.	Made F2 an instant
+	  chat key, screenshots are now taken with "Print Screen".
+
+2005-11-13 17:54  philippeqc
+
+	* resource/proto/map.dtd: map.dtd
+
+2005-11-13 00:28  z-man
+
+	* src/: engine/eCamera.cpp, engine/eCamera.h, tron/gCamera.cpp:
+	  Switched camera center from using the object ID (which varies) to
+	  a pointer to the game object itself.
+
+2005-11-12 19:30  z-man
+
+	* config/settings.cfg: Adapted settings for rim wall shadows.
+
+2005-11-12 19:30  z-man
+
+	* src/tron/: gWall.cpp, gWall.h: gWallRim constructor now also
+	  accepts texture coordinates.	Improved shadows, they are now
+	  displayed less often and don't flicker on and off that
+	  annoyingly.
+
+2005-11-12 19:28  z-man
+
+	* src/tron/: gParser.cpp, gParser.h: Added crude texture coordinate
+	  generation for rim walls to fix the texture stretching bug.
+
+2005-11-12 19:28  z-man
+
+	* config/settings_dedicated.cfg: Added setting for configurable
+	  repeat spam protection.
+
+2005-11-12 19:27  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed rubber warping bug: when the
+	  rubber code reverts the position to a previous value, it now also
+	  reverts the current face.
+
+2005-11-12 19:27  z-man
+
+	* src/engine/ePlayer.cpp: Made repeat spam protection configurable,
+	  sent a warning to the offending client.
+
+2005-11-12 19:26  z-man
+
+	* src/engine/eVoter.cpp: XXX, which was used as player name for
+	  players who already disconnected, was replaced by something
+	  describing the situation.
+
+2005-11-12 19:26  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added new texts for
+	  configurable repeat spam protection.
+
+2005-11-12 09:30  z-man
+
+	* src/render/: rModel.cpp, rTexture.cpp: Fixed resource (GL texture
+	  and display lists) leaks
+
+2005-11-10 23:41  z-man
+
+	* minor_version: Fell back to _alphaYYYYMMDD version.
+
+2005-11-09 23:35  z-man
+
+	* src/tools/tResourceManager.cpp: Beautified.
+
+2005-11-09 23:27  z-man
+
+	* src/network/nSocket.cpp: Fixed gcc 4.0 compatibility, the include
+	  reshuffling broke it.
+
+2005-11-09 21:45  z-man
+
+	* src/: defs.h, engine/eAxis.h, engine/eTimer.cpp,
+	  network/nNetwork.cpp, network/nSocket.cpp, render/rModel.cpp,
+	  thirdparty/particles/papi.h, tools/tCallback.h,
+	  tools/tDirectories.cpp, tools/tRecorder.cpp,
+	  tools/tRecorderInternal.h, tools/tResourceManager.cpp,
+	  tools/tString.h, tron/gParticles.cpp, tron/gParticles.h,
+	  ui/uInput.cpp, win32/config_common.h: Reshuffled includes so that
+	  config.h comes first.  Added some preprocessor magic for Visual
+	  Studio 2005 compatibility.  Disambiguated some fabs calls.
+
+2005-11-08 00:29  z-man
+
+	* src/engine/eTimer.cpp: Whoops, timer was smoothed on Linux.
+	  Fixed.  Timer sycing status was stored every frame in a
+	  recording. Fixed.  Added emergency recovery code in for NAN and
+	  other infinite time values.
+
+2005-11-08 00:28  z-man
+
+	* src/tools/tSysTime.cpp: Fixed return value of tTimerIsAccurate()
+	  on Windows, it was the wrong way round.
+
+2005-11-08 00:27  z-man
+
+	* src/network/nNetwork.cpp: Fixed nAverager::GetAverageVariance()
+	  to never return infinite values.
+
+2005-11-08 00:23  z-man
+
+	* src/render/rSysdep.cpp: Fixed playback speed adjustion when more
+	  than one third of frames was omitted.
+
+2005-11-07 19:42  z-man
+
+	* src/network/nNetwork.cpp: Beautified.
+
+2005-11-07 19:41  z-man
+
+	* src/engine/ePlayer.cpp: Added network filtering to outgoing chat
+	  strings and player names to protect old servers.
+
+2005-11-07 17:29  z-man
+
+	* config/master.srv: Moved to masterx.armagetronad.net.
+
+2005-11-07 09:26  z-man
+
+	* src/tools/tSafePTR.h: Allowed immediate destruction of just
+	  created referencable object.
+
+2005-11-07 00:16  z-man
+
+	* src/network/nNetwork.cpp: Fixed problems with overlong network
+	  packets.
+
+2005-11-07 00:14  z-man
+
+	* language/deutsch.txt: Fixed server browser text: one of the
+	  templates was wrong.
+
+2005-11-06 23:48  z-man
+
+	* config/master.srv: Added test server on Lucifer's machine,
+	  removed other test server.
+
+2005-11-06 19:58  z-man
+
+	* config/master.srv: Added two test master servers.
+
+2005-11-06 14:22  z-man
+
+	* src/tron/gWall.cpp: Added smooth shading of walls at any angle.
+
+2005-11-06 10:14  z-man
+
+	* src/network/nServerInfo.cpp: Beautified.
+
+2005-11-06 00:33  z-man
+
+	* src/tron/gWinZone.cpp: SetExpansionSpeed() clamped the zone's
+	  size to a non-negative value. Fixed.
+
+2005-11-05 23:31  z-man
+
+	* src/tools/tString.cpp: Beautified.
+
+2005-11-05 23:31  z-man
+
+	* src/network/nServerInfo.cpp: Filtering of strings that came over
+	  the network: remove newlines in the name and revision.  Added OS
+	  and server type info to the release info.
+
+2005-11-05 20:43  z-man
+
+	* config/settings_dedicated.cfg, src/engine/ePlayer.cpp,
+	  src/network/nConfig.cpp, src/network/nNetwork.cpp,
+	  src/network/nNetwork.h, src/tools/tConfiguration.cpp,
+	  src/tron/gGame.cpp, src/tron/gMenus.cpp: Adaptions to tString
+	  changes (quoting in input): configuration items now use quoted
+	  input.  Consolidated MESSAGE_OF_DAY and ROUND_CONSOLE_MESSAGE
+	  into single items; you can get multi-line messages by including
+	  "\n" into the setting.
+
+2005-11-05 20:41  z-man
+
+	* src/engine/: eTeam.cpp, eTeam.h: Added younges player finding
+	  functions.  Used those to now autoballance the teams using the
+	  youngest player.
+
+2005-11-05 20:40  z-man
+
+	* src/tools/: tString.cpp, tString.h: Added quoting and escape
+	  characters to streaming input functions.
+
+2005-11-05 20:39  z-man
+
+	* src/tron/: gCycle.cpp, gCycleMovement.cpp: Fixed dead man's trail
+	  bug. The client now respects the distance transmitted on the last
+	  sync message, and the server lets cycles die at the right
+	  position.
+
+2005-11-05 20:37  z-man
+
+	* src/engine/: eGrid.cpp, eGrid.h: Fixed crash: sometimes, the
+	  simplifying code would get the great idea to simplify one of the
+	  tree corners grid away. This caused trouble on the next
+	  expansion.
+
+2005-11-04 22:22  z-man
+
+	* config/settings.cfg, src/ui/uInput.cpp: Fixed berserking
+	  doublebind detection code.
+
+2005-11-04 19:50  z-man
+
+	* src/tron/: gCycle.cpp, gCycle.h, gCycleMovement.cpp,
+	  gCycleMovement.h, gWall.cpp, gWall.h: Refactoring:
+	  gCycleMovement.cpp no longer depends on gCycle.h.  Anti-Phasing
+	  improvement: cycles now also drop their current wall if the last
+	  wall is grinded. This avoids getting stuck at fresh corners.
+	  More Anti-Phasing: the call to FindCurrentFace() in DoTurn() is
+	  now done before updating the new driving directions, so the
+	  correct face is more likely to be found.
+
+2005-11-04 14:46  z-man
+
+	* config/settings.cfg, src/tron/gWall.cpp, src/tron/gWall.h: Added
+	  eCamera * argument to wall rendering functions.  Implemented
+	  crude method (very fake shadow) to make walls visible when you
+	  drive straight towards them.
+
+2005-11-04 14:45  z-man
+
+	* src/engine/: eAdvWall.h, eDisplay.cpp, eWall.h: Added eCamera *
+	  argument to wall rendering functions.
+
+2005-11-04 14:44  z-man
+
+	* src/engine/eCamera.h: Added CameraGlancePos()
+
+2005-11-04 09:07  z-man
+
+	* config/settings.cfg, src/engine/eTimer.cpp: Fixed timer being
+	  late a lot for some reason even during the round.  Fixed lag
+	  sliding at beginning of the round (also caused by the timer being
+	  a bit late on the client) by hacking in a fudge factor.
+
+2005-11-04 09:05  z-man
+
+	* src/tron/gGame.cpp: Less fuzzing with the timer; it is now only
+	  reset once.
+
+2005-11-04 09:05  z-man
+
+	* src/network/nNetwork.cpp: Corrected nAverager::GetAverageVariance
+	  to return higher values when only few samples have been taken.
+
+2005-11-02 14:07  z-man
+
+	* src/render/rTexture.cpp: Fixed crash when cycle texture could not
+	  be loaded
+
+2005-11-02 00:45  z-man
+
+	* src/engine/eCamera.cpp: Fixed endless wall lowering recursion.
+
+2005-11-01 22:54  z-man
+
+	* src/tools/tSysTime.cpp: Beautified.
+
+2005-11-01 22:43  z-man
+
+	* src/: tron/gCycle.cpp, tron/gWinZone.cpp,
+	  engine/eNetGameObject.cpp, engine/ePlayer.cpp: Initialized more
+	  member variables.
+
+2005-11-01 22:42  z-man
+
+	* NEWS: Added entry for network rate bugfix, it may be important to
+	  some people.
+
+2005-11-01 22:42  z-man
+
+	* AUTHORS: Added Jonathan's contributions.
+
+2005-11-01 21:08  z-man
+
+	* src/engine/eGrid.cpp: Whoops. Removed debug output.
+
+2005-11-01 15:04  z-man
+
+	* AUTHORS, src/engine/eTimer.cpp, src/tools/tSysTime.cpp,
+	  src/tools/tSysTime.h: Incorporated hang3r's Windows timer code
+	  suggestion.
+
+2005-11-01 15:03  z-man
+
+	* src/tools/tMemManager.cpp: Fixed VisualC warnings
+
+2005-11-01 14:37  z-man
+
+	* src/tron/gWinZone.cpp: Fixed VisualC compatibility
+
+2005-11-01 09:26  z-man
+
+	* src/engine/eCamera.cpp: Fixed crash when going to incam at the
+	  beginning of a round.
+
+2005-11-01 00:23  z-man
+
+	* src/engine/eGrid.cpp: Fixed too quick timeout in optimized mode
+	  due to floating point comparison trouble.
+
+2005-10-29 11:16  z-man
+
+	* src/engine/ePath.cpp: Restructured destructor to work around
+	  suspected GCC 3.3 bug on the mac.
+
+2005-10-29 11:14  z-man
+
+	* src/tron/gParser.cpp: Shuffled around includes for gcc 4.0
+	  compatibility.
+
+2005-10-29 11:14  z-man
+
+	* src/: engine/eCamera.cpp, tron/gCycle.cpp: Fixed missing variable
+	  initialization.
+
+2005-10-28 13:54  z-man
+
+	* src/tron/gWinZone.cpp: Clarified survival message, it is only the
+	  same as the conquest message if there are only two teams and no
+	  score is given for conquest alone.
+
+2005-10-28 09:59  z-man
+
+	* src/tron/gCycle.cpp: Initialized pointers.
+
+2005-10-28 09:59  z-man
+
+	* src/tron/gAIBase.cpp: Leakfix.
+
+2005-10-28 09:58  z-man
+
+	* src/network/: nNetObject.h, nNetwork.cpp: Fixed uninitialized
+	  memory.
+
+2005-10-28 09:58  z-man
+
+	* src/engine/eVoter.cpp: Fixed read-after-destroy in OnDestroy().
+
+2005-10-28 09:57  z-man
+
+	* src/engine/eTeam.cpp: Initialized some settings.
+
+2005-10-28 09:57  z-man
+
+	* src/engine/ePlayer.cpp: Initialized color values.
+
+2005-10-28 01:06  z-man
+
+	* src/network/nNetObject.h: Fixed netobects getting deleted during
+	  remote initialization.
+
+2005-10-27 23:21  z-man
+
+	* src/: engine/eGameObject.cpp, tools/tMemManager.cpp: Beautified.
+
+2005-10-27 23:21  z-man
+
+	* src/tron/gWall.cpp: Better safe than sorry: added another
+	  destruction guard pointer one level up.
+
+2005-10-27 23:15  z-man
+
+	* src/tron/gWall.cpp: Fixed memory management error when
+	  eNetPlayerWall object was deleted while a member function was
+	  executing.
+
+2005-10-27 23:14  z-man
+
+	* src/tron/gCycle.cpp: Added call to base class' implementation of
+	  RemoveFromGame().
+
+2005-10-27 23:12  z-man
+
+	* src/tools/tMemManager.cpp: Added thrashing of memory when it is
+	  freed, so access after delete likely leads to crashes.
+
+2005-10-27 23:11  z-man
+
+	* src/tools/tConfiguration.cpp: Fixed read-after-delete memory
+	  access error in veto processing.
+
+2005-10-27 23:10  z-man
+
+	* src/engine/: eGameObject.cpp, eGameObject.h, eNetGameObject.cpp,
+	  eNetGameObject.h: Added reference counting interface at
+	  eGameObject level.  Used reference counting interface to avoid
+	  losing an object while it is processed.
+
+2005-10-27 16:58  z-man
+
+	* src/engine/ePlayer.cpp: Fixed TEAMS_MAX disrespecting bug.
+
+2005-10-24 14:14  z-man
+
+	* src/tron/gParser.cpp: Beautified.
+
+2005-10-24 14:13  z-man
+
+	* src/tron/gCycle.cpp: Added debug breakpoint opportunity for lag
+	  sliding syncs.
+
+2005-10-24 11:12  z-man
+
+	* src/engine/: eGameObject.cpp, eGameObject.h: eGameObject::team is
+	  now a smart poiter, eliminating a crash in gWinZone.cpp.
+
+2005-10-24 00:24  z-man
+
+	* src/tron/gGame.cpp: Beautified.
+
+2005-10-24 00:22  z-man
+
+	* NEWS,
+	  resource/proto/Z-Man/fourfold_fortress_for_old_clients.aamap.xml:
+	  Added fortress map for four teams and old clients.
+
+2005-10-24 00:20  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/tron/gWinZone.cpp,
+	  src/tron/gWinZone.h: Implemented new fortress settings for
+	  multi-team fortress mode.
+
+2005-10-23 23:57  z-man
+
+	* src/doc/network.html.m4: Clarified time units.
+
+2005-10-23 13:12  klaxnek
+
+	* language/spanish.txt: translated new items
+
+2005-10-22 21:02  philippeqc
+
+	* resource/proto/map.dtd: Allow any order for Spawn, Wall and Zone
+	  in the Field. Axes stays the first when present.
+
+2005-10-22 16:44  z-man
+
+	* src/tron/gGame.cpp: Fixed crashes on exiting a server.
+
+2005-10-22 15:35  z-man
+
+	* src/network/nNetwork.cpp: Messages are not dublicated too much to
+	  compensate for packet loss.
+
+2005-10-22 15:25  z-man
+
+	* resource/Makefile.am: Fixed "make distcheck".
+
+2005-10-22 12:28  z-man
+
+	* src/tron/: gWinZone.cpp, gWinZone.h: Better syncing logic.
+
+2005-10-22 12:28  z-man
+
+	* src/doc/Content_Creation/Howto-Maps.txt: Added notice that the
+	  docs need updating.
+
+2005-10-22 12:27  z-man
+
+	* src/tools/tHeap.cpp: Clarified "not in heap" error messages.
+
+2005-10-22 02:08  z-man
+
+	* minor_version: Prepared for beta3.
+
+2005-10-22 02:08  z-man
+
+	* src/tron/: gCycle.cpp, gCycleMovement.cpp, gGame.cpp: Adaptions
+	  to function name changes in nNetwork.h.
+
+2005-10-22 02:07  z-man
+
+	* src/tron/: gWinZone.cpp, gWinZone.h: Made zone accelerate its
+	  rotation when it gets conquered.  Improved rendering by disabling
+	  z-buffer writes.  Added state variable to fortress zone.
+
+2005-10-22 02:06  z-man
+
+	* src/: network/nNetwork.cpp, engine/eTimer.cpp,
+	  network/nNetwork.h: Improved ping calculation (recovers faster
+	  from lag spikes).
+
+2005-10-22 02:05  z-man
+
+	* src/engine/eDisplay.cpp: Moved rendering of game objects to the
+	  back.
+
+2005-10-22 02:04  z-man
+
+	* src/doc/network.html.m4: Added sync settings doc.
+
+2005-10-22 02:04  z-man
+
+	* src/doc/: Makefile.am, net/Makefile.am: Fixed "make dist".
+
+2005-10-22 01:56  z-man
+
+	* src/tron/: gCycleMovement.cpp, gWall.cpp: VisualC compatibility
+
+2005-10-21 12:37  z-man
+
+	* configure.ac: Fixed DEBUGLEVEL 5 CXXFLAGS.
+
+2005-10-21 12:37  z-man
+
+	* src/engine/ePlayer.cpp: Updated team message syntax (from
+	  Nemostultae)
+
+2005-10-21 12:36  z-man
+
+	* src/network/nNetObject.cpp: Fixed write-after-delete memory
+	  corruption errors.
+
+2005-10-21 07:38  philippeqc
+
+	* resource/proto/map.dtd,
+	  resource/proto/Anonymous/original/original.map.xml,
+	  resource/proto/Anonymous/shapes/diamond.aamap.xml,
+	  resource/proto/Luke-Jr/n-gon/40-gon.map.xml,
+	  resource/proto/Your_mom/inaktek/inaktek.map.xml,
+	  resource/proto/Your_mom/repeat/repeat.map.xml,
+	  resource/proto/Z-Man/fortress_for_old_clients.aamap.xml,
+	  resource/proto/Z-Man/zonetest.aamap.xml, src/tron/gParser.cpp:
+	  Removed <Resources> and cleaned up the maps a bit
+
+2005-10-21 00:52  z-man
+
+	* src/engine/ePlayer.cpp: Merged in Nemostultae's /team chat code.
+
+2005-10-20 18:13  z-man
+
+	* src/tron/gWinZone.cpp: Fixed double rendering of one of the zone
+	  segments (caused flickering).
+
+2005-10-20 16:09  z-man
+
+	* resource/proto/Anonymous/original/original.map.xml: Whoops, a
+	  local change slipped in. Sorry! Reverting it.
+
+2005-10-20 16:08  z-man
+
+	* config/settings.cfg,
+	  resource/proto/Anonymous/original/original.map.xml,
+	  resource/proto/Anonymous/shapes/diamond.aamap.xml,
+	  resource/proto/Luke-Jr/n-gon/40-gon.map.xml,
+	  resource/proto/Your_mom/inaktek/inaktek.map.xml,
+	  resource/proto/Your_mom/repeat/repeat.map.xml,
+	  resource/proto/Z-Man/fortress_for_old_clients.aamap.xml,
+	  resource/proto/Z-Man/zonetest.aamap.xml: Adapted maps to new
+	  stable DTD (Sorry, Luke, HexaTRON has to get by without
+	  Save/Restorepos). I thought I already did this in the
+	  branch-brach...
+
+2005-10-20 15:33  z-man
+
+	* src/tron/gCycle.cpp, language/deutsch.txt,
+	  language/english_base.txt: Made teamkill message translatable.
+
+2005-10-20 15:31  z-man
+
+	* src/network/nSocket.cpp: Beautified.
+
+2005-10-20 15:30  z-man
+
+	* src/tron/gParser.cpp: Fixed error message typo.
+
+2005-10-20 15:27  z-man
+
+	* config/settings_dedicated.cfg, src/engine/eTeam.cpp: Activated
+	  configuration variables that allow the server to forbid naming a
+	  team after a player or a color.
+
+2005-10-20 00:20  z-man
+
+	* src/network/nServerInfo.cpp: Added reloading of the master list
+	  after one minute of non-usage to requery IP over DNS.
+
+2005-10-20 00:08  z-man
+
+	* config/settings.cfg: Added debug section with packet loss
+	  simulation settings.
+
+2005-10-20 00:07  z-man
+
+	* src/network/nNetwork.cpp: Increased packet resend timeout for
+	  connections with extremely little packet loss.
+
+2005-10-20 00:06  z-man
+
+	* src/network/nSocket.cpp: Fixed packet loss simulation
+	  recordability between debug and optimized mode.
+
+2005-10-20 00:05  z-man
+
+	* src/: tron/gCycle.cpp, engine/ePlayer.cpp: Fixed detection of
+	  team kills.  When a cycle gets killed, there are currently two
+	  sources for the killer: The wall it smashed into and the last
+	  enemy influence, taken from close encounters with enemy walls.
+	  The new algoritm rejects killers that are not allowed to be
+	  enemies by configuration; then, it tries to find an enemy killer,
+	  then a team killer, then it concludes it must have been suicide.
+	  All the time, the owner of the wall you smashed into is given a
+	  slight preference.
+
+2005-10-19 17:17  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h: Added detection of packet
+	  loss.  Added compensation of big packet loss by sending messages
+	  multiple times.  Reordered packet sending logic to reduce
+	  latency.
+
+2005-10-19 17:16  z-man
+
+	* src/network/nSocket.cpp: Added packet loss simulation.
+
+2005-10-19 12:23  z-man
+
+	* src/tron/gParser.cpp: Fixed stupid typo, giving the deprecated
+	  map format warning on wrong occasions.
+
+2005-10-19 12:18  z-man
+
+	* src/tron/gCycle.cpp: Fixed clientside assertion failure on cycle
+	  death.
+
+2005-10-19 12:18  z-man
+
+	* src/tron/gGame.cpp: Fixed scoring bug when a team would get
+	  points for conquering the enemy zone right at match start.
+
+2005-10-19 12:17  z-man
+
+	* Makefile.am: Adapted to removal of obsolete texture.
+
+2005-10-19 11:35  z-man
+
+	* batch/make/sortresources, batch/make/sortresources.py,
+	  config/settings.cfg, config/settings_dedicated.cfg,
+	  language/english_base.txt, resource/Makefile.am,
+	  resource/proto/map.dtd,
+	  resource/proto/Anonymous/original/original.map.xml,
+	  resource/proto/Anonymous/shapes/diamond.aamap.xml,
+	  resource/proto/Luke-Jr/n-gon/40-gon.map.xml,
+	  resource/proto/Your_mom/inaktek/inaktek.map.xml,
+	  resource/proto/Your_mom/repeat/repeat.map.xml,
+	  src/engine/eGameObject.cpp, src/engine/eGrid.cpp,
+	  src/engine/ePlayer.cpp, src/engine/eRectangle.cpp,
+	  src/render/rFont.cpp, src/render/rTexture.cpp,
+	  src/tools/tConfiguration.cpp, src/tools/tResourceManager.cpp,
+	  src/tools/tResourceManager.h, src/tron/gArena.cpp,
+	  src/tron/gArena.h, src/tron/gCycle.cpp,
+	  src/tron/gCycleMovement.cpp, src/tron/gFloor.cpp,
+	  src/tron/gGame.cpp, src/tron/gGame.h, src/tron/gLogo.cpp,
+	  src/tron/gParser.cpp, src/tron/gParser.h, src/tron/gWall.cpp,
+	  src/tron/gWinZone.cpp, src/tron/gWinZone.h: Merged in branch
+	  b0_2_8_map with new map format, zone changes and "Textures are
+	  resources" paradigm (commented out for now).
+
+2005-10-17 18:52  z-man
+
+	* src/tron/gCycle.cpp: Added real killing even on the client to
+	  RemoveFromGame().
+
+2005-10-17 18:52  z-man
+
+	* src/engine/eNetGameObject.h: Added call to RemoveFromGame() on
+	  ActionOnDelete() to make extra sure objects get removed from the
+	  game when they are deleted.
+
+2005-10-17 01:14  z-man
+
+	* src/engine/eTeam.cpp: Fixed memory leak.
+
+2005-10-17 01:13  z-man
+
+	* config/settings_dedicated.cfg: Added documentation for
+	  IGNOREERRORS.
+
+2005-10-17 01:13  z-man
+
+	* src/network/nNetwork.cpp: Changed fallback order of SERVER_IP
+	  from ALL ANY to ANY ALL.
+
+2005-10-17 01:11  z-man
+
+	* src/network/nSocket.cpp: Added IGNORE option to SERVER_IP that
+	  makes the system continue in spite of all errors.
+
+2005-10-16 16:00  z-man
+
+	* resource/proto/Z-Man/fortress_for_old_clients.aamap.xml: file
+	  fortress_for_old_clients.aamap.xml was added on branch b0_2_8 on
+	  2005-10-20 14:08:40 +0000
+
+2005-10-16 13:54  z-man
+
+	* resource/proto/map.dtd: file map.dtd was added on branch b0_2_8
+	  on 2005-10-19 09:35:19 +0000
+
+2005-10-16 01:29  z-man
+
+	* resource/proto/Z-Man/zonetest.aamap.xml: file zonetest.aamap.xml
+	  was added on branch b0_2_8 on 2005-10-20 14:08:40 +0000
+
+2005-10-15 01:10  z-man
+
+	* src/network/nNetwork.cpp: Made it easier to comment out timer
+	  hickup error detection.
+
+2005-10-15 01:09  z-man
+
+	* src/tron/gCycleMovement.cpp: Prepared for cycle width.
+
+2005-10-15 01:05  z-man
+
+	* src/tron/gCycle.cpp: Added another try..catch block for cycle
+	  death; this one around the call to gCycleMovement::Timestep().
+
+2005-10-15 00:59  z-man
+
+	* config/settings.cfg: Updated with LyX comment improvements.
+
+2005-10-12 00:44  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/doc/config.html.m4,
+	  src/tron/gCycleMovement.cpp: Added new settings:
+	  CYCLE_SPEED_DECAY_* replaces tho magic numbers and determines the
+	  base acceleration in an open field.  CYCLE_ACCEL_* are
+	  multiplicators to the wall acceleration for different wall
+	  configurations.
+
+2005-10-10 23:42  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed missing scaling of the base
+	  cycle speed in gCycleMovement::CalculateAcceleration if both
+	  server and client support it.
+
+2005-10-10 09:35  z-man
+
+	* src/network/nNetwork.cpp: Fixed bug in CountSameIP() that
+	  joda.bot pointed out: one of the tests did not make sense.
+
+2005-10-10 09:32  z-man
+
+	* src/tron/gWall.cpp: Moved depth offset setting out of
+	  glBegin()/glEnd() block.  Readded alpha channel storage to player
+	  wall textures.
+
+2005-10-10 09:31  z-man
+
+	* src/engine/ePlayer.cpp: Ok, the last fix was not a security fix;
+	  the code was already only executed on the client. Reverting.
+
+2005-10-09 20:08  z-man
+
+	* src/engine/: eTimer.cpp, eVoter.cpp: Beautified.
+
+2005-10-09 20:08  z-man
+
+	* src/engine/ePlayer.cpp: Fixed small security bug: modified
+	  clients were capable of kicking other players out of the game as
+	  if they disconnected.
+
+2005-10-09 20:07  z-man
+
+	* src/network/nNetObject.cpp: Fixed exuberant bandwidth usage on
+	  player join/leave: all netobjects were synced to all clients, now
+	  only the joining client gets updates.
+
+2005-10-09 18:24  z-man
+
+	* src/doc/: HtmlMakefile, Makefile.am, net/Makefile.am: Added
+	  generated .html files to tarball distribution.
+
+2005-10-09 11:16  klaxnek
+
+	* language/spanish.txt: translated new items
+
+2005-10-09 00:32  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  src/network/nConfig.cpp: Fixed false error messages about unknown
+	  network config items (SF bug 1305153).
+
+2005-10-08 16:35  philippeqc
+
+	* src/doc/Content_Creation/Howto-Maps.txt: added a best practice
+	  about the size of the arena
+
+2005-10-02 16:59  z-man
+
+	* src/engine/eVoter.cpp, config/settings_dedicated.cfg: Voting
+	  timeout now scales up with number of users.  Disconnecting and
+	  reconnecting does not protect you against running votes.
+
+2005-10-01 19:00  z-man
+
+	* src/engine/eTimer.cpp: Made the timer smooth faster to the known
+	  best value at the beginning of the round.
+
+2005-09-29 09:06  z-man
+
+	* src/engine/eVoter.cpp: Made kick name mutable.
+
+2005-09-29 08:59  z-man
+
+	* language/deutsch.txt, language/english_base.txt,
+	  config/settings_dedicated.cfg: Added configuration items for new
+	  vote settings: maximum total number of votes, maximum number of
+	  votes from one submitter and kick protection time.
+
+2005-09-29 08:58  z-man
+
+	* src/engine/: eVoter.cpp, eVoter.h: Added maximum number of votes
+	  running per submitter (configurable).  Added protection time
+	  against multiple kick votes against the same target
+	  (configurable).  Made maximum number of total concurrent votes
+	  configurable.
+
+2005-09-29 08:56  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h: Added machine decorators
+	  that are connected to machines and get informed when they get
+	  deleted.
+
+2005-09-29 08:56  z-man
+
+	* src/tools/tLinkedList.h: Added default constructors to linked
+	  list items.
+
+2005-09-28 09:30  z-man
+
+	* src/tron/: gCycle.cpp, gCycle.h, gCycleMovement.cpp, gWall.cpp:
+	  Fixed emeny cycles getting stuck after turns by introducing
+	  another ignored wall into gCycle; the last wall received over the
+	  network.
+
+2005-09-27 20:06  z-man
+
+	* src/tron/gCycle.cpp: Made last known good position lie closer to
+	  the current position.
+
+2005-09-27 20:04  z-man
+
+	* src/engine/eGameObject.cpp: Softened timeout condition.
+
+2005-09-26 20:52  z-man
+
+	* src/: render/rModel.cpp, render/rModel.h, render/rScreen.cpp,
+	  render/rScreen.h, tron/gMenus.cpp: Refactored display lists flag
+	  so it now is defined in rScreen.h.  Activate display lists on
+	  NVIdia cards by default.  Default to glFinish swap mode,
+	  whitelist NVidia cards and ATI cards on the Mac for glFlush.
+
+2005-09-26 20:48  z-man
+
+	* src/: engine/eGameObject.cpp, tron/gAIBase.cpp: Fixed crash in
+	  pathfinding code when gameobject's current face was no longer in
+	  the grid.
+
+2005-09-26 18:20  z-man
+
+	* src/tron/: gCycleMovement.cpp, gCycle.cpp: Fixed crash caused by
+	  early cycle destruction because of too little held references
+	  when a turn was made at the very first possible moment.
+
+2005-09-26 10:43  z-man
+
+	* src/tools/tCommandLine.cpp: Added newline in "needs another
+	  argument" error message.
+
+2005-09-26 10:42  z-man
+
+	* src/tools/tConfiguration.cpp: Activated --extraconfig command
+	  line argument.
+
+2005-09-25 22:59  z-man
+
+	* AUTHORS: Updated link to forums.
+
+2005-09-25 22:59  z-man
+
+	* src/doc/: index.html.m4, install_linux.html.m4,
+	  install_result.html.m4, install_windows.html.m4, network.html.m4,
+	  versions.html.m4: Various documentation updates.
+
+2005-09-25 22:58  z-man
+
+	* src/tron/: gCycle.cpp, gCycleMovement.cpp: Fixed synchronization
+	  bug: When a quick client turn command would get to the server
+	  early, the server would pass it to the cycle and mark it as used,
+	  but the cycle may only execute it delayed. The next sync back to
+	  the client would have inconsistent information. The server now no
+	  longer issues turn commands when they are not possible, and the
+	  client recognizes inconsistent syncs from older servers and
+	  corrects them.
+
+2005-09-25 22:55  z-man
+
+	* src/doc/config.html.m4: Added documentation of rubber settings.
+
+2005-09-25 22:54  z-man
+
+	* src/network/: nConfig.cpp, nNetwork.cpp: Bumped network protocol
+	  number to reflect a server side bugfix.
+
+2005-09-25 21:38  z-man
+
+	* src/render/rSysdep.cpp: Made benchmark output a message box in
+	  Windows.
+
+2005-09-25 16:00  klaxnek
+
+	* language/spanish.txt: uptodate translation
+
+2005-09-25 15:07  z-man
+
+	* config/settings.cfg, language/deutsch.txt,
+	  language/english_base.txt: Added documentation for new
+	  configuration variable FAST_FORWARD_MAXSTEP_REAL.
+
+2005-09-25 15:06  z-man
+
+	* src/render/rSysdep.cpp: Implemented command line option
+	  --benchmark as documented.
+
+2005-09-25 15:06  z-man
+
+	* src/tron/gHud.cpp: Added time display in recording mode to ease
+	  identifying of screenshots.
+
+2005-09-25 15:05  z-man
+
+	* src/tools/tCommandLine.cpp: Added sanity checks in GetOption and
+	  GetSwitch.
+
+2005-09-25 15:02  z-man
+
+	* src/tools/: tSysTime.cpp, tSysTime.h: Added tDelayForce to force
+	  a delay even in playback mode.
+
+2005-09-25 10:23  z-man
+
+	* src/engine/eGameObject.cpp: Adapted to new return value
+	  possibility in eHalfEdge::IntersectWithCareless: an off-axis
+	  intersection point of the moving edge and the edge of the current
+	  face gets a score malus.  Added debug retry on move command in
+	  eGameObject::FindCurrentFace().
+
+2005-09-25 10:19  z-man
+
+	* src/engine/eGrid.cpp: eHalfEdge::IntersectWithCareless() gives
+	  now more sensible results for almost parallel edges; it returns
+	  the eges' center of gravity, where the shorter edge is considered
+	  heavier.
+
+2005-09-25 10:18  z-man
+
+	* src/engine/: eAxis.cpp, eAxis.h: Driving axes are now snapped to
+	  coordinate axes if they are close; this avoids floating point
+	  trouble later.
+
+2005-09-24 22:34  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed another instance of phasing.
+
+2005-09-24 22:33  z-man
+
+	* src/engine/eGrid.cpp: Fixed comment typo.
+
+2005-09-24 22:32  z-man
+
+	* src/tron/: gCycle.cpp, gWall.cpp, gWall.h: Player walls are now
+	  copied into the grid immediately.
+
+2005-09-24 22:30  z-man
+
+	* src/tron/gCycleMovement.h: Cycle death exception is now derived
+	  from generic death exception.
+
+2005-09-24 22:28  z-man
+
+	* src/doc/index.html.m4: Added two other pre-Tron "lightcycle"
+	  games.
+
+2005-09-24 22:27  z-man
+
+	* src/engine/eGameObject.cpp: Made correction movement in
+	  eGameObject::FindCurrentFace() stop on generic death exception.
+
+2005-09-24 22:26  z-man
+
+	* src/engine/eGameObject.h: Added generic object death exception.
+
+2005-09-24 17:34  z-man
+
+	* src/: engine/eTeam.cpp, tron/gGame.cpp: Fixed memory leak when
+	  empty teams get created.  Fixed team balancing; empty teams are
+	  not allowed when several people are on the same team.
+
+2005-09-24 17:32  z-man
+
+	* src/engine/: eGameObject.cpp, eGameObject.h: Fixed bug that made
+	  only one of two temporary walls that lay exactly on top of each
+	  other count in collisions.  FindCurrentFace() now makes sure the
+	  current face really surrounds the current position.
+
+2005-09-21 22:59  z-man
+
+	* www-root/.cvsignore: file .cvsignore was added on branch b0_2_8
+	  on 2006-02-23 08:07:34 +0000
+
+2005-09-19 00:13  z-man
+
+	* desktop/armagetronad.desktop.in: Adapted icon path installation.
+
+2005-09-19 00:13  z-man
+
+	* batch/sysinstall.in: Fixed directory determination.  Adapted icon
+	  installation.
+
+2005-09-19 00:12  z-man
+
+	* batch/rcd_startstop.in: Fixed log file overwriting.
+
+2005-09-16 22:13  z-man
+
+	* NEWS: Added changes since 0.2.8_beta1.
+
+2005-09-16 22:10  z-man
+
+	* minor_version: Updated version to date-tag again.
+
+2005-09-16 22:06  z-man
+
+	* src/tron/gServerBrowser.cpp: Fixed color bleeding of user names.
+
+2005-09-16 22:04  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h, nServerInfo.cpp: Fixed
+	  network socket reinitialization bug when talking to master
+	  server.
+
+2005-09-13 10:03  z-man
+
+	* src/engine/: eTimer.cpp, eTimer.h: Corrected FPS display in
+	  Windows
+
+2005-09-13 09:08  z-man
+
+	* src/: render/rFont.cpp, ui/uMenu.cpp: Fixed missing font error
+	  when a message should pop up, but the window is inactive.
+
+2005-09-13 00:47  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Todos
+
+2005-09-12 12:26  z-man
+
+	* src/render/rConsoleCout.cpp: Removed check for terminal status of
+	  input; it prevents getting input from a pipe.
+
+2005-09-11 10:49  nemostultae
+
+	* src/tools/tResourceManager.cpp: upper case d, these should be
+	  moved out for localization in the future
+
+2005-09-09 23:24  z-man
+
+	* minor_version: Prepared version for 0.2.8_beta2
+
+2005-09-09 23:23  z-man
+
+	* configure.ac, batch/Makefile.am, batch/sysinstall.in: Made other
+	  parts of the sysinstall script disableable, too.
+
+2005-09-09 23:23  z-man
+
+	* src/doc/network.html.m4: Updated ban/kick docu
+
+2005-09-09 19:17  z-man
+
+	* src/network/nConfig.cpp: Fixed destruction order problems for GCC
+	  3.4.
+
+2005-09-09 11:52  z-man
+
+	* src/network/nNetwork.cpp: Disabled closing of network sockets in
+	  server mode; it is required for the communitiation with the
+	  master server.
+
+2005-09-09 00:18  z-man
+
+	* src/: tron/gArmagetron.cpp, ui/uMenu.cpp: Added special exception
+	  handling paths for Visual C++, it does not seem to properly
+	  handle catching by base class.
+
+2005-09-09 00:03  z-man
+
+	* src/tron/gCycle.cpp: Fixed anti-tunneling code on a rampage at
+	  round start.
+
+2005-09-09 00:00  z-man
+
+	* src/tools/tDirectories.cpp: Windows version of relocation code
+	  updated.
+
+2005-09-08 23:37  z-man
+
+	* Makefile.paths, src/Makefile.am, src/tools/tDirectories.cpp:
+	  Fixed relocation code: it now is cleaner and works in the most
+	  general situation. (Autopackage installation into home directory
+	  was broken).
+
+2005-09-08 23:27  z-man
+
+	* src/network/nNetwork.cpp: Fixed some logout problems.
+
+2005-09-07 20:34  z-man
+
+	* src/tron/gCycle.cpp: Added sanity checks for laggometer.  Made
+	  code actually do what the comments say.
+
+2005-09-07 17:10  z-man
+
+	* src/network/: nNetObject.h, nNetwork.cpp, nNetObject.cpp: Made
+	  non-spawned netobject error recoverable.  Let client get new
+	  source port on every connect.
+
+2005-09-07 15:50  z-man
+
+	* src/tron/gCycle.cpp: Fixed that last bug for old servers, too.
+
+2005-09-07 15:01  z-man
+
+	* src/tron/gCycle.cpp: Beautified.
+
+2005-09-07 15:00  z-man
+
+	* src/tron/gCycle.cpp: Fixed enemy cycle wall wrong placement on
+	  update, probably 1201874.
+
+2005-09-07 14:08  z-man
+
+	* src/: network/nNetwork.cpp, tron/gCycle.cpp: Fixed missing enemy
+	  cycles for old clients.  Extra sycns to the Cycle owner now only
+	  happen if enough bandwidth is available.
+
+2005-09-07 12:42  z-man
+
+	* src/network/nNetObject.cpp: Fixed timeout behavior.
+
+2005-09-07 11:36  z-man
+
+	* src/engine/ePlayer.cpp: Disabled player limit per IP code on
+	  client.
+
+2005-09-07 11:36  z-man
+
+	* src/network/nNetwork.cpp: Added sanity checks to disconnecting
+	  code.
+
+2005-09-07 11:35  z-man
+
+	* src/network/nNetObject.cpp: Made GetObject() error detection
+	  work.
+
+2005-09-07 07:09  luke-jr
+
+	* language/: deutsch.txt, english_base.txt, french.txt,
+	  spanish.txt: s/URL/URI (nemo, if you're going to do fixing, do it
+	  right =p)
+
+2005-09-06 20:27  z-man
+
+	* src/: engine/ePlayer.cpp, network/nServerInfo.cpp: Beautified.
+
+2005-09-06 20:26  z-man
+
+	* src/tron/gCycle.cpp: Cleaned up SyncIsNew()
+
+2005-09-06 20:24  z-man
+
+	* src/network/nNetwork.cpp: Network messages now processed roughly
+	  in the right order; not too many messages from everytime.cfg will
+	  now appear right.
+
+2005-09-06 20:10  z-man
+
+	* src/engine/eTimer.cpp: Improved clientside averaging.
+
+2005-09-06 16:42  z-man
+
+	* src/tron/gGame.cpp: Fixed player sync message flood.
+
+2005-09-06 16:40  z-man
+
+	* src/network/nNetObject.cpp: Kept sync messages out of message
+	  queue.
+
+2005-09-06 15:26  z-man
+
+	* src/network/nServerInfo.cpp: Removed annoying and useless
+	  message.
+
+2005-09-06 15:14  z-man
+
+	* src/: engine/ePlayer.cpp, network/nServerInfo.cpp: Implemented
+	  maximal lengths of URL and OPTIONS.
+
+2005-09-06 15:14  z-man
+
+	* config/settings_dedicated.cfg: Clarified purpose of settings.
+
+2005-09-06 14:52  z-man
+
+	* src/: engine/ePlayer.cpp, tron/gServerBrowser.cpp: Added
+	  SERVER_OPTIONS and the display thereof.  Player list now comes
+	  first in the display.
+
+2005-09-06 14:52  z-man
+
+	* config/settings_dedicated.cfg: Added SERVER_OPTIONS
+
+2005-09-06 14:51  z-man
+
+	* src/engine/eTimer.cpp: Removed leftover debug output.
+
+2005-09-06 14:48  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added Server Options to
+	  server browser and configuration.
+
+2005-09-06 14:20  z-man
+
+	* src/network/nNetwork.cpp: Fixed bandwith contol bookkeeping.
+
+2005-09-06 14:18  z-man
+
+	* src/engine/eTimer.cpp: Fixed sync overflow bug.
+
+2005-09-06 09:20  nemostultae
+
+	* src/network/nNetObject.cpp: added a .
+
+2005-09-06 09:03  z-man
+
+	* src/network/nNetObject.cpp: Removed output clutter.
+
+2005-09-06 09:03  z-man
+
+	* src/engine/ePlayer.cpp: URL is now a tSettingItem, this
+	  respecting # comments.
+
+2005-09-06 09:01  z-man
+
+	* config/settings_dedicated.cfg: Corrected URL.
+
+2005-09-06 09:01  z-man
+
+	* desktop/armagetronad.desktop.in: Categorized as all variations of
+	  Action and Game(s).
+
+2005-09-06 02:23  nemostultae
+
+	* config/default.cfg: Changed default console key to '`' from '^'
+	  because '^' can not be typed in-game.
+
+2005-09-06 01:51  nemostultae
+
+	* config/settings.cfg: fixed type in NETWORK_AUTOBAN_MAX_KPH
+	  comment
+
+2005-09-06 01:44  nemostultae
+
+	* language/: deutsch.txt, english_base.txt, french.txt,
+	  languages.txt.in, spanish.txt: Url and url -> URL
+
+2005-09-06 01:00  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: version is
+	  just major + minor now
+
+2005-09-05 21:43  z-man
+
+	* src/: network/nServerInfo.cpp, network/nServerInfo.h,
+	  tron/gServerBrowser.cpp: Fully implemented single server ping by
+	  pressing "p"; exported the option NOT to poll the servers
+	  directly (and other tuning parameters) as a setting item.
+
+2005-09-05 21:35  z-man
+
+	* config/settings.cfg: Added undocumented server browser settings.
+
+2005-09-05 21:34  z-man
+
+	* language/: deutsch.txt, english_base.txt, french.txt,
+	  spanish.txt: Updated master server display strings.
+
+2005-09-05 16:35  z-man
+
+	* src/thirdparty/shttpd/.cvsignore: file .cvsignore was added on
+	  branch b0_2_8 on 2006-02-23 08:07:34 +0000
+
+2005-09-05 15:23  z-man
+
+	* src/tron/: gAIBase.cpp, gAIBase.h: Made AI a bit aware of more
+	  than four driving directions: sensors are now cast into all
+	  directions.
+
+2005-09-05 09:32  z-man
+
+	* src/engine/eGameObject.cpp: Collisions with temporary walls are
+	  now sorted correctly (among themselves and with the permanent
+	  walls).
+
+2005-09-05 00:43  z-man
+
+	* config/settings.cfg, src/tron/gCycle.cpp: Smoother lag sliding,
+	  no more lag jumping (unless walls are in the way).
+
+2005-09-05 00:42  z-man
+
+	* src/engine/: eCamera.cpp, eCamera.h: CenterPos() now uses the
+	  predicted position of the center again to react better to lag
+	  sliding; it only calls the function once per frame.
+
+2005-09-05 00:40  z-man
+
+	* src/engine/: eSensor.cpp, eSensor.h: Made it safe to let a sensor
+	  start away from the owning game object.
+
+2005-09-04 16:57  z-man
+
+	* config/settings.cfg, src/tron/gGame.cpp: Added setting
+	  WIN_ZONE_RANDOMNESS that determines how far away from the center
+	  the winzone can appear.
+
+2005-09-04 16:56  z-man
+
+	* language/: deutsch.txt, english_base.txt: Whoops, win zone
+	  randomness help item got wrong name.
+
+2005-09-04 16:55  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added winzone
+	  randomness help.
+
+2005-09-04 16:54  z-man
+
+	* src/tron/gStuff.cpp: Activated server side repository setting.
+
+2005-09-04 16:17  z-man
+
+	* src/network/nNetwork.cpp: Disabled DNS lookups on machine checks.
+
+2005-09-04 16:16  z-man
+
+	* src/tron/gArena.cpp: Increased threshold for spawnpoints to be
+	  considered acceptable.
+
+2005-09-04 16:15  z-man
+
+	* src/engine/ePlayer.cpp: No machine checks in local games.
+
+2005-09-04 16:15  z-man
+
+	* src/network/: nSocket.cpp, nSocket.h: Added member variables to
+	  nAddress that allow setting and getting the address part without
+	  DNS lookups.
+
+2005-09-04 16:14  z-man
+
+	* src/engine/eTimer.cpp: Fixed uninitialized variable.
+
+2005-09-04 11:22  klaxnek
+
+	* language/spanish.txt: uptodate translations
+
+2005-09-04 11:22  klaxnek
+
+	* language/english_base.txt: fix typo
+
+2005-09-04 01:57  z-man
+
+	* config/settings.cfg: Added new banning settings.  Added settings
+	  that govern the behavior of many players from the same IP.
+
+2005-09-04 01:56  z-man
+
+	* src/: engine/eVoter.cpp, network/nServerInfo.cpp,
+	  network/nSpamProtection.cpp: Adapted to base network changes.
+
+2005-09-04 01:56  z-man
+
+	* src/tron/gWinZone.cpp: Added separate death zone message.
+
+2005-09-04 01:55  z-man
+
+	* src/render/rTexture.cpp: Made error messages translatable.
+
+2005-09-04 01:55  z-man
+
+	* src/tools/: tLocale.cpp, tLocale.h: Made conversion from tOutput
+	  to char * safer.  Added convenience constructors for tOutput.
+
+2005-09-04 01:54  z-man
+
+	* src/: tools/tResourceManager.cpp, tools/tResourceManager.h,
+	  tron/gStuff.cpp: Added server determined path to resource
+	  repository, disabled for now until the security situation is
+	  leared up.
+
+2005-09-04 01:54  z-man
+
+	* src/tron/: gCycle.cpp, gCycle.h, gGame.cpp: Scoring now honors
+	  ePlayerNetID::Enemies() to determine whether a kill gives a point
+	  or not.
+
+2005-09-04 01:53  z-man
+
+	* src/: engine/eNetGameObject.cpp, engine/eNetGameObject.h,
+	  network/nNetObject.cpp, network/nNetObject.h: Added direct path
+	  from object to the machine that owns it.
+
+2005-09-04 01:52  z-man
+
+	* src/engine/: eTeam.cpp, eTeam.h: Added Enemies() functions, see
+	  ePlayerNetID::Enemies() (the last commit) for a description.
+
+2005-09-04 01:52  z-man
+
+	* src/engine/: ePlayer.cpp, ePlayer.h: Added Enemies(), a function
+	  that determines whether two players can be enemies.  Added option
+	  to disallow players from the same client or IP to be enemies;
+	  friends don't get points fro killing each other or winning a
+	  match. Determined by ALLOW_ENEMIES_ settings.  Added BAN, BAN_IP,
+	  UNBAN_IP, BAN_LIST commands for banning.
+
+2005-09-04 01:49  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h: Added nMachine, a class
+	  to track unique machines (characterized by their IP address). It
+	  stores bans, kick statistics and a player count.
+
+2005-09-04 01:48  z-man
+
+	* src/network/nSocket.cpp: Corrected nAddress::GetHostName(); it
+	  also gave the port.
+
+2005-09-04 01:47  z-man
+
+	* src/doc/config.html.m4: Corrected typo.
+
+2005-09-04 01:47  z-man
+
+	* src/doc/network.html.m4: Documented kicking and banning.
+
+2005-09-04 01:47  z-man
+
+	* language/: deutsch.txt, english_base.txt, french.txt,
+	  spanish.txt: Corrected loose->lose.  Added documentation for
+	  ban/autoban settings.  Added texts for banning.  Added extra text
+	  for the deathzone.
+
+2005-09-02 23:16  z-man
+
+	* src/network/nConfig.cpp: Beautified.
+
+2005-09-02 23:16  z-man
+
+	* src/tron/gCycleMovement.cpp: Removed watcher over brake
+	  refill/deplete variables. The code that uses them is already
+	  careful about old clients.
+
+2005-09-02 23:15  z-man
+
+	* src/tron/gAIBase.cpp: Made initial period where the AI drives
+	  straight on scale correctly with speed and arena size.
+
+2005-09-02 23:14  z-man
+
+	* src/network/nNetwork.cpp: Disabled filling of snail ping averager
+	  to zero; that causes massive resending of packets in the
+	  beginning.
+
+2005-09-02 23:13  z-man
+
+	* src/engine/eTimer.cpp: Completely smoothed timer syncing.
+
+2005-09-02 23:13  z-man
+
+	* language/english_base.txt: fixed typo.
+
+2005-09-02 20:26  z-man
+
+	* config/settings.cfg, src/network/nConfig.cpp,
+	  src/network/nConfig.h, src/network/nSpamProtection.cpp,
+	  src/tron/gArena.cpp, src/tron/gCycleMovement.cpp,
+	  src/tron/gGame.cpp, src/tron/gStuff.cpp: Renamed setting
+	  compatibility categories to adjectives.  Changed default for the
+	  Annoying group to "ignore".  Delayed display of information
+	  messages.
+
+2005-09-02 20:25  z-man
+
+	* src/doc/network.html.m4: Added documentation of automatic
+	  compatibility mechanism.
+
+2005-09-02 20:24  z-man
+
+	* src/doc/faq.html.m4: Added "can't see server" questions.
+
+2005-09-02 20:22  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added documentation for
+	  compatibility behavior settings
+
+2005-09-02 16:47  z-man
+
+	* src/: engine/eNetGameObject.cpp, tron/gCycle.cpp: Smoother
+	  laggometer.
+
+2005-09-02 16:09  z-man
+
+	* src/engine/eCamera.cpp: Fixed "camera pointing down" bug.
+
+2005-09-02 14:48  z-man
+
+	* src/engine/: eTimer.cpp, eTimer.h: Beautified.
+
+2005-09-02 14:48  z-man
+
+	* src/engine/: eTimer.cpp, eTimer.h: Phew. Completely new network
+	  synchronization model. No decisions and exceptions anymore.
+
+2005-09-02 14:47  z-man
+
+	* src/engine/eCamera.cpp: Disabled inintial camera switching in
+	  spectator mode.
+
+2005-09-02 14:47  z-man
+
+	* src/network/nNetwork.cpp: nAverager::Variance() now is never
+	  negative.
+
+2005-09-02 00:41  z-man
+
+	* src/: network/nSpamProtection.cpp, tron/gArena.cpp,
+	  tron/gCycleMovement.cpp, tron/gGame.cpp, tron/gStuff.cpp: Added
+	  version watchers to all sensitive setting items.
+
+2005-09-02 00:40  z-man
+
+	* configure.ac: Removed include path from one level outside the
+	  build directory.
+
+2005-09-02 00:39  z-man
+
+	* src/tools/tRecorderInternal.cpp: Added newline to output.
+
+2005-09-02 00:38  z-man
+
+	* src/network/: nConfig.cpp, nConfig.h: Added convenience class.
+	  Added warning output when sensitive settings deviate from the
+	  default.
+
+2005-09-02 00:37  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added texts for setting
+	  compatibility messages.
+
+2005-09-01 12:15  z-man
+
+	* src/network/nConfig.h: Restored GCC 4.0 compatibility.
+
+2005-09-01 01:32  z-man
+
+	* src/network/nConfig.cpp: Fixed unused variable.
+
+2005-09-01 01:26  z-man
+
+	* src/tron/: gGame.cpp, gStuff.cpp: Made MAP_FILE and
+	  DOUBLEBIND_TIME aware of network versions.
+
+2005-09-01 01:25  z-man
+
+	* config/settings.cfg: Added compatibility section.
+
+2005-09-01 01:23  z-man
+
+	* src/tools/: tConfiguration.cpp, tConfiguration.h: Added Getter
+	  for config item title.
+
+2005-09-01 01:23  z-man
+
+	* src/: render/rSysdep.cpp, tron/gMenus.cpp: Moved PNG_SCREENSHOT
+	  item to rSysdep.cpp.
+
+2005-09-01 01:23  z-man
+
+	* src/network/: nConfig.cpp, nConfig.h, nNetwork.cpp, nNetwork.h:
+	  Added support for network settings that know what version they
+	  were added in; when an old client connects, they can revert to
+	  their default value or lock the old client out.
+
+2005-08-31 21:33  z-man
+
+	* src/doc/Makefile.am: Forgot to remove testing typo...
+
+2005-08-31 21:32  z-man
+
+	* Makefile.am, src/Makefile.am, src/doc/Makefile.am: Adapted
+	  makefiles so they work with nonempty $(EXEEXT).  Made generation
+	  of commands.txt optional for now.
+
+2005-08-31 15:17  z-man
+
+	* Makefile.manual, batch/sysinstall.in,
+	  desktop/armagetronad.desktop.in: KDE icons and startmenu now also
+	  respect DESTDIR setting (so they don't kill the real menu entries
+	  on testing).
+
+2005-08-31 13:57  z-man
+
+	* src/tron/gWall.cpp: Fixed random lowering of all walls.
+
+2005-08-31 13:57  z-man
+
+	* config/settings.cfg: Added CYCLE_PACKETLOSS_TOLERANCE to
+	  settings, defaults to disabled because it may promote cheating if
+	  enabled.
+
+2005-08-31 13:56  z-man
+
+	* src/tron/: gCycleMovement.cpp, gCycleMovement.h, gCycle.cpp:
+	  Moved packet loss tolerance code into gCycleMovement (the
+	  emergency death recovery exception catcher) and made it
+	  configurable (CYCLE_PACKETLOSS_TOLERANCE).
+
+2005-08-31 13:55  z-man
+
+	* src/network/nNetwork.cpp: Faster resending on packet loss.
+
+2005-08-31 13:55  z-man
+
+	* src/engine/eTimer.cpp: Smoother synchronization in the beginning
+	  of a round.
+
+2005-08-31 13:49  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added documentation for
+	  PACKETLOSS_TOLERANCE.
+
+2005-08-31 11:00  z-man
+
+	* src/engine/eNetGameObject.cpp: Made laggometer update faster.
+
+2005-08-31 08:11  z-man
+
+	* src/tron/: gCycle.cpp, gCycleMovement.cpp, gCycleMovement.h:
+	  Proper verlet interation of cycle speed.
+
+2005-08-31 08:11  z-man
+
+	* src/: doc/versions.html.m4, network/nNetwork.cpp: Bumped network
+	  version number
+
+2005-08-30 21:54  z-man
+
+	* src/engine/: eCamera.cpp, eCamera.h: Smart camera now also rises
+	  on turns when watching someone else.
+
+2005-08-30 20:23  z-man
+
+	* src/tron/gCycle.cpp: Sync code now sets the laggometer, it's no
+	  longer dependant on ePlayer::ping (which can be way off).  Fixed
+	  frequently missing call to nNetGameObject::Timestep().  Fixed
+	  enemy wall gap after turns: the position got corrected into the
+	  wrong direction.
+
+2005-08-30 20:21  z-man
+
+	* src/render/rSysdep.cpp: Cleanups and better breakpoint
+	  possibility.
+
+2005-08-30 20:20  z-man
+
+	* src/engine/eTimer.cpp: Moderately bad syncs are accepted, but
+	  with lower relevance. That way, long periods completely without
+	  syncs are avoided.
+
+2005-08-30 20:19  z-man
+
+	* src/engine/: eNetGameObject.cpp, eNetGameObject.h: Added
+	  non-smoothed laggometer variable; it does not get updated by
+	  Timestep() for enemies on the client (so it can be set to the
+	  right value by the cycle sync code)
+
+2005-08-30 14:43  z-man
+
+	* src/tron/gParser.cpp: Fixed crashes on failed validation; doc was
+	  deleted, but not set to NULL, so it was attempted to delete it
+	  again on the next call.
+
+2005-08-30 14:38  z-man
+
+	* resource/proto/: map-0.1-exp.dtd, map-0.1.dtd: Changed default
+	  category to "unsorted", a change that should not affect
+	  compatibility. Of course, Philippe has the authority to change it
+	  back.
+
+2005-08-30 13:15  z-man
+
+	* config/settings.cfg,
+	  resource/proto/Anonymous/original/original.map.xml,
+	  resource/proto/Anonymous/shapes/diamond.aamap.xml,
+	  resource/proto/Luke-Jr/n-gon/40-gon.map.xml,
+	  resource/proto/Your_mom/inaktek/inaktek.map.xml,
+	  resource/proto/Your_mom/repeat/repeat.map.xml,
+	  src/tron/gGame.cpp: Moved included maps (I hope for the last time
+	  in this branch).
+
+2005-08-30 13:15  z-man
+
+	* batch/make/sortresources: Added deletion of empty resource
+	  directories.
+
+2005-08-30 13:14  z-man
+
+	* resource/proto/Anonymous/polygon/: README, regular/README: Added
+	  new categories for anonymous maps.
+
+2005-08-30 10:55  z-man
+
+	* src/engine/: eTimer.cpp, eTimer.h: New synchronization code:
+	  discard syncs that fall out of the usual fluctuations.
+
+2005-08-30 10:54  z-man
+
+	* src/engine/eGameObject.cpp: Warning less often about phase bug.
+
+2005-08-30 10:53  z-man
+
+	* src/network/: nNetwork.h, nNetwork.cpp: Added really slow ping
+	  averager (mainly for the timer syncing).
+
+2005-08-29 18:12  z-man
+
+	* batch/make/sortresources: Avoided -x and -a argument to cp.
+
+2005-08-29 16:15  z-man
+
+	* src/tron/gCycle.cpp: Caught premature user input during
+	  preparation phase.
+
+2005-08-29 15:06  z-man
+
+	* desktop/armagetronad.desktop.in: Categorized under Arcade and
+	  Action Games.
+
+2005-08-29 15:05  z-man
+
+	* batch/sysinstall.in: Icon and application directories are now
+	  created when they don't exist (instead of giving up)
+
+2005-08-29 00:28  z-man
+
+	* batch/sysinstall.in: disabled debug mode again
+
+2005-08-29 00:21  z-man
+
+	* src/engine/eCamera.cpp: Fixed custom glance camera bug (forgot to
+	  set some variables).
+
+2005-08-29 00:20  z-man
+
+	* config/settings_dedicated.cfg: Changed default socket binding
+	  back to what it was in 0.2.7.1.
+
+2005-08-29 00:20  z-man
+
+	* batch/: Makefile.am, sysinstall.in: Skipped link to
+	  /etc/armagetronad-version in non-multiver setups.
+
+2005-08-28 18:39  z-man
+
+	* Makefile.paths, configure.ac, batch/Makefile.am,
+	  batch/sysinstall.in, desktop/Makefile.am,
+	  desktop/armagetronad.desktop.in: Contents of armagetronad.desktop
+	  are determined at configure time.  KDE desktop entries and icons
+	  are installed into the right place by sysinstall.sh.
+
+2005-08-27 00:30  z-man
+
+	* src/tron/gGame.cpp, config/settings.cfg: Adapted to map
+	  movements.
+
+2005-08-27 00:27  z-man
+
+	* resource/proto/: Anonymous/original/original.map.xml,
+	  Luke-Jr/n-gon/40-gon.map.xml: Moved maps into Anonymous/shapes
+
+2005-08-27 00:27  z-man
+
+	* resource/proto/Anonymous/shapes/diamond.aamap.xml: Added fist
+	  version of square rotated by 45 degrees.
+
+2005-08-27 00:26  z-man
+
+	* resource/proto/Anonymous/README: Added README files to describe
+	  the categories.
+
+2005-08-24 17:15  z-man
+
+	* resource/Makefile.am: Fixed installation over old installation.
+
+2005-08-24 14:02  z-man
+
+	* src/: engine/ePlayer.cpp, network/nSocket.cpp,
+	  tools/tConfiguration.cpp, tools/tConsole.cpp, tools/tLocale.cpp,
+	  ui/uMenu.h: Solaris compatibility: Replaced
+	  static_cast<tSting>(...) by tString(...).
+
+2005-08-24 14:01  z-man
+
+	* batch/make/version: replaced -a by -d in test invocation to test
+	  for the existence of the CVS directory.
+
+2005-08-24 13:59  z-man
+
+	* configure.ac, src/config_ide.h, src/defs.h: Added detection for
+	  fabsf and floorf
+
+2005-08-24 12:39  klaxnek
+
+	* language/spanish.txt: Make use of the new i accutes
+
+2005-08-24 12:35  klaxnek
+
+	* textures/font_extra.png: Updated with i accutes
+
+2005-08-24 11:55  klaxnek
+
+	* language/spanish.txt: New items translated, more accents
+	  corrected and some sentences fixed.
+
+2005-08-23 23:31  z-man
+
+	* language/update.py: Added support for adding already known
+	  translations in addition to original texts to untranslated items.
+
+2005-08-23 16:41  z-man
+
+	* src/: network/nNetObject.cpp, network/nSpamProtection.cpp,
+	  tron/gWall.cpp: Fixed hadling of the running out of netobject IDs
+	  condition: The killing of the ID hogging user is delayed and the
+	  number of available IDs is temporarily increased.
+
+2005-08-23 14:38  z-man
+
+	* src/tron/gGame.cpp: Adapted path to default map.
+
+2005-08-23 14:36  z-man
+
+	* config/settings.cfg: Corrected paths of example files so they
+	  don't need to get downloaded.
+
+2005-08-23 14:31  z-man
+
+	* batch/make/: sortresources, sortresources.py: Added support for
+	  different output and input directories.  Added support for -v
+	  command line option; silent operation is the default now.
+	  Adapted rewriting rules: rewrite rules are always written, a
+	  warning is issued when a conflicting rule is already in place.
+
+2005-08-22 17:54  z-man
+
+	* batch/make/sortresources.py: Added exception rule (grumbling):
+	  map resource types are named aamap.  Added command line options:
+	  -h for help, -n for no operation (just printing) and -r to add
+	  apache rewrite rules into .htaccess files.
+
+2005-08-22 16:22  z-man
+
+	* src/: tools/tString.h, tron/gExplosion.cpp: Fixed division by
+	  zero error.
+
+2005-08-22 16:22  z-man
+
+	* src/engine/eGrid.cpp: Disabled unneccessary assertions in grid
+	  modification.
+
+2005-08-22 09:00  z-man
+
+	* Makefile.am, src/Makefile.am: Moved rewriting of Win and OSX
+	  headers to src/Makefile.am; made distcheck work again.
+
+2005-08-22 00:06  z-man
+
+	* minor_version: .alpha -> _alpha
+
+2005-08-22 00:06  z-man
+
+	* Makefile.manual: Corrected ChangeLog generation.
+
+2005-08-22 00:06  z-man
+
+	* Makefile.am: Added MacOSX Project folder to source tarball.
+	  Windows and Mac header get rewritten with the correct version.
+
+2005-08-22 00:05  z-man
+
+	* batch/make/sortresources.py: Updated script to use the DTD name
+	  for the resource type.
+
+2005-08-22 00:04  z-man
+
+	* batch/: Makefile.am, make/releasetag: Added script that processes
+	  version string to version number, release tag and slot for
+	  installation.
+
+2005-08-21 15:21  z-man
+
+	* NEWS: Fixed typos.
+
+2005-08-21 05:34  luke-jr
+
+	* minor_version: back to alphas
+
+2005-08-21 05:29  luke-jr
+
+	* src/doc/Content_Creation/Howto-Maps.txt: Insert appendix about
+	  resource repo
+
+2005-08-21 05:04  luke-jr
+
+	* src/doc/Content_Creation/Howto-Maps.txt: Update examples
+
+2005-08-21 04:55  luke-jr
+
+	* config/settings.cfg, src/doc/index.html.m4: Replace references to
+	  legacy aabeta URI
+
+2005-08-21 04:41  luke-jr
+
+	* config/settings.cfg: Fix map filepaths
+
+2005-08-20 16:58  z-man
+
+	* src/config_ide.h: Fixed version
+
+2005-08-20 12:51  z-man
+
+	* minor_version, batch/make/version: Updated version files and
+	  script to produce 0.2.8_beta1
+
+2005-08-20 12:13  z-man
+
+	* Makefile.manual: Added removal of gmon.out for the uninstallation
+	  test.
+
+2005-08-20 12:12  z-man
+
+	* src/doc/config.html.m4: Added debug recording section.
+
+2005-08-20 12:11  z-man
+
+	* config/aiplayers.cfg.in: Renamed @progtile@ to Armagetron because
+	  "Armagetron Advanced" does not work; the reading code can' t cope
+	  with the space.
+
+2005-08-20 12:04  z-man
+
+	* language/english_base.txt, config/settings.cfg: Clarified
+	  DOUBLEBIND_TIME doc
+
+2005-08-20 10:29  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Added build
+	  phase to do sortresources.py
+
+2005-08-20 10:28  z-man
+
+	* batch/make/sortresources: Made copying/linking the resource
+	  folder more versatile and failsafe.
+
+2005-08-19 16:39  z-man
+
+	* src/tron/: gCycle.cpp, gCycle.h, gCycleMovement.cpp,
+	  gCycleMovement.h: Reestablished that WindingNumber() does not
+	  wrap and really counts all left/right turns.
+
+2005-08-18 07:04  davidfancella
+
+	* desktop/Makefile.am: Fixed broken desktop makefile
+
+2005-08-16 18:11  z-man
+
+	* src/ui/uInput.cpp: GCC 3.4 and 4.0 compatibility (too many
+	  semicolons)
+
+2005-08-16 17:35  luke-jr
+
+	* batch/sysinstall.in: Really fixed grep logic this time...
+
+2005-08-16 17:15  z-man
+
+	* src/ui/: uInput.cpp, uInput.h: Added optional double-binding
+	  countermeasures.
+
+2005-08-16 17:14  z-man
+
+	* config/settings.cfg, src/tron/gStuff.cpp: Added anti-doublebind
+	  setting.
+
+2005-08-16 17:13  z-man
+
+	* language/: deutsch.txt, english_base.txt: Added description of
+	  double bind setting.
+
+2005-08-16 09:24  luke-jr
+
+	* batch/sysinstall.in: Fix/flip grep logic
+
+2005-08-16 09:17  luke-jr
+
+	* Makefile.am, configure.ac, batch/make/uninstall: Make uninstall
+	  generater more portable
+
+2005-08-16 08:48  luke-jr
+
+	* Makefile.paths, batch/make/uninstall: Change uninstall script's
+	  filename to use slot var instead of version var
+
+2005-08-16 07:27  luke-jr
+
+	* batch/sysinstall.in: Use grep a bit more efficiently
+
+2005-08-16 07:23  luke-jr
+
+	* configure.ac, batch/Makefile.am, batch/sysinstall.in:
+	  --enable-useradd
+
+2005-08-16 01:11  luke-jr
+
+	* configure.ac: Use AC_HELP_STRING
+
+2005-08-16 01:03  luke-jr
+
+	* configure.ac: allow specifying slot w/ multiver
+
+2005-08-15 19:01  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed error in rubber effectiveness
+	  calculation, it was way off for high rubber.
+
+2005-08-15 18:41  z-man
+
+	* src/tron/gCycleMovement.cpp: Made AI cycles react faster in
+	  emergencies.
+
+2005-08-15 18:03  z-man
+
+	* resource/Makefile.am: Switched to using cp -Lr + chmod to install
+	  files.  Added clean rule.
+
+2005-08-15 16:55  z-man
+
+	* batch/make/sortresources, resource/Makefile.am: Adapted to
+	  sortresources.py changes
+
+2005-08-15 16:55  z-man
+
+	* batch/make/sortresources.py: Added support for scanning
+	  non-current directory.  Added fallback code when DTD can't be
+	  found.
+
+2005-08-15 13:56  z-man
+
+	* resource/Makefile.am: Fixed "make install" for builds from
+	  tarball
+
+2005-08-15 12:55  z-man
+
+	* src/tron/gGame.cpp: Updated fallback map.
+
+2005-08-15 12:54  z-man
+
+	* batch/make/sortresources, resource/Makefile.am,
+	  src/tools/tDirectories.cpp: Moved created "included" resource
+	  directory into build directory.
+
+2005-08-15 12:03  z-man
+
+	* resource/Makefile.am: Added removal of "included" on failure.
+
+2005-08-15 12:02  z-man
+
+	* desktop/Makefile.am: Took distribution files out of conditional
+	  so they work with a build configured for a server, too.
+
+2005-08-15 09:47  z-man
+
+	* batch/make/sortresources: Fixed path to python script.
+
+2005-08-15 09:03  z-man
+
+	* README-CVS: Added note for cvs2cl.
+
+2005-08-15 08:59  z-man
+
+	* README-CVS: Added a note that Python now is required.
+
+2005-08-15 08:22  z-man
+
+	* README-CVS, README-DEVELOPER: *** keyword substitution change ***
+
+2005-08-15 00:31  z-man
+
+	* batch/Makefile.am: Renamed one script.
+
+2005-08-15 00:08  z-man
+
+	* resource/proto/: map-0.1-exp.dtd, map-0.1.dtd: Sorry, I was
+	  heavily distracted and moved the wrong files. This should be the
+	  correct version.
+
+2005-08-14 22:55  z-man
+
+	* resource/proto/: map-0.1-exp.dtd, map-0.1.dtd: whoops, moved .dtd
+	  files into the wrong directory.
+
+2005-08-14 22:35  z-man
+
+	* config/settings.cfg: Updated to new resource locations (kept URIs
+	  as they were)
+
+2005-08-14 22:33  z-man
+
+	* resource/: .cvsignore, Makefile.am: Implemented automatic
+	  resource sorting.
+
+2005-08-14 22:32  z-man
+
+	* Makefile.manual: Removed output of .cvsfiles regeneration
+
+2005-08-14 22:31  z-man
+
+	* batch/: Makefile.am, make/sortresources, make/sortresources.py:
+	  Added support scripts for resource sorting
+
+2005-08-14 22:29  z-man
+
+	* resource/proto/: Anonymous/original/original.map.xml,
+	  Luke-Jr/n-gon/40-gon.map.xml, Your_mom/inaktek/inaktek.map.xml,
+	  Your_mom/repeat/repeat.map.xml: Moved resources here.
+
+2005-08-14 22:22  z-man
+
+	* src/doc/: Doxyfile.in, artr.cfg, bugs.html.m4, changelog.html.m4,
+	  commands.html.m4, compile.html.m4, config.html.m4, faq.html.m4,
+	  head.html.m4, index.html.m4, install_linux.html.m4,
+	  install_macosx.html.m4, install_result.html.m4,
+	  install_windows.html.m4, navbar.html.m4, network.html.m4,
+	  readme_macosx.html.m4, sig.m4, todo.html.m4, versions.html.m4:
+	  *** keyword substitution change ***
+
+2005-08-14 22:21  z-man
+
+	* src/: engine/eSound.cpp, tools/tDirectories.cpp: Removed output
+	  in non-debug mode.
+
+2005-08-14 22:18  z-man
+
+	* batch/make/version: *** keyword substitution change ***
+
+2005-08-14 16:03  klaxnek
+
+	* language/spanish.txt: Ahora con acentos, eñes y pasado el
+	  corrector ortográfico ;)
+
+2005-08-14 12:03  z-man
+
+	* desktop/.cvsignore: Added .cvsignore for Makefile.in
+
+2005-08-14 12:03  z-man
+
+	* src/tron/gCycleMovement.cpp: Ping rubber has now an effect on the
+	  rubber efficiency; this makes it easier to sync clients and to
+	  give the rubber meter a useful meaning.
+
+2005-08-14 12:02  z-man
+
+	* src/tron/gGame.cpp: Player ping calculation and syncing updated.
+
+2005-08-14 12:01  z-man
+
+	* src/tools/tLocale.cpp: Fixed bug causing the master server to
+	  spit out untranslated text.
+
+2005-08-14 12:01  z-man
+
+	* src/: tools/tCommandLine.cpp, tools/tCommandLine.h,
+	  tools/tConfiguration.cpp, tron/gArmagetron.cpp: Refactored
+	  command line parsing; tCommandLine.cpp only takes care of
+	  globally important options. The others have been moved to
+	  gArmagetron.cpp and tConfiguration.cpp.
+
+2005-08-14 11:57  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h: More ping query
+	  functions.
+
+2005-08-13 19:57  z-man
+
+	* src/tron/gCycle.cpp: Fixed rubber and brake-meter gauge jumping
+	  when connected to an old server.
+
+2005-08-13 19:57  z-man
+
+	* config/settings.cfg, src/tron/gCycleMovement.cpp: Lowered
+	  defaults for mindistance settings.
+
+2005-08-13 19:56  z-man
+
+	* src/tron/gGame.cpp: Between rounds, ping averaging is done with
+	  lower weight; it's not terribly reliable then.
+
+2005-08-13 19:55  z-man
+
+	* src/engine/eTimer.cpp: Improved start synchronisation.  The timer
+	  is no longer synchronized during a lag spike.
+
+2005-08-13 19:55  z-man
+
+	* src/network/nNetObject.cpp: Ping averager is reset when the
+	  connection is complete. The first packets are not too
+	  representative.
+
+2005-08-13 19:54  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h: Improved average ping
+	  calculation: there are now two averagers, one longerm and one
+	  shortterm. The more appropriate one is taken in each moment.
+
+2005-08-13 14:12  klaxnek
+
+	* src/doc/: faq.html.m4, index.html.m4: Updated forums link
+
+2005-08-13 14:08  klaxnek
+
+	* README-DEVELOPER: Updated forums link
+
+2005-08-13 12:06  klaxnek
+
+	* language/spanish.txt: Documentation for new RUBBER_MINDISTANCE
+	  settings.  Made vote spam detection more configurable.  Made
+	  simulation speed of dedicated server configurable (it was
+	  accidentally locked to 10 fps...).
+
+2005-08-12 23:43  davidfancella
+
+	* Makefile.paths, desktop/Makefile.am: Added desktop file.
+
+2005-08-12 23:06  z-man
+
+	* src/tools/tConfiguration.cpp: Disabled debug symbol warnings
+
+2005-08-12 22:59  davidfancella
+
+	* desktop/Makefile.am: Desktop Makefile.am added
+
+2005-08-12 22:58  davidfancella
+
+	* Makefile.am, Makefile.paths, configure.ac,
+	  desktop/icons/large/armagetronad.png,
+	  desktop/icons/medium/armagetronad.png,
+	  desktop/icons/small/armagetronad.png: Desktop icons in source
+	  tree and installed
+
+2005-08-12 22:35  z-man
+
+	* src/tools/tLocale.cpp: Fixed endless recursion.
+
+2005-08-12 22:16  z-man
+
+	* config/settings.cfg, src/tron/gCycleMovement.cpp: New
+	  RUBBER_MINDISTANCE settings that make 180s less effective at
+	  getting close to walls than pure, deep grinds.  Made DELAY=0 real
+	  180s behave as expected, you end up on the right side of your own
+	  wall.
+
+2005-08-12 22:14  z-man
+
+	* language/: deutsch.txt, english_base.txt: Documentation for new
+	  RUBBER_MINDISTANCE settings
+
+2005-08-12 21:05  z-man
+
+	* src/: network/nConfig.cpp, tools/tConfiguration.cpp,
+	  tools/tConfiguration.h: Optimization: Config items are now stored
+	  in a std::map.
+
+2005-08-12 21:04  z-man
+
+	* src/tools/: tLocale.cpp, tLocale.h: Optimization: Language files
+	  are only loaded fully on demand. Translation items are stored in
+	  a tree (vs. linked list).
+
+2005-08-12 15:51  z-man
+
+	* src/engine/eCamera.cpp: Fixed camera twitching.
+
+2005-08-12 14:37  z-man
+
+	* config/settings_dedicated.cfg: Added master server settings.
+
+2005-08-12 14:37  z-man
+
+	* src/network/master.cpp: Added tAdvanceFrame() to make master work
+	  again.  Made settings configurable.
+
+2005-08-12 10:11  z-man
+
+	* src/network/nNetwork.cpp: Logins in the dangerous phase where the
+	  client talks with the master server are rejected.
+
+2005-08-12 05:34  davidfancella
+
+	* Makefile.manual, src/tools/tCommandLine.cpp,
+	  src/tools/tCommandLine.h, src/tools/tConfiguration.cpp,
+	  src/tron/gArmagetron.cpp: Added support for --extraconfig
+	  commandline parameter
+
+2005-08-12 00:51  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Added basic
+	  auto-packaging for releases
+
+2005-08-12 00:11  z-man
+
+	* src/engine/ePlayer.cpp: Added feedback for remote admin commands.
+
+2005-08-12 00:11  z-man
+
+	* src/ui/uMenu.cpp: Forgot one break; in last commit...
+
+2005-08-11 22:36  z-man
+
+	* src/ui/uMenu.cpp: Fixed fullscreen toggle and other keys during
+	  chat (again).  Menu resets game input keystates to "unpressed".
+	  Unhandled keypresses and releases go to the input system.
+
+2005-08-11 22:33  z-man
+
+	* src/ui/: uInput.cpp, uInput.h: Added function to reset keys to
+	  unpressed state.
+
+2005-08-11 20:54  z-man
+
+	* config/settings_dedicated.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/engine/ePlayer.cpp,
+	  src/engine/eVoter.cpp, src/engine/eVoter.h: Made vote spam
+	  detection more configurable.
+
+2005-08-11 20:53  z-man
+
+	* src/network/: nSpamProtection.cpp, nSpamProtection.h: Refactored
+	  a bit to make extra factor configurable.
+
+2005-08-11 18:31  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed massive desyncing bug.
+
+2005-08-11 17:40  z-man
+
+	* config/settings_dedicated.cfg, language/deutsch.txt,
+	  language/english_base.txt, src/tron/gGame.cpp: Made simulation
+	  speed of dedicated server configurable (it was accidentally
+	  locked to 10 fps...)
+
+2005-08-11 17:36  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed "running carpet" bug: distance
+	  was updated even if emergency rubber code had the cycle stopped.
+
+2005-08-11 16:34  z-man
+
+	* src/tron/: gCycle.cpp, gCycle.h, gCycleMovement.cpp,
+	  gCycleMovement.h: Cycle now sends real time of last turn
+
+2005-08-11 16:34  z-man
+
+	* src/tools/tDirectories.cpp: Fixed directory lookup for master
+	  server
+
+2005-08-11 10:28  davidfancella
+
+	* config/settings_dedicated.cfg: Added VOTING_SPAM config item
+
+2005-08-11 10:25  davidfancella
+
+	* src/engine/eVoter.cpp: Enabled voting spam config item
+
+2005-08-11 08:56  nemostultae
+
+	* README-CVS: Xcode, not XCode
+
+2005-08-11 08:53  nemostultae
+
+	* MacOS/Armagetron Advanced.tmproj: TextMate project
+
+2005-08-11 08:49  nemostultae
+
+	* README-CVS: Updated Mac OS X build instruction
+
+2005-08-11 08:41  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj: Now using
+	  libpng non-framework
+
+2005-08-11 08:40  nemostultae
+
+	* src/macosx/client/config.h: Moved client specific stuff to client
+	  config
+
+2005-08-10 22:05  z-man
+
+	* src/tron/: gCycle.cpp, gCycle.h: Removed obsolte (and
+	  non-working) function.  Fixed bad assumtions about last walls in
+	  gCycle::EdgeIsDangerous().
+
+2005-08-10 19:04  z-man
+
+	* src/tron/: gCycleMovement.cpp, gWall.h: Walls encountered by the
+	  rubber code are copied into the grid so you can't phase past them
+	  that easily.
+
+2005-08-10 19:04  z-man
+
+	* src/tron/gWall.cpp: Walls are copied into the grid as fast as
+	  possible on the server now.
+
+2005-08-10 19:04  z-man
+
+	* src/: engine/eGameObject.cpp, engine/eGameObject.h,
+	  engine/eGrid.cpp, engine/eTess2.h, tron/gCycleMovement.h: Face
+	  replacement code now considers where a game object came from.
+
+2005-08-10 19:04  z-man
+
+	* src/: macosx/client/config.h, macosx/dedicated/config.h,
+	  render/rScreen.cpp, tools/tResourceManager.cpp,
+	  tron/gArmagetron.cpp: Rebeautified
+
+2005-08-10 19:03  z-man
+
+	* src/tron/gCycle.cpp: Timewarp kill bugfix: instead of killing it,
+	  the other cycle (from the future) is put back before the
+	  collision point if possible.
+
+2005-08-10 13:40  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed framerate dependancy of
+	  CYCLE_RUBBER_DELAY for small values.
+
+2005-08-10 11:54  z-man
+
+	* src/tron/: gCycle.cpp, gCycleMovement.cpp: Fixed Jonathan's
+	  phasing bug (where two cycles need to almost collide).  Added
+	  position debug outout to see what's going on.
+
+2005-08-10 11:50  z-man
+
+	* src/engine/eGameObject.cpp: Added warning for phasing bug on
+	  gridded walls.
+
+2005-08-10 10:34  davidfancella
+
+	* config/settings_dedicated.cfg: Now recommend using different
+	  files for server-specific configuration.
+
+2005-08-10 07:19  z-man
+
+	* src/tron/: gCycleMovement.cpp, gCycleMovement.h, gCycle.cpp,
+	  gCycle.h: Fixed rubber failures on rim wall and on new player
+	  walls by communicating cycle death with exceptions that get
+	  caught and swallowed by rubber code.
+
+2005-08-10 07:18  z-man
+
+	* src/tools/tConfiguration.cpp: Made recording a running playback
+	  (for modification) possible.
+
+2005-08-10 07:17  z-man
+
+	* src/engine/eGrid.cpp: Fixed one phasing bug.
+
+2005-08-10 07:16  z-man
+
+	* src/engine/eCamera.cpp: Fixed assertion failure on edges with two
+	  walls.  Fixed endless recursion.
+
+2005-08-08 21:41  z-man
+
+	* Makefile.manual: Renamed executable link on "make debug" to
+	  @progname@
+
+2005-08-08 21:39  z-man
+
+	* src/tron/gGame.cpp: Disabled highscore persistence in recorded
+	  sessions.
+
+2005-08-08 18:41  z-man
+
+	* src/tools/tConfiguration.cpp: Sorry, forgot to remove debug
+	  output
+
+2005-08-08 18:30  z-man
+
+	* src/tools/tConfiguration.cpp: Only non-recorded items are now
+	  read from configuration files now.
+
+2005-08-08 14:57  z-man
+
+	* src/ui/uMenu.cpp: Fixed function of delete key (Unicode 127)
+
+2005-08-08 14:54  z-man
+
+	* Makefile.manual: Adapted .cvsfiles generation to directories with
+	  spaces in them
+
+2005-08-07 15:01  philippeqc
+
+	* src/: tools/tResourceManager.cpp, tron/gGame.cpp,
+	  tron/gParser.cpp: Restricted some output to debug moreSend some
+	  output to the game console so user can follow resource fetching
+
+2005-08-05 14:55  z-man
+
+	* src/engine/eGameObject.cpp: Fixed endless loop (two control
+	  mechanisms failed)
+
+2005-08-05 09:59  nemostultae
+
+	* src/: render/rScreen.cpp, tron/gArmagetron.cpp: Fullscreen bugfix
+	  in Mac OS X (thanks Jonathan)
+
+2005-08-05 08:12  nemostultae
+
+	* src/macosx/Info.plist: And Info.plist didn't get added at all?
+	  Ok...
+
+2005-08-05 08:07  nemostultae
+
+	* src/macosx/English.lproj/InfoPlist.strings.in: Um, added
+	  infostrings to b0_2_8, got added to HEAD before
+
+2005-08-05 07:36  nemostultae
+
+	* MacOS/Armagetron Advanced.xcodeproj/project.pbxproj,
+	  src/macosx/Armagetron Advanced_Prefix.pch, src/macosx/SDLMain.h,
+	  src/macosx/SDLMain.mm, src/macosx/client/config.h,
+	  src/macosx/dedicated/config.h: Adding new Xcode project
+
+2005-08-04 16:21  z-man
+
+	* src/render/rFont.cpp: Text fields are now forced to fit the
+	  screen (so the title menu is fully visible)
+
+2005-08-04 16:05  z-man
+
+	* src/engine/eGameObject.cpp: Fixed unused label warning.
+
+2005-08-04 15:50  z-man
+
+	* src/render/rSysdep.cpp: Added a breakpoint location so that
+	  recordings can be viewed frame by frame after the fast forwarding
+	  finished.
+
+2005-08-04 15:49  z-man
+
+	* src/engine/eGrid.cpp: Fixed holes in walls.
+
+2005-08-04 15:48  z-man
+
+	* src/engine/eGameObject.cpp: Increased timeout in gameobject
+	  movement code so it won't fail that easily.
+
+2005-08-04 13:48  z-man
+
+	* src/tron/gGame.cpp: Changes to DEDICATED_ILDE can mow be made
+	  during runtime.
+
+2005-08-04 12:08  z-man
+
+	* config/: settings.cfg, settings_dedicated.cfg: Moved settings
+	  only meaningful for the dedicated server into
+	  settings_dedicated.cfg.
+
+2005-08-04 12:07  z-man
+
+	* src/network/nSocket.cpp: Fixed server playback; *.*.*.* IP was
+	  not read back correctly.
+
+2005-08-03 22:10  klaxnek
+
+	* language/spanish.txt: Documented _TIMEBASED settings for rubber
+	  and turn delay
+
+2005-08-03 21:33  z-man
+
+	* src/engine/ePlayer.cpp: Fixed chat message sent to new clients.
+
+2005-08-03 21:14  z-man
+
+	* src/tron/gCycle.cpp: Fixed clientside syncing error when a cycle
+	  makes a turn at the instant it is created.
+
+2005-08-03 21:13  z-man
+
+	* src/: tools/tString.cpp, ui/uMenu.cpp: Character filters now
+	  allow high-bit characters again
+
+2005-08-03 19:23  z-man
+
+	* config/settings.cfg, src/tron/gCycleMovement.cpp,
+	  src/tron/gCycleMovement.h: Added _TIMEBASED settings for rubber
+	  and turn delay that allow to tune the effect your speed has.
+
+2005-08-03 19:22  z-man
+
+	* language/: deutsch.txt, english_base.txt: Documented _TIMEBASED
+	  settings for rubber and turn delay
+
+2005-08-03 15:28  z-man
+
+	* src/network/nSocket.cpp: Replaced 0.0.0.0 with *.*.*.* in output
+
+2005-08-03 15:27  z-man
+
+	* src/tools/tCommandLine.cpp: Fixed crash on parsing the command
+	  line. Exceptions are thrown on errors.
+
+2005-08-03 15:27  z-man
+
+	* src/network/nNetwork.cpp: Clarified free port scan message.
+
+2005-08-03 15:27  z-man
+
+	* src/tron/gArmagetron.cpp: All our exceptions are caught now in
+	  main().
+
+2005-08-03 15:27  z-man
+
+	* src/tools/tError.cpp: Added caption to error output
+
+2005-08-03 08:20  z-man
+
+	* src/engine/ePlayer.cpp: Fixed KILL  by number.
+
+2005-08-03 03:44  nemostultae
+
+	* config/aiplayers.cfg.in: Made aiplayers.cfg more readable
+
+2005-08-02 23:33  z-man
+
+	* src/engine/ePlayer.cpp: Finished implementation of /me and /msg.
+	  Fixed Krawall authentication, it did not update the username
+	  properly.
+
+2005-08-02 23:32  z-man
+
+	* src/engine/ePlayer.h: Made SetUserName() public so Krawall
+	  authentication can work with it.
+
+2005-08-02 23:31  z-man
+
+	* src/tron/gHud.cpp: Added check for (me) before dereferencing
+	  pointer.
+
+2005-08-02 23:30  z-man
+
+	* src/tools/tLocale.cpp: Fixed wrong order of languages in menu.
+
+2005-08-02 23:29  z-man
+
+	* src/: doc/versions.html.m4, network/nNetwork.cpp: Bumped network
+	  version so /msg and /me can now work
+
+2005-08-02 21:30  z-man
+
+	* src/network/: nNetwork.cpp, nNetwork.h: Added overloaded write
+	  operator for tColoredString. VisualC 6.0 wrote the player name as
+	  a char array without it...
+
+2005-08-02 21:10  z-man
+
+	* src/tron/gMenus.cpp: Fixed Windows compilation error; apparently,
+	  max is a templated builtin function of VisualC or so.
+
+2005-08-02 11:52  z-man
+
+	* src/doc/net/index.html.m4: Declared network code documentation to
+	  be obsolete mostly.
+
+2005-08-02 00:18  z-man
+
+	* src/doc/config.html.m4: Added description of map selection and
+	  resources.
+
+2005-08-02 00:17  z-man
+
+	* configure.ac: Made docstyle variable persistent
+
+2005-08-02 00:17  z-man
+
+	* src/doc/Makefile.am: Added Howto-Maps.txt to distribution
+
+2005-08-02 00:15  z-man
+
+	* src/tron/gLanguageMenu.cpp: Fixed "Brisish" -> "British"
+
+2005-08-02 00:14  z-man
+
+	* src/tools/: tLocale.cpp, tLocale.h: Parameter to
+	  tLanguage::Find() is now const.  "British English" is the default
+	  fallback language, then whatever comes first in languages.txt.
+
+2005-08-01 19:59  klaxnek
+
+	* language/spanish.txt: more fixes
+
+2005-08-01 19:51  z-man
+
+	* src/tron/gCycleMovement.cpp: Fixed rubber usage code.  SF bug
+	  entry: [ 1232492 ] Rubber never depletes
+	  http://sourceforge.net/tracker/index.php?func=detail&aid=1232492&group_id=110997&atid=657948
+
+2005-08-01 19:47  z-man
+
+	* minor_version: Updated release tag to _beta for upcoming release
+
+2005-08-01 19:46  z-man
+
+	* src/engine/eRectangle.cpp: Turned assertion into clamping.
+
+2005-08-01 19:46  z-man
+
+	* src/doc/network.html.m4: Added special chat, voting, ingame admin
+	  and socket binding.
+
+2005-07-31 19:25  philippeqc
+
+	* todo-philippe.txt: [no log message]
+
+2005-07-31 19:24  philippeqc
+
+	* todo-philippe.txt: notes about dependency and configuration
+
+2005-07-29 16:57  z-man
+
+	* src/doc/html.m4.in: Started documentation update for 0.2.8.0.
+
+2005-07-29 06:55  nemostultae
+
+	* language/: american.txt, british.txt: color_[r|g|b]_help string
+
+2005-07-29 05:52  nemostultae
+
+	* language/: american.txt, british.txt: One or two misspellings in
+	  the English language files. Also capitalized first word in string
+
+2005-07-27 20:35  nemostultae
+
+	* language/: american.txt, british.txt: Corrected order in langauge
+	  menu
+
+2005-07-27 19:55  nemostultae
+
+	* language/: american.txt, british.txt: Split British strings into
+	  their own file
+
+2005-07-27 08:44  nemostultae
+
+	* MacOS/Armagetron Advanced.icns: Updated icons, removed border in
+	  32x32 mask
+
+2005-07-27 08:42  nemostultae
+
+	* MacOS/Armagetron Advanced.icns: remove icon file
+
+2005-07-27 08:37  nemostultae
+
+	* MacOS/Armagetron Advanced.icns: oops, forgot to make the icons
+	  files binary
+
+2005-07-27 02:19  nemostultae
+
+	* MacOS/Armagetron Advanced.icns: Adding new Mac OS X icon
+
+2005-07-23 17:44  z-man
+
+	* language/new.txt: Modified and filled with instructions
+
+2005-07-23 17:34  z-man
+
+	* language/.cvsignore: Added backup files to ignore list
+
+2005-07-19 23:53  z-man
+
+	* src/render/rTexture.h: Added accessors.  Switched to using
+	  exceptions to report texture load errors.
+
+2005-07-19 23:50  z-man
+
+	* src/tools/: tException.cpp, tException.h: Moved tException into
+	  separate files so it can use tString
+
+2005-07-19 09:05  z-man
+
+	* config/.cvsignore: added autoexec.cfg to ignored list
+
+2005-07-18 23:42  z-man
+
+	* src/engine/eAdvWall.cpp: Updated to use eRectangle for clipping
+
+2005-07-18 23:42  z-man
+
+	* src/engine/eRectangle.h: Added rectangle class (currently used
+	  for the arena bounding area)
+
+2005-07-18 23:41  z-man
+
+	* src/: prototype.cpp, prototype.h: Updated copyright notice
+
+2005-07-17 23:33  z-man
+
+	* src/engine/eAdvWall.cpp: Changed windows source package to
+	  contain a directory named "armagetronad" like the build
+	  environment expects
+
+2005-07-17 23:27  z-man
+
+	* src/thirdparty/Makefile.am: Disabled compilation of particle
+	  stystem when building a server
+
+2005-07-17 23:26  z-man
+
+	* src/render/: rGL.h, rTexture.h: Texture refactoring: reloading of
+	  textures after a cylce crashed no longer required; in fact, no
+	  texture reloading is required at all anymore.
+
+2005-07-17 23:25  z-man
+
+	* src/engine/eWall.cpp: Added camera to cycle line of sight
+	  checking code
+
+2005-07-11 09:44  z-man
+
+	* src/: network/nPriorizing.h, thirdparty/particles/action_api.cpp,
+	  thirdparty/particles/actions.cpp, thirdparty/particles/general.h,
+	  thirdparty/particles/opengl.cpp, thirdparty/particles/p_vector.h,
+	  tron/gExplosion.h, win32/config.h, win32_ded/config.h:
+	  Rebeautified
+
+2005-07-10 22:40  z-man
+
+	* src/network/nKrawall.cpp: Adaptions to player name changes
+
+2005-07-09 20:28  z-man
+
+	* src/render/rSysdep.h: Implemented different sync methods on
+	  buffer swap: none, glFlush and glFinish.  Put rSysDep global
+	  functions into a class.
+
+2005-07-07 17:41  z-man
+
+	* .cdtproject: Added make targets for cvscheck, distcheck and
+	  updated beautify target
+
+2005-07-03 17:26  z-man
+
+	* .cvsignore: Removed obsoleted Makefile.in files
+
+2005-07-03 16:49  z-man
+
+	* .cvsignore, bootstrap.sh, batch/rcd_master.in,
+	  batch/rcd_server.in, batch/make/beautify, config/.cvsignore,
+	  config/astylerc, src/doc/.cvsignore, src/doc/html.m4.in,
+	  src/doc/net/.cvsignore, src/thirdparty/.cvsignore,
+	  src/thirdparty/Makefile.am, src/thirdparty/binreloc/prefix.c,
+	  src/thirdparty/binreloc/prefix.h,
+	  src/thirdparty/particles/Makefile.am: Merged Automake branch
+
+2005-06-22 14:17  z-man
+
+	* .cdtproject: Fixed make target typo
+
+2005-06-15 11:44  nemostultae
+
+	* src/thirdparty/particles/opengl.cpp: or not ^^
+
+2005-06-15 11:40  nemostultae
+
+	* src/thirdparty/particles/opengl.cpp: No need to include the gl.h
+	  when compiling dedicated
+
+2005-06-15 11:19  nemostultae
+
+	* src/thirdparty/particles/opengl.cpp: Mac OS X opengl headers for
+	  particles
+
+2005-06-15 11:11  davidfancella
+
+	* bootstrap.sh: Fixing bootstrap
+
+2005-06-15 09:19  davidfancella
+
+	* src/thirdparty/: Makefile.am, particles/Makefile.am: Added
+	  particle system Makefile.am's
+
+2005-06-15 08:52  davidfancella
+
+	* bootstrap.sh: Changed automake invocation to --add-missing -i,
+	  otherwise it'll fail.
+
+2005-06-15 08:49  davidfancella
+
+	* bootstrap.sh: Added automake and aclocal invocations
+
+2005-06-15 07:52  z-man
+
+	* src/: engine/eCoord.h, network/astat.cpp, network/nKrawall.cpp,
+	  tron/gSparks.cpp, tools/tArray.cpp, tools/tRandom.h,
+	  tools/tSafePTR.cpp: Merged recording branch
+
+2005-06-14 21:10  luke-jr
+
+	* todo-luke-jr.txt: TODO updates
+
+2005-06-14 09:06  z-man
+
+	* src/thirdparty/particles/actions.cpp: Fixed warning messages
+
+2005-06-14 05:15  davidfancella
+
+	* src/thirdparty/particles/: LICENSE, Readme.txt, action_api.cpp,
+	  actions.cpp, general.h, opengl.cpp, p_vector.h: Added particle
+	  system
+
+2005-06-11 11:16  z-man
+
+	* bootstrap.sh: Added removal of generated files in case of
+	  interruption
+
+2005-06-10 19:25  luke-jr
+
+	* todo-luke-jr.txt: parse "resourcefile(resourceuri)"
+
+2005-06-09 20:50  z-man
+
+	* src/network/: nKrawall.cpp, nKrawallPrivate.cpp: Made krawall
+	  server compile again
+
+2005-06-06 12:21  davidfancella
+
+	* bootstrap.sh: Added bootstrap.sh to invoke autotools for a fresh
+	  cvs checkout
+
+2005-06-05 10:28  z-man
+
+	* src/engine/: eSound.h, eWall.cpp: Avoided inclusion of eGrid.h
+	  wherever possible (for compilation speed and dependency
+	  reduction)
+
+2005-06-04 12:46  z-man
+
+	* src/: win32/config.h, win32_ded/config.h: Repaired Windows
+	  Compile (Sorry!) Factored out common parts of config.h
+
+2005-06-03 19:21  luke-jr
+
+	* todo-luke-jr.txt: todo cleanup
+
+2005-06-03 17:29  z-man
+
+	* config_debug: updated to new configure script (but config_debug
+	  is obsolete anyway)
+
+2005-06-03 10:32  z-man
+
+	* src/: win32/config.h, win32_ded/config.h: Added flags indicating
+	  wmemset and sinf and the like are there
+
+2005-06-02 19:47  nemostultae
+
+	* MacOS/Armagetron.pbproj/project.pbxproj: Added steps to keep
+	  compatibilty with Mac OS X 10.2 and below
+
+2005-06-02 18:15  luke-jr
+
+	* todo-luke-jr.txt: Screenshots get their own dir instead of using
+	  VarDir now
+
+2005-06-02 01:52  luke-jr
+
+	* .cvsignore: ignore the removed config.h.in
+
+2005-06-02 01:51  luke-jr
+
+	* todo-luke-jr.txt: cleanup
+
+2005-06-02 01:21  luke-jr
+
+	* todo-luke-jr.txt: fixed configure.in so autoheader works removed
+	  generated config.h.in from CVS
+
+2005-06-02 01:14  nemostultae
+
+	* MacOS/Armagetron.pbproj/project.pbxproj: Added missing file,
+	  adjusted organization
+
+2005-06-02 00:42  luke-jr
+
+	* todo-luke-jr.txt: Make an attempt at working with old libxml2
+	  versions
+
+2005-06-01 08:07  luke-jr
+
+	* todo-luke-jr.txt: TODO: autoconf-ise old libxml2
+
+2005-06-01 00:09  nemostultae
+
+	* MacOS/Armagetron.pbproj/project.pbxproj: Added missing resource
+	  folder to Copy build phase
+
+2005-05-31 23:35  nemostultae
+
+	* MacOS/Armagetron.pbproj/project.pbxproj: More updates for Mac OS
+	  X project builder file
+
+2005-05-30 09:14  davidfancella
+
+	* src/tron/gExplosion.h: Committed last particle work.	Still
+	  doesn't work, though.  :)
+
+2005-05-29 23:36  luke-jr
+
+	* todo-luke-jr.txt: No longer a bug?
+
+2005-05-29 12:36  klaxnek
+
+	* src/network/nPriorizing.h: Class declaration missing for g++ 4.0+
+	  (thx to Lucifer)
+
+2005-05-25 23:10  z-man
+
+	* src/engine/eAdvWall.cpp: VisualC 2003 Toolkit compilation
+	  compatibility
+
+2005-05-23 00:11  luke-jr
+
+	* major_version: nothing really
+
+2005-05-18 04:27  luke-jr
+
+	* todo-luke-jr.txt: remove no longer applicable stuff
+
+2005-05-17 00:23  luke-jr
+
+	* language/american.txt: Fix English and fork off American
+
+2005-05-11 14:10  z-man
+
+	* src/: tools/tList.h, tools/tRing.cpp, tools/tSafePTR.cpp,
+	  network/nPriorizing.cpp, network/nPriorizing.h: fixed compiler
+	  warnings for the more picky 4.0 and 3.4 gcc versions. Most
+	  common: too many semicolons.
+
+2005-05-07 23:35  z-man
+
+	* src/: network/nKrawall.cpp, tools/tHeap.h: Cleaned out warning
+	  messages with CODELEVEL=2
+
+2005-05-07 22:39  luke-jr
+
+	* .cvsignore, todo-luke-jr.txt: cvsignore & todo
+
+2005-05-07 06:09  luke-jr
+
+	* todo-luke-jr.txt: maybe todo: new dir for screenshots
+
+2005-05-07 03:12  luke-jr
+
+	* todo-luke-jr.txt: rework tDirectories to create write-dirs
+
+2005-05-06 21:26  philippeqc
+
+	* todo-philippe.txt: Major update of my todo list
+
+2005-05-06 08:43  z-man
+
+	* src/network/astat.cpp: armagetronad-stat now works again
+
+2005-05-06 08:41  z-man
+
+	* src/tron/gServerBrowser.h: Improved server browser: refreshes are
+	  possible, sorting is customizable
+
+2005-05-05 21:36  luke-jr
+
+	* todo-luke-jr.txt: fresh ideas
+
+2005-05-05 16:10  luke-jr
+
+	* todo-luke-jr.txt: winzones=green, deathzones=red This time, it
+	  works :)
+
+2005-05-05 10:48  luke-jr
+
+	* todo-luke-jr.txt: more ideas
+
+2005-05-05 09:41  luke-jr
+
+	* todo-luke-jr.txt: Bugfixes in code that is never used (ATM)
+
+2005-05-04 20:40  luke-jr
+
+	* todo-luke-jr.txt: remove completed items and add new ones
+
+2005-05-04 12:08  luke-jr
+
+	* .cvsignore, todo-luke-jr.txt, src/engine/eAdvWall.cpp: MERGE:
+	  shaped_arenas -> HEAD
+
+2005-05-03 09:44  z-man
+
+	* src/doc/.cvsignore: added doxygen directory to ignored list
+
+2005-05-03 09:43  z-man
+
+	* src/doc/.cvsignore: Added doxygen source code documentation
+	  generation
+
+2005-05-02 12:46  luke-jr
+
+	* src/: network/l2_demo.cpp, network/l3_demo.cpp,
+	  network/nettest.cpp, tools/tRing.cpp, win32/config.h:
+	  HAVE_UNISTD_H exists for a reason -.-
+
+2005-04-26 08:28  luke-jr
+
+	* .cvsignore, config/.cvsignore, language/.cvsignore,
+	  src/engine/.cvsignore, src/network/.cvsignore,
+	  src/render/.cvsignore, src/tools/.cvsignore, src/tron/.cvsignore,
+	  src/ui/.cvsignore: Ignore autogenerated files and stuff
+
+2005-04-10 11:30  z-man
+
+	* src/tools/: tCallback.cpp, tConsole.h: adaptions to color code
+	  handling changes and explicit string constructors
+
+2005-04-01 09:32  z-man
+
+	* src/network/nAuthentification.cpp: fixed possible memory
+	  initializing problems
+
+2005-03-30 21:45  z-man
+
+	* src/tools/tMath.h: called the right copysign in windows
+
+2005-03-30 17:56  z-man
+
+	* src/tools/tList.h: removed profanity
+
+2005-03-25 21:08  philippeqc
+
+	* src/engine/eAdvWall.cpp: Added support for multi-axe grid
+
+2005-03-15 18:55  z-man
+
+	* src/engine/eAdvWall.cpp: added eWallRim::Clip
+
+2005-03-10 15:42  z-man
+
+	* tagcvs, src/tron/gSensor.cpp, src/doc/COPYING.txt: Merged in
+	  changes from 0.2.7.1 release branch
+
+2005-03-01 18:25  klaxnek
+
+	* COPYING.txt: Fixed first line missing
+
+2005-02-26 22:24  z-man
+
+	* src/render/rViewport.h: added function to create viewport with
+	  correct aspect ratio
+
+2005-02-25 15:44  z-man
+
+	* src/tools/tConsole.h: Added priorities to console filters
+
+2005-02-21 12:39  z-man
+
+	* batch/: rcd_master.in, rcd_server.in: better solaris
+	  compatibility
+
+2005-02-19 17:54  z-man
+
+	* batch/rcd_master.in, batch/rcd_server.in, batch/stat.in,
+	  src/doc/.cvsignore: Renamed master server to armagetronad-master
+	  updated rc.d scripts so they don't need startproc ( they use
+	  nohup instead ) refined rc.d scripts
+
+2005-02-18 11:13  z-man
+
+	* src/tools/tConsole.h: Added console filters
+
+2005-02-04 16:18  z-man
+
+	* src/doc/: net/sig.m4, .cvsignore, COPYING.txt, net/.cvsignore,
+	  net/head.html.m4, net/lower.html.m4, net/middle.html.m4,
+	  net/navbar.html.m4, net/upper.html.m4: Added documentation source
+	  from old project
+
+2005-02-04 13:26  z-man
+
+	* src/engine/eCoord.h: made constructor explicit
+
+2005-02-03 12:55  z-man
+
+	* src/: engine/eWall.cpp, win32/config.h, win32/dirent.h,
+	  win32_ded/config.h, win32_ded/dirent.h: beautified recent changes
+
+2005-02-03 11:41  z-man
+
+	* .cdtproject, .project: disabled display of path recovery problems
+
+2005-02-02 18:09  z-man
+
+	* src/engine/eCoord.h: corrected se_EstimatedRangeOfMult() added
+	  datastructures to track replacement of eFaces during
+	  restructuring fixed usage if se_EstimatedRangeOfMult()
+
+2005-02-01 23:12  z-man
+
+	* src/engine/eWall.cpp: Added null pointer checks for safety
+
+2005-02-01 17:54  z-man
+
+	* src/engine/eWall.cpp: Introduced the topology police functions
+	  RunsParallel* and IsSplitBy*
+
+2005-02-01 17:21  z-man
+
+	* .cdtproject: Removed old build targets; they did not work anymore
+	  anyway.
+
+2005-01-31 17:42  z-man
+
+	* .cdtproject: corrected make target
+
+2005-01-31 07:59  z-man
+
+	* .cdtproject: Updated and corrected make targets
+
+2005-01-30 19:28  z-man
+
+	* .cvsignore: added autom4te.cache
+
+2005-01-29 19:52  z-man
+
+	* src/tools/tArray.h: [no log message]
+
+2005-01-29 19:50  z-man
+
+	* src/tools/tArray.h: Translated german comments
+
+2005-01-29 19:46  z-man
+
+	* src/tools/tArray.h: Better fix for the tString[anytthing but int)
+	  problem of VisualC
+
+2005-01-29 18:37  z-man
+
+	* src/tools/tArray.h: Added subscription operators for unsigned int
+	  for VisualC compatibility
+
+2005-01-29 12:48  z-man
+
+	* .cdtproject: added global make targets
+
+2005-01-29 10:07  z-man
+
+	* .project: corrected clean target
+
+2005-01-29 00:17  z-man
+
+	* .project: set up build support without make targets
+
+2005-01-28 23:33  z-man
+
+	* .cdtproject, .project: Finally added make targets where they
+	  belong
+
+2005-01-28 18:12  z-man
+
+	* .cvsignore: Added .cvsignore for various files that pop up in the
+	  main directory during a build
+
+2005-01-28 18:10  z-man
+
+	* .cdtproject, .project: Changed build flags
+
+2005-01-28 10:35  z-man
+
+	* .cdtproject: renamed make targets
+
+2005-01-28 08:09  z-man
+
+	* src/engine/eWall.cpp: Alright, allright. Beautified.
+
+2005-01-27 22:26  z-man
+
+	* .cdtproject, .project: Added make targets using external build
+	  project from CVS module armagetronad_build_eclipse
+
+2005-01-27 18:29  z-man
+
+	* .cdtproject, .project: Added eclipse project files ( they
+	  typically don't change often )
+
+2005-01-26 17:21  z-man
+
+	* src/engine/eWall.cpp: AMD64 compatibility, but still ugly pointer
+	  magic
+
+2005-01-26 16:17  z-man
+
+	* src/tools/tList.h: template disambiguation for GCC34
+
+2004-12-27 16:57  klaxnek
+
+	* src/tron/gExplosion.h: Added colored explosions
+
+2004-11-29 11:26  philippeqc
+
+	* src/: engine/eAdvWall.cpp, engine/eCoord.h,
+	  engine/eDebugLine.cpp, engine/eDebugLine.h, engine/eFloor.cpp,
+	  engine/eFloor.h, engine/ePath.h, engine/eSound.h,
+	  engine/eWall.cpp, engine/test.cpp, network/astat.cpp,
+	  network/l2_demo.cpp, network/l3_demo.cpp, network/md5.cpp,
+	  network/md5.h, network/nAuthentification.cpp,
+	  network/nAuthentification.h, network/nKrawall.cpp,
+	  network/nKrawall.h, network/nKrawallPrivate.cpp,
+	  network/nObserver.cpp, network/nObserver.h,
+	  network/nPriorizing.cpp, network/nPriorizing.h,
+	  network/nettest.cpp, network/nettest_main.cpp,
+	  render/rGLRender.cpp, render/rRender.cpp, render/rRender.h,
+	  render/rTexture.h, render/rViewport.h, render/testgl.cpp,
+	  tools/memtest.cpp, tools/tArray.cpp, tools/tArray.h,
+	  tools/tCallback.cpp, tools/tCallbackString.h, tools/tConsole.h,
+	  tools/tCrypt.cpp, tools/tCrypt.h, tools/tEventQueue.cpp,
+	  tools/tEventQueue.h, tools/tHeap.h, tools/tInitExit.h,
+	  tools/tLinkedList.cpp, tools/tList.h, tools/tMath.h,
+	  tools/tMemStack.cpp, tools/tMemStack.h, tools/tReferenceHolder.h,
+	  tools/tRing.cpp, tools/tRing.h, tools/tSafePTR.cpp,
+	  tools/tSafePTRBase.cpp, tools/tToDo.cpp, tools/transfab.cpp,
+	  tron/gAICharacter.h, tron/gCamera.h, tron/gExplosion.h,
+	  tron/gLogo.h, tron/gSensor.cpp, tron/gSensor.h,
+	  tron/gServerBrowser.h, tron/gSparks.cpp, tron/gSparks.h,
+	  tron/gSpawn.h, tron/gTeam.h: Code re-formated with astyle. Please
+	  run make beautify before any commit to preserve the formating.
+
+2004-09-09 15:35  philippeqc
+
+	* todo-philippe.txt: list of todos for philippe
+
+2004-08-27 21:08  k_at_work
+
+	* src/: win32/dirent.c, win32/dirent.h, win32_ded/dirent.c,
+	  win32_ded/dirent.h: POSIX directory browsing functions and types
+	  for Win32
+
+2004-07-01 15:22  marrow
+
+	* COPYING.txt, README, README-KDevelop3_0, README-SDL,
+	  armagetron.kdevelop, armagetron.kdevelop.pcs, armagetron.kdevses,
+	  config.guess, config.sub, config_debug, html.m4.in, install-sh,
+	  major_version, src_doku, tagcvs, tank_todo-halffinnished.txt,
+	  tron.ico, update_cvs, MacOS/Armagetron.pbproj/project.pbxproj,
+	  batch/rcd_master.in, batch/rcd_server.in, batch/starter.in,
+	  batch/stat.in, language/new.txt, models/cycle_body.mod,
+	  models/cycle_front.mod, models/cycle_rear.mod, sound/cyclrun.wav,
+	  sound/expl.wav, src/leftover.cpp, src/prototype.cpp,
+	  src/prototype.h, src/engine/eAdvWall.cpp,
+	  src/engine/eAuthentification.cpp, src/engine/eAuthentification.h,
+	  src/engine/eCoord.h, src/engine/eDebugLine.cpp,
+	  src/engine/eDebugLine.h, src/engine/eFloor.cpp,
+	  src/engine/eFloor.h, src/engine/eKrawall.cpp,
+	  src/engine/eKrawall.h, src/engine/ePath.h, src/engine/eSound.h,
+	  src/engine/eWall.cpp, src/engine/test.cpp, src/network/astat.cpp,
+	  src/network/l2_demo.cpp, src/network/l3_demo.cpp,
+	  src/network/md5.cpp, src/network/md5.h,
+	  src/network/nAuthentification.cpp,
+	  src/network/nAuthentification.h, src/network/nKrawall.cpp,
+	  src/network/nKrawall.h, src/network/nKrawallPrivate.cpp,
+	  src/network/nObserver.cpp, src/network/nObserver.h,
+	  src/network/nPriorizing.cpp, src/network/nPriorizing.h,
+	  src/network/nSimulatePing.h, src/network/nettest.cpp,
+	  src/network/nettest_main.cpp, src/render/rGL.h,
+	  src/render/rGLRender.cpp, src/render/rRender.cpp,
+	  src/render/rRender.h, src/render/rSDL.h, src/render/rSysdep.h,
+	  src/render/rTexture.h, src/render/rViewport.h,
+	  src/render/testgl.cpp, src/tools/memtest.cpp,
+	  src/tools/tArray.cpp, src/tools/tArray.h,
+	  src/tools/tCallback.cpp, src/tools/tCallbackString.h,
+	  src/tools/tConsole.h, src/tools/tCrypt.cpp, src/tools/tCrypt.h,
+	  src/tools/tEventQueue.cpp, src/tools/tEventQueue.h,
+	  src/tools/tHeap.h, src/tools/tInitExit.h,
+	  src/tools/tLinkedList.cpp, src/tools/tList.h, src/tools/tMath.h,
+	  src/tools/tMemStack.cpp, src/tools/tMemStack.h,
+	  src/tools/tReferenceHolder.h, src/tools/tRing.cpp,
+	  src/tools/tRing.h, src/tools/tSafePTR.cpp,
+	  src/tools/tSafePTRBase.cpp, src/tools/tToDo.cpp,
+	  src/tools/tToDo.h, src/tools/transfab.cpp,
+	  src/tron/gAICharacter.h, src/tron/gCamera.h,
+	  src/tron/gExplosion.h, src/tron/gLanguageMenu.h,
+	  src/tron/gLogo.h, src/tron/gMenus.h, src/tron/gSensor.cpp,
+	  src/tron/gSensor.h, src/tron/gServerBrowser.h,
+	  src/tron/gSparks.cpp, src/tron/gSparks.h, src/tron/gSpawn.h,
+	  src/tron/gTeam.h, src/win32/config.h, src/win32/strstream.h,
+	  src/win32_ded/config.h, src/win32_ded/strstream.h,
+	  textures/KGN_logo.png, textures/icon.png, textures/shadow.png:
+	  Initial Import of 0.2.7.0
+

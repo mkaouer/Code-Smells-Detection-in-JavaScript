@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cd ../../
+ant jar
+./pack-rootbeer
+
+cd gtc2013/MegaMandel2/mandellib
+ant jar
+cd ../MegaMandel2/
+ant jar
+cd ..
+java -jar ../../lib/pack.jar -mainjar MegaMandel2.jar -libjar mandellib.jar -libjar ../../Rootbeer.jar -destjar MegaMandel2-CPU.jar

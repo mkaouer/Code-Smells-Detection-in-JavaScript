@@ -1,0 +1,124 @@
+BonkEnc version 0.6
+
+BonkEnc is an encoder for various audio formats. It can
+produce MP3, AAC, BONK and Ogg Vorbis files.
+
+BonkEnc uses LAME for MP3 encoding, but it can also use the
+BladeEnc encoder (available from http://bladeenc.mp3.no/).
+Just copy the BladeEnc DLL to your BonkEnc directory.
+
+You need the FAAC DLL for encoding AAC files. You can get the sources
+at http://faac.sf.net/. Use MingW32 to build a DLL from the sources
+in the libfaac directory. Contact me if you need help.
+
+Note that BladeEnc uses algorithms that the Fraunhofer IIS claims to
+have patents for and therefore may not be used in countries allowing
+software patents (in fact I'm not sure if you may use it in countries
+not allowing software patents - like most European countries).
+
+The same applies to FAAC, which uses algorithms that the Dolby Labs
+claim to have patents for.
+
+BonkEnc uses Albert L. Fabers CDRip DLL for audio ripping.
+
+History
+-------
+
+	Version 0.6
+
+		- upgraded to smooth v0.8.58.1
+		- upgraded to Ogg Vorbis v1.0
+		- upgraded to BONK v0.6
+		- upgraded to CDRip v116
+		- added support for ripping to PCM WAVE files
+		- added support for encoding lossless BONK files
+		- the BONK format has been extended by the META-tag
+		- all encoders and decoders are now implemented as IOLib filters
+		- all encoder DLLs are now optional
+		- some minor bugfixes
+
+	Version 0.5-pre2
+
+		- added support for ripping audio CDs
+		- added support for Ogg Vorbis files
+		- added support for FAAC (AAC encoder)
+		- added support for LAME
+		- added support for mono and different sampling rates
+		- the BONK format has been extended to support instant skipping
+		- added preliminary support for Apple AIFF, Creative Voice and Sun Audio files
+		- allowed more options for BladeEnc
+		- upgraded to smooth v0.8.58.0
+
+	Version 0.4
+
+		- initial release
+
+Requirements
+------------
+
+	- Windows NT/2000/XP, Windows 95/98/SE/ME
+	- A 200MHz processor or better for playing BONK files
+	- Winamp is required to play BONK files in Windows
+	- You need a Winamp plugin in order to play .ogg files.
+	  Pick the one called 'Nullsoft Vorbis Decoder' from
+	  www.winamp.com - older Plugins will not work.
+	- You'll need properly installed ASPI drivers for
+	  CD ripping.
+
+	Additional requirements for compiling the sources:
+
+		- MinGW32 v1.0 or greater (http://mingw.sf.net/)
+		- smooth v0.8.58.1 (http://smooth.sf.net/)
+		- IOLib v5.x (http://iolib.sf.net/ - included with smooth)
+
+	Additional optional software:
+
+		- BladeEnc is used if installed
+		- FAAC is used if installed
+		- CDRip is used if installed
+
+Problems
+--------
+
+	- The current version of Paul Harrison's BONK encoder still has a few bugs.
+	  Please contact him (pfh@csse.monash.edu.au) if BonkEnc generates BONK files with errors.
+
+	- There are the following restrictions on the input file format:
+
+		- BonkEnc:
+				- files must be 16 bit
+		- BladeEnc:
+				- files must be 16 bit at 32, 44.1 or 48kHz
+		- LAME:
+				- files must be 16 bit at standard rates (8, 11.025, 12, 16, 22.05, 24, 32, 44.1, 48kHz)
+		- Ogg Vorbis:
+				- files must be 16 bit, stereo
+		- FAAC:
+				- files must be 16 bit, stereo
+
+	- Resampling is only supported with LAME. Input files must be at the desired output
+	  sampling rate unless you are encoding with LAME.
+
+	- You'll have to experiment a bit to find good settings for BONK. I prefer the default settings
+	  with less quantization and a small predictor.
+
+Future plans
+------------
+
+	- extend the BONK format to support ID3V2 tags
+	- extract artist and title from the filename and write ID3V2 or similar
+	- support CD-Text
+	- input filters for MP3, Ogg Vorbis, BONK, AAC
+	- support more audio formats (FLAC, VQF, MAC, ...)
+	- allow expert settings for LAME (ATH, Temporal Masking, Psy-Models)
+	- develop an IOLib-Filters based plugin system
+
+-----------------------------------------------------------------------------------
+
+The official BonkEnc homepage: http://bonkenc.sf.net/
+Paul F. Harrison's BONK page: http://yoyo.cc.monash.edu.au/~pfh/bonk/
+
+robert.kausch@gmx.net,
+Robert Kausch
+
+ICQ#23891569

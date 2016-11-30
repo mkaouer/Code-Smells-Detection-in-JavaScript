@@ -1,0 +1,14 @@
+#!/bin/sh
+
+gcc -m32 -fPIC -g -c -I/usr/lib/jvm/java-6-openjdk-amd64/include/ -I/usr/lib/jvm/java-6-openjdk-amd64/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/FixedMemory.c -o FixedMemory.o
+gcc -m32 -shared -Wl,-soname,rootbeer -o rootbeer_x86.so.1 FixedMemory.o -lc
+
+gcc -m32 -fPIC -g -c -I/usr/lib/jvm/java-6-openjdk-amd64/include/ -I/usr/lib/jvm/java-6-openjdk-amd64/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/CUDARuntime.c -o CUDARuntime.o
+gcc -m32 -fPIC -g -c -I/usr/lib/jvm/java-6-openjdk-amd64/include/ -I/usr/lib/jvm/java-6-openjdk-amd64/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/CUDAContext.c -o CUDAContext.o
+gcc -m32 -shared -Wl,-soname,rootbeer_cuda -o rootbeer_cuda_x86.so.1 CUDARuntime.o CUDAContext.o -lc -lcuda
+
+gcc -m32 -fPIC -g -c -I/usr/lib/jvm/java-6-openjdk-amd64/include/ -I/usr/lib/jvm/java-6-openjdk-amd64/include/linux -I/usr/local/cuda/targets/x86_64-linux/include/ org/trifort/rootbeer/runtime/OpenCLRuntime.c -o OpenCLRuntime.o
+gcc -m32 -shared -Wl,-soname,rootbeer_opencl -o rootbeer_opencl_x86.so.1 OpenCLRuntime.o -lc -lOpenCL
+
+mkdir ../build/classes/org/trifort/rootbeer/runtime/binaries/
+cp *.so.1 ../build/classes/org/trifort/rootbeer/runtime/binaries/

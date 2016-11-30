@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd ../../
+ant clean
+ant jar
+./pack-rootbeer
+
+cd examples/MatrixShared/
+ant clean
+ant jar
+java -jar ../../Rootbeer.jar MatrixApp.jar MatrixApp-GPU.jar -maxrregcount 32 -64bit

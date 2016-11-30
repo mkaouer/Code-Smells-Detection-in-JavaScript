@@ -1,0 +1,26 @@
+def isprime(n)
+{
+  for (auto i = 2; i < n; ++i)
+  {
+    if (n % i == 0) {return false}
+  }
+
+  return true
+}
+
+
+def primes(n)
+{
+  auto count = 0
+  for (auto i = 2; i <= n; ++i)
+  {
+    if (isprime(i)) {++count}
+  }
+
+  return count
+}
+
+
+auto N = 5000
+
+print("primes: " + primes(N).to_string())

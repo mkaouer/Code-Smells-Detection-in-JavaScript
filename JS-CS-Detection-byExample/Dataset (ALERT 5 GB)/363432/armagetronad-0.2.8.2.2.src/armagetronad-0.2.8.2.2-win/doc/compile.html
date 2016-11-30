@@ -1,0 +1,250 @@
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="date" content="2011-09-13T19:15:44+01:00">
+
+   <meta name="author" content="Manuel Moos">
+   <title>Armagetron Advanced: Documentation</title>
+   <meta name="description" content="Armagetron Advanced: Documentation">
+</head><body>
+
+
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+<td align=center width="15%">
+<a href="index.html" target="_top">First Start</a>
+</td>
+
+ <td align=center width="15%">
+<a href="install_windows.html" target="_top"> Installation</a>
+</td>
+  
+
+
+<td align=center width="15%">
+<a href="network.html" target="_top">Network Play</a>
+</td>
+
+<td align=center width="15%">
+<a href="config.html" target="_top">Configuration</a>
+</td>
+
+<td align=center width="10%">
+<a href="faq.html" target="_top">FAQ</a>
+</td>
+
+
+
+</tr>
+</table>
+
+
+
+
+<a name=><h1 align=center>Redistribution</h1></a>
+
+<p align=justify>
+This page is intended to give GNU/Linux distribution builders some help in building packages
+of Armagetron Advanced for their system. For the average user, it is of little use.
+</p>
+
+<p align=justify>
+The most important remark: this game is distributed under the GNU general public license.
+You can redistribute it in any way you want as long as you don't make changes: Put in on 
+cover CDs of magazines (we are happy to receive a copy of the corresponding edition, but it's
+not mandatory), add it to your freeware download directory or even put it in a box and sell it if
+you're crazy enough. You don't have to ask us for permission for any of this.<br>
+The GNU license kicks in if you make changes. Then, you also have to publish the sources
+of these changes.
+</p>
+
+<p align=justify>
+In theory, you always have to make the sourcecode available when
+you redistribute. However, this documetnation contains links to the official
+download locations, and they count as "making the source available" in our eyes.
+</p>
+
+<a name=><h2 align=left>Packaging</h2></a>
+
+<p align=justify>
+We manage distribution building with an additional CVS module we don't put into regular releases;
+it is called <strong>armagetronad_build</strong> and also hosted at SourceForge. Get it with
+<pre>CVSROOT=:pserver:anonymous@cvs.sf.net:/cvsroot/armagetronad co armagetronad_build</pre>
+enter it and type <strong>make</strong> once to configure it to your system. Edit <strong>make.conf</strong> to put
+in the missing details. Then, drop a tarball from our distribution into the <strong>tarballs</strong>
+subdirectory and use <strong>make</strong> to build the package of your choice. See the enclosed README.txt
+to see what's available.
+</p>
+
+<a name=><h2 align=left>Roll your own</h2></a>
+<p align=justify>
+If you want to roll your own package distribution, there are two special switches to <strong>configure</strong>
+you'll need to know about:
+</p>
+<p align=justify>
+The first is <strong>--disable-sysinstall</strong>. Normally, <strong>make install</strong> copies the files
+to their destination and then calls the script <strong>batch/sysinstall</strong>, telling it where the
+files were put (just the prefix, i.e. <strong>/usr/local</strong>), and the script then finishes off the
+installation. It adapts the server starter scripts to the real location, adds symbolic links to
+<strong>/etc/armagetronad</strong> and <strong>/etc/init.d/</strong> for the server, and it creates the user the server
+should run as. Naturally, if you want to build a binary distribution package, you want this
+script to run on the user's machine, not yours. Therefore, you add the option
+<strong>--disable-sysinstall</strong> to the invocation of <strong>configure</strong> which will prevent the script
+from being run. Then, you should set up the installation package so that it calls
+<pre>{prefix}/share/armagetronad/scripts/sysinstall install {prefix}</pre>
+after the regular files have been installed. {prefix} stands for the user choosable installation
+prefix (Armagetron Advanced is relocatable). Before uninstallation, you call
+<pre>{prefix}/share/armagetronad/scripts/sysinstall uninstall {prefix}</pre>
+</p>
+<p align=justify>
+The second option is <strong>--enable-multiver</strong>. Enable it if you want to allow users to install
+multiple versions of you package concurrently. All directories and executables will get the
+version number as suffix so there are no file collisions, and the sysinstall script installs
+additional links to the executables for the user's convenience.
+</p>
+
+<br>
+
+
+
+<p align=center>This document was created by
+<a href="http://armagetron.sf.net/contact.html" target=_top><strong>Manuel Moos</strong></a>
+</p>
+
+<p align=center>
+Last modification: Sep 13 2011
+</p>
+<p align=center><!--#spaceportsbanner--></p>
+
+
+
+<table width="90%" align=center>
+<tr>
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+ 
+
+
+
+<td align=center width="15%">
+<a href="index.html" target="_top">First Start</a>
+</td>
+
+ <td align=center width="15%">
+<a href="install_windows.html" target="_top"> Installation</a>
+</td>
+  
+
+
+<td align=center width="15%">
+<a href="network.html" target="_top">Network Play</a>
+</td>
+
+<td align=center width="15%">
+<a href="config.html" target="_top">Configuration</a>
+</td>
+
+<td align=center width="10%">
+<a href="faq.html" target="_top">FAQ</a>
+</td>
+
+
+
+</tr>
+</table>
+
+
+</body>
+</html>
