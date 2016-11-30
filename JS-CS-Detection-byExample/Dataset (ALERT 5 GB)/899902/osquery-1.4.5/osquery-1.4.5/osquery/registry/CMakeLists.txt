@@ -1,0 +1,6 @@
+ADD_OSQUERY_LIBRARY(TRUE osquery_registry
+  registry.cpp
+)
+
+file(GLOB OSQUERY_REGISTRY_TESTS "tests/*.cpp")
+ADD_OSQUERY_TEST(TRUE ${OSQUERY_REGISTRY_TESTS})

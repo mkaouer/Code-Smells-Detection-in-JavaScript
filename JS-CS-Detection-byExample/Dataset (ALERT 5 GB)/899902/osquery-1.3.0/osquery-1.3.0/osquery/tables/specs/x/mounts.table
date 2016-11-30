@@ -1,0 +1,15 @@
+table_name("mounts")
+schema([
+	Column("device", TEXT),
+	Column("device_alias", TEXT),
+	Column("path", TEXT),
+	Column("type", TEXT),
+	Column("blocks_size", BIGINT),
+	Column("blocks", BIGINT),
+	Column("blocks_free", BIGINT),
+	Column("blocks_available", BIGINT),
+	Column("inodes", BIGINT),
+	Column("inodes_free", BIGINT),
+	Column("flags", TEXT),
+])
+implementation("mounts@genMounts")

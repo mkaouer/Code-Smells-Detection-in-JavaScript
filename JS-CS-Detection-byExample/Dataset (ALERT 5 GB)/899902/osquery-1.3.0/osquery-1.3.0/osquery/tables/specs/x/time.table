@@ -1,0 +1,7 @@
+table_name("time")
+schema([
+    Column("hour", INTEGER),
+    Column("minutes", INTEGER),
+    Column("seconds", INTEGER),
+])
+implementation("time@genTime")

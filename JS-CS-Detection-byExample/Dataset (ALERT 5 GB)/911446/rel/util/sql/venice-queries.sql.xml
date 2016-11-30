@@ -1,0 +1,294 @@
+<?xml version='1.0'?>
+
+<!--
+    Merchant of Venice - technical analysis software for the stock market.
+   Copyright (C) 2002 Andrew Leppard (aleppard@picknowl.com.au)
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+-->
+
+<venice_sql>
+  <doc:section xmlns:doc='http://docbook.org/ns/docbook'>
+    <doc:sectioninfo>
+      <doc:title>Introduction</doc:title>
+    </doc:sectioninfo>
+    <doc:para>This library stores SQL queries for Venice. It faciliates query building and avoids the tedium of building queries through strings. While using stored procedures would be even better, we can't guarantee that all databases support them, or if so, that the user can make use of them. All that is guaranteed is that the user can create and insert.</doc:para>
+    <doc:para>Currently only the alert functionality exists here; in time all the database functions maybe migrated here.</doc:para>    
+  </doc:section>
+  <doc:section xmlns:doc='http://docbook.org/ns/docbook'>
+    <doc:sectioninfo>
+      <doc:title>Alert Table Design</doc:title>
+    </doc:sectioninfo>
+    <doc:para>Alerts are stored in five tables: venice_alerts, start_dates, end_dates, ohlvc_targets, gondola_targets. End dates are optional, so to avoid using null to represent that no end date was set, it has it's own table and the retreive query uses placeholders. </doc:para>
+    <doc:para>We also explicity separate the two alert types even though ohlcv alerts map onto gondola alerts so that when alerts are retrieved, Venice knows what
+      type of alert the uesr created.</doc:para>    
+  </doc:section>
+
+  <queries>
+    <method name='createAlertTable'>
+      <transaction name='createAlerts'>
+	<query>
+	  CREATE <parameter name='tableType'/> TABLE venice_alerts (
+	  id CHAR(36) NOT NULL,
+	  host VARCHAR(255) NOT NULL,
+	  username VARCHAR(255) NOT NULL,
+	  symbol CHAR(<parameter name='maxSymbolLength'/>) NOT NULL,
+	  enabled BOOLEAN NOT NULL,
+	  date_set DATE NOT NULL,
+	  primary key(id, host, username, symbol));
+	</query>
+	<query>
+	  CREATE <parameter name='tableType'/> TABLE alert_OHLCV_targets (
+	  alert_id CHAR(36) NOT NULL,
+	  target FLOAT NOT NULL,
+	  boundtype CHAR(5) NOT NULL,
+	  field CHAR(6) NOT NULL,
+	  primary key(alert_id));
+	</query>
+	<query>
+	  CREATE <parameter name='tableType'/> TABLE alert_Gondola_targets (
+	  alert_id CHAR(36) NOT NULL,
+	  expression VARCHAR(800) NOT NULL,
+	  primary key(alert_id));
+	</query>
+	<query>
+	  CREATE <parameter name='tableType'/> TABLE alert_start_dates (
+	  alert_id CHAR(36) NOT NULL,
+	  start_date DATE NOT NULL,
+	  primary key(alert_id, start_date));
+	</query>
+	<query>
+	  CREATE <parameter name='tableType'/> TABLE alert_end_dates (
+	  alert_id CHAR(36) NOT NULL,
+	  end_date DATE NOT NULL,
+	  primary key(alert_id, end_date));
+	</query>
+      </transaction>
+    </method>
+    <method name='getAllAlerts'>
+      <!-- Union of three selects to get all the alerts, using place holder
+	   'no enddate' where an alert has an open ended date. The result
+	   of the query is a list of all the alerts -->
+      <transaction name='getAllAlerts'>
+	<query>
+	  SELECT venice_alerts.id, host, username, symbol, start_date, 'no enddate', target, boundType, field, enabled, date_set FROM
+	  venice_alerts,alert_OHLCV_targets, alert_start_dates WHERE
+	  venice_alerts.id = alert_OHLCV_targets.alert_id AND
+	  venice_alerts.id = alert_start_dates.alert_id UNION
+	  
+	  SELECT venice_alerts.id, host, username, symbol, start_date, 'no enddate', expression, 
+	  'no bound', 'no field', enabled, date_set
+	  FROM 
+	  venice_alerts,alert_Gondola_targets,alert_start_dates WHERE
+	  venice_alerts.id = alert_Gondola_targets.alert_id AND
+	  venice_alerts.id = alert_start_dates.alert_id UNION
+	  
+	  SELECT venice_alerts.id, host, username, symbol, start_date, end_date, 'no target', 
+	  'no bound', 'no field', enabled, date_set
+	  FROM
+	  venice_alerts, alert_start_dates, alert_end_dates where 
+	  venice_alerts.id = alert_end_dates.alert_id ORDER BY id;
+	</query>
+      </transaction>
+    </method>
+    <method name='setOHLCVAlert'>
+      <transaction name='insertOHLCVAlert'>
+	<query>
+	  INSERT INTO venice_alerts values (
+	  '<parameter name='id'/>',
+	  '<parameter name='host'/>',
+	  '<parameter name='username'/>',
+	  '<parameter name='symbol'/>',
+	  true,	
+	  '<parameter name='dateSet'/>'
+	  );
+	</query>
+	<query>
+	  INSERT INTO alert_OHLCV_TARGETS values (
+	  '<parameter name='id'/>',
+	  '<parameter name='target'/>',
+	  '<parameter name='boundType'/>',
+	  '<parameter name='fieldType'/>'
+	  );
+	</query>
+	<query>
+	  INSERT INTO alert_start_dates values (
+	  '<parameter name='id'/>',
+	  '<parameter name='start_date'/>'
+	  ); 
+	</query>
+	<query>
+	  INSERT INTO alert_end_dates values (
+	  '<parameter name='id'/>',
+	  '<parameter name='end_date'/>'
+	  );
+	</query>
+      </transaction>
+    </method>
+    <method name='setGondolaAlert'>
+      <transaction name='insertGondolaAlert'>
+	<query>
+	  INSERT INTO venice_alerts values (
+	  '<parameter name='id'/>',
+	  '<parameter name='host'/>',
+	  '<parameter name='username'/>',
+	  '<parameter name='symbol'/>',
+	  true,
+	  '<parameter name='dateSet'/>'
+	  );
+	</query>
+	<query>
+	  INSERT INTO alert_GONDOLA_TARGETS values (
+	  '<parameter name='id'/>',
+	  '<parameter name='target'/>',
+	  );
+	</query>
+	<query>
+	  INSERT INTO alert_start_dates values (
+	  '<parameter name='id'/>',
+	  '<parameter name='start_date'/>'
+	  ); 
+	</query>
+	<query>
+	  INSERT INTO alert_end_dates values (
+	  '<parameter name='id'/>',
+	  '<parameter name='end_date'/>'
+	  );
+	</query>
+      </transaction>
+    </method>
+    <method name='setOHLCVAlert_noEndDate'>
+      <transaction name='insertOHLCVAlert_noEndDate'>
+	<query>
+	  INSERT INTO venice_alerts values (
+	  '<parameter name='id'/>',
+	  '<parameter name='host'/>',
+	  '<parameter name='username'/>',
+	  '<parameter name='symbol'/>',
+	  true,
+	  '<parameter name='dateSet'/>'
+	  );
+	</query>
+	<query>
+	INSERT INTO alert_OHLCV_TARGETS values (
+	'<parameter name='id'/>',
+	'<parameter name='target'/>',
+	'<parameter name='boundType'/>',
+	'<parameter name='fieldType'/>'
+	);
+      </query>
+      <query>
+	INSERT INTO alert_start_dates values (
+	'<parameter name='id'/>',
+	'<parameter name='start_date'/>'
+	); 
+      </query>
+    </transaction>
+    </method>
+    <method name='setGondolaAlert_noEndDate'>
+      <transaction name='insertGondolaAlert_noEndDate'>
+	<query>
+	  INSERT INTO venice_alerts values (
+	  '<parameter name='id'/>',
+	  '<parameter name='host'/>',
+	  '<parameter name='username'/>',
+	  '<parameter name='symbol'/>',
+	  true,
+	  '<parameter name='dateSet'/>'
+	  );
+	</query>
+	<query>
+	  INSERT INTO alert_GONDOLA_TARGETS values (
+	  '<parameter name='id'/>',
+	  '<parameter name='target'/>'
+	  );
+	</query>
+	<query>
+	  INSERT INTO alert_start_dates values (
+	  '<parameter name='id'/>',
+	  '<parameter name='start_date'/>'
+	  ); 
+	</query>
+      </transaction>
+    </method>
+    <method name='deleteAlert'>
+      <transaction name='deleteAlert'>
+	<query>
+	  DELETE FROM venice_alerts WHERE 
+	  id = '<parameter name='id'/>' AND
+	  host     = '<parameter name='host'/>' AND
+	  username = '<parameter name='username'/>' AND
+	  symbol   = '<parameter name='symbol'/>';
+	</query>
+	<query>
+	  DELETE FROM alert_OHLCV_targets WHERE
+	  alert_id = '<parameter name='id'/>';	  
+	</query>
+	<query>
+	  DELETE FROM alert_GONDOLA_targets WHERE
+	  alert_id = '<parameter name='id'/>';	  
+	</query>
+	<query>
+	  DELETE FROM alert_start_dates WHERE
+	  alert_id = '<parameter name='id'/>' AND
+	  start_date = '<parameter name='start_date'/>';	  
+	</query>
+	<query>
+	  DELETE FROM alert_end_dates WHERE
+	  alert_id = '<parameter name='id'/>' AND
+	  end_date = '<parameter name='end_date'/>';	  
+	</query>
+      </transaction>
+    </method>   
+    <method name='enable'>
+      <transaction name='enableAlert'>
+	<query>
+	  UPDATE venice_alerts SET enabled=true WHERE
+	  id = '<parameter name='id'/>';
+	</query>
+      </transaction>
+    </method>
+    <method name='disable'>
+      <transaction name='disableAlert'>
+	<query>
+	  UPDATE venice_alerts SET enabled=false WHERE
+	  id = '<parameter name='id'/>';
+	</query>
+      </transaction>
+    </method>
+    <method name='getAdvanceDeclineDateRange'>
+      <transaction name='getAdvanceDecline'>
+	<query>
+	  SELECT COUNT(*), date FROM <parameter name='share_table'/> WHERE
+	  date &gt;= <parameter name='firstDate'/> AND 
+	  date &lt;= <parameter name='lastDate'/> AND
+          close &gt; open AND length(symbol) = 3 AND 
+	  <parameter name='symbol_first_char'/> != 'X' 
+	  GROUP BY date 
+	  ORDER BY date ASC;
+	</query>
+	<query>
+	  SELECT COUNT(*), date FROM <parameter name='share_table'/> WHERE
+	  date &gt;= <parameter name='firstDate'/> AND 
+	  date &lt;= <parameter name='lastDate'/> AND
+          close &lt; open AND length(symbol) = 3 AND 
+	  <parameter name='symbol_first_char'/> != 'X' 
+	  GROUP BY date 
+	  ORDER BY date ASC;
+	</query>	  
+      </transaction>
+    </method>
+  </queries>
+</venice_sql>

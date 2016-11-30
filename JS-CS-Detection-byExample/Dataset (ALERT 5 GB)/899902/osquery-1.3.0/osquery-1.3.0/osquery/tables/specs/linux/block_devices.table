@@ -1,0 +1,12 @@
+table_name("block_devices")
+schema([
+	Column("name", TEXT),
+	Column("parent", TEXT),
+	Column("vendor", TEXT),
+	Column("model", TEXT),
+	Column("size", BIGINT),
+	Column("uuid", TEXT),
+	Column("type", TEXT),
+	Column("label", TEXT),
+])
+implementation("block_devices@genBlockDevs")

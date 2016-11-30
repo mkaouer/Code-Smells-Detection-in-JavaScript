@@ -1,0 +1,9 @@
+table_name("listening_ports")
+schema([
+    Column("pid", INTEGER),
+    Column("port", INTEGER),
+    Column("protocol", INTEGER),
+    Column("family", INTEGER),
+    Column("address", TEXT),
+])
+implementation("listening_ports@genListeningPorts")

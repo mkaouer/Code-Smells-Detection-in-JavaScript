@@ -1,0 +1,10 @@
+table_name("logged_in_users")
+description("Users with an active shell on the system.")
+schema([
+    Column("user", TEXT),
+    Column("tty", TEXT),
+    Column("host", TEXT),
+    Column("time", INTEGER),
+    Column("pid", INTEGER),
+])
+implementation("logged_in_users@genLoggedInUsers")

@@ -1,0 +1,28 @@
+table_name("file")
+description("Interactive filesystem attributes and metadata.")
+schema([
+    Column("path", TEXT, "Absolute file path", required=True),
+    Column("directory", TEXT, "Directory of file(s)", required=True),
+    Column("filename", TEXT, "Name portion of file path"),
+    Column("inode", BIGINT, "Filesystem inode number"),
+    Column("uid", BIGINT, "Owning user ID"),
+    Column("gid", BIGINT, "Owning group ID"),
+    Column("mode", TEXT, "Permission bits"),
+    Column("device", BIGINT, "Device ID (optional)"),
+    Column("size", BIGINT, "Size of file in bytes"),
+    Column("block_size", INTEGER, "Block size of filesystem"),
+    Column("atime", BIGINT, "Last access time"),
+    Column("mtime", BIGINT, "Last modification time"),
+    Column("ctime", BIGINT, "Last status change time"),
+    Column("btime", BIGINT, "(B)irth or (cr)eate time"),
+    Column("hard_links", INTEGER, "Number of hard links"),
+    Column("type", TEXT, "File status"),
+    Column("pattern", TEXT, "A pattern which can be used to match file paths"),
+])
+attributes(utility=True)
+implementation("utility/file@genFile")
+examples([
+  "select * from file where path = '/etc/passwd'",
+  "select * from file where directory = '/etc/'",
+  "select * from file where pattern = '/etc/%'",
+])

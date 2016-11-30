@@ -1,0 +1,16 @@
+table_name("interface_details")
+schema([
+    Column("interface", TEXT),
+    Column("mac", TEXT),
+    Column("type", INTEGER),
+    Column("mtu", INTEGER),
+    Column("metric", INTEGER),
+    Column("ipackets", BIGINT),
+    Column("opackets", BIGINT),
+    Column("ibytes", BIGINT),
+    Column("obytes", BIGINT),
+    Column("ierrors", BIGINT),
+    Column("oerrors", BIGINT),
+    Column("last_change", BIGINT),
+])
+implementation("interfaces@genInterfaceDetails")

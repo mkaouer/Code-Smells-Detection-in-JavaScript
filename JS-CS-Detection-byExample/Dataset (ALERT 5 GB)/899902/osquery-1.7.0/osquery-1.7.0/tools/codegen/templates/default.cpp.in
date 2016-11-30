@@ -1,0 +1,75 @@
+/*
+ *  Copyright (c) 2014, Facebook, Inc.
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree. An additional grant
+ *  of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+/*
+** This file is generated. Do not modify it manually!
+*/
+
+#include <osquery/events.h>
+#include <osquery/logger.h>
+#include <osquery/tables.h>
+
+namespace osquery {
+
+/// BEGIN[GENTABLE]
+namespace tables {
+{% if class_name == "" %}\
+osquery::QueryData {{function}}(QueryContext& request);
+{% else %}
+class {{class_name}} {
+ public:
+  osquery::QueryData {{function}}(QueryContext& request);
+};
+{% endif %}\
+}
+
+class {{table_name_cc}}TablePlugin : public TablePlugin {
+ private:
+  TableColumns columns() const {
+    return {
+{% for column in schema %}\
+      {"{{column.name}}", {{column.type.affinity}}}\
+{% if not loop.last %}, {% endif %}
+{% endfor %}\
+    };
+  }
+
+  QueryData generate(QueryContext& request) {
+{% if class_name != "" %}\
+    if (EventFactory::exists(getName())) {
+      auto subscriber = EventFactory::getEventSubscriber(getName());
+      return subscriber->{{function}}(request);
+    } else {
+      LOG(ERROR) << "Subscriber table missing: " << getName();
+      return QueryData();
+    }
+{% else %}\
+{% if attributes.cachable %}\
+    if (isCached(kCacheStep)) {
+      return getCache();
+    }
+{% endif %}\
+    auto results = tables::{{function}}(request);
+{% if attributes.cachable %}\
+    setCache(kCacheStep, kCacheInterval, results);
+{% endif %}
+    return results;
+{% endif %}\
+  }
+};
+
+{% if attributes.utility %}
+REGISTER_INTERNAL({{table_name_cc}}TablePlugin, "table", "{{table_name}}");
+{% else %}
+REGISTER({{table_name_cc}}TablePlugin, "table", "{{table_name}}");
+{% endif %}
+/// END[GENTABLE]
+
+}

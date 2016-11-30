@@ -1,0 +1,13 @@
+table_name("routes")
+schema([
+    Column("destination", TEXT),
+    Column("netmask", TEXT),
+    Column("gateway", TEXT),
+    Column("source", TEXT),
+    Column("flags", INTEGER),
+    Column("interface", TEXT),
+    Column("mtu", INTEGER),
+    Column("metric", INTEGER),
+    Column("type", TEXT),
+])
+implementation("networking/routes@genRoutes")

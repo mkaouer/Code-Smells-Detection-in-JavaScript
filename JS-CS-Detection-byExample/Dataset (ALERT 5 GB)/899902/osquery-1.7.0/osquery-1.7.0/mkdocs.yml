@@ -1,0 +1,40 @@
+site_name: osquery
+theme: readthedocs
+
+docs_dir: docs/wiki
+site_dir: build/wiki
+pages:
+- Introduction:
+  - Welcome to osquery: index.md
+  - Features Overview: introduction/overview.md
+  - osqueryi (shell): introduction/using-osqueryi.md
+  - osqueryd (daemon): introduction/using-osqueryd.md
+- Installation:
+  - Install on OS X: installation/install-osx.md
+  - Install on Linux: installation/install-linux.md
+  - Install on FreeBSD: installation/install-freebsd.md
+  - Command Line Flags: installation/cli-flags.md
+  - 'Optional: Custom Packages': installation/custom-packages.md
+- Deployment:
+  - Configuration: deployment/configuration.md
+  - Logging: deployment/logging.md
+  - Aggregating Logs: deployment/log-aggregation.md
+  - Performance Safety: deployment/performance-safety.md
+  - Anomaly Detection: deployment/anomaly-detection.md
+  - Extensions: deployment/extensions.md
+  - File Integrity Monitoring: deployment/file-integrity-monitoring.md
+  - YARA Scanning: deployment/yara.md
+  - Remote settings: deployment/remote.md
+  - Debugging: deployment/debugging.md
+- Development:
+  - Building osquery: development/building.md
+  - Contributing Code: development/contributing-code.md
+  - Creating New Tables: development/creating-tables.md
+  - Configuration Plugins: development/config-plugins.md
+  - Logging Plugins: development/logger-plugins.md
+  - SDK and Extensions: development/osquery-sdk.md
+  - Eventing Framework: development/pubsub-framework.md
+  - Writing Tests: development/unit-tests.md
+  - Adding CLI Arguments: development/options-arguments.md
+  - Reading/Writing Files: development/reading-files.md
+  - Kernel: development/kernel.md

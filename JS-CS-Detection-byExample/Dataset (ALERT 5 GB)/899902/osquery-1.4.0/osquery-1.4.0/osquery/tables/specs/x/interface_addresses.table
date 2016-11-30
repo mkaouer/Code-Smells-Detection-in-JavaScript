@@ -1,0 +1,10 @@
+table_name("interface_addresses")
+description("Network interfaces and relevant metadata.")
+schema([
+    Column("interface", TEXT),
+    Column("address", TEXT),
+    Column("mask", TEXT),
+    Column("broadcast", TEXT),
+    Column("point_to_point", TEXT),
+])
+implementation("interfaces@genInterfaceAddresses")

@@ -1,0 +1,12 @@
+table_name("last")
+description("System logins and logouts.")
+schema([
+    Column("username", TEXT, "Entry username"),
+    Column("tty", TEXT, "Entry terminal"),
+    Column("pid", INTEGER, "Process (or thread) ID"),
+    Column("type", INTEGER, "Entry type, according to ut_type types (utmp.h)"),
+    Column("time", INTEGER, "Entry timestamp"),
+    Column("host", TEXT, "Entry hostname"),
+])
+attributes(cachable=True)
+implementation("last@genLastAccess")

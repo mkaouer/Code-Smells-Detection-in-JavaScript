@@ -1,0 +1,13 @@
+table_name("crontab")
+description("Line parsed values from system and user cron/tab.")
+schema([
+    Column("event", TEXT, "The job @event name (rare)"),
+    Column("minute", TEXT),
+    Column("hour", TEXT),
+    Column("day_of_month", TEXT),
+    Column("month", TEXT),
+    Column("day_of_week", TEXT),
+    Column("command", TEXT, "Raw command string"),
+    Column("path", TEXT, "File parsed"),
+])
+implementation("crontab@genCronTab")

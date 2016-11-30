@@ -1,0 +1,7 @@
+table_name("homebrew_packages")
+schema([
+    Column("name", TEXT),
+    Column("path", TEXT),
+    Column("version", TEXT),
+])
+implementation("system/homebrew_packages@genHomebrewPackages")
