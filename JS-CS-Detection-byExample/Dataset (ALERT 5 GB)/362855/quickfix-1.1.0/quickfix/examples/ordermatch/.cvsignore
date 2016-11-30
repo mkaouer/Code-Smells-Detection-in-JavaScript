@@ -1,0 +1,9 @@
+Debug
+Release
+Makefile
+*.plg
+.deps
+.libs
+*.dep
+*.mak
+ordermatch

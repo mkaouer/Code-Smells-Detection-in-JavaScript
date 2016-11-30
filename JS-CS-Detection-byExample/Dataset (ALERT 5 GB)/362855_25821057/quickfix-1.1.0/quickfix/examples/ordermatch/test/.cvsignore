@@ -1,8 +1,0 @@
-Debug
-Release
-*.mak
-*.dep
-Makefile
-.deps
-.libs
-ordermatch_ut

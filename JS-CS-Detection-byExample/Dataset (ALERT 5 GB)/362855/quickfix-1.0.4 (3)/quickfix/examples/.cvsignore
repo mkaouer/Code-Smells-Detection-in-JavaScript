@@ -1,0 +1,12 @@
+aclocal.m4
+config.log
+config.h
+config.cache
+libtool
+config.status
+stamp-h
+Makefile
+*.ncb
+*.opt
+Debug
+Release

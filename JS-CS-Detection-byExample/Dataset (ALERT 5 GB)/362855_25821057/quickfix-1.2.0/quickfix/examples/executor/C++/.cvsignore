@@ -1,8 +1,0 @@
-Release
-Debug
-*.plg
-*.dsp
-Makefile
-.deps
-.libs
-executor

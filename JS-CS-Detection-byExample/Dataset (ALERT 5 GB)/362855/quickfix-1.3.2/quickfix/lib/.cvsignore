@@ -1,0 +1,7 @@
+banzai.jar
+executor.jar
+quickfix.jar
+*.lib
+*.dll
+*.ilk
+*.pdb

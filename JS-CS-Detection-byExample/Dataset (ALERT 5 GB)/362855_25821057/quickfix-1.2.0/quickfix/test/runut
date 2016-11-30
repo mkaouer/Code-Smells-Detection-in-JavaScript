@@ -1,7 +1,0 @@
-#!/bin/sh
-
-DIR=`pwd`
-
-cd ..
-bin/ut -p $1
-cd $DIR
