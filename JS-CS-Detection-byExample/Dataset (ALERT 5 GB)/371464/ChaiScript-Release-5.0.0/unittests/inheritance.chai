@@ -1,0 +1,8 @@
+load_module("test_module")
+
+auto t0 = TestBaseType()
+auto t = TestDerivedType();
+
+assert_equal(t0.func(), 0);
+assert_equal(t.func(), 1);
+
