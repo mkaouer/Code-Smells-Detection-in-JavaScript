@@ -1,0 +1,32 @@
+# Application Files
+*.apk
+*.ap_
+
+# Dex VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated folders
+*/bin
+*/gen
+target
+
+# Config file
+build.xml
+local.properties
+
+# Eclipse
+.classpath
+.project
+library/res
+
+# Proguard
+proguard/
+
+# IntelliJ
+*.iml
+*.ipr
+*.iws
+.idea/

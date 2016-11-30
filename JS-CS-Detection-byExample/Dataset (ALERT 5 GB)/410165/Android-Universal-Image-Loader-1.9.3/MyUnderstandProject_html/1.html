@@ -1,0 +1,985 @@
+<html><head><title>DiskLruCache.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\sbasta\Downloads\Android-Universal-Image-Loader-1.9.3\library\src\com\nostra13\universalimageloader\cache\disc\impl\ext\DiskLruCache.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\sbasta\\Downloads\\Android-Universal-Image-Loader-1.9.3\\library\\src\\com\\nostra13\\universalimageloader\\cache\\disc\\impl\\ext\\DiskLruCache.java";
+top.document.title  = "DiskLruCache.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright (C) 2011 The Android Open Source Project</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * you may not use this file except in compliance with the License.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * You may obtain a copy of the License at</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> *      http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * See the License for the specific language governing permissions and</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * limitations under the License.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> */</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">com.nostra13.universalimageloader.cache.disc.impl.<a href="dictionary_I.html#291">ext</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#3">BufferedWriter</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#5">Closeable</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#261">EOFException</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#264">File</a>;</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#265">FileInputStream</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#266">FileNotFoundException</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#267">FileOutputStream</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#268">FilterOutputStream</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#269">IOException</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#272">InputStream</a>;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#273">InputStreamReader</a>;</span>
+<a name="29"><font size=-1>29     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#280">OutputStream</a>;</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#281">OutputStreamWriter</a>;</span>
+<a name="31"><font size=-1>31     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#294">io</a>.<a href="dictionary_I.html#290">Writer</a>;</span>
+<a name="32"><font size=-1>32     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#296">util</a>.<a href="dictionary_U.html#2">ArrayList</a>;</span>
+<a name="33"><font size=-1>33     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#296">util</a>.<a href="dictionary_U.html#274">Iterator</a>;</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#296">util</a>.<a href="dictionary_U.html#276">LinkedHashMap</a>;</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#296">util</a>.<a href="dictionary_U.html#277">Map</a>;</span>
+<a name="36"><font size=-1>36     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#293">concurrent</a>.<a href="dictionary_C.html#4">Callable</a>;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#293">concurrent</a>.<a href="dictionary_C.html#275">LinkedBlockingQueue</a>;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#293">concurrent</a>.<a href="dictionary_C.html#287">ThreadPoolExecutor</a>;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#293">concurrent</a>.<a href="dictionary_C.html#288">TimeUnit</a>;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#295">regex</a>.<a href="dictionary_R.html#278">Matcher</a>;</span>
+<a name="41"><font size=-1>41     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.util.<a href="dictionary_U.html#295">regex</a>.<a href="dictionary_R.html#283">Pattern</a>;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="44"><font size=-1>44     </font></a><span class="comment"> * A cache that uses a bounded amount of space on a filesystem. Each cache</span>
+<a name="45"><font size=-1>45     </font></a><span class="comment"> * entry has a string key and a fixed number of values. Each key must match</span>
+<a name="46"><font size=-1>46     </font></a><span class="comment"> * the regex &lt;strong&gt;[a-z0-9_-]{1,64}&lt;/strong&gt;. Values are byte sequences,</span>
+<a name="47"><font size=-1>47     </font></a><span class="comment"> * accessible as streams or files. Each value must be between {@code 0} and</span>
+<a name="48"><font size=-1>48     </font></a><span class="comment"> * {@code Integer.MAX_VALUE} bytes in length.</span>
+<a name="49"><font size=-1>49     </font></a><span class="comment"> *</span>
+<a name="50"><font size=-1>50     </font></a><span class="comment"> * &lt;p&gt;The cache stores its data in a directory on the filesystem. This</span>
+<a name="51"><font size=-1>51     </font></a><span class="comment"> * directory must be exclusive to the cache; the cache may delete or overwrite</span>
+<a name="52"><font size=-1>52     </font></a><span class="comment"> * files from its directory. It is an error for multiple processes to use the</span>
+<a name="53"><font size=-1>53     </font></a><span class="comment"> * same cache directory at the same time.</span>
+<a name="54"><font size=-1>54     </font></a><span class="comment"> *</span>
+<a name="55"><font size=-1>55     </font></a><span class="comment"> * &lt;p&gt;This cache limits the number of bytes that it will store on the</span>
+<a name="56"><font size=-1>56     </font></a><span class="comment"> * filesystem. When the number of stored bytes exceeds the limit, the cache will</span>
+<a name="57"><font size=-1>57     </font></a><span class="comment"> * remove entries in the background until the limit is satisfied. The limit is</span>
+<a name="58"><font size=-1>58     </font></a><span class="comment"> * not strict: the cache may temporarily exceed it while waiting for files to be</span>
+<a name="59"><font size=-1>59     </font></a><span class="comment"> * deleted. The limit does not include filesystem overhead or the cache</span>
+<a name="60"><font size=-1>60     </font></a><span class="comment"> * journal so space-sensitive applications should set a conservative limit.</span>
+<a name="61"><font size=-1>61     </font></a><span class="comment"> *</span>
+<a name="62"><font size=-1>62     </font></a><span class="comment"> * &lt;p&gt;Clients call {@link #edit} to create or update the values of an entry. An</span>
+<a name="63"><font size=-1>63     </font></a><span class="comment"> * entry may have only one editor at one time; if a value is not available to be</span>
+<a name="64"><font size=-1>64     </font></a><span class="comment"> * edited then {@link #edit} will return null.</span>
+<a name="65"><font size=-1>65     </font></a><span class="comment"> * &lt;ul&gt;</span>
+<a name="66"><font size=-1>66     </font></a><span class="comment"> * &lt;li&gt;When an entry is being &lt;strong&gt;created&lt;/strong&gt; it is necessary to</span>
+<a name="67"><font size=-1>67     </font></a><span class="comment"> * supply a full set of values; the empty value should be used as a</span>
+<a name="68"><font size=-1>68     </font></a><span class="comment"> * placeholder if necessary.</span>
+<a name="69"><font size=-1>69     </font></a><span class="comment"> * &lt;li&gt;When an entry is being &lt;strong&gt;edited&lt;/strong&gt;, it is not necessary</span>
+<a name="70"><font size=-1>70     </font></a><span class="comment"> * to supply data for every value; values default to their previous</span>
+<a name="71"><font size=-1>71     </font></a><span class="comment"> * value.</span>
+<a name="72"><font size=-1>72     </font></a><span class="comment"> * &lt;/ul&gt;</span>
+<a name="73"><font size=-1>73     </font></a><span class="comment"> * Every {@link #edit} call must be matched by a call to {@link Editor#commit}</span>
+<a name="74"><font size=-1>74     </font></a><span class="comment"> * or {@link Editor#abort}. Committing is atomic: a read observes the full set</span>
+<a name="75"><font size=-1>75     </font></a><span class="comment"> * of values as they were before or after the commit, but never a mix of values.</span>
+<a name="76"><font size=-1>76     </font></a><span class="comment"> *</span>
+<a name="77"><font size=-1>77     </font></a><span class="comment"> * &lt;p&gt;Clients call {@link #get} to read a snapshot of an entry. The read will</span>
+<a name="78"><font size=-1>78     </font></a><span class="comment"> * observe the value at the time that {@link #get} was called. Updates and</span>
+<a name="79"><font size=-1>79     </font></a><span class="comment"> * removals after the call do not impact ongoing reads.</span>
+<a name="80"><font size=-1>80     </font></a><span class="comment"> *</span>
+<a name="81"><font size=-1>81     </font></a><span class="comment"> * &lt;p&gt;This class is tolerant of some I/O errors. If files are missing from the</span>
+<a name="82"><font size=-1>82     </font></a><span class="comment"> * filesystem, the corresponding entries will be dropped from the cache. If</span>
+<a name="83"><font size=-1>83     </font></a><span class="comment"> * an error occurs while writing a cache value, the edit will fail silently.</span>
+<a name="84"><font size=-1>84     </font></a><span class="comment"> * Callers should handle other problems by catching {@code IOException} and</span>
+<a name="85"><font size=-1>85     </font></a><span class="comment"> * responding appropriately.</span>
+<a name="86"><font size=-1>86     </font></a><span class="comment"> */</span>
+<a name="87"><font size=-1>87     </font></a><span class="comment"></span><span class="keyword">final class <a href="dictionary_E.html#6">DiskLruCache</a> implements <a href="dictionary_I.html#5">Closeable</a> </span><span class="default">{</span>
+<a name="88"><font size=-1>88     </font></a><span class="default">	</span><span class="keyword">static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#235">JOURNAL_FILE</a> </span><span class="default">= </span><span class="string">&quot;journal&quot;</span><span class="default">;</span>
+<a name="89"><font size=-1>89     </font></a><span class="default">	</span><span class="keyword">static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#237">JOURNAL_FILE_TEMP</a> </span><span class="default">= </span><span class="string">&quot;journal.tmp&quot;</span><span class="default">;</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">	</span><span class="keyword">static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#236">JOURNAL_FILE_BACKUP</a> </span><span class="default">= </span><span class="string">&quot;journal.bkp&quot;</span><span class="default">;</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">	</span><span class="keyword">static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#239">MAGIC</a> </span><span class="default">= </span><span class="string">&quot;libcore.io.DiskLruCache&quot;</span><span class="default">;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">	</span><span class="keyword">static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#244">VERSION_1</a> </span><span class="default">= </span><span class="string">&quot;1&quot;</span><span class="default">;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">	</span><span class="keyword">static final long <a href="dictionary_D.html#232">ANY_SEQUENCE_NUMBER</a> </span><span class="default">= -</span><span class="number">1</span><span class="default">;</span>
+<a name="94"><font size=-1>94     </font></a><span class="default">	</span><span class="keyword">static final <a href="dictionary_R.html#283">Pattern</a> <a href="dictionary_D.html#238">LEGAL_KEY_PATTERN</a> </span><span class="default">= <a href="dictionary_R.html#283">Pattern</a>.<a href="dictionary_C.html#115">compile</a>(</span><span class="string">&quot;[a-z0-9_-]{1,64}&quot;</span><span class="default">);</span>
+<a name="95"><font size=-1>95     </font></a><span class="default">	</span><span class="keyword">private static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#233">CLEAN</a> </span><span class="default">= </span><span class="string">&quot;CLEAN&quot;</span><span class="default">;</span>
+<a name="96"><font size=-1>96     </font></a><span class="default">	</span><span class="keyword">private static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#234">DIRTY</a> </span><span class="default">= </span><span class="string">&quot;DIRTY&quot;</span><span class="default">;</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">	</span><span class="keyword">private static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#242">REMOVE</a> </span><span class="default">= </span><span class="string">&quot;REMOVE&quot;</span><span class="default">;</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">	</span><span class="keyword">private static final <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#241">READ</a> </span><span class="default">= </span><span class="string">&quot;READ&quot;</span><span class="default">;</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default">    </span><span class="comment">/*</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">     * This cache uses a journal file named &quot;journal&quot;. A typical journal file</span>
+<a name="102"><font size=-1>102     </font></a><span class="comment">     * looks like this:</span>
+<a name="103"><font size=-1>103     </font></a><span class="comment">     *     libcore.io.DiskLruCache</span>
+<a name="104"><font size=-1>104     </font></a><span class="comment">     *     1</span>
+<a name="105"><font size=-1>105     </font></a><span class="comment">     *     100</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">     *     2</span>
+<a name="107"><font size=-1>107     </font></a><span class="comment">     *</span>
+<a name="108"><font size=-1>108     </font></a><span class="comment">     *     CLEAN 3400330d1dfc7f3f7f4b8d4d803dfcf6 832 21054</span>
+<a name="109"><font size=-1>109     </font></a><span class="comment">     *     DIRTY 335c4c6028171cfddfbaae1a9c313c52</span>
+<a name="110"><font size=-1>110     </font></a><span class="comment">     *     CLEAN 335c4c6028171cfddfbaae1a9c313c52 3934 2342</span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">     *     REMOVE 335c4c6028171cfddfbaae1a9c313c52</span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">     *     DIRTY 1ab96a171faeeee38496d8b330771a7a</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">     *     CLEAN 1ab96a171faeeee38496d8b330771a7a 1600 234</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">     *     READ 335c4c6028171cfddfbaae1a9c313c52</span>
+<a name="115"><font size=-1>115     </font></a><span class="comment">     *     READ 3400330d1dfc7f3f7f4b8d4d803dfcf6</span>
+<a name="116"><font size=-1>116     </font></a><span class="comment">     *</span>
+<a name="117"><font size=-1>117     </font></a><span class="comment">     * The first five lines of the journal form its header. They are the</span>
+<a name="118"><font size=-1>118     </font></a><span class="comment">     * constant string &quot;libcore.io.DiskLruCache&quot;, the disk cache's version,</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">     * the application's version, the value count, and a blank line.</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">     *</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">     * Each of the subsequent lines in the file is a record of the state of a</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">     * cache entry. Each line contains space-separated values: a state, a key,</span>
+<a name="123"><font size=-1>123     </font></a><span class="comment">     * and optional state-specific values.</span>
+<a name="124"><font size=-1>124     </font></a><span class="comment">     *   o DIRTY lines track that an entry is actively being created or updated.</span>
+<a name="125"><font size=-1>125     </font></a><span class="comment">     *     Every successful DIRTY action should be followed by a CLEAN or REMOVE</span>
+<a name="126"><font size=-1>126     </font></a><span class="comment">     *     action. DIRTY lines without a matching CLEAN or REMOVE indicate that</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">     *     temporary files may need to be deleted.</span>
+<a name="128"><font size=-1>128     </font></a><span class="comment">     *   o CLEAN lines track a cache entry that has been successfully published</span>
+<a name="129"><font size=-1>129     </font></a><span class="comment">     *     and may be read. A publish line is followed by the lengths of each of</span>
+<a name="130"><font size=-1>130     </font></a><span class="comment">     *     its values.</span>
+<a name="131"><font size=-1>131     </font></a><span class="comment">     *   o READ lines track accesses for LRU.</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">     *   o REMOVE lines track entries that have been deleted.</span>
+<a name="133"><font size=-1>133     </font></a><span class="comment">     *</span>
+<a name="134"><font size=-1>134     </font></a><span class="comment">     * The journal file is appended to as cache operations occur. The journal may</span>
+<a name="135"><font size=-1>135     </font></a><span class="comment">     * occasionally be compacted by dropping redundant lines. A temporary file named</span>
+<a name="136"><font size=-1>136     </font></a><span class="comment">     * &quot;journal.tmp&quot; will be used during compaction; that file should be deleted if</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">     * it exists when the cache is opened.</span>
+<a name="138"><font size=-1>138     </font></a><span class="comment">     */</span>
+<a name="139"><font size=-1>139     </font></a><span class="comment"></span>
+<a name="140"><font size=-1>140     </font></a><span class="comment">	</span><span class="keyword">private final <a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#247">directory</a></span><span class="default">;</span>
+<a name="141"><font size=-1>141     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#250">journalFile</a></span><span class="default">;</span>
+<a name="142"><font size=-1>142     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#252">journalFileTmp</a></span><span class="default">;</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#251">journalFileBackup</a></span><span class="default">;</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">	</span><span class="keyword">private final int <a href="dictionary_D.html#245">appVersion</a></span><span class="default">;</span>
+<a name="145"><font size=-1>145     </font></a><span class="default">	</span><span class="keyword">private long <a href="dictionary_D.html#256">maxSize</a></span><span class="default">;</span>
+<a name="146"><font size=-1>146     </font></a><span class="default">	</span><span class="keyword">private int <a href="dictionary_D.html#255">maxFileCount</a></span><span class="default">;</span>
+<a name="147"><font size=-1>147     </font></a><span class="default">	</span><span class="keyword">private final int <a href="dictionary_D.html#260">valueCount</a></span><span class="default">;</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">	</span><span class="keyword">private long <a href="dictionary_D.html#259">size</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">	</span><span class="keyword">private int <a href="dictionary_D.html#249">fileCount</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">	</span><span class="keyword">private <a href="dictionary_I.html#290">Writer</a> <a href="dictionary_D.html#253">journalWriter</a></span><span class="default">;</span>
+<a name="151"><font size=-1>151     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_U.html#276">LinkedHashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#285">String</a>, <a href="dictionary_D.html#58">Entry</a>&gt; <a href="dictionary_D.html#254">lruEntries</a> =</span>
+<a name="152"><font size=-1>152     </font></a><span class="default">			</span><span class="keyword">new <a href="dictionary_U.html#276">LinkedHashMap</a></span><span class="default">&lt;<a href="dictionary_S.html#285">String</a>, <a href="dictionary_D.html#58">Entry</a>&gt;(</span><span class="number">0</span><span class="default">, </span><span class="number">0.75f</span><span class="default">, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="153"><font size=-1>153     </font></a><span class="default">	</span><span class="keyword">private int <a href="dictionary_D.html#258">redundantOpCount</a></span><span class="default">;</span>
+<a name="154"><font size=-1>154     </font></a><span class="default"></span>
+<a name="155"><font size=-1>155     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="156"><font size=-1>156     </font></a><span class="comment">	 * To differentiate between old and current snapshots, each entry is given</span>
+<a name="157"><font size=-1>157     </font></a><span class="comment">	 * a sequence number each time an edit is committed. A snapshot is stale if</span>
+<a name="158"><font size=-1>158     </font></a><span class="comment">	 * its sequence number is not equal to its entry's sequence number.</span>
+<a name="159"><font size=-1>159     </font></a><span class="comment">	 */</span>
+<a name="160"><font size=-1>160     </font></a><span class="comment">	</span><span class="keyword">private long <a href="dictionary_D.html#257">nextSequenceNumber</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="161"><font size=-1>161     </font></a><span class="default"></span>
+<a name="162"><font size=-1>162     </font></a><span class="default">	</span><span class="comment">/** This cache uses a single background thread to evict entries. */</span>
+<a name="163"><font size=-1>163     </font></a><span class="comment">	</span><span class="keyword">final <a href="dictionary_C.html#287">ThreadPoolExecutor</a> <a href="dictionary_D.html#248">executorService</a> </span><span class="default">=</span>
+<a name="164"><font size=-1>164     </font></a><span class="default">			</span><span class="keyword">new <a href="dictionary_C.html#287">ThreadPoolExecutor</a></span><span class="default">(</span><span class="number">0</span><span class="default">, </span><span class="number">1</span><span class="default">, </span><span class="number">60L</span><span class="default">, <a href="dictionary_C.html#288">TimeUnit</a>.<a href="dictionary_S.html#243">SECONDS</a>, </span><span class="keyword">new <a href="dictionary_C.html#275">LinkedBlockingQueue</a></span><span class="default">&lt;<a href="dictionary_R.html#284">Runnable</a>&gt;());</span>
+<a name="165"><font size=-1>165     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_C.html#4">Callable</a></span><span class="default">&lt;<a href="dictionary_V.html#289">Void</a>&gt; <a href="dictionary_D.html#246">cleanupCallable</a> = </span><span class="keyword">new <a href="dictionary_C.html#4">Callable</a></span><span class="default">&lt;Void&gt;() {</span>
+<a name="166"><font size=-1>166     </font></a><span class="default">		</span><span class="keyword">public <a href="dictionary_V.html#289">Void</a> <a href="dictionary_Non-Alpha.html#8">call</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_E.html#263">Exception</a> </span><span class="default">{</span>
+<a name="167"><font size=-1>167     </font></a><span class="default">			</span><span class="keyword">synchronized </span><span class="default">(<a href="dictionary_E.html#6">DiskLruCache</a>.</span><span class="keyword">this</span><span class="default">) {</span>
+<a name="168"><font size=-1>168     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#253">journalWriter</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="169"><font size=-1>169     </font></a><span class="default">					</span><span class="keyword">return null</span><span class="default">; </span><span class="comment">// Closed.</span>
+<a name="170"><font size=-1>170     </font></a><span class="comment">				</span><span class="default">}</span>
+<a name="171"><font size=-1>171     </font></a><span class="default">				<a href="dictionary_D.html#225">trimToSize</a>();</span>
+<a name="172"><font size=-1>172     </font></a><span class="default">				<a href="dictionary_D.html#221">trimToFileCount</a>();</span>
+<a name="173"><font size=-1>173     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#161">journalRebuildRequired</a>()) {</span>
+<a name="174"><font size=-1>174     </font></a><span class="default">					<a href="dictionary_D.html#206">rebuildJournal</a>();</span>
+<a name="175"><font size=-1>175     </font></a><span class="default">					<a href="dictionary_D.html#258">redundantOpCount</a> = </span><span class="number">0</span><span class="default">;</span>
+<a name="176"><font size=-1>176     </font></a><span class="default">				}</span>
+<a name="177"><font size=-1>177     </font></a><span class="default">			}</span>
+<a name="178"><font size=-1>178     </font></a><span class="default">			</span><span class="keyword">return null</span><span class="default">;</span>
+<a name="179"><font size=-1>179     </font></a><span class="default">		}</span>
+<a name="180"><font size=-1>180     </font></a><span class="default">	};</span>
+<a name="181"><font size=-1>181     </font></a><span class="default"></span>
+<a name="182"><font size=-1>182     </font></a><span class="default">	</span><span class="keyword">private <a href="dictionary_D.html#105">DiskLruCache</a></span><span class="default">(<a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#107">directory</a>, </span><span class="keyword">int <a href="dictionary_A.html#106">appVersion</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_V.html#110">valueCount</a></span><span class="default">, </span><span class="keyword">long <a href="dictionary_M.html#109">maxSize</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_M.html#108">maxFileCount</a></span><span class="default">) {</span>
+<a name="183"><font size=-1>183     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#247">directory</a> = <a href="dictionary_D.html#107">directory</a>;</span>
+<a name="184"><font size=-1>184     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#245">appVersion</a> = <a href="dictionary_A.html#106">appVersion</a>;</span>
+<a name="185"><font size=-1>185     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#250">journalFile</a> = </span><span class="keyword">new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#107">directory</a>, <a href="dictionary_D.html#235">JOURNAL_FILE</a>);</span>
+<a name="186"><font size=-1>186     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#252">journalFileTmp</a> = </span><span class="keyword">new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#107">directory</a>, <a href="dictionary_D.html#237">JOURNAL_FILE_TEMP</a>);</span>
+<a name="187"><font size=-1>187     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#251">journalFileBackup</a> = </span><span class="keyword">new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#107">directory</a>, <a href="dictionary_D.html#236">JOURNAL_FILE_BACKUP</a>);</span>
+<a name="188"><font size=-1>188     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#260">valueCount</a> = <a href="dictionary_V.html#110">valueCount</a>;</span>
+<a name="189"><font size=-1>189     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#256">maxSize</a> = <a href="dictionary_M.html#109">maxSize</a>;</span>
+<a name="190"><font size=-1>190     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#255">maxFileCount</a> = <a href="dictionary_M.html#108">maxFileCount</a>;</span>
+<a name="191"><font size=-1>191     </font></a><span class="default">	}</span>
+<a name="192"><font size=-1>192     </font></a><span class="default"></span>
+<a name="193"><font size=-1>193     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="194"><font size=-1>194     </font></a><span class="comment">	 * Opens the cache in {@code directory}, creating a cache if none exists</span>
+<a name="195"><font size=-1>195     </font></a><span class="comment">	 * there.</span>
+<a name="196"><font size=-1>196     </font></a><span class="comment">	 *</span>
+<a name="197"><font size=-1>197     </font></a><span class="comment">	 * @param directory a writable directory</span>
+<a name="198"><font size=-1>198     </font></a><span class="comment">	 * @param valueCount the number of values per cache entry. Must be positive.</span>
+<a name="199"><font size=-1>199     </font></a><span class="comment">	 * @param maxSize the maximum number of bytes this cache should use to store</span>
+<a name="200"><font size=-1>200     </font></a><span class="comment">	 * @param maxFileCount the maximum file count this cache should store</span>
+<a name="201"><font size=-1>201     </font></a><span class="comment">	 * @throws IOException if reading or writing the cache directory fails</span>
+<a name="202"><font size=-1>202     </font></a><span class="comment">	 */</span>
+<a name="203"><font size=-1>203     </font></a><span class="comment">	</span><span class="keyword">public static <a href="dictionary_E.html#6">DiskLruCache</a> <a href="dictionary_D.html#164">open</a></span><span class="default">(<a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#171">directory</a>, </span><span class="keyword">int <a href="dictionary_A.html#168">appVersion</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_V.html#175">valueCount</a></span><span class="default">, </span><span class="keyword">long <a href="dictionary_M.html#174">maxSize</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_M.html#173">maxFileCount</a></span><span class="default">)</span>
+<a name="204"><font size=-1>204     </font></a><span class="default">			</span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="205"><font size=-1>205     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#174">maxSize</a> &lt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="206"><font size=-1>206     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#270">IllegalArgumentException</a></span><span class="default">(</span><span class="string">&quot;maxSize &lt;= 0&quot;</span><span class="default">);</span>
+<a name="207"><font size=-1>207     </font></a><span class="default">		}</span>
+<a name="208"><font size=-1>208     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_M.html#173">maxFileCount</a> &lt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="209"><font size=-1>209     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#270">IllegalArgumentException</a></span><span class="default">(</span><span class="string">&quot;maxFileCount &lt;= 0&quot;</span><span class="default">);</span>
+<a name="210"><font size=-1>210     </font></a><span class="default">		}</span>
+<a name="211"><font size=-1>211     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_V.html#175">valueCount</a> &lt;= </span><span class="number">0</span><span class="default">) {</span>
+<a name="212"><font size=-1>212     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#270">IllegalArgumentException</a></span><span class="default">(</span><span class="string">&quot;valueCount &lt;= 0&quot;</span><span class="default">);</span>
+<a name="213"><font size=-1>213     </font></a><span class="default">		}</span>
+<a name="214"><font size=-1>214     </font></a><span class="default"></span>
+<a name="215"><font size=-1>215     </font></a><span class="default">		</span><span class="comment">// If a bkp file exists, use it instead.</span>
+<a name="216"><font size=-1>216     </font></a><span class="comment">		<a href="dictionary_I.html#264">File</a> <a href="dictionary_B.html#169">backupFile</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#171">directory</a>, <a href="dictionary_D.html#236">JOURNAL_FILE_BACKUP</a>);</span>
+<a name="217"><font size=-1>217     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_B.html#169">backupFile</a>.<a href="dictionary_E.html#119">exists</a>()) {</span>
+<a name="218"><font size=-1>218     </font></a><span class="default">			<a href="dictionary_I.html#264">File</a> <a href="dictionary_J.html#172">journalFile</a> = </span><span class="keyword">new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#171">directory</a>, <a href="dictionary_D.html#235">JOURNAL_FILE</a>);</span>
+<a name="219"><font size=-1>219     </font></a><span class="default">			</span><span class="comment">// If journal file also exists just delete backup file.</span>
+<a name="220"><font size=-1>220     </font></a><span class="comment">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_J.html#172">journalFile</a>.<a href="dictionary_E.html#119">exists</a>()) {</span>
+<a name="221"><font size=-1>221     </font></a><span class="default">				<a href="dictionary_B.html#169">backupFile</a>.<a href="dictionary_D.html#133">delete</a>();</span>
+<a name="222"><font size=-1>222     </font></a><span class="default">			} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="223"><font size=-1>223     </font></a><span class="default">				<a href="dictionary_D.html#214">renameTo</a>(<a href="dictionary_B.html#169">backupFile</a>, <a href="dictionary_J.html#172">journalFile</a>, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="224"><font size=-1>224     </font></a><span class="default">			}</span>
+<a name="225"><font size=-1>225     </font></a><span class="default">		}</span>
+<a name="226"><font size=-1>226     </font></a><span class="default"></span>
+<a name="227"><font size=-1>227     </font></a><span class="default">		</span><span class="comment">// Prefer to pick up where we left off.</span>
+<a name="228"><font size=-1>228     </font></a><span class="comment">		<a href="dictionary_E.html#6">DiskLruCache</a> <a href="dictionary_C.html#170">cache</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_D.html#105">DiskLruCache</a></span><span class="default">(<a href="dictionary_D.html#171">directory</a>, <a href="dictionary_A.html#168">appVersion</a>, <a href="dictionary_V.html#175">valueCount</a>, <a href="dictionary_M.html#174">maxSize</a>, <a href="dictionary_M.html#173">maxFileCount</a>);</span>
+<a name="229"><font size=-1>229     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#250">journalFile</a>.<a href="dictionary_E.html#119">exists</a>()) {</span>
+<a name="230"><font size=-1>230     </font></a><span class="default">			</span><span class="keyword">try </span><span class="default">{</span>
+<a name="231"><font size=-1>231     </font></a><span class="default">				<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#184">readJournal</a>();</span>
+<a name="232"><font size=-1>232     </font></a><span class="default">				<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#176">processJournal</a>();</span>
+<a name="233"><font size=-1>233     </font></a><span class="default">				<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#253">journalWriter</a> = </span><span class="keyword">new <a href="dictionary_I.html#3">BufferedWriter</a></span><span class="default">(</span>
+<a name="234"><font size=-1>234     </font></a><span class="default">						</span><span class="keyword">new <a href="dictionary_I.html#281">OutputStreamWriter</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_I.html#267">FileOutputStream</a></span><span class="default">(<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#250">journalFile</a>, </span><span class="keyword">true</span><span class="default">), <a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#304">US_ASCII</a>));</span>
+<a name="235"><font size=-1>235     </font></a><span class="default">				</span><span class="keyword">return <a href="dictionary_C.html#170">cache</a></span><span class="default">;</span>
+<a name="236"><font size=-1>236     </font></a><span class="default">			} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#269">IOException</a> <a href="dictionary_J.html#167">journalIsCorrupt</a>) {</span>
+<a name="237"><font size=-1>237     </font></a><span class="default">				System.out</span>
+<a name="238"><font size=-1>238     </font></a><span class="default">						.<a href="dictionary_P.html#166">println</a>(</span><span class="string">&quot;DiskLruCache &quot;</span>
+<a name="239"><font size=-1>239     </font></a><span class="string">								</span><span class="default">+ <a href="dictionary_D.html#171">directory</a></span>
+<a name="240"><font size=-1>240     </font></a><span class="default">								+ </span><span class="string">&quot; is corrupt: &quot;</span>
+<a name="241"><font size=-1>241     </font></a><span class="string">								</span><span class="default">+ <a href="dictionary_J.html#167">journalIsCorrupt</a>.<a href="dictionary_G.html#165">getMessage</a>()</span>
+<a name="242"><font size=-1>242     </font></a><span class="default">								+ </span><span class="string">&quot;, removing&quot;</span><span class="default">);</span>
+<a name="243"><font size=-1>243     </font></a><span class="default">				<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#131">delete</a>();</span>
+<a name="244"><font size=-1>244     </font></a><span class="default">			}</span>
+<a name="245"><font size=-1>245     </font></a><span class="default">		}</span>
+<a name="246"><font size=-1>246     </font></a><span class="default"></span>
+<a name="247"><font size=-1>247     </font></a><span class="default">		</span><span class="comment">// Create a new empty cache.</span>
+<a name="248"><font size=-1>248     </font></a><span class="comment">		<a href="dictionary_D.html#171">directory</a></span><span class="default">.<a href="dictionary_M.html#44">mkdirs</a>();</span>
+<a name="249"><font size=-1>249     </font></a><span class="default">		<a href="dictionary_C.html#170">cache</a> = </span><span class="keyword">new <a href="dictionary_D.html#105">DiskLruCache</a></span><span class="default">(<a href="dictionary_D.html#171">directory</a>, <a href="dictionary_A.html#168">appVersion</a>, <a href="dictionary_V.html#175">valueCount</a>, <a href="dictionary_M.html#174">maxSize</a>, <a href="dictionary_M.html#173">maxFileCount</a>);</span>
+<a name="250"><font size=-1>250     </font></a><span class="default">		<a href="dictionary_C.html#170">cache</a>.<a href="dictionary_D.html#206">rebuildJournal</a>();</span>
+<a name="251"><font size=-1>251     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_C.html#170">cache</a></span><span class="default">;</span>
+<a name="252"><font size=-1>252     </font></a><span class="default">	}</span>
+<a name="253"><font size=-1>253     </font></a><span class="default"></span>
+<a name="254"><font size=-1>254     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_D.html#184">readJournal</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="255"><font size=-1>255     </font></a><span class="default">		<a href="dictionary_E.html#298">StrictLineReader</a> <a href="dictionary_R.html#191">reader</a> = </span><span class="keyword">new <a href="dictionary_S.html#305">StrictLineReader</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_I.html#265">FileInputStream</a></span><span class="default">(<a href="dictionary_D.html#250">journalFile</a>), <a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#304">US_ASCII</a>);</span>
+<a name="256"><font size=-1>256     </font></a><span class="default">		</span><span class="keyword">try </span><span class="default">{</span>
+<a name="257"><font size=-1>257     </font></a><span class="default">			<a href="dictionary_S.html#285">String</a> <a href="dictionary_M.html#190">magic</a> = <a href="dictionary_R.html#191">reader</a>.<a href="dictionary_S.html#306">readLine</a>();</span>
+<a name="258"><font size=-1>258     </font></a><span class="default">			<a href="dictionary_S.html#285">String</a> <a href="dictionary_V.html#193">version</a> = <a href="dictionary_R.html#191">reader</a>.<a href="dictionary_S.html#306">readLine</a>();</span>
+<a name="259"><font size=-1>259     </font></a><span class="default">			<a href="dictionary_S.html#285">String</a> <a href="dictionary_A.html#187">appVersionString</a> = <a href="dictionary_R.html#191">reader</a>.<a href="dictionary_S.html#306">readLine</a>();</span>
+<a name="260"><font size=-1>260     </font></a><span class="default">			<a href="dictionary_S.html#285">String</a> <a href="dictionary_V.html#192">valueCountString</a> = <a href="dictionary_R.html#191">reader</a>.<a href="dictionary_S.html#306">readLine</a>();</span>
+<a name="261"><font size=-1>261     </font></a><span class="default">			<a href="dictionary_S.html#285">String</a> <a href="dictionary_B.html#188">blank</a> = <a href="dictionary_R.html#191">reader</a>.<a href="dictionary_S.html#306">readLine</a>();</span>
+<a name="262"><font size=-1>262     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_D.html#239">MAGIC</a>.<a href="dictionary_E.html#185">equals</a>(<a href="dictionary_M.html#190">magic</a>)</span>
+<a name="263"><font size=-1>263     </font></a><span class="default">					|| !<a href="dictionary_D.html#244">VERSION_1</a>.<a href="dictionary_E.html#185">equals</a>(<a href="dictionary_V.html#193">version</a>)</span>
+<a name="264"><font size=-1>264     </font></a><span class="default">					|| !Integer.<a href="dictionary_T.html#66">toString</a>(<a href="dictionary_D.html#245">appVersion</a>).<a href="dictionary_E.html#185">equals</a>(<a href="dictionary_A.html#187">appVersionString</a>)</span>
+<a name="265"><font size=-1>265     </font></a><span class="default">					|| !Integer.<a href="dictionary_T.html#66">toString</a>(<a href="dictionary_D.html#260">valueCount</a>).<a href="dictionary_E.html#185">equals</a>(<a href="dictionary_V.html#192">valueCountString</a>)</span>
+<a name="266"><font size=-1>266     </font></a><span class="default">					|| !</span><span class="string">&quot;&quot;</span><span class="default">.<a href="dictionary_E.html#185">equals</a>(<a href="dictionary_B.html#188">blank</a>)) {</span>
+<a name="267"><font size=-1>267     </font></a><span class="default">				</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">(</span><span class="string">&quot;unexpected journal header: [&quot; </span><span class="default">+ <a href="dictionary_M.html#190">magic</a> + </span><span class="string">&quot;, &quot; </span><span class="default">+ <a href="dictionary_V.html#193">version</a> + </span><span class="string">&quot;, &quot;</span>
+<a name="268"><font size=-1>268     </font></a><span class="string">						</span><span class="default">+ <a href="dictionary_V.html#192">valueCountString</a> + </span><span class="string">&quot;, &quot; </span><span class="default">+ <a href="dictionary_B.html#188">blank</a> + </span><span class="string">&quot;]&quot;</span><span class="default">);</span>
+<a name="269"><font size=-1>269     </font></a><span class="default">			}</span>
+<a name="270"><font size=-1>270     </font></a><span class="default"></span>
+<a name="271"><font size=-1>271     </font></a><span class="default">			</span><span class="keyword">int <a href="dictionary_L.html#189">lineCount</a> </span><span class="default">= </span><span class="number">0</span><span class="default">;</span>
+<a name="272"><font size=-1>272     </font></a><span class="default">			</span><span class="keyword">while </span><span class="default">(</span><span class="keyword">true</span><span class="default">) {</span>
+<a name="273"><font size=-1>273     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="274"><font size=-1>274     </font></a><span class="default">					<a href="dictionary_D.html#194">readJournalLine</a>(<a href="dictionary_R.html#191">reader</a>.<a href="dictionary_S.html#306">readLine</a>());</span>
+<a name="275"><font size=-1>275     </font></a><span class="default">					lineCount++;</span>
+<a name="276"><font size=-1>276     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#261">EOFException</a> <a href="dictionary_E.html#186">endOfJournal</a>) {</span>
+<a name="277"><font size=-1>277     </font></a><span class="default">					</span><span class="keyword">break</span><span class="default">;</span>
+<a name="278"><font size=-1>278     </font></a><span class="default">				}</span>
+<a name="279"><font size=-1>279     </font></a><span class="default">			}</span>
+<a name="280"><font size=-1>280     </font></a><span class="default">			<a href="dictionary_D.html#258">redundantOpCount</a> = <a href="dictionary_L.html#189">lineCount</a> - <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_S.html#162">size</a>();</span>
+<a name="281"><font size=-1>281     </font></a><span class="default">		} </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="282"><font size=-1>282     </font></a><span class="default">			<a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#301">closeQuietly</a>(<a href="dictionary_R.html#191">reader</a>);</span>
+<a name="283"><font size=-1>283     </font></a><span class="default">		}</span>
+<a name="284"><font size=-1>284     </font></a><span class="default">	}</span>
+<a name="285"><font size=-1>285     </font></a><span class="default"></span>
+<a name="286"><font size=-1>286     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_D.html#194">readJournalLine</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_L.html#203">line</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="287"><font size=-1>287     </font></a><span class="default">		</span><span class="keyword">int <a href="dictionary_F.html#200">firstSpace</a> </span><span class="default">= <a href="dictionary_L.html#203">line</a>.<a href="dictionary_I.html#195">indexOf</a>(</span><span class="string">' '</span><span class="default">);</span>
+<a name="288"><font size=-1>288     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_F.html#200">firstSpace</a> == -</span><span class="number">1</span><span class="default">) {</span>
+<a name="289"><font size=-1>289     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">(</span><span class="string">&quot;unexpected journal line: &quot; </span><span class="default">+ <a href="dictionary_L.html#203">line</a>);</span>
+<a name="290"><font size=-1>290     </font></a><span class="default">		}</span>
+<a name="291"><font size=-1>291     </font></a><span class="default"></span>
+<a name="292"><font size=-1>292     </font></a><span class="default">		</span><span class="keyword">int <a href="dictionary_K.html#202">keyBegin</a> </span><span class="default">= <a href="dictionary_F.html#200">firstSpace</a> + </span><span class="number">1</span><span class="default">;</span>
+<a name="293"><font size=-1>293     </font></a><span class="default">		</span><span class="keyword">int <a href="dictionary_S.html#205">secondSpace</a> </span><span class="default">= <a href="dictionary_L.html#203">line</a>.<a href="dictionary_I.html#195">indexOf</a>(</span><span class="string">' '</span><span class="default">, <a href="dictionary_K.html#202">keyBegin</a>);</span>
+<a name="294"><font size=-1>294     </font></a><span class="default">		</span><span class="keyword">final <a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#201">key</a></span><span class="default">;</span>
+<a name="295"><font size=-1>295     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#205">secondSpace</a> == -</span><span class="number">1</span><span class="default">) {</span>
+<a name="296"><font size=-1>296     </font></a><span class="default">			<a href="dictionary_K.html#201">key</a> = <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#198">substring</a>(<a href="dictionary_K.html#202">keyBegin</a>);</span>
+<a name="297"><font size=-1>297     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_F.html#200">firstSpace</a> == <a href="dictionary_D.html#242">REMOVE</a>.<a href="dictionary_L.html#121">length</a>() &amp;&amp; <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#197">startsWith</a>(<a href="dictionary_D.html#242">REMOVE</a>)) {</span>
+<a name="298"><font size=-1>298     </font></a><span class="default">				<a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_R.html#117">remove</a>(<a href="dictionary_K.html#201">key</a>);</span>
+<a name="299"><font size=-1>299     </font></a><span class="default">				</span><span class="keyword">return</span><span class="default">;</span>
+<a name="300"><font size=-1>300     </font></a><span class="default">			}</span>
+<a name="301"><font size=-1>301     </font></a><span class="default">		} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="302"><font size=-1>302     </font></a><span class="default">			<a href="dictionary_K.html#201">key</a> = <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#198">substring</a>(<a href="dictionary_K.html#202">keyBegin</a>, <a href="dictionary_S.html#205">secondSpace</a>);</span>
+<a name="303"><font size=-1>303     </font></a><span class="default">		}</span>
+<a name="304"><font size=-1>304     </font></a><span class="default"></span>
+<a name="305"><font size=-1>305     </font></a><span class="default">		<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#199">entry</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_G.html#138">get</a>(<a href="dictionary_K.html#201">key</a>);</span>
+<a name="306"><font size=-1>306     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#199">entry</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="307"><font size=-1>307     </font></a><span class="default">			<a href="dictionary_E.html#199">entry</a> = </span><span class="keyword">new <a href="dictionary_E.html#59">Entry</a></span><span class="default">(<a href="dictionary_K.html#201">key</a>);</span>
+<a name="308"><font size=-1>308     </font></a><span class="default">			<a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_P.html#139">put</a>(<a href="dictionary_K.html#201">key</a>, <a href="dictionary_E.html#199">entry</a>);</span>
+<a name="309"><font size=-1>309     </font></a><span class="default">		}</span>
+<a name="310"><font size=-1>310     </font></a><span class="default"></span>
+<a name="311"><font size=-1>311     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#205">secondSpace</a> != -</span><span class="number">1 </span><span class="default">&amp;&amp; <a href="dictionary_F.html#200">firstSpace</a> == <a href="dictionary_D.html#233">CLEAN</a>.<a href="dictionary_L.html#121">length</a>() &amp;&amp; <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#197">startsWith</a>(<a href="dictionary_D.html#233">CLEAN</a>)) {</span>
+<a name="312"><font size=-1>312     </font></a><span class="default">			<a href="dictionary_S.html#285">String</a>[] <a href="dictionary_P.html#204">parts</a> = <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#198">substring</a>(<a href="dictionary_S.html#205">secondSpace</a> + </span><span class="number">1</span><span class="default">).<a href="dictionary_S.html#196">split</a>(</span><span class="string">&quot; &quot;</span><span class="default">);</span>
+<a name="313"><font size=-1>313     </font></a><span class="default">			<a href="dictionary_E.html#199">entry</a>.<a href="dictionary_E.html#80">readable</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="314"><font size=-1>314     </font></a><span class="default">			<a href="dictionary_E.html#199">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="315"><font size=-1>315     </font></a><span class="default">			<a href="dictionary_E.html#199">entry</a>.<a href="dictionary_E.html#72">setLengths</a>(<a href="dictionary_P.html#204">parts</a>);</span>
+<a name="316"><font size=-1>316     </font></a><span class="default">		} </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_S.html#205">secondSpace</a> == -</span><span class="number">1 </span><span class="default">&amp;&amp; <a href="dictionary_F.html#200">firstSpace</a> == <a href="dictionary_D.html#234">DIRTY</a>.<a href="dictionary_L.html#121">length</a>() &amp;&amp; <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#197">startsWith</a>(<a href="dictionary_D.html#234">DIRTY</a>)) {</span>
+<a name="317"><font size=-1>317     </font></a><span class="default">			<a href="dictionary_E.html#199">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> = </span><span class="keyword">new <a href="dictionary_E.html#31">Editor</a></span><span class="default">(<a href="dictionary_E.html#199">entry</a>);</span>
+<a name="318"><font size=-1>318     </font></a><span class="default">		} </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_S.html#205">secondSpace</a> == -</span><span class="number">1 </span><span class="default">&amp;&amp; <a href="dictionary_F.html#200">firstSpace</a> == <a href="dictionary_D.html#241">READ</a>.<a href="dictionary_L.html#121">length</a>() &amp;&amp; <a href="dictionary_L.html#203">line</a>.<a href="dictionary_S.html#197">startsWith</a>(<a href="dictionary_D.html#241">READ</a>)) {</span>
+<a name="319"><font size=-1>319     </font></a><span class="default">			</span><span class="comment">// This work was already done by calling lruEntries.get().</span>
+<a name="320"><font size=-1>320     </font></a><span class="comment">		</span><span class="default">} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="321"><font size=-1>321     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">(</span><span class="string">&quot;unexpected journal line: &quot; </span><span class="default">+ <a href="dictionary_L.html#203">line</a>);</span>
+<a name="322"><font size=-1>322     </font></a><span class="default">		}</span>
+<a name="323"><font size=-1>323     </font></a><span class="default">	}</span>
+<a name="324"><font size=-1>324     </font></a><span class="default"></span>
+<a name="325"><font size=-1>325     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="326"><font size=-1>326     </font></a><span class="comment">	 * Computes the initial size and collects garbage as a part of opening the</span>
+<a name="327"><font size=-1>327     </font></a><span class="comment">	 * cache. Dirty entries are assumed to be inconsistent and will be deleted.</span>
+<a name="328"><font size=-1>328     </font></a><span class="comment">	 */</span>
+<a name="329"><font size=-1>329     </font></a><span class="comment">	</span><span class="keyword">private void <a href="dictionary_D.html#176">processJournal</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="330"><font size=-1>330     </font></a><span class="default">		<a href="dictionary_D.html#132">deleteIfExists</a>(<a href="dictionary_D.html#252">journalFileTmp</a>);</span>
+<a name="331"><font size=-1>331     </font></a><span class="default">		</span><span class="keyword">for </span><span class="default">(<a href="dictionary_U.html#274">Iterator</a>&lt;<a href="dictionary_D.html#58">Entry</a>&gt; <a href="dictionary_I.html#183">i</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_V.html#113">values</a>().<a href="dictionary_I.html#178">iterator</a>(); <a href="dictionary_I.html#183">i</a>.<a href="dictionary_H.html#177">hasNext</a>(); ) {</span>
+<a name="332"><font size=-1>332     </font></a><span class="default">			<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#182">entry</a> = <a href="dictionary_I.html#183">i</a>.<a href="dictionary_N.html#179">next</a>();</span>
+<a name="333"><font size=-1>333     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#182">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="334"><font size=-1>334     </font></a><span class="default">				</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_T.html#180">t</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_T.html#180">t</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; t++) {</span>
+<a name="335"><font size=-1>335     </font></a><span class="default">					size += <a href="dictionary_E.html#182">entry</a>.<a href="dictionary_E.html#79">lengths</a>[<a href="dictionary_T.html#180">t</a>];</span>
+<a name="336"><font size=-1>336     </font></a><span class="default">					fileCount++;</span>
+<a name="337"><font size=-1>337     </font></a><span class="default">				}</span>
+<a name="338"><font size=-1>338     </font></a><span class="default">			} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="339"><font size=-1>339     </font></a><span class="default">				<a href="dictionary_E.html#182">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="340"><font size=-1>340     </font></a><span class="default">				</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_T.html#181">t</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_T.html#181">t</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; t++) {</span>
+<a name="341"><font size=-1>341     </font></a><span class="default">					<a href="dictionary_D.html#132">deleteIfExists</a>(<a href="dictionary_E.html#182">entry</a>.<a href="dictionary_E.html#61">getCleanFile</a>(<a href="dictionary_T.html#181">t</a>));</span>
+<a name="342"><font size=-1>342     </font></a><span class="default">					<a href="dictionary_D.html#132">deleteIfExists</a>(<a href="dictionary_E.html#182">entry</a>.<a href="dictionary_E.html#63">getDirtyFile</a>(<a href="dictionary_T.html#181">t</a>));</span>
+<a name="343"><font size=-1>343     </font></a><span class="default">				}</span>
+<a name="344"><font size=-1>344     </font></a><span class="default">				<a href="dictionary_I.html#183">i</a>.<a href="dictionary_R.html#117">remove</a>();</span>
+<a name="345"><font size=-1>345     </font></a><span class="default">			}</span>
+<a name="346"><font size=-1>346     </font></a><span class="default">		}</span>
+<a name="347"><font size=-1>347     </font></a><span class="default">	}</span>
+<a name="348"><font size=-1>348     </font></a><span class="default"></span>
+<a name="349"><font size=-1>349     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="350"><font size=-1>350     </font></a><span class="comment">	 * Creates a new journal that omits redundant information. This replaces the</span>
+<a name="351"><font size=-1>351     </font></a><span class="comment">	 * current journal if it exists.</span>
+<a name="352"><font size=-1>352     </font></a><span class="comment">	 */</span>
+<a name="353"><font size=-1>353     </font></a><span class="comment">	</span><span class="keyword">private synchronized void <a href="dictionary_D.html#206">rebuildJournal</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="354"><font size=-1>354     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#253">journalWriter</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="355"><font size=-1>355     </font></a><span class="default">			<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_C.html#17">close</a>();</span>
+<a name="356"><font size=-1>356     </font></a><span class="default">		}</span>
+<a name="357"><font size=-1>357     </font></a><span class="default"></span>
+<a name="358"><font size=-1>358     </font></a><span class="default">		<a href="dictionary_I.html#290">Writer</a> <a href="dictionary_W.html#208">writer</a> = </span><span class="keyword">new <a href="dictionary_I.html#3">BufferedWriter</a></span><span class="default">(</span>
+<a name="359"><font size=-1>359     </font></a><span class="default">				</span><span class="keyword">new <a href="dictionary_I.html#281">OutputStreamWriter</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_I.html#267">FileOutputStream</a></span><span class="default">(<a href="dictionary_D.html#252">journalFileTmp</a>), <a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#304">US_ASCII</a>));</span>
+<a name="360"><font size=-1>360     </font></a><span class="default">		</span><span class="keyword">try </span><span class="default">{</span>
+<a name="361"><font size=-1>361     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#239">MAGIC</a>);</span>
+<a name="362"><font size=-1>362     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(</span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="363"><font size=-1>363     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#244">VERSION_1</a>);</span>
+<a name="364"><font size=-1>364     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(</span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="365"><font size=-1>365     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(Integer.<a href="dictionary_T.html#66">toString</a>(<a href="dictionary_D.html#245">appVersion</a>));</span>
+<a name="366"><font size=-1>366     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(</span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="367"><font size=-1>367     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(Integer.<a href="dictionary_T.html#66">toString</a>(<a href="dictionary_D.html#260">valueCount</a>));</span>
+<a name="368"><font size=-1>368     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(</span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="369"><font size=-1>369     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(</span><span class="string">&quot;\n&quot;</span><span class="default">);</span>
+<a name="370"><font size=-1>370     </font></a><span class="default"></span>
+<a name="371"><font size=-1>371     </font></a><span class="default">			</span><span class="keyword">for </span><span class="default">(<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#207">entry</a> : <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_V.html#113">values</a>()) {</span>
+<a name="372"><font size=-1>372     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#207">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="373"><font size=-1>373     </font></a><span class="default">					<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#234">DIRTY</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_E.html#207">entry</a>.<a href="dictionary_E.html#78">key</a> + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="374"><font size=-1>374     </font></a><span class="default">				} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="375"><font size=-1>375     </font></a><span class="default">					<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#233">CLEAN</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_E.html#207">entry</a>.<a href="dictionary_E.html#78">key</a> + <a href="dictionary_E.html#207">entry</a>.<a href="dictionary_E.html#65">getLengths</a>() + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="376"><font size=-1>376     </font></a><span class="default">				}</span>
+<a name="377"><font size=-1>377     </font></a><span class="default">			}</span>
+<a name="378"><font size=-1>378     </font></a><span class="default">		} </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="379"><font size=-1>379     </font></a><span class="default">			<a href="dictionary_W.html#208">writer</a>.<a href="dictionary_C.html#17">close</a>();</span>
+<a name="380"><font size=-1>380     </font></a><span class="default">		}</span>
+<a name="381"><font size=-1>381     </font></a><span class="default"></span>
+<a name="382"><font size=-1>382     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#250">journalFile</a>.<a href="dictionary_E.html#119">exists</a>()) {</span>
+<a name="383"><font size=-1>383     </font></a><span class="default">			<a href="dictionary_D.html#214">renameTo</a>(<a href="dictionary_D.html#250">journalFile</a>, <a href="dictionary_D.html#251">journalFileBackup</a>, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="384"><font size=-1>384     </font></a><span class="default">		}</span>
+<a name="385"><font size=-1>385     </font></a><span class="default">		<a href="dictionary_D.html#214">renameTo</a>(<a href="dictionary_D.html#252">journalFileTmp</a>, <a href="dictionary_D.html#250">journalFile</a>, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="386"><font size=-1>386     </font></a><span class="default">		<a href="dictionary_D.html#251">journalFileBackup</a>.<a href="dictionary_D.html#133">delete</a>();</span>
+<a name="387"><font size=-1>387     </font></a><span class="default"></span>
+<a name="388"><font size=-1>388     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a> = </span><span class="keyword">new <a href="dictionary_I.html#3">BufferedWriter</a></span><span class="default">(</span>
+<a name="389"><font size=-1>389     </font></a><span class="default">				</span><span class="keyword">new <a href="dictionary_I.html#281">OutputStreamWriter</a></span><span class="default">(</span><span class="keyword">new <a href="dictionary_I.html#267">FileOutputStream</a></span><span class="default">(<a href="dictionary_D.html#250">journalFile</a>, </span><span class="keyword">true</span><span class="default">), <a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#304">US_ASCII</a>));</span>
+<a name="390"><font size=-1>390     </font></a><span class="default">	}</span>
+<a name="391"><font size=-1>391     </font></a><span class="default"></span>
+<a name="392"><font size=-1>392     </font></a><span class="default">	</span><span class="keyword">private static void <a href="dictionary_D.html#132">deleteIfExists</a></span><span class="default">(<a href="dictionary_I.html#264">File</a> <a href="dictionary_F.html#134">file</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="393"><font size=-1>393     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_F.html#134">file</a>.<a href="dictionary_E.html#119">exists</a>() &amp;&amp; !<a href="dictionary_F.html#134">file</a>.<a href="dictionary_D.html#133">delete</a>()) {</span>
+<a name="394"><font size=-1>394     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">();</span>
+<a name="395"><font size=-1>395     </font></a><span class="default">		}</span>
+<a name="396"><font size=-1>396     </font></a><span class="default">	}</span>
+<a name="397"><font size=-1>397     </font></a><span class="default"></span>
+<a name="398"><font size=-1>398     </font></a><span class="default">	</span><span class="keyword">private static void <a href="dictionary_D.html#214">renameTo</a></span><span class="default">(<a href="dictionary_I.html#264">File</a> <a href="dictionary_F.html#216">from</a>, <a href="dictionary_I.html#264">File</a> <a href="dictionary_T.html#217">to</a>, </span><span class="keyword">boolean <a href="dictionary_D.html#215">deleteDestination</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="399"><font size=-1>399     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#215">deleteDestination</a>) {</span>
+<a name="400"><font size=-1>400     </font></a><span class="default">			<a href="dictionary_D.html#132">deleteIfExists</a>(<a href="dictionary_T.html#217">to</a>);</span>
+<a name="401"><font size=-1>401     </font></a><span class="default">		}</span>
+<a name="402"><font size=-1>402     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_F.html#216">from</a>.<a href="dictionary_R.html#122">renameTo</a>(<a href="dictionary_T.html#217">to</a>)) {</span>
+<a name="403"><font size=-1>403     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">();</span>
+<a name="404"><font size=-1>404     </font></a><span class="default">		}</span>
+<a name="405"><font size=-1>405     </font></a><span class="default">	}</span>
+<a name="406"><font size=-1>406     </font></a><span class="default"></span>
+<a name="407"><font size=-1>407     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="408"><font size=-1>408     </font></a><span class="comment">	 * Returns a snapshot of the entry named {@code key}, or null if it doesn't</span>
+<a name="409"><font size=-1>409     </font></a><span class="comment">	 * exist is not currently readable. If a value is returned, it is moved to</span>
+<a name="410"><font size=-1>410     </font></a><span class="comment">	 * the head of the LRU queue.</span>
+<a name="411"><font size=-1>411     </font></a><span class="comment">	 */</span>
+<a name="412"><font size=-1>412     </font></a><span class="comment">	</span><span class="keyword">public synchronized <a href="dictionary_D.html#82">Snapshot</a> <a href="dictionary_D.html#146">get</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#154">key</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="413"><font size=-1>413     </font></a><span class="default">		<a href="dictionary_D.html#111">checkNotClosed</a>();</span>
+<a name="414"><font size=-1>414     </font></a><span class="default">		<a href="dictionary_D.html#227">validateKey</a>(<a href="dictionary_K.html#154">key</a>);</span>
+<a name="415"><font size=-1>415     </font></a><span class="default">		<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#150">entry</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_G.html#138">get</a>(<a href="dictionary_K.html#154">key</a>);</span>
+<a name="416"><font size=-1>416     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#150">entry</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="417"><font size=-1>417     </font></a><span class="default">			</span><span class="keyword">return null</span><span class="default">;</span>
+<a name="418"><font size=-1>418     </font></a><span class="default">		}</span>
+<a name="419"><font size=-1>419     </font></a><span class="default"></span>
+<a name="420"><font size=-1>420     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#150">entry</a>.<a href="dictionary_E.html#80">readable</a>) {</span>
+<a name="421"><font size=-1>421     </font></a><span class="default">			</span><span class="keyword">return null</span><span class="default">;</span>
+<a name="422"><font size=-1>422     </font></a><span class="default">		}</span>
+<a name="423"><font size=-1>423     </font></a><span class="default"></span>
+<a name="424"><font size=-1>424     </font></a><span class="default">		</span><span class="comment">// Open all streams eagerly to guarantee that we see a single published</span>
+<a name="425"><font size=-1>425     </font></a><span class="comment">		// snapshot. If we opened streams lazily then the streams could come</span>
+<a name="426"><font size=-1>426     </font></a><span class="comment">		// from different edits.</span>
+<a name="427"><font size=-1>427     </font></a><span class="comment">		<a href="dictionary_I.html#264">File</a></span><span class="default">[] <a href="dictionary_F.html#152">files</a> = </span><span class="keyword">new <a href="dictionary_I.html#264">File</a></span><span class="default">[<a href="dictionary_D.html#260">valueCount</a>];</span>
+<a name="428"><font size=-1>428     </font></a><span class="default">		<a href="dictionary_I.html#272">InputStream</a>[] <a href="dictionary_I.html#153">ins</a> = </span><span class="keyword">new <a href="dictionary_I.html#272">InputStream</a></span><span class="default">[<a href="dictionary_D.html#260">valueCount</a>];</span>
+<a name="429"><font size=-1>429     </font></a><span class="default">		</span><span class="keyword">try </span><span class="default">{</span>
+<a name="430"><font size=-1>430     </font></a><span class="default">			<a href="dictionary_I.html#264">File</a> <a href="dictionary_F.html#151">file</a>;</span>
+<a name="431"><font size=-1>431     </font></a><span class="default">			</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#149">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#149">i</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; i++) {</span>
+<a name="432"><font size=-1>432     </font></a><span class="default">				<a href="dictionary_F.html#151">file</a> = <a href="dictionary_E.html#150">entry</a>.<a href="dictionary_E.html#61">getCleanFile</a>(<a href="dictionary_I.html#149">i</a>);</span>
+<a name="433"><font size=-1>433     </font></a><span class="default">				<a href="dictionary_F.html#152">files</a>[<a href="dictionary_I.html#149">i</a>] = <a href="dictionary_F.html#151">file</a>;</span>
+<a name="434"><font size=-1>434     </font></a><span class="default">				<a href="dictionary_I.html#153">ins</a>[<a href="dictionary_I.html#149">i</a>] = </span><span class="keyword">new <a href="dictionary_I.html#265">FileInputStream</a></span><span class="default">(<a href="dictionary_F.html#151">file</a>);</span>
+<a name="435"><font size=-1>435     </font></a><span class="default">			}</span>
+<a name="436"><font size=-1>436     </font></a><span class="default">		} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#266">FileNotFoundException</a> <a href="dictionary_E.html#148">e</a>) {</span>
+<a name="437"><font size=-1>437     </font></a><span class="default">			</span><span class="comment">// A file must have been deleted manually!</span>
+<a name="438"><font size=-1>438     </font></a><span class="comment">			</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#147">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#147">i</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; i++) {</span>
+<a name="439"><font size=-1>439     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_I.html#153">ins</a>[<a href="dictionary_I.html#147">i</a>] != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="440"><font size=-1>440     </font></a><span class="default">					<a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#301">closeQuietly</a>(<a href="dictionary_I.html#153">ins</a>[<a href="dictionary_I.html#147">i</a>]);</span>
+<a name="441"><font size=-1>441     </font></a><span class="default">				} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="442"><font size=-1>442     </font></a><span class="default">					</span><span class="keyword">break</span><span class="default">;</span>
+<a name="443"><font size=-1>443     </font></a><span class="default">				}</span>
+<a name="444"><font size=-1>444     </font></a><span class="default">			}</span>
+<a name="445"><font size=-1>445     </font></a><span class="default">			</span><span class="keyword">return null</span><span class="default">;</span>
+<a name="446"><font size=-1>446     </font></a><span class="default">		}</span>
+<a name="447"><font size=-1>447     </font></a><span class="default"></span>
+<a name="448"><font size=-1>448     </font></a><span class="default">		redundantOpCount++;</span>
+<a name="449"><font size=-1>449     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_A.html#67">append</a>(<a href="dictionary_D.html#241">READ</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_K.html#154">key</a> + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="450"><font size=-1>450     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#161">journalRebuildRequired</a>()) {</span>
+<a name="451"><font size=-1>451     </font></a><span class="default">			<a href="dictionary_D.html#248">executorService</a>.<a href="dictionary_S.html#118">submit</a>(<a href="dictionary_D.html#246">cleanupCallable</a>);</span>
+<a name="452"><font size=-1>452     </font></a><span class="default">		}</span>
+<a name="453"><font size=-1>453     </font></a><span class="default"></span>
+<a name="454"><font size=-1>454     </font></a><span class="default">		</span><span class="keyword">return new <a href="dictionary_S.html#83">Snapshot</a></span><span class="default">(<a href="dictionary_K.html#154">key</a>, <a href="dictionary_E.html#150">entry</a>.<a href="dictionary_E.html#81">sequenceNumber</a>, <a href="dictionary_F.html#152">files</a>, <a href="dictionary_I.html#153">ins</a>, <a href="dictionary_E.html#150">entry</a>.<a href="dictionary_E.html#79">lengths</a>);</span>
+<a name="455"><font size=-1>455     </font></a><span class="default">	}</span>
+<a name="456"><font size=-1>456     </font></a><span class="default"></span>
+<a name="457"><font size=-1>457     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="458"><font size=-1>458     </font></a><span class="comment">	 * Returns an editor for the entry named {@code key}, or null if another</span>
+<a name="459"><font size=-1>459     </font></a><span class="comment">	 * edit is in progress.</span>
+<a name="460"><font size=-1>460     </font></a><span class="comment">	 */</span>
+<a name="461"><font size=-1>461     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_D.html#12">Editor</a> <a href="dictionary_D.html#135">edit</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#136">key</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="462"><font size=-1>462     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#137">edit</a></span><span class="default">(<a href="dictionary_K.html#136">key</a>, <a href="dictionary_D.html#232">ANY_SEQUENCE_NUMBER</a>);</span>
+<a name="463"><font size=-1>463     </font></a><span class="default">	}</span>
+<a name="464"><font size=-1>464     </font></a><span class="default"></span>
+<a name="465"><font size=-1>465     </font></a><span class="default">	</span><span class="keyword">private synchronized <a href="dictionary_D.html#12">Editor</a> <a href="dictionary_D.html#137">edit</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#143">key</a>, </span><span class="keyword">long <a href="dictionary_E.html#142">expectedSequenceNumber</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="466"><font size=-1>466     </font></a><span class="default">		<a href="dictionary_D.html#111">checkNotClosed</a>();</span>
+<a name="467"><font size=-1>467     </font></a><span class="default">		<a href="dictionary_D.html#227">validateKey</a>(<a href="dictionary_K.html#143">key</a>);</span>
+<a name="468"><font size=-1>468     </font></a><span class="default">		<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#141">entry</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_G.html#138">get</a>(<a href="dictionary_K.html#143">key</a>);</span>
+<a name="469"><font size=-1>469     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#142">expectedSequenceNumber</a> != <a href="dictionary_D.html#232">ANY_SEQUENCE_NUMBER</a> &amp;&amp; (<a href="dictionary_E.html#141">entry</a> == </span><span class="keyword">null</span>
+<a name="470"><font size=-1>470     </font></a><span class="keyword">				</span><span class="default">|| <a href="dictionary_E.html#141">entry</a>.<a href="dictionary_E.html#81">sequenceNumber</a> != <a href="dictionary_E.html#142">expectedSequenceNumber</a>)) {</span>
+<a name="471"><font size=-1>471     </font></a><span class="default">			</span><span class="keyword">return null</span><span class="default">; </span><span class="comment">// Snapshot is stale.</span>
+<a name="472"><font size=-1>472     </font></a><span class="comment">		</span><span class="default">}</span>
+<a name="473"><font size=-1>473     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#141">entry</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="474"><font size=-1>474     </font></a><span class="default">			<a href="dictionary_E.html#141">entry</a> = </span><span class="keyword">new <a href="dictionary_E.html#59">Entry</a></span><span class="default">(<a href="dictionary_K.html#143">key</a>);</span>
+<a name="475"><font size=-1>475     </font></a><span class="default">			<a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_P.html#139">put</a>(<a href="dictionary_K.html#143">key</a>, <a href="dictionary_E.html#141">entry</a>);</span>
+<a name="476"><font size=-1>476     </font></a><span class="default">		} </span><span class="keyword">else if </span><span class="default">(<a href="dictionary_E.html#141">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="477"><font size=-1>477     </font></a><span class="default">			</span><span class="keyword">return null</span><span class="default">; </span><span class="comment">// Another edit is in progress.</span>
+<a name="478"><font size=-1>478     </font></a><span class="comment">		</span><span class="default">}</span>
+<a name="479"><font size=-1>479     </font></a><span class="default"></span>
+<a name="480"><font size=-1>480     </font></a><span class="default">		<a href="dictionary_D.html#12">Editor</a> <a href="dictionary_E.html#140">editor</a> = </span><span class="keyword">new <a href="dictionary_E.html#31">Editor</a></span><span class="default">(<a href="dictionary_E.html#141">entry</a>);</span>
+<a name="481"><font size=-1>481     </font></a><span class="default">		<a href="dictionary_E.html#141">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> = <a href="dictionary_E.html#140">editor</a>;</span>
+<a name="482"><font size=-1>482     </font></a><span class="default"></span>
+<a name="483"><font size=-1>483     </font></a><span class="default">		</span><span class="comment">// Flush the journal before creating files to prevent file leaks.</span>
+<a name="484"><font size=-1>484     </font></a><span class="comment">		<a href="dictionary_D.html#253">journalWriter</a></span><span class="default">.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#234">DIRTY</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_K.html#143">key</a> + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="485"><font size=-1>485     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_F.html#20">flush</a>();</span>
+<a name="486"><font size=-1>486     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_E.html#140">editor</a></span><span class="default">;</span>
+<a name="487"><font size=-1>487     </font></a><span class="default">	}</span>
+<a name="488"><font size=-1>488     </font></a><span class="default"></span>
+<a name="489"><font size=-1>489     </font></a><span class="default">	</span><span class="comment">/** Returns the directory where this cache stores its data. */</span>
+<a name="490"><font size=-1>490     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#155">getDirectory</a></span><span class="default">() {</span>
+<a name="491"><font size=-1>491     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#247">directory</a></span><span class="default">;</span>
+<a name="492"><font size=-1>492     </font></a><span class="default">	}</span>
+<a name="493"><font size=-1>493     </font></a><span class="default"></span>
+<a name="494"><font size=-1>494     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="495"><font size=-1>495     </font></a><span class="comment">	 * Returns the maximum number of bytes that this cache should use to store</span>
+<a name="496"><font size=-1>496     </font></a><span class="comment">	 * its data.</span>
+<a name="497"><font size=-1>497     </font></a><span class="comment">	 */</span>
+<a name="498"><font size=-1>498     </font></a><span class="comment">	</span><span class="keyword">public synchronized long <a href="dictionary_D.html#157">getMaxSize</a></span><span class="default">() {</span>
+<a name="499"><font size=-1>499     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#256">maxSize</a></span><span class="default">;</span>
+<a name="500"><font size=-1>500     </font></a><span class="default">	}</span>
+<a name="501"><font size=-1>501     </font></a><span class="default"></span>
+<a name="502"><font size=-1>502     </font></a><span class="default">	</span><span class="comment">/** Returns the maximum number of files that this cache should store */</span>
+<a name="503"><font size=-1>503     </font></a><span class="comment">	</span><span class="keyword">public synchronized int <a href="dictionary_D.html#156">getMaxFileCount</a></span><span class="default">() {</span>
+<a name="504"><font size=-1>504     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#255">maxFileCount</a></span><span class="default">;</span>
+<a name="505"><font size=-1>505     </font></a><span class="default">	}</span>
+<a name="506"><font size=-1>506     </font></a><span class="default"></span>
+<a name="507"><font size=-1>507     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="508"><font size=-1>508     </font></a><span class="comment">	 * Changes the maximum number of bytes the cache can store and queues a job</span>
+<a name="509"><font size=-1>509     </font></a><span class="comment">	 * to trim the existing store, if necessary.</span>
+<a name="510"><font size=-1>510     </font></a><span class="comment">	 */</span>
+<a name="511"><font size=-1>511     </font></a><span class="comment">	</span><span class="keyword">public synchronized void <a href="dictionary_D.html#218">setMaxSize</a></span><span class="default">(</span><span class="keyword">long <a href="dictionary_M.html#219">maxSize</a></span><span class="default">) {</span>
+<a name="512"><font size=-1>512     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#256">maxSize</a> = <a href="dictionary_M.html#219">maxSize</a>;</span>
+<a name="513"><font size=-1>513     </font></a><span class="default">		<a href="dictionary_D.html#248">executorService</a>.<a href="dictionary_S.html#118">submit</a>(<a href="dictionary_D.html#246">cleanupCallable</a>);</span>
+<a name="514"><font size=-1>514     </font></a><span class="default">	}</span>
+<a name="515"><font size=-1>515     </font></a><span class="default"></span>
+<a name="516"><font size=-1>516     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="517"><font size=-1>517     </font></a><span class="comment">	 * Returns the number of bytes currently being used to store the values in</span>
+<a name="518"><font size=-1>518     </font></a><span class="comment">	 * this cache. This may be greater than the max size if a background</span>
+<a name="519"><font size=-1>519     </font></a><span class="comment">	 * deletion is pending.</span>
+<a name="520"><font size=-1>520     </font></a><span class="comment">	 */</span>
+<a name="521"><font size=-1>521     </font></a><span class="comment">	</span><span class="keyword">public synchronized long <a href="dictionary_D.html#220">size</a></span><span class="default">() {</span>
+<a name="522"><font size=-1>522     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#259">size</a></span><span class="default">;</span>
+<a name="523"><font size=-1>523     </font></a><span class="default">	}</span>
+<a name="524"><font size=-1>524     </font></a><span class="default"></span>
+<a name="525"><font size=-1>525     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="526"><font size=-1>526     </font></a><span class="comment">	 * Returns the number of files currently being used to store the values in</span>
+<a name="527"><font size=-1>527     </font></a><span class="comment">	 * this cache. This may be greater than the max file count if a background</span>
+<a name="528"><font size=-1>528     </font></a><span class="comment">	 * deletion is pending.</span>
+<a name="529"><font size=-1>529     </font></a><span class="comment">	 */</span>
+<a name="530"><font size=-1>530     </font></a><span class="comment">	</span><span class="keyword">public synchronized long <a href="dictionary_D.html#144">fileCount</a></span><span class="default">() {</span>
+<a name="531"><font size=-1>531     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#249">fileCount</a></span><span class="default">;</span>
+<a name="532"><font size=-1>532     </font></a><span class="default">	}</span>
+<a name="533"><font size=-1>533     </font></a><span class="default"></span>
+<a name="534"><font size=-1>534     </font></a><span class="default">	</span><span class="keyword">private synchronized void <a href="dictionary_D.html#116">completeEdit</a></span><span class="default">(<a href="dictionary_D.html#12">Editor</a> <a href="dictionary_E.html#128">editor</a>, </span><span class="keyword">boolean <a href="dictionary_S.html#130">success</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="535"><font size=-1>535     </font></a><span class="default">		<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#129">entry</a> = <a href="dictionary_E.html#128">editor</a>.<a href="dictionary_E.html#55">entry</a>;</span>
+<a name="536"><font size=-1>536     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != <a href="dictionary_E.html#128">editor</a>) {</span>
+<a name="537"><font size=-1>537     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#271">IllegalStateException</a></span><span class="default">();</span>
+<a name="538"><font size=-1>538     </font></a><span class="default">		}</span>
+<a name="539"><font size=-1>539     </font></a><span class="default"></span>
+<a name="540"><font size=-1>540     </font></a><span class="default">		</span><span class="comment">// If this edit is creating the entry for the first time, every index must have a value.</span>
+<a name="541"><font size=-1>541     </font></a><span class="comment">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#130">success</a> &amp;&amp; !<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#80">readable</a>) {</span>
+<a name="542"><font size=-1>542     </font></a><span class="default">			</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#120">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#120">i</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; i++) {</span>
+<a name="543"><font size=-1>543     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#128">editor</a>.<a href="dictionary_E.html#57">written</a>[<a href="dictionary_I.html#120">i</a>]) {</span>
+<a name="544"><font size=-1>544     </font></a><span class="default">					<a href="dictionary_E.html#128">editor</a>.<a href="dictionary_E.html#33">abort</a>();</span>
+<a name="545"><font size=-1>545     </font></a><span class="default">					</span><span class="keyword">throw new <a href="dictionary_I.html#271">IllegalStateException</a></span><span class="default">(</span><span class="string">&quot;Newly created entry didn't create value for index &quot; </span><span class="default">+ <a href="dictionary_I.html#120">i</a>);</span>
+<a name="546"><font size=-1>546     </font></a><span class="default">				}</span>
+<a name="547"><font size=-1>547     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#63">getDirtyFile</a>(<a href="dictionary_I.html#120">i</a>).<a href="dictionary_E.html#119">exists</a>()) {</span>
+<a name="548"><font size=-1>548     </font></a><span class="default">					<a href="dictionary_E.html#128">editor</a>.<a href="dictionary_E.html#33">abort</a>();</span>
+<a name="549"><font size=-1>549     </font></a><span class="default">					</span><span class="keyword">return</span><span class="default">;</span>
+<a name="550"><font size=-1>550     </font></a><span class="default">				}</span>
+<a name="551"><font size=-1>551     </font></a><span class="default">			}</span>
+<a name="552"><font size=-1>552     </font></a><span class="default">		}</span>
+<a name="553"><font size=-1>553     </font></a><span class="default"></span>
+<a name="554"><font size=-1>554     </font></a><span class="default">		</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#125">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#125">i</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; i++) {</span>
+<a name="555"><font size=-1>555     </font></a><span class="default">			<a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#124">dirty</a> = <a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#63">getDirtyFile</a>(<a href="dictionary_I.html#125">i</a>);</span>
+<a name="556"><font size=-1>556     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#130">success</a>) {</span>
+<a name="557"><font size=-1>557     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#124">dirty</a>.<a href="dictionary_E.html#119">exists</a>()) {</span>
+<a name="558"><font size=-1>558     </font></a><span class="default">					<a href="dictionary_I.html#264">File</a> <a href="dictionary_C.html#123">clean</a> = <a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#61">getCleanFile</a>(<a href="dictionary_I.html#125">i</a>);</span>
+<a name="559"><font size=-1>559     </font></a><span class="default">					<a href="dictionary_D.html#124">dirty</a>.<a href="dictionary_R.html#122">renameTo</a>(<a href="dictionary_C.html#123">clean</a>);</span>
+<a name="560"><font size=-1>560     </font></a><span class="default">					</span><span class="keyword">long <a href="dictionary_O.html#127">oldLength</a> </span><span class="default">= <a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#79">lengths</a>[<a href="dictionary_I.html#125">i</a>];</span>
+<a name="561"><font size=-1>561     </font></a><span class="default">					</span><span class="keyword">long <a href="dictionary_N.html#126">newLength</a> </span><span class="default">= <a href="dictionary_C.html#123">clean</a>.<a href="dictionary_L.html#121">length</a>();</span>
+<a name="562"><font size=-1>562     </font></a><span class="default">					<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#79">lengths</a>[<a href="dictionary_I.html#125">i</a>] = <a href="dictionary_N.html#126">newLength</a>;</span>
+<a name="563"><font size=-1>563     </font></a><span class="default">					<a href="dictionary_D.html#259">size</a> = <a href="dictionary_D.html#259">size</a> - <a href="dictionary_O.html#127">oldLength</a> + <a href="dictionary_N.html#126">newLength</a>;</span>
+<a name="564"><font size=-1>564     </font></a><span class="default">					fileCount++;</span>
+<a name="565"><font size=-1>565     </font></a><span class="default">				}</span>
+<a name="566"><font size=-1>566     </font></a><span class="default">			} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="567"><font size=-1>567     </font></a><span class="default">				<a href="dictionary_D.html#132">deleteIfExists</a>(<a href="dictionary_D.html#124">dirty</a>);</span>
+<a name="568"><font size=-1>568     </font></a><span class="default">			}</span>
+<a name="569"><font size=-1>569     </font></a><span class="default">		}</span>
+<a name="570"><font size=-1>570     </font></a><span class="default"></span>
+<a name="571"><font size=-1>571     </font></a><span class="default">		redundantOpCount++;</span>
+<a name="572"><font size=-1>572     </font></a><span class="default">		<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="573"><font size=-1>573     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#80">readable</a> | <a href="dictionary_S.html#130">success</a>) {</span>
+<a name="574"><font size=-1>574     </font></a><span class="default">			<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#80">readable</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="575"><font size=-1>575     </font></a><span class="default">			<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#233">CLEAN</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#78">key</a> + <a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#65">getLengths</a>() + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="576"><font size=-1>576     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#130">success</a>) {</span>
+<a name="577"><font size=-1>577     </font></a><span class="default">				<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#81">sequenceNumber</a> = nextSequenceNumber++;</span>
+<a name="578"><font size=-1>578     </font></a><span class="default">			}</span>
+<a name="579"><font size=-1>579     </font></a><span class="default">		} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="580"><font size=-1>580     </font></a><span class="default">			<a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_R.html#117">remove</a>(<a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#78">key</a>);</span>
+<a name="581"><font size=-1>581     </font></a><span class="default">			<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_D.html#242">REMOVE</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_E.html#129">entry</a>.<a href="dictionary_E.html#78">key</a> + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="582"><font size=-1>582     </font></a><span class="default">		}</span>
+<a name="583"><font size=-1>583     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_F.html#20">flush</a>();</span>
+<a name="584"><font size=-1>584     </font></a><span class="default"></span>
+<a name="585"><font size=-1>585     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#259">size</a> &gt; <a href="dictionary_D.html#256">maxSize</a> || <a href="dictionary_D.html#249">fileCount</a> &gt; <a href="dictionary_D.html#255">maxFileCount</a> || <a href="dictionary_D.html#161">journalRebuildRequired</a>()) {</span>
+<a name="586"><font size=-1>586     </font></a><span class="default">			<a href="dictionary_D.html#248">executorService</a>.<a href="dictionary_S.html#118">submit</a>(<a href="dictionary_D.html#246">cleanupCallable</a>);</span>
+<a name="587"><font size=-1>587     </font></a><span class="default">		}</span>
+<a name="588"><font size=-1>588     </font></a><span class="default">	}</span>
+<a name="589"><font size=-1>589     </font></a><span class="default"></span>
+<a name="590"><font size=-1>590     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="591"><font size=-1>591     </font></a><span class="comment">	 * We only rebuild the journal when it will halve the size of the journal</span>
+<a name="592"><font size=-1>592     </font></a><span class="comment">	 * and eliminate at least 2000 ops.</span>
+<a name="593"><font size=-1>593     </font></a><span class="comment">	 */</span>
+<a name="594"><font size=-1>594     </font></a><span class="comment">	</span><span class="keyword">private boolean <a href="dictionary_D.html#161">journalRebuildRequired</a></span><span class="default">() {</span>
+<a name="595"><font size=-1>595     </font></a><span class="default">		</span><span class="keyword">final int <a href="dictionary_R.html#163">redundantOpCompactThreshold</a> </span><span class="default">= </span><span class="number">2000</span><span class="default">;</span>
+<a name="596"><font size=-1>596     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#258">redundantOpCount</a> </span><span class="default">&gt;= <a href="dictionary_R.html#163">redundantOpCompactThreshold</a> </span><span class="comment">//</span>
+<a name="597"><font size=-1>597     </font></a><span class="comment">				</span><span class="default">&amp;&amp; <a href="dictionary_D.html#258">redundantOpCount</a> &gt;= <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_S.html#162">size</a>();</span>
+<a name="598"><font size=-1>598     </font></a><span class="default">	}</span>
+<a name="599"><font size=-1>599     </font></a><span class="default"></span>
+<a name="600"><font size=-1>600     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="601"><font size=-1>601     </font></a><span class="comment">	 * Drops the entry for {@code key} if it exists and can be removed. Entries</span>
+<a name="602"><font size=-1>602     </font></a><span class="comment">	 * actively being edited cannot be removed.</span>
+<a name="603"><font size=-1>603     </font></a><span class="comment">	 *</span>
+<a name="604"><font size=-1>604     </font></a><span class="comment">	 * @return true if an entry was removed.</span>
+<a name="605"><font size=-1>605     </font></a><span class="comment">	 */</span>
+<a name="606"><font size=-1>606     </font></a><span class="comment">	</span><span class="keyword">public synchronized boolean <a href="dictionary_D.html#209">remove</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#213">key</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="607"><font size=-1>607     </font></a><span class="default">		<a href="dictionary_D.html#111">checkNotClosed</a>();</span>
+<a name="608"><font size=-1>608     </font></a><span class="default">		<a href="dictionary_D.html#227">validateKey</a>(<a href="dictionary_K.html#213">key</a>);</span>
+<a name="609"><font size=-1>609     </font></a><span class="default">		<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#212">entry</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_G.html#138">get</a>(<a href="dictionary_K.html#213">key</a>);</span>
+<a name="610"><font size=-1>610     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#212">entry</a> == </span><span class="keyword">null </span><span class="default">|| <a href="dictionary_E.html#212">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="611"><font size=-1>611     </font></a><span class="default">			</span><span class="keyword">return false</span><span class="default">;</span>
+<a name="612"><font size=-1>612     </font></a><span class="default">		}</span>
+<a name="613"><font size=-1>613     </font></a><span class="default"></span>
+<a name="614"><font size=-1>614     </font></a><span class="default">		</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#211">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#211">i</a> &lt; <a href="dictionary_D.html#260">valueCount</a>; i++) {</span>
+<a name="615"><font size=-1>615     </font></a><span class="default">			<a href="dictionary_I.html#264">File</a> <a href="dictionary_F.html#210">file</a> = <a href="dictionary_E.html#212">entry</a>.<a href="dictionary_E.html#61">getCleanFile</a>(<a href="dictionary_I.html#211">i</a>);</span>
+<a name="616"><font size=-1>616     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_F.html#210">file</a>.<a href="dictionary_E.html#119">exists</a>() &amp;&amp; !<a href="dictionary_F.html#210">file</a>.<a href="dictionary_D.html#133">delete</a>()) {</span>
+<a name="617"><font size=-1>617     </font></a><span class="default">				</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">(</span><span class="string">&quot;failed to delete &quot; </span><span class="default">+ <a href="dictionary_F.html#210">file</a>);</span>
+<a name="618"><font size=-1>618     </font></a><span class="default">			}</span>
+<a name="619"><font size=-1>619     </font></a><span class="default">			size -= <a href="dictionary_E.html#212">entry</a>.<a href="dictionary_E.html#79">lengths</a>[<a href="dictionary_I.html#211">i</a>];</span>
+<a name="620"><font size=-1>620     </font></a><span class="default">			fileCount--;</span>
+<a name="621"><font size=-1>621     </font></a><span class="default">			<a href="dictionary_E.html#212">entry</a>.<a href="dictionary_E.html#79">lengths</a>[<a href="dictionary_I.html#211">i</a>] = </span><span class="number">0</span><span class="default">;</span>
+<a name="622"><font size=-1>622     </font></a><span class="default">		}</span>
+<a name="623"><font size=-1>623     </font></a><span class="default"></span>
+<a name="624"><font size=-1>624     </font></a><span class="default">		redundantOpCount++;</span>
+<a name="625"><font size=-1>625     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_A.html#67">append</a>(<a href="dictionary_D.html#242">REMOVE</a> + </span><span class="string">' ' </span><span class="default">+ <a href="dictionary_K.html#213">key</a> + </span><span class="string">'\n'</span><span class="default">);</span>
+<a name="626"><font size=-1>626     </font></a><span class="default">		<a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_R.html#117">remove</a>(<a href="dictionary_K.html#213">key</a>);</span>
+<a name="627"><font size=-1>627     </font></a><span class="default"></span>
+<a name="628"><font size=-1>628     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#161">journalRebuildRequired</a>()) {</span>
+<a name="629"><font size=-1>629     </font></a><span class="default">			<a href="dictionary_D.html#248">executorService</a>.<a href="dictionary_S.html#118">submit</a>(<a href="dictionary_D.html#246">cleanupCallable</a>);</span>
+<a name="630"><font size=-1>630     </font></a><span class="default">		}</span>
+<a name="631"><font size=-1>631     </font></a><span class="default"></span>
+<a name="632"><font size=-1>632     </font></a><span class="default">		</span><span class="keyword">return true</span><span class="default">;</span>
+<a name="633"><font size=-1>633     </font></a><span class="default">	}</span>
+<a name="634"><font size=-1>634     </font></a><span class="default"></span>
+<a name="635"><font size=-1>635     </font></a><span class="default">	</span><span class="comment">/** Returns true if this cache has been closed. */</span>
+<a name="636"><font size=-1>636     </font></a><span class="comment">	</span><span class="keyword">public synchronized boolean <a href="dictionary_D.html#160">isClosed</a></span><span class="default">() {</span>
+<a name="637"><font size=-1>637     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_D.html#253">journalWriter</a> </span><span class="default">== </span><span class="keyword">null</span><span class="default">;</span>
+<a name="638"><font size=-1>638     </font></a><span class="default">	}</span>
+<a name="639"><font size=-1>639     </font></a><span class="default"></span>
+<a name="640"><font size=-1>640     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_D.html#111">checkNotClosed</a></span><span class="default">() {</span>
+<a name="641"><font size=-1>641     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#253">journalWriter</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="642"><font size=-1>642     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#271">IllegalStateException</a></span><span class="default">(</span><span class="string">&quot;cache is closed&quot;</span><span class="default">);</span>
+<a name="643"><font size=-1>643     </font></a><span class="default">		}</span>
+<a name="644"><font size=-1>644     </font></a><span class="default">	}</span>
+<a name="645"><font size=-1>645     </font></a><span class="default"></span>
+<a name="646"><font size=-1>646     </font></a><span class="default">	</span><span class="comment">/** Force buffered operations to the filesystem. */</span>
+<a name="647"><font size=-1>647     </font></a><span class="comment">	</span><span class="keyword">public synchronized void <a href="dictionary_D.html#145">flush</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="648"><font size=-1>648     </font></a><span class="default">		<a href="dictionary_D.html#111">checkNotClosed</a>();</span>
+<a name="649"><font size=-1>649     </font></a><span class="default">		<a href="dictionary_D.html#225">trimToSize</a>();</span>
+<a name="650"><font size=-1>650     </font></a><span class="default">		<a href="dictionary_D.html#221">trimToFileCount</a>();</span>
+<a name="651"><font size=-1>651     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_F.html#20">flush</a>();</span>
+<a name="652"><font size=-1>652     </font></a><span class="default">	}</span>
+<a name="653"><font size=-1>653     </font></a><span class="default"></span>
+<a name="654"><font size=-1>654     </font></a><span class="default">	</span><span class="comment">/** Closes this cache. Stored values will remain on the filesystem. */</span>
+<a name="655"><font size=-1>655     </font></a><span class="comment">	</span><span class="keyword">public synchronized void <a href="dictionary_D.html#112">close</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="656"><font size=-1>656     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_D.html#253">journalWriter</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="657"><font size=-1>657     </font></a><span class="default">			</span><span class="keyword">return</span><span class="default">; </span><span class="comment">// Already closed.</span>
+<a name="658"><font size=-1>658     </font></a><span class="comment">		</span><span class="default">}</span>
+<a name="659"><font size=-1>659     </font></a><span class="default">		</span><span class="keyword">for </span><span class="default">(<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#114">entry</a> : </span><span class="keyword">new <a href="dictionary_U.html#2">ArrayList</a></span><span class="default">&lt;<a href="dictionary_D.html#58">Entry</a>&gt;(<a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_V.html#113">values</a>())) {</span>
+<a name="660"><font size=-1>660     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#114">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="661"><font size=-1>661     </font></a><span class="default">				<a href="dictionary_E.html#114">entry</a>.<a href="dictionary_E.html#77">currentEditor</a>.<a href="dictionary_E.html#33">abort</a>();</span>
+<a name="662"><font size=-1>662     </font></a><span class="default">			}</span>
+<a name="663"><font size=-1>663     </font></a><span class="default">		}</span>
+<a name="664"><font size=-1>664     </font></a><span class="default">		<a href="dictionary_D.html#225">trimToSize</a>();</span>
+<a name="665"><font size=-1>665     </font></a><span class="default">		<a href="dictionary_D.html#221">trimToFileCount</a>();</span>
+<a name="666"><font size=-1>666     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a>.<a href="dictionary_C.html#17">close</a>();</span>
+<a name="667"><font size=-1>667     </font></a><span class="default">		<a href="dictionary_D.html#253">journalWriter</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="668"><font size=-1>668     </font></a><span class="default">	}</span>
+<a name="669"><font size=-1>669     </font></a><span class="default"></span>
+<a name="670"><font size=-1>670     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_D.html#225">trimToSize</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="671"><font size=-1>671     </font></a><span class="default">		</span><span class="keyword">while </span><span class="default">(<a href="dictionary_D.html#259">size</a> &gt; <a href="dictionary_D.html#256">maxSize</a>) {</span>
+<a name="672"><font size=-1>672     </font></a><span class="default">			<a href="dictionary_U.html#277">Map</a>.<a href="dictionary_M.html#262">Entry</a>&lt;<a href="dictionary_S.html#285">String</a>, <a href="dictionary_D.html#58">Entry</a>&gt; <a href="dictionary_T.html#226">toEvict</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_E.html#222">entrySet</a>().<a href="dictionary_I.html#178">iterator</a>().<a href="dictionary_N.html#179">next</a>();</span>
+<a name="673"><font size=-1>673     </font></a><span class="default">			<a href="dictionary_D.html#209">remove</a>(<a href="dictionary_T.html#226">toEvict</a>.<a href="dictionary_G.html#223">getKey</a>());</span>
+<a name="674"><font size=-1>674     </font></a><span class="default">		}</span>
+<a name="675"><font size=-1>675     </font></a><span class="default">	}</span>
+<a name="676"><font size=-1>676     </font></a><span class="default"></span>
+<a name="677"><font size=-1>677     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_D.html#221">trimToFileCount</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="678"><font size=-1>678     </font></a><span class="default">		</span><span class="keyword">while </span><span class="default">(<a href="dictionary_D.html#249">fileCount</a> &gt; <a href="dictionary_D.html#255">maxFileCount</a>) {</span>
+<a name="679"><font size=-1>679     </font></a><span class="default">			<a href="dictionary_M.html#292">Map</a>.<a href="dictionary_M.html#262">Entry</a>&lt;<a href="dictionary_S.html#285">String</a>, <a href="dictionary_D.html#58">Entry</a>&gt; <a href="dictionary_T.html#224">toEvict</a> = <a href="dictionary_D.html#254">lruEntries</a>.<a href="dictionary_E.html#222">entrySet</a>().<a href="dictionary_I.html#178">iterator</a>().<a href="dictionary_N.html#179">next</a>();</span>
+<a name="680"><font size=-1>680     </font></a><span class="default">			<a href="dictionary_D.html#209">remove</a>(<a href="dictionary_T.html#224">toEvict</a>.<a href="dictionary_G.html#223">getKey</a>());</span>
+<a name="681"><font size=-1>681     </font></a><span class="default">		}</span>
+<a name="682"><font size=-1>682     </font></a><span class="default">	}</span>
+<a name="683"><font size=-1>683     </font></a><span class="default"></span>
+<a name="684"><font size=-1>684     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="685"><font size=-1>685     </font></a><span class="comment">	 * Closes the cache and deletes all of its stored values. This will delete</span>
+<a name="686"><font size=-1>686     </font></a><span class="comment">	 * all files in the cache directory including files that weren't created by</span>
+<a name="687"><font size=-1>687     </font></a><span class="comment">	 * the cache.</span>
+<a name="688"><font size=-1>688     </font></a><span class="comment">	 */</span>
+<a name="689"><font size=-1>689     </font></a><span class="comment">	</span><span class="keyword">public void <a href="dictionary_D.html#131">delete</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="690"><font size=-1>690     </font></a><span class="default">		<a href="dictionary_D.html#112">close</a>();</span>
+<a name="691"><font size=-1>691     </font></a><span class="default">		<a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#302">deleteContents</a>(<a href="dictionary_D.html#247">directory</a>);</span>
+<a name="692"><font size=-1>692     </font></a><span class="default">	}</span>
+<a name="693"><font size=-1>693     </font></a><span class="default"></span>
+<a name="694"><font size=-1>694     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_D.html#227">validateKey</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#230">key</a>) {</span>
+<a name="695"><font size=-1>695     </font></a><span class="default">		<a href="dictionary_R.html#278">Matcher</a> <a href="dictionary_M.html#231">matcher</a> = <a href="dictionary_D.html#238">LEGAL_KEY_PATTERN</a>.<a href="dictionary_M.html#228">matcher</a>(<a href="dictionary_K.html#230">key</a>);</span>
+<a name="696"><font size=-1>696     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_M.html#231">matcher</a>.<a href="dictionary_M.html#229">matches</a>()) {</span>
+<a name="697"><font size=-1>697     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#270">IllegalArgumentException</a></span><span class="default">(</span><span class="string">&quot;keys must match regex [a-z0-9_-]{1,64}: \&quot;&quot; </span><span class="default">+ <a href="dictionary_K.html#230">key</a> + </span><span class="string">&quot;\&quot;&quot;</span><span class="default">);</span>
+<a name="698"><font size=-1>698     </font></a><span class="default">		}</span>
+<a name="699"><font size=-1>699     </font></a><span class="default">	}</span>
+<a name="700"><font size=-1>700     </font></a><span class="default"></span>
+<a name="701"><font size=-1>701     </font></a><span class="default">	</span><span class="keyword">private static <a href="dictionary_S.html#285">String</a> <a href="dictionary_D.html#158">inputStreamToString</a></span><span class="default">(<a href="dictionary_I.html#272">InputStream</a> <a href="dictionary_I.html#159">in</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="702"><font size=-1>702     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_E.html#299">Util</a></span><span class="default">.<a href="dictionary_U.html#303">readFully</a>(</span><span class="keyword">new <a href="dictionary_I.html#273">InputStreamReader</a></span><span class="default">(<a href="dictionary_I.html#159">in</a>, <a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#300">UTF_8</a>));</span>
+<a name="703"><font size=-1>703     </font></a><span class="default">	}</span>
+<a name="704"><font size=-1>704     </font></a><span class="default"></span>
+<a name="705"><font size=-1>705     </font></a><span class="default">	</span><span class="comment">/** A snapshot of the values for an entry. */</span>
+<a name="706"><font size=-1>706     </font></a><span class="comment">	</span><span class="keyword">public final class <a href="dictionary_D.html#82">Snapshot</a> implements <a href="dictionary_I.html#5">Closeable</a> </span><span class="default">{</span>
+<a name="707"><font size=-1>707     </font></a><span class="default">		</span><span class="keyword">private final <a href="dictionary_S.html#285">String</a> <a href="dictionary_S.html#102">key</a></span><span class="default">;</span>
+<a name="708"><font size=-1>708     </font></a><span class="default">		</span><span class="keyword">private final long <a href="dictionary_S.html#104">sequenceNumber</a></span><span class="default">;</span>
+<a name="709"><font size=-1>709     </font></a><span class="default">		</span><span class="keyword">private <a href="dictionary_I.html#264">File</a></span><span class="default">[] <a href="dictionary_S.html#100">files</a>;</span>
+<a name="710"><font size=-1>710     </font></a><span class="default">		</span><span class="keyword">private final <a href="dictionary_I.html#272">InputStream</a></span><span class="default">[] <a href="dictionary_S.html#101">ins</a>;</span>
+<a name="711"><font size=-1>711     </font></a><span class="default">		</span><span class="keyword">private final long</span><span class="default">[] <a href="dictionary_S.html#103">lengths</a>;</span>
+<a name="712"><font size=-1>712     </font></a><span class="default"></span>
+<a name="713"><font size=-1>713     </font></a><span class="default">		</span><span class="keyword">private <a href="dictionary_S.html#83">Snapshot</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#86">key</a>, </span><span class="keyword">long <a href="dictionary_S.html#88">sequenceNumber</a></span><span class="default">, <a href="dictionary_I.html#264">File</a>[] <a href="dictionary_F.html#84">files</a>, <a href="dictionary_I.html#272">InputStream</a>[] <a href="dictionary_I.html#85">ins</a>, </span><span class="keyword">long</span><span class="default">[] <a href="dictionary_L.html#87">lengths</a>) {</span>
+<a name="714"><font size=-1>714     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_S.html#102">key</a> = <a href="dictionary_K.html#86">key</a>;</span>
+<a name="715"><font size=-1>715     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_S.html#104">sequenceNumber</a> = <a href="dictionary_S.html#88">sequenceNumber</a>;</span>
+<a name="716"><font size=-1>716     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_S.html#100">files</a> = <a href="dictionary_F.html#84">files</a>;</span>
+<a name="717"><font size=-1>717     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_S.html#101">ins</a> = <a href="dictionary_I.html#85">ins</a>;</span>
+<a name="718"><font size=-1>718     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_S.html#103">lengths</a> = <a href="dictionary_L.html#87">lengths</a>;</span>
+<a name="719"><font size=-1>719     </font></a><span class="default">		}</span>
+<a name="720"><font size=-1>720     </font></a><span class="default"></span>
+<a name="721"><font size=-1>721     </font></a><span class="default">		</span><span class="comment">/**</span>
+<a name="722"><font size=-1>722     </font></a><span class="comment">		 * Returns an editor for this snapshot's entry, or null if either the</span>
+<a name="723"><font size=-1>723     </font></a><span class="comment">		 * entry has changed since this snapshot was created or if another edit</span>
+<a name="724"><font size=-1>724     </font></a><span class="comment">		 * is in progress.</span>
+<a name="725"><font size=-1>725     </font></a><span class="comment">		 */</span>
+<a name="726"><font size=-1>726     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_D.html#12">Editor</a> <a href="dictionary_S.html#91">edit</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="727"><font size=-1>727     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_E.html#6">DiskLruCache</a></span><span class="default">.</span><span class="keyword">this</span><span class="default">.<a href="dictionary_D.html#137">edit</a>(<a href="dictionary_S.html#102">key</a>, <a href="dictionary_S.html#104">sequenceNumber</a>);</span>
+<a name="728"><font size=-1>728     </font></a><span class="default">		}</span>
+<a name="729"><font size=-1>729     </font></a><span class="default"></span>
+<a name="730"><font size=-1>730     </font></a><span class="default">		</span><span class="comment">/** Returns file with the value for {@code index}. */</span>
+<a name="731"><font size=-1>731     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_I.html#264">File</a> <a href="dictionary_S.html#92">getFile</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#93">index</a></span><span class="default">) {</span>
+<a name="732"><font size=-1>732     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_S.html#100">files</a></span><span class="default">[<a href="dictionary_I.html#93">index</a>];</span>
+<a name="733"><font size=-1>733     </font></a><span class="default">		}</span>
+<a name="734"><font size=-1>734     </font></a><span class="default"></span>
+<a name="735"><font size=-1>735     </font></a><span class="default">		</span><span class="comment">/** Returns the unbuffered stream with the value for {@code index}. */</span>
+<a name="736"><font size=-1>736     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_I.html#272">InputStream</a> <a href="dictionary_S.html#94">getInputStream</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#95">index</a></span><span class="default">) {</span>
+<a name="737"><font size=-1>737     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_S.html#101">ins</a></span><span class="default">[<a href="dictionary_I.html#95">index</a>];</span>
+<a name="738"><font size=-1>738     </font></a><span class="default">		}</span>
+<a name="739"><font size=-1>739     </font></a><span class="default"></span>
+<a name="740"><font size=-1>740     </font></a><span class="default">		</span><span class="comment">/** Returns the string value for {@code index}. */</span>
+<a name="741"><font size=-1>741     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_S.html#285">String</a> <a href="dictionary_S.html#98">getString</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#99">index</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="742"><font size=-1>742     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_D.html#158">inputStreamToString</a></span><span class="default">(<a href="dictionary_S.html#94">getInputStream</a>(<a href="dictionary_I.html#99">index</a>));</span>
+<a name="743"><font size=-1>743     </font></a><span class="default">		}</span>
+<a name="744"><font size=-1>744     </font></a><span class="default"></span>
+<a name="745"><font size=-1>745     </font></a><span class="default">		</span><span class="comment">/** Returns the byte length of the value for {@code index}. */</span>
+<a name="746"><font size=-1>746     </font></a><span class="comment">		</span><span class="keyword">public long <a href="dictionary_S.html#96">getLength</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#97">index</a></span><span class="default">) {</span>
+<a name="747"><font size=-1>747     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_S.html#103">lengths</a></span><span class="default">[<a href="dictionary_I.html#97">index</a>];</span>
+<a name="748"><font size=-1>748     </font></a><span class="default">		}</span>
+<a name="749"><font size=-1>749     </font></a><span class="default"></span>
+<a name="750"><font size=-1>750     </font></a><span class="default">		</span><span class="keyword">public void <a href="dictionary_S.html#89">close</a></span><span class="default">() {</span>
+<a name="751"><font size=-1>751     </font></a><span class="default">			</span><span class="keyword">for </span><span class="default">(<a href="dictionary_I.html#272">InputStream</a> <a href="dictionary_I.html#90">in</a> : <a href="dictionary_S.html#101">ins</a>) {</span>
+<a name="752"><font size=-1>752     </font></a><span class="default">				<a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#301">closeQuietly</a>(<a href="dictionary_I.html#90">in</a>);</span>
+<a name="753"><font size=-1>753     </font></a><span class="default">			}</span>
+<a name="754"><font size=-1>754     </font></a><span class="default">		}</span>
+<a name="755"><font size=-1>755     </font></a><span class="default">	}</span>
+<a name="756"><font size=-1>756     </font></a><span class="default"></span>
+<a name="757"><font size=-1>757     </font></a><span class="default">	</span><span class="keyword">private static final <a href="dictionary_I.html#280">OutputStream</a> <a href="dictionary_D.html#240">NULL_OUTPUT_STREAM</a> </span><span class="default">= </span><span class="keyword">new <a href="dictionary_I.html#280">OutputStream</a></span><span class="default">() {</span>
+<a name="758"><font size=-1>758     </font></a><span class="default">		@<a href="dictionary_O.html#282">Override</a></span>
+<a name="759"><font size=-1>759     </font></a><span class="default">		</span><span class="keyword">public void <a href="dictionary_Non-Alpha.html#10">write</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_B.html#11">b</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="760"><font size=-1>760     </font></a><span class="default">			</span><span class="comment">// Eat all writes silently. Nom nom.</span>
+<a name="761"><font size=-1>761     </font></a><span class="comment">		</span><span class="default">}</span>
+<a name="762"><font size=-1>762     </font></a><span class="default">	};</span>
+<a name="763"><font size=-1>763     </font></a><span class="default"></span>
+<a name="764"><font size=-1>764     </font></a><span class="default">	</span><span class="comment">/** Edits the values for an entry. */</span>
+<a name="765"><font size=-1>765     </font></a><span class="comment">	</span><span class="keyword">public final class <a href="dictionary_D.html#12">Editor</a> </span><span class="default">{</span>
+<a name="766"><font size=-1>766     </font></a><span class="default">		</span><span class="keyword">private final <a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#55">entry</a></span><span class="default">;</span>
+<a name="767"><font size=-1>767     </font></a><span class="default">		</span><span class="keyword">private final boolean</span><span class="default">[] <a href="dictionary_E.html#57">written</a>;</span>
+<a name="768"><font size=-1>768     </font></a><span class="default">		</span><span class="keyword">private boolean <a href="dictionary_E.html#56">hasErrors</a></span><span class="default">;</span>
+<a name="769"><font size=-1>769     </font></a><span class="default">		</span><span class="keyword">private boolean <a href="dictionary_E.html#54">committed</a></span><span class="default">;</span>
+<a name="770"><font size=-1>770     </font></a><span class="default"></span>
+<a name="771"><font size=-1>771     </font></a><span class="default">		</span><span class="keyword">private <a href="dictionary_E.html#31">Editor</a></span><span class="default">(<a href="dictionary_D.html#58">Entry</a> <a href="dictionary_E.html#32">entry</a>) {</span>
+<a name="772"><font size=-1>772     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#55">entry</a> = <a href="dictionary_E.html#32">entry</a>;</span>
+<a name="773"><font size=-1>773     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#57">written</a> = (<a href="dictionary_E.html#32">entry</a>.<a href="dictionary_E.html#80">readable</a>) ? </span><span class="keyword">null </span><span class="default">: </span><span class="keyword">new boolean</span><span class="default">[<a href="dictionary_D.html#260">valueCount</a>];</span>
+<a name="774"><font size=-1>774     </font></a><span class="default">		}</span>
+<a name="775"><font size=-1>775     </font></a><span class="default"></span>
+<a name="776"><font size=-1>776     </font></a><span class="default">		</span><span class="comment">/**</span>
+<a name="777"><font size=-1>777     </font></a><span class="comment">		 * Returns an unbuffered input stream to read the last committed value,</span>
+<a name="778"><font size=-1>778     </font></a><span class="comment">		 * or null if no value has been committed.</span>
+<a name="779"><font size=-1>779     </font></a><span class="comment">		 */</span>
+<a name="780"><font size=-1>780     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_I.html#272">InputStream</a> <a href="dictionary_E.html#40">newInputStream</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#42">index</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="781"><font size=-1>781     </font></a><span class="default">			</span><span class="keyword">synchronized </span><span class="default">(<a href="dictionary_E.html#6">DiskLruCache</a>.</span><span class="keyword">this</span><span class="default">) {</span>
+<a name="782"><font size=-1>782     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != </span><span class="keyword">this</span><span class="default">) {</span>
+<a name="783"><font size=-1>783     </font></a><span class="default">					</span><span class="keyword">throw new <a href="dictionary_I.html#271">IllegalStateException</a></span><span class="default">();</span>
+<a name="784"><font size=-1>784     </font></a><span class="default">				}</span>
+<a name="785"><font size=-1>785     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#80">readable</a>) {</span>
+<a name="786"><font size=-1>786     </font></a><span class="default">					</span><span class="keyword">return null</span><span class="default">;</span>
+<a name="787"><font size=-1>787     </font></a><span class="default">				}</span>
+<a name="788"><font size=-1>788     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="789"><font size=-1>789     </font></a><span class="default">					</span><span class="keyword">return new <a href="dictionary_I.html#265">FileInputStream</a></span><span class="default">(<a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#61">getCleanFile</a>(<a href="dictionary_I.html#42">index</a>));</span>
+<a name="790"><font size=-1>790     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#266">FileNotFoundException</a> <a href="dictionary_E.html#41">e</a>) {</span>
+<a name="791"><font size=-1>791     </font></a><span class="default">					</span><span class="keyword">return null</span><span class="default">;</span>
+<a name="792"><font size=-1>792     </font></a><span class="default">				}</span>
+<a name="793"><font size=-1>793     </font></a><span class="default">			}</span>
+<a name="794"><font size=-1>794     </font></a><span class="default">		}</span>
+<a name="795"><font size=-1>795     </font></a><span class="default"></span>
+<a name="796"><font size=-1>796     </font></a><span class="default">		</span><span class="comment">/**</span>
+<a name="797"><font size=-1>797     </font></a><span class="comment">		 * Returns the last committed value as a string, or null if no value</span>
+<a name="798"><font size=-1>798     </font></a><span class="comment">		 * has been committed.</span>
+<a name="799"><font size=-1>799     </font></a><span class="comment">		 */</span>
+<a name="800"><font size=-1>800     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_S.html#285">String</a> <a href="dictionary_E.html#37">getString</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#39">index</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="801"><font size=-1>801     </font></a><span class="default">			<a href="dictionary_I.html#272">InputStream</a> <a href="dictionary_I.html#38">in</a> = <a href="dictionary_E.html#40">newInputStream</a>(<a href="dictionary_I.html#39">index</a>);</span>
+<a name="802"><font size=-1>802     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_I.html#38">in</a> </span><span class="default">!= </span><span class="keyword">null </span><span class="default">? <a href="dictionary_D.html#158">inputStreamToString</a>(<a href="dictionary_I.html#38">in</a>) : </span><span class="keyword">null</span><span class="default">;</span>
+<a name="803"><font size=-1>803     </font></a><span class="default">		}</span>
+<a name="804"><font size=-1>804     </font></a><span class="default"></span>
+<a name="805"><font size=-1>805     </font></a><span class="default">		</span><span class="comment">/**</span>
+<a name="806"><font size=-1>806     </font></a><span class="comment">		 * Returns a new unbuffered output stream to write the value at</span>
+<a name="807"><font size=-1>807     </font></a><span class="comment">		 * {@code index}. If the underlying output stream encounters errors</span>
+<a name="808"><font size=-1>808     </font></a><span class="comment">		 * when writing to the filesystem, this edit will be aborted when</span>
+<a name="809"><font size=-1>809     </font></a><span class="comment">		 * {@link #commit} is called. The returned output stream does not throw</span>
+<a name="810"><font size=-1>810     </font></a><span class="comment">		 * IOExceptions.</span>
+<a name="811"><font size=-1>811     </font></a><span class="comment">		 */</span>
+<a name="812"><font size=-1>812     </font></a><span class="comment">		</span><span class="keyword">public <a href="dictionary_I.html#280">OutputStream</a> <a href="dictionary_E.html#43">newOutputStream</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#48">index</a></span><span class="default">) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="813"><font size=-1>813     </font></a><span class="default">			</span><span class="keyword">synchronized </span><span class="default">(<a href="dictionary_E.html#6">DiskLruCache</a>.</span><span class="keyword">this</span><span class="default">) {</span>
+<a name="814"><font size=-1>814     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#77">currentEditor</a> != </span><span class="keyword">this</span><span class="default">) {</span>
+<a name="815"><font size=-1>815     </font></a><span class="default">					</span><span class="keyword">throw new <a href="dictionary_I.html#271">IllegalStateException</a></span><span class="default">();</span>
+<a name="816"><font size=-1>816     </font></a><span class="default">				}</span>
+<a name="817"><font size=-1>817     </font></a><span class="default">				</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#80">readable</a>) {</span>
+<a name="818"><font size=-1>818     </font></a><span class="default">					<a href="dictionary_E.html#57">written</a>[<a href="dictionary_I.html#48">index</a>] = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="819"><font size=-1>819     </font></a><span class="default">				}</span>
+<a name="820"><font size=-1>820     </font></a><span class="default">				<a href="dictionary_I.html#264">File</a> <a href="dictionary_D.html#47">dirtyFile</a> = <a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#63">getDirtyFile</a>(<a href="dictionary_I.html#48">index</a>);</span>
+<a name="821"><font size=-1>821     </font></a><span class="default">				<a href="dictionary_I.html#267">FileOutputStream</a> <a href="dictionary_O.html#49">outputStream</a>;</span>
+<a name="822"><font size=-1>822     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="823"><font size=-1>823     </font></a><span class="default">					<a href="dictionary_O.html#49">outputStream</a> = </span><span class="keyword">new <a href="dictionary_I.html#267">FileOutputStream</a></span><span class="default">(<a href="dictionary_D.html#47">dirtyFile</a>);</span>
+<a name="824"><font size=-1>824     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#266">FileNotFoundException</a> <a href="dictionary_E.html#46">e</a>) {</span>
+<a name="825"><font size=-1>825     </font></a><span class="default">					</span><span class="comment">// Attempt to recreate the cache directory.</span>
+<a name="826"><font size=-1>826     </font></a><span class="comment">					<a href="dictionary_D.html#247">directory</a></span><span class="default">.<a href="dictionary_M.html#44">mkdirs</a>();</span>
+<a name="827"><font size=-1>827     </font></a><span class="default">					</span><span class="keyword">try </span><span class="default">{</span>
+<a name="828"><font size=-1>828     </font></a><span class="default">						<a href="dictionary_O.html#49">outputStream</a> = </span><span class="keyword">new <a href="dictionary_I.html#267">FileOutputStream</a></span><span class="default">(<a href="dictionary_D.html#47">dirtyFile</a>);</span>
+<a name="829"><font size=-1>829     </font></a><span class="default">					} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#266">FileNotFoundException</a> <a href="dictionary_E.html#45">e2</a>) {</span>
+<a name="830"><font size=-1>830     </font></a><span class="default">						</span><span class="comment">// We are unable to recover. Silently eat the writes.</span>
+<a name="831"><font size=-1>831     </font></a><span class="comment">						</span><span class="keyword">return <a href="dictionary_D.html#240">NULL_OUTPUT_STREAM</a></span><span class="default">;</span>
+<a name="832"><font size=-1>832     </font></a><span class="default">					}</span>
+<a name="833"><font size=-1>833     </font></a><span class="default">				}</span>
+<a name="834"><font size=-1>834     </font></a><span class="default">				</span><span class="keyword">return new <a href="dictionary_F.html#14">FaultHidingOutputStream</a></span><span class="default">(<a href="dictionary_O.html#49">outputStream</a>);</span>
+<a name="835"><font size=-1>835     </font></a><span class="default">			}</span>
+<a name="836"><font size=-1>836     </font></a><span class="default">		}</span>
+<a name="837"><font size=-1>837     </font></a><span class="default"></span>
+<a name="838"><font size=-1>838     </font></a><span class="default">		</span><span class="comment">/** Sets the value at {@code index} to {@code value}. */</span>
+<a name="839"><font size=-1>839     </font></a><span class="comment">		</span><span class="keyword">public void <a href="dictionary_E.html#50">set</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#51">index</a></span><span class="default">, <a href="dictionary_S.html#285">String</a> <a href="dictionary_V.html#52">value</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="840"><font size=-1>840     </font></a><span class="default">			<a href="dictionary_I.html#290">Writer</a> <a href="dictionary_W.html#53">writer</a> = </span><span class="keyword">null</span><span class="default">;</span>
+<a name="841"><font size=-1>841     </font></a><span class="default">			</span><span class="keyword">try </span><span class="default">{</span>
+<a name="842"><font size=-1>842     </font></a><span class="default">				<a href="dictionary_W.html#53">writer</a> = </span><span class="keyword">new <a href="dictionary_I.html#281">OutputStreamWriter</a></span><span class="default">(<a href="dictionary_E.html#43">newOutputStream</a>(<a href="dictionary_I.html#51">index</a>), <a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#300">UTF_8</a>);</span>
+<a name="843"><font size=-1>843     </font></a><span class="default">				<a href="dictionary_W.html#53">writer</a>.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_V.html#52">value</a>);</span>
+<a name="844"><font size=-1>844     </font></a><span class="default">			} </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="845"><font size=-1>845     </font></a><span class="default">				<a href="dictionary_E.html#299">Util</a>.<a href="dictionary_U.html#301">closeQuietly</a>(<a href="dictionary_W.html#53">writer</a>);</span>
+<a name="846"><font size=-1>846     </font></a><span class="default">			}</span>
+<a name="847"><font size=-1>847     </font></a><span class="default">		}</span>
+<a name="848"><font size=-1>848     </font></a><span class="default"></span>
+<a name="849"><font size=-1>849     </font></a><span class="default">		</span><span class="comment">/**</span>
+<a name="850"><font size=-1>850     </font></a><span class="comment">		 * Commits this edit so it is visible to readers.  This releases the</span>
+<a name="851"><font size=-1>851     </font></a><span class="comment">		 * edit lock so another edit may be started on the same key.</span>
+<a name="852"><font size=-1>852     </font></a><span class="comment">		 */</span>
+<a name="853"><font size=-1>853     </font></a><span class="comment">		</span><span class="keyword">public void <a href="dictionary_E.html#36">commit</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="854"><font size=-1>854     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#56">hasErrors</a>) {</span>
+<a name="855"><font size=-1>855     </font></a><span class="default">				<a href="dictionary_D.html#116">completeEdit</a>(</span><span class="keyword">this</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="856"><font size=-1>856     </font></a><span class="default">				<a href="dictionary_D.html#209">remove</a>(<a href="dictionary_E.html#55">entry</a>.<a href="dictionary_E.html#78">key</a>); </span><span class="comment">// The previous entry is stale.</span>
+<a name="857"><font size=-1>857     </font></a><span class="comment">			</span><span class="default">} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="858"><font size=-1>858     </font></a><span class="default">				<a href="dictionary_D.html#116">completeEdit</a>(</span><span class="keyword">this</span><span class="default">, </span><span class="keyword">true</span><span class="default">);</span>
+<a name="859"><font size=-1>859     </font></a><span class="default">			}</span>
+<a name="860"><font size=-1>860     </font></a><span class="default">			<a href="dictionary_E.html#54">committed</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="861"><font size=-1>861     </font></a><span class="default">		}</span>
+<a name="862"><font size=-1>862     </font></a><span class="default"></span>
+<a name="863"><font size=-1>863     </font></a><span class="default">		</span><span class="comment">/**</span>
+<a name="864"><font size=-1>864     </font></a><span class="comment">		 * Aborts this edit. This releases the edit lock so another edit may be</span>
+<a name="865"><font size=-1>865     </font></a><span class="comment">		 * started on the same key.</span>
+<a name="866"><font size=-1>866     </font></a><span class="comment">		 */</span>
+<a name="867"><font size=-1>867     </font></a><span class="comment">		</span><span class="keyword">public void <a href="dictionary_E.html#33">abort</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="868"><font size=-1>868     </font></a><span class="default">			<a href="dictionary_D.html#116">completeEdit</a>(</span><span class="keyword">this</span><span class="default">, </span><span class="keyword">false</span><span class="default">);</span>
+<a name="869"><font size=-1>869     </font></a><span class="default">		}</span>
+<a name="870"><font size=-1>870     </font></a><span class="default"></span>
+<a name="871"><font size=-1>871     </font></a><span class="default">		</span><span class="keyword">public void <a href="dictionary_E.html#34">abortUnlessCommitted</a></span><span class="default">() {</span>
+<a name="872"><font size=-1>872     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(!<a href="dictionary_E.html#54">committed</a>) {</span>
+<a name="873"><font size=-1>873     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="874"><font size=-1>874     </font></a><span class="default">					<a href="dictionary_E.html#33">abort</a>();</span>
+<a name="875"><font size=-1>875     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#269">IOException</a> <a href="dictionary_I.html#35">ignored</a>) {</span>
+<a name="876"><font size=-1>876     </font></a><span class="default">				}</span>
+<a name="877"><font size=-1>877     </font></a><span class="default">			}</span>
+<a name="878"><font size=-1>878     </font></a><span class="default">		}</span>
+<a name="879"><font size=-1>879     </font></a><span class="default"></span>
+<a name="880"><font size=-1>880     </font></a><span class="default">		</span><span class="keyword">private class <a href="dictionary_E.html#13">FaultHidingOutputStream</a> extends <a href="dictionary_I.html#268">FilterOutputStream</a> </span><span class="default">{</span>
+<a name="881"><font size=-1>881     </font></a><span class="default">			</span><span class="keyword">private <a href="dictionary_F.html#14">FaultHidingOutputStream</a></span><span class="default">(<a href="dictionary_I.html#280">OutputStream</a> <a href="dictionary_O.html#15">out</a>) {</span>
+<a name="882"><font size=-1>882     </font></a><span class="default">				</span><span class="keyword">super</span><span class="default">(<a href="dictionary_O.html#15">out</a>);</span>
+<a name="883"><font size=-1>883     </font></a><span class="default">			}</span>
+<a name="884"><font size=-1>884     </font></a><span class="default"></span>
+<a name="885"><font size=-1>885     </font></a><span class="default">			@<a href="dictionary_O.html#282">Override</a> </span><span class="keyword">public void <a href="dictionary_F.html#22">write</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_O.html#25">oneByte</a></span><span class="default">) {</span>
+<a name="886"><font size=-1>886     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="887"><font size=-1>887     </font></a><span class="default">					out.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_O.html#25">oneByte</a>);</span>
+<a name="888"><font size=-1>888     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#269">IOException</a> <a href="dictionary_E.html#24">e</a>) {</span>
+<a name="889"><font size=-1>889     </font></a><span class="default">					<a href="dictionary_E.html#56">hasErrors</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="890"><font size=-1>890     </font></a><span class="default">				}</span>
+<a name="891"><font size=-1>891     </font></a><span class="default">			}</span>
+<a name="892"><font size=-1>892     </font></a><span class="default"></span>
+<a name="893"><font size=-1>893     </font></a><span class="default">			@<a href="dictionary_O.html#282">Override</a> </span><span class="keyword">public void <a href="dictionary_F.html#26">write</a></span><span class="default">(</span><span class="keyword">byte</span><span class="default">[] <a href="dictionary_B.html#28">buffer</a>, </span><span class="keyword">int <a href="dictionary_O.html#30">offset</a></span><span class="default">, </span><span class="keyword">int <a href="dictionary_L.html#29">length</a></span><span class="default">) {</span>
+<a name="894"><font size=-1>894     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="895"><font size=-1>895     </font></a><span class="default">					out.<a href="dictionary_W.html#23">write</a>(<a href="dictionary_B.html#28">buffer</a>, <a href="dictionary_O.html#30">offset</a>, <a href="dictionary_L.html#29">length</a>);</span>
+<a name="896"><font size=-1>896     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#269">IOException</a> <a href="dictionary_E.html#27">e</a>) {</span>
+<a name="897"><font size=-1>897     </font></a><span class="default">					<a href="dictionary_E.html#56">hasErrors</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="898"><font size=-1>898     </font></a><span class="default">				}</span>
+<a name="899"><font size=-1>899     </font></a><span class="default">			}</span>
+<a name="900"><font size=-1>900     </font></a><span class="default"></span>
+<a name="901"><font size=-1>901     </font></a><span class="default">			@<a href="dictionary_O.html#282">Override</a> </span><span class="keyword">public void <a href="dictionary_F.html#16">close</a></span><span class="default">() {</span>
+<a name="902"><font size=-1>902     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="903"><font size=-1>903     </font></a><span class="default">					out.<a href="dictionary_C.html#17">close</a>();</span>
+<a name="904"><font size=-1>904     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#269">IOException</a> <a href="dictionary_E.html#18">e</a>) {</span>
+<a name="905"><font size=-1>905     </font></a><span class="default">					<a href="dictionary_E.html#56">hasErrors</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="906"><font size=-1>906     </font></a><span class="default">				}</span>
+<a name="907"><font size=-1>907     </font></a><span class="default">			}</span>
+<a name="908"><font size=-1>908     </font></a><span class="default"></span>
+<a name="909"><font size=-1>909     </font></a><span class="default">			@<a href="dictionary_O.html#282">Override</a> </span><span class="keyword">public void <a href="dictionary_F.html#19">flush</a></span><span class="default">() {</span>
+<a name="910"><font size=-1>910     </font></a><span class="default">				</span><span class="keyword">try </span><span class="default">{</span>
+<a name="911"><font size=-1>911     </font></a><span class="default">					out.<a href="dictionary_F.html#20">flush</a>();</span>
+<a name="912"><font size=-1>912     </font></a><span class="default">				} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_I.html#269">IOException</a> <a href="dictionary_E.html#21">e</a>) {</span>
+<a name="913"><font size=-1>913     </font></a><span class="default">					<a href="dictionary_E.html#56">hasErrors</a> = </span><span class="keyword">true</span><span class="default">;</span>
+<a name="914"><font size=-1>914     </font></a><span class="default">				}</span>
+<a name="915"><font size=-1>915     </font></a><span class="default">			}</span>
+<a name="916"><font size=-1>916     </font></a><span class="default">		}</span>
+<a name="917"><font size=-1>917     </font></a><span class="default">	}</span>
+<a name="918"><font size=-1>918     </font></a><span class="default"></span>
+<a name="919"><font size=-1>919     </font></a><span class="default">	</span><span class="keyword">private final class <a href="dictionary_D.html#58">Entry</a> </span><span class="default">{</span>
+<a name="920"><font size=-1>920     </font></a><span class="default">		</span><span class="keyword">private final <a href="dictionary_S.html#285">String</a> <a href="dictionary_E.html#78">key</a></span><span class="default">;</span>
+<a name="921"><font size=-1>921     </font></a><span class="default"></span>
+<a name="922"><font size=-1>922     </font></a><span class="default">		</span><span class="comment">/** Lengths of this entry's files. */</span>
+<a name="923"><font size=-1>923     </font></a><span class="comment">		</span><span class="keyword">private final long</span><span class="default">[] <a href="dictionary_E.html#79">lengths</a>;</span>
+<a name="924"><font size=-1>924     </font></a><span class="default"></span>
+<a name="925"><font size=-1>925     </font></a><span class="default">		</span><span class="comment">/** True if this entry has ever been published. */</span>
+<a name="926"><font size=-1>926     </font></a><span class="comment">		</span><span class="keyword">private boolean <a href="dictionary_E.html#80">readable</a></span><span class="default">;</span>
+<a name="927"><font size=-1>927     </font></a><span class="default"></span>
+<a name="928"><font size=-1>928     </font></a><span class="default">		</span><span class="comment">/** The ongoing edit or null if this entry is not being edited. */</span>
+<a name="929"><font size=-1>929     </font></a><span class="comment">		</span><span class="keyword">private <a href="dictionary_D.html#12">Editor</a> <a href="dictionary_E.html#77">currentEditor</a></span><span class="default">;</span>
+<a name="930"><font size=-1>930     </font></a><span class="default"></span>
+<a name="931"><font size=-1>931     </font></a><span class="default">		</span><span class="comment">/** The sequence number of the most recently committed edit to this entry. */</span>
+<a name="932"><font size=-1>932     </font></a><span class="comment">		</span><span class="keyword">private long <a href="dictionary_E.html#81">sequenceNumber</a></span><span class="default">;</span>
+<a name="933"><font size=-1>933     </font></a><span class="default"></span>
+<a name="934"><font size=-1>934     </font></a><span class="default">		</span><span class="keyword">private <a href="dictionary_E.html#59">Entry</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_K.html#60">key</a>) {</span>
+<a name="935"><font size=-1>935     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#78">key</a> = <a href="dictionary_K.html#60">key</a>;</span>
+<a name="936"><font size=-1>936     </font></a><span class="default">			</span><span class="keyword">this</span><span class="default">.<a href="dictionary_E.html#79">lengths</a> = </span><span class="keyword">new long</span><span class="default">[<a href="dictionary_D.html#260">valueCount</a>];</span>
+<a name="937"><font size=-1>937     </font></a><span class="default">		}</span>
+<a name="938"><font size=-1>938     </font></a><span class="default"></span>
+<a name="939"><font size=-1>939     </font></a><span class="default">		</span><span class="keyword">public <a href="dictionary_S.html#285">String</a> <a href="dictionary_E.html#65">getLengths</a></span><span class="default">() </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="940"><font size=-1>940     </font></a><span class="default">			<a href="dictionary_S.html#286">StringBuilder</a> <a href="dictionary_R.html#69">result</a> = </span><span class="keyword">new <a href="dictionary_S.html#286">StringBuilder</a></span><span class="default">();</span>
+<a name="941"><font size=-1>941     </font></a><span class="default">			</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">long <a href="dictionary_S.html#68">size</a> </span><span class="default">: <a href="dictionary_E.html#79">lengths</a>) {</span>
+<a name="942"><font size=-1>942     </font></a><span class="default">				<a href="dictionary_R.html#69">result</a>.<a href="dictionary_A.html#67">append</a>(</span><span class="string">' '</span><span class="default">).<a href="dictionary_A.html#67">append</a>(<a href="dictionary_S.html#68">size</a>);</span>
+<a name="943"><font size=-1>943     </font></a><span class="default">			}</span>
+<a name="944"><font size=-1>944     </font></a><span class="default">			</span><span class="keyword">return <a href="dictionary_R.html#69">result</a></span><span class="default">.<a href="dictionary_T.html#66">toString</a>();</span>
+<a name="945"><font size=-1>945     </font></a><span class="default">		}</span>
+<a name="946"><font size=-1>946     </font></a><span class="default"></span>
+<a name="947"><font size=-1>947     </font></a><span class="default">		</span><span class="comment">/** Set lengths using decimal numbers like &quot;10123&quot;. */</span>
+<a name="948"><font size=-1>948     </font></a><span class="comment">		</span><span class="keyword">private void <a href="dictionary_E.html#72">setLengths</a></span><span class="default">(<a href="dictionary_S.html#285">String</a>[] <a href="dictionary_S.html#76">strings</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="949"><font size=-1>949     </font></a><span class="default">			</span><span class="keyword">if </span><span class="default">(<a href="dictionary_S.html#76">strings</a>.length != <a href="dictionary_D.html#260">valueCount</a>) {</span>
+<a name="950"><font size=-1>950     </font></a><span class="default">				</span><span class="keyword">throw <a href="dictionary_E.html#70">invalidLengths</a></span><span class="default">(<a href="dictionary_S.html#76">strings</a>);</span>
+<a name="951"><font size=-1>951     </font></a><span class="default">			}</span>
+<a name="952"><font size=-1>952     </font></a><span class="default"></span>
+<a name="953"><font size=-1>953     </font></a><span class="default">			</span><span class="keyword">try </span><span class="default">{</span>
+<a name="954"><font size=-1>954     </font></a><span class="default">				</span><span class="keyword">for </span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#75">i</a> </span><span class="default">= </span><span class="number">0</span><span class="default">; <a href="dictionary_I.html#75">i</a> &lt; <a href="dictionary_S.html#76">strings</a>.length; i++) {</span>
+<a name="955"><font size=-1>955     </font></a><span class="default">					<a href="dictionary_E.html#79">lengths</a>[<a href="dictionary_I.html#75">i</a>] = Long.<a href="dictionary_P.html#74">parseLong</a>(<a href="dictionary_S.html#76">strings</a>[<a href="dictionary_I.html#75">i</a>]);</span>
+<a name="956"><font size=-1>956     </font></a><span class="default">				}</span>
+<a name="957"><font size=-1>957     </font></a><span class="default">			} </span><span class="keyword">catch </span><span class="default">(<a href="dictionary_N.html#279">NumberFormatException</a> <a href="dictionary_E.html#73">e</a>) {</span>
+<a name="958"><font size=-1>958     </font></a><span class="default">				</span><span class="keyword">throw <a href="dictionary_E.html#70">invalidLengths</a></span><span class="default">(<a href="dictionary_S.html#76">strings</a>);</span>
+<a name="959"><font size=-1>959     </font></a><span class="default">			}</span>
+<a name="960"><font size=-1>960     </font></a><span class="default">		}</span>
+<a name="961"><font size=-1>961     </font></a><span class="default"></span>
+<a name="962"><font size=-1>962     </font></a><span class="default">		</span><span class="keyword">private <a href="dictionary_I.html#269">IOException</a> <a href="dictionary_E.html#70">invalidLengths</a></span><span class="default">(<a href="dictionary_S.html#285">String</a>[] <a href="dictionary_S.html#71">strings</a>) </span><span class="keyword">throws <a href="dictionary_I.html#269">IOException</a> </span><span class="default">{</span>
+<a name="963"><font size=-1>963     </font></a><span class="default">			</span><span class="keyword">throw new <a href="dictionary_I.html#269">IOException</a></span><span class="default">(</span><span class="string">&quot;unexpected journal line: &quot; </span><span class="default">+ java.util.Arrays.<a href="dictionary_T.html#66">toString</a>(<a href="dictionary_S.html#71">strings</a>));</span>
+<a name="964"><font size=-1>964     </font></a><span class="default">		}</span>
+<a name="965"><font size=-1>965     </font></a><span class="default"></span>
+<a name="966"><font size=-1>966     </font></a><span class="default">		</span><span class="keyword">public <a href="dictionary_I.html#264">File</a> <a href="dictionary_E.html#61">getCleanFile</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#62">i</a></span><span class="default">) {</span>
+<a name="967"><font size=-1>967     </font></a><span class="default">			</span><span class="keyword">return new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#247">directory</a>, <a href="dictionary_E.html#78">key</a> + </span><span class="string">&quot;.&quot; </span><span class="default">+ <a href="dictionary_I.html#62">i</a>);</span>
+<a name="968"><font size=-1>968     </font></a><span class="default">		}</span>
+<a name="969"><font size=-1>969     </font></a><span class="default"></span>
+<a name="970"><font size=-1>970     </font></a><span class="default">		</span><span class="keyword">public <a href="dictionary_I.html#264">File</a> <a href="dictionary_E.html#63">getDirtyFile</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_I.html#64">i</a></span><span class="default">) {</span>
+<a name="971"><font size=-1>971     </font></a><span class="default">			</span><span class="keyword">return new <a href="dictionary_I.html#264">File</a></span><span class="default">(<a href="dictionary_D.html#247">directory</a>, <a href="dictionary_E.html#78">key</a> + </span><span class="string">&quot;.&quot; </span><span class="default">+ <a href="dictionary_I.html#64">i</a> + </span><span class="string">&quot;.tmp&quot;</span><span class="default">);</span>
+<a name="972"><font size=-1>972     </font></a><span class="default">		}</span>
+<a name="973"><font size=-1>973     </font></a><span class="default">	}</span>
+<a name="974"><font size=-1>974     </font></a><span class="default">}</span>
+<a name="975"><font size=-1>975     </font></a><span class="default"></span>
+</pre></body></html>

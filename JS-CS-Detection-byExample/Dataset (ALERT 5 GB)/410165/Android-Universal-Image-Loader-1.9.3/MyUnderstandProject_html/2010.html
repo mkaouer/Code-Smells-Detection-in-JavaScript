@@ -1,0 +1,161 @@
+<html><head><title>ImageDecodingInfo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\sbasta\Downloads\Android-Universal-Image-Loader-1.9.3\library\src\com\nostra13\universalimageloader\core\decode\ImageDecodingInfo.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\sbasta\\Downloads\\Android-Universal-Image-Loader-1.9.3\\library\\src\\com\\nostra13\\universalimageloader\\core\\decode\\ImageDecodingInfo.java";
+top.document.title  = "ImageDecodingInfo.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="comment">/*******************************************************************************</span>
+<a name="2"><font size=-1>2     </font></a><span class="comment"> * Copyright 2013 Sergey Tarasevich</span>
+<a name="3"><font size=-1>3     </font></a><span class="comment"> *</span>
+<a name="4"><font size=-1>4     </font></a><span class="comment"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<a name="5"><font size=-1>5     </font></a><span class="comment"> * you may not use this file except in compliance with the License.</span>
+<a name="6"><font size=-1>6     </font></a><span class="comment"> * You may obtain a copy of the License at</span>
+<a name="7"><font size=-1>7     </font></a><span class="comment"> *</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * http://www.apache.org/licenses/LICENSE-2.0</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> *</span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * Unless required by applicable law or agreed to in writing, software</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<a name="13"><font size=-1>13     </font></a><span class="comment"> * See the License for the specific language governing permissions and</span>
+<a name="14"><font size=-1>14     </font></a><span class="comment"> * limitations under the License.</span>
+<a name="15"><font size=-1>15     </font></a><span class="comment"> *******************************************************************************/</span>
+<a name="16"><font size=-1>16     </font></a><span class="comment"></span><span class="keyword">package </span><span class="default">com.nostra13.universalimageloader.core.<a href="dictionary_C.html#1217">decode</a>;</span>
+<a name="17"><font size=-1>17     </font></a><span class="default"></span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#2049">annotation</a>.<a href="dictionary_A.html#2048">TargetApi</a>;</span>
+<a name="19"><font size=-1>19     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.graphics.<a href="dictionary_G.html#1792">BitmapFactory</a>.<a href="dictionary_B.html#1790">Options</a>;</span>
+<a name="20"><font size=-1>20     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#545">os</a>.<a href="dictionary_O.html#2011">Build</a>;</span>
+<a name="21"><font size=-1>21     </font></a><span class="default"></span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.nostra13.universalimageloader.<a href="dictionary_U.html#428">core</a>.<a href="dictionary_C.html#425">DisplayImageOptions</a>;</span>
+<a name="23"><font size=-1>23     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.nostra13.universalimageloader.core.<a href="dictionary_C.html#429">assist</a>.<a href="dictionary_A.html#552">ImageScaleType</a>;</span>
+<a name="24"><font size=-1>24     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.nostra13.universalimageloader.core.<a href="dictionary_C.html#429">assist</a>.<a href="dictionary_A.html#1212">ImageSize</a>;</span>
+<a name="25"><font size=-1>25     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.nostra13.universalimageloader.core.<a href="dictionary_C.html#429">assist</a>.<a href="dictionary_A.html#617">ViewScaleType</a>;</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.nostra13.universalimageloader.core.<a href="dictionary_C.html#418">download</a>.<a href="dictionary_D.html#431">ImageDownloader</a>;</span>
+<a name="27"><font size=-1>27     </font></a><span class="default"></span>
+<a name="28"><font size=-1>28     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="29"><font size=-1>29     </font></a><span class="comment"> * Contains needed information for decoding image to Bitmap</span>
+<a name="30"><font size=-1>30     </font></a><span class="comment"> *</span>
+<a name="31"><font size=-1>31     </font></a><span class="comment"> * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)</span>
+<a name="32"><font size=-1>32     </font></a><span class="comment"> * @since 1.8.3</span>
+<a name="33"><font size=-1>33     </font></a><span class="comment"> */</span>
+<a name="34"><font size=-1>34     </font></a><span class="comment"></span><span class="keyword">public class <a href="dictionary_D.html#1214">ImageDecodingInfo</a> </span><span class="default">{</span>
+<a name="35"><font size=-1>35     </font></a><span class="default"></span>
+<a name="36"><font size=-1>36     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#2042">imageKey</a></span><span class="default">;</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#2044">imageUri</a></span><span class="default">;</span>
+<a name="38"><font size=-1>38     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#2045">originalImageUri</a></span><span class="default">;</span>
+<a name="39"><font size=-1>39     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_A.html#1212">ImageSize</a> <a href="dictionary_I.html#2046">targetSize</a></span><span class="default">;</span>
+<a name="40"><font size=-1>40     </font></a><span class="default"></span>
+<a name="41"><font size=-1>41     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_A.html#552">ImageScaleType</a> <a href="dictionary_I.html#2043">imageScaleType</a></span><span class="default">;</span>
+<a name="42"><font size=-1>42     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_A.html#617">ViewScaleType</a> <a href="dictionary_I.html#2047">viewScaleType</a></span><span class="default">;</span>
+<a name="43"><font size=-1>43     </font></a><span class="default"></span>
+<a name="44"><font size=-1>44     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_D.html#431">ImageDownloader</a> <a href="dictionary_I.html#2040">downloader</a></span><span class="default">;</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">	</span><span class="keyword">private final </span><span class="default">Object <a href="dictionary_I.html#2041">extraForDownloader</a>;</span>
+<a name="46"><font size=-1>46     </font></a><span class="default"></span>
+<a name="47"><font size=-1>47     </font></a><span class="default">	</span><span class="keyword">private final boolean <a href="dictionary_I.html#2038">considerExifParams</a></span><span class="default">;</span>
+<a name="48"><font size=-1>48     </font></a><span class="default">	</span><span class="keyword">private final <a href="dictionary_B.html#1790">Options</a> <a href="dictionary_I.html#2039">decodingOptions</a></span><span class="default">;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default"></span>
+<a name="50"><font size=-1>50     </font></a><span class="default">	</span><span class="keyword">public <a href="dictionary_I.html#1239">ImageDecodingInfo</a></span><span class="default">(<a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#2014">imageKey</a>, <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#2015">imageUri</a>, <a href="dictionary_S.html#285">String</a> <a href="dictionary_O.html#2016">originalImageUri</a>, <a href="dictionary_A.html#1212">ImageSize</a> <a href="dictionary_T.html#2017">targetSize</a>, <a href="dictionary_A.html#617">ViewScaleType</a> <a href="dictionary_V.html#2018">viewScaleType</a>,</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">							 <a href="dictionary_D.html#431">ImageDownloader</a> <a href="dictionary_D.html#2013">downloader</a>, <a href="dictionary_C.html#425">DisplayImageOptions</a> <a href="dictionary_D.html#2012">displayOptions</a>) {</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2042">imageKey</a> = <a href="dictionary_I.html#2014">imageKey</a>;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2044">imageUri</a> = <a href="dictionary_I.html#2015">imageUri</a>;</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2045">originalImageUri</a> = <a href="dictionary_O.html#2016">originalImageUri</a>;</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2046">targetSize</a> = <a href="dictionary_T.html#2017">targetSize</a>;</span>
+<a name="56"><font size=-1>56     </font></a><span class="default"></span>
+<a name="57"><font size=-1>57     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2043">imageScaleType</a> = <a href="dictionary_D.html#2012">displayOptions</a>.<a href="dictionary_D.html#1766">getImageScaleType</a>();</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2047">viewScaleType</a> = <a href="dictionary_V.html#2018">viewScaleType</a>;</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+<a name="60"><font size=-1>60     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2040">downloader</a> = <a href="dictionary_D.html#2013">downloader</a>;</span>
+<a name="61"><font size=-1>61     </font></a><span class="default">		</span><span class="keyword">this</span><span class="default">.<a href="dictionary_I.html#2041">extraForDownloader</a> = <a href="dictionary_D.html#2012">displayOptions</a>.<a href="dictionary_D.html#1245">getExtraForDownloader</a>();</span>
+<a name="62"><font size=-1>62     </font></a><span class="default"></span>
+<a name="63"><font size=-1>63     </font></a><span class="default">		<a href="dictionary_I.html#2038">considerExifParams</a> = <a href="dictionary_D.html#2012">displayOptions</a>.<a href="dictionary_D.html#1767">isConsiderExifParams</a>();</span>
+<a name="64"><font size=-1>64     </font></a><span class="default">		<a href="dictionary_I.html#2039">decodingOptions</a> = </span><span class="keyword">new <a href="dictionary_B.html#1790">Options</a></span><span class="default">();</span>
+<a name="65"><font size=-1>65     </font></a><span class="default">		<a href="dictionary_I.html#2019">copyOptions</a>(<a href="dictionary_D.html#2012">displayOptions</a>.<a href="dictionary_D.html#1757">getDecodingOptions</a>(), <a href="dictionary_I.html#2039">decodingOptions</a>);</span>
+<a name="66"><font size=-1>66     </font></a><span class="default">	}</span>
+<a name="67"><font size=-1>67     </font></a><span class="default"></span>
+<a name="68"><font size=-1>68     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_I.html#2019">copyOptions</a></span><span class="default">(<a href="dictionary_B.html#1790">Options</a> <a href="dictionary_S.html#2027">srcOptions</a>, <a href="dictionary_B.html#1790">Options</a> <a href="dictionary_D.html#2020">destOptions</a>) {</span>
+<a name="69"><font size=-1>69     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#2021">inDensity</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#2021">inDensity</a>;</span>
+<a name="70"><font size=-1>70     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#2022">inDither</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#2022">inDither</a>;</span>
+<a name="71"><font size=-1>71     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#1685">inInputShareable</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#1685">inInputShareable</a>;</span>
+<a name="72"><font size=-1>72     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#1862">inJustDecodeBounds</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#1862">inJustDecodeBounds</a>;</span>
+<a name="73"><font size=-1>73     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#1689">inPreferredConfig</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#1689">inPreferredConfig</a>;</span>
+<a name="74"><font size=-1>74     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#1686">inPurgeable</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#1686">inPurgeable</a>;</span>
+<a name="75"><font size=-1>75     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#1873">inSampleSize</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#1873">inSampleSize</a>;</span>
+<a name="76"><font size=-1>76     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#2023">inScaled</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#2023">inScaled</a>;</span>
+<a name="77"><font size=-1>77     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#2024">inScreenDensity</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#2024">inScreenDensity</a>;</span>
+<a name="78"><font size=-1>78     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#2025">inTargetDensity</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#2025">inTargetDensity</a>;</span>
+<a name="79"><font size=-1>79     </font></a><span class="default">		<a href="dictionary_D.html#2020">destOptions</a>.<a href="dictionary_I.html#2026">inTempStorage</a> = <a href="dictionary_S.html#2027">srcOptions</a>.<a href="dictionary_I.html#2026">inTempStorage</a>;</span>
+<a name="80"><font size=-1>80     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#2011">Build</a>.VERSION.SDK_INT &gt;= </span><span class="number">10</span><span class="default">) <a href="dictionary_I.html#2028">copyOptions10</a>(<a href="dictionary_S.html#2027">srcOptions</a>, <a href="dictionary_D.html#2020">destOptions</a>);</span>
+<a name="81"><font size=-1>81     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_O.html#2011">Build</a>.VERSION.SDK_INT &gt;= </span><span class="number">11</span><span class="default">) <a href="dictionary_I.html#2032">copyOptions11</a>(<a href="dictionary_S.html#2027">srcOptions</a>, <a href="dictionary_D.html#2020">destOptions</a>);</span>
+<a name="82"><font size=-1>82     </font></a><span class="default">	}</span>
+<a name="83"><font size=-1>83     </font></a><span class="default"></span>
+<a name="84"><font size=-1>84     </font></a><span class="default">	@<a href="dictionary_A.html#2048">TargetApi</a>(</span><span class="number">10</span><span class="default">)</span>
+<a name="85"><font size=-1>85     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_I.html#2028">copyOptions10</a></span><span class="default">(<a href="dictionary_B.html#1790">Options</a> <a href="dictionary_S.html#2031">srcOptions</a>, <a href="dictionary_B.html#1790">Options</a> <a href="dictionary_D.html#2029">destOptions</a>) {</span>
+<a name="86"><font size=-1>86     </font></a><span class="default">		<a href="dictionary_D.html#2029">destOptions</a>.<a href="dictionary_I.html#2030">inPreferQualityOverSpeed</a> = <a href="dictionary_S.html#2031">srcOptions</a>.<a href="dictionary_I.html#2030">inPreferQualityOverSpeed</a>;</span>
+<a name="87"><font size=-1>87     </font></a><span class="default">	}</span>
+<a name="88"><font size=-1>88     </font></a><span class="default"></span>
+<a name="89"><font size=-1>89     </font></a><span class="default">	@<a href="dictionary_A.html#2048">TargetApi</a>(</span><span class="number">11</span><span class="default">)</span>
+<a name="90"><font size=-1>90     </font></a><span class="default">	</span><span class="keyword">private void <a href="dictionary_I.html#2032">copyOptions11</a></span><span class="default">(<a href="dictionary_B.html#1790">Options</a> <a href="dictionary_S.html#2036">srcOptions</a>, <a href="dictionary_B.html#1790">Options</a> <a href="dictionary_D.html#2033">destOptions</a>) {</span>
+<a name="91"><font size=-1>91     </font></a><span class="default">		<a href="dictionary_D.html#2033">destOptions</a>.<a href="dictionary_I.html#2034">inBitmap</a> = <a href="dictionary_S.html#2036">srcOptions</a>.<a href="dictionary_I.html#2034">inBitmap</a>;</span>
+<a name="92"><font size=-1>92     </font></a><span class="default">		<a href="dictionary_D.html#2033">destOptions</a>.<a href="dictionary_I.html#2035">inMutable</a> = <a href="dictionary_S.html#2036">srcOptions</a>.<a href="dictionary_I.html#2035">inMutable</a>;</span>
+<a name="93"><font size=-1>93     </font></a><span class="default">	}</span>
+<a name="94"><font size=-1>94     </font></a><span class="default"></span>
+<a name="95"><font size=-1>95     </font></a><span class="default">	</span><span class="comment">/** @return Original {@linkplain com.nostra13.universalimageloader.utils.MemoryCacheUtils#generateKey(String, ImageSize) image key} (used in memory cache). */</span>
+<a name="96"><font size=-1>96     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#1897">getImageKey</a></span><span class="default">() {</span>
+<a name="97"><font size=-1>97     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2042">imageKey</a></span><span class="default">;</span>
+<a name="98"><font size=-1>98     </font></a><span class="default">	}</span>
+<a name="99"><font size=-1>99     </font></a><span class="default"></span>
+<a name="100"><font size=-1>100     </font></a><span class="default">	</span><span class="comment">/** @return Image URI for decoding (usually image from disk cache) */</span>
+<a name="101"><font size=-1>101     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#1899">getImageUri</a></span><span class="default">() {</span>
+<a name="102"><font size=-1>102     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2044">imageUri</a></span><span class="default">;</span>
+<a name="103"><font size=-1>103     </font></a><span class="default">	}</span>
+<a name="104"><font size=-1>104     </font></a><span class="default"></span>
+<a name="105"><font size=-1>105     </font></a><span class="default">	</span><span class="comment">/** @return The original image URI which was passed to ImageLoader */</span>
+<a name="106"><font size=-1>106     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_S.html#285">String</a> <a href="dictionary_I.html#2037">getOriginalImageUri</a></span><span class="default">() {</span>
+<a name="107"><font size=-1>107     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2045">originalImageUri</a></span><span class="default">;</span>
+<a name="108"><font size=-1>108     </font></a><span class="default">	}</span>
+<a name="109"><font size=-1>109     </font></a><span class="default"></span>
+<a name="110"><font size=-1>110     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="111"><font size=-1>111     </font></a><span class="comment">	 * @return Target size for image. Decoded bitmap should close to this size according to {@linkplain ImageScaleType</span>
+<a name="112"><font size=-1>112     </font></a><span class="comment">	 * image scale type} and {@linkplain ViewScaleType view scale type}.</span>
+<a name="113"><font size=-1>113     </font></a><span class="comment">	 */</span>
+<a name="114"><font size=-1>114     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_A.html#1212">ImageSize</a> <a href="dictionary_I.html#1895">getTargetSize</a></span><span class="default">() {</span>
+<a name="115"><font size=-1>115     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2046">targetSize</a></span><span class="default">;</span>
+<a name="116"><font size=-1>116     </font></a><span class="default">	}</span>
+<a name="117"><font size=-1>117     </font></a><span class="default"></span>
+<a name="118"><font size=-1>118     </font></a><span class="default">	</span><span class="comment">/**</span>
+<a name="119"><font size=-1>119     </font></a><span class="comment">	 * @return {@linkplain ImageScaleType Scale type for image sampling and scaling}. This parameter affects result size</span>
+<a name="120"><font size=-1>120     </font></a><span class="comment">	 * of decoded bitmap.</span>
+<a name="121"><font size=-1>121     </font></a><span class="comment">	 */</span>
+<a name="122"><font size=-1>122     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_A.html#552">ImageScaleType</a> <a href="dictionary_I.html#1893">getImageScaleType</a></span><span class="default">() {</span>
+<a name="123"><font size=-1>123     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2043">imageScaleType</a></span><span class="default">;</span>
+<a name="124"><font size=-1>124     </font></a><span class="default">	}</span>
+<a name="125"><font size=-1>125     </font></a><span class="default"></span>
+<a name="126"><font size=-1>126     </font></a><span class="default">	</span><span class="comment">/** @return {@linkplain ViewScaleType View scale type}. This parameter affects result size of decoded bitmap. */</span>
+<a name="127"><font size=-1>127     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_A.html#617">ViewScaleType</a> <a href="dictionary_I.html#1896">getViewScaleType</a></span><span class="default">() {</span>
+<a name="128"><font size=-1>128     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2047">viewScaleType</a></span><span class="default">;</span>
+<a name="129"><font size=-1>129     </font></a><span class="default">	}</span>
+<a name="130"><font size=-1>130     </font></a><span class="default"></span>
+<a name="131"><font size=-1>131     </font></a><span class="default">	</span><span class="comment">/** @return Downloader for image loading */</span>
+<a name="132"><font size=-1>132     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_D.html#431">ImageDownloader</a> <a href="dictionary_I.html#1901">getDownloader</a></span><span class="default">() {</span>
+<a name="133"><font size=-1>133     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2040">downloader</a></span><span class="default">;</span>
+<a name="134"><font size=-1>134     </font></a><span class="default">	}</span>
+<a name="135"><font size=-1>135     </font></a><span class="default"></span>
+<a name="136"><font size=-1>136     </font></a><span class="default">	</span><span class="comment">/** @return Auxiliary object for downloader */</span>
+<a name="137"><font size=-1>137     </font></a><span class="comment">	</span><span class="keyword">public </span><span class="default">Object <a href="dictionary_I.html#1902">getExtraForDownloader</a>() {</span>
+<a name="138"><font size=-1>138     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2041">extraForDownloader</a></span><span class="default">;</span>
+<a name="139"><font size=-1>139     </font></a><span class="default">	}</span>
+<a name="140"><font size=-1>140     </font></a><span class="default"></span>
+<a name="141"><font size=-1>141     </font></a><span class="default">	</span><span class="comment">/** @return &lt;b&gt;true&lt;/b&gt; - if EXIF params of image should be considered; &lt;b&gt;false&lt;/b&gt; - otherwise */</span>
+<a name="142"><font size=-1>142     </font></a><span class="comment">	</span><span class="keyword">public boolean <a href="dictionary_I.html#1900">shouldConsiderExifParams</a></span><span class="default">() {</span>
+<a name="143"><font size=-1>143     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2038">considerExifParams</a></span><span class="default">;</span>
+<a name="144"><font size=-1>144     </font></a><span class="default">	}</span>
+<a name="145"><font size=-1>145     </font></a><span class="default"></span>
+<a name="146"><font size=-1>146     </font></a><span class="default">	</span><span class="comment">/** @return Decoding options */</span>
+<a name="147"><font size=-1>147     </font></a><span class="comment">	</span><span class="keyword">public <a href="dictionary_B.html#1790">Options</a> <a href="dictionary_I.html#1905">getDecodingOptions</a></span><span class="default">() {</span>
+<a name="148"><font size=-1>148     </font></a><span class="default">		</span><span class="keyword">return <a href="dictionary_I.html#2039">decodingOptions</a></span><span class="default">;</span>
+<a name="149"><font size=-1>149     </font></a><span class="default">	}</span>
+<a name="150"><font size=-1>150     </font></a><span class="default">}</span>
+<a name="151"><font size=-1>151     </font></a><span class="default"></span>
+</pre></body></html>

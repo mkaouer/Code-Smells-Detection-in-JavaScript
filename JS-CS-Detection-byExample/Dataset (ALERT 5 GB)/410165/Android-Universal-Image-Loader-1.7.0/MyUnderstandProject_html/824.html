@@ -1,0 +1,69 @@
+<html><head><title>L.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: C:\Users\sbasta\Downloads\Android-Universal-Image-Loader-1.7.0\library\src\com\nostra13\universalimageloader\utils\L.java</h3>
+<SCRIPT>
+defaultStatus = "File: C:\\Users\\sbasta\\Downloads\\Android-Universal-Image-Loader-1.7.0\\library\\src\\com\\nostra13\\universalimageloader\\utils\\L.java";
+top.document.title  = "L.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">com.nostra13.universalimageloader.<a href="dictionary_U.html#629">utils</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">com.nostra13.universalimageloader.<a href="dictionary_U.html#392">core</a>.<a href="dictionary_C.html#528">ImageLoader</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">android.<a href="dictionary_A.html#862">util</a>.<a href="dictionary_U.html#860">Log</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="comment">/**</span>
+<a name="8"><font size=-1>8     </font></a><span class="comment"> * &quot;Less-word&quot; analog of Android {@link Log logger}</span>
+<a name="9"><font size=-1>9     </font></a><span class="comment"> * </span>
+<a name="10"><font size=-1>10     </font></a><span class="comment"> * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)</span>
+<a name="11"><font size=-1>11     </font></a><span class="comment"> */</span>
+<a name="12"><font size=-1>12     </font></a><span class="comment"></span><span class="keyword">public final class <a href="dictionary_U.html#630">L</a> </span><span class="default">{</span>
+<a name="13"><font size=-1>13     </font></a><span class="default"></span>
+<a name="14"><font size=-1>14     </font></a><span class="default">	</span><span class="keyword">private static final <a href="dictionary_S.html#252">String</a> <a href="dictionary_L.html#859">LOG_FORMAT</a> </span><span class="default">= </span><span class="string">&quot;%1$s\n%2$s&quot;</span><span class="default">;</span>
+<a name="15"><font size=-1>15     </font></a><span class="default"></span>
+<a name="16"><font size=-1>16     </font></a><span class="default">	</span><span class="keyword">private <a href="dictionary_L.html#825">L</a></span><span class="default">() {</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">	}</span>
+<a name="18"><font size=-1>18     </font></a><span class="default"></span>
+<a name="19"><font size=-1>19     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_L.html#826">d</a></span><span class="default">(<a href="dictionary_S.html#252">String</a> <a href="dictionary_M.html#829">message</a>, Object... <a href="dictionary_A.html#828">args</a>) {</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">		<a href="dictionary_L.html#844">log</a>(<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_D.html#827">DEBUG</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_M.html#829">message</a>, <a href="dictionary_A.html#828">args</a>);</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">	}</span>
+<a name="22"><font size=-1>22     </font></a><span class="default"></span>
+<a name="23"><font size=-1>23     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_L.html#840">i</a></span><span class="default">(<a href="dictionary_S.html#252">String</a> <a href="dictionary_M.html#843">message</a>, Object... <a href="dictionary_A.html#842">args</a>) {</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">		<a href="dictionary_L.html#844">log</a>(<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_I.html#841">INFO</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_M.html#843">message</a>, <a href="dictionary_A.html#842">args</a>);</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">	}</span>
+<a name="26"><font size=-1>26     </font></a><span class="default"></span>
+<a name="27"><font size=-1>27     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_L.html#631">w</a></span><span class="default">(<a href="dictionary_S.html#252">String</a> <a href="dictionary_M.html#858">message</a>, Object... <a href="dictionary_A.html#857">args</a>) {</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">		<a href="dictionary_L.html#844">log</a>(<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_W.html#856">WARN</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_M.html#858">message</a>, <a href="dictionary_A.html#857">args</a>);</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">	}</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+<a name="31"><font size=-1>31     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_L.html#830">e</a></span><span class="default">(<a href="dictionary_T.html#861">Throwable</a> <a href="dictionary_E.html#832">ex</a>) {</span>
+<a name="32"><font size=-1>32     </font></a><span class="default">		<a href="dictionary_L.html#844">log</a>(<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_E.html#831">ERROR</a>, <a href="dictionary_E.html#832">ex</a>, </span><span class="keyword">null</span><span class="default">);</span>
+<a name="33"><font size=-1>33     </font></a><span class="default">	}</span>
+<a name="34"><font size=-1>34     </font></a><span class="default"></span>
+<a name="35"><font size=-1>35     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_L.html#833">e</a></span><span class="default">(<a href="dictionary_S.html#252">String</a> <a href="dictionary_M.html#835">message</a>, Object... <a href="dictionary_A.html#834">args</a>) {</span>
+<a name="36"><font size=-1>36     </font></a><span class="default">		<a href="dictionary_L.html#844">log</a>(<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_E.html#831">ERROR</a>, </span><span class="keyword">null</span><span class="default">, <a href="dictionary_M.html#835">message</a>, <a href="dictionary_A.html#834">args</a>);</span>
+<a name="37"><font size=-1>37     </font></a><span class="default">	}</span>
+<a name="38"><font size=-1>38     </font></a><span class="default"></span>
+<a name="39"><font size=-1>39     </font></a><span class="default">	</span><span class="keyword">public static void <a href="dictionary_L.html#836">e</a></span><span class="default">(<a href="dictionary_T.html#861">Throwable</a> <a href="dictionary_E.html#838">ex</a>, <a href="dictionary_S.html#252">String</a> <a href="dictionary_M.html#839">message</a>, Object... <a href="dictionary_A.html#837">args</a>) {</span>
+<a name="40"><font size=-1>40     </font></a><span class="default">		<a href="dictionary_L.html#844">log</a>(<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_E.html#831">ERROR</a>, <a href="dictionary_E.html#838">ex</a>, <a href="dictionary_M.html#839">message</a>, <a href="dictionary_A.html#837">args</a>);</span>
+<a name="41"><font size=-1>41     </font></a><span class="default">	}</span>
+<a name="42"><font size=-1>42     </font></a><span class="default"></span>
+<a name="43"><font size=-1>43     </font></a><span class="default">	</span><span class="keyword">private static void <a href="dictionary_L.html#844">log</a></span><span class="default">(</span><span class="keyword">int <a href="dictionary_P.html#855">priority</a></span><span class="default">, <a href="dictionary_T.html#861">Throwable</a> <a href="dictionary_E.html#849">ex</a>, <a href="dictionary_S.html#252">String</a> <a href="dictionary_M.html#854">message</a>, Object... <a href="dictionary_A.html#848">args</a>) {</span>
+<a name="44"><font size=-1>44     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_A.html#848">args</a>.<a href="dictionary_L.html#850">length</a> &gt; </span><span class="number">0</span><span class="default">) {</span>
+<a name="45"><font size=-1>45     </font></a><span class="default">			<a href="dictionary_M.html#854">message</a> = <a href="dictionary_S.html#252">String</a>.<a href="dictionary_F.html#640">format</a>(<a href="dictionary_M.html#854">message</a>, <a href="dictionary_A.html#848">args</a>);</span>
+<a name="46"><font size=-1>46     </font></a><span class="default">		}</span>
+<a name="47"><font size=-1>47     </font></a><span class="default"></span>
+<a name="48"><font size=-1>48     </font></a><span class="default">		<a href="dictionary_S.html#252">String</a> <a href="dictionary_L.html#851">log</a>;</span>
+<a name="49"><font size=-1>49     </font></a><span class="default">		</span><span class="keyword">if </span><span class="default">(<a href="dictionary_E.html#849">ex</a> == </span><span class="keyword">null</span><span class="default">) {</span>
+<a name="50"><font size=-1>50     </font></a><span class="default">			<a href="dictionary_L.html#851">log</a> = <a href="dictionary_M.html#854">message</a>;</span>
+<a name="51"><font size=-1>51     </font></a><span class="default">		} </span><span class="keyword">else </span><span class="default">{</span>
+<a name="52"><font size=-1>52     </font></a><span class="default">			<a href="dictionary_S.html#252">String</a> <a href="dictionary_L.html#853">logMessage</a> = <a href="dictionary_M.html#854">message</a> == </span><span class="keyword">null </span><span class="default">? <a href="dictionary_E.html#849">ex</a>.<a href="dictionary_G.html#845">getMessage</a>() : <a href="dictionary_M.html#854">message</a>;</span>
+<a name="53"><font size=-1>53     </font></a><span class="default">			<a href="dictionary_S.html#252">String</a> <a href="dictionary_L.html#852">logBody</a> = <a href="dictionary_U.html#860">Log</a>.<a href="dictionary_G.html#846">getStackTraceString</a>(<a href="dictionary_E.html#849">ex</a>);</span>
+<a name="54"><font size=-1>54     </font></a><span class="default">			<a href="dictionary_L.html#851">log</a> = <a href="dictionary_S.html#252">String</a>.<a href="dictionary_F.html#640">format</a>(<a href="dictionary_L.html#859">LOG_FORMAT</a>, <a href="dictionary_L.html#853">logMessage</a>, <a href="dictionary_L.html#852">logBody</a>);</span>
+<a name="55"><font size=-1>55     </font></a><span class="default">		}</span>
+<a name="56"><font size=-1>56     </font></a><span class="default">		<a href="dictionary_U.html#860">Log</a>.<a href="dictionary_P.html#847">println</a>(<a href="dictionary_P.html#855">priority</a>, <a href="dictionary_C.html#528">ImageLoader</a>.<a href="dictionary_I.html#863">TAG</a>, <a href="dictionary_L.html#851">log</a>);</span>
+<a name="57"><font size=-1>57     </font></a><span class="default">	}</span>
+<a name="58"><font size=-1>58     </font></a><span class="default">}</span>
+<a name="59"><font size=-1>59     </font></a><span class="default"></span>
+</pre></body></html>
