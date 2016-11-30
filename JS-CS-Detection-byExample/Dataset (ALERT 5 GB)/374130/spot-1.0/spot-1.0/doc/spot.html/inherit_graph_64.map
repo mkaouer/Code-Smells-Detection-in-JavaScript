@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$structspot_1_1ltl_1_1formula__tree_1_1node.html" title="spot::ltl::formula\l_tree::node" alt="" coords="5,138,117,182"/>
+<area shape="rect" id="node3" href="$structspot_1_1ltl_1_1formula__tree_1_1node__atomic.html" title="spot::ltl::formula\l_tree::node_atomic" alt="" coords="165,5,296,49"/>
+<area shape="rect" id="node5" href="$structspot_1_1ltl_1_1formula__tree_1_1node__binop.html" title="spot::ltl::formula\l_tree::node_binop" alt="" coords="169,71,292,115"/>
+<area shape="rect" id="node7" href="$structspot_1_1ltl_1_1formula__tree_1_1node__multop.html" title="spot::ltl::formula\l_tree::node_multop" alt="" coords="165,138,296,182"/>
+<area shape="rect" id="node9" href="$structspot_1_1ltl_1_1formula__tree_1_1node__nfa.html" title="spot::ltl::formula\l_tree::node_nfa" alt="" coords="175,205,287,249"/>
+<area shape="rect" id="node11" href="$structspot_1_1ltl_1_1formula__tree_1_1node__unop.html" title="spot::ltl::formula\l_tree::node_unop" alt="" coords="171,271,291,315"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classspot_1_1tgba__reachable__iterator.html" title="Iterate over all reachable states of a spot::tgba." alt="" coords="5,38,147,82"/>
+<area shape="rect" id="node3" href="$classspot_1_1tgba__reachable__iterator__breadth__first.html" title="An implementation of spot::tgba_reachable_iterator that browses states breadth first." alt="" coords="195,5,341,49"/>
+<area shape="rect" id="node5" href="$classspot_1_1tgba__reachable__iterator__depth__first.html" title="An implementation of spot::tgba_reachable_iterator that browses states depth first." alt="" coords="197,71,339,115"/>
+</map>

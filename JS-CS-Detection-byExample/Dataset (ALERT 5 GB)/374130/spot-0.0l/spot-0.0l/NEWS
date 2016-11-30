@@ -1,0 +1,60 @@
+New in spot 0.0l (2003-11-01):
+
+  * Computation of prime implicants.  This simplify the output of
+    ltl_to_tgba_fm, and allows conditions to be output as some of
+    product in dot output.
+  * Optimize translation of GFy in ltl_to_tgba_fm.
+  * tgba_explicit supports arbitrary binary formulae on transitions
+    (only conjunctions were allowed).
+
+New in spot 0.0j (2003-10-03):
+
+  * Use hash_map's instead of map's almost everywhere.
+  * New emptiness check, based on Couvreur's algorithm.
+  * LTL propositions can be put inside doublequotes to disambiguate
+    some constructions.
+  * Preliminary support for GreatSPN's EESRG.
+  * Various bug fixes.
+
+New in spot 0.0h (2003-08-18):
+
+  * More python bindings:
+    - "import buddy" works (see wrap/python/tests/bddnqueen.py for an example),
+    - almost all the Spot API is now available via "import spot".
+  * wrap/python/cgi/ltl2tgba.py is an LTL-to-Büchi translator that
+    work as as a cgi script.
+  * Couvreur's FM'99 ltl-to-tgba translation.
+
+New in spot 0.0f (2003-08-01):
+
+  * More python bindings, still only for the spot::ltl:: namespace.
+  * Functional GSPN interface.  (Enable with --with-gspn=directory.)
+  * The LTL scanner recognizes /\, \/, and xor.
+  * Upgrade to lbtt 1.0.2.
+  * tgba_tba_proxy is an on-the-fly degeneralizer.
+  * Implements the "magic search" algorithm.
+    (Works only on a tgba_tba_proxy.)
+  * Tgba's output algorithms (save(), dotty()) now non-recursive.
+  * During products, succ_iter will optimize its set of successors
+    using information computed from the current product state.
+  * BDD dictionnaries are now shared between automata and.  This
+    gets rid of all the BDD-variable translating machinery.
+
+New in spot 0.0d (2003-07-13):
+
+  * Optimize translation of G operators occurring at the root
+    of a formula (or its immediate children when the root is a
+    conjunction).  This saves two BDD variables per G operator.
+  * Distribute lbtt, and run it during `make check'.
+  * First sketch of GSPN interface.
+  * succ_iter_concreate::next() completely rewritten.
+  * Transitions are now labelled by boolean formulae (not only
+    conjunctions).
+  * Documentation:
+    - Output collaboration diagrams.
+    - Build and distribute PDF manual.
+  * Many bug fixes.
+
+New in spot 0.0b (2003-06-26):
+
+  * Everything.

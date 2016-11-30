@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Copyright (C) 2009, 2010, 2011 Laboratoire de Recherche et Développement de
+# l'EPITA (LRDE)
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+
+. ./defs
+
+set -e
+
+pwd
+lcdir=../../ltltest
+lc="$lcdir/genltl"
+
+run='run 0'
+
+check_formula()
+{
+  # First, check the satisfiability of the formula with Spot
+  $run ../ltl2tgba -CR -e -x -f "$1" >/dev/null
+  # Also check the satisfiability of the degeneralized formula
+  $run ../ltl2tgba -CR -e -D -x -f "$1" >/dev/null
+  $run ../ltl2tgba -CR -e -DS -x -f "$1" >/dev/null
+}
+
+# Kristin Y. Rozier reported that the formulae with n=10 were badly
+# translated.  Each of these formulae should have exactly one
+# accepting path, but in this case the emptiness returned an automata
+# without cycle.  It turned out the function used to compare LTL
+# formulae was bugged when two LTL formulae had the same hash value,
+# so the translation of the formula stopped midway, on a formula it
+# thought it had already seen.
+
+for n in 1 2 3 4 5 6 7 8 9 10 11
+do
+  :;:;: "========== $n counters ==========" ;:;:  # only visible with "set -x"
+  f=`"$lc" 17 $n`
+  check_formula "$f"
+  f=`"$lc" 18 $n`
+  check_formula "$f"
+  f=`"$lc" 19 $n`
+  check_formula "$f"
+  f=`"$lc" 20 $n`
+  check_formula "$f"
+
+  # Only run the first two formulae under valgrind,
+  # it is too slow otherwise.
+  if test $n = 2; then
+     run=
+  fi
+done

@@ -1,0 +1,97 @@
+
+html {overflow-y:scroll;}
+
+.ltl2tgba .ui-widget {
+    font-size: 1em;
+}
+
+input.formula {
+    width: 700px;
+}
+
+span#send {
+    width: 60px;
+    margin-left: 4px;
+}
+
+.shadow {
+    -moz-box-shadow: 2px 2px 2px #888888;
+    -webkit-box-shadow: 2px 1px 2px #888888;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+div.ltl2tgba {
+    width: 800px;
+    position:relative;
+    left:0px;
+    top:0px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index:10;
+}
+
+#spotlogo {
+  position:fixed;
+  left:10px;
+  top:10px;
+  z-index:1;
+}
+#lrdelogo {
+  position:fixed;
+  left:10px;
+  bottom:84px;
+  z-index:1;
+}
+#lip6logo {
+  position:fixed;
+  left:10px;
+  bottom:10px;
+  z-index:1;
+}
+#mailicon {
+  position:fixed;
+  left:10px;
+  top:84px;
+  z-index:1;
+}
+
+.ltl2tgba div.ui-widget-content {
+    padding: 3px;
+    margin: 2px 0px;
+}
+
+.ltl2tgba h3 {
+    font-size:1em;
+    margin: 0;
+    padding: 0px 0.2em 0px;
+    border-bottom:1px solid #eee;
+    text-transform: capitalize;
+}
+
+.ltl2tgba .head .ui-icon {
+    float: right;
+    margin: 0.2em 0px;
+}
+
+.ltl2tgba .formula, #tiptip_content .formula {
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.ltl2tgba .parse-error {
+    font-family: monospace;
+    white-space: pre;
+    color: red;
+    font-size: 1.1em;
+}
+
+.ltl2tgba .ec-error {
+    color: red;
+}
+
+.ltl2tgba .neverclaim, .ltl2tgba .accrun {
+    font-family: monospace;
+    white-space: pre;
+    font-size: 1.1em;
+}

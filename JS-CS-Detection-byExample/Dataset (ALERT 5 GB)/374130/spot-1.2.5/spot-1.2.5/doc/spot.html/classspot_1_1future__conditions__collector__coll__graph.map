@@ -1,0 +1,6 @@
+<map id="spot::future_conditions_collector" name="spot::future_conditions_collector">
+<area shape="rect" id="node2" href="$classspot_1_1tgba__scc.html" title="Wrap a tgba to offer information about strongly connected components. " alt="" coords="5,1385,213,1738"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="7,323,212,741"/>
+<area shape="rect" id="node8" href="$classspot_1_1scc__map.html" title="Build a map of Strongly Connected components in in a TGBA. " alt="" coords="171,811,320,1314"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="64,6,155,189"/>
+</map>

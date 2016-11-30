@@ -1,0 +1,76 @@
+# -*- shell-script -*-
+# Copyright (C) 2009 Laboratoire de Recherche et DÃ©veloppement
+# de l'Epita (LRDE).
+# Copyright (C) 2003, 2004, 2006 Laboratoire d'Informatique de Paris 6 (LIP6),
+# département Systèmes Répartis Coopératifs (SRC), Université Pierre
+# et Marie Curie.
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Ensure we are running from the right directory.
+test -f ./defs || {
+   echo "defs: not found in current directory" 1>&2
+   exit 1
+}
+
+# If srcdir is not set, then we are not running from `make check'.
+if test -z "$srcdir"; then
+   # compute $srcdir.
+   srcdir=`echo "$0" | sed -e 's,/[^\\/]*$,,'`
+   test $srcdir = $0 && srcdir=.
+fi
+
+# Ensure $srcdir is set correctly.
+test -f $srcdir/defs.in || {
+   echo "$srcdir/defs.in not found, check \$srcdir" 1>&2
+   exit 1
+}
+
+echo "== Running test $0"
+
+me=`echo "$0" | sed -e 's,.*[\\/],,;s/\.test$//'`
+
+testSubDir=$me.dir
+chmod -R a+rwx $testSubDir > /dev/null 2>&1
+rm -rf $testSubDir > /dev/null 2>&1
+mkdir $testSubDir
+cd $testSubDir
+
+DOT='@DOT@'
+VALGRIND='@VALGRIND@'
+top_srcdir='../@top_srcdir@'
+
+run()
+{
+  expected_exitcode=$1
+  shift
+  exitcode=0
+  if test -n "$VALGRIND"; then
+    exec 6>valgrind.err
+    GLIBCPP_FORCE_NEW=1 \
+    ../../../libtool --mode=execute \
+    $VALGRIND --tool=memcheck --leak-check=yes --log-fd=6 -q "$@" ||
+      exitcode=$?
+    cat valgrind.err 1>&2
+    test -z "`sed 1q valgrind.err`" || exit 50
+    rm -f valgrind.err
+  else
+    "$@" || exitcode=$?
+  fi
+  test $exitcode = $expected_exitcode || exit 1
+}
+
+set -x

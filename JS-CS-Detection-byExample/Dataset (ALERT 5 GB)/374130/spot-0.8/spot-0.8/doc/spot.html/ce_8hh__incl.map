@@ -1,0 +1,20 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$status_8hh.html" title="status.hh" alt="" coords="529,83,601,112"/>
+<area shape="rect" id="node72" href="$emptiness_8hh.html" title="tgbaalgos/emptiness.hh" alt="" coords="839,237,1002,267"/>
+<area shape="rect" id="node84" href="$emptiness__stats_8hh.html" title="emptiness_stats.hh" alt="" coords="1607,315,1741,344"/>
+<area shape="rect" id="node5" href="$sccstack_8hh.html" title="sccstack.hh" alt="" coords="307,237,398,267"/>
+<area shape="rect" id="node24" href="$nsheap_8hh.html" title="nsheap.hh" alt="" coords="711,237,794,267"/>
+<area shape="rect" id="node39" href="$tgba_8hh.html" title="tgba/tgba.hh" alt="" coords="518,160,611,189"/>
+<area shape="rect" id="node11" href="$state_8hh.html" title="tgba/state.hh" alt="" coords="683,315,779,344"/>
+<area shape="rect" id="node22" href="$casts_8hh.html" title="misc/casts.hh" alt="" coords="681,392,782,421"/>
+<area shape="rect" id="node27" href="$hash_8hh.html" title="misc/hash.hh" alt="" coords="1229,315,1327,344"/>
+<area shape="rect" id="node32" href="$hashfunc_8hh.html" title="hashfunc.hh" alt="" coords="1435,392,1526,421"/>
+<area shape="rect" id="node42" href="$succiter_8hh.html" title="succiter.hh" alt="" coords="602,237,687,267"/>
+<area shape="rect" id="node45" href="$bdddict_8hh.html" title="bdddict.hh" alt="" coords="433,237,515,267"/>
+<area shape="rect" id="node55" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="995,315,1107,344"/>
+<area shape="rect" id="node61" href="$bddalloc_8hh.html" title="misc/bddalloc.hh" alt="" coords="85,315,207,344"/>
+<area shape="rect" id="node59" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="1046,392,1129,421"/>
+<area shape="rect" id="node63" href="$freelist_8hh.html" title="freelist.hh" alt="" coords="233,392,310,421"/>
+<area shape="rect" id="node78" href="$optionmap_8hh.html" title="misc/optionmap.hh" alt="" coords="1351,315,1482,344"/>
+<area shape="rect" id="node88" href="$ltstr_8hh.html" title="misc/ltstr.hh" alt="" coords="1721,392,1811,421"/>
+</map>

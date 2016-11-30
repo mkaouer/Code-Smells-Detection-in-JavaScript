@@ -1,0 +1,98 @@
+#!/bin/sh
+# Copyright (C) 2008, 2009, 2010 Laboratoire de Recherche et
+# Développement de l'Epita (LRDE).
+# Copyright (C) 2003, 2004, 2005 Laboratoire d'Informatique de
+# Paris 6 (LIP6), département Systèmes Répartis Coopératifs (SRC),
+# Université Pierre et Marie Curie.
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+. ./defs
+
+set -e
+
+expect_ce_do()
+{
+  run 0 ../ltl2tgba "$@"
+  run 0 ../ltl2tgba -g "$@"
+}
+
+expect_ce()
+{
+  expect_ce_do -CR -e -l "$1"
+  expect_ce_do -CR -e -l -D "$1"
+  expect_ce_do -CR -e -f "$1"
+  expect_ce_do -CR -e -f -D "$1"
+  expect_ce_do -CR -e'Cou99(shy)' -l "$1"
+  expect_ce_do -CR -e'Cou99(shy)' -l -D "$1"
+  expect_ce_do -CR -e'Cou99(shy)' -f "$1"
+  expect_ce_do -CR -e'Cou99(shy)' -f -D "$1"
+  expect_ce_do -CR -eCVWY90 -l "$1"
+  expect_ce_do -CR -eCVWY90 -f "$1"
+  run 0 ../ltl2tgba -CR -e'CVWY90(bsh=10M)' -l "$1"
+  run 0 ../ltl2tgba -CR -e'CVWY90(bsh=10M)' -f "$1"
+  run 0 ../ltl2tgba -CR -eSE05 -l "$1"
+  run 0 ../ltl2tgba -CR -eSE05 -f "$1"
+  run 0 ../ltl2tgba -CR -e'SE05(bsh=10M)' -l "$1"
+  run 0 ../ltl2tgba -CR -e'SE05(bsh=10M)' -f "$1"
+  run 0 ../ltl2tgba -CR -eTau03_opt -f "$1"
+  run 0 ../ltl2tgba -CR -eGV04 -f "$1"
+  # Expect multiple accepting runs
+  test `../ltl2tgba -C -e'CVWY90(repeated)' -l "$1" |
+        grep Prefix: | wc -l` -ge $2
+  test `../ltl2tgba -C -e'SE05(repeated)' -l "$1" |
+        grep Prefix: | wc -l` -ge $2
+}
+
+expect_no()
+{
+  run 0 ../ltl2tgba -CR -E -l "$1"
+  run 0 ../ltl2tgba -CR -E -l -D "$1"
+  run 0 ../ltl2tgba -CR -E -f "$1"
+  run 0 ../ltl2tgba -CR -E -f -D "$1"
+  run 0 ../ltl2tgba -CR -E'Cou99(shy)' -l "$1"
+  run 0 ../ltl2tgba -CR -E'Cou99(shy)' -l -D "$1"
+  run 0 ../ltl2tgba -CR -E'Cou99(shy)' -f "$1"
+  run 0 ../ltl2tgba -CR -E'Cou99(shy)' -f -D "$1"
+  run 0 ../ltl2tgba -CR -ECVWY90 -l "$1"
+  run 0 ../ltl2tgba -CR -ECVWY90 -f "$1"
+  run 0 ../ltl2tgba -CR -E'CVWY90(bsh=10M)' -l "$1"
+  run 0 ../ltl2tgba -CR -E'CVWY90(bsh=10M)' -f "$1"
+  run 0 ../ltl2tgba -CR -ESE05 -l "$1"
+  run 0 ../ltl2tgba -CR -ESE05 -f "$1"
+  run 0 ../ltl2tgba -CR -E'SE05(bsh=10M)' -l "$1"
+  run 0 ../ltl2tgba -CR -E'SE05(bsh=10M)' -f "$1"
+  run 0 ../ltl2tgba -CR -ETau03_opt -f "$1"
+  run 0 ../ltl2tgba -CR -EGV04 -f "$1"
+  test `../ltl2tgba -C -e'CVWY90(repeated)' -l "!($1)" |
+        grep Prefix: | wc -l` -ge $2
+  test `../ltl2tgba -C -e'SE05(repeated)' -l "!($1)" |
+        grep Prefix: | wc -l` -ge $2
+}
+
+expect_ce 'a' 1
+expect_ce 'a U b' 1
+expect_ce 'X a' 1
+expect_ce 'a & b & c' 1
+expect_ce 'a | b | (c U (d & (g U (h ^ i))))' 2
+expect_ce 'Xa & (b U !a) & (b U !a)' 1
+expect_ce 'Fa & Xb & GFc & Gd' 1
+expect_ce 'Fa & Xa & GFc & Gc' 2
+expect_ce 'Fc & X(a | Xb) & GF(a | Xb) & Gc' 1
+expect_ce '!((FF a) <=> (F x))' 3
+expect_no 'Xa && (!a U b) && !b && X!b' 4
+expect_no '(a U !b) && Gb' 3

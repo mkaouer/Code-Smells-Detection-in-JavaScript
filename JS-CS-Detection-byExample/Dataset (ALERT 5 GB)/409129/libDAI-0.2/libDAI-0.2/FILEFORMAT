@@ -1,0 +1,50 @@
+Cluster file (lines starting with # are comments):
+
+<Number of clusters>
+
+<cl{0}.nr_members>
+<cl{0}.member>
+<cl{0}.Moebius_number>
+
+<cl{1}.nr_members>
+<cl{1}.member>
+<cl{1}.Moebius_number>
+
+...
+
+
+
+.fg Factors file (lines starting with # are comments):
+
+<Number of factors>
+
+<factor{0}.nr_members>
+<factor{0}.Member>                                     # int 
+<factor{0}.Dims>
+<factor{0}.nr_non_zero_entries>
+<factor{0}.entry(0).index> <factor{0}.entry(0).value>  # linear index starting from 0
+<factor{0}.entry(1).index> <factor{0}.entry(1).value>
+<factor{0}.entry(2).index> <factor{0}.entry(2).value>
+<factor{0}.entry(3).index> <factor{0}.entry(3).value>
+...
+
+
+<factor{1}.Member>
+<factor{1}.Dims>
+<factor{1}.nr_non_zero_entries>
+<factor{1}.entry(0).index> <factor{1}.entry(0).value>
+<factor{1}.entry(1).index> <factor{1}.entry(1).value>
+<factor{1}.entry(2).index> <factor{1}.entry(2).value>
+<factor{1}.entry(3).index> <factor{1}.entry(3).value>
+...
+
+<factor{2}.Member>
+<factor{2}.Dims>
+<factor{2}.nr_non_zero_entries>
+<factor{2}.entry(0).index> <factor{2}.entry(0).value>
+<factor{2}.entry(1).index> <factor{2}.entry(1).value>
+<factor{2}.entry(2).index> <factor{2}.entry(2).value>
+<factor{2}.entry(3).index> <factor{2}.entry(3).value>
+...
+
+...

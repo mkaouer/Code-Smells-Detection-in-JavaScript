@@ -1,0 +1,360 @@
+#+TITLE: =ltlfilt=
+#+EMAIL spot@lrde.epita.fr
+#+OPTIONS: H:2 num:nil toc:t
+#+LINK_UP: tools.html
+
+This tool is a filter for LTL formulas.  (It will also work with PSL
+formulas.)  It can be used to perform a number of tasks.  Essentially:
+- converting formulas from one syntax to another,
+- transforming formulas,
+- selecting formulas matching some criterion.
+
+* Changing syntaxes
+
+Because it read and write formulas, =ltlfilt= accepts
+all the [[file:ioltl.org][common input and output options]].
+
+Additionally, if no =-f= or =-F= option is specified, =ltlfilt=
+will read formulas from the standard input.
+
+For instance the following will convert two LTL formulas expressed
+using infix notation (with different names supported for the same
+operators) and convert it into LBT's syntax.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -l -f 'p1 U (p2 & GFp3)' -f 'X<>[]p4'
+#+END_SRC
+#+RESULTS:
+: U p1 & p2 G F p3
+: X F G p4
+
+Conversely, here is how to rewrite formulas expressed using the
+LBT's Polish notation.  Let's take the following four formulas
+taken from examples distributed with =scheck=:
+#+BEGIN_SRC sh :results verbatim :exports both
+cat >scheck.ltl<<EOF
+! | G p0 & G p1 F p3
+| | X p7 F p6 & | | t p3 p7 U | f p3 p3
+& U & X p0 X p4 F p1 X X U X F p5 U p0 X X p3
+U p0 & | p0 p5 p1
+EOF
+#+END_SRC
+#+RESULTS:
+
+These can be turned into something easier to read (to the human) with:
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --lbt-input -F scheck.ltl
+#+END_SRC
+#+RESULTS:
+: !(Gp0 | (Gp1 & Fp3))
+: Xp7 | Fp6 | p3
+: ((Xp0 & Xp4) U Fp1) & XX(XFp5 U (p0 U XXp3))
+: p0 U ((p0 | p5) & p1)
+
+* Altering the formula
+
+As with [[file:randltl.org][=randltl=]], the =-r= option can be used to simplify formulas.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --lbt-input -F scheck.ltl -r
+#+END_SRC
+#+RESULTS:
+: F!p0 & (F!p1 | G!p3)
+: p3 | Xp7 | Fp6
+: Fp1 & XX(XFp5 U (p0 U XXp3))
+: p0 U (p1 & (p0 | p5))
+
+You may notice that operands of n-ary operators such as =&= or =|= can
+be reordered by =ltlfilt= even when the formula is not changed
+otherwise.  This is because Spot internally order all operands of
+commutative and associative operators, and that this order depends on
+the order in which the subformulas are first encountered.  Adding
+transformation options such as =-r= may alter this order.  However
+this difference is semantically insignificant.
+
+Formulas can be easily negated using the =-n= option, rewritten into
+negative normal form using the =--nnf= option, and the =W= and =M=
+operators can be rewritten using =U= and =R= using the =--remove-wm=
+option (note that this is already done when a formula is output in
+Spin's syntax).
+
+Another way to alter formula is to rename the atomic propositions it
+uses.  The =--relabel=abc= will relabel all atomic propositions using
+letters of the alphabet, while =--relabel=pnn= will use =p0=, =p1=,
+etc. as in LBT's syntax.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --lbt-input -F scheck.ltl -r --relabel=abc
+#+END_SRC
+#+RESULTS:
+: F!a & (F!b | G!c)
+: a | Xb | Fc
+: Fa & XX(XFb U (c U XXd))
+: a U (b & (a | c))
+
+Note that the relabeling is reset between each formula: =p3= became
+=c= in the first formula, but it became =d= in the third.
+
+Another use of relabeling is to get rid of complex atomic propositions
+such as the one shown when [[file:ioltl.org][presenting lenient mode]]:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --lenient --relabel=pnn -f '(a < b) U (process[2]@ok)'
+#+END_SRC
+#+RESULTS:
+: p0 U p1
+
+
+Finally, there is a second variant of the relabeling procedure that is
+enabled by =--relabel-bool=abc= or =--relabel-book=pnn=.  With this
+option, Boolean subformulas that do not interfere with other
+subformulas will be changed into atomic propositions.  For instance:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -f '(a & !b) & GF(a & !b) & FG(!c)' --relabel-bool=pnn
+ltlfilt -f '(a & !b) & GF(a & !b) & FG(!c & a)' --relabel-bool=pnn
+#+END_SRC
+#+RESULTS:
+: p0 & GFp0 & FGp1
+: p0 & p1 & GF(p0 & p1) & FG(p0 & p2)
+
+In the first formula, the independent =a & !b= and =!c= subformulae
+were respectively renamed =p0= and =p1=.  In the second formula, =a &
+!b= and =!c & a= are dependent so they could not be renamed; instead
+=a=, =!b= and =c= were renamed as =p0=, =p1= and =p2=.
+
+This option was originally developed to remove superfluous formulas
+from benchmarks of LTL translators.  For instance the automata
+generated for =GF(a|b)= and =GF(p0)= should be structurally
+equivalent: replacing =p0= by =a|b= in the second automaton should
+turn in into the first automaton, and vice-versa.  (However algorithms
+dealing with =GF(a|b)= might be slower because they have to deal with
+more atomic propositions.)  So given a long list of LTL formulas, we
+can combine =--relabel-bool= and =-u= to keep only one instance of
+formulas that are equivalent after such relabeling.  We also suggest
+to use =--nnf= so that =!FG(a -> b)= would become =GF(p0)=
+as well.  For instance here are some LTL formulas extracted from an
+[[http://www.fi.muni.cz/~xrehak/publications/verificationresults.ps.gz][industrial project]]:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --nnf -u --relabel-bool <<EOF
+G (hfe_rdy -> F !hfe_req)
+G (lup_sr_valid -> F lup_sr_clean )
+G F (hfe_req)
+reset && X G (!reset)
+G ( (F hfe_clk) && (F ! hfe_clk) )
+G ( (F lup_clk) && (F ! lup_clk) )
+G F (lup_sr_clean)
+G ( ( !(lup_addr_5_ <-> (X lup_addr_5_)) || !(lup_addr_6_ <-> (X lup_addr_6_)) || !(lup_addr_7_ <-> (X lup_addr_7_)) || !(lup_addr_8_ <-> (X lup_addr_8_)) ) -> ( (X !lup_sr_clean) && X ( (!( !(lup_addr_5_ <-> (X lup_addr_5_)) || !(lup_addr_6_ <-> (X lup_addr_6_)) || !(lup_addr_7_ <-> (X lup_addr_7_)) || !(lup_addr_8_ <-> (X lup_addr_8_)) )) U lup_sr_clean ) ) )
+G F ( !(lup_addr_5_ <-> (X lup_addr_5_)) || !(lup_addr_6_ <-> (X lup_addr_6_)) || !(lup_addr_7_ <-> (X lup_addr_7_)) || !(lup_addr_8_ <-> (X lup_addr_8_)) )
+(lup_addr_8__5__eq_0)
+((hfe_block_0__eq_0)&&(hfe_block_1__eq_0)&&(hfe_block_2__eq_0)&&(hfe_block_3__eq_0))
+G ((lup_addr_8__5__eq_0) -> X( (lup_addr_8__5__eq_0) || (lup_addr_8__5__eq_1) ) )
+G ((lup_addr_8__5__eq_1) -> X( (lup_addr_8__5__eq_1) || (lup_addr_8__5__eq_2) ) )
+G ((lup_addr_8__5__eq_2) -> X( (lup_addr_8__5__eq_2) || (lup_addr_8__5__eq_3) ) )
+G ((lup_addr_8__5__eq_3) -> X( (lup_addr_8__5__eq_3) || (lup_addr_8__5__eq_4) ) )
+G ((lup_addr_8__5__eq_4) -> X( (lup_addr_8__5__eq_4) || (lup_addr_8__5__eq_5) ) )
+G ((lup_addr_8__5__eq_5) -> X( (lup_addr_8__5__eq_5) || (lup_addr_8__5__eq_6) ) )
+G ((lup_addr_8__5__eq_6) -> X( (lup_addr_8__5__eq_6) || (lup_addr_8__5__eq_7) ) )
+G ((lup_addr_8__5__eq_7) -> X( (lup_addr_8__5__eq_7) || (lup_addr_8__5__eq_8) ) )
+G ((lup_addr_8__5__eq_8) -> X( (lup_addr_8__5__eq_8) || (lup_addr_8__5__eq_9) ) )
+G ((lup_addr_8__5__eq_9) -> X( (lup_addr_8__5__eq_9) || (lup_addr_8__5__eq_10) ) )
+G ((lup_addr_8__5__eq_10) -> X( (lup_addr_8__5__eq_10) || (lup_addr_8__5__eq_11) ) )
+G ((lup_addr_8__5__eq_11) -> X( (lup_addr_8__5__eq_11) || (lup_addr_8__5__eq_12) ) )
+G ((lup_addr_8__5__eq_12) -> X( (lup_addr_8__5__eq_12) || (lup_addr_8__5__eq_13) ) )
+G ((lup_addr_8__5__eq_13) -> X( (lup_addr_8__5__eq_13) || (lup_addr_8__5__eq_14) ) )
+G ((lup_addr_8__5__eq_14) -> X( (lup_addr_8__5__eq_14) || (lup_addr_8__5__eq_15) ) )
+G ((lup_addr_8__5__eq_15) -> X( (lup_addr_8__5__eq_15) || (lup_addr_8__5__eq_0) ) )
+G (((X hfe_clk) -> hfe_clk)->((hfe_req->X hfe_req)&&((!hfe_req) -> (X !hfe_req))))
+G (((X lup_clk) -> lup_clk)->((lup_sr_clean->X lup_sr_clean)&&((!lup_sr_clean) -> (X !lup_sr_clean))))
+EOF
+#+END_SRC
+#+RESULTS:
+: G(a | Fb)
+: GFa
+: a & XG!a
+: G(Fa & F!a)
+: G((((!a & X!a) | (a & Xa)) & ((!b & X!b) | (b & Xb)) & ((!c & X!c) | (c & Xc)) & ((!d & X!d) | (d & Xd))) | (X!e & X((((!a & X!a) | (a & Xa)) & ((!b & X!b) | (b & Xb)) & ((!c & X!c) | (c & Xc)) & ((!d & X!d) | (d & Xd))) U e)))
+: GF((!a & Xa) | (a & X!a) | (!b & Xb) | (b & X!b) | (!c & Xc) | (c & X!c) | (!d & Xd) | (d & X!d))
+: a
+: G(!a | X(a | b))
+: G((!b & Xb) | ((!a | Xa) & (a | X!a)))
+
+Here 29 formulas were reduced into 9 formulas after relabeling of
+Boolean subexpression and removing of duplicate formulas.  In other
+words the original set of formulas contains 9 different patterns.
+
+* Filtering
+
+=ltlfilt= supports many ways to filter formulas:
+
+#+BEGIN_SRC sh :results verbatim :exports results
+ltlfilt --help | sed -n '/Filtering options.*:/,/^$/p' | sed '1d;$d'
+#+END_SRC
+#+RESULTS:
+#+begin_example
+      --boolean              match Boolean formulas
+      --bsize-max=INT        match formulas with Boolean size <= INT
+      --bsize-min=INT        match formulas with Boolean size >= INT
+      --equivalent-to=FORMULA   match formulas equivalent to FORMULA
+      --eventual             match pure eventualities
+      --guarantee            match guarantee formulas (even pathological)
+      --implied-by=FORMULA   match formulas implied by FORMULA
+      --imply=FORMULA        match formulas implying FORMULA
+      --ltl                  match only LTL formulas (no PSL operator)
+      --nox                  match X-free formulas
+      --obligation           match obligation formulas (even pathological)
+      --safety               match safety formulas (even pathological)
+      --size-max=INT         match formulas with size <= INT
+      --size-min=INT         match formulas with size >= INT
+      --stutter-insensitive, --stutter-invariant
+                             match stutter-insensitive LTL formulas
+      --syntactic-guarantee  match syntactic-guarantee formulas
+      --syntactic-obligation match syntactic-obligation formulas
+      --syntactic-persistence   match syntactic-persistence formulas
+      --syntactic-recurrence match syntactic-recurrence formulas
+      --syntactic-safety     match syntactic-safety formulas
+      --universal            match purely universal formulas
+  -u, --unique               drop formulas that have already been output (not
+                             affected by -v)
+  -v, --invert-match         select non-matching formulas
+#+end_example
+
+Most of the above options should be self-explanatory.  For instance
+the following command will extract all formulas from =scheck.ltl=
+which do not represent guarantee properties.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --lbt-input -F scheck.ltl -v --guarantee
+#+END_SRC
+#+RESULTS:
+: !(Gp0 | (Gp1 & Fp3))
+
+Combining =ltlfilt= with [[file:randltl.org][=randltl=]] makes it easier to generate random
+formulas that respect certain constraints.  For instance let us
+generate 10 formulas that are equivalent to =a U b=:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+randltl -n -1 a b | ltlfilt --equivalent-to 'a U b' | head -n 10
+#+END_SRC
+#+RESULTS:
+#+begin_example
+!(!a R !b)
+(!Gb -> a) U b
+a U b
+Fb & (a W b)
+((a <-> !(a | b)) W a) U ((!b M b) U b)
+(b <-> (Xb M a)) -> b
+(a | b) U b
+((!b U b) -> (a W b)) U b
+(a xor b) U b
+b R (Fb & (a U (a W b)))
+#+end_example
+
+The =-n -1= option to =randltl= will cause it to output an infinite
+stream of random formulas.  =ltlfilt=, which reads its standard input
+by default, will select only those equivalent to =a U b=.  The output
+of =ltlfilt= would still be an infinite stream of random formulas, so
+we display only the first 10 using the standard =head= utility.  Less
+trivial formulas could be obtained by adding the =-r= option to
+=randltl= (or equivalently adding the =-r= and =-u= option to
+=ltlfilt=).
+
+
+Another similar example, that requires two calls to =ltlfilt=, is the
+generation of random pathological safety formulas.  Pathological
+safety formulas are safety formulas that do not /look/ so
+syntactically.  We can generate some starting again with =randltl=,
+then ignoring all syntactic safety formulas, and keeping only the
+safety formulas in the remaining list.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+randltl -r -n -1 a b | ltlfilt -v --syntactic-safety | ltlfilt --safety | head -n 10
+#+END_SRC
+#+RESULTS:
+#+begin_example
+(!a & Fa) R Xa
+!a | (a & b) | (((!a & b) | (a & !b)) M (!a M X!a))
+G(!a M Xa)
+G((G!b & !a) | (a & Fb)) R a
+G!a M !a
+G(!a M ((!b & XGb) | (b & XF!b)))
+F(b | G!b)
+F(Xa | G!a)
+G(XXa | (b & F!a))
+G((!a & (!a M !b)) | (a & (a W b)))
+#+end_example
+
+
+=ltlfilt='s filtering ability can also be used to answer questions
+about a single formula.  For instance is =a U (b U a)= equivalent to
+=b U a=?
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -f 'a U (b U a)' --equivalent-to 'b U a'
+#+END_SRC
+#+RESULTS:
+: a U (b U a)
+
+The command prints the formula and returns an exit status of 0 if the
+two formulas are equivalent.  It would print nothing and set the exit
+status to 1, were the two formulas not equivalent.
+
+
+Is the formula =F(a & X(!a & Gb))= stutter-invariant?
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -f 'F(a & X(!a & Gb))' --stutter-invariant
+#+END_SRC
+#+RESULTS:
+: F(a & X(!a & Gb))
+
+Yes it is.  And since it is stutter-invariant, there exist some
+equivalent formulas that do not use =X= operator.  The =--remove-x=
+option gives one:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -f 'F(a & X(!a & Gb))' --remove-x
+#+END_SRC
+#+RESULTS:
+: F(a & ((a & (a U (!a & Gb)) & ((!b U !a) | (b U !a))) | (!a & (!a U (a & !a & Gb)) & ((!b U a) | (b U a))) | (b & (b U (!a & Gb & !b)) & ((!a U !b) | (a U !b))) | (!b & (!b U (!a & b & Gb)) & ((!a U b) | (a U b))) | (!a & Gb & (G!a | Ga) & (Gb | G!b))))
+
+We could even verify that the resulting horrible formula is equivalent
+to the original one:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -f 'F(a & X(!a & Gb))' --remove-x | ltlfilt --equivalent-to 'F(a & X(!a & Gb))'
+#+END_SRC
+#+RESULTS:
+: F(a & ((a & (a U (!a & Gb)) & ((!b U !a) | (b U !a))) | (!a & (!a U (a & !a & Gb)) & ((!b U a) | (b U a))) | (b & (b U (!a & Gb & !b)) & ((!a U !b) | (a U !b))) | (!b & (!b U (!a & b & Gb)) & ((!a U b) | (a U b))) | (!a & Gb & (G!a | Ga) & (Gb | G!b))))
+
+It is therefore equivalent, but that is not a surprise since the
+=--stutter-invariant= filter is actually implemented using exactly
+[[http://homepages.inf.ed.ac.uk/kousha/note_on_stut_tl_lpi.ps][this procedure]] (calling the =remove_x()= function, and building automata
+to check the equivalence of the resulting formula with the original one).
+
+* Using =--format=
+
+The =--format= option can be used the alter the way formulas are output (for instance use
+#+HTML: <code>--latex --format='$%f$'</code>
+to enclose formula in LaTeX format with =$...$=).  You may also find
+=--format= useful in more complex scenarios.  For instance you could
+print only the line numbers containing formulas matching some
+criterion.  In the following, we print only the numbers of the lines
+of =scheck.ltl= that contain guarantee formulas:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt --lbt-input -F scheck.ltl --guarantee --format=%L
+#+END_SRC
+#+RESULTS:
+: 2
+: 3
+: 4
+
+[[file:csv.org][More examples of how to use =--format= to create CSV files are on a
+separate page]]
+
+#  LocalWords:  ltlfilt num toc LTL PSL syntaxes LBT's SRC GFp scheck
+#  LocalWords:  ltl EOF lbt Gp Fp Xp XFp XXp randltl ary nnf wm abc
+#  LocalWords:  pnn Xb Fc XFb XXd sed boolean bsize nox Gb Fb Xa XGb
+#  LocalWords:  XF XXa

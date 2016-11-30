@@ -1,0 +1,27 @@
+<map id="G" name="G">
+<area shape="rect" id="node5" href="$tgba_8hh.html" title="tgba/tgba.hh" alt="" coords="748,237,841,267"/>
+<area shape="rect" id="node51" href="$common_8hh.html" title="common.hh" alt="" coords="1587,392,1677,421"/>
+<area shape="rect" id="node55" href="$gtec_8hh.html" title="tgbaalgos/gtec/gtec.hh" alt="" coords="1113,83,1271,112"/>
+<area shape="rect" id="node104" href="$ce_8hh.html" title="tgbaalgos/gtec/ce.hh" alt="" coords="943,83,1089,112"/>
+<area shape="rect" id="node109" href="$declenv_8hh.html" title="ltlenv/declenv.hh" alt="" coords="1679,160,1801,189"/>
+<area shape="rect" id="node7" href="$state_8hh.html" title="state.hh" alt="" coords="681,392,748,421"/>
+<area shape="rect" id="node21" href="$succiter_8hh.html" title="succiter.hh" alt="" coords="672,315,757,344"/>
+<area shape="rect" id="node24" href="$bdddict_8hh.html" title="bdddict.hh" alt="" coords="515,315,597,344"/>
+<area shape="rect" id="node19" href="$casts_8hh.html" title="misc/casts.hh" alt="" coords="563,469,664,499"/>
+<area shape="rect" id="node35" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="1701,392,1813,421"/>
+<area shape="rect" id="node41" href="$bddalloc_8hh.html" title="misc/bddalloc.hh" alt="" coords="117,392,240,421"/>
+<area shape="rect" id="node39" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="1716,469,1799,499"/>
+<area shape="rect" id="node43" href="$freelist_8hh.html" title="freelist.hh" alt="" coords="115,469,192,499"/>
+<area shape="rect" id="node59" href="$status_8hh.html" title="status.hh" alt="" coords="884,160,956,189"/>
+<area shape="rect" id="node82" href="$emptiness_8hh.html" title="tgbaalgos/emptiness.hh" alt="" coords="935,237,1097,267"/>
+<area shape="rect" id="node94" href="$emptiness__stats_8hh.html" title="emptiness_stats.hh" alt="" coords="1053,315,1187,344"/>
+<area shape="rect" id="node61" href="$sccstack_8hh.html" title="sccstack.hh" alt="" coords="371,315,461,344"/>
+<area shape="rect" id="node66" href="$nsheap_8hh.html" title="nsheap.hh" alt="" coords="883,315,965,344"/>
+<area shape="rect" id="node69" href="$hash_8hh.html" title="misc/hash.hh" alt="" coords="887,392,985,421"/>
+<area shape="rect" id="node73" href="$hashfunc_8hh.html" title="hashfunc.hh" alt="" coords="739,469,829,499"/>
+<area shape="rect" id="node88" href="$optionmap_8hh.html" title="misc/optionmap.hh" alt="" coords="1363,315,1493,344"/>
+<area shape="rect" id="node98" href="$ltstr_8hh.html" title="misc/ltstr.hh" alt="" coords="1124,392,1215,421"/>
+<area shape="rect" id="node111" href="$environment_8hh.html" title="environment.hh" alt="" coords="1853,315,1965,344"/>
+<area shape="rect" id="node117" href="$atomic__prop_8hh.html" title="LTL atomic propositions." alt="" coords="1669,237,1811,267"/>
+<area shape="rect" id="node122" href="$refformula_8hh.html" title="Reference&#45;counted LTL formulae." alt="" coords="1683,315,1779,344"/>
+</map>

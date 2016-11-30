@@ -1,0 +1,5 @@
+<map id="spot::formater" name="spot::formater">
+<area shape="rect" id="node2" href="$classspot_1_1printable__id.html" title="The default callback simply writes &quot;%c&quot;." alt="" coords="5,155,123,237"/>
+<area shape="rect" id="node4" href="$classspot_1_1printable.html" title="{spot::printable\n||+ ~printable()\l+ print()\l}" alt="" coords="108,6,209,103"/>
+<area shape="rect" id="node6" href="$classspot_1_1printable__percent.html" title="Called by default for &quot;%%&quot; and &quot;%\0&quot;." alt="" coords="147,155,299,237"/>
+</map>

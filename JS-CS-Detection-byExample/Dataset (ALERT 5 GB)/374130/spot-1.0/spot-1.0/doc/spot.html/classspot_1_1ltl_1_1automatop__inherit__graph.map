@@ -1,0 +1,4 @@
+<map id="spot::ltl::automatop" name="spot::ltl::automatop">
+<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1ref__formula.html" title="A reference&#45;counted LTL formula." alt="" coords="24,441,157,586"/>
+<area shape="rect" id="node4" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="5,6,176,391"/>
+</map>

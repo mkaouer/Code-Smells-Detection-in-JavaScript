@@ -1,0 +1,11 @@
+<area shape="rect" href="$classspot_1_1emptiness__check__result.html" title="The result of an emptiness check." alt="" coords="610,612,826,804">
+<area shape="rect" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton." alt="" coords="505,206,780,545">
+<area shape="rect" href="$classspot_1_1couvreur99__check__status.html" title="The status of the emptiness&#45;check on success." alt="" coords="294,626,521,789">
+<area shape="rect" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="430,8,534,128">
+<area shape="rect" href="$classspot_1_1option__map.html" title="Manage a map of options." alt="" coords="804,301,942,450">
+<area shape="rect" href="$classspot_1_1acss__statistics.html" title="Accepting Cycle Search Space statistics." alt="" coords="850,656,1002,760">
+<area shape="rect" href="$classspot_1_1ars__statistics.html" title="Accepting Run Search statistics." alt="" coords="966,301,1150,450">
+<area shape="rect" href="$structspot_1_1unsigned__statistics.html" title="{spot::unsigned_statistics\n|+ stats\l|+ ~unsigned_statistics()\l+ get()\l}" alt="" coords="966,22,1150,113">
+<area shape="rect" href="$classspot_1_1numbered__state__heap.html" title="Keep track of a large quantity of indexed states." alt="" coords="8,257,213,494">
+<area shape="rect" href="$classspot_1_1scc__stack.html" title="{spot::scc_stack\n|+ s\l|+ push()\l+ top()\l+ top()\l+ pop()\l+ size()\l+ rem()\l+ clear_rem()\l+ empty()\l}" alt="" coords="237,286,360,465">
+<area shape="rect" href="$structspot_1_1tgba__run.html" title="An accepted run, for a tgba." alt="" coords="1026,641,1144,774">

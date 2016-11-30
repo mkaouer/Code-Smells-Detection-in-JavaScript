@@ -1,0 +1,835 @@
+#!@PYTHON@
+# -*- mode: python; coding: utf-8 -*-
+# Copyright (C) 2011, 2012, 2013, 2014 Laboratoire de Recherche et
+# Développement de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+import os
+import sys
+
+script = ('SCRIPT_NAME' in os.environ)
+
+if script:
+    # 3600s = 1h
+    sys.stdout.write("""Cache-Control: max-age=3600
+Content-Type: text/html
+
+""")
+
+# Directory for temporary files (images and other auxiliary files).
+imgdir = 'spotimg'
+
+# Cache lookup for the QUERY_STRING
+qs = os.getenv('QUERY_STRING')
+if qs:
+    import hashlib
+    # We (optimistically) assume no collision from sha1(qs)
+    cachedir = imgdir + '/' + hashlib.sha1(qs.encode('utf-8')).hexdigest()
+    cachename = cachedir + '/html'
+    try:
+        # Is this a request we have already processed?
+        cache = open(cachename, "rb", 0)
+        if hasattr(sys.stdout, 'buffer'):
+            # Python 3+
+            sys.stdout.buffer.write(cache.read())
+        else:
+            # Python 2.x
+            sys.stdout.write(cache.read())
+        # Touch the directory containing the files we used, so
+        # it that it survives the browser's cache.
+        os.utime(cachedir, None)
+        exit(0)
+    except IOError:
+        # We failed to open the file.
+        # Let's run the rest of the script to create it.
+        pass
+elif script:
+    sys.stdout.write("<b>QUERY_STRING unset!</b>\n")
+    exit(0)
+
+# Location of the dot command
+dot = '@DOT@'
+dot_bgcolor = '-Gbgcolor=#FFFFFF00'
+
+svg_output = False # SVG output used to working well with Firefox
+                   # only.  It now seems to work with recent Chrome
+                   # versions as well, but it is still a problem with
+                   # Safari, and IE.
+output_both = True # Create both PNG and SVG.  If svg_output is False,
+                   # the SVG will be given as a link under the PNG.
+                   # Otherwise the PNG is used as alternate contents
+                   # for the SVG object.
+
+if not script:
+    # If this is not run as a cgi script, let's start an HTTP server.
+    try:
+        # Python 3+
+        from http.server import CGIHTTPRequestHandler, HTTPServer
+    except ImportError:
+        # Python 2.x
+        from CGIHTTPServer import CGIHTTPRequestHandler
+        from BaseHTTPServer import HTTPServer
+
+    class MyHandler(CGIHTTPRequestHandler):
+        def is_cgi(self):
+            if self.path.startswith('/cgi-bin/spot.py'):
+                self.cgi_info = '', self.path[9:]
+                return True
+            return False
+
+    server_address=('', 8000)
+    if not os.access(imgdir, os.F_OK):
+        # 493 = 0755 but we would have to write 0755 or 0o755
+        # depending on the python version...
+        os.mkdir(imgdir, 493)
+        sys.stdout.write("Directory spotimg/ created.\n")
+    httpd = HTTPServer(server_address, MyHandler)
+    sys.stdout.write("Point your browser to http://localhost:8000/ltl2tgba.html\n")
+    httpd.serve_forever()
+
+import cgi
+import cgitb; cgitb.enable()
+import signal
+import time
+import os.path
+
+# We do not output in cachedir directely, in case two
+# CGI scripts process the same request concurrently.
+tmpdir = cachedir + '-' + str(os.getpid())
+cachename = tmpdir + '/html'
+
+sys.stdout.flush()
+# Reopen stdout without buffering
+sys.stdout = os.fdopen(sys.stdout.fileno(), "wb", 0)
+
+# Redirect stderr to stdout at a low level (so that
+# even errors from subprocesses get printed).
+os.dup2(sys.stdout.fileno(), sys.stderr.fileno())
+
+# Create the temporary cache directory
+os.mkdir(tmpdir, 493) # See comment above about 0o755 or 0755.
+
+# Redirect stdout to the cache file, at a low level
+# for similar reason.
+fd = os.open(cachename, os.O_CREAT | os.O_WRONLY, 420) # 420 = 0644
+os.dup2(fd, sys.stdout.fileno())
+
+# We had to reopen stdout in binary mode to enable unbuffered output,
+# (disallowed on text I/O by Python 3.x) so starting now, we are not
+# allowed to send strings to sys.stdout.  Always use the following
+# method instead.
+def unbufprint(s):
+    if sys.getdefaultencoding() != 'ascii':
+        sys.stdout.write(s.encode("utf-8"))
+    else:
+        sys.stdout.write(s)
+
+def finish(kill = False):
+    # Output the result and exit.
+    os.dup2(sys.stderr.fileno(), sys.stdout.fileno())
+
+    cache = open(cachename, "rb", 0)
+    sys.stdout.write(cache.read())
+
+    # Rename tmpdir to its permanent name for caching purpose.
+    # os.rename will fail if cachedir already exist.  Since we tested
+    # that initially, it can only happen when two CGI script are
+    # processing the same request concurrently.  In that case the
+    # other result is as good as ours, so we just ignore the error.
+    # (We don't bother removing the temporary directory -- it will be
+    # removed by the next cache prune and cannot be created again in
+    # the meantime.)
+    try:
+        os.rename(tmpdir, cachedir)
+    except OSError:
+        pass
+
+    if kill:
+        # Kill all children
+        os.kill(0, signal.SIGTERM)
+    # Should we prune the cache?
+    stamp = imgdir + '/cache.stamp'
+    now = time.time()
+    try:
+        # Prune at most once every hour
+        if now - os.path.getmtime(stamp) < 3600:
+            exit(0)
+    except OSError:
+        # It's OK if the file did not exist.
+        # We will create it.
+        pass
+    # Erase all directories that are older than 2 hours, and all
+    # files that have only one hardlinks.  Files that have more than
+    # one hardlinks are referenced to by directories; so the hardlink
+    # count will decrease when the directory is purged.
+    os.system('find ' + imgdir  + ' -mindepth 1 -maxdepth 1 -mmin +120 '
+              + '\( -type d -o -links 1 \) -exec rm -rf {} +')
+    # Create or update the stamp so we know when to run the next prune.
+    open(stamp, "wb", 0)
+    exit(0)
+
+# Assume Spot is installed
+sys.path.insert(0, '@pythondir@')
+
+if ('SERVER_SOFTWARE' in os.environ and
+    os.environ['SERVER_SOFTWARE'].startswith('SimpleHTTP')):
+    # We might be running from the build tree (but it's not sure).
+    # Add the build and source directories first in the search path.
+    # If we are not in the right place, python will find the installed
+    # libraries later.
+    sys.path.insert(0, '@srcdir@/../.libs')
+    sys.path.insert(0, '@srcdir@/..')
+    sys.path.insert(0, '../.libs')
+    sys.path.insert(0, '..')
+    # Darwin needs some help in figuring out where non-installed libtool
+    # libraries are (on this platform libtool encodes the expected final
+    # path of dependent libraries in each library).
+    m = '../.libs:@top_builddir@/src/.libs:@top_builddir@/buddy/src/.libs'
+    os.environ['DYLD_LIBRARY_PATH'] = m
+
+try:
+    # execfile('ltl2tgba.opt') no longuer work with Python 3.
+    exec(compile(open("ltl2tgba.opt").read(), "ltl2tgba.opt", 'exec'))
+except IOError:
+    pass
+
+import spot
+import buddy
+
+def alarm_handler(signum, frame):
+    unbufprint("""<p><font color="red">The script was aborted because
+it has been running for too long.</font>  Please try a shorter formula,
+or different options.
+If you want to benchmark big formulae it is
+better to install Spot on your own computer.</p>\n""")
+    finish(kill = True)
+
+def run_dot(basename, ext):
+    outname = basename + '.' + ext
+    # Do not call "dot" to generate a file that already exists.
+    if not os.access(outname, os.F_OK):
+        os.spawnlp(os.P_WAIT, dot, dot, dot_bgcolor, '-T' + ext,
+                   '-Gsize=8.2,8.2', '-o', outname, basename + '.txt')
+    # Create a unused hardlink that points to the output picture
+    # just to remember how many cache entries are sharing it.
+    os.link(outname, tmpdir + "/" + ext)
+
+def render_dot(basename):
+    unbufprint('<div class="dot">')
+    b = cgi.escape(basename)
+
+    if svg_output or output_both:
+        run_dot(basename, 'svg')
+    if not svg_output or output_both:
+        run_dot(basename, 'png')
+        pngstr = '<img src="' + b + '.png">'
+
+    if svg_output:
+        unbufprint('<object type="image/svg+xml" data="' + b + '.svg">')
+        if output_both:
+            unbufprint(pngstr)
+        else:
+            unbufprint('Your browser does not support SVG.')
+        unbufprint('</object>' + '<br>(<a href="' + b
+                   + '.txt">dot</a>)')
+    else:
+        unbufprint('<img src="' + b + '.png"><br>(<a href="' + b
+                   + '.txt">dot</a>)')
+        if output_both:
+            unbufprint(' (<a href="' + b + '.svg">svg</a>)')
+    unbufprint('</div>\n')
+
+def render_dot_maybe(dotsrc, dont_run_dot):
+    # The dot output is named after the SHA1 of the dot source.
+    # This way we can cache two different requests that generate
+    # the same automaton (e.g., when changing a simplification
+    # option that has no influence).
+    if sys.getdefaultencoding() != 'ascii':
+        dotsrc = dotsrc.encode('utf-8')
+    # If the text rendering engine (usually Pango) used by dot does
+    # not draw overlines correctly, uncomment the following two
+    # lines.  Pango 1.28.4 seems not to support combining overline
+    # while 1.30 does.
+    #import re
+    #dotsrc = re.sub(r'(.)(̅|̄)', r'¬\1', dotsrc);
+    autprefix = (imgdir + '/' + hashlib.sha1(dotsrc).hexdigest())
+    dotname = autprefix + '.txt'
+    if not os.access(dotname, os.F_OK):
+        dotout = open(dotname, "wb", 0)
+        dotout.write(dotsrc)
+        dotout.close()
+    # Create a unused hardlink that points to the output picture
+    # just to remember how many cache entries are sharing it.
+    os.link(dotname, tmpdir + "/txt")
+
+    if dont_run_dot:
+        unbufprint('<p>' + dont_run_dot + ''' to be rendered on-line.
+However you may download the <a href="''' + cgi.escape(autprefix)
+        + '.txt">source in dot format</a> and render it yourself.</p>\n')
+    else:
+        render_dot(autprefix)
+
+def render_automaton(automaton, dont_run_dot, issba, deco = None):
+    dotsrc = spot.ostringstream()
+    if isinstance(automaton, spot.ta): # TA/GTA
+        spot.dotty_reachable(dotsrc, automaton)
+    elif hasattr(automaton, 'get_ta'): # TGTA
+        spot.dotty_reachable(dotsrc, automaton.get_ta())
+    else:                       # TGBA
+        spot.dotty_reachable(dotsrc, automaton, issba, deco)
+    render_dot_maybe(dotsrc.str(), dont_run_dot)
+
+def render_formula(f):
+    dotsrc = spot.ostringstream()
+    spot.dotty(dotsrc, f)
+    render_dot_maybe(dotsrc.str(), False)
+
+def print_stats(automaton, detinfo = False, ta = False):
+    if ta: # TA/GTA
+        stats = spot.stats_reachable(automaton)
+        detinfo = False
+    else:
+        stats = spot.sub_stats_reachable(automaton)
+    unbufprint("<p>%d state" % stats.states)
+    if stats.states > 1:
+        unbufprint("s")
+    if detinfo:
+        nondet = spot.count_nondet_states(automaton)
+        if nondet == 0:
+            unbufprint(" (deterministic)")
+        else:
+            unbufprint(" (%d nondeterministic)" % nondet)
+    if not hasattr(stats, 'sub_transitions'):
+        unbufprint(", %d transition" % stats.transitions)
+        if stats.transitions > 1:
+            unbufprint("s")
+    else:
+        unbufprint(", %d edge%s (%d transition%s)"
+                   % (stats.transitions,
+                      's' if stats.transitions > 1 else '',
+                      stats.sub_transitions,
+                      's' if stats.sub_transitions > 1 else ''))
+    if hasattr(automaton, 'number_of_acceptance_conditions'):
+        count = automaton.number_of_acceptance_conditions()
+        if count > 0:
+            unbufprint(", %d acceptance condition" % count)
+            if count > 1:
+                unbufprint("s")
+            acc = automaton.all_acceptance_conditions()
+            unbufprint(": " + spot.bdd_format_accset(automaton.get_dict(), acc))
+        else:
+            unbufprint(", no acceptance condition (all cycles are accepting)")
+    unbufprint("</p>\n")
+    # Decide whether we will render the automaton or not.
+    # (A webserver is not a computation center...)
+    if stats.states > 64:
+        return "Automaton has too much states"
+    if float(stats.transitions)/stats.states > 10:
+        return "Automaton has too much transitions per state"
+    return False
+
+def format_formula(f, kind='div'):
+    if utf8:
+        s = spot.to_utf8_string(f)
+    else:
+        s = str(f)
+    return '<%s class="formula spot-format">%s</%s>' % (kind, s, kind)
+
+form = cgi.FieldStorage()
+
+output_type = form.getfirst('o', 'v');
+
+# Version requested.
+if output_type == 'v':
+    unbufprint('Spot version %s\n' % spot.version())
+    finish()
+
+# ltl3ba's version
+if output_type == 'v3':
+    import subprocess
+    try:
+        l3proc = subprocess.Popen(['@LTL3BA@', '-v'], stdout=subprocess.PIPE)
+        (ver, err) = l3proc.communicate()
+        err = l3proc.returncode
+    except:
+        err = 1
+    if err != 0:
+        unbufprint('not available')
+    else:
+        unbufprint(ver.replace("\n", "<br>"))
+    finish()
+
+spot.unblock_signal(signal.SIGALRM)
+spot.unblock_signal(signal.SIGTERM)
+os.setpgrp()
+
+child = os.fork()
+if child != 0:
+    # In parent.  We are just waiting for the termination of the
+    # child, or for the timeout alarm.  On SIGALRM, we will kill the
+    # child.
+    #
+    # We cannot avoid forking, because Python will not deliver a
+    # signal when a C function is running.  So if Spot takes too long
+    # to translate some formula, it would not get interrupted.
+    signal.signal(signal.SIGALRM, alarm_handler)
+    signal.alarm(30)
+    os.waitpid(child, 0)
+    exit(0)
+
+# Global options
+utf8 = False
+for g in form.getlist('g'):
+    if g == '8':
+        utf8 = True
+        spot.enable_utf8()
+
+formula = form.getfirst('f', '')
+
+env = spot.default_environment.instance()
+pel = spot.empty_parse_error_list()
+f = spot.parse(formula, pel, env)
+
+if pel:
+    # Try the LBT parser in case someone is throwing LBT formulas at us.
+    pel2 = spot.empty_parse_error_list()
+    g = spot.parse_lbt(formula, pel2, env)
+    if pel2:
+        unbufprint('<div class="parse-error">')
+        err = spot.format_parse_errors(spot.get_cout(), formula, pel)
+        unbufprint('</div>')
+    else:
+        f = g
+
+# Do not continue if we could not parse anything sensible.
+if not f:
+    finish()
+
+# Formula simplifications
+simpopt = spot.ltl_simplifier_options(False, False, False,
+                                      False, False, False, True)
+dored = False
+for r in form.getlist('r'):
+    dored = True
+    if r == 'br':
+        simpopt.reduce_basics = True
+    elif r == 'lf':
+        simpopt.reduce_size_strictly = False
+    elif r == 'si':
+        simpopt.synt_impl = True
+    elif r == 'eu':
+        simpopt.event_univ = True
+    elif r == 'lc':
+        simpopt.containment_checks = True
+        simpopt.containment_checks_stronger = True
+if dored:
+    simp = spot.ltl_simplifier(simpopt)
+    f2 = simp.simplify(f)
+    f.destroy()
+    f = f2
+    # This also clears the as_bdd() cache.
+    simp = None
+
+# Formula manipulation only.
+if output_type == 'f':
+    formula_format = form.getfirst('ff', 'o')
+    # o = Spot, i = Spin, l = LBT, g = GraphViz, p = properties
+    if formula_format == 'o':
+        unbufprint(format_formula(f))
+    elif formula_format == 'i':
+        unbufprint('<div class="formula spin-format">'
+                   + spot.to_spin_string(f) + '</div>')
+        if f.is_psl_formula() and not f.is_ltl_formula():
+            s = ''
+            if simpopt.reduce_size_strictly:
+                s = '<br><b>Try enabling larger formula rewritings.</b>'
+            unbufprint('<div class="error">The above formula contains PSL operators that Spin will not understand.%s</div>' % s)
+    elif formula_format == 'l':
+        if not f.is_ltl_formula():
+            unbufprint('<div class="error">PSL formulas cannot be expressed in this format.</div>')
+        else:
+            unbufprint('<div class="formula lbt-format">' + spot.to_lbt_string(f) + '</div>')
+    elif formula_format == 'g':
+        render_formula(f)
+    elif formula_format == 'p':
+        if utf8:
+            s = spot.to_utf8_string(f)
+        else:
+            s = str(f)
+        unbufprint('Properties for ' + format_formula(f, 'span') + '<ul>\n')
+        for p in spot.list_formula_props(f):
+            unbufprint('<li>%s</li>\n' % p)
+
+        # Attempt to refine the hierarchy class using WDBA minimization
+        if not f.is_syntactic_safety() or not f.is_syntactic_guarantee():
+            dict = spot.bdd_dict()
+            automaton = spot.ltl_to_tgba_fm(f, dict, False, True)
+            minimized = spot.minimize_obligation_new(automaton, f)
+            if minimized:
+                g = spot.is_guarantee_automaton(minimized)
+                s = spot.is_safety_mwdba(minimized)
+                if s and not f.is_syntactic_safety():
+                    unbufprint('<li>pathologic safety</li>')
+                if g and not f.is_syntactic_guarantee():
+                    unbufprint('<li>pathologic guarantee</li>')
+                if not f.is_syntactic_obligation():
+                    unbufprint('<li>obligation (although not syntactically)</li>')
+            else:
+                unbufprint('<li>not an obligation</li>')
+            minimized = 0
+            automaton = 0
+        unbufprint('</ul>\n')
+    finish()
+
+# Formula translation.
+translator = form.getfirst('t', 'fm')
+
+if f.is_psl_formula() and not f.is_ltl_formula() and translator != 'fm':
+    unbufprint('''<div class="error">The PSL formula %s
+cannot be translated using this algorithm.  Please use Couveur/FM.'''
+               % format_formula(f, 'span'))
+    finish()
+
+dict = spot.bdd_dict()
+
+if output_type == 't' and not (f.is_ltl_formula() and f.is_X_free()):
+    unbufprint('<b>Warning:</b> The following result assumes the input formula is stuttering insensitive.</br>')
+
+# Should the automaton be displayed as a SBA?
+issba = False
+
+if translator == 'fm':
+    exprop = False
+    symb_merge = False
+    branching_postponement = False
+    fair_loop_approx = False
+    for fm in form.getlist('fm'):
+        if fm == 'od':
+            exprop = True
+        elif fm == 'sm':
+            symb_merge = True
+        elif fm == 'bp':
+            branching_postponement = True
+        elif fm == 'fl':
+            fair_loop_approx = True
+    automaton = spot.ltl_to_tgba_fm(f, dict,
+                                    exprop, symb_merge,
+                                    branching_postponement, fair_loop_approx)
+elif translator == 'la':
+    automaton = spot.ltl_to_tgba_lacim(f, dict)
+    if form.getfirst('la', '') == 'sp':
+        automaton.delete_unaccepting_scc()
+elif translator == 'ta':
+    refined_rules = False
+    if form.getfirst('ta', '') == 'lc':
+        refined_rules = True
+    automaton = spot.ltl_to_taa(f, dict, refined_rules)
+elif translator == 'l3':
+    l3out = '-T'
+    l3opt = { '-l', '-P', '-A', '-c', '-C', '-o', '-p' }
+    for lo in form.getfirst('lo', 'T'):
+        if lo == 'U':
+            l3out = '-U'
+            issba = True
+    for l3 in form.getlist('l3'):
+        if l3 == 'l':
+            l3opt.remove('-l')
+        elif l3 == 'P':
+            l3opt.remove('-P')
+        elif l3 == 'A':
+            l3opt.remove('-A')
+        elif l3 == 'C':
+            l3opt.remove('-C')
+            l3opt.remove('-c')
+        elif l3 == 'M':
+            l3opt.add('-M')
+        elif l3 == 'S':
+            l3opt.add('-S')
+        elif l3 == 'o':
+            l3opt.remove('-o')
+        elif l3 == 'p':
+            l3opt.remove('-p')
+    args = ["@LTL3BA@", l3out]
+    args.extend(l3opt)
+    args.extend(['-f', spot.to_spin_string(f)])
+    import subprocess
+    l3file = tmpdir + "/aut"
+    l3aut = open(l3file, "w+")
+    try:
+        l3proc = subprocess.Popen(args, stdout=l3aut)
+        ret = l3proc.wait()
+    except:
+        unbufprint('<div class="error">Failed to run ltl3ba. Is it installed?</div>')
+        finish()
+    if ret != 0:
+        unbufprint('<div class="error">ltl3ba exited with error %s</div>' % ret)
+        finish()
+    l3aut.close()
+    tpel = spot.empty_tgba_parse_error_list()
+    automaton = spot.tgba_parse(l3file, tpel, dict, env)
+    if tpel:
+        unbufprint('''<div class="error">failed to read ltl3ba's output</div>''')
+        unbufprint('<div class="parse-error">')
+        err = spot.format_tgba_parse_errors(spot.get_cout(), "output", tpel)
+        unbufprint('</div>')
+        automaton = 0
+        finish()
+elif translator == 'cs':
+    donot_inject = False
+    cs_nowdba = True
+    cs_nosimul = True
+    cs_early_start = False
+    for cs in form.getlist('cs'):
+        if cs == 'c':
+            donot_inject = True
+        elif cs == 'w':
+            cs_nowdba = False
+        elif cs == 's':
+            cs_nosimul = False
+        elif cs == 'e':
+            cs_early_start = True
+
+    automaton = spot.compsusp(f, dict, cs_nowdba, cs_nosimul,
+                              cs_early_start, donot_inject)
+
+# Monitor output
+if output_type == 'm':
+    issba = True
+    mf = form.getfirst('mf', 'd')
+    pp = spot.postprocessor()
+    pp.set_type(spot.postprocessor.Monitor)
+    if mf == 'd':
+        pp.set_pref(spot.postprocessor.Deterministic)
+    elif mf == 'n':
+        pp.set_pref(spot.postprocessor.Small)
+    automaton = pp.run(automaton, f)
+    unbufprint('<div class="automata-stats">')
+    dont_run_dot = print_stats(automaton)
+    unbufprint('</div>')
+    render_automaton(automaton, dont_run_dot, issba)
+    automaton = 0
+    finish()
+
+# Automaton simplifications
+prune_scc = False
+wdba_minimize = False
+direct_simul = False
+reverse_simul = False
+iterated_simul = False
+for s in form.getlist('as'):
+    if s == 'ps':
+        prune_scc = True
+    elif s == 'wd':
+        wdba_minimize = True
+    elif s == 'ds':
+        direct_simul = True
+    elif s == 'rs':
+        reverse_simul = True
+    elif s == 'is':
+        iterated_simul = True
+
+ta_type = None
+buchi_type = None
+
+if output_type == 'a':
+    buchi_type = form.getfirst('af', 't')
+elif output_type == 'r':
+    buchi_type = form.getfirst('ra', 't')
+elif output_type == 't':
+    ta_type = form.getfirst('tf', 't')
+else:
+    unbufprint("Unkown output type 'o=%s'.\n" % output_type)
+    automaton = 0
+    finish()
+
+degen = False
+neverclaim = False
+
+if buchi_type == 's' or ta_type == 't':
+    degen = True
+elif buchi_type == 'i':
+    degen = True
+    neverclaim = True
+
+if output_type == 't':
+    ta_type = form.getfirst('tf', 't')
+    if ta_type == 't':
+        degen = True
+
+if prune_scc:
+    # Do not suppress all useless acceptance conditions if
+    # degeneralization or simulation is requested: keeping those that
+    # lead to accepting states usually helps.
+    automaton = spot.scc_filter(automaton, not (degen
+                                                or direct_simul
+                                                or reverse_simul
+                                                or iterated_simul))
+    issba = False
+
+if wdba_minimize:
+    minimized = spot.minimize_obligation_new(automaton, f)
+    if minimized:
+        automaton = minimized
+        minimized = 0
+        degen = False # No need to degeneralize anymore
+        issba = True
+        direct_simul = False # No need to simulate anymore
+        reverse_simul = False
+        iterated_simul = False
+
+if direct_simul and not iterated_simul:
+    automaton = spot.simulation(automaton)
+    issba = False
+if reverse_simul and not iterated_simul:
+    automaton = spot.cosimulation(automaton)
+    issba = False
+if iterated_simul:
+    automaton = spot.iterated_simulations(automaton)
+    issba = False
+
+if prune_scc and (direct_simul or reverse_simul):
+    # Make a second pass after the simulation, since these might leave
+    # extra acceptance conditions.
+    automaton = spot.scc_filter(automaton, not degen)
+
+if degen or neverclaim:
+    degen = spot.degeneralize(automaton)
+    issba = True
+else:
+    degen = automaton
+
+if utf8:
+    spot.tgba_enable_utf8(degen)
+
+# Buchi Automaton Output
+if output_type == 'a':
+    if buchi_type == 'i':
+        s = spot.ostringstream()
+        spot.never_claim_reachable(s, degen, f)
+        unbufprint('<div class="neverclaim">%s</div>' % cgi.escape(s.str()))
+        del s
+    else: # 't' or 's'
+        dont_run_dot = print_stats(degen, True)
+        render_automaton(degen, dont_run_dot, issba)
+    degen = 0
+    automaton = 0
+    finish()
+
+# Testing automaton Output
+if output_type == 't':
+    livelock = False
+    singlepass = False
+    bisimulation = False
+    for to in form.getlist('to'):
+        if to == 'l':
+            livelock = True
+        elif to == 's':
+            singlepass = True
+        elif to == 'm':
+            bisimulation = True
+    propset = spot.atomic_prop_collect_as_bdd(f, automaton)
+    if ta_type == 'a':
+        tautomaton = spot.tgba_to_tgta(degen, propset)
+        if bisimulation:
+            tautomaton = spot.minimize_tgta(tautomaton)
+        issba = False
+    else:
+        tautomaton = spot.tgba_to_ta(degen, propset,
+                                     issba, True, singlepass, livelock)
+        if bisimulation:
+            tautomaton = spot.minimize_ta(tautomaton)
+    dont_run_dot = print_stats(tautomaton, ta = True)
+    render_automaton(tautomaton, dont_run_dot, issba)
+    tautomaton = 0
+    degen = 0
+    automaton = 0
+    finish()
+
+# Buchi Run Output
+if output_type == 'r':
+
+    print_acc_run = False
+    draw_acc_run = False
+    s = form.getfirst('rf', 'd')
+    if s == 'p':
+        print_acc_run = True
+    elif s == 'd':
+        draw_acc_run = True
+
+
+    err = ""
+    opt = (form.getfirst('ec', 'Cou99') + "(" +
+           form.getfirst('eo', '') + ")")
+    eci, err = spot.emptiness_check_instantiator.construct(opt)
+
+    if not eci:
+        unbufprint('<div class="parse-error">Cannot parse "' + opt
+                         + '" near "' + err + '".</div>')
+        ec = 0
+    else:
+        ec_a = 0
+        n_acc = degen.number_of_acceptance_conditions()
+        n_max = eci.max_acceptance_conditions()
+        n_min = eci.min_acceptance_conditions()
+        if (n_acc <= n_max):
+            if (n_acc >= n_min):
+                ec_a = degen
+            else:
+                unbufprint('<div class="ec-error">Cannot run ' + opt
+                           + ' on automata with less than ' + str(n_min)
+                           + ' acceptance condition.<br/>Please build '
+                           + 'a degeneralized B&uuml;chi automaton if you '
+                           + 'want to try this algorithm.</div>')
+        else:
+            unbufprint('<div class="ec-error">Cannot run ' + opt
+                       + ' on automata with more than ' + str(n_max)
+                       + ' acceptance condition.<br/>Please build '
+                       + 'a degeneralized B&uuml;chi automaton if you '
+                       + 'want to try this algorithm.</div>')
+        if ec_a:
+            ec = eci.instantiate(ec_a)
+        else:
+            ec = 0
+
+    if ec:
+        ec_res = ec.check()
+        if not ec_res:
+            unbufprint('<div class="ec">No accepting run found.</div>')
+        else:
+            ec_run = ec_res.accepting_run()
+            unbufprint('<div class="ec">An accepting run was found.<br/>')
+            if ec_run:
+                if print_acc_run:
+                    s = spot.ostringstream()
+                    spot.print_tgba_run(s, ec_a, ec_run)
+                    unbufprint('<div class="accrun">%s</div>' %
+                               cgi.escape(s.str()))
+                    del s
+
+                if draw_acc_run:
+                    deco = spot.tgba_run_dotty_decorator(ec_run)
+                    dont_run_dot = print_stats(ec_a)
+                    render_automaton(ec_a, dont_run_dot, issba, deco)
+                    del deco
+                del ec_run
+            del ec_res
+            unbufprint('</div>')
+        del ec
+        del ec_a
+    degen = 0
+    automaton = 0
+    finish()

@@ -1,0 +1,69 @@
+ltl2tgba.html is a dynamic web page that translates user-supplied LTL
+formulae to Transition-based Generalized Büchi Automata.  The actual
+translation work is performed by a CGI script in Python: spot.py.
+
+This is actually meant to be a moderner rewrite of the cgi script in
+../cgi-bin/
+
+There are two ways to use the page: using a web server such as
+Apache, or standalone.
+
+In both cases you should ensure that the command `dot', from the
+GraphViz package, is in the PATH.  configure should have picked it up.
+
+
+
+Standalone usage
+================
+
+Simply run the spot.py from this directory.  This will create a
+directory called spotimg/ in the current directory (this will hold the
+generated pictures) and start an HTTP server on port 8000.  Point your
+browser to http://localhost:8000/ltl2tgba.html and you should be OK.
+
+After you have killed the server process (e.g. with Control-C),
+you may want to erase the spotimg/ directory.
+
+Installing on a real web server
+===============================
+
+1) Install Spot first (run `make install' from the top-level).
+
+   The CGI script uses the Python bindings and assume they
+   have been installed.  Near the top of the script, you
+   should see a call to sys.path.insert(), with the expected
+   location of the Python bindings for spot.  This path was
+   configured from ./configure's arguments and you should not
+   have to fiddle with it.  I'm mentionning it just in case.
+
+2) Copy spot.py to some place were CGI execution is allowed.
+   Depending on your HTTP server's configuration, you may have
+   to rename the script as spot.cgi or something else, so
+   that the server accepts to run it.
+
+   Apache users in trouble should look at the following options
+   before digging the Apache manual deeper.  These can go
+   in a .htaccess file (if allowed).
+
+      # Treat *.py files as CGI scripts
+      AddHandle cgi-script .py
+
+      # Allow CGI execution in some directory.
+      Options +ExecCGI
+
+3) In the directory where you have installed spot.py,
+   create a subdirectory called spotimg/.  This is where
+   the script will output its images and other temporary
+   files.  (If you want to change this name, see the imgdir
+   variable at the top of the script.)
+
+   This directory must be writable by the Unix user that
+   will run the script when the HTTP server processes the
+   request.
+
+   spot.py purges old files (>15min) from this directory
+   each time it runs.
+
+4) Copy the directories css/, js/, and logos/ along with ltl2tgba.html
+   to there destination.  You may have to adjust a few paths at the
+   top of the html page.

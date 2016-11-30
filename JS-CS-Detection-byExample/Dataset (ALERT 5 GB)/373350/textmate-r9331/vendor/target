@@ -1,0 +1,3 @@
+BUILD       = lib
+OBJC_FLAGS += -fno-objc-arc
+TARGETS     = */target

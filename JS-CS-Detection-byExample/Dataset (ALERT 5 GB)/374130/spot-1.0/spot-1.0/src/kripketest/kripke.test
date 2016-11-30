@@ -1,0 +1,72 @@
+#! /bin/sh
+# Copyright (C) 2011, 2012 Laboratoire de Recherche et Developpement
+# de l'Epita (LRDE)
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+. ./defs
+
+set -e
+
+run2()
+{
+    run 0 ../parse_print "$1" > "$1.out"
+    run 0 ../parse_print "$1.out" > "$1.out2"
+    cmp "$1.out" "$1.out2"
+}
+
+cat >input1 <<EOF
+state1, "!b", state2;
+state2, "a&b", state3;
+state3, "a", state4 state1;
+state4, "b", state1;
+EOF
+
+run2 input1
+
+cat >input2 <<EOF
+state1, , state1 state2;
+state2, , state1 state2;
+EOF
+
+run2 input2
+
+cat >input3 <<EOF
+state42, "!b & !a", state40;
+state40, "!a | b", state42;
+EOF
+
+run2 input3
+
+cat >input4 <<EOF
+state1, "a&b", state1;
+EOF
+
+run2 input4
+
+cat >input5 <<EOF
+state51,,state60        state17 state3 state18 state62;
+EOF
+
+run2 input5
+
+cat >input6 <<EOF
+s42, "a&b|c&d", s51 s69 s73 s7;
+s7, "a&a&a&!a", s42 s51 s69 s73 s42;
+EOF
+
+run2 input6
+

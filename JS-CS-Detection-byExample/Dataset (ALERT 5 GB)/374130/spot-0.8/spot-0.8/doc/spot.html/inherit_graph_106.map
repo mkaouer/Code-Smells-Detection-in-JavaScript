@@ -1,0 +1,38 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="5,379,85,408"/>
+<area shape="rect" id="node3" href="$classspot_1_1fair__kripke.html" title="Interface for a Fair Kripke structure.A Kripke structure is a graph in which each node (=state) is la..." alt="" coords="173,59,288,88"/>
+<area shape="rect" id="node9" href="$classspot_1_1taa__tgba.html" title="A self&#45;loop Transition&#45;based Alternating Automaton (TAA) which is seen as a TGBA (abstract class..." alt="" coords="179,139,283,168"/>
+<area shape="rect" id="node21" href="$classspot_1_1tgba__bdd__concrete.html" title="A concrete spot::tgba implemented using BDDs." alt="" coords="147,219,315,248"/>
+<area shape="rect" id="node23" href="$classspot_1_1tgba__explicit.html" title="spot::tgba_explicit" alt="" coords="167,272,295,301"/>
+<area shape="rect" id="node41" href="$classspot_1_1tgba__kv__complement.html" title="Build a complemented automaton.The construction comes from:" alt="" coords="140,325,321,355"/>
+<area shape="rect" id="node43" href="$classspot_1_1tgba__product.html" title="A lazy product. (States are computed on the fly.)" alt="" coords="165,379,296,408"/>
+<area shape="rect" id="node47" href="$classspot_1_1tgba__safra__complement.html" title="Build a complemented automaton.It creates an automaton that recognizes the negated language of aut..." alt="" coords="133,432,328,461"/>
+<area shape="rect" id="node49" href="$classspot_1_1tgba__scc.html" title="Wrap a tgba to offer information about strongly connected components.This class is a spot::tgba wrapp..." alt="" coords="177,485,284,515"/>
+<area shape="rect" id="node53" href="$classspot_1_1tgba__sgba__proxy.html" title="Change the labeling&#45;mode of spot::tgba on the fly, producing a state&#45;based generalized Büchi automato..." alt="" coords="153,539,308,568"/>
+<area shape="rect" id="node55" href="$classspot_1_1tgba__tba__proxy.html" title="Degeneralize a spot::tgba on the fly, producing a TBA.This class acts as a proxy in front of a spot::..." alt="" coords="159,592,303,621"/>
+<area shape="rect" id="node59" href="$classspot_1_1tgba__union.html" title="A lazy union. (States are computed on the fly.)" alt="" coords="172,645,289,675"/>
+<area shape="rect" id="node5" href="$classspot_1_1kripke.html" title="Interface for a Kripke structureA Kripke structure is a graph in which each node (=state) is labeled ..." alt="" coords="548,5,639,35"/>
+<area shape="rect" id="node7" href="$classspot_1_1kripke__explicit.html" title="Kripke Structure." alt="" coords="925,5,1064,35"/>
+<area shape="rect" id="node11" href="$classspot_1_1taa__tgba__labelled.html" title="spot::taa_tgba_labelled\&lt; label, label_hash \&gt;" alt="" coords="453,59,733,88"/>
+<area shape="rect" id="node13" href="$classspot_1_1taa__tgba__labelled.html" title="spot::taa_tgba_labelled\&lt; const ltl::formula *, ltl::formula_ptr_hash \&gt;" alt="" coords="388,112,799,141"/>
+<area shape="rect" id="node17" href="$classspot_1_1taa__tgba__labelled.html" title="spot::taa_tgba_labelled\&lt; std::string, string_hash \&gt;" alt="" coords="436,165,751,195"/>
+<area shape="rect" id="node15" href="$classspot_1_1taa__tgba__formula.html" title="spot::taa_tgba_formula" alt="" coords="917,112,1072,141"/>
+<area shape="rect" id="node19" href="$classspot_1_1taa__tgba__string.html" title="spot::taa_tgba_string" alt="" coords="924,165,1065,195"/>
+<area shape="rect" id="node25" href="$classspot_1_1tgba__explicit__labelled.html" title="A tgba_explicit instance with states labeled by a given type." alt="" coords="441,219,745,248"/>
+<area shape="rect" id="node27" href="$classspot_1_1tgba__explicit__labelled.html" title="spot::tgba_explicit_labelled\&lt; const ltl::formula *, ltl::formula_ptr_hash \&gt;" alt="" coords="376,272,811,301"/>
+<area shape="rect" id="node31" href="$classspot_1_1tgba__explicit__labelled.html" title="spot::tgba_explicit_labelled\&lt; int, identity_hash\&lt; int \&gt; \&gt;" alt="" coords="423,325,764,355"/>
+<area shape="rect" id="node35" href="$classspot_1_1tgba__explicit__labelled.html" title="spot::tgba_explicit_labelled\&lt; std::string, string_hash \&gt;" alt="" coords="424,379,763,408"/>
+<area shape="rect" id="node29" href="$classspot_1_1tgba__explicit__formula.html" title="spot::tgba_explicit_formula" alt="" coords="905,272,1084,301"/>
+<area shape="rect" id="node33" href="$classspot_1_1tgba__explicit__number.html" title="spot::tgba_explicit_number" alt="" coords="905,325,1084,355"/>
+<area shape="rect" id="node37" href="$classspot_1_1tgba__explicit__string.html" title="spot::tgba_explicit_string" alt="" coords="912,412,1077,441"/>
+<area shape="rect" id="node39" href="$classspot_1_1tgba__reduc.html" title="spot::tgba_reduc" alt="" coords="1203,445,1323,475"/>
+<area shape="rect" id="node45" href="$classspot_1_1tgba__product__init.html" title="A lazy product with different initial states." alt="" coords="516,432,671,461"/>
+<area shape="rect" id="node51" href="$classspot_1_1future__conditions__collector.html" title="Wrap a tgba to offer information about upcoming conditions.This class is a spot::tgba wrapper that si..." alt="" coords="487,485,700,515"/>
+<area shape="rect" id="node57" href="$classspot_1_1tgba__sba__proxy.html" title="Degeneralize a spot::tgba on the fly, producing an SBA.This class acts as a proxy in front of a spot:..." alt="" coords="520,565,667,595"/>
+<area shape="rect" id="node60" href="$classspot_1_1tgba__reachable__iterator.html" title="Iterate over all reachable states of a spot::tgba." alt="" coords="497,619,689,648"/>
+<area shape="rect" id="node62" href="$classspot_1_1tgba__reachable__iterator__breadth__first.html" title="An implementation of spot::tgba_reachable_iterator that browses states breadth first." alt="" coords="860,532,1129,561"/>
+<area shape="rect" id="node71" href="$classspot_1_1tgba__reachable__iterator__depth__first.html" title="An implementation of spot::tgba_reachable_iterator that browses states depth first." alt="" coords="865,619,1124,648"/>
+<area shape="rect" id="node64" href="$classspot_1_1parity__game__graph.html" title="Parity game graph which compute a simulation relation." alt="" coords="1180,532,1345,561"/>
+<area shape="rect" id="node66" href="$classspot_1_1parity__game__graph__delayed.html" title="spot::parity_game_graph_delayed" alt="" coords="1396,505,1617,535"/>
+<area shape="rect" id="node68" href="$classspot_1_1parity__game__graph__direct.html" title="Parity game graph which compute the direct simulation relation." alt="" coords="1404,559,1609,588"/>
+</map>

@@ -1,0 +1,238 @@
+#+TITLE: Reading and writing CSV files
+#+EMAIL spot@lrde.epita.fr
+#+OPTIONS: H:2 num:nil toc:t
+#+LINK_UP: tools.html
+
+This page discusses features available in Spot's command-line
+tools to produce an consume CSV files.
+
+* Producing CSV files
+
+All the tools that normally produce formulas (like [[file:genltl.org][=genltl=]], [[file:randltl.org][=randltl=]],
+and [[file:ltlfilt.org][=ltlfilt=]]) have a [[file:ioltl.org][=--format= option]].  That can be used to
+customize the way output is formatted.
+
+For instance here is how we could use =genltl= to generate a CSV file
+with three columns: the family name of the formula, its parameter, and
+the formula itself.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+genltl --and-gf=1..5 --u-left=1..5 --format='%F,%L,%f' > gen.csv
+cat gen.csv
+#+END_SRC
+#+RESULTS:
+#+begin_example
+and-gf,1,GFp1
+and-gf,2,GFp1 & GFp2
+and-gf,3,GFp1 & GFp2 & GFp3
+and-gf,4,GFp1 & GFp2 & GFp3 & GFp4
+and-gf,5,GFp1 & GFp2 & GFp3 & GFp4 & GFp5
+u-left,1,p1
+u-left,2,p1 U p2
+u-left,3,(p1 U p2) U p3
+u-left,4,((p1 U p2) U p3) U p4
+u-left,5,(((p1 U p2) U p3) U p4) U p5
+#+end_example
+
+Tools that produce automata (like [[file:ltl2tgba.org][=ltl2tgba=]], or [[file:dstar2tgba.org][=dstar2tgba=]]) have a
+=--stats= option that can be used to output various statistics about
+the constructed automaton (these statistics are shown *instead* of
+printing the automaton).
+
+For instance, the following command will translate all the previous
+formulas, and show the resulting number of states (=%s=) and edges
+(=%e=) of the automaton constructed for each formula.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+genltl --and-gf=1..5 --u-left=1..5 | ltl2tgba -F- --stats '%f,%s,%e'
+#+END_SRC
+#+RESULTS:
+#+begin_example
+GFp1,1,2
+G(Fp1 & Fp2),1,4
+G(Fp1 & Fp2 & Fp3),1,8
+G(Fp1 & Fp2 & Fp3 & Fp4),1,16
+G(Fp1 & Fp2 & Fp3 & Fp4 & Fp5),1,32
+p1,2,2
+p1 U p2,2,3
+(p1 U p2) U p3,4,10
+((p1 U p2) U p3) U p4,8,34
+(((p1 U p2) U p3) U p4) U p5,16,116
+#+end_example
+
+If the translated formulas may contain commas, or double-quotes, this
+simple output may prove difficult to process by other tools.  For
+instance consider the translation of the following two formulas:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltl2tgba -f Xa -f 'G("switch == on" -> F"tab[3,5] < 12")' --stats '%f,%s,%e'
+#+END_SRC
+#+RESULTS:
+: Xa,3,3
+: G(!"switch == on" | F"tab[3,5] < 12"),2,4
+
+The second line of this input does no conform to [[https://www.rfc-editor.org/rfc/rfc4180.txt][RFC 4180]] because
+non-escaped fields are not allowed to contain comma or double-quotes.
+To fix this, use =ltl2tgba='s =--csv-escape= option: this causes
+"=%f=" to produce a double-quoted string properly escaped.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltl2tgba -f Xa -f 'G("switch == on" -> F"tab[3,5] < 12")' --stats '%f,%s,%e' --csv-escape
+#+END_SRC
+
+#+RESULTS:
+: "Xa",3,3
+: "G(!""switch == on"" | F""tab[3,5] < 12"")",2,4
+
+
+The tool [[file:ltlcross.org][=ltlcross=]] has its own =--csv=FILENAME= option to format the
+statistics it gathers in a CSV file, but you have very little control
+hover how this CSV file is formatted (it can only be changed
+via option such as =--products= or =--omit-missing=).
+
+* Reading CSV files
+
+All the tools that read formulas from files extend the filename syntax
+to support the specification of a CSV column.  The notation
+=filename/COL= denotes the column =COL= of that file.
+
+For instance let's consider the file =gen.csv= built with the first command of
+this page.  It contains:
+
+#+BEGIN_SRC sh :results verbatim :exports results
+cat gen.csv
+#+END_SRC
+#+RESULTS:
+#+begin_example
+and-gf,1,GFp1
+and-gf,2,GFp1 & GFp2
+and-gf,3,GFp1 & GFp2 & GFp3
+and-gf,4,GFp1 & GFp2 & GFp3 & GFp4
+and-gf,5,GFp1 & GFp2 & GFp3 & GFp4 & GFp5
+u-left,1,p1
+u-left,2,p1 U p2
+u-left,3,(p1 U p2) U p3
+u-left,4,((p1 U p2) U p3) U p4
+u-left,5,(((p1 U p2) U p3) U p4) U p5
+#+end_example
+
+We can run =ltl2tgba= on the third column to produce
+the same output as in a previous example:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltl2tgba -F gen.csv/3 --stats '%f,%s,%e'
+#+END_SRC
+#+RESULTS:
+#+begin_example
+GFp1,1,2
+G(Fp1 & Fp2),1,4
+G(Fp1 & Fp2 & Fp3),1,8
+G(Fp1 & Fp2 & Fp3 & Fp4),1,16
+G(Fp1 & Fp2 & Fp3 & Fp4 & Fp5),1,32
+p1,2,2
+p1 U p2,2,3
+(p1 U p2) U p3,4,10
+((p1 U p2) U p3) U p4,8,34
+(((p1 U p2) U p3) U p4) U p5,16,116
+#+end_example
+
+When =ltlfilt= is used on a CSV file, it will preserve the
+text before and after the matched formula in the CSV file.
+For instance:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -F gen.csv/3 --size-min=8 --relabel=abc
+#+END_SRC
+#+RESULTS:
+: and-gf,3,GFa & GFb & GFc
+: and-gf,4,GFa & GFb & GFc & GFd
+: and-gf,5,GFa & GFb & GFc & GFd & GFe
+: u-left,5,(((a U b) U c) U d) U e
+
+For security, in case a formula may contain double-quotes or
+commas, you should use the =--csv-escape= option:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -F gen.csv/3 --size-min=8 --relabel=abc --csv-escape
+#+END_SRC
+#+RESULTS:
+: and-gf,3,"GFa & GFb & GFc"
+: and-gf,4,"GFa & GFb & GFc & GFd"
+: and-gf,5,"GFa & GFb & GFc & GFd & GFe"
+: u-left,5,"(((a U b) U c) U d) U e"
+
+The preservation in the output of the text before and after the
+selected column can be altered using the =--format= option.  The =%<=
+escape sequence represent the (comma-separated) data of all the
+columns before the selected column, and =%>= is the same for the
+trailing data.  Note that the comma that separate formulas' column
+from the other column are excluded and should be added in the format
+string.
+
+For instance this moves the first two columns after the formulas.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -F gen.csv/3 --size-min=8 --csv-escape --format='%f,%<'
+#+END_SRC
+#+RESULTS:
+: "GFp1 & GFp2 & GFp3",and-gf,3
+: "GFp1 & GFp2 & GFp3 & GFp4",and-gf,4
+: "GFp1 & GFp2 & GFp3 & GFp4 & GFp5",and-gf,5
+: "(((p1 U p2) U p3) U p4) U p5",u-left,5
+
+
+Typical uses of =ltlfilt= on CSV file include:
+- Filtering lines based on an LTL criterion, as above.
+- Changing the syntax of LTL formulas.  For instance =ltl2tgba='s
+  =--stats= option, and =ltlcross='s =--csv= option always output
+  formulas in Spot's format.  If that is inappropriate, simply
+  use =ltlfilt= to rewrite the relevant column in your prefered
+  syntax.
+
+* Dealing with header lines
+
+Some CSV contain a header lines that should not be processed.
+The CSV file produced by =ltlcross= have such a line:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+randltl -n 2 a b | ltlfilt --remove-wm |
+  ltlcross --csv=results.csv 'ltl2tgba -s %f >%N' 'ltl3ba -f %s >%N'
+cat results.csv
+#+END_SRC
+#+RESULTS:
+: "formula","tool","exit_status","exit_code","time","states","edges","transitions","acc","scc","nonacc_scc","terminal_scc","weak_scc","strong_scc","nondet_states","nondet_aut","terminal_aut","weak_aut","strong_aut","product_states","product_transitions","product_scc"
+: "(1)","ltl2tgba -s %f >%N","ok",0,0.0247303,1,1,1,1,1,0,1,0,0,0,0,1,0,0,200,3994,1
+: "(1)","ltl3ba -f %s >%N","ok",0,0.00314673,1,1,1,1,1,0,1,0,0,0,0,1,0,0,200,3994,1
+: "(0)","ltl2tgba -s %f >%N","ok",0,0.0246916,1,1,0,1,1,1,0,0,0,0,0,1,0,0,1,0,1
+: "(0)","ltl3ba -f %s >%N","ok",0,0.00343519,1,0,0,1,1,1,0,0,0,0,0,1,0,0,1,0,1
+: "(!(G((F(b)) | (F(!((b) | (G(b))))))))","ltl2tgba -s %f >%N","ok",0,0.0233752,1,1,0,1,1,1,0,0,0,0,0,1,0,0,1,0,1
+: "(!(G((F(b)) | (F(!((b) | (G(b))))))))","ltl3ba -f %s >%N","ok",0,0.00316933,1,0,0,1,1,1,0,0,0,0,0,1,0,0,1,0,1
+: "(G((F(b)) | (F(!((b) | (G(b)))))))","ltl2tgba -s %f >%N","ok",0,0.0238983,1,1,1,1,1,0,1,0,0,0,0,1,0,0,200,4083,1
+: "(G((F(b)) | (F(!((b) | (G(b)))))))","ltl3ba -f %s >%N","ok",0,0.00315896,1,1,1,1,1,0,1,0,0,0,0,1,0,0,200,4083,1
+
+If we run =ltlfilt= on the first column, it will process the =formula=
+header as if it was an LTL formula.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -F results.csv/1 --format='%f' --unique
+#+END_SRC
+
+#+RESULTS:
+: formula
+: 1
+: 0
+: !G(Fb | F!(b | Gb))
+: G(Fb | F!(b | Gb))
+
+In such case, the syntax =FILENAME/-COL= (with a minus sign before the
+column number) can be used to discard the first line of a CSV file.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -F results.csv/-1 --format='%f' --unique
+#+END_SRC
+
+#+RESULTS:
+: 1
+: 0
+: !G(Fb | F!(b | Gb))
+: G(Fb | F!(b | Gb))

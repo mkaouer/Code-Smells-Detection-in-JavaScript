@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="5,1323,229,1616"/>
+<area shape="rect" id="node4" href="$structspot_1_1tgba__bdd__core__data.html" title="Core data for a TGBA encoded using BDDs." alt="" coords="253,1227,475,1711"/>
+<area shape="rect" id="node6" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae." alt="" coords="241,520,487,1160"/>
+<area shape="rect" id="node8" href="$classspot_1_1bdd__allocator.html" title="Manage ranges of variables." alt="" coords="291,280,437,469"/>
+<area shape="rect" id="node10" href="$classspot_1_1free__list.html" title="Manage list of free integers." alt="" coords="301,5,427,229"/>
+</map>

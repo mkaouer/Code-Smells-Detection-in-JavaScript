@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title><code>ltlcross</code></title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="<code>ltlcross</code>"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2014-08-21T17:43+0200"/>
+<meta name="author" content="Alexandre Duret-Lutz"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="syntax.css" />
+<link rel="stylesheet" type="text/css" href="http://spot.lip6.fr/css/spot-zenburn.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+/**
+ *
+ * @source: http://orgmode.org/mathjax/MathJax.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ * Copyright (C) 2012-2013  MathJax
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ */
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code below.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code below is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code below.
+*/
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:center;white-space:nowrap;">
+ <a accesskey="h" href="tools.html">UP</a> | <a accesskey="H" href="tools.html">HOME</a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title"><code>ltlcross</code></h1>
+
+<p><code>ltlcross</code> is a tool for cross-comparing the output of LTL-to-Büchi
+translators.  It is actually a Spot-based clone of <a href="http://www.tcs.hut.fi/Software/lbtt/">LBTT</a>, the
+<i>LTL-to-Büchi Translator Testbench</i>, that essentially performs the
+same sanity checks.
+</p>
+<p>
+The main differences are:
+</p><ul>
+<li>support for PSL formulas in addition to LTL
+</li>
+<li>more statistics, especially:
+<ul>
+<li>the number of logical transitions represented by each physical edge,
+</li>
+<li>the number of deterministic states and automata
+</li>
+<li>the number of SCCs with their various strengths (nonaccepting, terminal, weak, strong)
+</li>
+<li>the number of terminal, weak, and strong automata
+</li>
+</ul>
+
+</li>
+<li>statistics output in a format that can be more easily be post-processed,
+</li>
+<li>more precise time measurement (LBTT was only precise to
+    1/100 of a second, reporting most times as "0.00s"),
+</li>
+<li>support for deterministic Rabin or Streett automata written in
+    <a href="http://www.ltl2dstar.de/docs/ltl2dstar.html"><code>ltl2dstar</code>'s format</a>,
+</li>
+<li>additional intersection checks with the complement of any
+    deterministic automaton produced by a translator.
+</li>
+</ul>
+
+
+<p>
+Although <code>ltlcross</code> performs the same sanity checks as LBTT, it does
+not implement any of the interactive features of LBTT.  In our almost
+10-year usage of LBTT, we never had to use its interactive features to
+understand bugs in our translation.  Therefore <code>ltlcross</code> will report
+problems, maybe with a conterexample, but you will be on your own to
+investigate and fix them.
+</p>
+<p>
+The core of <code>ltlcross</code> is a loop that does the following steps:
+</p><ul>
+<li>Input a formula
+</li>
+<li>Translate the formula and its negation using each configured translator.
+    If there are 3 translators, the positive and negative translations
+    will be denoted <code>P0</code>, <code>N0</code>, <code>P1</code>, <code>N1</code>, <code>P2</code>, <code>N2</code>.  Optionally
+    build complemented automata denoted <code>Comp(P0)</code>, <code>Comp(N0)</code>, etc.
+</li>
+<li>Perform sanity checks between all these automata to detect any problem.
+</li>
+<li>Build the products of these automata with a random state-space (the same
+    state-space for all translations).  (If the <code>--products=N</code> option is given,
+    <code>N</code> products are performed instead.)
+</li>
+<li>Gather statistics if requested.
+</li>
+</ul>
+
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Formula selection</a></li>
+<li><a href="#sec-2">Configuring translators</a></li>
+<li><a href="#sec-3">Getting statistics</a>
+<ul>
+<li><a href="#sec-3-1">CSV or JSON output (or both!)</a></li>
+<li><a href="#sec-3-2">Description of the columns</a></li>
+<li><a href="#sec-3-3">Changing the name of the translators</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">Detecting problems</a></li>
+<li><a href="#sec-5">Miscellaneous options</a>
+<ul>
+<li><a href="#sec-5-1"><code>--stop-on-error</code></a></li>
+<li><a href="#sec-5-2"><code>--save-bogus=FILENAME</code></a></li>
+<li><a href="#sec-5-3"><code>--no-check</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Formula selection</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Formulas to translate should be specified using the <a href="ioltl.html">common input options</a>.
+Standard input is read if no <code>-f</code> or <code>-F</code> option is given.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Configuring translators</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+Each translator should be specified as a string that use some of the
+following character sequences:
+</p>
+
+<pre class="example">
+  %f,%s,%l,%w                the formula as a (quoted) string in Spot, Spin,
+                             LBT, or Wring's syntax
+  %F,%S,%L,%W                the formula as a file in Spot, Spin, LBT, or
+                             Wring's syntax
+  %N,%T,%D                   the output automaton as a Never claim, in LBTT's
+                             or in LTL2DSTAR's format
+</pre>
+
+
+<p>
+For instance here is how we could cross-compare the never claims
+output by <code>spin</code> and <code>ltl2tgba</code> for the formulas <code>GFa</code> and <code>X(a U b)</code>.
+</p>
+
+
+
+<pre class="src src-sh">ltlcross -f <span class="org-string">'GFa'</span> -f <span class="org-string">'X(a U b)'</span> <span class="org-string">'ltl2tgba -s %s &gt;%N'</span> <span class="org-string">'spin -f %s &gt;%N'</span>
+</pre>
+
+<p>
+When <code>ltlcross</code> executes these commands, <code>%s</code> will be replaced
+by the formula in Spin's syntax, and <code>%N</code> will be replaced by a
+temporary file into which the output of the translator is redirected
+before it is read back by <code>ltlcross</code>.
+</p>
+
+
+
+
+<pre class="example">([](&lt;&gt;(a)))
+Running [P0]: ltl2tgba -s '([](&lt;&gt;(a)))' &gt;'lcr-o0-h36rDO'
+Running [P1]: spin -f '([](&lt;&gt;(a)))' &gt;'lcr-o1-L0XFNC'
+Running [N0]: ltl2tgba -s '(!([](&lt;&gt;(a))))' &gt;'lcr-o0-hU7g4q'
+Running [N1]: spin -f '(!([](&lt;&gt;(a))))' &gt;'lcr-o1-9mFZpf'
+Performing sanity checks and gathering statistics...
+
+(X((a) U (b)))
+Running [P0]: ltl2tgba -s '(X((a) U (b)))' &gt;'lcr-o0-FuqKR3'
+Running [P1]: spin -f '(X((a) U (b)))' &gt;'lcr-o1-s3H9nS'
+Running [N0]: ltl2tgba -s '(!(X((a) U (b))))' &gt;'lcr-o0-TBPQUG'
+Running [N1]: spin -f '(!(X((a) U (b))))' &gt;'lcr-o1-tZ1bwv'
+Performing sanity checks and gathering statistics...
+
+No problem detected.
+</pre>
+
+
+<p>
+<code>ltlcross</code> can only read three kinds of output:
+</p><ul>
+<li>Never claims (only if they are restricted to representing an
+    automaton using <code>if</code>, <code>goto</code>, and <code>skip</code> statements) such as those
+    output by <a href="http://spinroot.com/"><code>spin</code></a>, <a href="http://www.lsv.ens-cachan.fr/~gastin/ltl2ba/"><code>ltl2ba</code></a>, <a href="http://sourceforge.net/projects/ltl3ba/"><code>ltl3ba</code></a>, or <code>ltl2tgba --spin</code>.  These
+    should be indicated using <code>%N</code>.  The newer syntax introduced by
+    Spin 6.24, using <code>do</code> instead of <code>if</code>, is also supported.
+</li>
+<li><a href="http://www.tcs.hut.fi/Software/lbtt/doc/html/Format-for-automata.html">LBTT's format</a>, which supports generalized Büchi automata with
+    either state-based acceptance or transition-based acceptance.
+    This output is used for instance by <a href="http://www.tcs.hut.fi/Software/maria/tools/lbt/"><code>lbt</code></a>, <a href="http://web.archive.org/web/20080607170403/http://www.science.unitn.it/~stonetta/modella.html"><code>modella</code></a>, or <code>ltl2tgba     --lbtt</code>.  These should be indicated using <code>%T</code>.
+</li>
+<li><a href="http://www.ltl2dstar.de/docs/ltl2dstar.html"><code>ltl2dsar</code>'s format</a>, which support deterministic Rabin or Streett
+    automata.  After <code>ltlcross</code> reads such input, it immediately
+    convert it into a Büchi automaton.  Rabin automata are converted
+    to (degeneralized) Büchi automata and the conversion will preserve
+    the determinism anytime a deterministic Büchi automaton exists for
+    that property (this determinism is good for the complemented
+    intersection check discussed below).  Streett automata are
+    converted to non-deterministic TGBA, where generalized acceptance
+    conditions are used to reduce the size of the automaton you would
+    get by the classical conversion from Streett to Büchi.
+    This kind of output (Rabin or Streett) should be indicated with <code>%D</code>.
+</li>
+</ul>
+
+
+<p>
+Of course all configured tools need not use the same <code>%</code> sequences.
+The following list shows some typical configurations for some existing
+tools:
+</p>
+<ul>
+<li>'<code>spin -f %s &gt;%N</code>'
+</li>
+<li>'<code>ltl2ba -f %s &gt;%N</code>'
+</li>
+<li>'<code>ltl3ba -S -f %s &gt;%N</code>'
+</li>
+<li>'<code>ltl3ba -S -M -f %s &gt;%N</code>' (more deterministic output)
+</li>
+<li>'<code>modella -r12 -g -e %L %T</code>'
+</li>
+<li>'<code>/path/to/script4lbtt.py %L %T</code>' (script supplied by <a href="http://www.ti.informatik.uni-kiel.de/~fritz/">ltl2nba</a> for
+    its interface with LBTT)
+</li>
+<li>'<code>ltl2tgba -s %s &gt;%N</code>' (smaller output, Büchi automaton)
+</li>
+<li>'<code>ltl2tgba -s -D %s &gt;%N</code>' (more deterministic output, Büchi automaton)
+</li>
+<li>'<code>ltl2tgba --lbtt %s &gt;%T</code>' (smaller output, TGBA)
+</li>
+<li>'<code>ltl2tgba --lbtt -D %s &gt;%T</code>' (more deterministic output, TGBA)
+</li>
+<li>'<code>lbt &lt;%L &gt;%T</code>'
+</li>
+<li>'<code>ltl2dstar --ltl2nba=spin:path/tp/ltl2tgba@-sD %L %D</code>'
+    (deterministic Rabin output)
+</li>
+<li>'<code>ltl2dstar --automata=streett --ltl2nba=spin:path/tp/ltl2tgba@-sD     %L %D</code>' (deterministic Streett output)
+</li>
+<li>'<code>ltl2dstar --ltl2nba=spin:path/tp/ltl2tgba@-sD %L - | dstar2tgba     -s &gt;%N</code>' (external conversion from Rabin to Büchi done by
+    <code>dstar2tgba</code> for more reduction of the Büchi automaton than
+    what <code>ltlcross</code> would provide)
+</li>
+<li>'<code>java -jar Rabinizer.jar -ltl2dstar %F %D; mv %D.dst %D</code>' (Rabinizer
+    uses the last <code>%D</code> argument as a prefix to which it always append <code>.dst</code>,
+    so we have to rename <code>%D.dst</code> as <code>%D</code> so that <code>ltlcross</code> can find the file)
+</li>
+<li>'<code>ltl3dra -f %s &gt;%D</code>'
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Getting statistics</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+Detailed statistics about the result of each translation, and the
+product of that resulting automaton with the random state-space, can
+be obtained using the <code>--csv=FILE</code> or <code>--json=FILE</code> option.
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">CSV or JSON output (or both!)</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+<p>
+The following compare <code>ltl2tgba</code>, <code>spin</code>, and <code>lbt</code> on two random
+formulas (where <code>W</code> and <code>M</code> operators have been rewritten away because
+they are not supported by <code>spin</code> and <code>lbt</code>).
+</p>
+
+
+
+<pre class="src src-sh">randltl -n 2 a b |
+ltlfilt --remove-wm |
+ltlcross --csv=results.csv <span class="org-sh-escaped-newline">\</span>
+         <span class="org-string">'ltl2tgba -s %f &gt;%N'</span> <span class="org-sh-escaped-newline">\</span>
+         <span class="org-string">'spin -f %s &gt;%N'</span> <span class="org-sh-escaped-newline">\</span>
+         <span class="org-string">'lbt &lt; %L &gt;%T'</span>
+</pre>
+
+
+
+<pre class="example">-:1: (G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1)))))))
+Running [P0]: ltl2tgba -s '(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1)))))))' &gt;'lcr-o0-aLN6H6'
+Running [P1]: spin -f '([](((p0) U ((p0) &amp;&amp; ([](p1)))) V (([](p1)) || ((p0) U ((p0) &amp;&amp; ([](p1)))))))' &gt;'lcr-o1-OOW9YV'
+Running [P2]: lbt &lt; 'lcr-i0-ZYMsvh' &gt;'lcr-o2-HrJfhL'
+Running [N0]: ltl2tgba -s '(!(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1))))))))' &gt;'lcr-o0-H3L26q'
+Running [N1]: spin -f '(!([](((p0) U ((p0) &amp;&amp; ([](p1)))) V (([](p1)) || ((p0) U ((p0) &amp;&amp; ([](p1))))))))' &gt;'lcr-o1-ENED8g'
+Running [N2]: lbt &lt; 'lcr-i0-qDW8bB' &gt;'lcr-o2-NJPId7'
+Performing sanity checks and gathering statistics...
+
+-:2: (!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))
+Running [P0]: ltl2tgba -s '(!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))' &gt;'lcr-o0-1f4SKR'
+Running [P1]: spin -f '(!(p0)) || (!(p1)) || (&lt;&gt;(p2))' &gt;'lcr-o1-sBNl7J'
+Running [P2]: lbt &lt; 'lcr-i1-cDCiuZ' &gt;'lcr-o2-vVU8tC'
+Running [N0]: ltl2tgba -s '(!((!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))))' &gt;'lcr-o0-Rnhzen'
+Running [N1]: spin -f '(!((!(p0)) || (!(p1)) || (&lt;&gt;(p2))))' &gt;'lcr-o1-i7z5Ff'
+Running [N2]: lbt &lt; 'lcr-i1-gQTlRu' &gt;'lcr-o2-9FuW77'
+Performing sanity checks and gathering statistics...
+
+No problem detected.
+</pre>
+
+
+<p>
+After this execution, the file <code>results.csv</code> contains the following:
+</p>
+
+
+
+
+<pre class="example">"formula","tool","exit_status","exit_code","time","states","edges","transitions","acc","scc","nonacc_scc","terminal_scc","weak_scc","strong_scc","nondet_states","nondet_aut","terminal_aut","weak_aut","strong_aut","product_states","product_transitions","product_scc"
+"(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1)))))))","ltl2tgba -s %f &gt;%N","ok",0,0.0292363,3,5,9,1,3,2,0,1,0,2,1,0,1,0,401,5168,3
+"(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1)))))))","spin -f %s &gt;%N","ok",0,0.00671565,6,13,18,1,3,2,0,0,1,6,1,0,0,1,999,14414,5
+"(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1)))))))","lbt &lt; %L &gt;%T","ok",0,0.260393,8,41,51,1,3,2,0,0,1,8,1,0,0,1,1397,43175,5
+"(!(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1))))))))","ltl2tgba -s %f &gt;%N","ok",0,0.0445421,4,10,16,1,3,1,1,0,1,0,0,0,0,1,797,16411,3
+"(!(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1))))))))","spin -f %s &gt;%N","ok",0,0.0228213,7,24,63,1,4,2,1,0,1,6,1,0,0,1,1400,64822,4
+"(!(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1))))))))","lbt &lt; %L &gt;%T","ok",0,0.00435242,39,286,614,3,28,26,1,0,1,33,1,0,0,1,7583,600472,4394
+"(!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))","ltl2tgba -s %f &gt;%N","ok",0,0.0390749,3,5,24,1,3,2,1,0,0,0,0,1,0,0,401,8029,3
+"(!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))","spin -f %s &gt;%N","ok",0,0.0018992,3,5,35,1,3,2,1,0,0,2,1,1,0,0,401,9983,3
+"(!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))","lbt &lt; %L &gt;%T","ok",0,0.00233017,8,13,84,1,8,7,1,0,0,3,1,1,0,0,633,14659,235
+"(!((!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))))","ltl2tgba -s %f &gt;%N","ok",0,0.0286798,2,2,5,1,2,1,0,1,0,0,0,0,1,0,201,2067,2
+"(!((!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))))","spin -f %s &gt;%N","ok",0,0.00191626,2,2,5,1,2,1,0,1,0,0,0,0,1,0,201,2067,2
+"(!((!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))))","lbt &lt; %L &gt;%T","ok",0,0.00317898,3,3,9,0,3,2,0,1,0,0,0,0,1,0,202,2078,3
+</pre>
+
+
+<p>
+This file can be loaded in any spreadsheet or statistical application.
+</p>
+<p>
+Although we only supplied 2 random generated formulas, the output
+contains 4 formulas because <code>ltlcross</code> had to translate the positive
+and negative version of each.
+</p>
+<p>
+If we had used the option <code>--json=results.json</code> instead of (or in
+addition to) <code>--cvs=results.csv</code>, the file <code>results.json</code> would have
+contained the following <a href="http://www.json.org/">JSON</a> output.
+</p>
+
+
+
+
+<pre class="example">{
+  "tool": [
+    "ltl2tgba -s %f &gt;%N",
+    "spin -f %s &gt;%N",
+    "lbt &lt; %L &gt;%T"
+  ],
+  "formula": [
+    "(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1)))))))",
+    "(!(G(((p0) U ((p0) &amp; (G(p1)))) R ((G(p1)) | ((p0) U ((p0) &amp; (G(p1))))))))",
+    "(!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))",
+    "(!((!(p0)) | ((p1) -&gt; (!(p1))) | (F(p2))))"
+  ],
+  "fields":  [
+  "formula","tool","exit_status","exit_code","time","states","edges","transitions","acc","scc","nonacc_scc","terminal_scc","weak_scc","strong_scc","nondet_states","nondet_aut","terminal_aut","weak_aut","strong_aut","product_states","product_transitions","product_scc"
+  ],
+  "inputs":  [ 0, 1 ],
+  "results": [
+    [ 0,0,"ok",0,0.0292363,3,5,9,1,3,2,0,1,0,2,1,0,1,0,401,5168,3 ],
+    [ 0,1,"ok",0,0.00671565,6,13,18,1,3,2,0,0,1,6,1,0,0,1,999,14414,5 ],
+    [ 0,2,"ok",0,0.260393,8,41,51,1,3,2,0,0,1,8,1,0,0,1,1397,43175,5 ],
+    [ 1,0,"ok",0,0.0445421,4,10,16,1,3,1,1,0,1,0,0,0,0,1,797,16411,3 ],
+    [ 1,1,"ok",0,0.0228213,7,24,63,1,4,2,1,0,1,6,1,0,0,1,1400,64822,4 ],
+    [ 1,2,"ok",0,0.00435242,39,286,614,3,28,26,1,0,1,33,1,0,0,1,7583,600472,4394 ],
+    [ 2,0,"ok",0,0.0390749,3,5,24,1,3,2,1,0,0,0,0,1,0,0,401,8029,3 ],
+    [ 2,1,"ok",0,0.0018992,3,5,35,1,3,2,1,0,0,2,1,1,0,0,401,9983,3 ],
+    [ 2,2,"ok",0,0.00233017,8,13,84,1,8,7,1,0,0,3,1,1,0,0,633,14659,235 ],
+    [ 3,0,"ok",0,0.0286798,2,2,5,1,2,1,0,1,0,0,0,0,1,0,201,2067,2 ],
+    [ 3,1,"ok",0,0.00191626,2,2,5,1,2,1,0,1,0,0,0,0,1,0,201,2067,2 ],
+    [ 3,2,"ok",0,0.00317898,3,3,9,0,3,2,0,1,0,0,0,0,1,0,202,2078,3 ]
+  ]
+}
+</pre>
+
+
+<p>
+Here the <code>fields</code> table describes the columns of the <code>results</code> table.
+The <code>inputs</code> tables lists the columns that are considered as inputs
+for the experiments.  The values in the columns corresponding to the
+fields <code>formula</code> and <code>tool</code> contains indices relative to the <code>formula</code>
+and <code>tool</code> tables.  This format is more compact when dealing with lots
+of translators and formulas, because they don't have to be repeated on
+each line as in the CSV version.
+</p>
+<p>
+JSON data can be easily processed in any language.  For instance the
+following Python3 script averages each column (except the first four)
+for each tool, and presents the results in a form that can almost be
+copied into a LaTeX table (the <code>%</code> in the tool names have to be taken
+care of).  Note that for simplicity we assume that the first two
+columns are inputs, instead of reading the <code>inputs</code> field.
+</p>
+
+
+
+<pre class="src src-python"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/python3</span>
+<span class="org-keyword">import</span> json
+<span class="org-variable-name">data</span> = json.load(<span class="org-builtin">open</span>(<span class="org-string">'results.json'</span>))
+<span class="org-variable-name">datacols</span> = <span class="org-builtin">range</span>(4, <span class="org-builtin">len</span>(data[<span class="org-string">"fields"</span>]))
+<span class="org-comment-delimiter"># </span><span class="org-comment">Index results by tool</span>
+<span class="org-variable-name">results</span> = { t:[] <span class="org-keyword">for</span> t <span class="org-keyword">in</span> <span class="org-builtin">range</span>(0, <span class="org-builtin">len</span>(data[<span class="org-string">"tool"</span>])) }
+<span class="org-keyword">for</span> l <span class="org-keyword">in</span> data[<span class="org-string">"results"</span>]:
+  results[l[1]].append(l)
+<span class="org-comment-delimiter"># </span><span class="org-comment">Average columns for each tool, and display them as a table</span>
+<span class="org-keyword">print</span>(<span class="org-string">"%-18s &amp; count &amp; %s \\\\"</span> % (<span class="org-string">"tool"</span>, <span class="org-string">" &amp; "</span>.join(data[<span class="org-string">"fields"</span>][4:])))
+<span class="org-keyword">for</span> i <span class="org-keyword">in</span> <span class="org-builtin">range</span>(0, <span class="org-builtin">len</span>(data[<span class="org-string">"tool"</span>])):
+  <span class="org-variable-name">c</span> = <span class="org-builtin">len</span>(results[i])
+  <span class="org-variable-name">sums</span> = [<span class="org-string">"%6.1f"</span> % (<span class="org-builtin">sum</span>([x[j] <span class="org-keyword">for</span> x <span class="org-keyword">in</span> results[i]])/c)
+          <span class="org-keyword">for</span> j <span class="org-keyword">in</span> datacols]
+  <span class="org-keyword">print</span>(<span class="org-string">"%-18s &amp; %3d &amp; %s \\\\"</span> % (data[<span class="org-string">"tool"</span>][i], c,
+        <span class="org-string">" &amp; "</span>.join(sums)))
+</pre>
+
+<pre class="example">
+tool               &amp; count &amp; time &amp; states &amp; edges &amp; transitions &amp; acc &amp; scc &amp; nonacc_scc &amp; terminal_scc &amp; weak_scc &amp; strong_scc &amp; nondet_states &amp; nondet_aut &amp; terminal_aut &amp; weak_aut &amp; strong_aut &amp; product_states &amp; product_transitions &amp; product_scc \\
+ltl2tgba -s %f &gt;%N &amp;   4 &amp;    0.0 &amp;    3.0 &amp;    5.5 &amp;   13.5 &amp;    1.0 &amp;    2.8 &amp;    1.5 &amp;    0.5 &amp;    0.5 &amp;    0.2 &amp;    0.5 &amp;    0.2 &amp;    0.2 &amp;    0.5 &amp;    0.2 &amp;  450.0 &amp; 7918.8 &amp;    2.8 \\
+spin -f %s &gt;%N     &amp;   4 &amp;    0.0 &amp;    4.5 &amp;   11.0 &amp;   30.2 &amp;    1.0 &amp;    3.0 &amp;    1.8 &amp;    0.5 &amp;    0.2 &amp;    0.5 &amp;    3.5 &amp;    0.8 &amp;    0.2 &amp;    0.2 &amp;    0.5 &amp;  750.2 &amp; 22821.5 &amp;    3.5 \\
+lbt &lt; %L &gt;%T       &amp;   4 &amp;    0.1 &amp;   14.5 &amp;   85.8 &amp;  189.5 &amp;    1.2 &amp;   10.5 &amp;    9.2 &amp;    0.5 &amp;    0.2 &amp;    0.5 &amp;   11.0 &amp;    0.8 &amp;    0.2 &amp;    0.2 &amp;    0.5 &amp; 2453.8 &amp; 165096.0 &amp; 1159.2 \\
+</pre>
+
+
+<p>
+The script <code>bench/ltl2tgba/sum.py</code> is a more evolved version of the
+above script that generates two kinds of LaTeX tables.
+</p>
+<p>
+When computing such statistics, you should be aware that inputs for
+which a tool failed to generate an automaton (e.g. it crashed, or it
+was killed if you used <code>ltlcross</code>'s <code>--timeout</code> option to limit run
+time) will appear as mostly empty lines in the CSV or JSON files,
+since most statistics cannot be computed without an automaton&hellip;
+Those lines with missing data can be omitted with the <code>--omit-missing</code>
+option (this used to be the default up to Spot 1.2).
+</p>
+<p>
+However data for bogus automata are still included: as shown below
+<code>ltlcross</code> will report inconsistencies between automata as errors, but
+it does not try to guess who is incorrect.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Description of the columns</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+<p>
+<code>formula</code> and <code>tool</code> contain the formula translated and the command
+run to translate it.  In the CSV, these columns contain the actual
+text.  In the JSON output, these column contains an index into the
+<code>formula</code> and <code>tool</code> table declared separately.
+</p>
+<p>
+<code>exit_status</code> and <code>exit_code</code> are used to indicate if the translator
+successfully produced an automaton, or if it failed.  On successful
+translation, <code>exit_status</code> is equal to "<code>ok</code>" and <code>exit_code</code> is 0.
+If the translation took more time than allowed with the <code>--timeout</code>
+option, <code>exit_status</code> will contain "<code>timeout</code>" and <code>exit_code</code> will be
+set to -1.  Other values are used to diagnose various issues: please
+check the man-page for <code>ltlcross</code> for a list of them.
+</p>
+<p>
+<code>time</code> obviously contains the time used by the translation.  Time is
+measured with some high-resolution clock when available (that's
+nanosecond accuracy under Linux), but because translator commands are
+executed through a shell, it also includes the time to start a shell.
+(This extra cost apply identically to all translators, so it is not unfair.)
+</p>
+
+<p>
+All the values that follow will be missing if <code>exit_status</code> is not
+equal to "<code>ok</code>".  (You may instruct <code>ltlcross</code> not to output lines with
+such missing data with the option <code>--omit-missing</code>.)
+</p>
+<p>
+The columns <code>in_type</code>, <code>in_states</code>, <code>in_edges</code>, <code>in_transitions</code>,
+<code>in_acc</code>, and <code>in_scc</code> are only output if one of the translator
+produces Rabin or Streett automata (i.e., if <code>%D</code> is used to specify
+one output filename for any translator).  In that case these columns
+give the type (DRA or DSA) of the produced automaton, as well as its
+size (states, edges, transitions, number of acceptance pairs, and
+number of SCCs).  This input automaton is then converted by <code>ltlcross</code>
+into a TGBA before being checked the result of other translators, and
+all the following columns are measures of that converted automaton.
+(Aside from parsing them and converting them to TGBA, Spot has no support
+for Rabin automata and Streett automata.)
+</p>
+<p>
+<code>states</code>, <code>edges</code>, <code>transitions</code>, <code>acc</code> are size measures for the
+automaton that was translated.  <code>acc</code> counts the number of acceptance
+sets.  When building (degeneralized) Büchi automata, it will always be
+<code>1</code>, so its value is meaningful only when evaluating translations to
+generalized Büchi automata.  <code>edges</code> counts the actual number of edges
+in the graph supporting the automaton; an edge (labeled by a Boolean
+formula) might actually represent several transitions (each labeled by
+assignment of all atomic propositions).  For instance in an automaton
+where the atomic proposition are \(a\) and \(b\), one edge labeled by
+\(a\lor b\) actually represents three transitions \(a b\), \(a\bar b\), and
+\(\bar a b\).
+</p>
+<p>
+The following picture displays two automata for the LTL formula <code>a U b</code>.  They both have 2 states and 3 edges, however they differ in the
+number of transitions (7 versus 8), because the initial self-loop is
+more constrained in the first automaton.  A smaller number of
+transition is therefore an indication of a more constrained automaton.
+</p>
+
+
+<p>
+<img src="edges.png"  alt="edges.png" />
+</p>
+
+<p>
+<code>scc</code> counts the number of strongly-connected components in the automaton.  These SCCs are
+also partitioned on four sets based on their strengths:
+</p><ul>
+<li><code>nonacc_scc</code> for non-accepting SCCs (such as states A1 and A2 in the
+  previous picture)
+</li>
+<li><code>terminal_scc</code> for SCCs that consist of a single state with an
+  accepting self-loop labeled by true (such as states B1 and B2
+  in the previous picture)
+</li>
+<li><code>weak_scc</code> for non-terminal SCCs in which all cycles are accepting
+</li>
+<li>and <code>strong_scc</code> for accepting SCCs in which some cycles are not accepting.
+</li>
+</ul>
+
+
+<p>
+These SCC strengths can be used to compute the strength of the
+automaton as a whole:
+</p><ul>
+<li>an automaton is terminal if it contains only non-accepting or
+  terminal SCCs,
+</li>
+<li>an automaton is weak if it it contains only non-accepting,
+  terminal, or weak SCCs,
+</li>
+<li>an automaton is strong if it contains at least one strong SCC.
+</li>
+</ul>
+
+
+<p>
+This classification is used to fill the <code>terminal_aut</code>, <code>weak_aut</code>,
+<code>strong_aut</code> columns with Boolean values.  Only one of these should
+contain <code>1</code>.  We usually prefer terminal automata over weak automata,
+and weak automata over strong automata, because the emptiness check
+of terminal (and weak) automata is easier.
+</p>
+<p>
+<code>nondetstates</code> counts the number of non-deterministic states in the
+automaton.  <code>nondeterministic</code> is a Boolean value indicating if the
+automaton is not deterministic.  For instance in the previous picture
+showing two automata for <code>a U b</code>, the first automaton is deterministic
+(these two fields will contain 0), while the second automaton contain
+a nondeterministic state (state A2 has two possible successors for the
+assignment \(ab\)) and is therefore not deterministic.
+</p>
+<p>
+Finally, <code>product_states</code>, <code>product_transitions</code>, and <code>product_scc</code>
+count the number of state, transitions and strongly-connect components
+in the product that has been built between the translated automaton
+and a random model.  For a given formula, the same random model is of
+course used against the automata translated by all tools.  Comparing
+the size of these product might give another indication of the
+"conciseness" of a translated automaton.
+</p>
+<p>
+There is of course a certain "luck factor" in the size of the product.
+Maybe some translator built a very dumb automaton, with many useless
+states, in which just a very tiny part is translated concisely.  By
+luck, the random model generated might synchronize with this tiny part
+only, and ignore the part with all the useless states.  A way to
+lessen this luck factor is to increase the number of products
+performed against the translated automaton.  If option <code>--products=N</code>
+is used, <code>N</code> products are builds instead of one, and the fields
+<code>product_states</code>, <code>product_transitions</code>, and <code>product_scc</code> contain
+average values.
+</p>
+<p>
+If the option <code>--products=+N</code> is used (with a <code>+</code> in front of the
+number), then no average value is computed.  Instead, three columns
+<code>product_states</code>, <code>product_transitions</code>, and <code>product_scc</code> are output
+for each individual product (i.e., \(3\times N\) columns are output).
+This might be useful if you want to compute different kind of
+statistic (e.g., a median instead of a mean) or if you want to build
+scatter plots of all these products.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Changing the name of the translators</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+<p>
+By default, the names used in the CSV and JSON output to designate the
+translators are the command specified on the command line.
+</p>
+<p>
+For instance in the following, <code>ltl2tgba</code> is run in two
+configurations, and the strings <code>ltl2tgba -s --small %f &gt;%N</code> and
+<code>ltl2tgba -s --deter %f &gt;%N</code> appear verbatim in the output:
+</p>
+
+
+
+<pre class="src src-sh">ltlcross -f a -f Ga <span class="org-string">'ltl2tgba -s --small %f &gt;%N'</span> <span class="org-string">'ltl2tgba -s --deter %f &gt;%N'</span> --csv
+</pre>
+
+<pre class="example">
+"formula","tool","exit_status","exit_code","time","states","edges","transitions","acc","scc","nonacc_scc","terminal_scc","weak_scc","strong_scc","nondet_states","nondet_aut","terminal_aut","weak_aut","strong_aut","product_states","product_transitions","product_scc"
+"(a)","ltl2tgba -s --small %f &gt;%N","ok",0,0.0361914,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4092,2
+"(a)","ltl2tgba -s --deter %f &gt;%N","ok",0,0.0310513,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4092,2
+"(!(a))","ltl2tgba -s --small %f &gt;%N","ok",0,0.0355644,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4098,2
+"(!(a))","ltl2tgba -s --deter %f &gt;%N","ok",0,0.0286283,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4098,2
+"(G(a))","ltl2tgba -s --small %f &gt;%N","ok",0,0.0308319,1,1,1,1,1,0,0,1,0,0,0,0,1,0,200,2023,1
+"(G(a))","ltl2tgba -s --deter %f &gt;%N","ok",0,0.0264577,1,1,1,1,1,0,0,1,0,0,0,0,1,0,200,2023,1
+"(!(G(a)))","ltl2tgba -s --small %f &gt;%N","ok",0,0.0371777,2,3,4,1,2,1,1,0,0,0,0,1,0,0,400,8166,2
+"(!(G(a)))","ltl2tgba -s --deter %f &gt;%N","ok",0,0.035956,2,3,4,1,2,1,1,0,0,0,0,1,0,0,400,8166,2
+</pre>
+
+
+<p>
+To present these results graphically, or even when analyzing these
+data, it might be convenient to give each configured tool a shorter
+name.  <code>ltlcross</code> supports the specification of such short names by
+looking whether the command specification for a translator has the
+form "<code>{short name}actual command</code>".
+</p>
+<p>
+For instance:
+</p>
+
+
+<pre class="src src-sh">ltlcross -f a -f Ga <span class="org-string">'{small} ltl2tgba -s --small %f &gt;%N'</span> <span class="org-string">'{deter} ltl2tgba -s --deter %f &gt;%N'</span> --csv
+</pre>
+
+<pre class="example">
+"formula","tool","exit_status","exit_code","time","states","edges","transitions","acc","scc","nonacc_scc","terminal_scc","weak_scc","strong_scc","nondet_states","nondet_aut","terminal_aut","weak_aut","strong_aut","product_states","product_transitions","product_scc"
+"(a)","small","ok",0,0.0372669,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4092,2
+"(a)","deter","ok",0,0.0333373,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4092,2
+"(!(a))","small","ok",0,0.0313834,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4098,2
+"(!(a))","deter","ok",0,0.031681,2,2,3,1,2,1,1,0,0,0,0,1,0,0,201,4098,2
+"(G(a))","small","ok",0,0.0317352,1,1,1,1,1,0,0,1,0,0,0,0,1,0,200,2023,1
+"(G(a))","deter","ok",0,0.0281772,1,1,1,1,1,0,0,1,0,0,0,0,1,0,200,2023,1
+"(!(G(a)))","small","ok",0,0.0273178,2,3,4,1,2,1,1,0,0,0,0,1,0,0,400,8166,2
+"(!(G(a)))","deter","ok",0,0.0231561,2,3,4,1,2,1,1,0,0,0,0,1,0,0,400,8166,2
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Detecting problems</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+If a translator exits with a non-zero status code, or fails to output
+an automaton <code>ltlcross</code> can read, and error will be displayed and the
+result of the translation will be discarded.
+</p>
+<p>
+Otherwise <code>ltlcross</code> performs the following checks on all translated
+formulas (\(P_i\) and \(N_i\) designate respectively the translation of
+positive and negative formulas by the ith translator).
+</p>
+<ul>
+<li>Intersection check: \(P_i\otimes N_j\) must be empty for all
+    pairs of \((i,j)\).
+
+<p>
+    A single failing translator might generate a lot of lines of
+    the form:
+</p>
+<pre class="example">
+error: P0*N1 is nonempty; both automata accept the infinite word
+       cycle{p0 &amp; !p1}
+error: P1*N0 is nonempty; both automata accept the infinite word
+       p0; !p1; cycle{p0 &amp; p1}
+error: P1*N1 is nonempty; both automata accept the infinite word
+       p0; cycle{!p1 &amp; !p0}
+error: P1*N2 is nonempty; both automata accept the infinite word
+       p0; !p1; cycle{p0 &amp; p1}
+error: P1*N3 is nonempty; both automata accept the infinite word
+       p0; !p1; cycle{p0 &amp; p1}
+error: P1*N4 is nonempty; both automata accept the infinite word
+       p0; cycle{!p1 &amp; !p0}
+error: P2*N1 is nonempty; both automata accept the infinite word
+       p0; !p1; !p0; cycle{!p1 &amp; !p0; p0 &amp; !p1; !p1; !p1; p0 &amp; !p1}
+error: P3*N1 is nonempty; both automata accept the infinite word
+       p0; !p1; !p1 &amp; !p0; cycle{p0 &amp; !p1}
+error: P4*N1 is nonempty; both automata accept the infinite word
+       p0; !p1; !p1 &amp; !p0; cycle{p0 &amp; !p1}
+</pre>
+
+
+<p>
+    In this example, translator number <code>1</code> looks clearly faulty
+    (at least the other 4 translators do not contradict each other).
+</p>
+<p>
+    Examples of infinite words that are accepted by both automata
+    always have the form of a lasso: a (possibly empty) finite prefix
+    followed by a cycle that should be repeated infinitely often.
+    The cycle part is denoted by <code>cycle{...}</code>.
+</p>
+</li>
+<li>Complemented intersection check.  If \(P_i\) and \(P_j\) are
+    deterministic, we <code>ltlcross</code> builds their complements, \(Comp(P_i)\)
+    and \(Comp(P_j)\), and then ensures that \(Comp(P_i)\otimes
+    Comp(P_j)\) is empty.  If only one of them is deterministic,
+    for instance \(P_i\), we check that \(P_j\otimes Comp(P_i)\) for all
+    \(j \ne i\); likewise if it's \(N_i\) that is deterministic.
+
+<p>
+    This check is only done for deterministic automata, because
+    complementation is cheap is that case.  When validating a
+    translator with <code>ltlcross</code>, we highly recommend to include a
+    translator with good deterministic output to augment test
+    coverage.  Using '<code>ltl2tgba -lD %f &gt;%T</code>' will produce
+    deterministic automata for all obligation properties and many
+    recurrence properties.  Using '<code>ltl2dstar     --ltl2nba=spin:pathto/ltl2tgba@-sD %L %D</code>' is more expansive, but
+    it will produce a deterministic Büchi automaton whenever one
+    exists.
+</p>
+</li>
+<li>Cross-comparison checks: for some state-space \(S\),
+    all \(P_i\otimes S\) are either all empty, or all non-empty.
+    Similarly all \(N_i\otimes S\) are either all empty, or all non-empty.
+
+<p>
+    A cross-comparison failure could be displayed as:
+</p>
+<pre class="example">
+error: {P0,P2,P3,P4,P5,P6,P7,P8,P9} disagree with {P1} when evaluating the state-space
+</pre>
+
+
+<p>
+    If <code>--products=N</code> is used with <code>N</code> greater than one, the number of
+    the state-space is also printed.  This number is of no use by
+    itself, except to explain why you may get multiple disagreement
+    between the same sets of automata.
+</p>
+</li>
+<li>Consistency check:
+
+<p>
+    For each \(i\), the products \(P_i\otimes S\) and \(N_i\otimes S\)
+    actually cover all states of \(S\).  Because \(S\) does not have any
+    deadlock, any of its infinite path must be accepted by \(P_i\) or
+    \(N_i\) (or both).
+</p>
+<p>
+    An error in that case is displayed as
+</p>
+<pre class="example">
+error: inconsistency between P1 and N1
+</pre>
+
+
+<p>
+    If <code>--products=N</code> is used with <code>N</code> greater than one, the number of
+    the state-space in which the inconsistency was detected is also
+    printed.
+</p></li>
+</ul>
+
+
+<p>
+The above checks are similar to those that are performed by <a href="http://www.tcs.hut.fi/Software/lbtt/">LBTT</a>,
+except for the complemented intersection check, which is only done in
+<code>ltlcross</code>.
+</p>
+<p>
+If any problem was reported during the translation of one of the
+formulas, <code>ltlcheck</code> will exit with an exit status of <code>1</code>.  Statistics
+(if requested) are output nonetheless, and include any faulty
+automaton as well.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Miscellaneous options</h2>
+<div class="outline-text-2" id="text-5">
+
+
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1"><code>--stop-on-error</code></h3>
+<div class="outline-text-3" id="text-5-1">
+
+
+<p>
+The <code>--stop-on-error</code> option will cause <code>ltlcross</code> to abort on the
+first detected error.  This include failure to start some translator,
+read its output, or failure to passe the sanity checks.  Timeouts are
+allowed.
+</p>
+<p>
+One use for this option is when <code>ltlcross</code> is used in combination with
+<code>randltl</code> to check translators on an infinite stream of formulas.
+</p>
+<p>
+For instance the following will cross-compare <code>ltl2tgba</code> against
+<code>ltl3ba</code> until it finds an error, or your interrupt the command, or it
+runs out of memory (the hash tables used by <code>randltl</code> and <code>ltlcross</code>
+to remove duplicate formulas will keep growing).
+</p>
+
+
+
+<pre class="src src-sh">randltl -n -1 --tree-size 10..25 a b c | ltlcross --stop-on-error <span class="org-string">'ltl2tgba --lbtt %f &gt;%T'</span> <span class="org-string">'ltl3ba -f %s &gt;%N'</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2"><code>--save-bogus=FILENAME</code></h3>
+<div class="outline-text-3" id="text-5-2">
+
+
+<p>
+The <code>--save-bogus=FILENAME</code> will save any formula for which an error
+was detected (either some translation failed, or some problem was
+detected using the resulting automata) in <code>FILENAME</code>.  Again, timeouts
+are not considered to be errors, and therefore not reported in this
+file.
+</p>
+<p>
+The main use for this feature is in conjunction with <code>randltl</code>'s
+generation of random formulas.  For instance the following command
+will run the translators on an infinite number of formulas, saving
+any problematic formula in <code>bugs.ltl</code>.
+</p>
+
+
+
+<pre class="src src-sh">randltl -n -1 --tree-size 10..25 a b c | ltlcross --save-bogus=bugs.ltl <span class="org-string">'ltl2tgba --lbtt %f &gt;%T'</span> <span class="org-string">'ltl3ba -f %s &gt;%N'</span>
+</pre>
+
+
+<p>
+You can periodically check the contents of <code>bugs.ltl</code>, and then run
+<code>ltlcross</code> only on those formulas to look at the problems:
+</p>
+
+
+
+<pre class="src src-sh">ltlcross -F bugs.ltl <span class="org-string">'ltl2tgba --lbtt %f &gt;%T'</span> <span class="org-string">'ltl3ba -f %s &gt;%N'</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-3">
+<h3 id="sec-5-3"><code>--no-check</code></h3>
+<div class="outline-text-3" id="text-5-3">
+
+
+<p>
+The <code>--no-check</code> option disables all sanity checks, and only use the supplied
+formulas in their positive form.
+</p>
+<p>
+When checks are enabled, the negated formulas are intermixed with the
+positives ones in the results.  Therefore the <code>--no-check</code> option can
+be used to gather statistics about a specific set of formulas.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2014-08-21T17:43+0200</p>
+<p class="author">Author: Alexandre Duret-Lutz</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

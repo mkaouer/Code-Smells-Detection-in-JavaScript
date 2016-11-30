@@ -1,0 +1,442 @@
+New in spot 0.8 (2011-11-28):
+
+  * Major new features:
+    - Spot can read DiVinE models.  See iface/dve2/README for details.
+    - The genltl tool can now output 20 different LTL formula families.
+      It also replaces the LTLcounter Perl scripts.
+    - There is a printer and parser for Kripke structures in text format.
+  * Major interface changes:
+    - The destructor of all states is now private.  Any code that looks like
+      "delete some_state;" will cause an compile error and should be
+      updated to "some_state->destroy();".  This new syntax is supported
+      since version 0.7.
+    - The experimental Nips interface has been removed.
+  * Minor changes:
+    - The dotty_reachable() function has a new option "assume_sba" that
+      can be used for rendering automata with state-based acceptance.
+      In that case, acceptance states are displayed with a double
+      circle. ltl2tgba (both command line and on-line) Use it to display
+      degeneralized automata.
+    - The dotty_reachable() function will also display transition
+      annotations (as returned by the tgba::transitition_annotation()).
+      This can be useful when displaying (small) state spaces.
+    - Identifiers used to name atomic proposition can contain dots.
+      E.g.: X.Y is now an atomic proposition, while it was understood
+      as X&Y in previous versions.
+    - The Doxygen documentation is no longer built as a PDF file.
+  * Internal improvements:
+    - The on-line ltl2tgba CGI script uses a cache to produce faster
+      answers.
+    - Better memory management for the states of explicit automata.
+      Thanks to the aforementioned ->destroy() change, we can avoid
+      cloning explicit states.
+    - tgba_product has learned how to be faster when one of the operands
+      is a Kripke structure (15% speedup).
+    - The reduction rule for "a M b" has been improved: it can be
+      reduced to "a & b" if "a" is a pure eventuallity.
+    - More useless acceptance conditions are removed by SCC simplifications.
+  * Bug fixes:
+    - Safra complementation has been fixed in cases where more than
+      one acceptance conditions where needed to convert the
+      deterministic Streett automaton as a TGBA.
+    - The degeneralization is now idempotent.  Previously, degeneralizing
+      an already degeneralized automaton could add some states.
+    - The degeneralization now has a deterministic behavior.  Previously
+      it was possible to obtain different output depending on the
+      memory layout.
+    - Spot now outputs neverclaims with fully parenthesized guards.
+      I.e., instead of
+         (!x && y) -> goto S1
+      it now outputs
+         ((!(x)) && (y)) -> goto S1
+      This prevents problems when the model defines `x' as
+         #define x flag==0
+      because !x then evaluated to (!flag)==0 instead of !(flag==0).
+
+New in spot 0.7.1 (2001-02-07):
+
+  * The LTL parser will accept operator ~ (for not) as well
+    as --> and <--> (for implication and equivalence), allowing
+    formulae from the Büchi Store to be read directly.
+  * The neverclaim parser will accept guards of the form
+        :: !(...) -> goto ...
+    instead of the more commonly used
+        :: (!(...)) -> goto ...
+    This makes it possible to read neverclaims provided by the Büchi Store.
+  * A new ltl2tgba option, -kt, will count the number of "sub-transitions".
+    I.e., a transition labelled by "true" counts for 4 "sub-transitions"
+    if the automaton uses 2 atomic propositions.
+  * Bugs fixed:
+    - Fix segfault during WDBA minimization on automata with useless states.
+    - Use the included BuDDy library if the one already installed
+      is older than the one distributed with Spot 0.7.
+    - Fix two typos in the code of the CGI scripts.
+
+New in spot 0.7 (2011-02-01):
+
+  * Spot is now able to read an automaton expressed as a Spin neverclaim.
+  * The "experimental" Kripke structure introduced in Spot 0.5 has
+    been rewritten, and is no longer experimental.  We have a
+    developement version of checkpn using it, and it should be
+    released shortly after Spot 0.7.
+  * The function to_spin_string(), that outputs an LTL formula using
+    Spin's syntax, now takes an optional argument to request
+    parentheses at all levels.
+  * src/ltltest/genltl is a new tool that generates some interesting
+    families of LTL formulae, for testing purpose.
+  * bench/ltlclasses/ uses the above tool to conduct the same benchmark
+    as in the DepCoS'09 paper by Cichoń et al.  The resulting benchmark
+    completes in 12min, while it tooks days (or exhausted the memory)
+    when the paper was written (they used Spot 0.4).
+  * Degeneralization has again been improved in two ways:
+    - It will merge degeneralized transitions that can be merged.
+    - It uses a cache to speed up the improvement introduced in 0.6.
+  * An implementation of Dax et al.'s paper for minimizing obligation
+    formulae has been integrated.  Use ltl2tgba -Rm to enable this
+    optimization from the command-line; it will have no effect if the
+    property is not an obligation.
+  * bench/wdba/ conducts a benchmark similar to the one on Dax's
+    webpage, comparing the size of the automata expressing obligation
+    formula before and after minimization.  See bench/wdba/README for
+    results.
+  * Using similar code, Spot can now construct deterministic monitors.
+  * New ltl2tgba options:
+    -XN: read an input automaton as a neverclaim.
+    -C, -CR: Compute (and display) a counterexample after running the
+             emptiness check.  With -CR, the counterexample will be
+             replayed on the automaton to ensure it is correct
+	     (previous version would always compute a replay a
+	     counterexample when emptiness-check was enabled)
+    -ks: traverse the automaton to compute its number of states and
+         transitions (this is faster than -k which will also count
+         SCCs and paths).
+    -M: Build a deterministic monitor.
+    -O: Tell whether a formula represents a safety, guarantee, or
+        obligation property.
+    -Rm: Minimize automata representing obligation properties.
+  * The on-line tool to translate LTL formulae into automata
+    has been rewritten and is now at http://spot.lip6.fr/ltl2tgba.html
+    It requires a javascript-enabled browser.
+  * Bug fixes:
+    - Location of the errors messages in the TGBA parser where inaccurate.
+    - Various warning fixes for different versions of GCC and Clang.
+    - The neverclaim output with ltl2tgba -N or -NN used to ignore any
+      automaton simplification performed after degeneralization.
+    - The formula simplification based on universality and eventuality
+      had a quadratic run-time.
+
+New in spot 0.6 (2010-04-16):
+
+  * Several optimizations to improve some auxiliary steps
+    of the LTL translation (not the core of the translation):
+    - Better degeneralization
+    - SCC simplifications has been tuned for degeneralization
+      (ltl2tgba now has two options -R3 and -R3f: the latter will
+      remove every acceptance condition that used to be removed
+      in Spot 0.5 while the former will leave useless acceptance conditions
+      going to accepting SCC.  Experience shows that -R3 is more
+      favorable to degeneralization).
+    - ltl2tgba will perform SCC optimizations before degeneralization
+      and not the converse
+    - We added a syntactic simplification rule to rewrite F(a)|F(b) as F(a|b).
+      We only had a rule for the more specific FG(a)|FG(b) = F(Ga|Gb).
+    - The syntactic simplification rule for F(a&GF(b)) = F(a)&GF(b) has
+      be disabled because the latter formula is in fact harder to translate
+      efficiently.
+  * New LTL operators: W (weak until) and its dual M (strong release)
+    - Weak until allows many LTL specification to be specified more
+      compactly.
+    - All LTL translation algorithms have been updated to
+      support these operators.
+    - Although they do not add any expressive power, translating
+      "a W b" is more efficient (read smaller output automaton) than
+      translating the equivalent form using the U operator.
+    - Basic syntactic rewriting rules will automatically rewrite "a U
+      (b | G(a))" and "(a U b)|G(a)" as "a W b", so you will benefit
+      from the new operators even if you do not use them.  Similar
+      rewriting rules exist for R and M, although they are less used.
+  * New options have been added to the CGI script for
+    - SVG output
+    - SCC simplifications
+  * Bug fixes:
+    - The precedence of the "->" and "<->" Boolean operators has been
+      adjusted to better match other tools.
+      Spot <= 0.5 used to parse "a & b -> c & d" as "a & (b -> c) & d";
+      Spot >= 0.6 will parse it as "(a & b) -> (c & d)".
+    - The random graph generator was fixed (again!) not to produce
+      dead states as documented.
+    - Locations in the error messages of the LTL parser were off by one.
+
+New in spot 0.5 (2010-02-01):
+
+  * We have setup two mailing lists:
+    - <spot-announce@lrde.epita.fr> is read-only and will be used to
+      announce new releases.  You may subscribe at
+      https://www.lrde.epita.fr/mailman/listinfo/spot-announce
+    - <spot@lrde.epita.fr> can be used to discuss anything related
+      to Spot.  You may subscribe at
+      https://www.lrde.epita.fr/mailman/listinfo/spot-announce
+  * Two new LTL translations have been implemented:
+    - eltl_to_tgba_lacim() is a symbolic translation for ELTL based on
+      Couvreur's LaCIM'00 paper.  For this translation (available with
+      ltl2tgba's option -le), all operators are described as finite
+      automata.  A default set of operators is provided for LTL
+      (option -lo) and user may add more automaton operators.
+    - ltl_to_taa() is a translation based on Tauriainen's PhD thesis.
+      LTL is translated to "self-loop" alternating automata
+      and then to Transition-based Generalized Automata.  (ltl2tgba's
+      option -taa).
+    The "Couvreur/FM" translation remains the best LTL translation
+    available in Spot.
+  * The data structures used to represent LTL formulae have been
+    overhauled, and it resulted in a big performence improvement
+    (in time and memory consumption) for the LTL translation.
+  * Two complementation algorithms for state-based Büchi automata
+    have been implemented:
+    - tgba_kv_complement is an on-the-fly implementation of the
+      Kupferman-Vardi construction (TCS'05) for generalized acceptance
+      conditions.
+    - tgba_safra_complement is an implementation of Safra's
+      complementation.  This algorithm takes a degeneralized Büchi
+      automaton as input, but our implementation for the Streett->Büchi
+      step will produce a generalized automaton in the end.
+  * ltl2tgba has gained several options and the help text has been
+    reorganized.  Please run src/tgbatest/ltl2tgba without arguments
+    for details.  Couvreur/FM is now the default translation.
+  * The ltl2tgba.py CGI script can now run standalone.  It also offers
+    the Tauriainen/TAA translation, and some options for SCC-based
+    reductions.
+  * Automata using BDD-encoded transitions relation can now be pruned
+    for useless states symbolically using the delete_unaccepting_scc()
+    function.  This is ltl2tgba's -R3b option.
+  * The SCC-based simplification (ltl2tgba's -R3 option) has been
+    rewritten and improved.
+  * The "*" symbol, previously parsed as a synonym for "&" is no
+    longer recognized.  This makes room for an upcoming support of
+    rational operators.
+  * More benchmarks in the bench/ directory:
+    - gspn-ssp/    some benchmarks published at ACSD'07,
+    - ltlcounter/  translation of a class of LTL formulae used by
+                     Rozier & Vardi at SPIN'07
+    - scc-stats/   SCC statistics after translation of LTL formulae
+    - split-product/ parallelizing gain after splitting LTL automata
+  * An experimental Kripke interface has been developed to simplify
+    the integration of third party tools that do not use acceptance
+    conditions and that have label on states instead of transitions.
+    This interface has not been used yet.
+  * Experimental interface with the Nips virtual machine.
+    It is not very useful as Spot isn't able to retrieve any property
+    information from the model.  This will just check assertions.
+  * Distribution:
+    - The Boost C++ library is now required.
+    - Update to Autoconf 2.65, Automake 1.11.1, Libtool 2.2.6b,
+      Bison 2.4.1, and Swig 1.3.40.
+    - Thanks to the newest Automake, "make check" will now
+      run in parallel if you use "make -j2 check" or more.
+  * Bug fixes:
+    - Disable warnings from the garbage collection of BuDDy, it
+      could break the standard output of ltl2tgba.
+    - Fix several C++ constructs to ensure Spot will build with
+      GCC 4.3, 4.4, and older 3.x releases, as well as with Intel's
+      ICC compiler.
+    - A very old bug in the hash function for LTL formulae caused Spot
+      to sometimes (but very rarely) consider two different LTL formulae
+      as equal.
+
+New in spot 0.4 (2007-07-17):
+
+  * Upgrade to Autoconf 2.61, Automake 1.10, Bison 2.3, and Swig 1.3.31.
+  * Better LTL simplifications.
+  * Don't initialize Buddy if it has already been initialized (in case
+    the client software is already using Buddy).
+  * Lots of work in the greatspn interface for our ACSD'05 paper.
+  * Bug fixes:
+    - Fix the random graph generator not to produce dead states as documented.
+    - Fix synchronized product in case both side use acceptance conditions.
+    - Fix some syntax errors with newer versions of GCC.
+
+New in spot 0.3 (2006-01-25):
+
+  * lbtt 1.2.0
+  * The CGI script for LTL translation also offers emptiness check algorithms.
+  * tau03_opt_search implements the "ordering heuristic".
+    (Submitted by Heikki Tauriainen.)
+  * A couple of bugs were fixed into the LTL or automata simplifications.
+
+New in spot 0.2 (2005-04-08):
+
+  * Emptiness checks:
+    - the new spot::option_map class is used to pass options to
+      emptiness-check algorithms.
+    - the new emptiness_check_instantiator class is used to turn a
+      string such as `algorithm(option1, option2)' into an actual
+      instance of this emptiness-check algorithm with the given
+      options.  All tools use this.
+    - tau03_opt_search implements the "condition heuristic".
+      (Suggested by Heikki Tauriainen.)
+  * Minor bug fixes.
+
+New in spot 0.1 (2005-01-31):
+
+  * Emptiness checks:
+    - They all follow the same interface, and gather statistical data.
+    - New algorithms: gv04.hh, se05.hh, tau03.hh, tau03opt.hh
+    - New options for couvreur99: poprem and group.
+    - reduce_run() try to reduce accepting runs produced by emptiness checks.
+    - replay_run() ensure accepting runs are actually accepting runs.
+  * New testing tools:
+    - ltltest/randltl: Generate random LTL formulae.
+    - tgbatest/randtgba: Generate random TGBAs.  Optionally multiply them
+        against random LTL formulae.  Optionally check them for emptiness
+        with all available algorithms.  Optionally gather statistics.
+  * bench/emptchk/: Contains scripts that benchmark emptiness-checks.
+  * Split the degeneralization proxy in two:
+    - tgba_tba_proxy  uses at most max(N,1) copies
+    - tgba_sba_proxy  uses at most 1+max(N,1) copies and has a
+                      state_is_accepting() method
+  * tgba::transition_annotation annotate a transition with some string.
+    This comes handy to associate that transition to its high-level name.
+  * Preliminary support for Event-based GBA (the evtgba*/ directories).
+    This might as well disappear in a future release.
+  * LTL formulae are now sorting using their string representation, instead
+    of their memory address (which is still unique).  This makes the output
+    of the various functions more deterministic.
+  * The Doxygen documentation is now organized using modules.
+
+New in spot 0.0x (2004-08-13):
+
+  * New atomic_prop_collect() function: collect atomic propositions
+    in an LTL formula.
+  * Fix several typos in documentation, and some warnings in the code.
+  * Now compiles on Darwin and Cygwin.
+  * Upgrade to Automake 1.9.1, and lbtt 1.1.2.
+    (And drop support for older lbtt versions.)
+  * Support newer versions of Valgrind (>= 2.1.0).
+
+New in spot 0.0v (2004-06-29):
+
+  * LTL formula simplifications using basic rewriting rules,
+    a-la Wring syntactic approximations, and Etessami's universal
+    and existential classes.
+     - Function reduce() in ltlvisit/reduce.hh is the main interface.
+     - Can be tested with the CGI script.
+  * TGBA simplifications using direct simulation, delayed simulation,
+    and SCC-based simplifications.  This is still experimental.
+  * The LTL parser will now read LTL formulae written using Wring's syntax.
+  * ltl2tgba_fm() now has options for on-the-fly fair-loop approximations,
+    and Modella-like branching-postponement.
+  * GreatSPN interface:
+     - The `declarative_environment' is now part of Spot itself rather than
+       part of the interface with GreatSPN.
+     - the RG and SRG interface can deal with dead markings in three
+       ways (omit deadlocks from the state graph, stutter on the deadlock
+       and consider as a regular behavior, or stutter and distinguish the
+       deadlock with a property).
+     - update SSP interface to Soheib Baarir latest work.
+  * Preliminary Python bindings for BuDDy's FDD and BVEC.
+  * Upgrade to BuDDy 2.3.
+
+New in spot 0.0t (2004-04-23):
+
+  * `emptiness_check':
+      - fix two bugs in the computation of the counter example,
+      - revamp the interface for better customization.
+  * `never_claim_reachable': new function.
+  * Introduce annonymous BDD variables in `bdd_dict', and start
+    to use it in `ltl_to_tgba_fm'.
+  * Offer never claim in the CGI script.
+  * Rename EESRG as SSP, and offer specialized variants of the
+    emptiness_check.
+
+New in spot 0.0r (2004-03-08):
+
+  * In ltl_to_tgba_fm:
+    - New option `exprop' to optimize determinism.
+    - Make the `symbolic indentification' from 0.0p optional.
+  * `nonacceptant_lbtt_reachable' new function to help getting
+    accurate statistics from LBTT.
+  * Revamp the cgi script's user interface.
+  * Upgrade to lbtt 1.0.3, swig 1.3.21, automake 1.8.3
+
+New in spot 0.0p (2004-02-03):
+
+  * In ltl_to_tgba_fm:
+    - identify states with identical symbolic expansions
+      (i.e., identical continuations)
+    - use Acc[b] as acceptance condition for Fb, not Acc[Fb].
+  * Update and speed-up the cgi script.
+  * Improve degeneralization.
+
+New in spot 0.0n (2004-01-13):
+
+  * emptiness_check::check2() is a variant of Couvreur's emptiness check that
+    explores visited states first.
+  * Build the EESRG supporting code condinally, as the associated
+    GreatSPN changes have not yet been contributed to GreatSPN.
+  * Add a powerset algorithm (determinize TGBA ignoring acceptance
+    conditions, i.e., as if they were used to recognize finite languages).
+  * tgba_explicit::merge_transitions: merge transitions with same source,
+    destination, and acceptance condition.
+  * Run test cases within valgrind.
+  * Various bug fixes.
+
+New in spot 0.0l (2003-12-01):
+
+  * Computation of prime implicants.  This simplify the output of
+    ltl_to_tgba_fm, and allows conditions to be output as some of
+    product in dot output.
+  * Optimize translation of GFy in ltl_to_tgba_fm.
+  * tgba_explicit supports arbitrary binary formulae on transitions
+    (only conjunctions were allowed).
+
+New in spot 0.0j (2003-11-03):
+
+  * Use hash_map's instead of map's almost everywhere.
+  * New emptiness check, based on Couvreur's algorithm.
+  * LTL propositions can be put inside doublequotes to disambiguate
+    some constructions.
+  * Preliminary support for GreatSPN's EESRG.
+  * Various bug fixes.
+
+New in spot 0.0h (2003-08-18):
+
+  * More python bindings:
+    - "import buddy" works (see wrap/python/tests/bddnqueen.py for an example),
+    - almost all the Spot API is now available via "import spot".
+  * wrap/python/cgi/ltl2tgba.py is an LTL-to-Büchi translator that
+    work as as a cgi script.
+  * Couvreur's FM'99 ltl-to-tgba translation.
+
+New in spot 0.0f (2003-08-01):
+
+  * More python bindings, still only for the spot::ltl:: namespace.
+  * Functional GSPN interface.  (Enable with --with-gspn=directory.)
+  * The LTL scanner recognizes /\, \/, and xor.
+  * Upgrade to lbtt 1.0.2.
+  * tgba_tba_proxy is an on-the-fly degeneralizer.
+  * Implements the "magic search" algorithm.
+    (Works only on a tgba_tba_proxy.)
+  * Tgba's output algorithms (save(), dotty()) now non-recursive.
+  * During products, succ_iter will optimize its set of successors
+    using information computed from the current product state.
+  * BDD dictionnaries are now shared between automata and.  This
+    gets rid of all the BDD-variable translating machinery.
+
+New in spot 0.0d (2003-07-13):
+
+  * Optimize translation of G operators occurring at the root
+    of a formula (or its immediate children when the root is a
+    conjunction).  This saves two BDD variables per G operator.
+  * Distribute lbtt, and run it during `make check'.
+  * First sketch of GSPN interface.
+  * succ_iter_concreate::next() completely rewritten.
+  * Transitions are now labelled by boolean formulae (not only
+    conjunctions).
+  * Documentation:
+    - Output collaboration diagrams.
+    - Build and distribute PDF manual.
+  * Many bug fixes.
+
+New in spot 0.0b (2003-06-26):
+
+  * Everything.

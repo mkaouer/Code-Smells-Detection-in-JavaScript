@@ -1,0 +1,78 @@
+#!/bin/sh
+# -*- shell-script -*-
+# Copyright (C) 2005  Laboratoire d'Informatique de Paris 6 (LIP6),
+# département Systèmes Répartis Coopératifs (SRC), Université Pierre
+# et Marie Curie.
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+. ./defs
+
+conffile=small.cfg
+logfile=small.log
+sumfile=small.txt
+
+. "$srcdir/algorithms"
+
+cat >>"$conffile" <<EOF
+GlobalOptions
+{
+   Rounds = 100
+   Interactive = Never
+#   Verbosity = 5
+#   ComparisonCheck = no
+   ConsistencyCheck = no
+#   IntersectionCheck = no
+}
+
+StateSpaceOptions
+{
+   Size = 200
+   Propositions = 4
+}
+
+FormulaOptions
+{
+  Size = 10
+  Propositions = 4
+
+  AbbreviatedOperators = No
+  GenerateMode = Normal
+  OutputMode = NNF
+  PropositionPriority = 50
+
+  TruePriority = 1
+  FalsePriority = 1
+
+  AndPriority = 10
+  OrPriority = 10
+  XorPriority = 0
+  EquivalencePriority = 0
+
+  BeforePriority = 0
+  StrongReleasePriority = 0
+  WeakUntilPriority = 0
+
+  UntilPriority = 30
+  DefaultOperatorPriority = 15
+}
+
+EOF
+
+"$LBTT" --configfile="$conffile" | tee "$logfile"
+"$srcdir"/parseout.pl "$logfile" | tee "$sumfile"

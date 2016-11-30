@@ -1,0 +1,197 @@
+New in spot 0.4 (2007-07-17):
+
+  * Upgrade to Autoconf 2.61, Automake 1.10, Bison 2.3, and Swig 1.3.31.
+  * Better LTL simplifications.
+  * Don't initialize Buddy if it has already been initialized (in case
+    the client software is already using Buddy).
+  * Lots of work in the greatspn interface for our ACSD'05 paper.
+  * Bug fixes:
+    - Fix the random graph generator not to produce dead states as documented.
+    - Fix synchronized product in case both side use acceptance conditions.
+    - Fix some syntax errors with newer versions of GCC.
+
+New in spot 0.3 (2006-01-25):
+
+  * lbtt 1.2.0
+  * The CGI script for LTL translation also offers emptiness check algorithms.
+  * tau03_opt_search implements the "ordering heuristic".
+    (Submitted by Heikki Tauriainen.)
+  * A couple of bugs were fixed into the LTL or automata simplifications.
+
+New in spot 0.2 (2005-04-08):
+
+  * Emptiness checks:
+    - the new spot::option_map class is used to pass options to
+      emptiness-check algorithms.
+    - the new emptiness_check_instantiator class is used to turn a
+      string such as `algorithm(option1, option2)' into an actual
+      instance of this emptiness-check algorithm with the given
+      options.  All tools use this.
+    - tau03_opt_search implements the "condition heuristic".
+      (Suggested by Heikki Tauriainen.)
+  * Minor bug fixes.
+
+New in spot 0.1 (2005-01-31):
+
+  * Emptiness checks:
+    - They all follow the same interface, and gather statistical data.
+    - New algorithms: gv04.hh, se05.hh, tau03.hh, tau03opt.hh
+    - New options for couvreur99: poprem and group.
+    - reduce_run() try to reduce accepting runs produced by emptiness checks.
+    - replay_run() ensure accepting runs are actually accepting runs.
+  * New testing tools:
+    - ltltest/randltl: Generate random LTL formulae.
+    - tgbatest/randtgba: Generate random TGBAs.  Optionally multiply them
+        against random LTL formulae.  Optionally check them for emptiness
+        with all available algorithms.  Optionally gather statistics.
+  * bench/emptchk/: Contains scripts that benchmark emptiness-checks.
+  * Split the degeneralization proxy in two:
+    - tgba_tba_proxy  uses at most max(N,1) copies
+    - tgba_sba_proxy  uses at most 1+max(N,1) copies and has a
+                      state_is_accepting() method
+  * tgba::transition_annotation annotate a transition with some string.
+    This comes handy to associate that transition to its high-level name.
+  * Preliminary support for Event-based GBA (the evtgba*/ directories).
+    This might as well disappear in a future release.
+  * LTL formulae are now sorting using their string representation, instead
+    of their memory address (which is still unique).  This makes the output
+    of the various functions more deterministic.
+  * The Doxygen documentation is now organized using modules.
+
+New in spot 0.0x (2004-08-13):
+
+  * New atomic_prop_collect() function: collect atomic propositions
+    in an LTL formula.
+  * Fix several typos in documentation, and some warnings in the code.
+  * Now compiles on Darwin and Cygwin.
+  * Upgrade to Automake 1.9.1, and lbtt 1.1.2.
+    (And drop support for older lbtt versions.)
+  * Support newer versions of Valgrind (>= 2.1.0).
+
+New in spot 0.0v (2004-06-29):
+
+  * LTL formula simplifications using basic rewriting rules,
+    a-la Wring syntactic approximations, and Etessami's universal
+    and existential classes.
+     - Function reduce() in ltlvisit/reduce.hh is the main interface.
+     - Can be tested with the CGI script.
+  * TGBA simplifications using direct simulation, delayed simulation,
+    and SCC-based simplifications.  This is still experimental.
+  * The LTL parser will now read LTL formulae written using Wring's syntax.
+  * ltl2tgba_fm() now has options for on-the-fly fair-loop approximations,
+    and Modella-like branching-postponement.
+  * GreatSPN interface:
+     - The `declarative_environment' is now part of Spot itself rather than
+       part of the interface with GreatSPN.
+     - the RG and SRG interface can deal with dead markings in three
+       ways (omit deadlocks from the state graph, stutter on the deadlock
+       and consider as a regular behavior, or stutter and distinguish the
+       deadlock with a property).
+     - update SSP interface to Soheib Baarir latest work.
+  * Preliminary Python bindings for BuDDy's FDD and BVEC.
+  * Upgrade to BuDDy 2.3.
+
+New in spot 0.0t (2004-04-23):
+
+  * `emptiness_check':
+      - fix two bugs in the computation of the counter example,
+      - revamp the interface for better customization.
+  * `never_claim_reachable': new function.
+  * Introduce annonymous BDD variables in `bdd_dict', and start
+    to use it in `ltl_to_tgba_fm'.
+  * Offer never claim in the CGI script.
+  * Rename EESRG as SSP, and offer specialized variants of the
+    emptiness_check.
+
+New in spot 0.0r (2004-03-08):
+
+  * In ltl_to_tgba_fm:
+    - New option `exprop' to optimize determinism.
+    - Make the `symbolic indentification' from 0.0p optional.
+  * `nonacceptant_lbtt_reachable' new function to help getting
+    accurate statistics from LBTT.
+  * Revamp the cgi script's user interface.
+  * Upgrade to lbtt 1.0.3, swig 1.3.21, automake 1.8.3
+
+New in spot 0.0p (2004-02-03):
+
+  * In ltl_to_tgba_fm:
+    - identify states with identical symbolic expansions
+      (i.e., identical continuations)
+    - use Acc[b] as acceptance condition for Fb, not Acc[Fb].
+  * Update and speed-up the cgi script.
+  * Improve degeneralization.
+
+New in spot 0.0n (2004-01-13):
+
+  * emptiness_check::check2() is a variant of Couvreur's emptiness check that
+    explores visited states first.
+  * Build the EESRG supporting code condinally, as the associated
+    GreatSPN changes have not yet been contributed to GreatSPN.
+  * Add a powerset algorithm (determinize TGBA ignoring acceptance
+    conditions, i.e., as if they were used to recognize finite languages).
+  * tgba_explicit::merge_transitions: merge transitions with same source,
+    destination, and acceptance condition.
+  * Run test cases within valgrind.
+  * Various bug fixes.
+
+New in spot 0.0l (2003-12-01):
+
+  * Computation of prime implicants.  This simplify the output of
+    ltl_to_tgba_fm, and allows conditions to be output as some of
+    product in dot output.
+  * Optimize translation of GFy in ltl_to_tgba_fm.
+  * tgba_explicit supports arbitrary binary formulae on transitions
+    (only conjunctions were allowed).
+
+New in spot 0.0j (2003-11-03):
+
+  * Use hash_map's instead of map's almost everywhere.
+  * New emptiness check, based on Couvreur's algorithm.
+  * LTL propositions can be put inside doublequotes to disambiguate
+    some constructions.
+  * Preliminary support for GreatSPN's EESRG.
+  * Various bug fixes.
+
+New in spot 0.0h (2003-08-18):
+
+  * More python bindings:
+    - "import buddy" works (see wrap/python/tests/bddnqueen.py for an example),
+    - almost all the Spot API is now available via "import spot".
+  * wrap/python/cgi/ltl2tgba.py is an LTL-to-Büchi translator that
+    work as as a cgi script.
+  * Couvreur's FM'99 ltl-to-tgba translation.
+
+New in spot 0.0f (2003-08-01):
+
+  * More python bindings, still only for the spot::ltl:: namespace.
+  * Functional GSPN interface.  (Enable with --with-gspn=directory.)
+  * The LTL scanner recognizes /\, \/, and xor.
+  * Upgrade to lbtt 1.0.2.
+  * tgba_tba_proxy is an on-the-fly degeneralizer.
+  * Implements the "magic search" algorithm.
+    (Works only on a tgba_tba_proxy.)
+  * Tgba's output algorithms (save(), dotty()) now non-recursive.
+  * During products, succ_iter will optimize its set of successors
+    using information computed from the current product state.
+  * BDD dictionnaries are now shared between automata and.  This
+    gets rid of all the BDD-variable translating machinery.
+
+New in spot 0.0d (2003-07-13):
+
+  * Optimize translation of G operators occurring at the root
+    of a formula (or its immediate children when the root is a
+    conjunction).  This saves two BDD variables per G operator.
+  * Distribute lbtt, and run it during `make check'.
+  * First sketch of GSPN interface.
+  * succ_iter_concreate::next() completely rewritten.
+  * Transitions are now labelled by boolean formulae (not only
+    conjunctions).
+  * Documentation:
+    - Output collaboration diagrams.
+    - Build and distribute PDF manual.
+  * Many bug fixes.
+
+New in spot 0.0b (2003-06-26):
+
+  * Everything.

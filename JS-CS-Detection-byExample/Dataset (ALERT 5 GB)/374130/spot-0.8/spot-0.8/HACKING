@@ -1,0 +1,394 @@
+Bootstraping from GIT
+=====================
+
+Some files in SPOT's source tree are generated.  They are distributed
+so that users do not need to tools to rebuild them, but we don't keep
+all of them under GIT because it can generate lots of changes or
+conflicts.
+
+Here are the tools you need to bootstrap the GIT tree, or more
+generally if you plan to regenerate some of the generated files.
+(None of these tools are required by end users installing a tarball
+since the generated files they produce are distributed.)
+
+  GNU Autoconf >= 2.61
+  GNU Automake >= 1.11
+  GNU Libtool >= 2.2
+  GNU Flex (the version seems to matters, we used 2.5.35)
+  GNU Bison >= 2.4.2
+  SWIG >= 1.3.31
+  Doxygen >= 1.4.0
+
+Bootstrap the GIT tree by running
+
+  % autoreconf -vfi
+
+and then go on with the usual
+
+  % ./configure
+  % make
+
+
+Tricks
+======
+
+Avoiding Doxygen runs
+---------------------
+
+When there is no documentation built (e.g., after a fresh checkout
+of the GIT tree), when the configure.ac file has changed, or when
+the Doxygen configuration has changed, the doc will be rebuilt.
+
+This can take quite some time, even though recent version of Doxygen
+have started to parallelize things.  If you have no interest
+in generating the documentation, just use the "magic touch":
+
+  touch doc/stamp
+
+Do that right before running make.  The timestamp of doc/stamp
+is compared to configure.ac and Doxygen.in to decide if the
+documentation is out-of-date.  The above command pretends the
+documentation has just been built.
+
+
+Debugging Libtool executables
+-----------------------------
+
+The executable generated in the various testsuite directories of Spot,
+are not real binaries.  Because we use libtool to compile the spot
+library in a portable manner, these executable are just script that
+run the actual binary after setting some environment variable so that
+the OS can find the library in the build tree.
+
+A consequence is that tools like gdb or valgrind, that expect to
+work on a binary, will be confused by the script.  Example:
+
+  % cd src/tgbatest
+  % file ltl2tgba
+  ltl2tgba: POSIX shell script text executable
+  % gdb -q ltl2tgba
+  "/home/adl/git/spot/src/tgbatest/ltl2tgba": not in executable format: File format not recognized
+  (gdb) quit
+
+The proper way to work on these libtool scripts is via the libtool
+command:
+
+  % ../../libtool --mode=execute file ltl2tgba
+  /home/adl/git/spot/src/tgbatest/.libs/lt-ltl2tgba: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, not stripped
+  % ../../libtool --mode=execute gdb -q ltl2tgba
+  Reading symbols from /home/adl/git/spot/src/tgbatest/.libs/lt-ltl2tgba...done.
+  (gdb) quit
+
+If you are building Spot from the GIT repository the libtool script
+generated the root of the build tree should be the same as the libtool
+script that is installed on your system.  So you can simply run
+libtool instead of ../../libtool.
+
+You might also find conveniant to define a alias, a function, or a
+script to shorten the invocation of "libtool --mode=execute".
+
+Also there is an undocumented feature of libtool that allows you to
+shorthand "libtool --mode=execute" as "libtool execute" or even
+"libtool e".
+
+
+Profiling with callgrind
+------------------------
+
+Install valgrind and kcachegrind.
+
+Then run the command you want to profile through valgrind's callgrind
+tool.  For instance:
+
+  % libtool e valgrind --tool=callgrind ltl2tgba -f 'GFa & GFb'
+
+This will output a file called 'callgrind.PID' where PID is the
+process ID printed during valgrind's run.  Load this file with
+kcachegrind to get a graphical summary.
+
+  % kcachegrind ./callgrind.PID
+
+
+Running coverage tests
+----------------------
+
+First, compile (and link) Spot with coverage enabled.
+
+  % ./configure CXX='gcc --coverage'
+  % make
+
+Then run the test suite (or any program you want to study).
+
+  % make check
+
+Executing programs using Spot will generate a lot of *.gc* files
+everywhere.  Collect these using lcov:
+
+  % lcov --capture --directory src --output spot.info
+
+Finally generate a coverage report in HTML:
+
+  % genhtml --legend --demangle-cpp --output-directory html spot.info
+
+This should create the directory html/.
+
+
+Link-time optimizations
+-----------------------
+
+This is currently (April 2011) tricky to setup, because the
+toolchain is not mature enough.
+
+You need:
+  1. a version of GCC (>= 4.5) with gold and pluing linker enabled.
+  2. a version of Libtool that knows how to deal with
+     -flto flags (Libtool 2.4 will not work -- currently only
+     the development version does.)
+  3. to use static libraries instead of shared libraries
+     so that you get inter-libraries optimizations.
+
+Here are example options to pass to configure:
+
+  ./configure CC=gcc-4.6 CXX=g++-4.6 \
+              --disable-devel --disable-debug \
+              CFLAGS='-flto' CXXFLAGS='-flto' LDFLAGS='-fuse-linker-plugin' \
+              --disable-shared --enable-static
+
+Using --disable-debug prevents the '-g' flag to be passed to the
+compiler, which seems to help avoiding some internal compiler errors.
+
+Some binaries (like ltl2tgba) currently fail to compile (internal
+compiler error), while most others (like randtgba, dve2check, randltl,
+...) do fine.
+
+
+Coding conventions
+==================
+
+Here are the conventions we follow in Spot, so that the code looks
+homogeneous.  Please follow these strictly.  Since this is free
+software, uniformity of the code matters a lot.  Most of these
+conventions are derived from the GNU Coding Standards
+(http://www.gnu.org/prep/standards.html) with the notable exception
+that we do not put a space before the opening parenthesis in function
+calls (this is hardly readable when chaining method calls).
+
+Comments
+--------
+
+  * The language to use is American.
+
+  * When comments are sentences, they should start with a capital and
+    end with a dot.  Dots that end sentences should be followed by two
+    spaces (i.e., American typing convention), like in this paragraph.
+
+  * Prefer C++-style comments (// foo) to C-style comments (/* foo */).
+    Use /// for Doxygen comments.
+
+Formating
+---------
+
+  * Braces are always on their own line.
+
+  * Text within braces is two-space indented.
+
+    {
+      f(12);
+
+    }
+
+  * Anything after a control statement is two-space indented.  This
+    includes braces.
+
+    if (test)
+      {
+        f(123);
+	while (test2)
+	  g(456);
+      }
+
+  * Braces from function/structure/enum/class/namespace definitions
+    are not indented.
+
+    class foo
+    {
+    public:
+      Foo();
+    protected:
+      static int get_mumble();
+    };
+
+  * The above corresponds to the `gnu' indentation style under Emacs.
+
+  * Put return types and linkage specifiers on their own line in
+    function/method _definitions_:
+
+    static int
+    Foo::get_mumble()
+    {
+      return 2;
+    }
+
+    This makes it easier to grep functions in the code.
+
+    Function/method declaration are usually written on one line:
+
+    int get_bar(int i);
+
+  * Put a space before the opening parenthesis in control statements
+
+    if (test)
+      {
+        do
+	  {
+	    something();
+	  }
+	while (0);
+      }
+
+  * No space before parentheses in function calls.
+    (`some()->foo()->bar()' is far more readable than
+    `some ()->foo ()->bar ()' is)
+
+  * No space after opening or before closing parentheses, however
+    put a space after commas (as in english).
+
+    func(arg1, arg2, arg3);
+
+  * No useless parentheses in return statements.
+
+    return 2;    (not `return (2);')
+
+  * Spaces around infix binary or ternary operators:
+
+    2 + 2;
+    a = b;
+    a <<= (3 + 5) * 3 + f(67 + (really ? 45 : 0));
+
+  * No space after prefix unary operators, or before postfix unary
+    operators:
+
+    if (!test && y++ != 0)
+      {
+        ++x;
+      }
+
+  * When an expression spans over several lines, split it before
+    operators.  If it's inside a parenthesis, the following lines
+    should be 1-indented w.r.t. the opening parenthesis.
+
+    if (foo_this_is_long && bar > win(x, y, z)
+        && !remaining_condition)
+      {
+        ...
+      }
+
+  * `else if' can be put as-is on a single line.
+
+  * No line should be larger than 80 columns.
+    If a line takes more than 80 columns, split it or rethink it.
+
+  * Labels or case statements are back-indented by two spaces,
+    without space before the `:'.
+
+    if (something)
+      {
+      top:
+        bar = foo();
+        switch (something_else)
+	  {
+	  case first_case:
+	    f();
+	    break;
+	  case second_case:
+	    g();
+	    break;
+	  default:
+	    goto top;
+	  }
+      }
+
+  * Pointers and references are part of the type, and should be put
+    near the type, not near the variable.
+
+      int* p;        // not `int *p;'
+      list& l;       // not `list &l;'
+      void* magic(); // not `void *magic();'
+
+  * Do not declare many variables on one line.
+    Use
+      int* p;
+      int* q;
+    instead of
+      int *p, *q;
+    The former declarations also allow you to describe each variable.
+
+  * The include guard for src/somedir/foo.hh is
+    SPOT_SOMEDIR_FOO_HH
+
+
+Naming
+======
+
+  * Functions, methods, types, classes, etc. are named with lowercase
+    letters, using an underscore to separate words.
+
+      int compute_this_and_that();
+
+      class this_is_a_class;
+
+      typedef int int_array[];
+
+    That is the style used in STL.
+
+  * Private members end with an underscore.
+
+    class my_class
+    {
+    public:
+      ...
+      int get_val() const;
+    private:
+      int name_;
+    };
+
+  * Identifiers (even internal) starting with `_' are best avoided
+    to limit clashes with system definitions.
+
+  * Template arguments use capitalized name, with joined words.
+
+    template <class T, int NumberOfThings>
+    class foo
+    {
+      ...
+    };
+
+  * Enum members also use capitalized name, with joined words.
+
+  * C Macros are all uppercase.
+
+  * Use *.hxx for the implementation of templates that are private
+    to Spot (i.e. not installed) and need to be included multiple times.
+
+Other style recommandations
+===========================
+
+  * Do not use the NULL macro, it is not always implemented in a way
+    which is compatible with all pointer types.  Always use 0 instead.
+
+  * Limit the scope of local variables by defining them as late as
+    possible.  Do not reuse a local variables for two different things.
+
+  * Do not systematically initialise local variables with 0 or other
+    meaningless values.  This hides errors to valgrind.
+
+  * Avoid <iostream>, <ostream>, etc. in headers whenever possible.
+    Prefer <iosfwd> when predeclarations are sufficient, and then
+    use for instance use just <ostream> in the corresponding .cc file.
+    (A plain <iostream> is needed when using std::cout, std::cerr, etc.)
+
+  * Always declare helper functions and other local class definitions
+    (used in a single .cc files) in anonymous namespaces.  (The risk
+    otherwise is to declare two classes with the same name: the linker
+    will ignore one of the two silently.  The resulting bugs are often
+    difficult to understand.)

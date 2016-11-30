@@ -1,0 +1,4 @@
+<map id="spot::state_ta_explicit::transition" name="spot::state_ta_explicit::transition">
+<area shape="rect" id="node2" href="$classspot_1_1state__ta__explicit.html" title="{spot::state_ta_explicit\n|&#45; tgba_condition_\l&#45; is_initial_state_\l&#45; is_accepting_state_\l&#45; is_livelock_accepting\l_state_\l&#45; transitions_\l&#45; transitions_by_condition\l|+ state_ta_explicit()\l+ compare()\l+ hash()\l+ clone()\l+ destroy()\l+ ~state_ta_explicit()\l+ get_transitions()\l+ get_transitions()\l+ add_transition()\l+ get_tgba_state()\land 10 more...\l}" alt="" coords="5,217,173,554"/>
+<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="44,6,135,151"/>
+</map>

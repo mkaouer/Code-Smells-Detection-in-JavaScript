@@ -1,0 +1,4 @@
+<map id="spot::tgta" name="spot::tgta">
+<area shape="rect" id="node5" href="$classspot_1_1tgta__explicit.html" title="{spot::tgta_explicit\n|# ta_\l|+ tgta_explicit()\l+ get_init_state()\l+ succ_iter()\l+ get_dict()\l+ get_ta()\l+ get_ta()\l+ all_acceptance_conditions()\l+ neg_acceptance_conditions()\l+ format_state()\l+ succ_iter_by_changeset()\l# compute_support_conditions()\l# compute_support_variables()\l}" alt="" coords="5,667,211,925"/>
+<area shape="rect" id="node2" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="5,6,211,455"/>
+</map>

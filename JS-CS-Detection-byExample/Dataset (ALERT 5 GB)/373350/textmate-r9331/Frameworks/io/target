@@ -1,0 +1,5 @@
+SOURCES      = src/*.cc
+TEST_SOURCES = tests/*
+LINK        += text cf regexp
+FRAMEWORKS   = Carbon Security
+EXPORT       = src/*.h

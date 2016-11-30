@@ -1,0 +1,7 @@
+<map id="spot::tgta_explicit" name="spot::tgta_explicit">
+<area shape="rect" id="node2" href="$classspot_1_1tgta.html" title="A Transition&#45;based Generalized Testing Automaton (TGTA). " alt="" coords="20,878,201,1018"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="5,323,211,741"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="63,6,153,189"/>
+<area shape="rect" id="node8" href="$classspot_1_1ta__explicit.html" title="{spot::ta_explicit\n||+ ta_explicit()\l+ get_tgba()\l+ add_state()\l+ add_to_initial_states_set()\l+ create_transition()\l+ delete_stuttering_transitions()\l+ ~ta_explicit()\l+ get_initial_states_set()\l+ succ_iter()\l+ succ_iter()\land 12 more...\l}" alt="" coords="228,793,433,1103"/>
+<area shape="rect" id="node10" href="$classspot_1_1ta.html" title="A Testing Automaton. " alt="" coords="235,334,429,730"/>
+</map>

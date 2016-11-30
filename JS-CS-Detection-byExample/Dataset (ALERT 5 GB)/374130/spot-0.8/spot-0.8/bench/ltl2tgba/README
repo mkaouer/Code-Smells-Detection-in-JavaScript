@@ -1,0 +1,168 @@
+This directory contains benchmark scripts for LTL-to-Büchi translators.
+They are all based on lbtt.
+
+==========
+ CONTENTS
+==========
+
+* algorithms
+
+  The lbtt configuration of all the algorithms.  More about these below.
+
+* small
+* big
+* known
+
+  Run lbtt on, respectively:
+    small formulae (size 10, 4 propositions)
+    big formulae (size 12..15, 8 propositions)
+    known formulae (96 formulae from formulae.ltl)
+
+  Each script generates 3 files:
+    xxxx.cfg: the configuration file for lbtt
+    xxxx.log: the log of lbtt's execution (also output when the script runs)
+    xxxx.txt: the summary of the test (also output at the end of the script)
+
+* ltl2baw.in
+* ltl2baw.pl
+
+  ltl2baw.pl is generated from ltl2baw.in by configure.  This perl
+  script converts the intermediate generalized automata computed by
+  ltl2ba into a form usable by lbtt.
+
+* formulae.ltl
+
+  A list of LTL formulae used by the `known' check.
+  See ../emptchk/README for the sources.
+
+* parseout.pl
+
+  This scripts is used to create *.txt files from *.log files.
+
+
+====================
+ ALGORITHMS & TOOLS
+====================
+
+The page http://spot.lip6.fr/wiki/LtlTranslationBenchmark explains
+all the keys used and the different tools involved in the benchmark.
+
+Spot's configure script checks for the tools needed in the
+benchmark, and the script in this directory should omit the tools
+that are not available.
+
+
+=====================
+ Running the scripts
+=====================
+
+  1) Install all the third-party translators that you want to check.
+     They must all be in $PATH and work from there.
+
+     Two difficulties comes from Modella and wring2lbtt:
+
+       * Modella 1.5.7 produces automata that are not readable by lbtt 1.1.2.
+         You have to fix the former as follows:
+
+--- modella1.5.7/modella_automa.c	2004-08-30 17:19:47.000000000 +0200
++++ modella1.5.7.fixed/modella_automa.c	2005-04-14 15:07:46.632785000 +0200
+@@ -618,6 +618,7 @@ void print_LBA(LBA* b,FILE* output){
+ 	if(b->R[j]->source==i){
+ 	  fprintf(output,"%d ",b->R[j]->dest);
+ 	  print_form_prefix(b->R[j]->label,output);
++	  fputc('\n',output);
+ 	}
+       fprintf(output,"-1 ");
+
+
+       * The automata produced by Wring are translated to the syntax
+         understood by lbtt using `wring2lbtt' (by the same author of
+         Modella).  wring2lbtt suffers from the same "lbtt syntax"
+         problem described above, you have to fix this too before it
+         can be used.
+
+         Also wring2lbtt requires a Wring directory in the directory
+         where it is run; that makes it harder to use as a normal tool
+         from $PATH.  I use the following wrapper in my $PATH to work
+         around this.
+
+#!/bin/sh
+cd ~/src/wring2lbtt && ./wring2lbtt "$@"
+
+         This is OK because the filenames supplied by lbtt are absolute.
+
+  2) ./configure Spot, and build it.
+
+     During the configure process you should see lines such as
+
+checking for lbt... lbt
+checking for ltl2ba... ltl2ba
+checking for modella... modella
+checking for script4lbtt.py... script4lbtt.py
+checking for spin... spin
+checking for wring2lbtt... wring2lbtt
+
+     If some tool is not found, the corresponding tests will be disabled.
+     You can also use variables such as LBT, LTL2BA, MODELLA, LTL2NBA,
+     SPIN, and WRING2LBTT to specify the location of any of these scripts
+     if it is not in $PATH.  For instance
+
+        ./configure LTL2NBA=/home/adl/src/ltlnba/script4lbtt.py
+
+  3) Run `make' to build Spot.
+
+  4) cd into bench/ltl2tgba/ and execute any of
+        ./small
+        ./big
+     or ./known
+
+     Alternatively running `make run' (in that directory) will run all
+     three scripts.  If you have a multicore processor, you may want
+     to run `make -j3 run' to run these three scripts in parallel.
+     None of the tested translators use more than one core.
+
+  5) Wait...
+
+=======================
+ Reading the summaries
+=======================
+
+The files small.txt, big.txt, and known.txt contain a summary of the
+results.  Each algorithm is described as two lines formated as
+follows.
+
+    6: Spot FM (degen)
+            834 /   2419 /  188 /      2.86      166579 /   8749162   (188)
+
+The first line presents the name of the algorithm ("Spot FM (degen)")
+and its number for lbtt (6).  The number is useless.  In this example,
+"FM (degen)" means that the Couvreur/FM algorithm is used to translate
+LTL formula into a TGBA that is then DEGENeralized.  You may want to
+look in the file `algorithms' to see which options are used for each
+name, if the naming is unclear.
+
+The second line display 7 values:
+  1. the total number of states of all generated automata (834)
+  2. the total number of transitions of all generated automata (2419)
+  3. the total number of acceptance conditions of all generated automata (188)
+  4. the cumulated translation time in seconds (2.86)
+  5. the total number of states in the synchronized products (166579)
+  6. the total number of transitions in the synchronized products (8749162)
+  7. the number of translated formulae (188)
+
+Notes:
+
+  * Small translation times are not accurate because most of the
+    translators are run through scripts that translate their input
+    from and their output to the format understood by lbtt.  For fast
+    translators, most of the time is spent through these wrappers.
+    (For instance Spot's ltl2tgba is run through lbtt-translate, and
+    depending on how Spot has been configured w.r.t. to dynamic
+    libraries, ltl2tgba itself is often a shell script that run the
+    real binary with the locally built libraries.)
+
+  * Some tools will appear to have translated fewer automata than the
+    others.  This normally indicates bugs in the translator.  In that
+    case it is harder to compare the results.  (Normalizing the other
+    values accordingly may not be fair: maybe the translator precisely
+    failed to translate the largest automata.)

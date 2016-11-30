@@ -1,0 +1,94 @@
+U p0 p1
+U p0 U p1 p2
+V ! p0 V ! p1 ! p2
+| U t V f ! p0 V f U t p1
+U U t p0 V f p1
+U V f p0 p1
+& & U t U t p0 V f ! p0 & U t p0 V f V f ! p0
+& V f U t p0 U t V f ! p1
+& & V f U t p0 U t V f ! p1 & V f U t p1 U t V f ! p0
+V p0 | p0 p1
+| U X p0 X p1 X V ! p0 ! p1
+| U X p0 p1 X V ! p0 | ! p0 ! p1
+& V f | ! p0 U t p1 | U X p0 p1 X V ! p0 | ! p0 ! p1
+& V f | ! p0 U t p1 | U X p0 X p1 X V ! p0 ! p1
+V f | ! p0 U t p1
+U t & p0 X U ! p1 ! p2
+& U t V f ! p0 V f U t ! p1
+V f & U t p0 U t p1
+& U t p0 U t ! p0
+V & X p1 p2 X U V U p3 p0 p2 V p3 p2
+| | & V f | p1 V f U t p0 V f | p2 V f U t ! p0 V f p1 V f p2
+| | & V f | p1 U t V f p0 V f | p2 U t V f ! p0 V f p1 V f p2
+& & | U t & ! p1 U t V f ! p0 U t & ! p2 U t V f p0 U t p1 U t p2
+& & | U t & ! p1 V f U t ! p0 U t & ! p2 V f U t p0 U t p1 U t p2
+& V f | p1 X V f p0 V f | p2 X V f ! p0
+V f | p1 & X p0 X ! p0
+| U p0 p0 U p1 p0
+U p0 & p1 V f p2
+U p0 & p1 X U p2 p3
+U p0 & p1 X & p2 U t & p3 X U t & p4 X U t & p5 X U t p6
+U t & p0 X V f p1
+U t & p0 X & p1 X U t p2
+U t & p0 X U p1 p2
+| U t V f p0 U t V f p1
+V f | ! p0 U p1 p2
+U t & p0 X U t & p1 X U t & p2 X U t p3
+& & & & V f U t p0 V f U t p1 V f U t p2 V f U t p3 V f U t p4
+| | U p0 U p1 p2 U p1 U p2 p0 U p2 U p0 p1
+V f | ! p0 U p1 | V f p2 V f p3
+[](!p0)
+<>p1 -> (!p0 U p1)
+[](p2 -> [](!p0))
+[]((p2 & !p1 & <>p1) -> (!p0 U p1))
+[](p2 & !p1 -> (!p0 U (p1 | []!p0)))
+<>(p0)
+!p1 U ((p0 & !p1) | []!p1)
+[](!p2) | <>(p2 & <>p0)
+[](p2 & !p1 -> (!p1 U ((p0 & !p1) | []!p1)))
+[](p2 & !p1 -> (!p1 U (p0 & !p1)))
+<>p1 -> ((!p0 & !p1) U (p1 | ((p0 & !p1) U (p1 | ((!p0 & !p1) U (p1 | ((p0 & !p1) U (p1 | (!p0 U p1)))))))))
+[]((p2 & <>p1) -> ((!p0 & !p1) U (p1 | ((p0 & !p1) U (p1 | ((!p0 & !p1) U (p1 | ((p0 & !p1) U (p1 | (!p0 U p1))))))))))
+[](p2 -> ((!p0 & !p1) U (p1 | ((p0 & !p1) U (p1 | ((!p0 & !p1) U (p1 | ((p0 & !p1) U (p1 | (!p0 U (p1 | []!p0)) | []p0)))))))))
+[](p0)
+<>p1 -> (p0 U p1)
+[](p2 -> [](p0))
+[]((p2 & !p1 & <>p1) -> (p0 U p1))
+[](p2 & !p1 -> (p0 U (p1 | [] p0)))
+!p0 U (p3 | []!p0)
+<>p1 -> (!p0 U (p3 | p1))
+[]!p2 | <>(p2 & (!p0 U (p3 | []!p0)))
+[]((p2 & !p1 & <>p1) -> (!p0 U (p3 | p1)))
+[](p2 & !p1 -> (!p0 U ((p3 | p1) | []!p0)))
+[](p0 -> <>p3)
+<>p1 -> (p0 -> (!p1 U (p3 & !p1))) U p1
+[](p2 -> [](p0 -> <>p3))
+[]((p2 & !p1 & <>p1) -> (p0 -> (!p1 U (p3 & !p1))) U p1)
+[](p2 & !p1 -> ((p0 -> (!p1 U (p3 & !p1))) U (p1 | [](p0 -> (!p1 U (p3 & !p1))))))
+<>p0 -> (!p0 U (p3 & !p0 & X(!p0 U p4)))
+<>p1 -> (!p0 U (p1 | (p3 & !p0 & X(!p0 U p4))))
+([]!p2) | (!p2 U (p2 & <>p0 -> (!p0 U (p3 & !p0 & X(!p0 U p4)))))
+[]((p2 & <>p1) -> (!p0 U (p1 | (p3 & !p0 & X(!p0 U p4)))))
+[](p2 -> (<>p0 -> (!p0 U (p1 | (p3 & !p0 & X(!p0 U p4))))))
+(<>(p3 & X<>p4)) -> ((!p3) U p0)
+<>p1 -> ((!(p3 & (!p1) & X(!p1 U (p4 & !p1)))) U (p1 | p0))
+([]!p2) | ((!p2) U (p2 & ((<>(p3 & X<>p4)) -> ((!p3) U p0))))
+[]((p2 & <>p1) -> ((!(p3 & (!p1) & X(!p1 U (p4 & !p1)))) U (p1 | p0)))
+[](p2 -> (!(p3 & (!p1) & X(!p1 U (p4 & !p1))) U (p1 | p0) | [](!(p3 & X<>p4))))
+[] (p3 & X<> p4 -> X(<>(p4 & <> p0)))
+<>p1 -> (p3 & X(!p1 U p4) -> X(!p1 U (p4 & <> p0))) U p1
+[] (p2 -> [] (p3 & X<> p4 -> X(!p4 U (p4 & <> p0))))
+[] ((p2 & <>p1) -> (p3 & X(!p1 U p4) -> X(!p1 U (p4 & <> p0))) U p1)
+[] (p2 -> (p3 & X(!p1 U p4) -> X(!p1 U (p4 & <> p0))) U (p1 | [] (p3 & X(!p1 U p4) -> X(!p1 U (p4 & <> p0)))))
+[] (p0 -> <>(p3 & X<>p4))
+<>p1 -> (p0 -> (!p1 U (p3 & !p1 & X(!p1 U p4)))) U p1
+[] (p2 -> [] (p0 -> (p3 & X<> p4)))
+[] ((p2 & <>p1) -> (p0 -> (!p1 U (p3 & !p1 & X(!p1 U p4)))) U p1)
+[] (p2 -> (p0 -> (!p1 U (p3 & !p1 & X(!p1 U p4)))) U (p1 | [] (p0 -> (p3 & X<> p4))))
+[] (p0 -> <>(p3 & !p5 & X(!p5 U p4)))
+<>p1 -> (p0 -> (!p1 U (p3 & !p1 & !p5 & X((!p1 & !p5) U p4)))) U p1
+[] (p2 -> [] (p0 -> (p3 & !p5 & X(!p5 U p4))))
+[] ((p2 & <>p1) -> (p0 -> (!p1 U (p3 & !p1 & !p5 & X((!p1 & !p5) U p4)))) U p1)
+[] (p2 -> (p0 -> (!p1 U (p3 & !p1 & !p5 & X((!p1 & !p5) U p4)))) U (p1 | [] (p0 -> (p3 & !p5 & X(!p5 U p4)))))
+!p0 U ((p0 U ((!p0 U ((p0 U ([]!p0 | []p0)) | []!p0)) | []!p0)) | []!p0)
+<>p2 -> (!p2 U (p2 & (!p0 U ((p0 U ((!p0 U ((p0 U ([]!p0 | []p0)) | []!p0)) | []!p0)) | []!p0))))

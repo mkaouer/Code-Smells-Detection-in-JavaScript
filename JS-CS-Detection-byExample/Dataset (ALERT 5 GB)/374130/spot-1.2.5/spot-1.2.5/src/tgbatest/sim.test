@@ -1,0 +1,83 @@
+#! /bin/sh
+# -*- coding: utf-8 -*-
+# Copyright (C) 2013 Laboratoire de Recherche et Développement
+# de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+. ./defs
+set -e
+
+cat >in.tgba <<EOF
+acc = "1";
+"i", "x", "b",;
+"i", "d2", "b",;
+"x", "ed", "a", "1";
+"ed", "ed", "a & b", "1";
+"d2", "d", "a",;
+"d", "d", "a", "1";
+EOF
+
+run 0 ../ltl2tgba -X -RDCS -b in.tgba > out.tgba
+
+cat >expected.tgba <<EOF
+acc = "1";
+"4", "3", "b",;
+"3", "3", "a", "1";
+EOF
+
+diff out.tgba expected.tgba
+
+run 0 ../ltl2tgba  -RDCIS -b XXXXGFa > out.tgba
+
+cat >expected.tgba <<EOF
+acc = "a";
+"1", "1", "a", "a";
+"1", "1", "!a",;
+EOF
+
+diff out.tgba expected.tgba
+
+run 0 ../ltl2tgba -RDCIS -kt 'Fp U Gq' > out
+cat >expected <<EOF
+sub trans.: 12
+transitions: 6
+states: 3
+nondeterministic states: 1
+EOF
+
+diff out expected
+
+
+run 0 ../ltl2tgba -R3 -x -RDCS -kt 'F(a & GFa)' > out
+run 0 ../ltl2tgba -R3f -x -RDCS -kt 'F(a & GFa)' > out2
+diff out out2
+
+
+f='FG((Fp0 & (!p0 R (F!p1 U !p1))) | (G!p0 & (p0 U (Gp1 R p1))))'
+run 0 ../ltl2tgba -R3f -x -RDS -kt "$f" | grep -v sub > out
+run 0 ../ltl2tgba -R3f -x -RDCS -kt "$f" | grep -v sub > out2
+diff out out2
+
+run 0 ../ltl2tgba -R3f -x -RDCS -kt "$f" > out2
+cat >expected <<EOF
+sub trans.: 13
+transitions: 8
+states: 3
+nondeterministic states: 1
+EOF
+
+diff out2 expected

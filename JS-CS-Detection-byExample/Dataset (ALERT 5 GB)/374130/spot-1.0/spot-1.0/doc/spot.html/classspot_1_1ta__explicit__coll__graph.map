@@ -1,0 +1,6 @@
+<map id="spot::ta_explicit" name="spot::ta_explicit">
+<area shape="rect" id="node2" href="$classspot_1_1ta.html" title="A Testing Automaton.The Testing Automata (TA) were introduced by Henri Hansen, Wojciech Penczek and A..." alt="" coords="5,337,200,642"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="224,265,429,714"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="448,6,539,151"/>
+<area shape="rect" id="node8" href="$classspot_1_1state__ta__explicit.html" title="{spot::state_ta_explicit\n|&#45; tgba_condition_\l&#45; is_initial_state_\l&#45; is_accepting_state_\l&#45; is_livelock_accepting\l_state_\l&#45; transitions_\l&#45; transitions_by_condition\l|+ state_ta_explicit()\l+ compare()\l+ hash()\l+ clone()\l+ destroy()\l+ ~state_ta_explicit()\l+ get_transitions()\l+ get_transitions()\l+ add_transition()\l+ get_tgba_state()\land 10 more...\l}" alt="" coords="453,321,621,658"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="spot::state_explicit&lt; Label, label_hash &gt;" name="spot::state_explicit&lt; Label, label_hash &gt;">
+<area shape="rect" id="node5" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; const ltl::formula\l *, ltl::formula_ptr_hash \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="16,542,179,799"/>
+<area shape="rect" id="node9" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; int, identity_hash\l\&lt; int \&gt; \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="212,542,343,799"/>
+<area shape="rect" id="node13" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; std::string, string\l_hash \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="387,542,515,799"/>
+<area shape="rect" id="node2" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="232,6,323,151"/>
+<area shape="rect" id="node7" href="$classspot_1_1state__explicit__formula.html" title="{spot::state_explicit\l_formula\n|+ default_val\l|+ state_explicit_formula()\l+ state_explicit_formula()\l}" alt="" coords="5,851,171,965"/>
+<area shape="rect" id="node11" href="$classspot_1_1state__explicit__number.html" title="{spot::state_explicit\l_number\n|+ default_val\l|+ state_explicit_number()\l+ state_explicit_number()\l}" alt="" coords="195,851,360,965"/>
+<area shape="rect" id="node15" href="$classspot_1_1state__explicit__string.html" title="{spot::state_explicit\l_string\n|+ default_val\l|+ state_explicit_string()\l+ state_explicit_string()\l}" alt="" coords="384,851,539,965"/>
+</map>

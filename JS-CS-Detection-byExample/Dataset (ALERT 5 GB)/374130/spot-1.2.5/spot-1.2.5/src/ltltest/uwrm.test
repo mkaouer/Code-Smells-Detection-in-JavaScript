@@ -1,0 +1,73 @@
+#! /bin/sh
+# Copyright (C) 2012 Laboratoire de Recherche et Developpement
+# de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Check LTL reductions for U, W, M and R.
+# These formulas comes from an appendix of tl/tl.tex
+
+. ./defs || exit 1
+
+set -e
+
+equiv()
+{
+  dst=$1
+  shift
+  for src in "$@"; do
+     ../reduccmp "$src" "$dst"
+  done
+}
+
+# Equivalences with U
+
+equiv Ff '1 U f'
+equiv Gf '!F!f' '!(1 U!f)'
+equiv 'f W g' '(f U g) | (G f)' '(f U g) | !(1 U ! f)' \
+              'f U (g | G f)' 'f U (g | !(1 U ! f ))'
+equiv 'f M g'  'g U (f & g)'
+equiv 'f R g'  'g W (f & g)'  '(g U (f & g)) | !(1 U ! g)' \
+               'g U ((f & g) | !(1 U ! g))'
+
+# Equivalences with W
+
+equiv Ff '!G!f' '!((! f) W 0)'
+equiv Gf  '0 R f'  'f W 0'
+equiv 'f U g'  '(f W g) & (F g)'  '(f W g) & !((! g) W 0)'
+equiv 'f M g'  '(g W (f & g)) & (F f)'  '(g W (f & g)) & !((!f) W 0)'
+equiv 'f R g'  'g W (f & g)'
+
+# Equivalences with R
+
+equiv Ff '!G!f' '!(0 R !f)'
+equiv Gf '0 R f'
+#equiv 'f U g'  '(((X g) R f) & F g) | g' '(((X g) R f ) & (!(0 R ! g))) | g'
+equiv 'f W g'  '((X g) R f) | g' 'g R (f | g)'
+equiv 'f M g'  '( f R g) & F f'  '(f R g) & ! (0 R ! f)' \
+               'f R (g & F f)'  'f R (g & !(0 R !f))'
+# Equivalences with M
+
+equiv Ff 'f M 1'
+equiv Gf  '!F!f'  '!((!f) M 1)'
+equiv 'f U g'  '((X g) M f) | g' 'g M (f | g)'
+equiv 'f W g'  '(f U g) | G f'  '((X g) M f) | g | !((! f ) M 1)'
+equiv 'f R g'  '(f M g) | G g'  '(f M g) | !((! g) M 1)'
+
+# Example from tl.tex
+
+# equiv 'f U g' '(((f U (Xg & f))|!(1 U !f))&(1 U Xg)) | g'

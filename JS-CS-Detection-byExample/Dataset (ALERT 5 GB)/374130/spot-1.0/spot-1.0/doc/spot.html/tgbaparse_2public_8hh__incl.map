@@ -1,0 +1,20 @@
+<map id="tgbaparse/public.hh" name="tgbaparse/public.hh">
+<area shape="rect" id="node3" href="$tgbaexplicit_8hh.html" title="tgba/tgbaexplicit.hh" alt="" coords="953,83,1087,111"/>
+<area shape="rect" id="node88" href="$defaultenv_8hh.html" title="ltlenv/defaultenv.hh" alt="" coords="1532,83,1665,111"/>
+<area shape="rect" id="node9" href="$tgba_8hh.html" title="tgba.hh" alt="" coords="653,238,717,266"/>
+<area shape="rect" id="node40" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="1581,393,1696,421"/>
+<area shape="rect" id="node58" href="$sba_8hh.html" title="sba.hh" alt="" coords="656,161,715,189"/>
+<area shape="rect" id="node61" href="$formula2bdd_8hh.html" title="tgba/formula2bdd.hh" alt="" coords="1165,238,1304,266"/>
+<area shape="rect" id="node65" href="$hash_8hh.html" title="misc/hash.hh" alt="" coords="640,315,739,343"/>
+<area shape="rect" id="node78" href="$bddop_8hh.html" title="misc/bddop.hh" alt="" coords="840,238,947,266"/>
+<area shape="rect" id="node82" href="$tostring_8hh.html" title="ltlvisit/tostring.hh" alt="" coords="1677,315,1797,343"/>
+<area shape="rect" id="node11" href="$state_8hh.html" title="state.hh" alt="" coords="203,393,269,421"/>
+<area shape="rect" id="node25" href="$succiter_8hh.html" title="succiter.hh" alt="" coords="467,315,552,343"/>
+<area shape="rect" id="node28" href="$bdddict_8hh.html" title="bdddict.hh" alt="" coords="1195,315,1275,343"/>
+<area shape="rect" id="node23" href="$casts_8hh.html" title="misc/casts.hh" alt="" coords="259,470,360,498"/>
+<area shape="rect" id="node48" href="$bddalloc_8hh.html" title="misc/bddalloc.hh" alt="" coords="1288,393,1405,421"/>
+<area shape="rect" id="node45" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="1589,470,1669,498"/>
+<area shape="rect" id="node50" href="$freelist_8hh.html" title="freelist.hh" alt="" coords="1243,470,1320,498"/>
+<area shape="rect" id="node69" href="$hashfunc_8hh.html" title="misc/hashfunc.hh" alt="" coords="344,393,467,421"/>
+<area shape="rect" id="node90" href="$environment_8hh.html" title="environment.hh" alt="" coords="1544,315,1653,343"/>
+</map>

@@ -1,0 +1,489 @@
+#!@PYTHON@
+# -*- mode: python; coding: iso-8859-1 -*-
+# Copyright (C) 2011 Laboratoire de Recherche et Développement de
+# l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+import os
+
+script = os.environ.has_key('SCRIPT_NAME')
+
+if script:
+    print "Cache-Control: max-age=3600" # One hour.
+    print "Content-Type: text/html"
+    print
+
+# Directory for temporary files (images and other auxiliary files).
+imgdir = 'spotimg'
+
+# Cache lookup for the QUERY_STRING
+qs = os.getenv('QUERY_STRING')
+if qs:
+    import hashlib
+    # We (optimistically) assume no collision from sha1(qs)
+    imgprefix = imgdir + '/' + hashlib.sha1(qs).hexdigest()
+    cachename = imgprefix + '/html'
+    try:
+        # Is this a request we have already processed?
+        cache = open(cachename, "r", 0)
+        print cache.read()
+        # Touch the directory containing the files we used, so
+        # it that it survives the browser's cache.
+        os.utime(imgprefix)
+        exit(0)
+    except IOError:
+        # We failed to open the file.
+        # Let's run the rest of the script to create it.
+        pass
+elif script:
+    print "<b>QUERY_STRING unset!</b>"
+    exit(0)
+
+# Location of the dot command
+dot = '@DOT@'
+dot_bgcolor = '-Gbgcolor=#FFFFFF00'
+
+svg_output = False # FIXME: SVG output seems to be working well with
+                   #        Firefox only.  We have to figure out how
+                   #        to get the correct size and transparent
+                   #        background in Chrome.
+
+from CGIHTTPServer import CGIHTTPRequestHandler
+class MyHandler(CGIHTTPRequestHandler):
+    def is_cgi(self):
+        if self.path.startswith('/cgi-bin/spot.py'):
+            self.cgi_info = '', self.path[9:]
+            return True
+        return False
+
+if not script:
+    # If this is not run as a cgi script, let's start an HTTP server.
+    from BaseHTTPServer import HTTPServer
+    server_address=('',8000)
+    if not os.access(imgdir, os.F_OK):
+        os.mkdir(imgdir, 0755)
+        print "Directory spotimg/ created."
+    httpd = HTTPServer(server_address, MyHandler)
+    print "Point your browser to http://localhost:8000/ltl2tgba.html"
+    httpd.serve_forever()
+
+import sys
+import cgi
+import cgitb; cgitb.enable()
+import signal
+import time
+import os.path
+
+sys.stdout.flush()
+# Reopen stdout without buffering
+sys.stdout = os.fdopen(sys.stdout.fileno(), "w", 0)
+
+# Redirect stderr to stdout at a low-level (so that
+# even errors from subprocesses get printed).
+os.dup2(sys.stdout.fileno(), sys.stderr.fileno())
+
+# Redirect stdout to the cache file, at a low-level
+# for similar reason.
+os.mkdir(imgprefix, 0755)
+fd = os.open(cachename, os.O_CREAT | os.O_WRONLY, 0644)
+os.dup2(fd, sys.stdout.fileno())
+
+def finish(kill = False):
+    # Output the result and exit.
+    os.dup2(sys.stderr.fileno(), sys.stdout.fileno())
+    cache = open(cachename, "r", 0)
+    print cache.read()
+    if kill:
+        os.kill(0, signal.SIGTERM)
+    # Should we prune the cache?
+    stamp = imgdir + '/cache.stamp'
+    now = time.time()
+    try:
+        # Prune at most once every hour
+        if now - os.path.getmtime(stamp) < 3600:
+            exit(0)
+    except OSError:
+        pass
+    # Erase all directories that are older than 2 hours, and all
+    # files that have only one hardlinks.  Files that have more than
+    # one hardlinks are referenced to by directories; so the hardlink
+    # count will decrease when the directory is purged.
+    os.system('find ' + imgdir  + ' -mindepth 1 -maxdepth 1 -mmin +120 '
+              + '\( -type d -o -links 1 \) -exec rm -rf {} +')
+    # Create or update the stamp so we know when to run the next prune.
+    open(stamp, "w", 0)
+    exit(0)
+
+# Assume Spot is installed
+sys.path.insert(0, '@pythondir@')
+
+if (os.environ.has_key('SERVER_SOFTWARE') and
+    os.environ['SERVER_SOFTWARE'].startswith(MyHandler.server_version)):
+    # We might be running from the build tree (but it's not sure).
+    # Add the build and source directories first in the search path.
+    # If we are not in the right place, python will find the installed
+    # libraries later.
+    sys.path.insert(0, '@srcdir@/../.libs')
+    sys.path.insert(0, '@srcdir@/..')
+    sys.path.insert(0, '../.libs')
+    sys.path.insert(0, '..')
+    # Darwin needs some help in figuring out where non-installed libtool
+    # libraries are (on this platform libtool encodes the expected final
+    # path of dependent libraries in each library).
+    m = '../.libs:@top_builddir@/src/.libs:@top_builddir@/buddy/src/.libs'
+    os.environ['DYLD_LIBRARY_PATH'] = m
+
+try:
+    execfile('ltl2tgba.opt')
+except IOError:
+    pass
+
+import spot
+import buddy
+
+def alarm_handler(signum, frame):
+    print """<p><font color="red">The script was aborted because
+it has been running for too long.</font>  Please try a shorter formula,
+or different options (not drawing automata usually helps).
+If you want to benchmark big formulae it is
+better to install Spot on your own computer.</p>"""
+    finish(kill = True)
+
+def reset_alarm():
+    signal.alarm(30)
+
+def render_dot(basename):
+    print '<div class="dot">'
+    if svg_output:
+        ext = 'svg'
+    else:
+        ext = 'png'
+
+    outname = basename + '.' + ext
+    # Do not call "dot" to generate a file that already exists.
+    if not os.access(outname, os.F_OK):
+        os.spawnlp(os.P_WAIT, dot, dot, dot_bgcolor, '-T' + ext,
+                   '-Gsize=8.2,8.2', '-o', outname, basename + '.txt')
+    reset_alarm()
+    # Create an unused hardlink that point to the output picture
+    # just to remember how many cache entries are sharing it.
+    os.link(outname, imgprefix + "/" + ext)
+    b = cgi.escape(basename)
+    if svg_output:
+        print ('<object type="image/svg+xml" data="' + b + '.svg">'
+               + 'Your browser does not support SVG.</object>')
+    else:
+        print ('<img src="' + b + '.png"><br>(<a href="' + b
+               + '.txt">dot source</a>)')
+    print '</div>'
+
+def render_dot_maybe(dotsrc, dont_run_dot):
+    # The dot output is named after the SHA1 of the dot source.
+    # This way we can cache two different request that generate
+    # the same automaton (e.g. when changing a simplification
+    # option that has no influence).
+    autprefix = imgdir + '/' + hashlib.sha1(dotsrc).hexdigest()
+    dotname = autprefix + '.txt'
+    if not os.access(dotname, os.F_OK):
+        dotout = open(dotname, "w", 0)
+        dotout.write(dotsrc)
+        dotout.close()
+    # Create an unused hardlink that point to the output picture
+    # just to remember how many cache entries are sharing it.
+    os.link(dotname, imgprefix + "/txt")
+
+    if dont_run_dot:
+        print ('<p>' + dont_run_dot + ''' to be rendered on-line.  However
+you may download the <a href="''' + cgi.escape(autprefix)
+               + '.txt">source in dot format</a> and render it yourself.')
+    else:
+        render_dot(autprefix)
+
+def render_automaton(automaton, dont_run_dot, issba, deco = False):
+    dotsrc = spot.ostringstream()
+    if not deco:
+        spot.dotty_reachable(dotsrc, automaton, issba)
+    else:
+        spot.dotty_reachable(dotsrc, automaton, issba, deco)
+    render_dot_maybe(dotsrc.str(), dont_run_dot)
+
+def render_formula(f):
+    dotsrc = spot.ostringstream()
+    spot.dotty(dotsrc, f)
+    render_dot_maybe(dotsrc.str(), False)
+
+def print_stats(automaton):
+    stats = spot.stats_reachable(automaton)
+    print "<p>", stats.states,
+    if stats.states <= 1:
+        print " state,",
+    else:
+        print " states,",
+    print stats.transitions,
+    if stats.transitions <= 1:
+        print " transition,",
+    else:
+        print " transitions,",
+    # compute the number of acceptance conditions
+    count = automaton.number_of_acceptance_conditions()
+    if count > 0:
+        print count,
+        if count <= 1:
+            print "acceptance condition:",
+        else:
+            print "acceptance conditions:",
+        acc = automaton.all_acceptance_conditions()
+        print spot.bdd_format_accset(automaton.get_dict(), acc)
+    else:
+        print "no acceptance condition (all cycles are accepting)"
+    print "</p>"
+    # Decide whether we will render the automaton or not.
+    # (A webserver is not a computation center...)
+    if stats.states > 64:
+        return "Automaton has too much states"
+    if float(stats.transitions)/stats.states > 10:
+        return "Automaton has too much transitions per states"
+    return False
+
+form = cgi.FieldStorage()
+
+output_type = form.getfirst('o', 'v');
+
+# Version requested.
+if output_type == 'v':
+    print 'Spot version ' + spot.version()
+    finish()
+
+spot.unblock_signal(signal.SIGALRM)
+spot.unblock_signal(signal.SIGTERM)
+os.setpgrp()
+signal.signal(signal.SIGALRM, alarm_handler)
+reset_alarm()
+
+formula = form.getfirst('f', '')
+
+env = spot.default_environment.instance()
+pel = spot.empty_parse_error_list()
+f = spot.parse(formula, pel, env)
+
+if pel:
+    print '<div class="parse-error">'
+    err = spot.format_parse_errors(spot.get_cout(), formula, pel)
+    print '</div>'
+
+# Formula simplifications
+opt = spot.Reduce_None
+for r in form.getlist('r'):
+    if r == 'br':
+        opt = opt + spot.Reduce_Basics
+    elif r == 'si':
+        opt = opt + spot.Reduce_Syntactic_Implications
+    elif r == 'eu':
+        opt = opt + spot.Reduce_Eventuality_And_Universality
+    elif r == 'lc':
+        opt = opt + spot.Reduce_Containment_Checks_Stronger
+if opt != spot.Reduce_None:
+    f2 = spot.reduce(f, opt)
+    f.destroy()
+    f = f2
+
+# Formula manipulation only.
+if output_type == 'f':
+    formula_format = form.getfirst('ff', 'o')
+    # o = Spot, i = Spin, g = GraphViz
+
+    if formula_format == 'o':
+        print '<div class="formula spot-format">%s</div>' % f
+    elif formula_format == 'i':
+        print ('<div class="formula spin-format">'
+               + spot.to_spin_string(f) + '</div>')
+    elif formula_format == 'g':
+        render_formula(f)
+    finish()
+
+# Formula translation.
+translator = form.getfirst('t', 'fm')
+
+dict = spot.bdd_dict()
+
+if translator == 'fm':
+    exprop = False
+    symb_merge = False
+    branching_postponement = False
+    fair_loop_approx = False
+    for fm in form.getlist('fm'):
+        if fm == 'od':
+            exprop = True
+        elif fm == 'sm':
+            symb_merge = True
+        elif fm == 'bp':
+            branching_postponement = True
+        elif fm == 'fl':
+            fair_loop_approx = True
+    automaton = spot.ltl_to_tgba_fm(f, dict,
+                                    exprop, symb_merge,
+                                    branching_postponement, fair_loop_approx)
+elif translator == 'la':
+    automaton = spot.ltl_to_tgba_lacim(f, dict)
+    if form.getfirst('la', '') == 'sp':
+        automaton.delete_unaccepting_scc()
+elif translator == 'ta':
+    refined_rules = False
+    if form.getfirst('ta', '') == 'lc':
+        refined_rules = True
+    automaton = spot.ltl_to_taa(f, dict, refined_rules)
+
+# Should it be displayed as a SBA?
+issba = False
+
+# Monitor output
+if output_type == 'm':
+    automaton = spot.scc_filter(automaton)
+    automaton = spot.minimize_monitor(automaton)
+    print '<div class="automata-stats">'
+    dont_run_dot = print_stats(automaton)
+    print '</div>'
+    render_automaton(automaton, dont_run_dot, issba)
+    automaton = 0
+    finish()
+
+# Automaton simplifications
+prune_scc = False
+wdba_minimize = False
+for s in form.getlist('as'):
+    if s == 'ps':
+        prune_scc = True
+    elif s == 'wd':
+        wdba_minimize = True
+
+if output_type == 'a':
+    buchi_type = form.getfirst('af', 't')
+elif output_type == 'r':
+    buchi_type = form.getfirst('ra', 't')
+else:
+    print "Unkown output type 'o=%s'." % output_type
+    automaton = 0
+    finish()
+
+degen = False
+neverclaim = False
+if buchi_type == 's':
+    degen = True
+elif buchi_type == 'i':
+    degen = True
+    neverclaim = True
+
+if prune_scc:
+    # Do not suppress all useless acceptance conditions if
+    # degeneralization is requested: keeping those that lead to
+    # accepting states usually helps.
+    automaton = spot.scc_filter(automaton, not degen)
+
+if wdba_minimize:
+    minimized = spot.minimize_obligation_new(automaton, f)
+    if minimized:
+        automaton = minimized
+        minimized = 0
+        degen = False # No need to degeneralize anymore
+        issba = True
+
+if degen or neverclaim:
+    degen = spot.tgba_sba_proxy(automaton)
+    issba = True
+else:
+    degen = automaton
+
+# Buchi Automaton Output
+if output_type == 'a':
+    if buchi_type == 'i':
+        s = spot.ostringstream()
+        spot.never_claim_reachable(s, degen, f)
+        print '<div class="neverclaim">%s</div>' % cgi.escape(s.str())
+        del s
+    else: # 't' or 's'
+        dont_run_dot = print_stats(degen)
+        render_automaton(degen, dont_run_dot, issba)
+    degen = 0
+    automaton = 0
+    finish()
+
+# Buchi Run Output
+if output_type == 'r':
+
+    print_acc_run = False
+    draw_acc_run = False
+    s = form.getfirst('rf', 'p')
+    if s == 'p':
+        print_acc_run = True
+    elif s == 'd':
+        draw_acc_run = True
+
+
+    err = ""
+    opt = (form.getfirst('ec', 'Cou99') + "(" +
+           form.getfirst('eo', '') + ")")
+    eci, err = spot.emptiness_check_instantiator.construct(opt)
+
+    if not eci:
+        print ('<div class="parse-error">Cannot parse "' + opt + '" near "'
+               + err + '".</div>')
+    else:
+        ec_a = 0
+        n_acc = degen.number_of_acceptance_conditions()
+        n_max = eci.max_acceptance_conditions()
+        if (n_acc <= n_max):
+            ec_a = degen
+        else:
+            print ('<div class="ec-error">Cannot run ' + opt
+                   + ' on automata with more than ' + str(n_max)
+                   + ' acceptance condition.<br/>Please build '
+                   + 'a degeneralized B&uuml;chi automaton if you '
+                   + 'want to try this algorithm.</div>')
+        if ec_a:
+            ec = eci.instantiate(ec_a)
+        else:
+            ec = 0
+
+    if ec:
+        ec_res = ec.check()
+        if not ec_res:
+            print '<div class="ec">No accepting run found.</div>'
+        else:
+            ec_run = ec_res.accepting_run()
+            print '<div class="ec">An accepting run was found.<br/>'
+            if ec_run:
+                if print_acc_run:
+                    s = spot.ostringstream()
+                    spot.print_tgba_run(s, ec_a, ec_run)
+                    print '<div class="accrun">%s</div>' % cgi.escape(s.str())
+                    del s
+
+                if draw_acc_run:
+                    deco = spot.tgba_run_dotty_decorator(ec_run)
+                    dont_run_dot = print_stats(ec_a)
+                    render_automaton(ec_a, dont_run_dot, issba, deco)
+                    del deco
+                del ec_run
+            del ec_res
+            print '</div>'
+        del ec
+        del ec_a
+    degen = 0
+    automaton = 0
+    finish()

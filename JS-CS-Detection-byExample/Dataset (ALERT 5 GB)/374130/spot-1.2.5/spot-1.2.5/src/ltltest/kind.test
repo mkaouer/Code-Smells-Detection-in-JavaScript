@@ -1,0 +1,139 @@
+#! /bin/sh
+# Copyright (C) 2010, 2011, 2012 Laboratoire de Recherche et Developement to
+# l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Check for the constant_term visitor
+
+. ./defs || exit 1
+
+set -e
+
+check()
+{
+    run 0 ../kind "$1" >out
+    read word rest <out
+    test "$word" = "$2"
+}
+
+check 'a'         'B&!xfLEPSFsgopr'
+check 'a<->b'     'BxfLEPSFsgopr'
+check '!a'        'B&!xfLEPSFsgopr'
+check '!(a|b)'    'B&xfLEPSFsgopr'
+check 'F(a)'      '&!xLPegopr'
+check 'G(a)'      '&!xLPusopr'
+check 'a U b'     '&!xfLPgopr'
+check 'a U Fb'    '&!xLPegopr'
+check 'Ga U b'    '&!xLPopr'
+check '1 U a'     '&!xfLPegopr'
+check 'a W b'     '&!xfLPsopr'
+check 'a W 0'     '&!xfLPusopr'
+check 'a M b'     '&!xfLPgopr'
+check 'a M 1'     '&!xfLPegopr'
+check 'a R b'     '&!xfLPsopr'
+check '0 R b'     '&!xfLPusopr'
+check 'a R (b R (c R d))' '&!xfLPsopr'
+check 'a U (b U (c U d))' '&!xfLPgopr'
+check 'a W (b W (c W d))' '&!xfLPsopr'
+check 'a M (b M (c M d))' '&!xfLPgopr'
+check 'Fa -> Fb'  'xLPopr'
+check 'Ga -> Fb'  'xLPgopr'
+check 'Fa -> Gb'  'xLPsopr'
+check '(Ga|Fc) -> Fb'  'xLPopr'
+check '(Ga|Fa) -> Gb'  'xLPopr'
+check '{a;c*;b}|->!Xb' '&fPsopr'
+check '{a;c*;b}|->X!b' '&!fPsopr'
+check '{a;c*;b}|->!Fb' '&xPsopr'
+check '{a;c*;b}|->G!b' '&!xPsopr'
+check '{a;c*;b}|->!Gb' '&xPr'
+check '{a;c*;b}|->F!b' '&!xPr'
+check '{a;c*;b}|->GFa' '&!xPr'
+check '{a;c*;b}|->FGa' '&!xP'
+check '{a;c;b|(d;e)}|->!Xb' '&fPFsgopr'
+check '{a;c;b|(d;e)}|->X!b' '&!fPFsgopr'
+check '{a;c;b|(d;e)}|->!Fb' '&xPsopr'
+check '{a;c;b|(d;e)}|->G!b' '&!xPsopr'
+check '{a;c;b|(d;e)}|->!Gb' '&xPgopr'
+check '{a;c;b|(d;e)}|->F!b' '&!xPgopr'
+check '{a;c;b|(d;e)}|->GFa' '&!xPr'
+check '{a;c;b|(d;e)}|->FGa' '&!xPp'
+check '{a;c*;b}<>->!Gb' '&xPgopr'
+check '{a;c*;b}<>->F!b' '&!xPgopr'
+check '{a;c*;b}<>->FGb' '&!xPp'
+check '{a;c*;b}<>->!GFb' '&xPp'
+check '{a;c*;b}<>->GFb' '&!xP'
+check '{a;c*;b}<>->!FGb' '&xP'
+check '{a;c|d;b}<>->!Gb' '&xPgopr'
+check '{a;c|d;b}<>->G!b' '&!xPsopr'
+check '{a;c|d;b}<>->FGb' '&!xPp'
+check '{a;c|d;b}<>->!GFb' '&xPp'
+check '{a;c|d;b}<>->GFb' '&!xPr'
+check '{a;c|d;b}<>->!FGb' '&xPr'
+check '{a:b:c:d}!' 'B&!xfLEPSFsgopr'  # Equivalent to a&b&c&d
+check 'a&b&c&d'    'B&!xfLEPSFsgopr'
+check '(Xa <-> XXXc) U (b & Fe)' 'LPgopr'
+check '(!X(a|X(!b))&(FX(g xor h)))U(!G(a|b))' 'LPegopr'
+check '(!X(a|X(!b))&(GX(g xor h)))R(!F(a|b))' 'LPusopr'
+check '(!X(a|X(!b))&(GX(g xor h)))U(!G(a|b))' 'LPeopr'
+check '(!X(a|X(!b))&(FX(g xor h)))R(!F(a|b))' 'LPuopr'
+check '(!X(a|X(!b))&(GX(g xor h)))U(!F(a|b))' 'LPp'
+check '(!X(a|X(!b))&(FX(g xor h)))R(!G(a|b))' 'LPr'
+check '(!X(a|GXF(!b))&(FGX(g xor h)))U(!F(a|b))' 'LPp'
+check '(!X(a|GXF(!b))&(FGX(g xor h)))R(!F(a|b))' 'LPup'
+check '(!X(a|FXG(!b))&(GFX(g xor h)))R(!G(a|b))' 'LPr'
+check '(!X(a|FXG(!b))&(GFX(g xor h)))U(!G(a|b))' 'LPer'
+check '(!X(a|GXF(!b))&(FGX(g xor h)))U(!G(a|Fb))' 'LPep'
+check '(!X(a|GXF(!b))&(FGX(g xor h)))U(!F(a|Gb))' 'LP'
+check '(!X(a|FXG(!b))&(GFX(g xor h)))R(!F(a|Gb))' 'LPur'
+check '(!X(a|FXG(!b))&(GFX(g xor h)))R(!G(a|Fb))' 'LP'
+check 'GFa M GFb' '&!xLPeu'
+check 'FGa M FGb' '&!xLPeup'
+check 'Fa  M GFb' '&!xLPer'
+check 'GFa W GFb' '&!xLPeur'
+check 'FGa W FGb' '&!xLPeu'
+check 'Ga  W FGb' '&!xLPup'
+check 'Ga  W b'   '&!xLPsopr'
+check 'Fa  M b'   '&!xLPgopr'
+check '{a;b*;c}' '&!xfPsopr'
+check '{a;b*;c}!' '&!xfPgopr'
+check '!{a;b*;c}!' '&xfPsopr'  # The negative normal form is {a;b*;c}[]->0
+check '{a;b*;c}[]->0' '&!xfPsopr'
+check '!{a;b*;c}' '&!xfPgopr'
+
+run 0 ../consterm '1'
+run 0 ../consterm '0'
+run 1 ../consterm '[*0]'
+run 1 ../consterm 'a*'
+run 1 ../consterm '0*'
+run 1 ../consterm 'a[*0]'
+run 1 ../consterm 'a[*0..]'
+run 1 ../consterm 'a[*0..3]'
+run 0 ../consterm 'a[*1..3]'
+run 0 ../consterm 'a[*3]'
+run 1 ../consterm 'a[*..4][*3]'
+run 0 ../consterm 'a[*1..4][*3]'
+run 1 ../consterm 'a[*1..4][*0..3]'
+run 0 ../consterm '((a ; b) + c)'
+run 1 ../consterm '((a ; b) + [*0])'
+run 0 ../consterm '((a ; b) + [*0]) & e'
+run 1 ../consterm '((a ; b) + [*0]) & [*0]'
+run 1 ../consterm '((a ; b) + [*0]) & (a* + b)'
+run 1 ../consterm '{{a ; b} + {[*0]}} & {a* + b}'  # test braces
+run 1 ../consterm '(a + [*0]);(b + [*0]);(c + [*0])'
+run 0 ../consterm '(a + [*0]);(b + e);(c + [*0])'
+run 1 ../consterm '(a + [*0]);(b + e)*;(c + [*0])'

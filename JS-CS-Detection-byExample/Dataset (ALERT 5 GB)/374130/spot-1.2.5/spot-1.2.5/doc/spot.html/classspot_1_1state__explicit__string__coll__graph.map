@@ -1,0 +1,5 @@
+<map id="spot::state_explicit_string" name="spot::state_explicit_string">
+<area shape="rect" id="node2" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; std::string, string\l_hash \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="19,641,149,973"/>
+<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="8,6,99,189"/>
+<area shape="rect" id="node6" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; Label, label_hash \&gt;\n|+ successors\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="83,259,229,549"/>
+</map>

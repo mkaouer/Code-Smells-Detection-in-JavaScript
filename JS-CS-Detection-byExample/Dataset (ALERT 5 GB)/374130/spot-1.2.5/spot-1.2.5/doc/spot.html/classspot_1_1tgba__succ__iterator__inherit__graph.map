@@ -1,0 +1,14 @@
+<map id="spot::tgba_succ_iterator" name="spot::tgba_succ_iterator">
+<area shape="rect" id="node3" href="$classspot_1_1fair__kripke__succ__iterator.html" title="Iterator code for a Fair Kripke structure. " alt="" coords="5,665,197,890"/>
+<area shape="rect" id="node5" href="$classspot_1_1kripke__succ__iterator.html" title="Iterator code for Kripke structure. " alt="" coords="221,686,392,869"/>
+<area shape="rect" id="node9" href="$classspot_1_1ta__succ__iterator.html" title="Iterate over the successors of a state. " alt="" coords="416,654,563,901"/>
+<area shape="rect" id="node17" href="$classspot_1_1taa__succ__iterator.html" title="{spot::taa_succ_iterator\n||+ taa_succ_iterator()\l+ ~taa_succ_iterator()\l+ first()\l+ next()\l+ done()\l+ current_state()\l+ current_condition()\l+ current_acceptance\l_conditions()\l}" alt="" coords="587,643,741,911"/>
+<area shape="rect" id="node19" href="$classspot_1_1tgba__explicit__succ__iterator.html" title="{spot::tgba_explicit\l_succ_iterator\&lt; State \&gt;\n||+ tgba_explicit_succ\l_iterator()\l+ first()\l+ next()\l+ done()\l+ current_state()\l+ current_condition()\l+ current_acceptance\l_conditions()\l+ get_iterator()\l}" alt="" coords="765,622,923,933"/>
+<area shape="rect" id="node21" href="$classspot_1_1tgba__succ__iterator__concrete.html" title="{spot::tgba_succ_iterator\l_concrete\n||+ tgba_succ_iterator\l_concrete()\l+ ~tgba_succ_iterator\l_concrete()\l+ first()\l+ next()\l+ done()\l+ current_state()\l+ current_condition()\l+ current_acceptance\l_conditions()\l}" alt="" coords="947,611,1109,943"/>
+<area shape="rect" id="node23" href="$classspot_1_1tgba__succ__iterator__union.html" title="Iterate over the successors of an union computed on the fly. " alt="" coords="1133,547,1296,1007"/>
+<area shape="rect" id="node25" href="$classspot_1_1tgta__succ__iterator__product.html" title="Iterate over the successors of a product computed on the fly. " alt="" coords="1320,451,1493,1103"/>
+<area shape="rect" id="node7" href="$classspot_1_1kripke__explicit__succ__iterator.html" title="Implement iterator pattern on successor of a state_kripke. " alt="" coords="215,1366,375,1634"/>
+<area shape="rect" id="node11" href="$classspot_1_1ta__explicit__succ__iterator.html" title="Successor iterators used by spot::ta_explicit. " alt="" coords="399,1355,580,1645"/>
+<area shape="rect" id="node13" href="$classspot_1_1ta__succ__iterator__product.html" title="Iterate over the successors of a product computed on the fly. " alt="" coords="604,1153,796,1847"/>
+<area shape="rect" id="node15" href="$classspot_1_1ta__succ__iterator__product__by__changeset.html" title="{spot::ta_succ_iterator\l_product_by_changeset\n||+ ta_succ_iterator_product\l_by_changeset()\l+ next_kripke_dest()\l}" alt="" coords="612,1897,788,2058"/>
+</map>

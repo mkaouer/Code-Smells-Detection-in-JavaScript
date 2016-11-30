@@ -1,0 +1,6 @@
+<map id="spot::ltl::simplify_f_g_visitor" name="spot::ltl::simplify_f_g_visitor">
+<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1clone__visitor.html" title="Clone a formula.This visitor is public, because it&#39;s convenient to derive from it and override part o..." alt="" coords="37,763,179,1005"/>
+<area shape="rect" id="node4" href="$structspot_1_1ltl_1_1visitor.html" title="Formula visitorImplementing visitors is the prefered way to traverse a formula, since it does not inv..." alt="" coords="5,417,109,610"/>
+<area shape="rect" id="node6" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="133,329,304,698"/>
+<area shape="rect" id="node8" href="$structspot_1_1ltl_1_1formula_1_1ltl__prop.html" title="{spot::ltl::formula\l::ltl_prop\n|+ boolean\l+ sugar_free_boolean\l+ in_nenoform\l+ X_free\l+ sugar_free_ltl\l+ ltl_formula\l+ eltl_formula\l+ psl_formula\l+ sere_formula\l+ finite\land 10 more...\l|}" alt="" coords="145,6,292,263"/>
+</map>

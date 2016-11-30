@@ -1,0 +1,4 @@
+SOURCES      = src/*.cc
+TESTS        = tests/t_*.cc
+EXPORT       = src/*.h
+LINK        += io text regexp OakSystem

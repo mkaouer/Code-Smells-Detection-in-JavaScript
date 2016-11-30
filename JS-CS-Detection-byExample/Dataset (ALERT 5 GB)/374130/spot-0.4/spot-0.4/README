@@ -1,0 +1,146 @@
+Installation
+============
+
+Requirements
+------------
+
+Spot requires a complete installation of Python (version 2.0 or
+later).  Especially, Python's headers files should be installed.
+
+Spot also uses modified versions of BuDDy (a binary decision diagram),
+and LBTT (an LTL to Büchi test bench).  You do not need to install
+these yourself, they are included in this package (directories buddy/
+and lbtt/), and will built and installed alongside of Spot.
+
+
+Building and installing
+-----------------------
+
+Spot follows the traditional `./configure && make && make check &&
+make install' process.  People unfamiliar with the GNU Build System
+should read the file INSTALL for generic instructions.
+
+In additions to its usual options, ./configure will accept some
+flags specific to Spot:
+
+  --with-gspn=DIR
+    Turns on GreatSPN support.  DIR should designate the root of
+    GreatSPN source tree.  (./configure will then run
+    DIR/SOURCES/contrib/version.sh to find the GreatSPN build tree.)
+
+    GreatSPN had to be modified in order to be used as a library
+    (thanks Soheib Baarir and Yann Thierry-Mieg for this work), and
+    presently these modifications are only available on the GreatSPN
+    CVS repository hosted by the Università di Torino.
+
+  --with-included-buddy
+  --with-included-lbtt
+    After you have installed Spot the first time, LBTT and a modified
+    version of BuDDy will be installed.  The next time you reconfigure
+    Spot, configure will detect that these versions are already
+    installed, and will attempt to use these installed versions
+    directly (this is in case you had to modify one of these yourself
+    for another purpose).  These two options will *force* the use,
+    build, and installation of the included versions of these package,
+    even when compatible versions are already installed.
+
+  --enable-devel
+    Enable debugging symbols, turn off aggressive optimizations, and
+    turn on assertions.  This option is effective by default in
+    development versions (version numbers ending with a letter).
+    It is equivalent to
+      --enable-debug
+      --enable-warnings
+      --enable-assert
+      --enable-optimizations=-O
+  --disable-devel
+    Disable development options.  This is the case by default in
+    releases (version numbers NOT ending with a letter).
+    It is equivalent to
+      --disable-debug
+      --disable-warnings
+      --disable-assert
+      --enable-optimizations
+
+Here are the meaning of the fine-tuning options, in case
+enable/disable-devel is not enough.
+
+  --disable-assert
+  --enable-assert
+    Control assertion checking.
+
+  --disable-warnings
+  --enable-warnings
+    Whether warnings should be output.  Note that during development
+    we consider warnings to be errors.
+
+  --disable-debug
+  --enable-debug
+    Whether to compile extra debugging code.
+
+  --enable-optimizations
+  --enable-optimizations=FLAGS
+  --disable-optimizations
+    Whether the compilation should be optimized.  When FLAGS are
+    given, use these as optimization flags.  Otherwise, pick working
+    flags from a built-in list.
+
+
+Layout of the source tree
+=========================
+
+Core directories
+----------------
+
+src/            Sources for libspot.
+   ltlast/      LTL abstract syntax tree.
+   ltlenv/      LTL environments.
+   ltlparse/    Parser for LTL formulae.
+   ltlvisit/    Visitors of LTL formulae.
+   ltltest/     Tests for ltlast/, ltlenv/, ltlparse/, and ltlvisit/.
+   misc/        Miscellaneous support files.
+   tgba/        TGBA objects and cousins.
+   tgbaalgos/   Algorithms on TGBA.
+      gtec/     Couvreur's Emptiness-Check.
+   tgbaparse/   Parser for explicit TGBA.
+   tgbatest/    Tests for tgba/, tgbaalgos/, and tgbaparse/.
+   evtgba*/     Ignore these for now.
+doc/	        Documentation for libspot.
+   spot.html/   HTML reference manual.
+   spot.latex/  Sources for the PDF manual.  (Not distributed, can be rebuilt.)
+   spotref.pdf  PDF reference manual.
+bench/          Benchmarks...
+   emptchk/     ... for emptiness-check algorithms,
+   ltl2tgba/    ... for LTL-to-Büchi translation algorithms.
+wrap/	        Wrappers for other languages.
+   python/      Python bindings for Spot and BuDDy
+      tests/    Tests for these bindings
+      cgi/      Python-based CGI script (ltl-to-tgba translator)
+iface/	        Interfaces to other libraries.
+   gspn/        GreatSPN interface.
+      examples/ Supporting models used by the test cases.
+
+
+Third party software
+--------------------
+
+buddy/   A patched version of BuDDy 2.3 (a BDD library).
+lbtt/    lbtt 1.2.0 (an LTL to Büchi automata test bench).
+
+
+Build-system stuff
+------------------
+
+m4/      M4 macros used by configure.ac.
+tools/   Helper scripts used during the build.
+
+-------------------------------------------------------------------------------
+Local Variables:
+mode: text
+End:
+
+ LocalWords:  Python's BuDDy LBTT LTL Büchi lbtt gspn DIR GreatSPN Soheib Yann
+ LocalWords:  Baarir Thierry Mieg CVS Università di Torino devel src libspot ac
+ LocalWords:  ltlast ltlenv ltlparse ltlvisit ltltest misc tgba TGBA tgbaalgos
+ LocalWords:  gtec Tarjan tgbaparse tgbatest doc html PDF spotref pdf cgi
+ LocalWords:  CGI ltl iface BDD Couvreur's evtgba emptchk

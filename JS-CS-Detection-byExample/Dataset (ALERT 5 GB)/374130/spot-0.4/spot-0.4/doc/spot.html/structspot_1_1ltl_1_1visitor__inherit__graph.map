@@ -1,0 +1,5 @@
+<area shape="rect" href="$classspot_1_1ltl_1_1clone__visitor.html" title="Clone a formula." alt="" coords="155,236,318,428">
+<area shape="rect" href="$classspot_1_1ltl_1_1postfix__visitor.html" title="Apply an algorithm on each node of an AST, during a postfix traversal." alt="" coords="342,206,513,457">
+<area shape="rect" href="$classspot_1_1ltl_1_1simplify__f__g__visitor.html" title="Replace true U f and false R g by F f and G g." alt="" coords="7,506,213,626">
+<area shape="rect" href="$classspot_1_1ltl_1_1unabbreviate__logic__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated logical operators." alt="" coords="237,506,490,626">
+<area shape="rect" href="$classspot_1_1ltl_1_1unabbreviate__ltl__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated LTL and logical operators..." alt="" coords="246,674,481,794">

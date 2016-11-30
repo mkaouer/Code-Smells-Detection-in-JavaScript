@@ -1,0 +1,165 @@
+#!/bin/sh
+# Copyright (C) 2011 Laboratoire de Recherche et Developpement de
+# l'Epita
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+. ./defs
+
+set -e
+
+# This file tests the logic for simplifying superfluous
+# acceptance conditions.  Especially those whose presence
+# are implied by others.  This simplification is done as
+# part of option -R3.
+
+
+# The following automaton was generated for
+# G((!p0 | !p2 | (!p1 W (!p1 & p3 & X(!p1 U p4)))) U p1)
+# The formula does not really matter (except to show how
+# such automata can occur).  The important point is that the
+# acceptance condition "p4", used a lot, is always present
+# when "p1" is used.  So the "p4" acceptance can be removed.
+cat <<EOF > aut.txt
+acc = "p4" "p1";
+S1, S1, "p1", "p4" "p1";
+S1, S1, "!p0 | !p2", "p4";
+S1, S2, "p3", "p4";
+S1, S3, "1", "p4";
+S2, S1, "p1 & p4", "p4" "p1";
+S2, S1, "(p4 & !p0) | (p4 & !p2)", "p4";
+S2, S2, "p3 & p4", "p4";
+S2, S2, "(!p1 & !p0) | (!p1 & !p2) | (!p1 & p3)",;
+S2, S3, "p4", "p4";
+S2, S4, "!p1",;
+S3, S2, "!p1 & p3", "p4";
+S3, S3, "!p1", "p4";
+S4, S2, "!p1 & p3 & p4", "p4";
+S4, S2, "!p1 & p3",;
+S4, S3, "!p1 & p4", "p4";
+S4, S4, "!p1",;
+EOF
+
+run 0 ../ltl2tgba -X -R3 -b aut.txt > out.txt
+grep '^acc = "p1";$' out.txt
+
+
+# Here, acceptances A and C can both be removed.
+cat <<EOF > aut2.txt
+acc = A B C D;
+S1, S1, "a", A;
+S1, S1, "b", A B;
+S1, S1, "c", A B C;
+S1, S1, "d", C D;
+EOF
+run 0 ../ltl2tgba -X -R3 -b aut2.txt > out2.txt
+grep '^acc = "B" "D";$' out2.txt || grep '^acc = "D" "B";$' out2.txt || exit 1
+# only 4 lines output, because the "b" and "c" lines have been merged.
+test `wc -l < out2.txt` = 4
+
+
+# Here, acceptances A and B can both be removed.
+cat <<EOF > aut3.txt
+acc = A B C D;
+S1, S1, "a", A;
+S1, S1, "b", A B;
+S1, S1, "c", A B C;
+S1, S1, "d", B D;
+EOF
+run 0 ../ltl2tgba -X -R3 -b aut3.txt > out3.txt
+grep '^acc = "C" "D";$' out3.txt || grep '^acc = "D" "C";$' out3.txt || exit 1
+# only 4 lines output, because the "a" and "b" lines have been merged.
+test `wc -l < out3.txt` = 4
+
+
+# No simplification possible here
+cat <<EOF > aut4.txt
+acc = A B C D;
+S1, S1, "a", A;
+S1, S1, "b", A B;
+S1, S1, "c", A B C;
+S1, S1, "d", B D;
+S1, S1, "e", C D;
+EOF
+run 0 ../ltl2tgba -X -R3 -b aut4.txt > out4.txt
+test `grep '^acc' out4.txt | wc -w` = 6
+test `wc -l < out4.txt` = 6
+
+
+# Make sure nothing wrong (like an assert())
+# happens when no acceptance conditions are used.
+cat <<EOF > aut5.txt
+acc = ;
+S1, S1, "a", ;
+S1, S1, "b", ;
+S1, S1, "c", ;
+EOF
+run 0 ../ltl2tgba -X -R3 -b aut5.txt > out5.txt
+test `wc -l < out5.txt` = 2
+
+
+# Here, one of A,B and one of C,D can be removed.
+cat <<EOF > aut6.txt
+acc = A B C D;
+S1, S1, "a", A B;
+S1, S1, "b", A B;
+S1, S1, "c", C D;
+S1, S1, "d", C D;
+EOF
+run 0 ../ltl2tgba -X -R3 -b aut6.txt > out6.txt
+test `grep '^acc' out6.txt | wc -w` = 4
+test `wc -l < out6.txt` = 3
+
+
+# This automaton comes from the formula
+# 1 U (p0 & (!p1 R ((1 U !p2) & (1 U !p3))))
+# and and early implementation of our simplification
+# missed the simplification.
+cat <<EOF > aut7.txt
+acc = ZZ "!p3" "!p2";
+S1, S2, "p0 & !p2 & !p3 & !p1", ZZ "!p3" "!p2";
+S1, S1, "!p0 | p1 | p2 | p3", "!p3" "!p2";
+S1, S3, "p0 & p2 & !p3 & !p1", ZZ "!p3";
+S1, S4, "p0 & p3 & !p2 & !p1", ZZ "!p2";
+S1, S5, "(p0 & p2 & !p1) | (p0 & p3 & !p1)", ZZ;
+S1, S6, "p0 & p1 & !p2 & !p3", ZZ "!p3" "!p2";
+S1, S6, "(p0 & p1 & !p3) | (p0 & p2 & !p3)", ZZ "!p3";
+S1, S6, "(p0 & p1 & !p2) | (p0 & p3 & !p2)", ZZ "!p2";
+S1, S6, "(p0 & p1) | (p0 & p2) | (p0 & p3)", ZZ;
+S2, S2, "1", ZZ "!p3" "!p2";
+S3, S2, "!p2", ZZ "!p3" "!p2";
+S3, S3, "p2", ZZ "!p3";
+S4, S2, "!p3", ZZ "!p3" "!p2";
+S4, S4, "p3", ZZ "!p2";
+S5, S2, "!p2 & !p3", ZZ "!p3" "!p2";
+S5, S3, "p2 & !p3", ZZ "!p3";
+S5, S4, "p3 & !p2", ZZ "!p2";
+S5, S5, "p2 | p3", ZZ;
+S6, S2, "!p2 & !p3 & !p1", ZZ "!p3" "!p2";
+S6, S3, "p2 & !p3 & !p1", ZZ "!p3";
+S6, S4, "p3 & !p2 & !p1", ZZ "!p2";
+S6, S5, "(p2 & !p1) | (p3 & !p1)", ZZ;
+S6, S6, "p1 & !p2 & !p3", ZZ "!p3" "!p2";
+S6, S6, "(p1 & !p3) | (p2 & !p3)", ZZ "!p3";
+S6, S6, "(p1 & !p2) | (p3 & !p2)", ZZ "!p2";
+S6, S6, "p1 | p2 | p3", ZZ;
+EOF
+run 0 ../ltl2tgba -X -R3 -b aut7.txt > out7.txt
+# ZZ should disappear
+grep ZZ out7.txt && exit 1
+test `grep '^acc' out7.txt | wc -w` = 4

@@ -1,0 +1,5 @@
+SOURCES       = src/*.{cc,rl}
+TESTS         = tests/*.cc
+LINK         += text cf io
+FRAMEWORKS    = CoreFoundation
+EXPORT        = src/*.h

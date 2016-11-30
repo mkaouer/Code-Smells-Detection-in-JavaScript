@@ -1,0 +1,47 @@
+#!/bin/sh
+# -*- coding: utf-8 -*-
+# Copyright (C) 2013 Laboratoire de Recherche et
+# Développement de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+. ./defs
+set -e
+
+# This automaton used to trigger a bug in the complementation: its
+# intersection with the complement was not empty!
+cat >input.tgba <<EOF
+acc = "a" "b" "c";
+"1", "1", "(a & d) | (a & b)", "b" "c";
+"1", "2", "a & !d & !c & !b",;
+"1", "1", "(d & !a) | (b & !a)", "a" "b" "c";
+"1", "2", "!a & !d & !c & !b", "a";
+"2", "1", "a & c & b", "b" "c";
+"2", "3", "a & b & !c", "b";
+"2", "2", "a & !c & !b",;
+"2", "1", "c & b & !a", "a" "b" "c";
+"2", "3", "b & !a & !c", "a" "b";
+"2", "2", "!a & !c & !b", "a";
+"3", "1", "(a & d & c) | (a & c & b)", "b" "c";
+"3", "3", "(a & d & !c) | (a & b & !c)", "b";
+"3", "2", "a & !d & !c & !b",;
+"3", "1", "(d & c & !a) | (c & b & !a)", "a" "b" "c";
+"3", "3", "(d & !a & !c) | (b & !a & !c)", "a" "b";
+"3", "2", "!a & !d & !c & !b", "a";
+EOF
+
+# Check emptiness of product with complement.
+run 0 ../ltl2tgba -Pinput.tgba -DC -E -C -X input.tgba

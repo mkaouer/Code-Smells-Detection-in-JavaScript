@@ -1,0 +1,6 @@
+<map id="spot::kripke_explicit_succ_iterator" name="spot::kripke_explicit_succ_iterator">
+<area shape="rect" id="node2" href="$classspot_1_1kripke__succ__iterator.html" title="Iterator code for Kripke structureThis iterator can be used to simplify the writing of an iterator on..." alt="" coords="5,411,176,557"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="11,6,171,311"/>
+<area shape="rect" id="node6" href="$classspot_1_1state__kripke.html" title="Concrete class for kripke states." alt="" coords="200,363,323,605"/>
+<area shape="rect" id="node8" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="216,86,307,231"/>
+</map>

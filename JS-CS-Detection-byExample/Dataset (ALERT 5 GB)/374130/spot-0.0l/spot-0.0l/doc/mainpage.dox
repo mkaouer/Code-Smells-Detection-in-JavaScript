@@ -1,0 +1,15 @@
+/// \mainpage
+///
+/// This main page has yet to be written.
+///
+/// \section pointers Handy starting points
+///
+/// \li spot::ltl::formula  Base class for an LTL formulae.
+/// \li spot::ltl::parse    Parsing a text string into a
+///                         spot::ltl::formula.
+/// \li spot::tgba          Base class for Transition-based
+///                         Generalized Büchi Automaton.
+/// \li spot::ltl_to_tgba   Convert a spot::ltl::formula into a
+///                         spot::tgba.
+
+

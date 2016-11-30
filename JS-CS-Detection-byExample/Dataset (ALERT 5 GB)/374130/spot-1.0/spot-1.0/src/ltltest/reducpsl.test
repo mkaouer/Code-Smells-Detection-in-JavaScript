@@ -1,0 +1,42 @@
+#! /bin/sh
+# Copyright (C) 2011, 2012 Laboratoire de Recherche et Développement de
+# l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Check for the reduc visitor.
+. ./defs || exit 1
+
+set -e
+
+randltl=../../bin/randltl
+
+FILE=formulae
+: > $FILE
+for i in 10 12 14 16 18 20; do
+  run 0 $randltl --psl --seed 0   --tree-size $i a b c       -n 100 >> $FILE
+  run 0 $randltl --psl --seed 100 --tree-size $i a b c d e f -n 100 >> $FILE
+done
+
+for opt in 0 1 2 3 7; do
+  run 0 ../reduc -f -h $opt "$FILE"
+done
+# Running the above through valgrind is quite slow already.
+# Don't use valgrind for the next reductions (even slower).
+for opt in 8 9; do
+  ../reduc -f -h $opt "$FILE"
+done

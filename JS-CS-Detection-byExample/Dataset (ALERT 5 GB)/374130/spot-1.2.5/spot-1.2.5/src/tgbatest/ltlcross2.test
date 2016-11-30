@@ -1,0 +1,45 @@
+#!/bin/sh
+# -*- coding: utf-8 -*-
+# Copyright (C) 2012, 2013 Laboratoire de Recherche et Développement
+# de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+. ./defs
+set -e
+
+ltl2tgba=../../bin/ltl2tgba
+
+../../bin/randltl -P -n 100 p1 p2 p3 p4 p5 p6 --tree-size 5..15 |
+../../bin/ltlcross --products=3 \
+"$ltl2tgba --lbtt --any --low %f > %T" \
+"$ltl2tgba --lbtt --any --medium %f > %T" \
+"$ltl2tgba --lbtt --any --high %f > %T" \
+"$ltl2tgba --lbtt --deterministic --low %f > %T" \
+"$ltl2tgba --lbtt --deterministic --medium %f > %T" \
+"$ltl2tgba --lbtt --deterministic --high %f > %T" \
+"$ltl2tgba --lbtt --small --low %f > %T" \
+"$ltl2tgba --lbtt --small --medium %f > %T" \
+"$ltl2tgba --lbtt --small --high %f > %T" \
+"$ltl2tgba --lbtt -x comp-susp --small %f >%T" \
+"$ltl2tgba --lbtt -x comp-susp,!skel-wdba --lbtt --small %f >%T" \
+"$ltl2tgba --lbtt -x comp-susp,early-susp --lbtt --small %f >%T" \
+"$ltl2tgba --lbtt -x comp-susp,!skel-wdba,!skel-simul --lbtt --small %f >%T" \
+"$ltl2tgba --lbtt --ba -x degen-skip=0 --lbtt %f >%T" \
+"$ltl2tgba --lbtt --ba --high %f > %T" \
+"$ltl2tgba --lbtt -BDC %f > %T" \
+"$ltl2tgba --lbtt -BC %f > %T" \
+--json=output.json --csv=output.csv

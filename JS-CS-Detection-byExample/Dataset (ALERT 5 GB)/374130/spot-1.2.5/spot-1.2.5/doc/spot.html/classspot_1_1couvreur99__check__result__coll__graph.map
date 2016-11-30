@@ -1,0 +1,9 @@
+<map id="spot::couvreur99_check_result" name="spot::couvreur99_check_result">
+<area shape="rect" id="node2" href="$classspot_1_1emptiness__check__result.html" title="The result of an emptiness check. " alt="" coords="191,811,380,1079"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="5,323,211,741"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="63,6,153,189"/>
+<area shape="rect" id="node8" href="$classspot_1_1option__map.html" title="Manage a map of options. " alt="" coords="235,430,357,634"/>
+<area shape="rect" id="node10" href="$classspot_1_1acss__statistics.html" title="Accepting Cycle Search Space statistics. " alt="" coords="404,875,545,1015"/>
+<area shape="rect" id="node12" href="$classspot_1_1ars__statistics.html" title="Accepting Run Search statistics. " alt="" coords="392,441,557,623"/>
+<area shape="rect" id="node14" href="$structspot_1_1unsigned__statistics.html" title="{spot::unsigned_statistics\n|+ stats\l|+ ~unsigned_statistics()\l+ get()\l}" alt="" coords="392,38,557,157"/>
+</map>

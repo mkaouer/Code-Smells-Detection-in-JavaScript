@@ -1,0 +1,72 @@
+#! /bin/sh
+# Copyright (C) 2003, 2004  Laboratoire d'Informatique de Paris 6 (LIP6),
+# département Systèmes Répartis Coopératifs (SRC), Université Pierre
+# et Marie Curie.
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+
+# Check error recovery in parsing.  This also checks how the
+# resulting tree looks like.
+
+. ./defs || exit 1
+
+check()
+{
+  run 1 ./ltl2text "$1" >stdout
+  if test -n "$2"; then
+    echo "$2" >expect
+  else
+    : >expect
+  fi
+  if cmp stdout expect; then
+    :
+  else
+    echo "'$1' parsed as"
+    cat stdout
+    echo "instead of"
+    cat expect
+    rm -f stdout expect
+    exit 1
+  fi
+}
+
+# Empty or unparsable strings
+check '' ''
+check '+' ''
+check '/2/3/4/5 a + b /6/7/8/' ''
+
+# leading and trailing garbage are skipped
+run 0 ./equals -E 'a U b c' 'a U b'
+run 0 ./equals -E 'a &&& b' '0 && b'
+# (check multop merging while we are at it)
+run 0 ./equals -E 'a & b & c & d e' 'a & b & c & d'
+run 0 ./equals -E 'a & (b | c) & d should work' 'a & (b | c) & d'
+# Binop recovery
+run 0 ./equals -E 'a U' 0
+run 0 ./equals -E 'a U b V c R' 0
+
+# Recovery inside parentheses
+run 0 ./equals -E 'a U (b c) U e R (f g <=> h)' 'a U (0) U e R (0)'
+run 0 ./equals -E 'a U ((c) U e) R (<=> f g)' 'a U ((c) U e) R (0)'
+
+# Missing parentheses
+run 0 ./equals -E 'a & (a + b' 'a & (a + b)'
+run 0 ./equals -E 'a & (a + b c' 'a & (0)'
+run 0 ./equals -E 'a & (+' 'a & (0)'
+run 0 ./equals -E 'a & ('  'a & (0)'

@@ -1,0 +1,123 @@
+This directory contains an evolution of the benchmark we used in
+the following papers.
+
+* Souheib Baarir and Alexandre Duret-Lutz. Test de vacuité pour
+  automates de Büchi ensemblistes avec tests d'inclusion. In Actes du
+  6e Colloque Francophone sur la Modélisation des Systèmes Réactifs
+  (MSR'07), pages 19-34. Hermes-Lavoisier, October 2007.
+
+* Souheib Baarir and Alexandre Duret-Lutz. Emptiness check of powerset
+  Büchi automata. In Proceedings of the 7th International Conference
+  on Application of Concurrency to System Design (ACSD'07), pages
+  41-50. IEEE Computer Society, July 2007.
+
+* Souheib Baarir and Alexandre Duret-Lutz. Emptiness check of powerset
+  Büchi automata. Technical report 2006/003, Université Pierre et
+  Marie Curie, LIP6-CNRS, Paris, France, October 2006.
+
+It is unlikely that you will be able to run this benchmark unless you
+are close to Souheib et Alexandre, because of it requires
+(1) a customized version of GreatSPN that has never been released,
+(2) a tool called Snow that has never been released either
+    (see http://spot.lip6.fr/wiki/Snow)
+
+
+Here is some documentation nonetheless.
+
+
+Layout
+======
+
+template/
+  This directory contains the original models.  Some of them
+  are parametrized and need to be instantiated.
+     WCSsym/
+        A parameterized model for a critical section in which
+	processes are assigned a different priority (yielding an
+	asymmetry).  The parameter is the number of processes.
+     bagrodia/
+        A parameterized model of Rajive L Bagrodia's distributed
+        rendez-vous algorithm.  The parameter is the number of
+	processes.
+     predef/
+	Some preinstanciated models for WCS that do not use
+        symmetries.
+
+models/
+  This directory is built by make and will contain the actual
+  instances of each model.
+
+results/
+  This directory will be built by make and will contain the result of
+  each test.
+
+tools/
+  Scripts used by the benchmark.
+
+  tools/modelgen-create
+    is a script that creates , the makefile rules for instantiating
+    the models in the models/ directory.
+
+  tools/bench-create
+    is a script that creates modelgen.mk and bench.mk.
+    modelgen.mk contains the rules for instantiating
+    the models in the models/ directory, and bench.mk
+    those for putting the results in the results/ directory.
+    Unless you add new models you should not need to run this,
+    because the Makefiles are distributed with Spot.
+
+  tools/sum
+    (for summary) is the script that should be run to display the
+    results of the benchmark.  This script can be run at any point
+    during the benchmark, and will display the available results.
+
+  tools/runbench
+    is an auxiliary script used in the makefile rules of bench.mk.
+    Its job is to actually run the ltlgspn-* binaries from iface/gspn/
+    with the right options.  Runbench will also clone the model in a
+    temporary directory before running any tool : this is because
+    GreatSPN use many temporary files and we want to be able to run
+    several test in parallel.
+
+  tools/trans2prop.pl
+    is an auxiliary script used by tools/runbench.  It is used in
+    conjunction with Snow (see link above) to express atomic properties
+    as transitions in a model.
+
+
+Running
+=======
+
+1) Compile GreatSPN.  You should have the following three libraries:
+
+   % ls greatspn/i686_R2.6.25.10/2bin/lib
+   libgspnRG.a  libgspnSRG.a  libgspnSSP.a
+
+2) Compile Spot using GreatSPN.  I use the following command:
+
+   % ./configure --with-gspn=GREATSPN_PATH --disable-static LDFLAGS=-lglib-2.0
+
+   You should have the following tree binaries :
+   iface/gspn/ltlgspn-rg
+   iface/gspn/ltlgspn-srg
+   iface/gspn/ltlgspn-ssp*
+
+3) Edit bench/gspn-ssp/defs and fix the location of Snow.
+
+4) Go into bench/gspn-ssp/, run "make check" or "make -j2 check" (or more)
+   if you have several CPUs.
+
+5) Run tools/sum to get a summary of the results.  You can run this
+   even before the above "make check" has finished, but of course this
+   will only summarize the available results.
+
+
+What is tested
+==============
+
+Each model is tested using differents emptiness check strategies
+(these are the ltlgspn-ssp options -e4, -e5, -e6 etc.) against 50
+formulaes.  Each test (1 model, 1 set of option, 1 formula) produce
+one ".log" file in the results/ directory.  The tools/sum script
+processes all these log files and show how one model with one set of
+option averages on the 50 formulae.

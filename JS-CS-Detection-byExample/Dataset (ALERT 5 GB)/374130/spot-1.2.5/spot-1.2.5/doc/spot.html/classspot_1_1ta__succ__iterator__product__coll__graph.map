@@ -1,0 +1,10 @@
+<map id="spot::ta_succ_iterator_product" name="spot::ta_succ_iterator_product">
+<area shape="rect" id="node2" href="$classspot_1_1ta__succ__iterator.html" title="Iterate over the successors of a state. " alt="" coords="155,1601,301,1847"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state. " alt="" coords="37,1038,200,1434"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="525,6,616,189"/>
+<area shape="rect" id="node14" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="475,323,680,741"/>
+<area shape="rect" id="node19" href="$classspot_1_1state__ta__product.html" title="A state for spot::ta_product. " alt="" coords="660,766,812,1013"/>
+<area shape="rect" id="node8" href="$classspot_1_1ta.html" title="A Testing Automaton. " alt="" coords="773,1526,968,1922"/>
+<area shape="rect" id="node10" href="$classspot_1_1kripke.html" title="Interface for a Kripke structure. " alt="" coords="436,1643,647,1805"/>
+<area shape="rect" id="node12" href="$classspot_1_1fair__kripke.html" title="Interface for a Fair Kripke structure. " alt="" coords="488,1155,699,1317"/>
+</map>

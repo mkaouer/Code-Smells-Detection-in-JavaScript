@@ -1,0 +1,103 @@
+This directory contains the input files and test program used to compute basic 
+statistics on TGBA.
+
+==========
+ CONTENTS
+==========
+
+This directory contains:
+
+* formulae.ltl
+
+    A list of 96 handwritten formulae with their negations.  They come
+    from three sources:
+
+    @InProceedings{   dwyer.98.fmsp,
+      author        = {Matthew B. Dwyer and George S. Avrunin and James C.
+		      Corbett},
+      title         = {Property Specification Patterns for Finite-state
+		      Verification},
+      booktitle     = {Proceedings of the 2nd Workshop on Formal Methods in
+		      Software Practice (FMSP'98)},
+      publisher     = {ACM Press},
+      address       = {New York},
+      editor        = {Mark Ardis},
+      month         = mar,
+      year          = {1998},
+      pages         = {7--15}
+    }
+
+    @InProceedings{   etessami.00.concur,
+      author        = {Kousha Etessami and Gerard J. Holzmann},
+      title         = {Optimizing {B\"u}chi Automata},
+      booktitle     = {Proceedings of the 11th International Conference on
+		      Concurrency Theory (Concur'00)},
+      pages         = {153--167},
+      year          = {2000},
+      editor        = {C. Palamidessi},
+      volume        = {1877},
+      series        = {Lecture Notes in Computer Science},
+      address       = {Pennsylvania, USA},
+      publisher     = {Springer-Verlag}
+    }
+
+    @InProceedings{   somenzi.00.cav,
+      author        = {Fabio Somenzi and Roderick Bloem},
+      title         = {Efficient {B\"u}chi Automata for {LTL} Formul{\ae}},
+      booktitle     = {Proceedings of the 12th International Conference on
+		      Computer Aided Verification (CAV'00)},
+      pages         = {247--263},
+      year          = {2000},
+      volume        = {1855},
+      series        = {Lecture Notes in Computer Science},
+      address       = {Chicago, Illinois, USA},
+      publisher     = {Springer-Verlag}
+    }
+
+* full.ltl
+
+    A list of 1000 large randomly generated LTL formulae with ./randtgba.
+    
+=======
+ USAGE
+=======
+
+  Use the stats program.
+  Usage : ./stats ltl_file
+  Where ltl_file is a file with a single LTL formula per line.
+    
+==========================
+ INTERPRETING THE RESULTS
+==========================
+
+  Results can be found in file 'results'.
+  Here is the list of the measured values:
+  - Accepting Strongly Connected Components.
+    Total number of accepting SCC.
+  - Dead Strongly Connected Components.
+    Total number of dead SCC.
+    An SCC is dead if no accepting SCC is reachable from it.
+  - Accepting Paths.
+    Number of maximal accepting paths.
+    An path is maximal and accepting if it ends in an accepting
+    SCC that is only dead (i.e. non accepting) successors, or no
+    successors at all.
+  - Dead Paths.
+    Number of paths to a terminal dead SCC.
+    A terminal dead SCC is a dead SCC without successors.
+  - Max Effective Splitting.
+    A clue to measure the potential effectiveness of splitting the formula.
+    This is the maximum number of possible sub automata with unique states.
+    Beyond this threshold, more sub automata can be generated, but all their
+    states will be included in some of the previous automata.
+  - Self Loops per State.
+    Number of self loops.
+    A self loop is a transition from a state to itself.
+
+    For each of these measured value, we provide the following statistics
+    computed on all the formulae in ltl_file:\
+    - Min
+    - Max
+    - Mean
+    - Median
+    - Standard Deviation

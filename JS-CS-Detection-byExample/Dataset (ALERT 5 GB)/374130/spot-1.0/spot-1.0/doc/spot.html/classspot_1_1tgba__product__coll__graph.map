@@ -1,0 +1,10 @@
+<map id="spot::tgba_product" name="spot::tgba_product">
+<area shape="rect" id="node2" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="5,598,211,1047"/>
+<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="45,283,136,429"/>
+<area shape="rect" id="node6" href="$classspot_1_1fixed__size__pool.html" title="A fixed&#45;size memory pool implementation." alt="" coords="235,742,373,903"/>
+<area shape="rect" id="node8" href="$structspot_1_1fixed__size__pool_1_1block__.html" title="{spot::fixed_size_pool\l::block_\n||}" alt="" coords="160,307,299,405"/>
+<area shape="rect" id="node11" href="$unionspot_1_1fixed__size__pool_1_1chunk__.html" title="{spot::fixed_size_pool\l::chunk_\n|+ data_\l|}" alt="" coords="375,307,513,405"/>
+<area shape="rect" id="node15" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae." alt="" coords="407,558,591,1087"/>
+<area shape="rect" id="node17" href="$classspot_1_1bdd__allocator.html" title="Manage ranges of variables." alt="" coords="591,267,735,445"/>
+<area shape="rect" id="node19" href="$classspot_1_1free__list.html" title="Manage list of free integers." alt="" coords="600,6,725,215"/>
+</map>

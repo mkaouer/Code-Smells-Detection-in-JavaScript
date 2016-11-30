@@ -1,0 +1,295 @@
+This directory contains the input files and test program used to produce
+the measures for our new method consisting in splitting the automaton
+corresponding to the formula in order to obtain smaller synchronised product.
+This new method could lead to parallel computation of emptiness checks for
+possibly faster results.
+
+==========
+ CONTENTS
+==========
+
+This directory contains:
+
+* models/cl3serv1.pml
+* models/cl3serv3.pml
+
+    Two simple client/server promela examples.
+
+* models/clserv.ltl
+
+    An LTL formula to verify on these examples.
+
+* models/eeaean1.pml
+* models/eeaean2.pml
+
+    Variations of the leader election protocol with extinction from
+    Tel, Introduction to Distributed Algorithms, 1994, Chapter 7. The
+    network in the model consists of three nodes. In Variant 1, the
+    same node wins every time, in Variant 2, each node gets a turn at
+    winning the election.  These specifications were originally
+    distributed alongside
+
+    @InProceedings{   schwoon.05.tacas,
+      author        = {Stefan Schwoon and Javier Esparza},
+      title         = {A note on on-the-fly verification algorithms.},
+      booktitle     = {Proceedings of the 11th International Conference
+                       on Tools and Algorithms for the Construction and
+                       Analysis of Systems
+		      (TACAS'05)},
+      year          = {2005},
+      series        = {Lecture Notes in Computer Science},
+      publisher     = {Springer-Verlag},
+      month         = apr
+    }
+
+* models/eeaean.ltl
+
+    Sample properties for the leader election protocols. These come from
+
+    @InProceedings{   geldenhuys.04.tacas,
+      author        = {Jaco Geldenhuys and Antti Valmari},
+      title         = {Tarjan's Algorithm Makes On-the-Fly {LTL} Verification
+		      More Efficient},
+      booktitle     = {Proceedings of the 10th International Conference on
+                       Tools and Algorithms for the Construction and Analysis
+                       of Systems
+		      (TACAS'04)},
+      editor        = {Kurt Jensen and Andreas Podelski},
+      pages         = {205--219},
+      year          = {2004},
+      publisher     = {Springer-Verlag},
+      series        = {Lecture Notes in Computer Science},
+      volume        = {2988},
+      isbn          = {3-540-21299-X}
+    }
+
+* formulae.ltl
+
+    A list of 96 handwritten formulae with their negations.  They come
+    from three sources:
+
+    @InProceedings{   dwyer.98.fmsp,
+      author        = {Matthew B. Dwyer and George S. Avrunin and James C.
+		      Corbett},
+      title         = {Property Specification Patterns for Finite-state
+		      Verification},
+      booktitle     = {Proceedings of the 2nd Workshop on Formal Methods in
+		      Software Practice (FMSP'98)},
+      publisher     = {ACM Press},
+      address       = {New York},
+      editor        = {Mark Ardis},
+      month         = mar,
+      year          = {1998},
+      pages         = {7--15}
+    }
+
+    @InProceedings{   etessami.00.concur,
+      author        = {Kousha Etessami and Gerard J. Holzmann},
+      title         = {Optimizing {B\"u}chi Automata},
+      booktitle     = {Proceedings of the 11th International Conference on
+		      Concurrency Theory (Concur'00)},
+      pages         = {153--167},
+      year          = {2000},
+      editor        = {C. Palamidessi},
+      volume        = {1877},
+      series        = {Lecture Notes in Computer Science},
+      address       = {Pennsylvania, USA},
+      publisher     = {Springer-Verlag}
+    }
+
+    @InProceedings{   somenzi.00.cav,
+      author        = {Fabio Somenzi and Roderick Bloem},
+      title         = {Efficient {B\"u}chi Automata for {LTL} Formul{\ae}},
+      booktitle     = {Proceedings of the 12th International Conference on
+		      Computer Aided Verification (CAV'00)},
+      pages         = {247--263},
+      year          = {2000},
+      volume        = {1855},
+      series        = {Lecture Notes in Computer Science},
+      address       = {Chicago, Illinois, USA},
+      publisher     = {Springer-Verlag}
+    }
+
+* models/mobile1.pml
+
+    File found in /Spin/Test/
+    Model of cell-phone handoff strategy in a mobile network.
+    A translation from the pi-calculus description of this model presented in:
+
+    @ARTICLE{   Orava91analgebraic,
+      author = {Fredrik Orava and Joachim Parrow},
+      title = {An Algebraic Verification of a Mobile Network},
+      journal = {Formal Aspects of Computing},
+      year = {1991},
+      volume = {4},
+      pages = {497--543}
+    }
+
+* models/mobile2.pml
+
+    File found in /Spin/Test/
+    Simplified model of cell-phone handoff strategy in a mobile network.
+    A translation from the pi-calculus description of this model presented in
+    the same article as above.
+
+* models/leader.pml
+
+    File found in /Spin/Test/
+    O(n log n) algorithm for leader election in unidirectional ring.
+    Presented in:
+
+    @InProceedings{Afek97self-stabilizingunidirectional,
+      author = {Yehuda Afek and Anat Bremler},
+      title = {Self-Stabilizing Unidirectional Network Algorithms
+               by Power-Supply},
+      booktitle = {Chicago Journal of Theoretical Computer Science},
+      year = {1997},
+      pages = {111--120},
+      publisher = {The MIT Press}
+    }
+
+* models/zune.pml
+
+    File found in Spin/Test/
+    A bug caused all Zune-30 players to freeze on Dec 31, 2008
+    http://www.zuneboards.com/forums/zune-news/38143-cause-zune-30-leapyear-problem-isolated.html
+    The bug was in the firmware clock-driver, which was written by Freescale
+    for their MC13783 PMIC processor.
+    input: days elapsed since Jan 1, 1980
+    intended output: year and daynr in current year
+
+* models/cl3serv1.tgba
+* models/cl3serv3.tgba
+* models/cl3serv1R.tgba
+* models/cl3serv3R.tgba
+* models/eeaean1.tgba (12MB)
+* models/eeaean2.tgba (38MB)
+* models/eeaean1R.tgba
+* models/eeaean2R.tgba
+* models/leader.tgba
+* models/leaderR.tgba
+* models/mobile1.tgba
+* models/mobile1R.tgba
+* models/mobile2.tgba
+* models/mobile2R.tgba
+* models/zune.tgba
+* models/zumeR.tgba
+
+    The corresponding TGBA for the Promela models introduced above.
+    They were translated by pml2tgba.pl (located in bench/emptchk/)
+    into an input format readable by SPOT.
+    Promela inputs can be translated in 4 different graphs.
+    For instance eeaean1.pml is translated as
+       - eeaean1.tgba        full translation
+       - eeaean1R.tgba       reduced translation
+    The "reduced" translation uses Spin's partial order reductions.
+
+* results/<model_name>
+
+    For each <model_name>.tgba model in models you can find a simple text file
+    named <model_name>.
+    Each file present the results of our own benchmarks.
+    See the INTERPRETING RESULTS section for further details.
+
+=======
+ USAGE
+=======
+
+    Use the cutscc program.
+    Usage: ./cutscc ltl_formulae split_number [model]
+    Where
+    - ltl_formulae is a ltl file with one formula per line.
+    - split_number is the maximum number of sub automata after splitting.
+      Remember this is a maximum value, the effective splitting can be between
+      1 and split_number automata.
+    - model is the .tgba input file translated from Promela for Spot.
+      If no model is speficied, a random graph with 10 000 nodes will be
+      generated.
+
+    Sample examples :
+    ./cutscc models/eeaean.ltl 2 models/eeaean1.tgba
+    ./cutscc models/formulae.ltl 2
+
+==========================
+ INTERPRETING THE RESULTS
+==========================
+
+  By default, all results are printed on standard output. Redirect them
+  with ">" to erase files in cut-results/ or to create new benchs files.
+
+  The output looks as follow, first, the global header:
+  | Reference automaton has 49332 states.
+  | Trying to split each automaton in 9 sub automata.
+  | Each operation is repeated 100 times to improve precision.
+  First, if we specified a single model, we have the size of our model.
+  The second line is a recall of split_number value.
+  The third line is the number of iteration repeated to increase the precision
+  of benchmarks for each key operation. It greatly slows down the whole process.
+  To measure the elapsed time we simply compute the difference between
+  gettimeofday() before and after our operation.
+
+  For each formula, the result looks as follow :
+  | Formula 9
+  | !((<>[](noLeader || zeroLeads || oneLeads || twoLeads)) && (<>[]((zeroLeads -> (zeroLeads U (noLeader U twoLeads))))) && (<>[]((oneLeads -> (oneLeads U (noLeader U zeroLeads))))) && (<>[]((twoLeads -> (twoLeads U (noLeader U oneLeads))))))
+  |
+  First, the number of the formula, i.e the corresponding line in the ltl file.
+  On the following line the formula is recalled
+
+  | Full Product : 247864 states in 0.002611s
+  | 361 unique states visited
+  | 27 strongly connected components in search stack
+  | 412 transitions explored
+  | 361 items max in DFS search stack
+  |
+  Stats of the synchronised product and emptiness check computed on the main
+  unsplitted automaton.
+
+  | Splitting in 0.000212s
+  | Base automaton splitted in 4 automata.
+  |
+  Details about splitting time and number of sub automata created.
+  Here, we wished every formula would have been splitted in 9, but here
+  it could only be splitted in 4.
+
+  | Product 1 : 99871 states in 0.002614s
+  | 361 unique states visited
+  | 27 strongly connected components in search stack
+  | 412 transitions explored
+  | 361 items max in DFS search stack
+  |
+  | Product 2 : 49332 states in 0.297583s
+  | No accepting path.
+  |
+  | Product 3 : 49332 states in 0.297967s
+  | No accepting path.
+  |
+  | Product 4 : 49332 states in 0.296978s
+  | No accepting path.
+  |
+  Details concerning synchronised product size and emptiness check on each
+  sub automaton, in the same format as above for the full formula.
+
+  | Total split products size : 247867
+  | Additionnal states created : 3
+  | Additionnal states ratio : 0.000012
+  | Cutting and computing time : 0.002826s
+  | Time gain -0.000214s
+  Overall data for this formula, we compute the size of our splitted
+  synchronised products by simply adding them. This is an important
+  factor because sometimes an excessively large number of states are generated
+  with this method compared to the original product.
+  The two last lines give the speed results of splitting and computing emptiness
+  check on the sub automata.
+  If there is an accepting path, we take the shortest time because it means an
+  early stop in our algorithm, we can stop computation for other sub automata.
+  If there are no accepting path, we take the longest time because it means a
+  mandatory full traversal of all automaton.
+
+  At the end we sum the computation times for the full formula and the splitted
+  formula:
+  | Full    3.145159s
+  | Cutting 0.000212s
+  | Split   2.522595s
+  This is more or less significant, sometime splitting will greatly improve
+  speed for a single formula and will have small or no impact on others.
+

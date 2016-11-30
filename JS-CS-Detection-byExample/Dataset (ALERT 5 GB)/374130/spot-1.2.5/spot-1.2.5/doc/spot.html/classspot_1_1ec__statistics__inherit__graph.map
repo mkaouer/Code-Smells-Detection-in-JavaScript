@@ -1,0 +1,6 @@
+<map id="spot::ec_statistics" name="spot::ec_statistics">
+<area shape="rect" id="node5" href="$classspot_1_1couvreur99__check.html" title="An implementation of the Couvreur99 emptiness&#45;check algorithm. " alt="" coords="5,545,200,834"/>
+<area shape="rect" id="node9" href="$classspot_1_1ta__check.html" title="An implementation of the emptiness&#45;check algorithm for a product between a TA and a Kripke structure..." alt="" coords="224,513,371,866"/>
+<area shape="rect" id="node2" href="$structspot_1_1unsigned__statistics.html" title="{spot::unsigned_statistics\n|+ stats\l|+ ~unsigned_statistics()\l+ get()\l}" alt="" coords="117,6,283,125"/>
+<area shape="rect" id="node7" href="$classspot_1_1couvreur99__check__shy.html" title="A version of spot::couvreur99_check that tries to visit known states first. " alt="" coords="8,915,197,1247"/>
+</map>

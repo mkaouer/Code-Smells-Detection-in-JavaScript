@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="5,139,168,168"/>
+<area shape="rect" id="node3" href="$classspot_1_1fair__kripke__succ__iterator.html" title="Iterator code for a Fair Kripke structure.This iterator can be used to simplify the writing of an ite..." alt="" coords="228,5,425,35"/>
+<area shape="rect" id="node5" href="$classspot_1_1kripke__succ__iterator.html" title="Iterator code for Kripke structureThis iterator can be used to simplify the writing of an iterator on..." alt="" coords="240,59,413,88"/>
+<area shape="rect" id="node9" href="$classspot_1_1taa__succ__iterator.html" title="spot::taa_succ_iterator" alt="" coords="249,112,404,141"/>
+<area shape="rect" id="node11" href="$classspot_1_1tgba__explicit__succ__iterator.html" title="spot::tgba_explicit_succ_iterator" alt="" coords="221,165,432,195"/>
+<area shape="rect" id="node13" href="$classspot_1_1tgba__succ__iterator__concrete.html" title="spot::tgba_succ_iterator_concrete" alt="" coords="216,219,437,248"/>
+<area shape="rect" id="node15" href="$classspot_1_1tgba__succ__iterator__union.html" title="Iterate over the successors of an union computed on the fly." alt="" coords="227,272,427,301"/>
+<area shape="rect" id="node7" href="$classspot_1_1kripke__explicit__succ__iterator.html" title="Implement iterator pattern on successor of a state_kripke." alt="" coords="485,59,707,88"/>
+</map>

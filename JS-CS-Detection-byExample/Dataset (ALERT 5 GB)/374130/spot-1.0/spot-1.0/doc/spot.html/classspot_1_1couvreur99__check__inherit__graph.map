@@ -1,0 +1,6 @@
+<map id="spot::couvreur99_check" name="spot::couvreur99_check">
+<area shape="rect" id="node9" href="$classspot_1_1couvreur99__check__shy.html" title="A version of spot::couvreur99_check that tries to visit known states first." alt="" coords="71,750,257,1007"/>
+<area shape="rect" id="node2" href="$classspot_1_1emptiness__check.html" title="Common interface to emptiness check algorithms." alt="" coords="5,169,160,410"/>
+<area shape="rect" id="node4" href="$classspot_1_1ec__statistics.html" title="Emptiness&#45;check statistics." alt="" coords="184,153,309,426"/>
+<area shape="rect" id="node6" href="$structspot_1_1unsigned__statistics.html" title="{spot::unsigned_statistics\n|+ stats\l|+ ~unsigned_statistics()\l+ get()\l}" alt="" coords="164,6,329,103"/>
+</map>

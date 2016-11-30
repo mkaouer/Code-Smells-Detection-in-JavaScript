@@ -1,0 +1,46 @@
+#! /bin/sh
+
+# Check that each header is self contained and generates no warning.
+
+set -e
+
+rm -f failures
+
+# Remove any trailing slash
+INCDIR=${INCDIR%/}
+
+for file in `find "$INCDIR" \( -name "${1-*}.hh" \
+                               -o -name "${1-*}.hxx" \) \
+                  -a -type f -a -print | sed "s,$INCDIR/,,g"`; do
+
+   b=`echo "$file" | tr '[/.a-z]' '[__A-Z]'`
+   if grep "[	 ]*#.*def.* SPOT_$b\$" "$INCDIR/$file" >/dev/null; then
+     :
+   elif grep 'GNU Bison' "$INCDIR/$file" >/dev/null; then
+     :
+   else
+     echo "Missing, or incorrect include guard." >&2
+     echo "FAIL: $file"
+     echo "  $file" >> failures
+     continue
+   fi
+
+   cat >incltest.cc <<EOF
+// Include the file twice, so we detect missing inclusion guards.
+#include <$file>
+#include <$file>
+EOF
+   if $CXX $CPPFLAGS $CXXFLAGS -c incltest.cc; then
+      echo "PASS: $file"
+   else
+      echo "FAIL: $file"
+      echo "  $file" >> failures
+   fi
+done
+
+if test -f failures; then
+   echo "Failed files:"
+   cat failures
+   rm failures
+   exit 1;
+fi

@@ -1,0 +1,21 @@
+#! /bin/sh
+
+. ./defs || exit 1
+
+set -e
+
+cp -R $srcdir/examples/udcs .
+chmod +w udcs
+
+# F(ReP1 => F(gsP1)) is false
+../ltlgspn-srg -c -f -m udcs/udcs \
+  'F(ReP1 => F(gsP1))' ReP1 gsP1 >output && exit 1
+
+# !F(ReP1 => F(gsP1)) is true
+../ltlgspn-srg -c -f -m udcs/udcs '!F(ReP1 => F(gsP1))' ReP1 gsP1 >output
+
+# !G(ReP1 => F(gsP1)) is false
+../ltlgspn-srg -c -f -m udcs/udcs \
+  '!G(ReP1 => F(gsP1))' ReP1 gsP1 >output && exit 1
+
+:

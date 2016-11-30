@@ -1,0 +1,7 @@
+<map id="spot::tgba_product_init" name="spot::tgba_product_init">
+<area shape="rect" id="node2" href="$classspot_1_1tgba__product.html" title="A lazy product. (States are computed on the fly.) " alt="" coords="111,1046,316,1485"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="67,430,272,847"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="29,6,120,189"/>
+<area shape="rect" id="node8" href="$classspot_1_1fixed__size__pool.html" title="A fixed&#45;size memory pool implementation. " alt="" coords="296,558,440,719"/>
+<area shape="rect" id="node11" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae. " alt="" coords="464,323,651,954"/>
+</map>

@@ -1,0 +1,6 @@
+base referer
+rect $bdddict_8hh.html 153,231 265,255
+rect $formula_8hh.html 318,255 433,279
+rect $bddalloc_8hh.html 316,303 436,327
+rect $predecl_8hh.html 486,231 569,255
+rect $freelist_8hh.html 488,378 568,402

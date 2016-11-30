@@ -1,0 +1,15 @@
+<map id="ta/taproduct.hh" name="ta/taproduct.hh">
+<area shape="rect" id="node3" href="$ta_8hh.html" title="ta.hh" alt="" coords="491,238,542,266"/>
+<area shape="rect" id="node59" href="$kripke_8hh.html" title="kripke/kripke.hh" alt="" coords="554,83,666,111"/>
+<area shape="rect" id="node9" href="$bddlt_8hh.html" title="misc/bddlt.hh" alt="" coords="694,393,793,421"/>
+<area shape="rect" id="node15" href="$state_8hh.html" title="tgba/state.hh" alt="" coords="817,393,913,421"/>
+<area shape="rect" id="node26" href="$succiter_8hh.html" title="tgba/succiter.hh" alt="" coords="631,315,746,343"/>
+<area shape="rect" id="node29" href="$bdddict_8hh.html" title="tgba/bdddict.hh" alt="" coords="341,315,450,343"/>
+<area shape="rect" id="node24" href="$casts_8hh.html" title="misc/casts.hh" alt="" coords="810,470,911,498"/>
+<area shape="rect" id="node41" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="161,393,275,421"/>
+<area shape="rect" id="node49" href="$bddalloc_8hh.html" title="misc/bddalloc.hh" alt="" coords="433,393,550,421"/>
+<area shape="rect" id="node46" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="101,470,181,498"/>
+<area shape="rect" id="node51" href="$freelist_8hh.html" title="freelist.hh" alt="" coords="394,470,471,498"/>
+<area shape="rect" id="node61" href="$fairkripke_8hh.html" title="fairkripke.hh" alt="" coords="565,161,655,189"/>
+<area shape="rect" id="node63" href="$tgba_8hh.html" title="tgba/tgba.hh" alt="" coords="643,238,737,266"/>
+</map>

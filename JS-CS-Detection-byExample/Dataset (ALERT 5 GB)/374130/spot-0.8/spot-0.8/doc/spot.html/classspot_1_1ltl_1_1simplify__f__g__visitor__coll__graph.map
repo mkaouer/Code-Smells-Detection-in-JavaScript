@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1clone__visitor.html" title="Clone a formula.This visitor is public, because it&#39;s convenient to derive from it and override part o..." alt="" coords="52,331,199,573"/>
+<area shape="rect" id="node4" href="$structspot_1_1ltl_1_1visitor.html" title="Formula visitor that can modify the formula.Writing visitors is the prefered way to traverse a formul..." alt="" coords="5,40,112,229"/>
+<area shape="rect" id="node6" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="136,5,251,264"/>
+</map>

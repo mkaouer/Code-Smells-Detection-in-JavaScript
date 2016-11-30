@@ -1,0 +1,415 @@
+#+TITLE: =dstar2tgba=
+#+EMAIL spot@lrde.epita.fr
+#+OPTIONS: H:2 num:nil toc:t
+#+LINK_UP: tools.html
+
+This tool converts deterministic Rabin and Streett automata, presented
+in [[http://www.ltl2dstar.de/docs/ltl2dstar.html][the format output by =ltl2dstar=]], into Büchi automata.
+
+It's usage is almost similar to [[file:ltl2tgba.org][=ltl2tgba=]] except that instead of
+supplying a formula to translate, you should specify a filename
+containing the deterministic Rabin or Streett automaton to convert.
+
+* Two quick examples
+
+Here are some brief examples before we discuss the behavior of
+=dstar2tgba= in more detail.
+
+** From Rabin to Büchi
+
+The following command instructs =ltl2dstar= to:
+1. run =ltl2tgba -sD= to build a Büchi automaton for =Fa & GFb=, and then
+2. convert that Büchi automaton into a deterministic Rabin automaton
+   (DRA) stored in =fagfb=.
+Additionally we use =ltlfilt= to convert our formula to the
+prefix format used by =ltl2dstar=.
+
+#+BEGIN_SRC sh :results verbatim :exports node
+ltlfilt -f 'Fa & GFb' -l | ltl2dstar --ltl2nba=spin:../../src/bin/ltl2tgba@-sD - fagfb
+#+END_SRC
+
+By looking at the file =fagfb= you can see the =ltl2dsar= actually
+produced a 3-state DRA:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+cat fagfb
+#+END_SRC
+#+RESULTS:
+#+begin_example
+DRA v2 explicit
+Comment: "Safra[NBA=3]"
+States: 3
+Acceptance-Pairs: 1
+Start: 1
+AP: 2 "a" "b"
+---
+State: 0
+Acc-Sig: +0
+2
+2
+0
+0
+State: 1
+Acc-Sig:
+1
+0
+1
+0
+State: 2
+Acc-Sig:
+2
+2
+0
+0
+#+end_example
+
+=dstar2tgba= can now be used to convert this DRA into a TGBA, a BA, or
+a Monitor, using the same options as [[file:ltl2tgba.org][=ltl2tgba=]].
+
+For instance here is the conversion to a Büchi automaton (=-B=) in [[http://http://www.graphviz.org/][GraphViz]]'s format:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+dstar2tgba -B fagfb
+#+END_SRC
+#+RESULTS:
+#+begin_example
+digraph G {
+  0 [label="", style=invis, height=0]
+  0 -> 1
+  1 [label="1"]
+  1 -> 2 [label="a\n"]
+  1 -> 1 [label="!a\n"]
+  2 [label="2", peripheries=2]
+  2 -> 2 [label="b\n{Acc[1]}"]
+  2 -> 3 [label="!b\n{Acc[1]}"]
+  3 [label="3"]
+  3 -> 2 [label="b\n"]
+  3 -> 3 [label="!b\n"]
+}
+#+end_example
+
+Which can be rendered as:
+
+#+NAME: fagfb2ba
+#+BEGIN_SRC sh :results verbatim :exports none
+dstar2tgba -B fagfb | sed 's/\\/\\\\/'
+#+END_SRC
+#+RESULTS: fagfb2ba
+#+begin_example
+digraph G {
+  0 [label="", style=invis, height=0]
+  0 -> 1
+  1 [label="1"]
+  1 -> 2 [label="a\\n"]
+  1 -> 1 [label="!a\\n"]
+  2 [label="2", peripheries=2]
+  2 -> 2 [label="b\\n{Acc[1]}"]
+  2 -> 3 [label="!b\\n{Acc[1]}"]
+  3 [label="3"]
+  3 -> 2 [label="b\\n"]
+  3 -> 3 [label="!b\\n"]
+}
+#+end_example
+
+#+BEGIN_SRC dot :file fagfb2ba.png :cmdline -Tpng :var txt=fagfb2ba :exports results
+$txt
+#+END_SRC
+#+RESULTS:
+[[file:fagfb2ba.png]]
+
+But we could as well require the output to be output as a never claim for Spin (option =-s=):
+
+#+BEGIN_SRC sh :results verbatim :exports both
+dstar2tgba -s fagfb
+#+END_SRC
+#+RESULTS:
+#+begin_example
+never {
+T0_init:
+  if
+  :: ((a)) -> goto accept_S2
+  :: ((!(a))) -> goto T0_init
+  fi;
+accept_S2:
+  if
+  :: ((b)) -> goto accept_S2
+  :: ((!(b))) -> goto T0_S3
+  fi;
+T0_S3:
+  if
+  :: ((b)) -> goto accept_S2
+  :: ((!(b))) -> goto T0_S3
+  fi;
+}
+#+end_example
+
+** Streett to TGBA
+:PROPERTIES:
+  :CUSTOM_ID: streett_to_tgba_example
+:END:
+
+Here is the translation of =GFa & GFb= to a 4-state Streett automaton:
+
+#+BEGIN_SRC sh :results verbatim :exports both
+ltlfilt -f 'GFa & GFb' -l | ltl2dstar --automata=streett --ltl2nba=spin:../../src/bin/ltl2tgba@-sD - gfagfb
+cat gfagfb
+#+END_SRC
+#+RESULTS:
+#+begin_example
+DSA v2 explicit
+Comment: "Streett{Union{Safra[NBA=2],Safra[NBA=2]}}"
+States: 4
+Acceptance-Pairs: 2
+Start: 0
+AP: 2 "a" "b"
+---
+State: 0
+Acc-Sig: -0 -1
+3
+2
+1
+0
+State: 1
+Acc-Sig: +0 -1
+3
+2
+1
+0
+State: 2
+Acc-Sig: -0 +1
+3
+2
+1
+0
+State: 3
+Acc-Sig: +0 +1
+3
+2
+1
+0
+#+end_example
+
+And now its conversion by =dstar2tgba= to a 2-state Büchi automaton.
+We don't pass any option to =dstar2tgba= because converting to TGBA in
+GraphViz's format is the default:
+
+#+BEGIN_SRC sh :results verbatim :exports code
+dstar2tgba gfagfb
+#+END_SRC
+#+RESULTS:
+#+begin_example
+digraph G {
+  0 [label="", style=invis, height=0]
+  0 -> 1
+  1 [label="1"]
+  1 -> 2 [label="1\n"]
+  2 [label="2"]
+  2 -> 2 [label="a & b\n{Acc[\"1\"], Acc[\"0\"]}"]
+  2 -> 2 [label="b & !a\n{Acc[\"1\"]}"]
+  2 -> 2 [label="a & !b\n{Acc[\"0\"]}"]
+  2 -> 2 [label="!a & !b\n"]
+}
+#+end_example
+
+#+NAME: gfagfb2ba
+#+BEGIN_SRC sh :results verbatim :exports none
+dstar2tgba gfagfb | sed 's/\\/\\\\/g'
+#+END_SRC
+#+RESULTS: gfagfb2ba
+#+begin_example
+digraph G {
+  0 [label="", style=invis, height=0]
+  0 -> 1
+  1 [label="1"]
+  1 -> 2 [label="1\\n"]
+  2 [label="2"]
+  2 -> 2 [label="a & b\\n{Acc[\\"1\\"], Acc[\\"0\\"]}"]
+  2 -> 2 [label="b & !a\\n{Acc[\\"1\\"]}"]
+  2 -> 2 [label="a & !b\\n{Acc[\\"0\\"]}"]
+  2 -> 2 [label="!a & !b\\n"]
+}
+#+end_example
+
+#+BEGIN_SRC dot :file gfagfb2ba.png :cmdline -Tpng :var txt=gfagfb2ba :exports results
+$txt
+#+END_SRC
+#+RESULTS:
+[[file:gfagfb2ba.png]]
+
+(Obviously the resulting automaton could be simplified further, by
+starting with the second state right away.)
+
+* Details
+
+** General behavior
+
+The =dstar2tgba= tool implement a 4-step process:
+
+  1. read the DRA/DSA
+  2. convert it into TGBA
+  3. postprocess the resulting TGBA (simplifying the automaton, a degeneralizing it into a BA or Monitor if requested)
+  4. output the resulting automaton
+
+** Controlling output
+
+The last two steps are shared with =ltl2tgba= and use the same options.
+
+The type of automaton to produce can be selected using the =-B= or =-M=
+switches:
+#+BEGIN_SRC sh :results verbatim :exports results
+dstar2tgba --help | sed -n '/Output automaton type:/,/^$/p' | sed '1d;$d'
+#+END_SRC
+
+#+RESULTS:
+:   -B, --ba                   Büchi Automaton
+:   -M, --monitor              Monitor (accepts all finite prefixes of the given
+:                              formula)
+:       --tgba                 Transition-based Generalized Büchi Automaton
+:                              (default)
+
+And these may be refined by a translation intent, should the
+post-processor routine had a choice to make:
+#+BEGIN_SRC sh :results verbatim :exports results
+dstar2tgba --help | sed -n '/Translation intent:/,/^$/p' | sed '1d;$d'
+#+END_SRC
+#+RESULTS:
+:   -a, --any                  no preference
+:   -C, --complete             output a complete automaton (combine with other
+:                              intents)
+:   -D, --deterministic        prefer deterministic automata
+:       --small                prefer small automata (default)
+
+The effort put into post-processing can be limited with the =--low= or
+=--medium= options:
+
+#+BEGIN_SRC sh :results verbatim :exports results
+dstar2tgba --help | sed -n '/Optimization level:/,/^$/p' | sed '1d;$d'
+#+END_SRC
+#+RESULTS:
+:       --high                 all available optimizations (slow, default)
+:       --low                  minimal optimizations (fast)
+:       --medium               moderate optimizations
+
+For instance using =-a --low= will skip any optional post-processing,
+should you find =dstar2tgba= too slow.
+
+Finally, the output format can be changed with the following options:
+#+BEGIN_SRC sh :results verbatim :exports results
+dstar2tgba --help | sed -n '/Output format:/,/^$/p' | sed '1d;$d'
+#+END_SRC
+#+RESULTS:
+:   -8, --utf8                 enable UTF-8 characters in output (ignored with
+:                              --lbtt or --spin)
+:       --dot                  GraphViz's format (default)
+:       --lbtt[=t]             LBTT's format (add =t to force transition-based
+:                              acceptance even on Büchi automata)
+:   -s, --spin                 Spin neverclaim (implies --ba)
+:       --spot                 SPOT's format
+:       --stats=FORMAT         output statistics about the automaton
+
+The =--stats= options can output statistics about the input and the
+output automaton, so it can be useful to search for particular
+pattern.
+
+
+For instance here is a complex command that will
+
+1. generate an infinite stream of random LTL formulas with [[file:randltl.org][=randltl=]],
+2. use [[file:ltlfilt.org][=ltlfilt=]] to rewrite the W and M operators away (=--remove-wm=),
+   simplify the formulas (=-r=), remove duplicates (=u=) as well as
+   formulas that have a size less then 3 (=--size-min=3=),
+3. use =head= to keep only 10 of such formula
+4. loop to process each of these formula:
+   - print it
+   - then convert the formula into =ltl2dstar='s input format, process
+     it with =ltl2dstar= (using =ltl2tgba= as the actual LTL->BA
+     transltor), and process the result with =dstar2tgba= to build a
+     Büchi automaton (=-B=), favoring determinism if we can (=-D=),
+     and finally displaying some statistics about this conversion.
+
+The statistics displayed in this case are: =%S=, the number of states
+of the input (Rabin) automaton, =%s=, the number of states of the
+output (Büchi) automaton, =%d=, whether the output automaton is
+deterministic, and =%p= whether the automaton is complete.
+
+#+BEGIN_SRC sh :results verbatim :exports both
+randltl -n -1 --tree-size=10..15 a b c |
+ltlfilt --remove-wm -r -u --size-min=3 |
+head -n 10 |
+while read f; do
+  echo "$f"
+  ltlfilt -l -f "$f" |
+  ltl2dstar --ltl2nba=spin:../../src/bin/ltl2tgba@-sD - - |
+  dstar2tgba -B --stats='  DRA: %Sst.; BA: %sst.; det.? %d; complete? %p'
+done
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+F(a | !b)
+  DRA: 2st.; BA: 2st.; det.? 1; complete? 1
+Fa | (Xc U (c & Xc))
+  DRA: 5st.; BA: 5st.; det.? 1; complete? 1
+X(((!b & XGc) | (b & XF!c)) U (!a & ((!b & XGc) | (b & XF!c))))
+  DRA: 8st.; BA: 7st.; det.? 1; complete? 0
+!b | !a
+  DRA: 3st.; BA: 2st.; det.? 1; complete? 0
+F!a
+  DRA: 2st.; BA: 2st.; det.? 1; complete? 1
+F(Ga R (b | Ga))
+  DRA: 10st.; BA: 10st.; det.? 0; complete? 0
+!c U (!c & !a)
+  DRA: 3st.; BA: 2st.; det.? 1; complete? 0
+!c | FGb
+  DRA: 4st.; BA: 5st.; det.? 0; complete? 0
+G(c U a)
+  DRA: 4st.; BA: 3st.; det.? 1; complete? 0
+c & Gb
+  DRA: 3st.; BA: 2st.; det.? 1; complete? 0
+#+end_example
+
+An important point you should be aware of when comparing these numbers
+of states is that the deterministic automata produced by =ltl2dstar=
+are complete, while the automata produced by =dstar2tgba=
+(deterministic or not) are not complete by default.  This can explain
+a difference of one state (the so called "sink" state).
+
+You can instruct =dstar2tgba= to output a complete automaton using the
+=--complete= option (or =-C= for short).
+
+** Conversion from Rabin and Streett to TGBA
+
+The algorithms used to convert Rabin and Streett into TGBA/BA are different.
+
+*** Rabin to BA
+
+The conversion implemented is a variation of Krishnan et al.'s
+"Deterministic ω-Automata vis-a-vis Deterministic Büchi Automata"
+(ISAAC'94) paper.  They explain how to convert a deterministic Rabin
+automaton (DRA) into a deterministic Büchi automaton (DBA) when such
+an automaton exist.  The surprising result is that when a DRA is
+DBA-realizable, a DBA can be obtained from the DRA without changing
+its transition structure.
+
+Spot implements a slight refinement to the above technique: any DRA
+will be converted into a BA, and the determinism will be conserved
+only in strongly connected components where determinism can be
+conserved.
+
+*** Streett to TGBA
+
+Streett automata are converted into non-deterministic TGBA.
+When a Streett automaton uses multiple acceptance pairs, we use
+generalized acceptance conditions in the TGBA to limit the combinatorial
+explosion.
+
+A straightforward translation from Streett to BA, as described for
+instance by [[http://www.automata.rwth-aachen.de/~loeding/diploma_loeding.pdf][Löding's diploma thesis]], will create a BA with
+$|Q|\cdot(4^n-3^n+2)$ states if the input Streett automaton has $|Q|$
+states and $n$ acceptance pairs.  Our translation to TGBA limits this
+to $|Q|\cdot(2^n+1)$ states.
+
+Sometimes, as in the [[#streett_to_tgba_example][example for =GFa & GFb=]] the output of this
+conversion will happen to be deterministic.  Let's say that this is
+luck: Spot does not implement any algorithm to preserve the
+determinism of Streett automata.

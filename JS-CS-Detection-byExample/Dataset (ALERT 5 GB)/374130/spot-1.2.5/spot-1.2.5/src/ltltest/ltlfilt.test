@@ -1,0 +1,161 @@
+#! /bin/sh
+# Copyright (C) 2013 Laboratoire de Recherche et Developement to
+# l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Check several options of ltlfilt
+
+. ./defs || exit 1
+
+set -e
+
+checkopt()
+{
+  cat >exp
+  run 0 ../../bin/ltlfilt "$@" formulas > out
+  diff exp out
+}
+
+# The empty lines in the file are meant, we want to make sure that
+# they are ignored.
+cat >formulas <<EOF
+GFa | FGb
+F(GFa | Gb)
+
+F(b W GFa)
+GFa | Gb
+b W GFa
+!{a;b*;c}!
+a U Fb
+G(a & Xb)
+Xa
+F(a & !Xa & Xb)
+{a & {b|c} }
+
+EOF
+
+checkopt --eventual <<EOF
+GFa | FGb
+F(GFa | Gb)
+F(b W GFa)
+a U Fb
+F(a & !Xa & Xb)
+EOF
+
+checkopt --universal <<EOF
+GFa | FGb
+F(GFa | Gb)
+GFa | Gb
+G(a & Xb)
+EOF
+
+checkopt --eventual --universal <<EOF
+GFa | FGb
+F(GFa | Gb)
+EOF
+
+checkopt --stutter-invariant <<EOF
+GFa | FGb
+F(GFa | Gb)
+F(b W GFa)
+GFa | Gb
+b W GFa
+a U Fb
+F(a & !Xa & Xb)
+a & (b | c)
+EOF
+
+checkopt --simplify <<EOF
+F(GFa | Gb)
+F(GFa | Gb)
+F(b W GFa)
+GFa | Gb
+b W GFa
+!a | X(!b R !c)
+Fb
+G(a & Xb)
+Xa
+F(a & X(!a & b))
+a & (b | c)
+EOF
+
+checkopt --simplify --eventual --unique <<EOF
+F(GFa | Gb)
+F(b W GFa)
+Fb
+F(a & X(!a & b))
+EOF
+
+checkopt --safety <<EOF
+!({a;b[*];c}!)
+G(a & Xb)
+Xa
+a & (b | c)
+EOF
+
+checkopt --obligation <<EOF
+!({a;b[*];c}!)
+a U Fb
+G(a & Xb)
+Xa
+F(a & !Xa & Xb)
+a & (b | c)
+EOF
+
+checkopt --guarantee <<EOF
+a U Fb
+Xa
+F(a & !Xa & Xb)
+a & (b | c)
+EOF
+
+checkopt -v --ltl <<EOF
+!({a;b[*];c}!)
+EOF
+
+checkopt -v --stutter-invariant <<EOF
+!({a;b[*];c}!)
+G(a & Xb)
+Xa
+EOF
+
+checkopt --equivalent-to 'GFa | FGb' <<EOF
+GFa | FGb
+F(GFa | Gb)
+F(b W GFa)
+EOF
+
+
+cat >in <<EOF
+a & Xb & c
+a & b & GF(a | c) & FG(a | c)
+b & GF(a | c) & FG(a | c)
+G(d & e) | FG(Xf| !c) | h | i
+b & !Xc & e & (f | g)
+b & GF(a | c) & !GF!(a | c)
+EOF
+
+cat >exp <<EOF
+p0 & Xp1
+p0 & p1 & GF(p0 | p2) & FG(p0 | p2)
+p0 & GFp1 & FGp1
+p0 | Gp1 | FG(p2 | Xp3)
+EOF
+
+run 0 ../../bin/ltlfilt -u --nnf --relabel-bool=pnn in >out
+diff exp out

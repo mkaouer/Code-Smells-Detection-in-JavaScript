@@ -1,0 +1,11 @@
+<map id="spot::couvreur99_check" name="spot::couvreur99_check">
+<area shape="rect" id="node2" href="$classspot_1_1emptiness__check.html" title="Common interface to emptiness check algorithms. " alt="" coords="640,811,797,1101"/>
+<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="476,323,681,741"/>
+<area shape="rect" id="node14" href="$classspot_1_1couvreur99__check__status.html" title="The status of the emptiness&#45;check on success. " alt="" coords="275,865,472,1047"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="389,6,480,189"/>
+<area shape="rect" id="node8" href="$classspot_1_1option__map.html" title="Manage a map of options. " alt="" coords="705,430,828,634"/>
+<area shape="rect" id="node10" href="$classspot_1_1ec__statistics.html" title="Emptiness&#45;check statistics. " alt="" coords="847,811,975,1101"/>
+<area shape="rect" id="node12" href="$structspot_1_1unsigned__statistics.html" title="{spot::unsigned_statistics\n|+ stats\l|+ ~unsigned_statistics()\l+ get()\l}" alt="" coords="852,473,1017,591"/>
+<area shape="rect" id="node17" href="$classspot_1_1numbered__state__heap.html" title="Keep track of a large quantity of indexed states. " alt="" coords="5,366,187,698"/>
+<area shape="rect" id="node20" href="$classspot_1_1scc__stack.html" title="{spot::scc_stack\n|+ s\l|+ push()\l+ top()\l+ top()\l+ pop()\l+ size()\l+ rem()\l+ clear_rem()\l+ empty()\l}" alt="" coords="211,409,325,655"/>
+</map>

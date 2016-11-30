@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$structspot_1_1ltl_1_1formula__tree_1_1node__atomic.html" title="{spot::ltl::formula_tree::node_atomic\n|+ i\l|}" alt="" coords="5,156,235,241"/>
+<area shape="rect" id="node5" href="$structspot_1_1ltl_1_1formula__tree_1_1node__binop.html" title="{spot::ltl::formula_tree::node_binop\n|+ op\l+ lhs\l+ rhs\l|}" alt="" coords="259,139,480,259"/>
+<area shape="rect" id="node7" href="$structspot_1_1ltl_1_1formula__tree_1_1node__multop.html" title="{spot::ltl::formula_tree::node_multop\n|+ op\l+ lhs\l+ rhs\l|}" alt="" coords="504,139,733,259"/>
+<area shape="rect" id="node9" href="$structspot_1_1ltl_1_1formula__tree_1_1node__nfa.html" title="{spot::ltl::formula_tree::node_nfa\n|+ children\l+ nfa\l|}" alt="" coords="757,147,965,250"/>
+<area shape="rect" id="node11" href="$structspot_1_1ltl_1_1formula__tree_1_1node__unop.html" title="{spot::ltl::formula_tree::node_unop\n|+ op\l+ child\l|}" alt="" coords="989,147,1208,250"/>
+</map>

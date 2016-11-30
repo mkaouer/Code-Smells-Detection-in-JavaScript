@@ -1,0 +1,132 @@
+#!/bin/sh
+# -*- coding: utf-8 -*-
+# Copyright (C) 2012, 2013, 2014 Laboratoire de Recherche et
+# Développement de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+. ./defs
+set -e
+
+check_csv()
+{
+  # Make sure all lines in $1 have the same number of comas
+  sed 's/[^,]//g' < "$1" |
+  ( read first
+  while read l; do
+    test "x$first" = "x$l" || exit 1
+  done)
+}
+
+ltl2tgba=../../bin/ltl2tgba
+
+run 2 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'foo bar' 2>stderr -f a
+grep 'ltlcross.*no input.*in.*foo bar' stderr
+
+# Make sure non-zero exit codes are reported...
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%N' \
+                         -f a --csv=out.csv 2>stderr
+grep '"exit_status"' out.csv
+grep '"exit_code"' out.csv
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 2
+check_csv out.csv
+
+# ... unless --omit-missing is supplied.
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%N' \
+                         -f a --csv=out.csv --omit-missing 2>stderr
+grep '"exit_status"' out.csv && exit 1
+grep '"exit_code"' out.csv && exit 1
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 0
+check_csv out.csv
+
+# Likewise for timeouts
+echo foo >bug
+run 0 ../../bin/ltlcross 'sleep 5; false %f >%N' \
+                         --timeout 2 -f a --csv=out.csv \
+                         --save-bogus=bug 2>stderr
+grep '"exit_status"' out.csv
+grep '"exit_code"' out.csv
+test `grep 'warning:.*timeout' stderr | wc -l` -eq 2
+test `grep '"timeout",-1' out.csv | wc -l` -eq 2
+check_csv out.csv
+# 'bug' should exist but be empty
+test -f bug
+test -s bug && exit 1
+
+run 0 ../../bin/ltlcross 'sleep 5; false %f >%N' \
+                         --timeout 2 --omit-missing -f a --csv=out.csv 2>stderr
+grep '"exit_status"' out.csv && exit 1
+grep '"exit_code"' out.csv && exit 1
+test `grep 'warning:.*timeout' stderr | wc -l` -eq 2
+test `wc -l < out.csv` -eq 1
+check_csv out.csv
+
+# Check with --products=5
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%N' \
+      -f a --csv=out.csv --products=5 2>stderr
+p=`sed 's/[^,]//g;q' out.csv | wc -c`
+grep '"exit_status"' out.csv
+grep '"exit_code"' out.csv
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 2
+check_csv out.csv
+
+# ... unless --omit-missing is supplied.
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%N' \
+      -f a --csv=out.csv --omit-missing --products=5  2>stderr
+grep '"exit_status"' out.csv && exit 1
+grep '"exit_code"' out.csv && exit 1
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 0
+check_csv out.csv
+
+
+# Check with --products=+5
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%N' \
+      -f a --csv=out.csv --products=+5 2>stderr
+q=`sed 's/[^,]//g;q' out.csv | wc -c`
+grep '"exit_status"' out.csv
+grep '"exit_code"' out.csv
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 2
+check_csv out.csv
+
+# ... unless --omit-missing is supplied.
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%N' \
+      -f a --csv=out.csv --omit-missing --products=+5  2>stderr
+grep '"exit_status"' out.csv && exit 1
+grep '"exit_code"' out.csv && exit 1
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 0
+check_csv out.csv
+
+test $q -eq `expr $p + 12`
+
+
+# Check with Rabin/Streett output
+run 1 ../../bin/ltlcross "$ltl2tgba -s %f >%N" 'false %f >%D' \
+      -f 'X  a' --csv=out.csv --save-bogus=bug.txt 2>stderr
+q=`sed 's/[^,]//g;q' out.csv | wc -c`
+grep '"exit_status"' out.csv
+grep '"exit_code"' out.csv
+test `grep 'error:.*returned exit code 1' stderr | wc -l` -eq 2
+test `grep '"exit code",1' out.csv | wc -l` -eq 2
+check_csv out.csv
+grep 'X  a' bug.txt
+
+test $q -eq `expr $p + 6`

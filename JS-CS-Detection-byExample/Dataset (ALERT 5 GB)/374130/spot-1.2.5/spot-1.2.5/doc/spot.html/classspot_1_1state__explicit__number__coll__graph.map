@@ -1,0 +1,5 @@
+<map id="spot::state_explicit_number" name="spot::state_explicit_number">
+<area shape="rect" id="node2" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; int, identity_hash\l\&lt; int \&gt; \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="23,641,156,973"/>
+<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="13,6,104,189"/>
+<area shape="rect" id="node6" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; Label, label_hash \&gt;\n|+ successors\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="88,259,235,549"/>
+</map>

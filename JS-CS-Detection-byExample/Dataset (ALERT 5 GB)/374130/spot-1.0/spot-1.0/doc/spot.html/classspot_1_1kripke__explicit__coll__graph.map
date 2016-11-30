@@ -1,0 +1,10 @@
+<map id="spot::kripke_explicit" name="spot::kripke_explicit">
+<area shape="rect" id="node2" href="$classspot_1_1kripke.html" title="Interface for a Kripke structureA Kripke structure is a graph in which each node (=state) is labeled ..." alt="" coords="9,1449,220,1578"/>
+<area shape="rect" id="node4" href="$classspot_1_1fair__kripke.html" title="Interface for a Fair Kripke structure.A Kripke structure is a graph in which each node (=state) is la..." alt="" coords="7,1030,217,1159"/>
+<area shape="rect" id="node6" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="5,265,211,714"/>
+<area shape="rect" id="node8" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="141,6,232,151"/>
+<area shape="rect" id="node10" href="$classspot_1_1state__kripke.html" title="Concrete class for kripke states." alt="" coords="197,739,320,981"/>
+<area shape="rect" id="node13" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae." alt="" coords="295,1249,479,1778"/>
+<area shape="rect" id="node15" href="$classspot_1_1bdd__allocator.html" title="Manage ranges of variables." alt="" coords="315,1006,459,1183"/>
+<area shape="rect" id="node17" href="$classspot_1_1free__list.html" title="Manage list of free integers." alt="" coords="324,385,449,594"/>
+</map>

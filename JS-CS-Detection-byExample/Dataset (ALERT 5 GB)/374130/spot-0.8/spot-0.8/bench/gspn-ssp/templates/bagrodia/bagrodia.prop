@@ -1,0 +1,8 @@
+P1: Repos >= <x1> + <x2>;
+P2: Pot >= <x1,x2>;
+P3: Att >= <x1,x2>;
+P4: Appel >= 2<x1>;
+P5: EnCours >= 2<x2>;
+P6: EnCours >= <x1>;
+P7: #(Jeton) >= 2;
+P8: [-,*,-](Message) >= <x2>;

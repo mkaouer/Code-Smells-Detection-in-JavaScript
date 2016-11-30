@@ -1,0 +1,6 @@
+<map id="spot::ltl::atomic_prop" name="spot::ltl::atomic_prop">
+<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1ref__formula.html" title="A reference&#45;counted LTL formula." alt="" coords="24,750,157,895"/>
+<area shape="rect" id="node4" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="5,329,176,698"/>
+<area shape="rect" id="node6" href="$structspot_1_1ltl_1_1formula_1_1ltl__prop.html" title="{spot::ltl::formula\l::ltl_prop\n|+ boolean\l+ sugar_free_boolean\l+ in_nenoform\l+ X_free\l+ sugar_free_ltl\l+ ltl_formula\l+ eltl_formula\l+ psl_formula\l+ sere_formula\l+ finite\land 10 more...\l|}" alt="" coords="17,6,164,263"/>
+<area shape="rect" id="node8" href="$classspot_1_1ltl_1_1environment.html" title="An environment that describes atomic propositions." alt="" coords="181,766,320,879"/>
+</map>

@@ -1,0 +1,4 @@
+<area shape="rect" href="$classspot_1_1state__bdd.html" title="{spot::state_bdd\n|# state_\l|+ state_bdd()\l+ as_bdd()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="8,206,130,340">
+<area shape="rect" href="$classspot_1_1state__evtgba__explicit.html" title="States used by spot::tgba_evtgba_explicit." alt="" coords="154,198,352,348">
+<area shape="rect" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\n|&#45; state_\l|+ state_explicit()\l+ compare()\l+ hash()\l+ clone()\l+ ~state_explicit()\l+ get_state()\l}" alt="" coords="376,198,522,348">
+<area shape="rect" href="$classspot_1_1state__product.html" title="A state for spot::tgba_product." alt="" coords="546,177,696,369">

@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="5,673,251,1071"/>
+<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="189,297,283,452"/>
+<area shape="rect" id="node6" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\n|+ successors\l|+ state_explicit()\l+ compare()\l+ hash()\l+ clone()\l+ empty()\l+ destroy()\l&#45; state_explicit()\l&#45; operator=()\l&#45; ~state_explicit()\l}" alt="" coords="275,760,405,984"/>
+<area shape="rect" id="node9" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae." alt="" coords="429,552,675,1192"/>
+<area shape="rect" id="node11" href="$classspot_1_1bdd__allocator.html" title="Manage ranges of variables." alt="" coords="479,280,625,469"/>
+<area shape="rect" id="node13" href="$classspot_1_1free__list.html" title="Manage list of free integers." alt="" coords="489,5,615,229"/>
+</map>

@@ -1,0 +1,91 @@
+#!/bin/sh
+# Copyright (C) 2003  Laboratoire d'Informatique de Paris 6 (LIP6),
+# département Systèmes Répartis Coopératifs (SRC), Université Pierre
+# et Marie Curie.
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+
+echo 'This test can take as long as 15 minutes on a 2GHz Pentium 4.'
+
+. ./defs
+
+set -e
+
+cat > config <<EOF
+Algorithm
+{
+   Name = "Spot (Couvreur -- LaCIM)"
+   Path = "${LBTT_TRANSLATE} --spot './ltl2tgba -F -t'"
+   Enabled = yes
+}
+
+Algorithm
+{
+   Name = "Spot (Couvreur -- LACIM), degeneralized"
+   Path = "${LBTT_TRANSLATE} --spot './ltl2tgba -F -t -D'"
+   Enabled = yes
+}
+
+Algorithm
+{
+   Name = "Spot (Couvreur -- FM)"
+   Path = "${LBTT_TRANSLATE} --spot './ltl2tgba -F -f -t'"
+   Enabled = yes
+}
+
+Algorithm
+{
+   Name = "Spot (Couvreur -- FM), degeneralized"
+   Path = "${LBTT_TRANSLATE} --spot './ltl2tgba -F -f -t -D'"
+   Enabled = yes
+}
+
+GlobalOptions
+{
+   Rounds = 100
+   Interactive = Never
+#   Verbosity = 5
+}
+
+FormulaOptions
+{
+  Size = 1...13
+  Propositions = 6
+
+  AbbreviatedOperators = Yes
+  GenerateMode = Normal
+  OutputMode = Normal
+  PropositionPriority = 50
+
+  TruePriority = 1
+  FalsePriority = 1
+
+  AndPriority = 10
+  OrPriority = 10
+
+  BeforePriority = 0
+  StrongReleasePriority = 0
+  WeakUntilPriority = 0
+
+  DefaultOperatorPriority = 5
+}
+EOF
+
+${LBTT}
+rm config

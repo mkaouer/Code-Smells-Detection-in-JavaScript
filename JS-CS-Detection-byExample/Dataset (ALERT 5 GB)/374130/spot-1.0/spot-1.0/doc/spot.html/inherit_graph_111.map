@@ -1,0 +1,18 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="5,315,88,343"/>
+<area shape="rect" id="node3" href="$classspot_1_1state__bdd.html" title="spot::state_bdd" alt="" coords="164,5,273,33"/>
+<area shape="rect" id="node5" href="$classspot_1_1state__evtgba__explicit.html" title="States used by spot::tgba_evtgba_explicit." alt="" coords="155,55,283,99"/>
+<area shape="rect" id="node7" href="$classspot_1_1state__explicit.html" title="spot::state_explicit\l\&lt; Label, label_hash \&gt;" alt="" coords="147,122,291,166"/>
+<area shape="rect" id="node9" href="$classspot_1_1state__kripke.html" title="Concrete class for kripke states." alt="" coords="157,189,280,217"/>
+<area shape="rect" id="node11" href="$classspot_1_1state__product.html" title="A state for spot::tgba_product.This state is in fact a pair of state: the state from the left automat..." alt="" coords="153,239,284,267"/>
+<area shape="rect" id="node13" href="$classspot_1_1state__set.html" title="Set of states deriving from spot::state." alt="" coords="165,290,272,318"/>
+<area shape="rect" id="node15" href="$classspot_1_1state__ta__explicit.html" title="spot::state_ta_explicit" alt="" coords="145,341,292,369"/>
+<area shape="rect" id="node17" href="$classspot_1_1state__ta__product.html" title="A state for spot::ta_product.This state is in fact a pair of state: the state from the TA automaton a..." alt="" coords="144,391,293,419"/>
+<area shape="rect" id="node19" href="$classspot_1_1state__union.html" title="A state for spot::tgba_union.This state is in fact a pair. If the first member equals 0 and the secon..." alt="" coords="159,442,279,470"/>
+<area shape="rect" id="node21" href="$classspot_1_1state__explicit.html" title="spot::state_explicit\l\&lt; const ltl::formula\l *, ltl::formula_ptr_hash \&gt;" alt="" coords="137,493,300,553"/>
+<area shape="rect" id="node25" href="$classspot_1_1state__explicit.html" title="spot::state_explicit\l\&lt; int, identity_hash\l\&lt; int \&gt; \&gt;" alt="" coords="153,575,284,635"/>
+<area shape="rect" id="node29" href="$classspot_1_1state__explicit.html" title="spot::state_explicit\l\&lt; std::string, string\l_hash \&gt;" alt="" coords="155,658,283,718"/>
+<area shape="rect" id="node23" href="$classspot_1_1state__explicit__formula.html" title="spot::state_explicit\l_formula" alt="" coords="351,501,479,545"/>
+<area shape="rect" id="node27" href="$classspot_1_1state__explicit__number.html" title="spot::state_explicit\l_number" alt="" coords="351,583,479,627"/>
+<area shape="rect" id="node31" href="$classspot_1_1state__explicit__string.html" title="spot::state_explicit\l_string" alt="" coords="351,666,479,710"/>
+</map>

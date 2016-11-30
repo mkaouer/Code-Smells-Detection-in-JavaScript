@@ -1,0 +1,13 @@
+#! /bin/sh
+
+. ./defs || exit 1
+
+cp -R $srcdir/examples/DCSwave .
+chmod +w DCSwave
+
+# G(ATTiIDLj => F(!SCj U SCi)) is true
+../ltlgspn-srg -c -f -m DCSwave/DCSWave '!G(ATTiIDLj => F(!SCj U SCi))' ATTiIDLj SCi SCj > output || exit 1
+
+# G(F(!SCj U SCi)) is false
+../ltlgspn-srg -c -f -m DCSwave/DCSWave '!G(F(!SCj U SCi))' ATTiIDLj SCi SCj > output
+test $? = 1 || exit 1

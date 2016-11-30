@@ -1,0 +1,6 @@
+<map id="spot::state_product" name="spot::state_product">
+<area shape="rect" id="node2" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="5,177,96,322"/>
+<area shape="rect" id="node4" href="$classspot_1_1fixed__size__pool.html" title="A fixed&#45;size memory pool implementation." alt="" coords="120,169,259,330"/>
+<area shape="rect" id="node6" href="$structspot_1_1fixed__size__pool_1_1block__.html" title="{spot::fixed_size_pool\l::block_\n||}" alt="" coords="13,6,152,103"/>
+<area shape="rect" id="node9" href="$unionspot_1_1fixed__size__pool_1_1chunk__.html" title="{spot::fixed_size_pool\l::chunk_\n|+ data_\l|}" alt="" coords="228,6,367,103"/>
+</map>

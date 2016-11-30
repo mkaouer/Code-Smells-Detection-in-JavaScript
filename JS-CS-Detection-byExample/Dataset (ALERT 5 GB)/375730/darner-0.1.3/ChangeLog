@@ -1,0 +1,27 @@
+2012.08.26, 0.1.3
+
+  * Alias `gets` to `get` [cjc]
+
+  * Perf improvements to the network/request handler.
+
+2012.08.24, 0.1.2
+
+  * Fix long compaction times and memory bloat when items are big and the queue is big.
+
+2012.08.22, 0.1.1
+
+  * Builds correctly for Boost >1.46, tested up to 1.50. [Norman Casagrande, Henrik Bjørnskov]
+
+2012.08.20, 0.1.0
+
+  * Fix timeout/cancel race condition on get wait.
+
+  * Totally halt io_service when Darner gets a signal, exit safely.
+
+  * Add /peek option to get.
+
+  * Clean up iqstream/oqstream semantics.  Drop use of boost::optional.
+
+  * Darner bench: add option to sprinkle in bad requests
+
+  * Track enqueued/dequeued stat.

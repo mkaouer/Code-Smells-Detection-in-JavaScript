@@ -1,0 +1,4 @@
+<area shape="rect" href="$classspot_1_1ltl_1_1simplify__f__g__visitor.html" title="Replace true U f and false R g by F f and G g." alt="" coords="8,448,213,568">
+<area shape="rect" href="$classspot_1_1ltl_1_1unabbreviate__logic__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated logical operators." alt="" coords="237,448,490,568">
+<area shape="rect" href="$structspot_1_1ltl_1_1visitor.html" title="Formula visitor that can modify the formula." alt="" coords="177,8,297,157">
+<area shape="rect" href="$classspot_1_1ltl_1_1unabbreviate__ltl__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated LTL and logical operators..." alt="" coords="246,616,481,736">

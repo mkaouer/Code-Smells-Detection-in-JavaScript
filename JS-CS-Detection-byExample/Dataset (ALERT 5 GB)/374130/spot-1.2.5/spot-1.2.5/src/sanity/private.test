@@ -1,0 +1,51 @@
+#! /bin/sh
+# -*- coding: utf-8 -*-
+# Copyright (C) 2013 Laboratoire de Recherche et
+# Développement de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# Make sure we do not install privated header, i.e., headers that
+# declare unexported functions.  We catch these by checking for
+# headers that have no SPOT_API occurrence, but that have an ssociated
+# *.cc file.
+
+set -e
+
+rm -f failures
+
+# Remove any trailing slash
+INCDIR=${INCDIR%/}
+
+for file in `find "$INCDIR" \( -name "${1-*}.hh" \
+                               -o -name "${1-*}.hxx" \) \
+                  -a -type f -a -print | sed "s,$INCDIR/,,g"`; do
+
+   if grep SPOT_API "$INCDIR/$file" >/dev/null; then
+      :
+   elif test -f "$SRCDIR/${file%.*}.cc"; then
+      echo "FAIL: $file -- no exported symbol, should this file be private?"
+      echo "  $file" >> failures
+   fi
+
+done
+
+if test -f failures; then
+   echo "Failed files:"
+   cat failures
+   rm failures
+   exit 1;
+fi

@@ -1,0 +1,48 @@
+;; htmlize is not always in the load-path.  On Debian it can be found here.
+(setq load-path (cons "/usr/share/emacs/site-lisp/emacs-goodies-el" load-path))
+(require 'org-publish)
+(require 'org-install)
+
+(print (concat "Org " (org-version)))
+(setq org-export-htmlize-output-type 'css)
+; the .org-timestamp directory does not always exist, is not always
+; created by org, and that causes issues on our buildfarm.
+(setq org-publish-use-timestamps-flag nil)
+;; The default value of writing to ~/.org-timestamps causes race
+;; conditions when doing concurrent builds.
+(setq org-publish-timestamp-directory "@abs_top_builddir@/.org-timestamps/")
+
+(setq org-babel-python-command "/usr/bin/python3")
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (dot . t)
+   (python . t)))
+(setq org-confirm-babel-evaluate nil)
+
+(setq org-babel-sh-command
+      (concat "PATH=@abs_top_builddir@/src/bin" path-separator "$PATH sh"))
+
+(setq org-export-html-home/up-format
+"<div id=\"org-div-home-and-up\" style=\"text-align:center;white-space:nowrap;\">
+ <a accesskey=\"h\" href=\"%s\">UP</a> | <a accesskey=\"H\" href=\"%s\">HOME</a>
+</div>")
+
+(setq org-publish-project-alist
+      '(("spot-html"
+	:base-directory "@abs_top_srcdir@/doc/org/"
+	:base-extension "org"
+	:publishing-directory "@abs_top_srcdir@/doc/userdoc/"
+	:recursive t
+	:publishing-function org-publish-org-to-html
+	:style "\n<link rel=\"stylesheet\" type=\"text/css\" href=\"syntax.css\" />\n<link rel=\"stylesheet\" type=\"text/css\" href=\"http://spot.lip6.fr/css/spot-zenburn.css\" />"
+	:auto-preamble t)
+       ("spot-static"
+	:base-directory "@abs_top_srcdir@/doc/org/"
+	:base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf"
+	:publishing-directory "@abs_top_srcdir@/doc/userdoc/"
+	:recursive t
+	:publishing-function org-publish-attachment)
+       ("spot-all" :components ("spot-html" "spot-static"))))
+
+(org-publish-all t)

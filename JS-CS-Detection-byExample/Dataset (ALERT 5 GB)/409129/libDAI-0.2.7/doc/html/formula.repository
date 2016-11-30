@@ -1,0 +1,145 @@
+\form#0:$\frac{\exp(a)}{\exp(a)+\exp(b)}$
+\form#1:$\log\left(\exp(a) + \exp(b)\right)$
+\form#2:$m_{I\to i}(x_i)$
+\form#3:$I$
+\form#4:$i$
+\form#5:\[ m_{I\to i}(x_i) \propto \sum_{x_{N_I\setminus\{i\}}} f_I(x_I) \prod_{j\in N_I\setminus\{i\}} \prod_{J\in N_j\setminus\{I\}} m_{J\to j}\]
+\form#6:\[ m_{I\to i}(x_i) \propto \max_{x_{N_I\setminus\{i\}}} f_I(x_I) \prod_{j\in N_I\setminus\{i\}} \prod_{J\in N_j\setminus\{I\}} m_{J\to j}\]
+\form#7:\[ b_i(x_i) \propto \prod_{I\in N_i} m_{I\to i}(x_i)\]
+\form#8:\[ b_I(x_I) \propto f_I(x_I) \prod_{j\in N_I} \prod_{J\in N_j\setminus\{I\}} m_{J\to j}(x_j) \]
+\form#9:\[ \log Z = \sum_i (1 - |N_i|) \sum_{x_i} b_i(x_i) \log b_i(x_i) - \sum_I \sum_{x_I} b_I(x_I) \log \frac{b_I(x_I)}{f_I(x_I)} \]
+\form#10:$ x_i $
+\form#11:$ x_i^* $
+\form#12:$ x_i = x_i^* $
+\form#13:$\delta_{x_i, x}$
+\form#14:\[ P(\mathbf{x}) = \prod_{i\in\mathcal{V}} P(x_i \,|\, x_{\mathrm{pa}(i)}) \]
+\form#15:$\mathrm{pa}(i)$
+\form#16:\[ P(\mathbf{x}) = \frac{1}{Z} \prod_{C\in\mathcal{C}} \psi_C(x_C) \]
+\form#17:$ \mathcal{C} $
+\form#18:$ \psi_C(x_C) $
+\form#19:$ Z $
+\form#20:\[ P(\mathbf{x}) = \frac{1}{Z} \prod_{I\in \mathcal{F}} f_I(x_I) \]
+\form#21:$ \mathcal{F} $
+\form#22:$ f_I(x_I) $
+\form#23:$\{x_i\}_{i\in\mathcal{V}}$
+\form#24:$\{f_I(x_I)\}_{I\in\mathcal{F}}$
+\form#25:\[ Z = \sum_{\mathbf{x}_{\mathcal{V}}} \prod_{I \in \mathcal{F}} f_I(x_I) \]
+\form#26:$\{x_i\}_{i\in A}$
+\form#27:\[ P(\mathbf{x}_{A}) = \frac{1}{Z} \sum_{\mathbf{x}_{\mathcal{V}\setminus A}} \prod_{I \in \mathcal{F}} f_I(x_I) \]
+\form#28:\[ \mathrm{argmax}_{\mathbf{x}}\,\prod_{I\in\mathcal{F}} f_I(x_I) \]
+\form#29:$l$
+\form#30:$x_l$
+\form#31:$S_{x_l}$
+\form#32:$S_l$
+\form#33:$X_l := \{0,1,\dots,S_l-1\}$
+\form#34:$A := \{x_{l_1},x_{l_2},\dots,x_{l_n}\}$
+\form#35:$l_1 < l_2$
+\form#36:$x_{l_1}$
+\form#37:$x_{l_2}$
+\form#38:$(l_i)_{i=1}^n$
+\form#39:$l_1 < l_2 < \dots < l_n$
+\form#40:$ \prod_{i=1}^n X_{l_i}$
+\form#41:$(s_1,s_2,\dots,s_n)$
+\form#42:$x_{l_1} = s_1, \dots, x_{l_n} = s_n$
+\form#43:\[ s := \sum_{i=1}^n s_i \prod_{j=1}^{i-1} S_{l_j} = s_1 + s_2 S_{l_1} + s_3 S_{l_1} S_{l_2} + \dots + s_n S_{l_1} \cdots S_{l_{n-1}}. \]
+\form#44:$s_i$
+\form#45:$x_{l_i}$
+\form#46:\[ s_i = \left\lfloor\frac{s \mbox { mod } \prod_{j=1}^i S_{l_j}}{\prod_{j=1}^{i-1} S_{l_j}}\right\rfloor. \]
+\form#47:$\prod_{i=1}^n S_{l_i}$
+\form#48:\[ \begin{array}{ccc|c} x_4 & x_8 & x_7 & \mbox{value}\\ \hline 0 & 0 & 0 & 0.1\\ 1 & 0 & 0 & 3.5\\ 2 & 0 & 0 & 2.8\\ 0 & 1 & 0 & 6.3\\ 1 & 1 & 0 & 8.4\\ 2 & 1 & 0 & 0.0\\ 0 & 0 & 1 & 7.4\\ 1 & 0 & 1 & 2.4\\ 2 & 0 & 1 & 8.9\\ 0 & 1 & 1 & 1.3\\ 1 & 1 & 1 & 1.6\\ 2 & 1 & 1 & 2.6 \end{array} \]
+\form#49:$x_4$
+\form#50:$x_8$
+\form#51:$x_7$
+\form#52:$x_4 x_7 x_8$
+\form#53:\[ \begin{array}{ccc|c} x_4 & x_7 & x_8 & \mbox{value}\\ \hline 0 & 0 & 0 & 0.1\\ 1 & 0 & 0 & 3.5\\ 2 & 0 & 0 & 2.8\\ 0 & 1 & 0 & 7.4\\ 1 & 1 & 0 & 2.4\\ 2 & 1 & 0 & 8.9\\ 0 & 0 & 1 & 6.3\\ 1 & 0 & 1 & 8.4\\ 2 & 0 & 1 & 0.0\\ 0 & 1 & 1 & 1.3\\ 1 & 1 & 1 & 1.6\\ 2 & 1 & 1 & 2.6 \end{array} \]
+\form#54:$x_1 = 0, x_3 = 0, x_2 = 1$
+\form#55:$x_1 = 1, x_3 = 0, x_2 = 1$
+\form#56:$x_1 = 1, x_2 = 1$
+\form#57:$x_3$
+\form#58:$ P( X | Y ) $
+\form#59:$ | X | $
+\form#60:$ |X| \cdot |Y| $
+\form#61:$ P(X | Y=y) $
+\form#62:$ \frac{\log(Z_t) - \log(Z_{t-1})}{| \log(Z_{t-1}) | } < \mathrm{tol} $
+\form#63:$X_l = \{0,1,\dots,S_l-1\}$
+\form#64:$\{x_l\}_{l\in L}$
+\form#65:$f_L : \prod_{l\in L} X_l \to [0,\infty)$
+\form#66:$\prod_{l\in L} X_l$
+\form#67:$\{0,1,\dots,\prod_{l\in L} S_l-1\}$
+\form#68:$\sigma$
+\form#69:$ \exp(hx) $
+\form#70:$ x = \pm 1 $
+\form#71:$ \exp(J x_1 x_2) $
+\form#72:$ x_1, x_2 = \pm 1 $
+\form#73:$ \exp( J \delta_{x_1, x_2} ) $
+\form#74:$\prod_{l\in L} S_l$
+\form#75:$-\sum_i p_i \log p_i$
+\form#76:$1/n$
+\form#77:$f : \prod_{l\in L} X_l \to [0,\infty)$
+\form#78:$g : \prod_{m\in M} X_m \to [0,\infty)$
+\form#79:\[f+g : \prod_{l\in L\cup M} X_l \to [0,\infty) : x \mapsto f(x_L) + g(x_M).\]
+\form#80:\[f-g : \prod_{l\in L\cup M} X_l \to [0,\infty) : x \mapsto f(x_L) - g(x_M).\]
+\form#81:\[fg : \prod_{l\in L\cup M} X_l \to [0,\infty) : x \mapsto f(x_L) g(x_M).\]
+\form#82:\[\frac{f}{g} : \prod_{l\in L\cup M} X_l \to [0,\infty) : x \mapsto \frac{f(x_L)}{g(x_M)}.\]
+\form#83:$M \subset L$
+\form#84:$s$
+\form#85:$x_m$
+\form#86:$m\in M$
+\form#87:$s(x_m) \in X_m$
+\form#88:$g : \prod_{l \in L \setminus M} X_l \to [0,\infty)$
+\form#89:$g(\{x_l\}_{l\in L \setminus M}) = f(\{x_l\}_{l\in L \setminus M}, \{s(x_m)\}_{m\in M})$
+\form#90:$L \subset M$
+\form#91:$g : \prod_{m\in M} X_m \to [0,\infty) : x \mapsto f(x_L)$
+\form#92:$N$
+\form#93:$x_0,x_1,\dots,x_{N-1}$
+\form#94:$M$
+\form#95:\[ P(x_0,x_1,\dots,x_{N-1}) = \frac{1}{Z} \prod_{I=0}^{M-1} f_I(x_I), \qquad Z = \sum_{x_0}\dots\sum_{x_{N-1}} \prod_{I=0}^{M-1} f_I(X_I). \]
+\form#96:$f_I$
+\form#97:$X_I \subset \{x_0,x_1,\dots,x_{N-1}\}$
+\form#98:$\min_q KL(p||q)$
+\form#99:$ KL(q||p) $
+\form#100:$ c_I $
+\form#101:$ \alpha=1/c_I $
+\form#102:\[ m_{I\to i}(x_i) \propto \left( \sum_{x_{N_I\setminus\{i\}}} f_I(x_I)^{1/c_I} \prod_{j\in N_I\setminus\{i\}} m_{I\to j}^{1-1/c_I} \prod_{J\in N_j\setminus\{I\}} m_{J\to j} \right)^{c_I} \]
+\form#103:\[ b_i(x_i) \propto \prod_{I\in N_i} m_{I\to i} \]
+\form#104:\[ b_I(x_I) \propto f_I(x_I)^{1/c_I} \prod_{j \in N_I} m_{I\to j}^{1-1/c_I} \prod_{J\in N_j\setminus\{I\}} m_{J\to j} \]
+\form#105:\[ \log Z = \sum_{I} \sum_{x_I} b_I(x_I) \big( \log f_I(x_I) - c_I \log b_I(x_I) \big) + \sum_{i} (c_i - 1) \sum_{x_i} b_i(x_i) \log b_i(x_i) \]
+\form#106:\[ c_i := \sum_{I \in N_i} c_I \]
+\form#107:$ \phi^{\setminus i}_I(x_{I \setminus i}) $
+\form#108:$b_i$
+\form#109:\[ b_i^{\mathrm{new}}(x_i) \propto \prod_{I\in N_i} \exp \left( \sum_{x_{N_I \setminus \{i\}}} \log f_I(x_I) \prod_{j \in N_I \setminus \{i\}} b_j(x_j) \right) \]
+\form#110:\[ b_i^{\mathrm{new}}(x_i) \propto \prod_{I\in N_i} \left( \sum_{x_{N_I \setminus \{i\}}} f_I(x_I) \prod_{j \in N_I \setminus \{i\}} b_j(x_j) \right) \]
+\form#111:$ M^{(i)}_j $
+\form#112:$ \Omega^{(i)}_{j,l} $
+\form#113:$ T^{(i)}_A $
+\form#114:$ A = \{l_1,l_2,\dots\} $
+\form#115:$ T^{(i)}_j $
+\form#116:$ \Gamma^{(i)}_{j,l_1l_2} $
+\form#117:$ \Gamma^{(i)}_{l_1l_2} $
+\form#118:$\alpha$
+\form#119:$\beta$
+\form#120:$x$
+\form#121:\[\sum_{\alpha \ni x} c_\alpha + \sum_{\beta \ni x} c_\beta = 1\]
+\form#122:\[ c_\beta := 1 - \sum_{\gamma \in \mathrm{an}(\beta)} c_\gamma \]
+\form#123:$\mathrm{an}(\beta)$
+\form#124:$\tilde f_i(x_j,x_k)$
+\form#125:$\tilde f_i(x_s)$
+\form#126:\[ m_{I\to i}(x_i) \propto \sum_{x_{N_I\setminus\{i\}}} f_I(x_I)^{1/c_I} \prod_{j\in N_I\setminus\{i\}} m_{I\to j}^{c_I-1} \prod_{J\in N_j\setminus\{I\}} m_{J\to j}^{c_J} \]
+\form#127:\[ b_i(x_i) \propto \prod_{I\in N_i} m_{I\to i}^{c_I} \]
+\form#128:\[ b_I(x_I) \propto f_I(x_I)^{1/c_I} \prod_{j \in N_I} m_{I\to j}^{c_I-1} \prod_{J\in N_j\setminus\{I\}} m_{J\to j}^{c_J} \]
+\form#129:$\ell_1$
+\form#130:$\ell_\infty$
+\form#131:$\sum_i p_i (\log p_i - \log q_i)$
+\form#132:$\frac{1}{2}\sum_i (\sqrt{p_i}-\sqrt{q_i})^2$
+\form#133:$\{x_{l(0)},x_{l(1)},\dots,x_{l(n-1)}\}$
+\form#134:$l(0) < l(1) < \dots < l(n-1)$
+\form#135:$s(x_l) \in \{0,1,\dots,S_l-1\}$
+\form#136:$s(x_l)=0$
+\form#137:$S$
+\form#138:\begin{eqnarray*} S &:=& \sum_{i=0}^{n-1} s(x_{l(i)}) \prod_{j=0}^{i-1} S_{l(j)} \\ &= & s(x_{l(0)}) + s(x_{l(1)}) S_{l(0)} + s(x_{l(2)}) S_{l(0)} S_{l(1)} + \dots + s(x_{l(n-1)}) S_{l(0)} \cdots S_{l(n-2)}. \end{eqnarray*}
+\form#139:$l\in L$
+\form#140:$\sigma : \prod_{l\in L} X_l \to \{0,1,\dots,\prod_{l\in L} S_l-1\}$
+\form#141:$\sigma^{-1}$
+\form#142:$s(x_l)$
+\form#143:\begin{eqnarray*} s(x_{l(i)}) = \left\lfloor\frac{S \mbox { mod } \prod_{j=0}^{i} S_{l(j)}}{\prod_{j=0}^{i-1} S_{l(j)}}\right\rfloor \qquad \mbox{for all $i=0,\dots,n-1$}. \end{eqnarray*}
+\form#144:$\sigma^{-1} : \{0,1,\dots,\prod_{l\in L} S_l-1\} \to \prod_{l\in L} X_l$

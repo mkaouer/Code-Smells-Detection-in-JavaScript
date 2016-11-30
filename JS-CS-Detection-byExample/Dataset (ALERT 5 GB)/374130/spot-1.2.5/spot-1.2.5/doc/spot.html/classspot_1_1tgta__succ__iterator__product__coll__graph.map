@@ -1,0 +1,10 @@
+<map id="spot::tgta_succ_iterator_product" name="spot::tgta_succ_iterator_product">
+<area shape="rect" id="node2" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state. " alt="" coords="5,1369,168,1765"/>
+<area shape="rect" id="node4" href="$classspot_1_1fixed__size__pool.html" title="A fixed&#45;size memory pool implementation. " alt="" coords="192,1486,336,1647"/>
+<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="631,6,721,189"/>
+<area shape="rect" id="node12" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="573,323,779,741"/>
+<area shape="rect" id="node19" href="$classspot_1_1state__product.html" title="A state for spot::tgba_product. " alt="" coords="791,766,924,991"/>
+<area shape="rect" id="node8" href="$classspot_1_1kripke.html" title="Interface for a Kripke structure. " alt="" coords="416,1486,627,1647"/>
+<area shape="rect" id="node10" href="$classspot_1_1fair__kripke.html" title="Interface for a Fair Kripke structure. " alt="" coords="523,1017,733,1178"/>
+<area shape="rect" id="node16" href="$classspot_1_1tgta.html" title="A Transition&#45;based Generalized Testing Automaton (TGTA). " alt="" coords="625,1203,807,1343"/>
+</map>

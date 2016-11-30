@@ -1,0 +1,60 @@
+#! /bin/sh
+# -*- coding: utf-8 -*-
+# Copyright (C) 2012, 2013, 2014 Laboratoire de Recherche et
+# Developpement de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+. ./defs || exit 1
+
+check()
+{
+  run 0 ../reduceu "$@"
+}
+
+check 'Xa | GFb'    'Xa | GFb'
+check 'X(a | GXFb)' 'Xa | GFb'
+check 'Xa & GFb'    'Xa & GFb'
+check 'X(a & GXFb)' 'Xa & GFb'
+
+check 'F(a & b & GFc & FGd)' 'F(a & b) & G(Fc & FGd)'
+check 'Fa | Fb | GFc | GFd' 'F(a|b) | GF(c | d)'
+check 'Fa | Fb | GFc | GFd | FGe' 'F(a|b) | F(G(e) | GF(c | d))'
+cehck 'Ga | Gb | GFd | FGe | FGf' 'Ga | Gb | F(GFd | Ge | Gf)'
+
+check 'G(Ga & Fb & c & GFd)'  'G(a&c) & G(Fb & Fd)'
+check 'G(Ga & GFb & c & GFd)' 'G(a&c) & G(Fb & Fd)'
+check 'G(a & GFb & c & GFd)'  'G(a&c) & G(Fb & Fd)'
+check 'G(Ga & Fb & c & GFd & FGe)' 'G(a & c) & G(Fb & Fd & FGe)'
+check 'G(Ga & XFGb & c & FGd & FGe)' 'FG(b & d & e) & G(a & c)'
+check 'G(Ga & GXFb & c & FGd & FGe & Fc)' 'G(Fb & FG(d & e)) & G(a & c)'
+check 'Ga & Gb & GFd & FGe & FGf'    'G(Fd & FG(e & f)) & G(a & b)'
+check 'G(Ga & Gb & GFd & FGe) & FGf' 'G(Fd & FG(e & f)) & G(a & b)'
+
+check 'a U (b | Fc)'  '(a U b) | Fc'
+check 'a W (b | Fc)'  '(a W b) | Fc'
+check 'a U (b & GFc)' '(a U b) & GFc'
+check 'a W (b & GFc)' 'a W (b & GFc)'  # Unchanged
+check '(a | Gc) W g'  '(a | Gc) W g'   # Unchanged
+check '(a | Gc) U g'  '(a | Gc) U g'   # Unchanged
+
+check '(a & GFc) M b' '(a M b) & GFc'
+check '(a | GFc) M b' '(a | GFc) M b'  # Unchanged
+check '(a & GFc) R b' '(a & GFc) R b'  # Unchanged
+check '(a | GFc) R b' '(a | GFc) R b'  # Unchanged
+check 'a R (b & Gc)'  '(a R b) & Gc'
+check 'a M (b & Gc)'  '(a M b) & Gc'
+

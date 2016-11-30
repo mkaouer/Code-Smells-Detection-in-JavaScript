@@ -1,0 +1,14 @@
+#! /bin/sh
+
+. ./defs || exit 1
+
+set -e
+
+cp -R $srcdir/examples/DCSwave .
+chmod +w DCSwave
+
+# Run this if you want, it builds approximately 3,600,000 states.
+# ../dottygspn-rg DCSwave/DCSWave ATTiIDLj SCi SCj >output
+
+# Only 5,579 states.
+../dottygspn-srg DCSwave/DCSWave ATTiIDLj SCi SCj >output

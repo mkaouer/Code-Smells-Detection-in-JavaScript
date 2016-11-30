@@ -1,0 +1,74 @@
+#!/bin/sh
+# Copyright (C) 2009 Laboratoire de Recherche et Developpement de
+# l'Epita
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+. ./defs
+
+set -e
+
+
+run 0 ../ltl2tgba -f -k '(a U c) U b & (b U c)' >stdout
+cat >expected <<EOF
+transitions: 15
+states: 6
+total SCCs: 5
+accepting SCCs: 1
+dead SCCs: 0
+accepting paths: 4
+dead paths: 0
+EOF
+diff stdout expected
+
+
+run 0 ../ltl2tgba -f -k '(b U a) | (GFa & XG!a)' >stdout
+cat >expected <<EOF
+transitions: 7
+states: 4
+total SCCs: 4
+accepting SCCs: 1
+dead SCCs: 1
+accepting paths: 2
+dead paths: 1
+EOF
+diff stdout expected
+
+run 0 ../ltl2tgba -f -R3 -k '(b U a) | (GFa & XG!a)' >stdout
+cat >expected <<EOF
+transitions: 5
+states: 3
+total SCCs: 3
+accepting SCCs: 1
+dead SCCs: 0
+accepting paths: 2
+dead paths: 0
+EOF
+diff stdout expected
+
+run 0 ../ltl2tgba -f -R3 -k 'XXXX(0)' >stdout
+cat >expected <<EOF
+transitions: 0
+states: 1
+total SCCs: 1
+accepting SCCs: 0
+dead SCCs: 1
+accepting paths: 0
+dead paths: 1
+EOF
+diff stdout expected

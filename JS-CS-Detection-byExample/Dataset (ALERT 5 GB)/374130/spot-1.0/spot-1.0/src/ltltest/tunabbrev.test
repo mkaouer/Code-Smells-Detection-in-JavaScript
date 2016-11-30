@@ -1,0 +1,58 @@
+#! /bin/sh
+# Copyright (C) 2009, 2010 Laboratoire de Recherche et Développement
+# de l'Epita (LRDE).
+# Copyright (C) 2003, 2004 Laboratoire d'Informatique de Paris 6 (LIP6),
+# d�partement Syst�mes R�partis Coop�ratifs (SRC), Universit� Pierre
+# et Marie Curie.
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+# Check for the unabbreviate_ltl visitor
+
+. ./defs || exit 1
+
+set -e
+
+# A few things that do not change
+run 0 ../tunabbrev 'a' 'a'
+run 0 ../tunabbrev '1' '1'
+run 0 ../tunabbrev '0' '0'
+run 0 ../tunabbrev 'a U b' 'a U b'
+run 0 ../tunabbrev 'a & b' 'a & b'
+run 0 ../tunabbrev 'a & b' 'b & a'
+run 0 ../tunabbrev 'a & b & c' 'c & a & b'
+run 0 ../tunabbrev 'a & b & c' 'b & c & a'
+run 0 ../tunabbrev 'a & b & a' 'b & a & b'
+run 0 ../tunabbrev 'a & b' 'b & a & b'
+run 0 ../tunabbrev 'a & b' 'b & a & a'
+run 0 ../tunabbrev 'a & b & (c |(f U g)| e)' \
+                   'b & a & a & (c | e |(f U g)| e | c) & b'
+
+# same as in lunabbrev.test:
+run 0 ../tunabbrev 'a ^ b' '(a & !b) | (!a & b)'
+run 0 ../tunabbrev 'a ^ Xb' '(!Xb & a) | (!a & Xb) | (Xb & !a)'
+run 0 ../tunabbrev '!a <-> Xb' '(Xb & !a) | (!!a & !Xb)'
+run 0 ../tunabbrev '(a ^ b) | (b ^ c)' \
+                   '(c & !b) | (!c & b) | (a & !b) | (!a & b)'
+
+# LTL unabbreviations:
+run 0 ../tunabbrev 'G a ' 'false R a'
+run 0 ../tunabbrev 'GF a => F G(b)' \
+                   '!(false R (true U a)) | (true U (false V b))'
+run 0 ../tunabbrev 'GGGGa' 'false V a'
+run 0 ../tunabbrev 'FFFfalse' '0'
+run 0 ../tunabbrev 'FFFf' 'true U f'

@@ -1,0 +1,5 @@
+<map id="printable_formula" name="printable_formula">
+<area shape="rect" id="node2" href="$classspot_1_1printable__value.html" title="{spot::printable_value\l\&lt; const spot::ltl::formula * \&gt;\n|# val_\l|+ val()\l+ val()\l+ operator const const\l spot::ltl::formula *&amp;()\l+ operator const spot\l::ltl::formula *&amp;()\l+ operator=()\l+ print()\l}" alt="" coords="5,473,189,741"/>
+<area shape="rect" id="node4" href="$classspot_1_1printable.html" title="{spot::printable\n||+ ~printable()\l+ print()\l}" alt="" coords="63,6,167,125"/>
+<area shape="rect" id="node6" href="$classspot_1_1printable__value.html" title="{spot::printable_value\&lt; T \&gt;\n|# val_\l|+ val()\l+ val()\l+ operator const T &amp;()\l+ operator T &amp;()\l+ operator=()\l+ print()\l}" alt="" coords="113,177,287,381"/>
+</map>

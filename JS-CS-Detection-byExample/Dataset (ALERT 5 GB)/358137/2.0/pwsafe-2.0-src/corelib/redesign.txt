@@ -1,0 +1,288 @@
+From: passwordsafe-devel-admin@lists.sourceforge.net on behalf of gregg
+conklin [greco@gate.net]
+Sent: Wednesday 30 April 2003 18:42
+To: passwordsafe-devel
+Subject: RE: [Passwordsafe-devel] redesign
+
+here's my initial take on a possible interface to the password safe 
+engine.  i used HRESULT here just cause i like them (they should be 
+portable as they are just longs divided into bit fields).  but really 
+anything could be done that conveys the same info.
+
+it's a pretty simple interface really.  but then, i don't think it needs to 
+be too complex.
+
+PASSWORD SAFE ENGINE INTERFACE
+==============================
+
+RETURN CODES
+------------
+// general success
+#define PWSAFE_S_OK             S_OK
+
+// general failure
+#define PWAFE_E_Fail            MAKE_HRESULT( SEVERITY_ERROR, FACILITY_ITF, 
+0x01 )
+
+#define PWAFE_E_FileNotExist    MAKE_HRESULT( SEVERITY_ERROR, FACILITY_ITF, 
+0x02 )
+#define PWAFE_E_FileLocked      MAKE_HRESULT( SEVERITY_ERROR, FACILITY_ITF, 
+0x03 )
+#define PWAFE_E_BadCombination  MAKE_HRESULT( SEVERITY_ERROR, FACILITY_ITF, 
+0x04 )
+#define PWAFE_E_ReadOnly        MAKE_HRESULT( SEVERITY_ERROR, FACILITY_ITF, 
+0x05 )
+#define PWAFE_E_ItemNotFound    MAKE_HRESULT( SEVERITY_ERROR, FACILITY_ITF, 
+0x06 )
+
+
+METHODS
+-------
+// Opens a safe
+// Parameters:
+//   pszFilename     - path and filename of safe to open
+//   pszCombination  - attempt to open file with this combination
+//   bReadOnly       - safe cannot be modified when true
+// Returns:
+//   PWSAFE_S_OK             - safe opened with correct password
+//   PWSAFE_E_Fail           - some unaccounted for problem
+//   PWSAFE_E_FileNotExist   - pszFilename was not found
+//   PWSAFE_E_FileLocked     - try setting bReadOnly to true
+//   PWSAFE_E_BadCombination - file exists, but pszCombination was wrong
+HRESULT Open( const char* pszFilename, const char* pszCombination, bool 
+bReadOnly );
+
+// Close the safe file
+void Close();
+
+// Commit current safe data to disk
+// Returns:
+//   PWSAFE_S_OK       - data committed
+//   PWSAFE_E_Fail     - some unaccounted for problem during save
+//   PWSAFE_E_ReadOnly - safe was opened in read only mode
+HRESULT Save();
+
+// Returns count of how many entries in this safe
+int GetEntryCount();
+
+// Retrieve an item from the safe
+// Parameters:
+//   nItem - index into entries (must be < GetEntryCount())
+// Returns:
+//   a valid pointer to an item or NULL
+CItemData* GetItem( int nItem );
+
+// Adds an item to the safe
+// Parameters:
+//   pItem             - create with new, you no longer own it, don't delete
+// Returns:
+//   PWSAFE_S_OK       - item added
+//   PWSAFE_E_ReadOnly - safe was opened in read only mode, cannot modify
+HRESULT AddItem( CItemData* pItem );
+
+// Delete a single item
+// Parameters:
+//   pItem - item to delete [from GetItem()]
+// Returns:
+//   PWSAFE_S_OK           - Item deleted, memory freed, cease using pItem 
+immediatly
+//   PWSAFE_E_ReadOnly     - safe was opened in read only mode, cannot modify
+//   PWSAFE_E_ItemNotFound - item was invalid in some way
+HRESULT DeleteItem( CItemData *pItem );
+
+
+some pseudo code of initial load could be:
+
+pwsafe->Open( filename, password, false )
+for ( x = 0; x < pwsafe->GetItemCount(); ++x )
+{
+   item = pwsafe->GetItem( x );
+   create gui line item entry and populate fields from item
+   associate item* with gui line item for use later
+}
+
+
+-gregg
+
+At 10:46 AM 4/29/2003 +0200, you wrote:
+>Hi,
+>
+>Violent agreement here. Once 1.91 is released, I think we need to create a
+>"core" library sub-project that will handle file reading/writing, record
+>encryption/decryption, and other platform-independent functions. Would
+>anyone like to take a stab at defining the interface, i.e., write "core.h"?
+
+
+
+-------------------------------------------------------
+This sf.net email is sponsored by:ThinkGeek
+Welcome to geek heaven.
+http://thinkgeek.com/sf
+_______________________________________________
+Passwordsafe-devel mailing list
+Passwordsafe-devel@lists.sourceforge.net
+https://lists.sourceforge.net/lists/listinfo/passwordsafe-devel
+
+
+Good start. Some thoughts:
+
+- It would be nice to wrap a class or two around the functions (class
+Vault?)
+
+- Basically, we're abstracting the encrypted database. (Aside from the extra
+password parameter and an extra status code, the encryption is transparent
+to the class's users.) In addition to the functions you've written, I think
+we should have a way to add, delete and modify entries.
+
+- The Find() function should also be moved to the core (perhaps renamed
+Exist()?), as well as FindAll
+
+- Passkey should move to the Core, as should the CList<CItemData,CItemData>,
+which is the in-memory database, and access to it should be abstracted from
+the rest of the application, as a first step in replacing it with an STL
+list (or vector?).
+
+- Of course, CMyString, the crypto functions and Util.c should also move to
+Core, as these are totally GUI-independant. Core.h should #include the
+relevant header files for the users, I think.
+
+
+-----------------------------------------------------------------
+
+
+>- It would be nice to wrap a class or two around the functions (class
+>Vault?)
+
+certainly.  i just omitted it not knowing what to call it..
+CPasswordSafe
+CSafe
+CPwSafe
+etc.
+
+
+>- Basically, we're abstracting the encrypted database. (Aside from the extra
+>password parameter and an extra status code, the encryption is transparent
+>to the class's users.) In addition to the functions you've written, I think
+>we should have a way to add, delete and modify entries.
+
+my interface had two methods for adding and deleting items [AddItem() and 
+DeleteItem()].  to modify an item, just alter the pointer you get back from 
+GetItem() by calling CItemData methods [SetTitle(), etc]
+
+>- The Find() function should also be moved to the core (perhaps renamed
+>Exist()?), as well as FindAll
+
+i suppose it could return a collection of found CItemData objects.
+
+>- Passkey should move to the Core,
+
+yes.  i hadn't gotten that far on the interface yet.  but there could be 
+methods like:
+ChangeCombination( const char* pszOld, const char* pszNew );
+
+>as should the CList<CItemData,CItemData>,
+>which is the in-memory database, and access to it should be abstracted from
+>the rest of the application, as a first step in replacing it with an STL
+>list (or vector?).
+
+yes, this is what i was going for.  all my methods rely on the fact that 
+the collection (whatever it may be) of CItemData will be hidden behind the 
+interface and no direct access to the collection will be allowed.
+
+>- Of course, CMyString, the crypto functions and Util.c should also move to
+>Core, as these are totally GUI-independant. Core.h should #include the
+>relevant header files for the users, I think.
+
+yes, that sounds good.  single include to get the entire password safe 
+functionality.
+
+-gregg
+
+-----------------------------------------------------------------
+
+So far, we're talking about moving non-platform dependent code to a
+Core.  Good.  But one thing to think about is, what drives the program
+logic?  When writing a GUI app, it is very easy to have the GUI drive
+the main program flow.  But that means that when you write another
+interface, you really have a second app, albeit one that uses the
+same core functionality.
+
+Another way to approach it is to abstract the GUI into a View class,
+that is then used by a Model class that drives it using general
+business logic.
+
+Having said all this, I'm not sure how helpful it will be for this
+project since the GUI is fairly simple.  I suppose we could have
+
+View::PromptForCombination()
+View::ShowList()
+
+but I'm not sure what else.  Still, it's something to consider!
+
+-Andy
+
+-----------------------------------------------------------------
+
+Hi,
+
+Looks like we're in sync here. I think PWSCore or PWSEngine captures the
+sense of what we're trying to do.
+
+Just a thought: What about overloading the << and >> operators for I/O,
+iostream like?
+
+	Rony
+
+-----------------------------------------------------------------
+
+Another case to consider:
+
+EncryptFile and DecryptFile functions are called based on command-line
+functions.  Currently, they are in ThisMfcApp.cpp.  To me, it makes sense to
+have those completely in business logic, and only call the View to display
+messagebox error messages.  If we keep the program flow logic in GUI code,
+then we have to call, say, Core::EncryptFile, then display a message box
+error
+if appropriate.  Which is fine, but as we find more of these cases, that is
+more and more code logic that will be duplicated in future GUI code.  (If we
+don't find many more cases, then maybe it's not a big deal).
+
+Any thoughts?
+
+-Andy
+
+-----------------------------------------------------------------
+
+I am strongly in favor of Andy's suggestion of abstracting the GUI into a
+View class, etc. All my  recent development (in Python) has worked this way,
+and I think it is a good plan. Here is a link explaining the concept more
+fully:
+http://c2.com/cgi/wiki?TestFirstUserInterfaces.
+
+-----------------------------------------------------------------
+
+
+> - Abstracting the GUI. This is agreed to be a Good Thing, and the
+> creation of the Core library subproject is the first step towards
+> this. The next step would be to add some abstraction between the core
+> and the display logic, as has been discussed. Anyone care to show some
+> pseudo-code?
+
+Well, it's not pseudo-code, but there are a couple of good ways of allowing the Core to 
+present its own messages without breaking the separation between platform-independent 
+and platform-specific.  
+
+        One is a message passing architecture.  
+
+        The other is by using callbacks.  
+
+It's okay for the Core to expect that it will only be run from a Skin (or Shell, Wrapper, 
+whatever we want to call the platform-specific UI.)  So, for example, the Core may require 
+that the Skin register some callback functions at startup time, to provide the Core with 
+"MessageBox" functionality and the like.
+
+[BTW, I really get a kick out of us using the term "Core."  I ran nuclear reactors on US Navy 
+submarines for 6 years before I became a full time software developer. :-) ]
+
+-----------------------------------------------------------------
+

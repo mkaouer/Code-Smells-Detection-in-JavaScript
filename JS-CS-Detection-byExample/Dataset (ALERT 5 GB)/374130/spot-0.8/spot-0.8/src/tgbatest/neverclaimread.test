@@ -1,0 +1,126 @@
+#!/bin/sh
+# Copyright (C) 2010, 2011 Laboratoire de Recherche et Développement
+# de l'Epita (LRDE).
+#
+# This file is part of Spot, a model checking library.
+#
+# Spot is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# Spot is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Spot; see the file COPYING.  If not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
+# 02111-1307, USA.
+
+
+. ./defs
+
+set -e
+
+cat >input <<EOF
+never {
+T2_init:
+if
+:: (1) -> goto T2_init
+:: (p1 && p0) -> goto T1
+fi;
+T1:
+if
+:: (p1 && (! p0)) -> goto accept_all
+:: !(p1) -> goto T1
+:: ! (p1) -> goto T2_init
+fi;
+accept_all:
+skip
+}
+EOF
+
+run 0 ../ltl2tgba -XN input > stdout
+
+cat >expected <<EOF
+digraph G {
+  0 [label="", style=invis, height=0]
+  0 -> 1
+  1 [label="T2_init"]
+  1 -> 1 [label="1\n"]
+  1 -> 2 [label="p0 & p1\n"]
+  2 [label="T1"]
+  2 -> 3 [label="p1 & !p0\n"]
+  2 -> 2 [label="!p1\n"]
+  2 -> 1 [label="!p1\n"]
+  3 [label="accept_all"]
+  3 -> 3 [label="1\n{Acc[1]}"]
+}
+EOF
+
+# Sort out some possible inversions in the output.
+# (The order is not guaranteed by SPOT.)
+sed -e 's/!p0 & p1/p1 \& !p0/g' -e 's/p1 & p0/p0 \& p1/g' stdout \
+    > tmp_ && mv tmp_ stdout
+diff stdout expected
+
+rm input stdout expected
+
+
+# Test broken guards in input
+cat >input <<EOF
+never {
+T2_init:
+if
+:: (1) -> goto T2_init
+:: (p1 && ) -> goto T1
+fi;
+T1:
+if
+:: (p1 && ! p0)) -> goto accept_all
+:: (p1) -> goto T1
+fi;
+accept_all:
+skip
+}
+EOF
+
+run 2 ../ltl2tgba -XN input > stdout 2>stderr
+cat >expected <<EOF
+input:5.11: syntax error, unexpected closing parenthesis
+input:5.8-9: missing right operand for "and operator"
+input:9.16: syntax error, unexpected closing parenthesis
+input:9.16: ignoring trailing garbage
+EOF
+grep input: stderr >> stderrfilt
+diff stderrfilt expected
+
+cat >formulae<<EOF
+a
+<>[] a
+X false
+([] a) U X b
+(a U b) U (c U d)
+true
+([]a && XXXX!a)
+EOF
+while read f
+do
+    run 0 ../ltl2tgba -b -f "!($f)" > f.tgba
+    if test -n "$SPIN"; then
+	$SPIN -f "$f" > f.spin
+	run 0 ../ltl2tgba -E -Pf.tgba -XN f.spin
+    fi
+    if test -n "$LTL2BA"; then
+	$LTL2BA -f "$f" > f.ltl2ba
+	run 0 ../ltl2tgba -E -Pf.tgba -XN f.ltl2ba
+    fi
+    run 0 ../ltl2tgba -DS -NN -f "$f" > f.spot
+    # Make sure there is no `!x' occurring in the
+    # output.  Because `x' is usually #define'd, we
+    # should use `!(x)' in guards.
+    grep '![^(].*->' f.spot && exit 1
+    run 0 ../ltl2tgba -E -Pf.tgba -XN f.spot
+done  <formulae
