@@ -16,7 +16,7 @@
     ]
   },
   "devDependencies": {
-    "react": "0.10.0",
+    "react": "16.13.1",
     "react-router-component": "~0.15.0",
     "react-bootstrap-npm": "git://github.com/react-bootstrap/react-bootstrap-npm.git",
     "express": "~3.4.8",
