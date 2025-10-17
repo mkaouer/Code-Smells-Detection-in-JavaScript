@@ -1,3 +1,0 @@
-This directory contains preliminary experimental SWIG wrappers for libDAI
-written by Patrick Pletscher. They enable usage of libDAI functionality
-directly from python and octave.

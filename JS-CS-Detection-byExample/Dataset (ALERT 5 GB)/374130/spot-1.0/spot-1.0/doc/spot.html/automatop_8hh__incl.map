@@ -1,8 +1,0 @@
-<map id="ltlast/automatop.hh" name="ltlast/automatop.hh">
-<area shape="rect" id="node9" href="$nfa_8hh.html" title="NFA interface used by automatop." alt="" coords="451,83,507,111"/>
-<area shape="rect" id="node34" href="$refformula_8hh.html" title="Reference&#45;counted LTL formulae." alt="" coords="171,83,267,111"/>
-<area shape="rect" id="node11" href="$hash_8hh.html" title="misc/hash.hh" alt="" coords="631,161,729,189"/>
-<area shape="rect" id="node17" href="$hashfunc_8hh.html" title="misc/hashfunc.hh" alt="" coords="949,238,1072,266"/>
-<area shape="rect" id="node36" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="175,161,257,189"/>
-<area shape="rect" id="node41" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="176,238,256,266"/>
-</map>

@@ -1,7 +1,0 @@
-table_name("process_open_files")
-schema([
-    Column("pid", BIGINT),
-    Column("fd", BIGINT),
-    Column("path", TEXT),
-])
-implementation("system/process_open_files@genOpenFiles")

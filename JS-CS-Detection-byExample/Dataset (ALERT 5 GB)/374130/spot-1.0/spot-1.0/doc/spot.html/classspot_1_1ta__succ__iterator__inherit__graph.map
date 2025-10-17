@@ -1,6 +1,0 @@
-<map id="spot::ta_succ_iterator" name="spot::ta_succ_iterator">
-<area shape="rect" id="node5" href="$classspot_1_1ta__explicit__succ__iterator.html" title="Successor iterators used by spot::ta_explicit." alt="" coords="5,739,187,997"/>
-<area shape="rect" id="node7" href="$classspot_1_1ta__succ__iterator__product.html" title="Iterate over the successors of a product computed on the fly." alt="" coords="211,603,400,1133"/>
-<area shape="rect" id="node2" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="120,6,280,311"/>
-<area shape="rect" id="node9" href="$classspot_1_1ta__succ__iterator__product__by__changeset.html" title="{spot::ta_succ_iterator\l_product_by_changeset\n||+ ta_succ_iterator_product\l_by_changeset()\l+ next_kripke_dest()\l}" alt="" coords="217,1182,393,1311"/>
-</map>

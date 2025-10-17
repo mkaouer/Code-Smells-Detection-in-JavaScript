@@ -1,7 +1,0 @@
-<map id="spot::printable_formula" name="spot::printable_formula">
-<area shape="rect" id="node2" href="$classspot_1_1printable__value.html" title="{spot::printable_value\l\&lt; const ltl::formula * \&gt;\n||+ val()\l+ val()\l+ operator const const\l ltl::formula *&amp;()\l+ operator const ltl\l::formula *&amp;()\l+ operator=()\l+ print()\l}" alt="" coords="89,763,239,973"/>
-<area shape="rect" id="node4" href="$classspot_1_1printable.html" title="{spot::printable\n||+ ~printable()\l+ print()\l}" alt="" coords="5,86,107,183"/>
-<area shape="rect" id="node10" href="$classspot_1_1printable__value.html" title="{spot::printable_value\&lt; T \&gt;\n||+ val()\l+ val()\l+ operator const T &amp;()\l+ operator T &amp;()\l+ operator=()\l+ print()\l}" alt="" coords="79,433,249,594"/>
-<area shape="rect" id="node6" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="273,329,444,698"/>
-<area shape="rect" id="node8" href="$structspot_1_1ltl_1_1formula_1_1ltl__prop.html" title="{spot::ltl::formula\l::ltl_prop\n|+ boolean\l+ sugar_free_boolean\l+ in_nenoform\l+ X_free\l+ sugar_free_ltl\l+ ltl_formula\l+ eltl_formula\l+ psl_formula\l+ sere_formula\l+ finite\land 10 more...\l|}" alt="" coords="285,6,432,263"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classspot_1_1state__bdd.html" title="{spot::state_bdd\n|# state_\l|+ state_bdd()\l+ as_bdd()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="5,269,117,424"/>
-<area shape="rect" id="node5" href="$classspot_1_1state__evtgba__explicit.html" title="States used by spot::tgba_evtgba_explicit." alt="" coords="141,261,320,433"/>
-<area shape="rect" id="node7" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\n|+ successors\l|+ state_explicit()\l+ compare()\l+ hash()\l+ clone()\l+ empty()\l+ destroy()\l&#45; state_explicit()\l&#45; operator=()\l&#45; ~state_explicit()\l}" alt="" coords="344,235,475,459"/>
-<area shape="rect" id="node9" href="$classspot_1_1state__kripke.html" title="Concrete class for kripke states." alt="" coords="499,217,627,476"/>
-<area shape="rect" id="node11" href="$classspot_1_1state__product.html" title="A state for spot::tgba_product.This state is in fact a pair of state: the state from the left automat..." alt="" coords="651,209,784,485"/>
-<area shape="rect" id="node13" href="$classspot_1_1state__set.html" title="Set of states deriving from spot::state." alt="" coords="808,252,915,441"/>
-<area shape="rect" id="node15" href="$classspot_1_1state__union.html" title="A state for spot::tgba_union.This state is in fact a pair. If the first member equals 0 and the secon..." alt="" coords="939,235,1061,459"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="spot::ta_check" name="spot::ta_check">
-<area shape="rect" id="node2" href="$classspot_1_1ec__statistics.html" title="Emptiness&#45;check statistics. " alt="" coords="40,475,168,765"/>
-<area shape="rect" id="node4" href="$structspot_1_1unsigned__statistics.html" title="{spot::unsigned_statistics\n|+ stats\l|+ ~unsigned_statistics()\l+ get()\l}" alt="" coords="5,145,171,263"/>
-<area shape="rect" id="node6" href="$classspot_1_1ta__product.html" title="A lazy product between a Testing automaton and a Kripke structure. (States are computed on the fly..." alt="" coords="201,454,367,786"/>
-<area shape="rect" id="node8" href="$classspot_1_1ta.html" title="A Testing Automaton. " alt="" coords="195,6,389,402"/>
-<area shape="rect" id="node10" href="$classspot_1_1scc__stack__ta.html" title="{spot::scc_stack_ta\n|+ s\l|+ push()\l+ top()\l+ top()\l+ pop()\l+ size()\l+ rem()\l+ empty()\l}" alt="" coords="391,507,524,733"/>
-<area shape="rect" id="node12" href="$classspot_1_1option__map.html" title="Manage a map of options. " alt="" coords="548,518,671,722"/>
-</map>

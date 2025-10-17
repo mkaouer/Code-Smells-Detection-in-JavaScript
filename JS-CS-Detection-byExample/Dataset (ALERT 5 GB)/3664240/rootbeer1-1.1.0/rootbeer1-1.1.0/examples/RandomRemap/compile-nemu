@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd ../../
-ant jar
-./pack-rootbeer
-
-cd examples/RandomRemap/
-ant jar
-java -jar ../../Rootbeer.jar RandomRemapApp.jar RandomRemapApp-GPU.jar -nemu

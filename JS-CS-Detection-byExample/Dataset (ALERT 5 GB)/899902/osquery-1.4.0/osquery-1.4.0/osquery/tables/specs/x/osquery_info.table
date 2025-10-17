@@ -1,9 +1,0 @@
-table_name("osquery_info")
-description("Top level information about the running version of osquery.")
-schema([
-    Column("version", TEXT),
-    Column("config_md5", TEXT),
-    Column("config_path", TEXT),
-    Column("pid", INTEGER),
-])
-implementation("osquery@genOsqueryInfo")

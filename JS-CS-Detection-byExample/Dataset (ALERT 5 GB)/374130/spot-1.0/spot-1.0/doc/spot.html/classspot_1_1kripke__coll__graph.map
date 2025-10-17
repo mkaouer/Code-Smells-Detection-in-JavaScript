@@ -1,5 +1,0 @@
-<map id="spot::kripke" name="spot::kripke">
-<area shape="rect" id="node2" href="$classspot_1_1fair__kripke.html" title="Interface for a Fair Kripke structure.A Kripke structure is a graph in which each node (=state) is la..." alt="" coords="5,766,216,895"/>
-<area shape="rect" id="node4" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="8,265,213,714"/>
-<area shape="rect" id="node6" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="65,6,156,151"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classspot_1_1ars__statistics.html" title="Accepting Run Search statistics." alt="" coords="51,218,213,390"/>
-<area shape="rect" id="node9" href="$classspot_1_1ec__statistics.html" title="Emptiness&#45;check statistics." alt="" coords="247,157,372,451"/>
-<area shape="rect" id="node5" href="$classspot_1_1acss__statistics.html" title="Accepting Cycle Search Space statistics." alt="" coords="44,560,183,680"/>
-<area shape="rect" id="node7" href="$classspot_1_1couvreur99__check__result.html" title="Compute a counter example from a spot::couvreur99_check_status." alt="" coords="5,842,208,1014"/>
-<area shape="rect" id="node11" href="$classspot_1_1couvreur99__check.html" title="An implementation of the Couvreur99 emptiness&#45;check algorithm." alt="" coords="220,499,420,741"/>
-<area shape="rect" id="node13" href="$classspot_1_1couvreur99__check__shy.html" title="A version of spot::couvreur99_check that tries to visit known states first." alt="" coords="232,790,424,1066"/>
-</map>

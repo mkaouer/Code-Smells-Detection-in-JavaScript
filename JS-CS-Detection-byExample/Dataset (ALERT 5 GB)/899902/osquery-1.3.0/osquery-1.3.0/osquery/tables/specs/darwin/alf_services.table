@@ -1,7 +1,0 @@
-table_name("alf_services")
-schema([
-    Column("service", TEXT),
-    Column("process", TEXT),
-    Column("state", INTEGER),
-])
-implementation("firewall@genALFServices")

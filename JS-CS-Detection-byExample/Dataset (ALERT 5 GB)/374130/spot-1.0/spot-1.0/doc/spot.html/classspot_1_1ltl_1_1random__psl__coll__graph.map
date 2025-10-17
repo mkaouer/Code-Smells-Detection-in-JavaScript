@@ -1,9 +1,0 @@
-<map id="spot::ltl::random_psl" name="spot::ltl::random_psl">
-<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1random__ltl.html" title="Generate random LTL formulae.This class recursively constructs LTL formulae of a given size..." alt="" coords="5,1438,133,1551"/>
-<area shape="rect" id="node4" href="$classspot_1_1ltl_1_1random__formula.html" title="Base class for random formula generators." alt="" coords="72,990,235,1279"/>
-<area shape="rect" id="node12" href="$classspot_1_1ltl_1_1random__sere.html" title="Generate random SERE.This class recursively constructs SERE of a given size. The formulae will use th..." alt="" coords="107,1577,251,1658"/>
-<area shape="rect" id="node15" href="$classspot_1_1ltl_1_1random__boolean.html" title="Generate random Boolean formulae.This class recursively constructs Boolean formulae of a given size..." alt="" coords="191,1331,353,1413"/>
-<area shape="rect" id="node6" href="$structspot_1_1ltl_1_1random__formula_1_1op__proba.html" title="{spot::ltl::random_formula\l::op_proba\n|+ name\l+ min_n\l+ proba\l|+ setup()\l}" alt="" coords="72,763,235,893"/>
-<area shape="rect" id="node8" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="68,329,239,698"/>
-<area shape="rect" id="node10" href="$structspot_1_1ltl_1_1formula_1_1ltl__prop.html" title="{spot::ltl::formula\l::ltl_prop\n|+ boolean\l+ sugar_free_boolean\l+ in_nenoform\l+ X_free\l+ sugar_free_ltl\l+ ltl_formula\l+ eltl_formula\l+ psl_formula\l+ sere_formula\l+ finite\land 10 more...\l|}" alt="" coords="80,6,227,263"/>
-</map>

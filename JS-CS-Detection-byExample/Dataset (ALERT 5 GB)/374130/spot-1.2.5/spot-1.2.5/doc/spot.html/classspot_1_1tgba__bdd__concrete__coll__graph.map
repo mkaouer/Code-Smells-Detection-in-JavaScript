@@ -1,6 +1,0 @@
-<map id="spot::tgba_bdd_concrete" name="spot::tgba_bdd_concrete">
-<area shape="rect" id="node2" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="5,857,211,1274"/>
-<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="63,230,153,413"/>
-<area shape="rect" id="node6" href="$structspot_1_1tgba__bdd__core__data.html" title="Core data for a TGBA encoded using BDDs. " alt="" coords="235,771,421,1359"/>
-<area shape="rect" id="node8" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae. " alt="" coords="235,6,421,637"/>
-</map>

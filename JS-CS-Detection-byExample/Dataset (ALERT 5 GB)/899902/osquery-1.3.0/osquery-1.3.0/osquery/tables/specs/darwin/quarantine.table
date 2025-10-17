@@ -1,6 +1,0 @@
-table_name("quarantine")
-schema([
-    Column("path", TEXT),
-    Column("creator", TEXT),
-])
-implementation("system@genQuarantine")

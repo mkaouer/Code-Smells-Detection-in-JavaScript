@@ -1,1 +1,0 @@
-tradeclient -f cfg\tradeclient.cfg

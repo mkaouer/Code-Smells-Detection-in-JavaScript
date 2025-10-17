@@ -1,3 +1,0 @@
-#!/bin/sh
-
-java -jar Rootbeer.jar -runtest edu.syr.pcpratts.rootbeer.testcases.rootbeertest.serialization.SimpleTest

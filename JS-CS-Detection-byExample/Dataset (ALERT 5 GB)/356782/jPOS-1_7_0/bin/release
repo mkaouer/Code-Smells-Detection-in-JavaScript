@@ -1,8 +1,0 @@
-#!/bin/sh
-
-ANT=/usr/local/ant/bin/ant
-cd `dirname $0`/..
-
-svn update
-REVISION=`svn update | sed -e 's/At revision //' -e 's/.$//'`
-$ANT -Drevision=$REVISION clean dist

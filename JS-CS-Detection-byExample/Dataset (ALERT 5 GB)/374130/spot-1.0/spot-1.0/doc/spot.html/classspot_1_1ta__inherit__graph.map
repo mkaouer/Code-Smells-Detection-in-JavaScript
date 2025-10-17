@@ -1,4 +1,0 @@
-<map id="spot::ta" name="spot::ta">
-<area shape="rect" id="node3" href="$classspot_1_1ta__explicit.html" title="{spot::ta_explicit\n|&#45; tgba_\l&#45; all_acceptance_conditions_\l&#45; artificial_initial\l_state_\l&#45; states_set_\l&#45; initial_states_set_\l&#45; own_tgba_\l|+ ta_explicit()\l+ get_tgba()\l+ add_state()\l+ add_to_initial_states_set()\l+ create_transition()\l+ delete_stuttering_transitions()\l+ ~ta_explicit()\l+ get_initial_states_set()\l+ succ_iter()\l+ succ_iter()\land 12 more...\l&#45; ta_explicit()\l&#45; operator=()\l}" alt="" coords="5,361,208,730"/>
-<area shape="rect" id="node5" href="$classspot_1_1ta__product.html" title="A lazy product between a Testing automaton and a Kripke structure. (States are computed on the fly..." alt="" coords="232,385,395,706"/>
-</map>

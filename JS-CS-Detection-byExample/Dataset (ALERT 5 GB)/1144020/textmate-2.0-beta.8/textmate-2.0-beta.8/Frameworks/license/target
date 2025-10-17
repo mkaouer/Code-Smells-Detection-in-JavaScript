@@ -1,6 +1,0 @@
-SOURCES      = src/*.cc
-EXPORT       = src/{license,keychain}.h
-LINK        += text cf
-LN_FLAGS    += -Wl,-U,__Z15revoked_serialsv
-LIBS         = crypto
-FRAMEWORKS   = Security

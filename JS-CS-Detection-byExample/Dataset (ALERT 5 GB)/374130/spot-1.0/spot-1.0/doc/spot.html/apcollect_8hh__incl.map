@@ -1,7 +1,0 @@
-<map id="ltlvisit/apcollect.hh" name="ltlvisit/apcollect.hh">
-<area shape="rect" id="node5" href="$atomic__prop_8hh.html" title="LTL atomic propositions." alt="" coords="69,83,211,111"/>
-<area shape="rect" id="node13" href="$refformula_8hh.html" title="Reference&#45;counted LTL formulae." alt="" coords="355,161,451,189"/>
-<area shape="rect" id="node24" href="$environment_8hh.html" title="ltlenv/environment.hh" alt="" coords="187,161,331,189"/>
-<area shape="rect" id="node15" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="269,238,352,266"/>
-<area shape="rect" id="node20" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="319,315,399,343"/>
-</map>

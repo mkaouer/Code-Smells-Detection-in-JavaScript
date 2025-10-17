@@ -1,3 +1,0 @@
-SOURCES    = src/*.cc
-LINK      += authorization cf io plist text
-FRAMEWORKS = ApplicationServices Security

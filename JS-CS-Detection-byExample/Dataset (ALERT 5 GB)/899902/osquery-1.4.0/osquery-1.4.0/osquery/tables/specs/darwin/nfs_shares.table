@@ -1,8 +1,0 @@
-table_name("nfs_shares")
-description("NFS shares that are actively loaded on the host system.")
-schema([
-    Column("share", TEXT),
-    Column("readonly", TEXT),
-    Column("options", TEXT),
-])
-implementation("nfs_shares@genNfsShares")

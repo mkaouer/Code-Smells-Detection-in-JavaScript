@@ -1,1 +1,0 @@
-executor_cpp_debug cfg\executor.cfg

@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cd ../../
-ant jar
-./pack-rootbeer
-
-cd examples/MatrixShared/
-ant jar

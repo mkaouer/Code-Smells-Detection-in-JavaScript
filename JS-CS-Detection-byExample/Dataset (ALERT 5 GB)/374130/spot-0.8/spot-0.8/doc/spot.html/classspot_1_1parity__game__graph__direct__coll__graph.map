@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classspot_1_1parity__game__graph.html" title="Parity game graph which compute a simulation relation." alt="" coords="57,1222,223,1463"/>
-<area shape="rect" id="node4" href="$classspot_1_1tgba__reachable__iterator__breadth__first.html" title="An implementation of spot::tgba_reachable_iterator that browses states breadth first." alt="" coords="5,1051,275,1171"/>
-<area shape="rect" id="node6" href="$classspot_1_1tgba__reachable__iterator.html" title="Iterate over all reachable states of a spot::tgba." alt="" coords="44,707,236,1000"/>
-<area shape="rect" id="node8" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="17,243,263,640"/>
-<area shape="rect" id="node10" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="93,5,187,160"/>
-</map>

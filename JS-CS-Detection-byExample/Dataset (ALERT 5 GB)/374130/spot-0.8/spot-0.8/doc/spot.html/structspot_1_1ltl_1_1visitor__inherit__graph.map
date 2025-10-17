@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classspot_1_1ltl_1_1clone__visitor.html" title="Clone a formula.This visitor is public, because it&#39;s convenient to derive from it and override part o..." alt="" coords="136,286,283,527"/>
-<area shape="rect" id="node11" href="$classspot_1_1ltl_1_1postfix__visitor.html" title="Apply an algorithm on each node of an AST, during a postfix traversal.Override one or more of the pos..." alt="" coords="307,243,459,571"/>
-<area shape="rect" id="node5" href="$classspot_1_1ltl_1_1simplify__f__g__visitor.html" title="Replace true U f and false R g by F f and G g." alt="" coords="5,619,187,757"/>
-<area shape="rect" id="node7" href="$classspot_1_1ltl_1_1unabbreviate__logic__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated logical operators.This will rewrite bin..." alt="" coords="211,619,435,757"/>
-<area shape="rect" id="node9" href="$classspot_1_1ltl_1_1unabbreviate__ltl__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated LTL and logical operators.The rewriting performed on logical operator is the same as the one done by spot::ltl::unabbreviate_logic_visitor." alt="" coords="220,806,425,943"/>
-</map>

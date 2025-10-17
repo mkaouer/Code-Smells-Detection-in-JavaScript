@@ -1,6 +1,0 @@
-<map id="spot::ltl::random_ltl" name="spot::ltl::random_ltl">
-<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1random__formula.html" title="Base class for random formula generators. " alt="" coords="8,1214,173,1525"/>
-<area shape="rect" id="node4" href="$structspot_1_1ltl_1_1random__formula_1_1op__proba.html" title="{spot::ltl::random_formula\l::op_proba\n|+ name\l+ min_n\l+ proba\l|+ setup()\l}" alt="" coords="8,918,173,1079"/>
-<area shape="rect" id="node6" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula. " alt="" coords="5,409,176,847"/>
-<area shape="rect" id="node8" href="$structspot_1_1ltl_1_1formula_1_1ltl__prop.html" title="{spot::ltl::formula\l::ltl_prop\n|+ boolean\l+ sugar_free_boolean\l+ in_nenoform\l+ X_free\l+ sugar_free_ltl\l+ ltl_formula\l+ eltl_formula\l+ psl_formula\l+ sere_formula\l+ finite\land 10 more...\l|}" alt="" coords="17,6,164,338"/>
-</map>

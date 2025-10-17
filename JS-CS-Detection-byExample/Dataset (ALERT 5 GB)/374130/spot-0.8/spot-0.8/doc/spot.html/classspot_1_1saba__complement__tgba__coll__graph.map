@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classspot_1_1saba.html" title="A State&#45;based Alternating (Generalized) Büchi Automaton.Browsing such automaton can be achieved using..." alt="" coords="5,1155,251,1362"/>
-<area shape="rect" id="node4" href="$classspot_1_1tgba__sba__proxy.html" title="Degeneralize a spot::tgba on the fly, producing an SBA.This class acts as a proxy in front of a spot:..." alt="" coords="275,1199,424,1319"/>
-<area shape="rect" id="node6" href="$classspot_1_1tgba__tba__proxy.html" title="Degeneralize a spot::tgba on the fly, producing a TBA.This class acts as a proxy in front of a spot::..." alt="" coords="180,707,519,1104"/>
-<area shape="rect" id="node8" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="227,243,472,640"/>
-<area shape="rect" id="node10" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="303,5,396,160"/>
-</map>

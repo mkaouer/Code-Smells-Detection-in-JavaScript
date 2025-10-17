@@ -1,8 +1,0 @@
-#!/bin/sh
-
-cd ../../
-ant jar
-./pack-rootbeer
-
-cd gtc2013/Matrix/
-ant jar

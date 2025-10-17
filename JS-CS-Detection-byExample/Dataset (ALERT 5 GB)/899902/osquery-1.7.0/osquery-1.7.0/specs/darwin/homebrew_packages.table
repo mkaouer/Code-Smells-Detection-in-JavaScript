@@ -1,9 +1,0 @@
-table_name("homebrew_packages")
-description("The installed homebrew package database.")
-schema([
-    Column("name", TEXT, "Package name"),
-    Column("path", TEXT, "Package install path"),
-    Column("version", TEXT, "Current 'linked' version"),
-])
-attributes(cachable=True)
-implementation("system/homebrew_packages@genHomebrewPackages")

@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd ../../
-ant jar
-./pack-rootbeer
-
-cd examples/ArraySumApp/
-ant jar
-java -jar ../../Rootbeer.jar ArraySumApp.jar ArraySumApp-GPU.jar

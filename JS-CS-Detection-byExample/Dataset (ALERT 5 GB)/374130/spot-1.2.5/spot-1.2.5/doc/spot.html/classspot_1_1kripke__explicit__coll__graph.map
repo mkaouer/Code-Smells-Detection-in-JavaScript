@@ -1,6 +1,0 @@
-<map id="spot::kripke_explicit" name="spot::kripke_explicit">
-<area shape="rect" id="node2" href="$classspot_1_1kripke.html" title="Interface for a Kripke structure. " alt="" coords="5,1006,216,1167"/>
-<area shape="rect" id="node4" href="$classspot_1_1fair__kripke.html" title="Interface for a Fair Kripke structure. " alt="" coords="5,793,216,954"/>
-<area shape="rect" id="node6" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="8,323,213,741"/>
-<area shape="rect" id="node8" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="65,6,156,189"/>
-</map>

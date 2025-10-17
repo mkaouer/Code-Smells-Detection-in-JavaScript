@@ -1,3 +1,0 @@
-SOURCES = src/*.{cc,capnp}
-EXPORT  = src/encoding.h
-LIBS   += capnp kj

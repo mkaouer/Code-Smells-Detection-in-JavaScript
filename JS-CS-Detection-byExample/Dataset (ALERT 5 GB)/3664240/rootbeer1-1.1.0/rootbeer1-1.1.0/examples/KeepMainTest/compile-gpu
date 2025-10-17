@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd ../../
-ant jar
-./pack-rootbeer
-
-cd examples/KeepMainTest/
-ant jar
-java -jar ../../Rootbeer.jar KeepMainTest.jar KeepMainTest-GPU.jar -64bit

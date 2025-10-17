@@ -1,7 +1,0 @@
-Jinja2
-psutil
-argparse
-
-# needed for integration tests
-pexpect
-thrift

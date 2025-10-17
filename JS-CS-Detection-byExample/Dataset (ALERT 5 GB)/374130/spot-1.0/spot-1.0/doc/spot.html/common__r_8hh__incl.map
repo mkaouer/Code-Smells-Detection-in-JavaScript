@@ -1,9 +1,0 @@
-<map id="bin/common_r.hh" name="bin/common_r.hh">
-<area shape="rect" id="node3" href="$common__sys_8hh.html" title="common_sys.hh" alt="" coords="109,83,224,111"/>
-<area shape="rect" id="node5" href="$simplify_8hh.html" title="ltlvisit/simplify.hh" alt="" coords="248,83,368,111"/>
-<area shape="rect" id="node7" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="173,238,288,266"/>
-<area shape="rect" id="node19" href="$bdddict_8hh.html" title="tgba/bdddict.hh" alt="" coords="331,161,440,189"/>
-<area shape="rect" id="node13" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="5,315,85,343"/>
-<area shape="rect" id="node32" href="$bddalloc_8hh.html" title="misc/bddalloc.hh" alt="" coords="432,238,549,266"/>
-<area shape="rect" id="node34" href="$freelist_8hh.html" title="freelist.hh" alt="" coords="443,315,520,343"/>
-</map>

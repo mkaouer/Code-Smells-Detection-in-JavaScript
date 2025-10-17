@@ -1,9 +1,0 @@
-table_name("interface_addresses")
-schema([
-    Column("interface", TEXT),
-    Column("address", TEXT),
-    Column("mask", TEXT),
-    Column("broadcast", TEXT),
-    Column("point_to_point", TEXT),
-])
-implementation("interfaces@genInterfaceAddresses")

@@ -1,1 +1,0 @@
-debug\tradeclient cfg\tradeclient.cfg

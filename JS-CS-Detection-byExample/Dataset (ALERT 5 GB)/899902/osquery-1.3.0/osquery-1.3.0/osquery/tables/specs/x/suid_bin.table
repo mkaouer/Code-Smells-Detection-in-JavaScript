@@ -1,8 +1,0 @@
-table_name("suid_bin")
-schema([
-    Column("path", TEXT),
-    Column("username", TEXT),
-    Column("groupname", TEXT),
-    Column("permissions", TEXT),
-])
-implementation("suid_bin@genSuidBin")

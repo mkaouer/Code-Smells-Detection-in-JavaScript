@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# remove /bin symlink
-rm -f /usr/syno/bin/filebot
-
-exit 0

@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="45,203,139,357"/>
-<area shape="rect" id="node4" href="$classspot_1_1fixed__size__pool.html" title="A fixed&#45;size memory pool implementation." alt="" coords="163,177,312,383"/>
-<area shape="rect" id="node6" href="$structspot_1_1fixed__size__pool_1_1block__.html" title="{spot::fixed_size_pool::block_\n|+ next\l|}" alt="" coords="5,15,200,100"/>
-<area shape="rect" id="node9" href="$unionspot_1_1fixed__size__pool_1_1chunk__.html" title="{spot::fixed_size_pool::chunk_\n|+ prev\l+ data_\l|}" alt="" coords="273,6,471,109"/>
-</map>

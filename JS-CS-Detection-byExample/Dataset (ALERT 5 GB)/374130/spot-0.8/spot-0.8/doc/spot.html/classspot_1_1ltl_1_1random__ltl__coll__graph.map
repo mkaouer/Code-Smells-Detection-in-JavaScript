@@ -1,4 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$structspot_1_1ltl_1_1random__ltl_1_1op__proba.html" title="{spot::ltl::random_ltl::op_proba\n|+ name\l+ min_n\l+ proba\l+ build\l|+ setup()\l}" alt="" coords="5,331,200,469"/>
-<area shape="rect" id="node4" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="45,5,160,264"/>
-</map>

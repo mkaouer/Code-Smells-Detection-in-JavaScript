@@ -1,5 +1,0 @@
-<map id="spot::state_explicit_formula" name="spot::state_explicit_formula">
-<area shape="rect" id="node2" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; const ltl::formula\l *, ltl::formula_ptr_hash \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="5,665,173,997"/>
-<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="59,6,149,189"/>
-<area shape="rect" id="node6" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; Label, label_hash \&gt;\n|+ successors\l# label_\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="105,241,252,551"/>
-</map>

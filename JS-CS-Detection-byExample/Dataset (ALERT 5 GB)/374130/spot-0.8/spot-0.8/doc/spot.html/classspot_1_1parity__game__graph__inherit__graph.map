@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node7" href="$classspot_1_1parity__game__graph__delayed.html" title="{spot::parity_game_graph_delayed\n|&#45; sub_set_acc_cond_\l|+ parity_game_graph_delayed()\l+ ~parity_game_graph_delayed()\l+ get_relation()\l&#45; nb_set_acc_cond()\l&#45; add_duplicator_node_delayed()\l&#45; add_spoiler_node_delayed()\l&#45; build_recurse_successor_spoiler()\l&#45; build_recurse_successor_duplicator()\l&#45; build_graph()\l&#45; lift()\l}" alt="" coords="5,806,256,1047"/>
-<area shape="rect" id="node9" href="$classspot_1_1parity__game__graph__direct.html" title="Parity game graph which compute the direct simulation relation." alt="" coords="280,841,485,1013"/>
-<area shape="rect" id="node2" href="$classspot_1_1tgba__reachable__iterator__breadth__first.html" title="An implementation of spot::tgba_reachable_iterator that browses states breadth first." alt="" coords="121,347,391,467"/>
-<area shape="rect" id="node4" href="$classspot_1_1tgba__reachable__iterator.html" title="Iterate over all reachable states of a spot::tgba." alt="" coords="160,5,352,299"/>
-</map>

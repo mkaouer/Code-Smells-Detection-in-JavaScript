@@ -1,5 +1,0 @@
-table_name("alf_explicit_auths")
-schema([
-    Column("process", TEXT),
-])
-implementation("firewall@genALFExplicitAuths")

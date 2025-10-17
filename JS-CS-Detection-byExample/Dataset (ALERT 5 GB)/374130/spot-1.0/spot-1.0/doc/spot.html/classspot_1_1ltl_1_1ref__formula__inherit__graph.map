@@ -1,9 +1,0 @@
-<map id="spot::ltl::ref_formula" name="spot::ltl::ref_formula">
-<area shape="rect" id="node5" href="$classspot_1_1ltl_1_1atomic__prop.html" title="Atomic propositions." alt="" coords="5,723,144,965"/>
-<area shape="rect" id="node7" href="$classspot_1_1ltl_1_1automatop.html" title="Automaton operators." alt="" coords="168,699,304,989"/>
-<area shape="rect" id="node9" href="$classspot_1_1ltl_1_1binop.html" title="Binary operator." alt="" coords="328,699,464,989"/>
-<area shape="rect" id="node11" href="$classspot_1_1ltl_1_1bunop.html" title="Bounded unary operator." alt="" coords="488,635,624,1053"/>
-<area shape="rect" id="node13" href="$classspot_1_1ltl_1_1multop.html" title="Multi&#45;operand operators." alt="" coords="648,691,784,997"/>
-<area shape="rect" id="node15" href="$classspot_1_1ltl_1_1unop.html" title="Unary operators." alt="" coords="808,715,944,973"/>
-<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula.The only way you can work with a formula is to build a spot::ltl::visitor or spot::ltl..." alt="" coords="391,6,561,391"/>
-</map>

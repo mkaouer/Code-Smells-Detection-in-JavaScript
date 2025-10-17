@@ -1,5 +1,0 @@
-SOURCES      = src/*.cc
-EXPORT       = src/license.h
-LINK        += text cf
-LIBS         = crypto
-FRAMEWORKS   = Security

@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classspot_1_1kripke__succ__iterator.html" title="Iterator code for Kripke structureThis iterator can be used to simplify the writing of an iterator on..." alt="" coords="5,410,229,547"/>
-<area shape="rect" id="node4" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="5,5,229,299"/>
-<area shape="rect" id="node6" href="$classspot_1_1state__kripke.html" title="Concrete class for kripke states." alt="" coords="253,349,381,608"/>
-<area shape="rect" id="node8" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="271,75,364,229"/>
-</map>

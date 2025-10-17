@@ -1,1 +1,0 @@
-EXTRA_DIST = *.xml *.xsl *.html *.l *.c

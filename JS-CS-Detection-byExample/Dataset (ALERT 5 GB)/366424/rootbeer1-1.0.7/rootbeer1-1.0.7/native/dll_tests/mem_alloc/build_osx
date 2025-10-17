@@ -1,3 +1,0 @@
-#!/bin/sh
-
-gcc -I/usr/local/cuda/include/ mem_alloc.c -o mem_alloc -lcuda -L/usr/local/cuda/lib

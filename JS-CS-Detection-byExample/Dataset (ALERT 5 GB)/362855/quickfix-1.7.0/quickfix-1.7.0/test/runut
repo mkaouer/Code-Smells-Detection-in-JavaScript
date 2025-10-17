@@ -1,9 +1,0 @@
-#!/bin/sh
-
-DIR=`pwd`
-
-cd ..
-bin/ut -p $1
-RESULT=$?
-cd $DIR
-exit $RESULT

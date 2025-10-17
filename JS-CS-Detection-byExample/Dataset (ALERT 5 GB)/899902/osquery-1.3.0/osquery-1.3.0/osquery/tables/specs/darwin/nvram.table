@@ -1,7 +1,0 @@
-table_name("nvram")
-schema([
-    Column("name", TEXT),
-    Column("type", TEXT),
-    Column("value", TEXT),
-])
-implementation("nvram@genNVRAM")

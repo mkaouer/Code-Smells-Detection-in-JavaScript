@@ -1,9 +1,0 @@
-<map id="spot::printable_value&lt; T &gt;" name="spot::printable_value&lt; T &gt;">
-<area shape="rect" id="node5" href="$classspot_1_1printable__value.html" title="{spot::printable_value\l\&lt; double \&gt;\n|# val_\l|+ val()\l+ val()\l+ operator const double &amp;()\l+ operator double &amp;()\l+ operator=()\l+ print()\l}" alt="" coords="5,494,184,719"/>
-<area shape="rect" id="node7" href="$classspot_1_1printable__value.html" title="{spot::printable_value\l\&lt; unsigned \&gt;\n|# val_\l|+ val()\l+ val()\l+ operator const unsigned &amp;()\l+ operator unsigned &amp;()\l+ operator=()\l+ print()\l}" alt="" coords="208,494,403,719"/>
-<area shape="rect" id="node9" href="$classspot_1_1printable__value.html" title="{spot::printable_value\l\&lt; const spot::ltl::formula * \&gt;\n|# val_\l|+ val()\l+ val()\l+ operator const const\l spot::ltl::formula *&amp;()\l+ operator const spot\l::ltl::formula *&amp;()\l+ operator=()\l+ print()\l}" alt="" coords="427,473,611,741"/>
-<area shape="rect" id="node13" href="$classspot_1_1printable__value.html" title="{spot::printable_value\l\&lt; const ltl::formula * \&gt;\n|# val_\l|+ val()\l+ val()\l+ operator const const\l ltl::formula *&amp;()\l+ operator const ltl\l::formula *&amp;()\l+ operator=()\l+ print()\l}" alt="" coords="635,473,787,741"/>
-<area shape="rect" id="node2" href="$classspot_1_1printable.html" title="{spot::printable\n||+ ~printable()\l+ print()\l}" alt="" coords="335,6,439,125"/>
-<area shape="rect" id="node11" href="$classprintable__formula.html" title="{printable_formula\n||+ operator=()\l+ print()\l}" alt="" coords="459,793,579,911"/>
-<area shape="rect" id="node15" href="$classspot_1_1printable__formula.html" title="{spot::printable_formula\n||+ operator=()\l+ print()\l}" alt="" coords="633,793,788,911"/>
-</map>

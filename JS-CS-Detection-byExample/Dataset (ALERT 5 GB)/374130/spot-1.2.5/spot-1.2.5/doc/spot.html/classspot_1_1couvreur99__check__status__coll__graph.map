@@ -1,6 +1,0 @@
-<map id="spot::couvreur99_check_status" name="spot::couvreur99_check_status">
-<area shape="rect" id="node2" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="68,6,159,189"/>
-<area shape="rect" id="node6" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton. " alt="" coords="155,323,360,741"/>
-<area shape="rect" id="node4" href="$classspot_1_1numbered__state__heap.html" title="Keep track of a large quantity of indexed states. " alt="" coords="384,366,565,698"/>
-<area shape="rect" id="node9" href="$classspot_1_1scc__stack.html" title="{spot::scc_stack\n|+ s\l|+ push()\l+ top()\l+ top()\l+ pop()\l+ size()\l+ rem()\l+ clear_rem()\l+ empty()\l}" alt="" coords="589,409,704,655"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="spot::ltl::random_formula" name="spot::ltl::random_formula">
-<area shape="rect" id="node3" href="$classspot_1_1ltl_1_1random__boolean.html" title="Generate random Boolean formulae. " alt="" coords="5,451,173,549"/>
-<area shape="rect" id="node5" href="$classspot_1_1ltl_1_1random__ltl.html" title="Generate random LTL formulae. " alt="" coords="197,430,331,570"/>
-<area shape="rect" id="node9" href="$classspot_1_1ltl_1_1random__sere.html" title="Generate random SERE. " alt="" coords="355,451,501,549"/>
-<area shape="rect" id="node7" href="$classspot_1_1ltl_1_1random__psl.html" title="Generate random PSL formulae. " alt="" coords="195,619,333,717"/>
-</map>

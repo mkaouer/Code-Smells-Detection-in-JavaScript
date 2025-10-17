@@ -1,6 +1,0 @@
-table_name("alf_exceptions")
-schema([
-    Column("path", TEXT),
-    Column("state", INTEGER),
-])
-implementation("firewall@genALFExceptions")

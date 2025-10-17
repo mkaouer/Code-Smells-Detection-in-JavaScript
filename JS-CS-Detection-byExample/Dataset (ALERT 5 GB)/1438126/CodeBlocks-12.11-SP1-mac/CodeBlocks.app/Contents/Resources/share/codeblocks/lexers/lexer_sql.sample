@@ -1,4 +1,0 @@
--- comment
-/* comment */
-
-SELECT * FROM bar WHERE foo = 10 AND xxx LIKE 'abcd%'

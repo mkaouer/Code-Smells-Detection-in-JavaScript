@@ -1,7 +1,0 @@
-*.lo
-*.la
-Makefile
-.deps
-.libs
-Debug
-Release

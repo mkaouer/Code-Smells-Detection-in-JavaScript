@@ -1,5 +1,0 @@
-<map id="spot::ltl::unabbreviate_logic_visitor" name="spot::ltl::unabbreviate_logic_visitor">
-<area shape="rect" id="node7" href="$classspot_1_1ltl_1_1unabbreviate__ltl__visitor.html" title="Clone and rewrite a formula to remove most of the abbreviated LTL and logical operators.The rewriting performed on logical operator is the same as the one done by spot::ltl::unabbreviate_logic_visitor." alt="" coords="5,766,187,911"/>
-<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1clone__visitor.html" title="Clone a formula.This visitor is public, because it&#39;s convenient to derive from it and override part o..." alt="" coords="25,249,167,490"/>
-<area shape="rect" id="node4" href="$structspot_1_1ltl_1_1visitor.html" title="Formula visitorImplementing visitors is the prefered way to traverse a formula, since it does not inv..." alt="" coords="44,6,148,199"/>
-</map>

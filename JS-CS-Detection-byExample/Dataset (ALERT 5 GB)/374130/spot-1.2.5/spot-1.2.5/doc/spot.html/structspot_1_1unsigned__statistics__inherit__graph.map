@@ -1,9 +1,0 @@
-<map id="spot::unsigned_statistics" name="spot::unsigned_statistics">
-<area shape="rect" id="node3" href="$classspot_1_1ars__statistics.html" title="Accepting Run Search statistics. " alt="" coords="37,227,203,410"/>
-<area shape="rect" id="node9" href="$classspot_1_1ec__statistics.html" title="Emptiness&#45;check statistics. " alt="" coords="241,174,369,463"/>
-<area shape="rect" id="node5" href="$classspot_1_1acss__statistics.html" title="Accepting Cycle Search Space statistics. " alt="" coords="33,619,175,759"/>
-<area shape="rect" id="node7" href="$classspot_1_1couvreur99__check__result.html" title="Compute a counter example from a spot::couvreur99_check_status. " alt="" coords="5,979,192,1183"/>
-<area shape="rect" id="node11" href="$classspot_1_1couvreur99__check.html" title="An implementation of the Couvreur99 emptiness&#45;check algorithm. " alt="" coords="208,545,403,834"/>
-<area shape="rect" id="node15" href="$classspot_1_1ta__check.html" title="An implementation of the emptiness&#45;check algorithm for a product between a TA and a Kripke structure..." alt="" coords="427,513,573,866"/>
-<area shape="rect" id="node13" href="$classspot_1_1couvreur99__check__shy.html" title="A version of spot::couvreur99_check that tries to visit known states first. " alt="" coords="216,915,405,1247"/>
-</map>

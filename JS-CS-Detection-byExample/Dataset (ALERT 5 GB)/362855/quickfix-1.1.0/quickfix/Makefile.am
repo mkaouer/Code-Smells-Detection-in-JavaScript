@@ -1,1 +1,0 @@
-SUBDIRS = src bin cfg spec test CPPTest doc

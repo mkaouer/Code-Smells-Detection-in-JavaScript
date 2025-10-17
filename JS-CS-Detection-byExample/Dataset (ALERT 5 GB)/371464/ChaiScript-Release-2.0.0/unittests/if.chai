@@ -1,4 +1,0 @@
-if (true) {
-	print("true")
-}
-print("done")

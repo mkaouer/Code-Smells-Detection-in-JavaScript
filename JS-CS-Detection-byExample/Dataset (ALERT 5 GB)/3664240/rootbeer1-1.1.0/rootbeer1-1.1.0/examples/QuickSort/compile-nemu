@@ -1,9 +1,0 @@
-#!/bin/sh
-
-cd ../../
-ant jar
-./pack-rootbeer
-
-cd examples/QuickSort/
-ant jar
-java -jar ../../Rootbeer.jar QuickSort.jar QuickSort-GPU.jar -nemu

@@ -1,9 +1,0 @@
-#!/bin/sh
-
-gcc -fPIC -g -c -I/usr/lib/jvm/default-java/include/ -I/usr/lib/jvm/default-java/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/FixedMemory.c -o FixedMemory.o
-gcc -shared -Wl,-soname,rootbeer -o rootbeer_x64.so.1 FixedMemory.o -lc
-
-gcc -fPIC -g -c -I/usr/lib/jvm/default-java/include/ -I/usr/lib/jvm/default-java/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/CUDARuntime.c -o CUDARuntime.o
-gcc -fPIC -g -c -I/usr/lib/jvm/default-java/include/ -I/usr/lib/jvm/default-java/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/CUDAContext.c -o CUDAContext.o
-gcc -fPIC -g -c -I/usr/lib/jvm/default-java/include/ -I/usr/lib/jvm/default-java/include/linux -I/usr/local/cuda/include/ org/trifort/rootbeer/runtime/Stopwatch.c -o Stopwatch.o
-gcc -shared -L/usr/lib/nvidia-current/ -Wl,-soname,rootbeer_cuda -o rootbeer_cuda_x64.so.1 CUDARuntime.o CUDAContext.o Stopwatch.o -lc -lcuda

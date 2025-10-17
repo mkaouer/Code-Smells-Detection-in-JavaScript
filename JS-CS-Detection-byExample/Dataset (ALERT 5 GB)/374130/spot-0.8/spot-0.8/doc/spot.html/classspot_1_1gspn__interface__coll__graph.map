@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classspot_1_1ltl_1_1declarative__environment.html" title="A declarative environment.This environment recognizes all atomic propositions that have been previous..." alt="" coords="5,754,221,926"/>
-<area shape="rect" id="node4" href="$classspot_1_1ltl_1_1environment.html" title="An environment that describes atomic propositions." alt="" coords="41,315,185,435"/>
-<area shape="rect" id="node6" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae." alt="" coords="245,520,491,1160"/>
-<area shape="rect" id="node8" href="$classspot_1_1bdd__allocator.html" title="Manage ranges of variables." alt="" coords="295,280,441,469"/>
-<area shape="rect" id="node10" href="$classspot_1_1free__list.html" title="Manage list of free integers." alt="" coords="305,5,431,229"/>
-</map>

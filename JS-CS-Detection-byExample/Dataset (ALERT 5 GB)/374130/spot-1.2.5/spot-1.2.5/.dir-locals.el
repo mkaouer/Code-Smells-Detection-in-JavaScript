@@ -1,8 +1,0 @@
-((nil . ((whitespace-action auto-cleanup)
-	 (whitespace-style face empty trailing lines-tail)
-	 (require-final-newline . t)
-	 (mode . whitespace)))
- (c++-mode . ((c-default-style . "gnu")
-	      (indent-tab-mode . t)
-	      (tab-width . 8)
-	      (fill-column . 70))))

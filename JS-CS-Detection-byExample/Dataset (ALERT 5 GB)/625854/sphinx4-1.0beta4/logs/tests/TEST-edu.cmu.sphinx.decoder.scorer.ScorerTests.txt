@@ -1,9 +1,0 @@
-Testsuite: edu.cmu.sphinx.decoder.scorer.ScorerTests
-Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 1,367 sec
-------------- Standard Error -----------------
-testing: SimpleAcousticScorer
-testing: ThreadedAcousticScorer
-------------- ---------------- ---------------
-
-Testcase: waitUntilSpeechStart took 0,125 sec
-Testcase: testThreadedScorerDeallocation took 1,061 sec

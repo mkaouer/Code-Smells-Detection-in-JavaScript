@@ -1,7 +1,0 @@
-<map id="spot::state_explicit_formula" name="spot::state_explicit_formula">
-<area shape="rect" id="node2" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; const ltl::formula\l *, ltl::formula_ptr_hash \&gt;\n|+ successors\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="101,961,269,1271"/>
-<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states. " alt="" coords="5,81,96,263"/>
-<area shape="rect" id="node10" href="$classspot_1_1state__explicit.html" title="{spot::state_explicit\l\&lt; Label, label_hash \&gt;\n|+ successors\l|+ state_explicit()\l+ state_explicit()\l+ ~state_explicit()\l+ destroy()\l+ label()\l+ empty()\l+ compare()\l+ hash()\l+ clone()\l}" alt="" coords="80,483,227,773"/>
-<area shape="rect" id="node6" href="$classspot_1_1ltl_1_1formula.html" title="An LTL formula. " alt="" coords="264,409,435,847"/>
-<area shape="rect" id="node8" href="$structspot_1_1ltl_1_1formula_1_1ltl__prop.html" title="{spot::ltl::formula\l::ltl_prop\n|+ boolean\l+ sugar_free_boolean\l+ in_nenoform\l+ X_free\l+ sugar_free_ltl\l+ ltl_formula\l+ eltl_formula\l+ psl_formula\l+ sere_formula\l+ finite\land 10 more...\l|}" alt="" coords="276,6,423,338"/>
-</map>

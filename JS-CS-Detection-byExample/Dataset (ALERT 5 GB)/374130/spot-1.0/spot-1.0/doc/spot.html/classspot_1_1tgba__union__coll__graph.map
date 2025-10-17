@@ -1,7 +1,0 @@
-<map id="spot::tgba_union" name="spot::tgba_union">
-<area shape="rect" id="node2" href="$classspot_1_1tgba.html" title="A Transition&#45;based Generalized Büchi Automaton.The acronym TGBA (Transition&#45;based Generalized Büchi A..." alt="" coords="5,598,211,1047"/>
-<area shape="rect" id="node4" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="63,283,153,429"/>
-<area shape="rect" id="node7" href="$classspot_1_1bdd__dict.html" title="Map BDD variables to formulae." alt="" coords="235,558,419,1087"/>
-<area shape="rect" id="node9" href="$classspot_1_1bdd__allocator.html" title="Manage ranges of variables." alt="" coords="255,267,399,445"/>
-<area shape="rect" id="node11" href="$classspot_1_1free__list.html" title="Manage list of free integers." alt="" coords="264,6,389,215"/>
-</map>

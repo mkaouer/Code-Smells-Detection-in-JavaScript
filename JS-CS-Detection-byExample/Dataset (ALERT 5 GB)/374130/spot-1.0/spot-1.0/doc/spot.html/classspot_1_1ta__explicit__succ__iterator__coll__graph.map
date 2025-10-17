@@ -1,6 +1,0 @@
-<map id="spot::ta_explicit_succ_iterator" name="spot::ta_explicit_succ_iterator">
-<area shape="rect" id="node2" href="$classspot_1_1ta__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="12,449,159,642"/>
-<area shape="rect" id="node4" href="$classspot_1_1tgba__succ__iterator.html" title="Iterate over the successors of a state.This class provides the basic functionalities required to iter..." alt="" coords="5,6,165,311"/>
-<area shape="rect" id="node6" href="$classspot_1_1state__ta__explicit.html" title="{spot::state_ta_explicit\n|&#45; tgba_condition_\l&#45; is_initial_state_\l&#45; is_accepting_state_\l&#45; is_livelock_accepting\l_state_\l&#45; transitions_\l&#45; transitions_by_condition\l|+ state_ta_explicit()\l+ compare()\l+ hash()\l+ clone()\l+ destroy()\l+ ~state_ta_explicit()\l+ get_transitions()\l+ get_transitions()\l+ add_transition()\l+ get_tgba_state()\land 10 more...\l}" alt="" coords="183,377,351,714"/>
-<area shape="rect" id="node8" href="$classspot_1_1state.html" title="Abstract class for states." alt="" coords="221,86,312,231"/>
-</map>

@@ -1,1 +1,0 @@
-T6[MAXIMUM(x)];

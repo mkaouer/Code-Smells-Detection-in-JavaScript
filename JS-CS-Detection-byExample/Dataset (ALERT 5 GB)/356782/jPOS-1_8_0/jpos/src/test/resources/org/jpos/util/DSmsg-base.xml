@@ -1,5 +1,0 @@
-<schema>
-    <field id="id" type="B" length="1" />
-    <field id="content" type="BDS" length="40"/>
-</schema>
-

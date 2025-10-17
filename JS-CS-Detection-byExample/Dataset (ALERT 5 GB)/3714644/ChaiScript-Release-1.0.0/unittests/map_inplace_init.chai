@@ -1,2 +1,0 @@
-var x = ["bob":1, "fred":2]
-print(x)

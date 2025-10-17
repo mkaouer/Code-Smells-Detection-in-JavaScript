@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$environment_8hh.html" title="environment.hh" alt="" coords="24,160,136,189"/>
-<area shape="rect" id="node17" href="$atomic__prop_8hh.html" title="LTL atomic propositions." alt="" coords="169,83,310,112"/>
-<area shape="rect" id="node5" href="$formula_8hh.html" title="LTL formula interface." alt="" coords="206,237,318,267"/>
-<area shape="rect" id="node11" href="$predecl_8hh.html" title="Predeclare all LTL node types." alt="" coords="209,315,292,344"/>
-<area shape="rect" id="node23" href="$refformula_8hh.html" title="Reference&#45;counted LTL formulae." alt="" coords="210,160,306,189"/>
-</map>
