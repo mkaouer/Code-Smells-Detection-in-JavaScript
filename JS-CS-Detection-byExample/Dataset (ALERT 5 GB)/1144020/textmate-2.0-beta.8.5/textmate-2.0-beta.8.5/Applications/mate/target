@@ -1,0 +1,3 @@
+SOURCES    = src/*.cc
+LINK      += authorization plist
+FRAMEWORKS = ApplicationServices Security
